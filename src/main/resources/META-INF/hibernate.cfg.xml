@@ -11,7 +11,7 @@
         </property>
 
         <property name="connection.url">
-            jdbc:sqlserver://localhost:1433;databaseName=FINALASS_FPOLYSHOP_FA22_SOF205__SOF2041;encrypt=true;trustServerCertificate=true;
+            jdbc:sqlserver://localhost:1433;databaseName=Du_an_1;encrypt=true;trustServerCertificate=true;
         </property>
 
         <property name="connection.username">sa</property>
