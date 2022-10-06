@@ -32,19 +32,16 @@
         <!-- Echo all executed SQL to stdout -->
         <property name="show_sql">true</property>
        
-        <mapping class = "DomainModels.NhanVien"/>
-        <mapping class = "DomainModels.CuaHang"/>
-        <mapping class = "DomainModels.ChucVu"/>
-        <mapping class = "DomainModels.HoaDon"/>
-        <mapping class = "DomainModels.KhachHang"/>
-        <mapping class = "DomainModels.GioHang"/>
-        <mapping class = "DomainModels.NSX"/>
-        <mapping class = "DomainModels.DongSP"/>
-        <mapping class = "DomainModels.SanPham"/>
-        <mapping class = "DomainModels.MauSac"/>
-        <mapping class = "DomainModels.ChiTietSP"/>
-        <mapping class = "DomainModels.GioHangChiTiet"/>
-        <mapping class = "DomainModels.HoaDonChiTiet"/>
+        <mapping class = "com.mycompany.domainModels.CoSo"/>
+        <mapping class = "com.mycompany.domainModels.LoaiHang"/>
+        <mapping class = "com.mycompany.domainModels.KhoHang"/>
+        <mapping class = "com.mycompany.domainModels.KhachHang"/>
+        <mapping class = "com.mycompany.domainModels.TruongPhong"/>
+        <mapping class = "com.mycompany.domainModels.NhanVienGiaoHang"/>
+        <mapping class = "com.mycompany.domainModels.NhanVienVanDon"/>
+        <mapping class = "com.mycompany.domainModels.DonHang"/>
+        <mapping class = "com.mycompany.domainModels.HoaDon"/>
+
         
     </session-factory>
 </hibernate-configuration>
