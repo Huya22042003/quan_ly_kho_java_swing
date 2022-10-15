@@ -29,5 +29,18 @@
             <version>1.18.24</version>
             <scope>provided</scope>
         </dependency>
+        
+        <dependency>
+            <groupId>com.miglayout</groupId>
+            <artifactId>miglayout-swing</artifactId>
+            <version>4.2</version>
+        </dependency>
+         <!--https://mvnrepository.com/artifact/net.java.dev.timingframework/timingframework--> 
+        <dependency>
+            <groupId>net.java.dev.timingframework</groupId>
+            <artifactId>timingframework</artifactId>
+            <version>1.0</version>
+        </dependency>
+        
     </dependencies>
 </project>
