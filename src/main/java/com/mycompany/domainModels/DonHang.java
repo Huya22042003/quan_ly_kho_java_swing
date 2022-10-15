@@ -69,4 +69,6 @@ public class DonHang implements Serializable {
     @OneToMany(mappedBy = "idDonHang" , fetch = FetchType.LAZY)
     private List<HoaDon> listDonHang;
 
+    
+    
 }
