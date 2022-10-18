@@ -1,5 +1,6 @@
 package com.mycompany.views.main;
 
+import com.mycompany.views.component.Header;
 import com.mycompany.views.component.Menu;
 import com.mycompany.views.event.EventMenuSelected;
 import com.mycompany.views.event.EventShowPopupMenu;
@@ -8,6 +9,9 @@ import com.mycompany.views.form.MainForm;
 import com.mycompany.views.swing.MenuItem;
 import com.mycompany.views.swing.PopupMenu;
 import java.awt.Component;
+import java.awt.Frame;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
@@ -17,11 +21,16 @@ public class Main extends javax.swing.JFrame {
 
     private MigLayout layout;
     private Menu menu;
+    private Header header;
     private MainForm main;
     private Animator animator;
+    private Frame frame;
 
     public Main() {
         initComponents();
+        frame = new Frame();
+        frame = this;
+
         init();
     }
 
@@ -29,6 +38,7 @@ public class Main extends javax.swing.JFrame {
         layout = new MigLayout("fill", "0[]0[100%, fill]0", "0[fill, top]0");
         bg.setLayout(layout);
         menu = new Menu();
+        header = new Header();
         main = new MainForm();
         menu.addEvent(new EventMenuSelected() {
             @Override
@@ -36,7 +46,7 @@ public class Main extends javax.swing.JFrame {
                 System.out.println("Menu Index : " + menuIndex + " SubMenu Index " + subMenuIndex);
                 if (menuIndex == 0) {
                     if (subMenuIndex == 0) {
-                        main.showForm(new MainForm());
+                        main.showForm(new Form1());
                     } else if (subMenuIndex == 1) {
                         main.showForm(new Form1());
                     }
@@ -56,6 +66,7 @@ public class Main extends javax.swing.JFrame {
         });
         menu.initMenuItem();
         bg.add(menu, "w 230!, spany 2");    // Span Y 2cell
+        bg.add(header, "h 120!, wrap");
         bg.add(main, "w 100%, h 100%");
         TimingTarget target = new TimingTargetAdapter() {
             @Override
@@ -81,6 +92,33 @@ public class Main extends javax.swing.JFrame {
         animator.setResolution(0);
         animator.setDeceleration(0.5f);
         animator.setAcceleration(0.5f);
+        menu.addMenuEvent(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                if (!animator.isRunning()) {
+                    animator.start();
+                }
+                menu.setEnableMenu(false);
+                if (menu.isShowMenu()) {
+                    menu.hideallMenu();
+                }
+            }
+        });
+        header.addClose(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                System.exit(0);
+            }
+        });
+        header.addSap(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                frame.setExtendedState(frame.ICONIFIED);
+            }
+        });
+
+        //  Start with this form
+        main.showForm(new Form1());
     }
 
     @SuppressWarnings("unchecked")
@@ -94,6 +132,16 @@ public class Main extends javax.swing.JFrame {
 
         bg.setBackground(new java.awt.Color(245, 245, 245));
         bg.setOpaque(true);
+        bg.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                bgMouseDragged(evt);
+            }
+        });
+        bg.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                bgMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);
@@ -120,6 +168,17 @@ public class Main extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+    int xy, xx;
+    private void bgMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bgMousePressed
+        xx = evt.getX();
+        xy = evt.getY();
+    }//GEN-LAST:event_bgMousePressed
+
+    private void bgMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bgMouseDragged
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        this.setLocation(x - xx, y - xy);
+    }//GEN-LAST:event_bgMouseDragged
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
