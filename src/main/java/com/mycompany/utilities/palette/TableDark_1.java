@@ -26,6 +26,7 @@ public class TableDark_1 extends JTable {
         getTableHeader().setPreferredSize(new Dimension(0, 35));
         setDefaultRenderer(Object.class, cell);
         setRowHeight(30);
+        setAutoscrolls(false);
     }
 
     public void setColumnAlignment(int column, int align) {
@@ -44,15 +45,6 @@ public class TableDark_1 extends JTable {
         getColumnModel().getColumn(column).setMaxWidth(10000);
     }
 
-    public void fixTable(JScrollPane scroll) {
-        scroll.setVerticalScrollBar(new ScrollBarCustom());
-        JPanel panel = new JPanel();
-        panel.setBackground(new Color(30, 30, 30));
-        scroll.setCorner(JScrollPane.UPPER_RIGHT_CORNER, panel);
-        scroll.getViewport().setBackground(new Color(30, 30, 30));
-        scroll.setBorder(BorderFactory.createLineBorder(new Color(60, 60, 60), 2));
-    }
-
     private class TableDarkHeader extends DefaultTableCellRenderer {
 
         private Map<Integer, Integer> alignment = new HashMap<>();
@@ -64,8 +56,8 @@ public class TableDark_1 extends JTable {
         @Override
         public Component getTableCellRendererComponent(JTable jtable, Object o, boolean bln, boolean bln1, int i, int i1) {
             Component com = super.getTableCellRendererComponent(jtable, o, bln, bln1, i, i1);
-            com.setBackground(new Color(30, 30, 30));
-            com.setForeground(new Color(200, 200, 200));
+            com.setBackground(new Color(1, 92, 170));
+            com.setForeground(new Color(255, 255, 255));
             com.setFont(com.getFont().deriveFont(Font.BOLD, 12));
             if (alignment.containsKey(i1)) {
                 setHorizontalAlignment(alignment.get(i1));
@@ -88,17 +80,9 @@ public class TableDark_1 extends JTable {
         public Component getTableCellRendererComponent(JTable jtable, Object o, boolean bln, boolean bln1, int row, int column) {
             Component com = super.getTableCellRendererComponent(jtable, o, bln, bln1, row, column);
             if (isCellSelected(row, column)) {
-                if (row % 2 == 0) {
-                    com.setBackground(new Color(33, 103, 153));
-                } else {
-                    com.setBackground(new Color(29, 86, 127));
-                }
+                com.setBackground(new Color(83, 166, 255));
             } else {
-                if (row % 2 == 0) {
-                    com.setBackground(new Color(50, 50, 50));
-                } else {
-                    com.setBackground(new Color(30, 30, 30));
-                }
+                com.setBackground(new Color(188, 230, 255));
             }
             com.setForeground(new Color(200, 200, 200));
             setBorder(new EmptyBorder(0, 5, 0, 5));

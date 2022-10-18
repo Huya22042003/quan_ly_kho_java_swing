@@ -4,6 +4,7 @@ import com.mycompany.views.component.Header;
 import com.mycompany.views.component.Menu;
 import com.mycompany.views.event.EventMenuSelected;
 import com.mycompany.views.event.EventShowPopupMenu;
+import com.mycompany.views.form.AD_QuanLyCoSo;
 import com.mycompany.views.form.Form1;
 import com.mycompany.views.form.MainForm;
 import com.mycompany.views.swing.MenuItem;
@@ -43,12 +44,13 @@ public class Main extends javax.swing.JFrame {
         menu.addEvent(new EventMenuSelected() {
             @Override
             public void menuSelected(int menuIndex, int subMenuIndex) {
-                System.out.println("Menu Index : " + menuIndex + " SubMenu Index " + subMenuIndex);
                 if (menuIndex == 0) {
                     if (subMenuIndex == 0) {
                         main.showForm(new Form1());
                     } else if (subMenuIndex == 1) {
                         main.showForm(new Form1());
+                    }else if (subMenuIndex == 2) {
+                        main.showForm(new AD_QuanLyCoSo());
                     }
                 }
             }
