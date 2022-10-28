@@ -101,7 +101,7 @@
         <Property name="text" type="java.lang.String" value="jButton2"/>
       </Properties>
     </Component>
-    <Component class="utilit.palette.Combobox" name="combobox1">
+    <Component class="utilities.palette.Combobox" name="combobox1">
     </Component>
   </SubComponents>
 </Form>

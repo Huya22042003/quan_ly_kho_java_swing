@@ -11,7 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import net.miginfocom.swing.MigLayout;
-import utilit.palette.Combobox;
+import utilities.palette.Combobox;
 
 public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
 
