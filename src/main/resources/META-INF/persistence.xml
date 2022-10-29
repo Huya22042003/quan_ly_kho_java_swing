@@ -3,7 +3,7 @@
     <persistence-unit name="DemoJPA" transaction-type="RESOURCE_LOCAL">
         <properties>
             <property name="javax.persistence.jdbc.user" value="sa"/>
-            <property name="javax.persistence.jdbc.password" value="123456"/>
+            <property name="javax.persistence.jdbc.password" value="0868975265t"/>
             <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
         </properties>
     </persistence-unit>
