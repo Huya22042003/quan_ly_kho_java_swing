@@ -17,7 +17,7 @@ public class Form1 extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        combobox1 = new utilit.palette.Combobox();
+        combobox1 = new utilities.palette.Combobox();
 
         jTextField1.setText("jTextField1");
 
@@ -80,7 +80,7 @@ public class Form1 extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private utilit.palette.Combobox combobox1;
+    private utilities.palette.Combobox combobox1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
