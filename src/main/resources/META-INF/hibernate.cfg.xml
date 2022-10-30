@@ -32,15 +32,15 @@
         <!-- Echo all executed SQL to stdout -->
         <property name="show_sql">true</property>
        
-        <mapping class = "domainModel.CoSo"/>
-        <mapping class = "domainModel.LoaiHang"/>
-        <mapping class = "domainModel.KhoHang"/>
-        <mapping class = "domainModel.KhachHang"/>
-        <mapping class = "domainModel.TruongPhong"/>
-        <mapping class = "domainModel.NhanVienGiaoHang"/>
-        <mapping class = "domainModel.NhanVienVanDon"/>
-        <mapping class = "domainModel.DonHang"/>
-        <mapping class = "domainModel.HoaDon"/>
+        <mapping class = "domainModels.CoSo"/>
+        <mapping class = "domainModels.LoaiHang"/>
+        <mapping class = "domainModels.KhoHang"/>
+        <mapping class = "domainModels.KhachHang"/>
+        <mapping class = "domainModels.TruongPhong"/>
+        <mapping class = "domainModels.NhanVienGiaoHang"/>
+        <mapping class = "domainModels.NhanVienVanDon"/>
+        <mapping class = "domainModels.DonHang"/>
+        <mapping class = "domainModels.HoaDon"/>
 
         
     </session-factory>
