@@ -24,5 +24,5 @@ public interface AdKhoHangService {
 
     void deleteKhoHangById(UUID id);
 
-    AdKhoHangCustom checkValidate(JLabel errTen, String ten,String ma,KhoHangConstant tt,UUID idCoSo);
+    AdKhoHangCustom checkValidate(JLabel errTen, String ten,String ma,String tt,UUID idCoSo);
 }

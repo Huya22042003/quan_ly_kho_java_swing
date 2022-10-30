@@ -20,7 +20,8 @@ import javax.swing.JLabel;
  *
  * @author Acer
  */
-public class AdKhoHangServiceImpl implements AdKhoHangService{
+public class AdKhoHangServiceImpl implements AdKhoHangService {
+
     private AdKhoHangRepository repoKhoHang;
     private AdCoSoRepository repoCoSo;
 
@@ -28,7 +29,7 @@ public class AdKhoHangServiceImpl implements AdKhoHangService{
         repoCoSo = new AdCoSoRepository();
         repoKhoHang = new AdKhoHangRepository();
     }
-    
+
     @Override
     public List<AdKhoHangCustom> getListKhoHang() {
         return repoKhoHang.getListKhoHang();
@@ -36,7 +37,7 @@ public class AdKhoHangServiceImpl implements AdKhoHangService{
 
     @Override
     public AdKhoHangCustom saveKhoHang(AdKhoHangCustom kh) {
-           CoSo cs = repoCoSo.findCoSoById(kh.getIdCoSo());
+        CoSo cs = repoCoSo.findCoSoById(kh.getIdCoSo());
         KhoHang kh1 = new KhoHang();
         kh1.setMa(kh.getMa());
         kh1.setTen(kh.getTen());
@@ -57,7 +58,7 @@ public class AdKhoHangServiceImpl implements AdKhoHangService{
         kh1.setIdCoSo(cs);
         kh1.setId(kh.getId());
         repoKhoHang.updateKhoHang(kh1);
-        }
+    }
 
     @Override
     public void deleteKhoHangById(UUID id) {
@@ -65,22 +66,35 @@ public class AdKhoHangServiceImpl implements AdKhoHangService{
     }
 
     @Override
-    public AdKhoHangCustom checkValidate(JLabel errTen, String ten, String ma, KhoHangConstant tt, UUID idCoSo) {
-           int i = 0;
-        if(ten.trim().length() == 0){
-                errTen.setText("Bạn phải nhập tên!");
-                i++;
+    public AdKhoHangCustom checkValidate(JLabel errTen, String ten, String ma, String tt, UUID idCoSo) {
+        int i = 0;
+        if (ten.trim().length() == 0) {
+            errTen.setText("Bạn phải nhập tên!");
+            i++;
         }
-        if(i!=0){
+        KhoHangConstant trangThai = null;
+        if (tt.equalsIgnoreCase("Đang hoạt động")) {
+            trangThai = KhoHangConstant.DANG_HOAT_DONG;
+        }
+        if (tt.equalsIgnoreCase("Đã hoạt động")) {
+            trangThai = KhoHangConstant.DA_DONG_CUA;
+        }
+        if (tt.equalsIgnoreCase("Sắp hoạt động")) {
+            trangThai = KhoHangConstant.SAP_HOAT_DONG;
+        }
+        if (tt.equalsIgnoreCase("Tạm nghỉ")) {
+            trangThai = KhoHangConstant.TAM_NGHI;
+        }
+        if (i != 0 || trangThai ==null) {
             return null;
         }
-        
+
         AdKhoHangCustom kh = new AdKhoHangCustom();
         kh.setIdCoSo(idCoSo);
         kh.setMa(ma);
-        kh.setTrangThai(tt);
+        kh.setTrangThai(trangThai);
         kh.setTen(ten);
         return kh;
     }
-    
+
 }
