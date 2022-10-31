@@ -202,7 +202,7 @@ public class Combobox<E> extends JComboBox<E> {
 
         private void createHintText(Graphics2D g2) {
             Insets in = getInsets();
-            g2.setColor(new Color(150, 150, 150));
+            g2.setColor(new Color(0, 0, 0));
             FontMetrics ft = g2.getFontMetrics();
             Rectangle2D r2 = ft.getStringBounds(combo.getLabeText(), g2);
             double height = getHeight() - in.top - in.bottom;
@@ -210,12 +210,12 @@ public class Combobox<E> extends JComboBox<E> {
             double size;
             if (animateHinText) {
                 if (show) {
-                    size = 18 * (1 - location);
+                    size = 20 * (1 - location);
                 } else {
-                    size = 18 * location;
+                    size = 20 * location;
                 }
             } else {
-                size = 18;
+                size = 20;
             }
             g2.drawString(combo.getLabeText(), in.right, (int) (in.top + textY + ft.getAscent() - size));
         }

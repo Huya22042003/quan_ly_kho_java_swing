@@ -6,7 +6,7 @@
 package cores;
 
 
-import cores.nhanVienVanDons.views.NvvdXemThongTinCaNhanForm;
+import cores.truongPhongs.views.TpQuanLyNvghForm;
 import java.awt.FlowLayout;
 
 /**
@@ -18,7 +18,7 @@ public class testAll extends javax.swing.JFrame {
     /** Creates new form testAll */
     public testAll() {
         initComponents();
-        NvvdXemThongTinCaNhanForm a = new NvvdXemThongTinCaNhanForm();
+        TpQuanLyNvghForm a = new TpQuanLyNvghForm();
         this.add(a);
         this.setLayout(new FlowLayout());
         this.pack();
