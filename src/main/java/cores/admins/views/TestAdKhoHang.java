@@ -15,6 +15,7 @@ public class TestAdKhoHang extends javax.swing.JFrame {
     /**
      * Creates new form NewJFrame
      */
+    
     public TestAdKhoHang() {
         initComponents();
         AdKhoHangForm a = new AdKhoHangForm();
