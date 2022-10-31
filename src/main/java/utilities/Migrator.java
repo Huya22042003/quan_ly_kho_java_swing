@@ -151,6 +151,7 @@ public class Migrator {
         tp.setGioiTinh(GioiTinhConstant.NAM);
         tp.setTrangThai(TrangThaiNhanVienConstant.CHUA_HOAT_DONG);
         tp.setIdKhoHang(kh);
+        tp.setDiaChi("Hà Nội");
         session.save(tp);
 
         TruongPhong tp1 = new TruongPhong();
@@ -163,6 +164,7 @@ public class Migrator {
         tp1.setGioiTinh(GioiTinhConstant.NAM);
         tp1.setTrangThai(TrangThaiNhanVienConstant.CHUA_HOAT_DONG);
         tp1.setIdKhoHang(kh1);
+        tp1.setDiaChi("Hà Nội");
         session.save(tp1);
 
         TruongPhong tp2 = new TruongPhong();
@@ -175,18 +177,20 @@ public class Migrator {
         tp2.setGioiTinh(GioiTinhConstant.NAM);
         tp2.setTrangThai(TrangThaiNhanVienConstant.CHUA_HOAT_DONG);
         tp2.setIdKhoHang(kh2);
+        tp2.setDiaChi("Hà Nội");
         session.save(tp2);
 
         TruongPhong tp3 = new TruongPhong();
         tp3.setMa("TP004");
-        tp3.setTen("Nguyễn Quốc Huy");
-        tp3.setSdt("0328843156");
-        tp3.setEmail("huynqph26782@fpt.edu.vn");
+        tp3.setTen("Phạm Xuân Hải");
+        tp3.setSdt("0339821695");
+        tp3.setEmail("haipxph26772@fpt.edu.vn");
         tp3.setMatKhau("1");
-        tp3.setNgaySinh(Date.valueOf("2003-04-22"));
+        tp3.setNgaySinh(Date.valueOf("2003-07-29"));
         tp3.setGioiTinh(GioiTinhConstant.NAM);
         tp3.setTrangThai(TrangThaiNhanVienConstant.CHUA_HOAT_DONG);
         tp3.setIdKhoHang(kh3);
+        tp3.setDiaChi("Hà Nội");
         session.save(tp3);
 
         NhanVienVanDon nvvd = new NhanVienVanDon();
@@ -199,6 +203,7 @@ public class Migrator {
         nvvd.setGioiTinh(GioiTinhConstant.NAM);
         nvvd.setTrangThai(TrangThaiNhanVienConstant.CHUA_HOAT_DONG);
         nvvd.setIdKhoHang(kh1);
+        nvvd.setDiaChi("Hà Nội");
         session.save(nvvd);
 
         NhanVienVanDon nvvd1 = new NhanVienVanDon();
@@ -211,6 +216,7 @@ public class Migrator {
         nvvd1.setGioiTinh(GioiTinhConstant.NAM);
         nvvd1.setTrangThai(TrangThaiNhanVienConstant.CHUA_HOAT_DONG);
         nvvd1.setIdKhoHang(kh1);
+        nvvd1.setDiaChi("Hà Nội");
         session.save(nvvd1);
 
         NhanVienVanDon nvvd2 = new NhanVienVanDon();
@@ -223,18 +229,20 @@ public class Migrator {
         nvvd2.setGioiTinh(GioiTinhConstant.NAM);
         nvvd2.setTrangThai(TrangThaiNhanVienConstant.CHUA_HOAT_DONG);
         nvvd2.setIdKhoHang(kh1);
+        nvvd2.setDiaChi("Hà Nội");
         session.save(nvvd2);
 
         NhanVienVanDon nvvd3 = new NhanVienVanDon();
         nvvd3.setMa("VD004");
-        nvvd3.setTen("Nguyễn Quốc Huy");
-        nvvd3.setSdt("0328843156");
-        nvvd3.setEmail("huynqph26782@fpt.edu.vn");
+        nvvd3.setTen("Phạm Xuân Hải");
+        nvvd3.setSdt("0339821695");
+        nvvd3.setEmail("haipxph26772@fpt.edu.vn");
         nvvd3.setMatKhau("1");
-        nvvd3.setNgaySinh(Date.valueOf("2003-04-22"));
+        nvvd3.setNgaySinh(Date.valueOf("2003-07-29"));
         nvvd3.setGioiTinh(GioiTinhConstant.NAM);
         nvvd3.setTrangThai(TrangThaiNhanVienConstant.CHUA_HOAT_DONG);
         nvvd3.setIdKhoHang(kh1);
+        nvvd3.setDiaChi("Hà Nội");
         session.save(nvvd3);
 
         NhanVienGiaoHang nvgh = new NhanVienGiaoHang();
@@ -248,6 +256,7 @@ public class Migrator {
         nvgh.setTrangThai(TrangThaiNhanVienConstant.CHUA_HOAT_DONG);
         nvgh.setIdKhoHang(kh1);
         nvgh.setIdKhoGiao(kh3);
+        nvgh.setDiaChi("Hà Nội");
         session.save(nvgh);
 
         NhanVienGiaoHang nvgh1 = new NhanVienGiaoHang();
@@ -261,6 +270,7 @@ public class Migrator {
         nvgh1.setTrangThai(TrangThaiNhanVienConstant.CHUA_HOAT_DONG);
         nvgh1.setIdKhoHang(kh1);
         nvgh1.setIdKhoGiao(kh3);
+        nvgh1.setDiaChi("Hà Nội");
         session.save(nvgh1);
 
         NhanVienGiaoHang nvgh2 = new NhanVienGiaoHang();
@@ -274,6 +284,7 @@ public class Migrator {
         nvgh2.setTrangThai(TrangThaiNhanVienConstant.CHUA_HOAT_DONG);
         nvgh2.setIdKhoHang(kh1);
         nvgh2.setIdKhoGiao(kh);
+        nvgh2.setDiaChi("Hà Nội");
         session.save(nvgh2);
 
         NhanVienGiaoHang nvgh3 = new NhanVienGiaoHang();
@@ -287,19 +298,21 @@ public class Migrator {
         nvgh3.setTrangThai(TrangThaiNhanVienConstant.CHUA_HOAT_DONG);
         nvgh3.setIdKhoHang(kh1);
         nvgh3.setIdKhoGiao(kh2);
+        nvgh3.setDiaChi("Hà Nội");
         session.save(nvgh3);
 
         NhanVienGiaoHang nvgh4 = new NhanVienGiaoHang();
         nvgh4.setMa("GH005");
-        nvgh4.setTen("Nguyễn Quốc Huy");
-        nvgh4.setSdt("0328843156");
-        nvgh4.setEmail("huynqph26782@fpt.edu.vn");
+        nvgh4.setTen("Phạm Xuân Hải");
+        nvgh4.setSdt("0339821695");
+        nvgh4.setEmail("haipxph26772@fpt.edu.vn");
         nvgh4.setMatKhau("1");
-        nvgh4.setNgaySinh(Date.valueOf("2003-04-22"));
+        nvgh4.setNgaySinh(Date.valueOf("2003-07-29"));
         nvgh4.setGioiTinh(GioiTinhConstant.NAM);
         nvgh4.setTrangThai(TrangThaiNhanVienConstant.CHUA_HOAT_DONG);
         nvgh4.setIdKhoHang(kh1);
         nvgh4.setIdKhoGiao(kh3);
+        nvgh4.setDiaChi("Hà Nội");
         session.save(nvgh4);
 
 // insert Khách Hàng
@@ -310,7 +323,7 @@ public class Migrator {
         khachHang.setEmail("huynqph26782@fpt.edu.vn");
         khachHang.setMatKhau("1");
         khachHang.setNgaySinh(Date.valueOf("2003-04-22"));
-        khachHang.setGioiTinh(0);
+        khachHang.setGioiTinh(GioiTinhConstant.NU);
         khachHang.setDiaChi("Hà Nội");
         session.save(khachHang);
 
@@ -321,7 +334,7 @@ public class Migrator {
         khachHang1.setEmail("huynqph26782@fpt.edu.vn");
         khachHang1.setMatKhau("1");
         khachHang1.setNgaySinh(Date.valueOf("2003-04-22"));
-        khachHang1.setGioiTinh(0);
+        khachHang1.setGioiTinh(GioiTinhConstant.NAM);
         khachHang1.setDiaChi("Hà Nội");
         session.save(khachHang1);
 
@@ -432,7 +445,7 @@ public class Migrator {
         hd5.setTrangThai(TrangThaiDonHangConstant.CHO_XAC_NHAN);
         session.save(hd5);
         
-        System.out.println(Coverter.trangThaiDonHang(hd5.getTrangThai()));
+        System.out.println(Converter.trangThaiDonHang(hd5.getTrangThai()));
         
         trans.commit();
         session.close();
