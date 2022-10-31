@@ -4,6 +4,7 @@
  */
 package domainModels;
 
+import infrastructures.constant.GioiTinhConstant;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
@@ -59,7 +60,7 @@ public class KhachHang implements Serializable {
     private String hinhAnh;
 
     @Column(name = "GioiTinh")
-    private int gioiTinh;
+    private GioiTinhConstant gioiTinh;
 
     @Column(name = "DiaChi", columnDefinition = "NVARCHAR(255)")
     private String diaChi;
