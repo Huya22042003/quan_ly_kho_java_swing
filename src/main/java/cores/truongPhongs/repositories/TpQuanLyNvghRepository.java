@@ -2,14 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package cores;
+package cores.truongPhongs.repositories;
 
 /**
  *
- * @author QUOC HUY
+ * @author window
  */
-public class a {
-    public static void main(String[] args) {
-        System.out.println("hehe");
-    }
+public class TpQuanLyNvghRepository {
+    
 }

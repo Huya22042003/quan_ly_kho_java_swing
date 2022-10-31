@@ -54,7 +54,7 @@ public class TableDark_1 extends JTable {
         public Component getTableCellRendererComponent(JTable jtable, Object o, boolean bln, boolean bln1, int i, int i1) {
             Component com = super.getTableCellRendererComponent(jtable, o, bln, bln1, i, i1);
             com.setBackground(new Color(1, 92, 170));
-            com.setForeground(new Color(255, 255, 255));
+            com.setForeground(new Color(255,255,255));
             com.setFont(com.getFont().deriveFont(Font.BOLD, 12));
             if (alignment.containsKey(i1)) {
                 setHorizontalAlignment(alignment.get(i1));
@@ -81,7 +81,7 @@ public class TableDark_1 extends JTable {
             } else {
                 com.setBackground(new Color(188, 230, 255));
             }
-            com.setForeground(new Color(200, 200, 200));
+            com.setForeground(new Color(0,0,0));
             setBorder(new EmptyBorder(0, 5, 0, 5));
             if (alignment.containsKey(column)) {
                 setHorizontalAlignment(alignment.get(column));
