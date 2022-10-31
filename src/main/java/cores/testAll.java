@@ -3,9 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
-package cores.khachHangs.views;
+package cores;
 
-import cores.nhanVienGiaoHangs.views.NvghXemThongTinCaNhanForm;
+
+import cores.nhanVienVanDons.views.NvvdXemThongTinCaNhanForm;
 import java.awt.FlowLayout;
 
 /**
@@ -17,7 +18,7 @@ public class testAll extends javax.swing.JFrame {
     /** Creates new form testAll */
     public testAll() {
         initComponents();
-        KhXemThongTinCaNhanForm a = new KhXemThongTinCaNhanForm();
+        NvvdXemThongTinCaNhanForm a = new NvvdXemThongTinCaNhanForm();
         this.add(a);
         this.setLayout(new FlowLayout());
         this.pack();

@@ -2,38 +2,38 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package cores.nhanVienGiaoHangs.services.serviceImpls;
+package cores.truongPhongs.services.serviceImpls;
 
-import cores.khachHangs.customModels.NvghXemThongTinCaNhanCustom;
-import cores.nhanVienGiaoHangs.repositories.NvghXemThongTinCaNhanRepository;
-import cores.nhanVienGiaoHangs.services.NvghXemThongTinCaNhanService;
+import cores.truongPhongs.customModels.TpXemThongTinCaNhanCustom;
+import cores.truongPhongs.repositories.TpXemThongTinCaNhanRepository;
+import cores.truongPhongs.services.TpXemThongTinCaNhanService;
 import java.util.List;
 
 /**
  *
  * @author window
  */
-public class NvghXemThongTinCaNhanServiceImpl implements NvghXemThongTinCaNhanService{
+public class TpXemThongTinCaNhanServiceImpl implements TpXemThongTinCaNhanService{
 
-    private NvghXemThongTinCaNhanRepository nvghXemThongTinCaNhanRepository;
+    private TpXemThongTinCaNhanRepository tpXemThongTinCaNhanRepository;
 
-    public NvghXemThongTinCaNhanServiceImpl() {
-        nvghXemThongTinCaNhanRepository = new NvghXemThongTinCaNhanRepository();
+    public TpXemThongTinCaNhanServiceImpl() {
+        tpXemThongTinCaNhanRepository = new TpXemThongTinCaNhanRepository();
     }
     
     @Override
-    public List<NvghXemThongTinCaNhanCustom> getAll() {
-        return nvghXemThongTinCaNhanRepository.getAll();
+    public List<TpXemThongTinCaNhanCustom> getAll() {
+        return tpXemThongTinCaNhanRepository.getAll();
     }
 
     @Override
     public void doiMatKhau(String pass) {
-        nvghXemThongTinCaNhanRepository.doiMatKhau(pass);
+        tpXemThongTinCaNhanRepository.doiMatKhau(pass);
     }
 
     @Override
     public boolean checkMatKhau(String matKhau) {
-        return nvghXemThongTinCaNhanRepository.checkMatKhau(matKhau);
+        return tpXemThongTinCaNhanRepository.checkMatKhau(matKhau);
     }
     
 }

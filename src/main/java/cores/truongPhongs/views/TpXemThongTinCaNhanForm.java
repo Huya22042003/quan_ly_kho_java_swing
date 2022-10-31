@@ -2,11 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package cores.nhanVienGiaoHangs.views;
+package cores.truongPhongs.views;
 
-import cores.khachHangs.customModels.NvghXemThongTinCaNhanCustom;
-import cores.nhanVienGiaoHangs.services.NvghXemThongTinCaNhanService;
-import cores.nhanVienGiaoHangs.services.serviceImpls.NvghXemThongTinCaNhanServiceImpl;
+import cores.truongPhongs.customModels.TpXemThongTinCaNhanCustom;
+import cores.truongPhongs.services.TpXemThongTinCaNhanService;
+import cores.truongPhongs.services.serviceImpls.TpXemThongTinCaNhanServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -16,30 +16,30 @@ import utilities.Converter;
  *
  * @author window
  */
-public class NvghXemThongTinCaNhanForm extends javax.swing.JPanel {
+public class TpXemThongTinCaNhanForm extends javax.swing.JPanel {
 
-    private List<NvghXemThongTinCaNhanCustom> listNvghXemThongTinCaNhanCustom = new ArrayList<>();
-    private NvghXemThongTinCaNhanService khXemThongTinCaNhanService = new NvghXemThongTinCaNhanServiceImpl();
+    private List<TpXemThongTinCaNhanCustom> listTpXemThongTinCaNhanCustom = new ArrayList<>();
+    private TpXemThongTinCaNhanService khXemThongTinCaNhanService = new TpXemThongTinCaNhanServiceImpl();
 
-    public NvghXemThongTinCaNhanForm() {
+    public TpXemThongTinCaNhanForm() {
         initComponents();
-        listNvghXemThongTinCaNhanCustom = khXemThongTinCaNhanService.getAll();
-        showData(listNvghXemThongTinCaNhanCustom);
+        listTpXemThongTinCaNhanCustom = khXemThongTinCaNhanService.getAll();
+        showData(listTpXemThongTinCaNhanCustom);
     }
 
-    public void showData(List<NvghXemThongTinCaNhanCustom> list) {
-        for (NvghXemThongTinCaNhanCustom kh : list) {
+    public void showData(List<TpXemThongTinCaNhanCustom> list) {
+        for (TpXemThongTinCaNhanCustom kh : list) {
             txtMa.setText(kh.getMa());
             txtTen.setText(kh.getTen());
             txtGioiTinh.setText(Converter.trangThaiGioiTinh(kh.getGioiTinh()));
             txtDienThoai.setText(kh.getSdt());
             txtNgaySinh.setText(kh.getNgaySinh() + "");
             txtDiaChi.setText(kh.getDiaChi());
-            txtVaiTro.setText("Nhân viên giao hàng");
+            txtVaiTro.setText("Trưởng phòng");
         }
     }
 
-    public NvghXemThongTinCaNhanCustom checkPass() {
+    public TpXemThongTinCaNhanCustom checkPass() {
         String oldPass = txtOldPass.getText();
         String newPass = txtNewPass.getText();
         String cFPass = txtConfirmPass.getText();
@@ -60,7 +60,7 @@ public class NvghXemThongTinCaNhanForm extends javax.swing.JPanel {
             return null;
         }
 
-        NvghXemThongTinCaNhanCustom kh = new NvghXemThongTinCaNhanCustom();
+        TpXemThongTinCaNhanCustom kh = new TpXemThongTinCaNhanCustom();
         kh.setMatKhau(newPass);
         return kh;
     }
@@ -214,12 +214,9 @@ public class NvghXemThongTinCaNhanForm extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnHuyBoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyBoActionPerformed
-//        KhXemThongTinCaNhanForm form = new KhXemThongTinCaNhanForm();
-//            form.setVisible(false);
-//            this.dispose();
-// KhXemThongTinCaNhanForm comp = (KhXemThongTinCaNhanForm) evt.getSource();
-//  Window win = SwingUtilities.getWindowAncestor(comp);
-//  win.dispose();
+        txtConfirmPass.setText("");
+        txtOldPass.setText("");
+        txtNewPass.setText("");
     }//GEN-LAST:event_btnHuyBoActionPerformed
 
     public void clearForm() {
@@ -228,7 +225,7 @@ public class NvghXemThongTinCaNhanForm extends javax.swing.JPanel {
         txtConfirmPass.setText("");
     }
     private void btnXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanActionPerformed
-        NvghXemThongTinCaNhanCustom kh = checkPass();
+        TpXemThongTinCaNhanCustom kh = checkPass();
         if (kh == null) {
             return;
         }

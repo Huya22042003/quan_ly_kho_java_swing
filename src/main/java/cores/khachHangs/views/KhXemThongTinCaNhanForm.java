@@ -214,12 +214,9 @@ public class KhXemThongTinCaNhanForm extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnHuyBoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyBoActionPerformed
-//        KhXemThongTinCaNhanForm form = new KhXemThongTinCaNhanForm();
-//            form.setVisible(false);
-//            this.dispose();
-// KhXemThongTinCaNhanForm comp = (KhXemThongTinCaNhanForm) evt.getSource();
-//  Window win = SwingUtilities.getWindowAncestor(comp);
-//  win.dispose();
+        txtConfirmPass.setText("");
+        txtOldPass.setText("");
+        txtNewPass.setText("");
     }//GEN-LAST:event_btnHuyBoActionPerformed
 
     public void clearForm() {

@@ -2,38 +2,38 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package cores.nhanVienGiaoHangs.services.serviceImpls;
+package cores.nhanVienVanDons.services.serviceImpls;
 
-import cores.khachHangs.customModels.NvghXemThongTinCaNhanCustom;
-import cores.nhanVienGiaoHangs.repositories.NvghXemThongTinCaNhanRepository;
-import cores.nhanVienGiaoHangs.services.NvghXemThongTinCaNhanService;
+import cores.nhanVienVanDons.customModels.NvvdXemThongTinCaNhanCustom;
+import cores.nhanVienVanDons.repositories.NvvdXemThongTinCaNhanRepository;
+import cores.nhanVienVanDons.services.NvvdXemThongTinCaNhanService;
 import java.util.List;
 
 /**
  *
  * @author window
  */
-public class NvghXemThongTinCaNhanServiceImpl implements NvghXemThongTinCaNhanService{
+public class NvvdXemThongTinCaNhanServiceImpl implements NvvdXemThongTinCaNhanService {
 
-    private NvghXemThongTinCaNhanRepository nvghXemThongTinCaNhanRepository;
+    private NvvdXemThongTinCaNhanRepository nvvdXemThongTinCaNhanRepository;
 
-    public NvghXemThongTinCaNhanServiceImpl() {
-        nvghXemThongTinCaNhanRepository = new NvghXemThongTinCaNhanRepository();
+    public NvvdXemThongTinCaNhanServiceImpl() {
+        nvvdXemThongTinCaNhanRepository = new NvvdXemThongTinCaNhanRepository();
     }
-    
+
     @Override
-    public List<NvghXemThongTinCaNhanCustom> getAll() {
-        return nvghXemThongTinCaNhanRepository.getAll();
+    public List<NvvdXemThongTinCaNhanCustom> getAll() {
+        return nvvdXemThongTinCaNhanRepository.getAll();
     }
 
     @Override
     public void doiMatKhau(String pass) {
-        nvghXemThongTinCaNhanRepository.doiMatKhau(pass);
+        nvvdXemThongTinCaNhanRepository.doiMatKhau(pass);
     }
 
     @Override
     public boolean checkMatKhau(String matKhau) {
-        return nvghXemThongTinCaNhanRepository.checkMatKhau(matKhau);
+        return nvvdXemThongTinCaNhanRepository.checkMatKhau(matKhau);
     }
-    
+
 }

@@ -52,7 +52,7 @@ public class NvghXemThongTinCaNhanRepository {
                 + " m.gioiTinh as gioiTinh,"
                 + " m.diaChi as diaChi"
                 + " )"
-                + " from domainModels.base.NhanVienBase m where m.id = 'C63B9A29-B6B5-CA47-A92F-38354C216504' AND m.matKhau = :matKhau ");
+                + " from domainModels.NhanVienGiaoHang m where m.id = 'C63B9A29-B6B5-CA47-A92F-38354C216504' AND m.matKhau = :matKhau ");
         query.setParameter("matKhau", matKhau);
         NvghXemThongTinCaNhanCustom kh = null;
         try {
