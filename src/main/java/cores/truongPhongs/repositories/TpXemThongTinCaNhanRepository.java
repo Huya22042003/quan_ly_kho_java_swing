@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package cores.nhanVienGiaoHangs.repositories;
+package cores.truongPhongs.repositories;
 
-import cores.khachHangs.customModels.NvghXemThongTinCaNhanCustom;
+import cores.truongPhongs.customModels.TpXemThongTinCaNhanCustom;
 import java.util.List;
 import javax.persistence.Query;
 import org.hibernate.Session;
@@ -15,12 +15,12 @@ import utilities.HibernateUtil;
  *
  * @author window
  */
-public class NvghXemThongTinCaNhanRepository {
+public class TpXemThongTinCaNhanRepository {
 
-    public List<NvghXemThongTinCaNhanCustom> getAll() {
+    public List<TpXemThongTinCaNhanCustom> getAll() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         javax.persistence.Query query = session.createQuery("select "
-                + " new cores.khachHangs.customModels.NvghXemThongTinCaNhanCustom("
+                + " new cores.truongPhongs.customModels.TpXemThongTinCaNhanCustom("
                 + " m.id,"
                 + " m.ma as ma,"
                 + " m.ten as ten,"
@@ -31,17 +31,17 @@ public class NvghXemThongTinCaNhanRepository {
                 + " m.gioiTinh as gioiTinh,"
                 + " m.diaChi as diaChi"
                 + " )"
-                + " from domainModels.NhanVienGiaoHang m where m.id = 'C63B9A29-B6B5-CA47-A92F-38354C216504' ");
+                + " from domainModels.TruongPhong m where m.id = '15A60E6E-D644-E941-B227-020ED133EE00' ");
 //        query.setParameter("id", id);
-        List<NvghXemThongTinCaNhanCustom> list = query.getResultList();
+        List<TpXemThongTinCaNhanCustom> list = query.getResultList();
         session.close();
         return list;
     }
     
-    public NvghXemThongTinCaNhanCustom findByMatKhau(String matKhau) {
+    public TpXemThongTinCaNhanCustom findByMatKhau(String matKhau) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         javax.persistence.Query query = session.createQuery("select "
-                + " new cores.khachHangs.customModels.NvghXemThongTinCaNhanCustom("
+                + " new cores.truongPhongs.customModels.TpXemThongTinCaNhanCustom("
                 + " m.id,"
                 + " m.ma as ma,"
                 + " m.ten as ten,"
@@ -52,11 +52,11 @@ public class NvghXemThongTinCaNhanRepository {
                 + " m.gioiTinh as gioiTinh,"
                 + " m.diaChi as diaChi"
                 + " )"
-                + " from domainModels.NhanVienGiaoHang m where m.id = 'C63B9A29-B6B5-CA47-A92F-38354C216504' AND m.matKhau = :matKhau ");
+                + " from domainModels.TruongPhong m where m.id = '15A60E6E-D644-E941-B227-020ED133EE00' AND m.matKhau = :matKhau ");
         query.setParameter("matKhau", matKhau);
-        NvghXemThongTinCaNhanCustom kh = null;
+        TpXemThongTinCaNhanCustom kh = null;
         try {
-            kh = (NvghXemThongTinCaNhanCustom) query.getSingleResult();
+            kh = (TpXemThongTinCaNhanCustom) query.getSingleResult();
         } catch (Exception e) {
         }
         session.close();
@@ -67,7 +67,7 @@ public class NvghXemThongTinCaNhanRepository {
     }
     
      public boolean checkMatKhau(String matKhau){
-        NvghXemThongTinCaNhanCustom ql = findByMatKhau(matKhau);
+        TpXemThongTinCaNhanCustom ql = findByMatKhau(matKhau);
         if(ql != null){
             return true;
         }
@@ -77,7 +77,7 @@ public class NvghXemThongTinCaNhanRepository {
 
     public void doiMatKhau(String matKhau) {
         Transaction transaction = null;
-        String hql = "UPDATE NhanVienGiaoHang m SET MatKhau = :matKhau where m.id = 'C63B9A29-B6B5-CA47-A92F-38354C216504'";
+        String hql = "UPDATE TruongPhong m SET MatKhau = :matKhau where m.id = '15A60E6E-D644-E941-B227-020ED133EE00'";
         try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
             Query query = session.createQuery(hql);
             transaction = session.beginTransaction();
