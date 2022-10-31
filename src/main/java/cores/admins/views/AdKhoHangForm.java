@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import utilities.Coverter;
+import utilities.Converter;
 import utilities.MaTuSinh;
 import views.main.Admin;
 
@@ -48,10 +48,10 @@ public class AdKhoHangForm extends javax.swing.JPanel {
 
     private void loadCbbTT() {
 
-        this.cbbTrangThai.addItem(Coverter.trangThaiKhoHang(KhoHangConstant.DANG_HOAT_DONG));
-        this.cbbTrangThai.addItem(Coverter.trangThaiKhoHang(KhoHangConstant.SAP_HOAT_DONG));
-        this.cbbTrangThai.addItem(Coverter.trangThaiKhoHang(KhoHangConstant.DA_DONG_CUA));
-        this.cbbTrangThai.addItem(Coverter.trangThaiKhoHang(KhoHangConstant.TAM_NGHI));
+        this.cbbTrangThai.addItem(Converter.trangThaiKhoHang(KhoHangConstant.DANG_HOAT_DONG));
+        this.cbbTrangThai.addItem(Converter.trangThaiKhoHang(KhoHangConstant.SAP_HOAT_DONG));
+        this.cbbTrangThai.addItem(Converter.trangThaiKhoHang(KhoHangConstant.DA_DONG_CUA));
+        this.cbbTrangThai.addItem(Converter.trangThaiKhoHang(KhoHangConstant.TAM_NGHI));
     }
 
     private AdKhoHangCustom getFormData() {
@@ -71,7 +71,7 @@ public class AdKhoHangForm extends javax.swing.JPanel {
                 dtm.getRowCount() + 1,
                 adKhoHangCustom.getMa(),
                 adKhoHangCustom.getTen(),
-                Coverter.trangThaiKhoHang(adKhoHangCustom.getTrangThai()),
+                Converter.trangThaiKhoHang(adKhoHangCustom.getTrangThai()),
                 adKhoHangCustom.getTenCoSo()
             };
             dtm.addRow(rowData);
