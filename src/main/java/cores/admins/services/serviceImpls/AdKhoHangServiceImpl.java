@@ -43,7 +43,9 @@ public class AdKhoHangServiceImpl implements AdKhoHangService {
         kh1.setTen(kh.getTen());
         kh1.setTrangThai(kh.getTrangThai());
         kh1.setIdCoSo(cs);
+
         kh.setId(repoKhoHang.saveKhoHang(kh1).getId());
+        kh.setTenCoSo(kh1.getIdCoSo().getTen());
         return kh;
 
     }
@@ -57,6 +59,7 @@ public class AdKhoHangServiceImpl implements AdKhoHangService {
         kh1.setTrangThai(kh.getTrangThai());
         kh1.setIdCoSo(cs);
         kh1.setId(kh.getId());
+            kh.setTenCoSo(kh1.getIdCoSo().getTen());
         repoKhoHang.updateKhoHang(kh1);
     }
 
@@ -85,7 +88,7 @@ public class AdKhoHangServiceImpl implements AdKhoHangService {
         if (tt.equalsIgnoreCase("Tạm nghỉ")) {
             trangThai = KhoHangConstant.TAM_NGHI;
         }
-        if (i != 0 || trangThai ==null) {
+        if (i != 0 || trangThai == null) {
             return null;
         }
 
