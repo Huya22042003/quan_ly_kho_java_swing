@@ -41,7 +41,6 @@ public class TpQuanLyNvghForm extends javax.swing.JPanel {
         textField8 = new utilities.palette.TextField();
         textField9 = new utilities.palette.TextField();
         uWPButton1 = new utilities.palette.UWPButton();
-        combobox2 = new utilities.palette.Combobox();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -131,8 +130,6 @@ public class TpQuanLyNvghForm extends javax.swing.JPanel {
                 .addComponent(buttonGradient1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39)
                 .addComponent(uWPButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(87, 87, 87)
-                .addComponent(combobox2, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -165,10 +162,8 @@ public class TpQuanLyNvghForm extends javax.swing.JPanel {
                 .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(buttonGradient1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(uWPButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(combobox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(27, 27, 27))
+                    .addComponent(uWPButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -188,7 +183,6 @@ public class TpQuanLyNvghForm extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private utilities.palette.ButtonGradient buttonGradient1;
     private utilities.palette.Combobox combobox1;
-    private utilities.palette.Combobox combobox2;
     private javax.swing.JScrollPane jScrollPane1;
     private utilities.palette.lable lable1;
     private utilities.palette.TableDark_1 tableDark_11;
