@@ -57,6 +57,9 @@ public abstract class NhanVienBase {
     @Column(name = "GioiTinh")
     private GioiTinhConstant gioiTinh;
     
+    @Column(name = "DiaChi", columnDefinition = "NVARCHAR(255)")
+    private String diaChi;
+    
     @Column(name = "TrangThai")
     private TrangThaiNhanVienConstant trangThai;
 

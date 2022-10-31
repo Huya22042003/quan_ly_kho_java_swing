@@ -14,7 +14,7 @@ import infrastructures.constant.TrangThaiNhanVienConstant;
  *
  * @author QUOC HUY
  */
-public class Coverter {
+public class Converter {
 
     public static String trangThaiDonHang(TrangThaiDonHangConstant th) {
         String trangThai = "";
