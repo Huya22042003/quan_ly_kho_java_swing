@@ -77,7 +77,7 @@ public class DemoCoSoView extends javax.swing.JPanel {
 
     public List<DemoCoSoCustom> checkCbb(CoSoConstant cs) {
         List<DemoCoSoCustom> listTimKiem = new ArrayList<>();
-        getList.parallelStream().forEach(el -> {
+        getList.forEach(el -> {
             if (el.getTrangThai() == cs) {
                 listTimKiem.add(el);
             }
