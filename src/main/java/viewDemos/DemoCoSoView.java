@@ -24,7 +24,7 @@ public class DemoCoSoView extends javax.swing.JPanel {
      */
     private DemoCoSoService coSoService;
     
-    List<DemoCoSoCustom> getList;
+    private List<DemoCoSoCustom> getList;
 
     public DemoCoSoView() {
         coSoService = new DemoCoSoServiceImpl();
@@ -49,11 +49,9 @@ public class DemoCoSoView extends javax.swing.JPanel {
                 case 2:
                     search = el.getViTri();
                     break;
-                default:
-                    throw new AssertionError();
             }
             for (int i = 0; i <= search.length(); i++) {
-                String newMa = search.substring(0, i).trim();
+                String newMa = search.substring(0, i);
                 strings.add(newMa);
             }
 
