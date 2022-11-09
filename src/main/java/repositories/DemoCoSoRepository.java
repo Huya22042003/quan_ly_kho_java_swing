@@ -1,11 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package repositories;
 
 import customModels.DemoCoSoCustom;
 import domainModels.CoSo;
+import infrastructures.constant.CoSoConstant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -35,7 +32,7 @@ public class DemoCoSoRepository {
         s.close();
         return list;
     }
-
+    
     public CoSo addCoSo(CoSo cs) {
         Session s = HibernateUtil.getSessionFactory().openSession();
         try {
@@ -98,6 +95,58 @@ public class DemoCoSoRepository {
             return null;
         }
         return csc;
+    }
+    
+    // cách tìm kiếm thứ 2
+    public List<DemoCoSoCustom> findAllByMa(String ma, CoSoConstant tt) {
+        List<DemoCoSoCustom> list = new ArrayList<>();
+        Session s = HibernateUtil.getSessionFactory().openSession();
+        Query q = s.createQuery("SELECT new customModels.DemoCoSoCustom ("
+                + "cs.id as id, "
+                + "cs.ma as ma, "
+                + "cs.ten as ten,"
+                + "cs.viTri as viTri,"
+                + "cs.trangThai as trangThai"
+                + ") FROM domainModels.CoSo cs WHERE cs.ma LIKE CONCAT('%',:ma,'%') AND cs.trangThai = :tt");
+        q.setParameter("ma", ma);
+        q.setParameter("tt", tt);
+        list = q.getResultList();
+        s.close();
+        return list;
+    }
+    
+    public List<DemoCoSoCustom> findAllByTen(String ten, CoSoConstant tt) {
+        List<DemoCoSoCustom> list = new ArrayList<>();
+        Session s = HibernateUtil.getSessionFactory().openSession();
+        Query q = s.createQuery("SELECT new customModels.DemoCoSoCustom ("
+                + "cs.id as id, "
+                + "cs.ma as ma, "
+                + "cs.ten as ten,"
+                + "cs.viTri as viTri,"
+                + "cs.trangThai as trangThai"
+                + ") FROM domainModels.CoSo cs WHERE cs.ten LIKE CONCAT('%',:ten,'%') AND cs.trangThai = :tt");
+        q.setParameter("ten", ten);
+        q.setParameter("tt", tt);
+        list = q.getResultList();
+        s.close();
+        return list;
+    }
+    
+    public List<DemoCoSoCustom> findAllByViTri(String vt, CoSoConstant tt) {
+        List<DemoCoSoCustom> list = new ArrayList<>();
+        Session s = HibernateUtil.getSessionFactory().openSession();
+        Query q = s.createQuery("SELECT new customModels.DemoCoSoCustom ("
+                + "cs.id as id, "
+                + "cs.ma as ma, "
+                + "cs.ten as ten,"
+                + "cs.viTri as viTri,"
+                + "cs.trangThai as trangThai"
+                + ") FROM domainModels.CoSo cs WHERE cs.viTri LIKE CONCAT('%',:vt,'%') AND cs.trangThai = :tt");
+        q.setParameter("vt", vt);
+        q.setParameter("tt", tt);
+        list = q.getResultList();
+        s.close();
+        return list;
     }
 
 }

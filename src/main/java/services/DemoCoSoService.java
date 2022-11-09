@@ -24,4 +24,5 @@ public interface DemoCoSoService {
     DemoCoSoCustom checkValidate(DemoCoSoCustom cs, JLabel erroMa, JLabel erroTen, JLabel erroViTri);
     CoSoConstant loc(int a);
     DemoCoSoCustom findCoSoByMa(String ma);
+    List<DemoCoSoCustom> findAllByRadio(String ten, CoSoConstant tt, int rdo);
 }

@@ -17,54 +17,35 @@ import utilities.Converter;
  *
  * @author QUOC HUY
  */
-public class DemoCoSoView extends javax.swing.JPanel {
+public class DemoCoSoViewPast2 extends javax.swing.JPanel {
 
     /**
-     * Creates new form DemoCoSoView
+     * Creates new form DemoCoSoViewPast2
      */
     private DemoCoSoService coSoService;
     
     private List<DemoCoSoCustom> getList;
-
-    public DemoCoSoView() {
+    public DemoCoSoViewPast2() {
         coSoService = new DemoCoSoServiceImpl();
         getList = new ArrayList<>();
         initComponents();
+        coSoService.loadCombobox(cbbTrangThai);
         clearForm();
+        loadTable(getList);
     }
-
+    
+    public void clearForm() {
+        rdoTen.setSelected(true);
+        cbbTrangThai.setSelectedIndex(0);
+        getList = coSoService.findAllByRadio("", coSoService.loc(cbbTrangThai.getSelectedIndex()), 0);
+    }
+    
     public List<DemoCoSoCustom> listSearch(int rdo) {
         String timKiem = this.txtSearchTheo.getText();
-        List<DemoCoSoCustom> listTimKiem = new ArrayList<>();
-        checkCbb(coSoService.loc(this.cbbTrangThai.getSelectedIndex())).parallelStream().forEach(el -> {
-            String search = "";
-            List<String> strings = new ArrayList<>();
-            switch (rdo) {
-                case 0:
-                    search = el.getMa();
-                    break;
-                case 1:
-                    search = el.getTen();
-                    break;
-                case 2:
-                    search = el.getViTri();
-                    break;
-            }
-            for (int i = 0; i <= search.length(); i++) {
-                String newMa = search.substring(0, i);
-                strings.add(newMa);
-            }
-
-            for (String e : strings) {
-                if (e.equalsIgnoreCase(timKiem)) {
-                    listTimKiem.add(el);
-                }
-
-            }
-        });
-        return listTimKiem;
+        getList = coSoService.findAllByRadio(timKiem, coSoService.loc(cbbTrangThai.getSelectedIndex()), rdo);
+        return getList;
     }
-
+    
     public void searchRadio() {
         if (rdoMa.isSelected()) {
             loadTable(listSearch(0));
@@ -74,26 +55,7 @@ public class DemoCoSoView extends javax.swing.JPanel {
             loadTable(listSearch(2));
         }
     }
-
-    public List<DemoCoSoCustom> checkCbb(CoSoConstant cs) {
-        List<DemoCoSoCustom> listTimKiem = new ArrayList<>();
-        getList.forEach(el -> {
-            if (el.getTrangThai() == cs) {
-                listTimKiem.add(el);
-            }
-        });
-        return listTimKiem;
-    }
     
-    public void clearForm() {
-        this.txtSearchTheo.setText("");
-        this.rdoTen.setSelected(true);
-        coSoService.loadCombobox(cbbTrangThai);
-        this.cbbTrangThai.setSelectedIndex(0);
-        getList = coSoService.getListCoSo();
-        loadTable(checkCbb(CoSoConstant.DANG_HOAT_DONG));
-    }
-
     public void loadTable(List<DemoCoSoCustom> list) {
         DefaultTableModel dtm = (DefaultTableModel) this.tableAll.getModel();
         dtm.setRowCount(0);
@@ -130,6 +92,7 @@ public class DemoCoSoView extends javax.swing.JPanel {
         rdoTen = new utilities.palette.RadioButtonCustom();
         rdoMa = new utilities.palette.RadioButtonCustom();
         rdoViTri = new utilities.palette.RadioButtonCustom();
+        uWPButton3 = new utilities.palette.UWPButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         uWPButton2 = new utilities.palette.UWPButton();
@@ -171,43 +134,25 @@ public class DemoCoSoView extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tableAll);
 
         cbbTrangThai.setLabeText("Trạng thái");
-        cbbTrangThai.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbbTrangThaiActionPerformed(evt);
-            }
-        });
 
         txtSearchTheo.setLabelText("Search");
-        txtSearchTheo.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtSearchTheoKeyReleased(evt);
-            }
-        });
 
         buttonGroup1.add(rdoTen);
         rdoTen.setText("Tên");
         rdoTen.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        rdoTen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdoTenActionPerformed(evt);
-            }
-        });
 
         buttonGroup1.add(rdoMa);
         rdoMa.setText("Mã");
         rdoMa.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        rdoMa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdoMaActionPerformed(evt);
-            }
-        });
 
         buttonGroup1.add(rdoViTri);
         rdoViTri.setText("Vị trí");
         rdoViTri.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        rdoViTri.addActionListener(new java.awt.event.ActionListener() {
+
+        uWPButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Search.png"))); // NOI18N
+        uWPButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdoViTriActionPerformed(evt);
+                uWPButton3ActionPerformed(evt);
             }
         });
 
@@ -217,7 +162,7 @@ public class DemoCoSoView extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(rdoTen, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(46, 46, 46)
@@ -226,22 +171,32 @@ public class DemoCoSoView extends javax.swing.JPanel {
                         .addComponent(rdoViTri, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(37, 37, 37)
                         .addComponent(cbbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(59, 59, 59)
-                        .addComponent(txtSearchTheo, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 957, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(27, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(txtSearchTheo, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(uWPButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 957, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtSearchTheo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rdoTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rdoViTri, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rdoMa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbbTrangThai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 21, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtSearchTheo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(rdoTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(rdoViTri, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(rdoMa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbbTrangThai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 27, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(uWPButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29))
         );
@@ -302,7 +257,7 @@ public class DemoCoSoView extends javax.swing.JPanel {
                     .addComponent(btnThem, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
                     .addComponent(uWPButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(uWPButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -321,31 +276,6 @@ public class DemoCoSoView extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cbbTrangThaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbTrangThaiActionPerformed
-        listSearch(this.cbbTrangThai.getSelectedIndex());
-        searchRadio();
-    }//GEN-LAST:event_cbbTrangThaiActionPerformed
-
-    private void txtSearchTheoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchTheoKeyReleased
-        searchRadio();
-    }//GEN-LAST:event_txtSearchTheoKeyReleased
-
-    private void rdoTenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoTenActionPerformed
-        searchRadio();
-    }//GEN-LAST:event_rdoTenActionPerformed
-
-    private void rdoMaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoMaActionPerformed
-        searchRadio();
-    }//GEN-LAST:event_rdoMaActionPerformed
-
-    private void rdoViTriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoViTriActionPerformed
-        searchRadio();
-    }//GEN-LAST:event_rdoViTriActionPerformed
-
-    private void uWPButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uWPButton2ActionPerformed
-        clearForm();
-    }//GEN-LAST:event_uWPButton2ActionPerformed
-
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         DemoCreateCoSoView create = new DemoCreateCoSoView();
         create.setVisible(true);
@@ -356,6 +286,15 @@ public class DemoCoSoView extends javax.swing.JPanel {
         DemoRUDCoSoView rud = new DemoRUDCoSoView(coSoService.findCoSoByMa(tableAll.getValueAt(row, 2).toString()));
         rud.setVisible(true);
     }//GEN-LAST:event_tableAllMouseClicked
+
+    private void uWPButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uWPButton2ActionPerformed
+        clearForm();
+        loadTable(getList);
+    }//GEN-LAST:event_uWPButton2ActionPerformed
+
+    private void uWPButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uWPButton3ActionPerformed
+        searchRadio();
+    }//GEN-LAST:event_uWPButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -374,5 +313,6 @@ public class DemoCoSoView extends javax.swing.JPanel {
     private utilities.palette.TextField txtSearchTheo;
     private utilities.palette.UWPButton uWPButton1;
     private utilities.palette.UWPButton uWPButton2;
+    private utilities.palette.UWPButton uWPButton3;
     // End of variables declaration//GEN-END:variables
 }
