@@ -58,10 +58,13 @@ public class TpSendEmail extends javax.swing.JPanel {
 
         lable1.setText("Send email to nhân viên");
 
+        txtSubject.setText("a");
         txtSubject.setLabelText("Subject");
 
+        txtToEmail.setText("xuanhai29072003@gmail.com");
         txtToEmail.setLabelText("To");
 
+        txtMessage.setText("a");
         txtMessage.setLabelText("Mesage");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -112,11 +115,12 @@ public class TpSendEmail extends javax.swing.JPanel {
 
 //        xuanhai29072003@gmail.com
         Properties prop = new Properties();
-        prop.put("mail.smtp.host*", "smtp.gmail.com");
-        prop.put("mail.smtp.port*", "587");
-        prop.put("mail.smtp.auth*", "true");
-        prop.put("mail.smtp.ssl.protocols", "TLSv1.2");
-        prop.put("mail.smtp.starttls.enable*", "true"); //TLS
+        prop.put("mail.smtp.host", "smtp.gmail.com");
+        prop.put("mail.smtp.port", "587");
+        prop.put("mail.smtp.auth", "true");
+//        prop.put("mail.smtp.starttls ", "enable=false");
+        prop.put("mail.smtp.starttls.enable", "true"); //TLS
+        
         
 
         Session session = Session.getInstance(prop, new javax.mail.Authenticator() {

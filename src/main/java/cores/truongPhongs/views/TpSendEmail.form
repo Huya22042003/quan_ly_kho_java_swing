@@ -90,16 +90,19 @@
     </Component>
     <Component class="utilities.palette.TextField" name="txtSubject">
       <Properties>
+        <Property name="text" type="java.lang.String" value="a"/>
         <Property name="labelText" type="java.lang.String" value="Subject"/>
       </Properties>
     </Component>
     <Component class="utilities.palette.TextField" name="txtToEmail">
       <Properties>
+        <Property name="text" type="java.lang.String" value="xuanhai29072003@gmail.com"/>
         <Property name="labelText" type="java.lang.String" value="To"/>
       </Properties>
     </Component>
     <Component class="utilities.palette.TextField" name="txtMessage">
       <Properties>
+        <Property name="text" type="java.lang.String" value="a"/>
         <Property name="labelText" type="java.lang.String" value="Mesage"/>
       </Properties>
     </Component>
