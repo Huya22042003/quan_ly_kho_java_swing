@@ -131,4 +131,19 @@ public class DemoCoSoServiceImpl implements DemoCoSoService {
         return rp.findByMa(ma);
     }
 
+    @Override
+    public List<DemoCoSoCustom> findAllByRadio(String tk, CoSoConstant tt, int rdo) {
+        switch (rdo) {
+            case 0:
+                return rp.findAllByMa(tk, tt);
+            case 1:
+                return rp.findAllByTen(tk, tt);
+            case 2:
+                return rp.findAllByViTri(tk, tt);
+            default:
+               return null; 
+        }
+    }
+
+
 }
