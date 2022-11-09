@@ -11,9 +11,11 @@ import domainModels.HoaDon;
 import domainModels.KhachHang;
 import domainModels.KhoHang;
 import domainModels.LoaiHang;
+import domainModels.NhaCungCap;
 import domainModels.NhanVienGiaoHang;
 import domainModels.NhanVienVanDon;
 import domainModels.TruongPhong;
+import infrastructures.NhaCungCapConstant;
 import infrastructures.constant.CoSoConstant;
 import infrastructures.constant.GioiTinhConstant;
 import infrastructures.constant.KhoHangConstant;
@@ -53,6 +55,34 @@ public class Migrator {
         Transaction trans = session.beginTransaction();
 
         // insert database
+        // insert Nhà cung cấp
+        NhaCungCap ncc = new NhaCungCap();
+        ncc.setMa("CS001");
+        ncc.setTen("Phạm Xuân Hải");
+        ncc.setDiaChi("Hải Dương");
+        ncc.setSdt("0339821695");
+        ncc.setEmail("hai@gmail.com");
+        ncc.setKhuVuc("Hà Nội");
+        ncc.setTrangThai(NhaCungCapConstant.DANG_SU_DUNG);
+        session.save(ncc);
+        NhaCungCap ncc1 = new NhaCungCap();
+        ncc.setMa("CS002");
+        ncc.setTen("Vũ Thị Tuyết");
+        ncc.setDiaChi("Hải Dương");
+        ncc.setSdt("0339821695");
+        ncc.setEmail("tuyet@gmail.com");
+        ncc.setKhuVuc("HCM");
+        ncc.setTrangThai(NhaCungCapConstant.DANG_SU_DUNG);
+        session.save(ncc1);
+        NhaCungCap ncc2 = new NhaCungCap();
+        ncc.setMa("CS003");
+        ncc.setTen("Nguyễn Quốc Huy");
+        ncc.setDiaChi("Hải Dương");
+        ncc.setSdt("0339821695");
+        ncc.setEmail("huy@gmail.com");
+        ncc.setKhuVuc("Đà Nẵng");
+        ncc.setTrangThai(NhaCungCapConstant.DANG_SU_DUNG);
+        session.save(ncc2);
         // insert Cơ sở
         CoSo cs = new CoSo();
         cs.setMa("CS001");
