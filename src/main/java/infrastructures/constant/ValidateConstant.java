@@ -8,7 +8,7 @@ package infrastructures.constant;
  *
  * @author QUOC HUY
  */
-public class ValidateConstant {
+public class ValidateConstant { 
 
     public static final String REGEX_HO_OR_TEN = "^[A-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãè"
             + "éêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂẾưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔ"

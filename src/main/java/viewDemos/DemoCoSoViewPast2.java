@@ -5,7 +5,6 @@
 package viewDemos;
 
 import customModels.DemoCoSoCustom;
-import infrastructures.constant.CoSoConstant;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -25,9 +24,16 @@ public class DemoCoSoViewPast2 extends javax.swing.JPanel {
     private DemoCoSoService coSoService;
     
     private List<DemoCoSoCustom> getList;
+    
+    private DemoCreateCoSoView createView;
+    
+    private DemoRUDCoSoView rud;
+    
     public DemoCoSoViewPast2() {
         coSoService = new DemoCoSoServiceImpl();
         getList = new ArrayList<>();
+        createView = new DemoCreateCoSoView();
+        rud = new DemoRUDCoSoView();
         initComponents();
         coSoService.loadCombobox(cbbTrangThai);
         clearForm();
@@ -277,14 +283,17 @@ public class DemoCoSoViewPast2 extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        DemoCreateCoSoView create = new DemoCreateCoSoView();
-        create.setVisible(true);
+        createView.setVisible(true);
+        rud.setVisible(false);
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void tableAllMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableAllMouseClicked
         int row = this.tableAll.getSelectedRow();
-        DemoRUDCoSoView rud = new DemoRUDCoSoView(coSoService.findCoSoByMa(tableAll.getValueAt(row, 2).toString()));
+        createView.setVisible(false);
+        
+        rud.csc = coSoService.findCoSoByMa(tableAll.getValueAt(row, 2).toString());
         rud.setVisible(true);
+        rud.showData();
     }//GEN-LAST:event_tableAllMouseClicked
 
     private void uWPButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uWPButton2ActionPerformed

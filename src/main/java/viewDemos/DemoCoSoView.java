@@ -34,11 +34,16 @@ public class DemoCoSoView extends javax.swing.JPanel {
     }
 
     public List<DemoCoSoCustom> listSearch(int rdo) {
+        // nhập vào 
         String timKiem = this.txtSearchTheo.getText();
         List<DemoCoSoCustom> listTimKiem = new ArrayList<>();
+        
+        // tìm kiếm theo tên mã vị trí
         checkCbb(coSoService.loc(this.cbbTrangThai.getSelectedIndex())).parallelStream().forEach(el -> {
             String search = "";
             List<String> strings = new ArrayList<>();
+            
+            // truyền tham số
             switch (rdo) {
                 case 0:
                     search = el.getMa();
@@ -50,18 +55,25 @@ public class DemoCoSoView extends javax.swing.JPanel {
                     search = el.getViTri();
                     break;
             }
+            // cắt phần tử rồi ném vào mảng String[] vd Hà Nội =>  H, à , , N, ộ, i => [
+//                                                                                      "H",
+//                                                                                       "Hà",
+//                                                                                      "Hà ",
+//                                                                                      "Hà N"
+//                                                                                       ....,
+//                                                                                      "Hà Nội"]
             for (int i = 0; i <= search.length(); i++) {
                 String newMa = search.substring(0, i);
                 strings.add(newMa);
             }
-
+            // so sánh mảng vừa cắt với phần tử nhập vào
             for (String e : strings) {
                 if (e.equalsIgnoreCase(timKiem)) {
                     listTimKiem.add(el);
                 }
-
             }
         });
+        
         return listTimKiem;
     }
 
