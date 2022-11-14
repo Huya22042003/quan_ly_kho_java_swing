@@ -6,7 +6,7 @@ package cores.nhanVienVanDons.repositories;
 
 import cores.nhanVienVanDons.customModels.NVVDListNVGHCustom;
 import domainModels.NhanVienGiaoHang;
-import domainModels.base.NhanVienBase;
+import domainModels.NhanVien;
 import java.util.List;
 import javax.persistence.Query;
 import org.hibernate.Session;

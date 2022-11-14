@@ -2,16 +2,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package domainModels.base;
+package domainModels;
 
 import infrastructures.constant.GioiTinhConstant;
 import infrastructures.constant.TrangThaiNhanVienConstant;
-import java.sql.Date;
+import java.io.Serializable;
 import java.util.UUID;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,8 +28,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@MappedSuperclass
-public abstract class NhanVienBase {
+@Table(name = "NhanVien")
+@Entity
+public class NhanVien implements Serializable{
 
     @Id
     @GeneratedValue
@@ -49,7 +53,7 @@ public abstract class NhanVienBase {
     private String matKhau;
     
     @Column(name = "NgaySinh")
-    private Date ngaySinh;
+    private Long ngaySinh;
     
     @Column(name = "HinhAnh")
     private String hinhAnh;
@@ -62,5 +66,9 @@ public abstract class NhanVienBase {
     
     @Column(name = "TrangThai")
     private TrangThaiNhanVienConstant trangThai;
+    
+    @ManyToOne
+    @JoinColumn(name = "idChucVu")
+    private ChucVu idChucVu;
 
 }

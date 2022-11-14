@@ -4,12 +4,9 @@
  */
 package domainModels;
 
-import domainModels.base.NhanVienBase;
 import java.io.Serializable;
+import java.util.UUID;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,15 +17,14 @@ import lombok.Setter;
  *
  * @author QUOC HUY
  */
-@Entity
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "NhanVienVanDon")
-public class NhanVienVanDon extends NhanVienBase implements Serializable {
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "IdKhoHang", nullable = false)
-    private KhoHang idKhoHang;
+@NoArgsConstructor
+public class ChiTietPhieuNhapId implements Serializable{
+    
+    private UUID idPhieuNhap;
+    
+    private UUID idChiTietSp;
+    
 }
