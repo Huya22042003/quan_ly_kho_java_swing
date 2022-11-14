@@ -5,35 +5,30 @@
 package domainModels;
 
 import java.io.Serializable;
-import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 /**
  *
- * @author QUOC HUY
+ * @author window
  */
 @Entity
 @Data
-@Table(name = "ChiTietPhieuHoanXuat")
-@IdClass(ChiTietPhieuHoanXuatId.class)
-public class ChiTietPhieuHoanXuat implements Serializable {
+@Table(name = "ChiTietPhieuHoanNhap")
+@IdClass(ChiTietPhieuHoanNhapId.class)
+public class ChiTietPhieuHoanNhap implements Serializable {
 
     @Id
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "IdPhieuHoanXuat")
-    private PhieuHoanXuat idPhieuHoanXuat;
+    @JoinColumn(name = "IdPhieuHoanNhap")
+    private PhieuHoanXuat idPhieuHoanNhap;
     
     @Id
     @ManyToOne(fetch = FetchType.EAGER)
@@ -42,6 +37,5 @@ public class ChiTietPhieuHoanXuat implements Serializable {
     
     @Column(name = "SoLuong")
     private int soLuong;
-    
     
 }
