@@ -2,8 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package cores.admins.customModels;
+package cores.nhanVienQuanLy.customModels;
 
+import infrastructures.constant.GioiTinhConstant;
+import java.util.Date;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,14 +14,22 @@ import lombok.Setter;
 
 /**
  *
- * @author Acer
+ * @author window
  */
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AdGetTenCoSoCustom {
-    private UUID id;
-    private String ten;
-}
+public class NvghXemThongTinCaNhanCustom {
 
+    private UUID id;
+    private String ma;
+    private String ten;
+    private String email;
+    private String sdt;
+    private String matKhau;
+    private Date ngaySinh;
+    private GioiTinhConstant gioiTinh;
+    private String diaChi;
+
+}
