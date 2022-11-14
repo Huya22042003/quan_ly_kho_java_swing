@@ -2,11 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package cores.nhanVienVanDons.views;
+package cores.nhanVienQuanLy.views;
 
-import cores.nhanVienVanDons.customModels.NvvdXemThongTinCaNhanCustom;
-import cores.nhanVienVanDons.services.NvvdXemThongTinCaNhanService;
-import cores.nhanVienVanDons.services.serviceImpls.NvvdXemThongTinCaNhanServiceImpl;
+import cores.nhanVienQuanLy.customModels.NvghXemThongTinCaNhanCustom;
+import cores.nhanVienQuanLy.services.NvghXemThongTinCaNhanService;
+import cores.nhanVienQuanLy.services.serviceImpls.NvghXemThongTinCaNhanServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -16,30 +16,30 @@ import utilities.Converter;
  *
  * @author window
  */
-public class NvvdXemThongTinCaNhanForm extends javax.swing.JPanel {
+public class NvghXemThongTinCaNhanForm extends javax.swing.JPanel {
 
-    private List<NvvdXemThongTinCaNhanCustom> listNvvdXemThongTinCaNhanCustom = new ArrayList<>();
-    private NvvdXemThongTinCaNhanService khXemThongTinCaNhanService = new NvvdXemThongTinCaNhanServiceImpl();
+    private List<NvghXemThongTinCaNhanCustom> listNvghXemThongTinCaNhanCustom = new ArrayList<>();
+    private NvghXemThongTinCaNhanService khXemThongTinCaNhanService = new NvghXemThongTinCaNhanServiceImpl();
 
-    public NvvdXemThongTinCaNhanForm() {
+    public NvghXemThongTinCaNhanForm() {
         initComponents();
-        listNvvdXemThongTinCaNhanCustom = khXemThongTinCaNhanService.getAll();
-        showData(listNvvdXemThongTinCaNhanCustom);
+        listNvghXemThongTinCaNhanCustom = khXemThongTinCaNhanService.getAll();
+        showData(listNvghXemThongTinCaNhanCustom);
     }
 
-    public void showData(List<NvvdXemThongTinCaNhanCustom> list) {
-        for (NvvdXemThongTinCaNhanCustom kh : list) {
+    public void showData(List<NvghXemThongTinCaNhanCustom> list) {
+        for (NvghXemThongTinCaNhanCustom kh : list) {
             txtMa.setText(kh.getMa());
             txtTen.setText(kh.getTen());
             txtGioiTinh.setText(Converter.trangThaiGioiTinh(kh.getGioiTinh()));
             txtDienThoai.setText(kh.getSdt());
             txtNgaySinh.setText(kh.getNgaySinh() + "");
             txtDiaChi.setText(kh.getDiaChi());
-            txtVaiTro.setText("Nhan viên vận đơn");
+            txtVaiTro.setText("Nhân viên giao hàng");
         }
     }
 
-    public NvvdXemThongTinCaNhanCustom checkPass() {
+    public NvghXemThongTinCaNhanCustom checkPass() {
         String oldPass = txtOldPass.getText();
         String newPass = txtNewPass.getText();
         String cFPass = txtConfirmPass.getText();
@@ -60,7 +60,7 @@ public class NvvdXemThongTinCaNhanForm extends javax.swing.JPanel {
             return null;
         }
 
-        NvvdXemThongTinCaNhanCustom kh = new NvvdXemThongTinCaNhanCustom();
+        NvghXemThongTinCaNhanCustom kh = new NvghXemThongTinCaNhanCustom();
         kh.setMatKhau(newPass);
         return kh;
     }
@@ -225,7 +225,7 @@ public class NvvdXemThongTinCaNhanForm extends javax.swing.JPanel {
         txtConfirmPass.setText("");
     }
     private void btnXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanActionPerformed
-        NvvdXemThongTinCaNhanCustom kh = checkPass();
+        NvghXemThongTinCaNhanCustom kh = checkPass();
         if (kh == null) {
             return;
         }

@@ -2,11 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package cores.nhanVienGiaoHangs.services.serviceImpls;
+package cores.nhanVienQuanLy.services.serviceImpls;
 
-import cores.khachHangs.customModels.NvghXemThongTinCaNhanCustom;
-import cores.nhanVienGiaoHangs.repositories.NvghXemThongTinCaNhanRepository;
-import cores.nhanVienGiaoHangs.services.NvghXemThongTinCaNhanService;
+import cores.nhanVienQuanLy.customModels.NvghXemThongTinCaNhanCustom;
+import cores.nhanVienQuanLy.repositories.NvghXemThongTinCaNhanRepository;
+import cores.nhanVienQuanLy.services.NvghXemThongTinCaNhanService;
 import java.util.List;
 
 /**
