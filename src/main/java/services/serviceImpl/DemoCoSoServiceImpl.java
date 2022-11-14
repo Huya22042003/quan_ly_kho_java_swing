@@ -27,12 +27,13 @@ public class DemoCoSoServiceImpl implements DemoCoSoService {
     public DemoCoSoServiceImpl() {
         rp = new DemoCoSoRepository();
     }
-
+    // cách 1
     @Override
     public List<DemoCoSoCustom> getListCoSo() {
         return rp.getList();
-    }
+    } //
 
+    // công việc cả cách 1 lẫn cách 2
     @Override
     public DemoCoSoCustom addCoSo(DemoCoSoCustom custom) {
         CoSo cs = new CoSo();
@@ -130,7 +131,9 @@ public class DemoCoSoServiceImpl implements DemoCoSoService {
     public DemoCoSoCustom findCoSoByMa(String ma) {
         return rp.findByMa(ma);
     }
-
+    //
+    
+    // cách 2
     @Override
     public List<DemoCoSoCustom> findAllByRadio(String tk, CoSoConstant tt, int rdo) {
         switch (rdo) {
@@ -143,7 +146,6 @@ public class DemoCoSoServiceImpl implements DemoCoSoService {
             default:
                return null; 
         }
-    }
-
+    } //
 
 }

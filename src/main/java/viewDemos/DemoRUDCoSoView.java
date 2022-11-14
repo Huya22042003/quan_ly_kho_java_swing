@@ -22,10 +22,16 @@ public class DemoRUDCoSoView extends javax.swing.JFrame {
      * Creates new form DemoRUDCoSoView
      */
     private DemoCoSoService coSoService;
-    private DemoCoSoCustom csc;
+    DemoCoSoCustom csc = new DemoCoSoCustom();
     
     public DemoRUDCoSoView() {
+        coSoService = new DemoCoSoServiceImpl();
         initComponents();
+        coSoService.loadCombobox(cbbTrangThai);
+        
+        Toolkit toolkit = getToolkit();
+        Dimension size = toolkit.getScreenSize();
+        setLocation(size.width / 2 - getWidth() / 2, size.height / 2 - getHeight() / 2);
     }
     
     public DemoRUDCoSoView(DemoCoSoCustom cs) {
@@ -272,7 +278,7 @@ public class DemoRUDCoSoView extends javax.swing.JFrame {
     private void uWPButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uWPButton3ActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_uWPButton3ActionPerformed
-    int xy, xx;
+    private int xy, xx;
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
         xx = evt.getX();
         xy = evt.getY();

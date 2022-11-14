@@ -4,10 +4,12 @@
  */
 package domainModels;
 
-import domainModels.base.NhanVienBase;
 import java.io.Serializable;
+import java.util.UUID;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -20,16 +22,25 @@ import lombok.Setter;
  *
  * @author QUOC HUY
  */
+@Table(name = "PhieuHoanXuat")
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "TruongPhong")
-public class TruongPhong extends NhanVienBase implements Serializable {
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "IdKhoHang", nullable = false)
-    private KhoHang idKhoHang;
-
+public class PhieuHoanXuat implements Serializable{
+    @Id
+    @GeneratedValue
+    @Column(name = "Id", columnDefinition = "uniqueidentifier")
+    private UUID id;
+    
+    @Column(name = "NgayTao")
+    private Long ngayTao;
+    
+    @Column(name = "GhiChu", columnDefinition = "NVARCHAR(255)")
+    private String ghiChu;
+    
+    @ManyToOne
+    @JoinColumn(name = "idPhieuXuat")
+    private PhieuXuat phieuXuat;
 }

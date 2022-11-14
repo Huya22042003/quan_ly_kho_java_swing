@@ -4,7 +4,6 @@
  */
 package domainModels;
 
-import infrastructures.constant.CoSoConstant;
 import java.io.Serializable;
 import java.util.UUID;
 import javax.persistence.Column;
@@ -12,18 +11,22 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
  *
  * @author QUOC HUY
  */
+@Table(name = "ChucVu")
 @Entity
 @Getter
 @Setter
-@Table(name = "CoSo")
-public class CoSo implements Serializable {
+@NoArgsConstructor
+@AllArgsConstructor
+public class ChucVu implements Serializable{
 
     @Id
     @GeneratedValue
@@ -35,11 +38,4 @@ public class CoSo implements Serializable {
 
     @Column(name = "Ten", columnDefinition = "NVARCHAR(255)")
     private String ten;
-
-    @Column(name = "ViTri", columnDefinition = "NVARCHAR(255)")
-    private String viTri;
-
-    @Column(name = "TrangThai")
-    private CoSoConstant trangThai;
-
 }

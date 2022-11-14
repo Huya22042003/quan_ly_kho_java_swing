@@ -34,11 +34,16 @@ public class DemoCoSoView extends javax.swing.JPanel {
     }
 
     public List<DemoCoSoCustom> listSearch(int rdo) {
+        // nhập vào 
         String timKiem = this.txtSearchTheo.getText();
         List<DemoCoSoCustom> listTimKiem = new ArrayList<>();
+        
+        // tìm kiếm theo tên mã vị trí
         checkCbb(coSoService.loc(this.cbbTrangThai.getSelectedIndex())).parallelStream().forEach(el -> {
             String search = "";
             List<String> strings = new ArrayList<>();
+            
+            // truyền tham số
             switch (rdo) {
                 case 0:
                     search = el.getMa();
@@ -50,18 +55,25 @@ public class DemoCoSoView extends javax.swing.JPanel {
                     search = el.getViTri();
                     break;
             }
+            // cắt phần tử rồi ném vào mảng String[] vd Hà Nội =>  H, à , , N, ộ, i => [
+//                                                                                      "H",
+//                                                                                       "Hà",
+//                                                                                      "Hà ",
+//                                                                                      "Hà N"
+//                                                                                       ....,
+//                                                                                      "Hà Nội"]
             for (int i = 0; i <= search.length(); i++) {
                 String newMa = search.substring(0, i);
                 strings.add(newMa);
             }
-
+            // so sánh mảng vừa cắt với phần tử nhập vào
             for (String e : strings) {
                 if (e.equalsIgnoreCase(timKiem)) {
                     listTimKiem.add(el);
                 }
-
             }
         });
+        
         return listTimKiem;
     }
 
@@ -229,7 +241,7 @@ public class DemoCoSoView extends javax.swing.JPanel {
                         .addGap(59, 59, 59)
                         .addComponent(txtSearchTheo, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 957, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(211, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -302,7 +314,7 @@ public class DemoCoSoView extends javax.swing.JPanel {
                     .addComponent(btnThem, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
                     .addComponent(uWPButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(uWPButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)

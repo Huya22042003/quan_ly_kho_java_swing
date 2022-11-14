@@ -4,17 +4,15 @@
  */
 package domainModels;
 
+import infrastructures.constant.DanhGiaConstant;
 import infrastructures.constant.GioiTinhConstant;
+import infrastructures.constant.KhachHangConstant;
 import java.io.Serializable;
-import java.sql.Date;
-import java.util.List;
 import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,14 +23,14 @@ import lombok.Setter;
  *
  * @author QUOC HUY
  */
-@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "KhachHang")
-public class KhachHang implements Serializable {
-
+@Table(name = "NhanVien")
+@Entity
+public class KhachHang implements Serializable{
+    
     @Id
     @GeneratedValue
     @Column(name = "Id", columnDefinition = "uniqueidentifier")
@@ -43,28 +41,31 @@ public class KhachHang implements Serializable {
 
     @Column(name = "Ten", columnDefinition = "NVARCHAR(255)")
     private String ten;
-
-    @Column(name = "Email")
-    private String email;
-
+    
     @Column(name = "Sdt")
     private String sdt;
-
+    
+    @Column(name = "Email")
+    private String email;
+    
     @Column(name = "MatKhau", columnDefinition = "NVARCHAR(255)")
     private String matKhau;
-
+    
     @Column(name = "NgaySinh")
-    private Date ngaySinh;
-
+    private Long ngaySinh;
+    
     @Column(name = "HinhAnh")
     private String hinhAnh;
-
+    
     @Column(name = "GioiTinh")
     private GioiTinhConstant gioiTinh;
-
+    
     @Column(name = "DiaChi", columnDefinition = "NVARCHAR(255)")
     private String diaChi;
     
-    @OneToMany(mappedBy = "idKhachHang" , fetch = FetchType.LAZY)
-    private List<DonHang> listKhachHang;
+    @Column(name = "DanhGia")
+    private DanhGiaConstant danhGia;
+    
+    @Column(name = "TrangThai")
+    private KhachHangConstant trangThai;
 }
