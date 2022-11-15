@@ -6,7 +6,6 @@ package domainModels;
 
 import java.io.Serializable;
 import java.util.Objects;
-import java.util.UUID;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,8 +20,6 @@ public class ChiTietPhieuXuatId implements Serializable{
     private PhieuXuat idPhieuXuat;
 
     private ChiTietSanPham idChiTietSp;
-    
-    private int soLuong;
     
     @Override
     public int hashCode() {

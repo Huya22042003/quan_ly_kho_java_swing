@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package domainModels;
 
 import java.io.Serializable;
@@ -13,7 +9,10 @@ import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  *
@@ -21,7 +20,10 @@ import lombok.Data;
  */
 
 @Entity
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "ChiTietPhieuXuat")
 @IdClass(ChiTietPhieuXuatId.class)
 public class ChiTietPhieuXuat implements Serializable{
@@ -34,7 +36,7 @@ public class ChiTietPhieuXuat implements Serializable{
     @Id
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "IdChiTietSP")
-    private ChiTietSanPham idChiTietSP;
+    private ChiTietSanPham idChiTietSp;
     
     @Column(name = "SoLuong")
     private int soLuong;

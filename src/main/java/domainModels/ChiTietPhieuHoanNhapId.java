@@ -4,19 +4,27 @@
  */
 package domainModels;
 
+import java.io.Serializable;
 import java.util.Objects;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  *
  * @author window
  */
-public class ChiTietPhieuHoanNhapId {
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class ChiTietPhieuHoanNhapId implements Serializable {
+
     private PhieuHoanNhap idPhieuHoanNhap;
 
     private ChiTietSanPham idChiTietSp;
-    
-    private int soLuong;
-    
+
     @Override
     public int hashCode() {
         int hash = 3;
@@ -42,5 +50,5 @@ public class ChiTietPhieuHoanNhapId {
         }
         return Objects.equals(this.idChiTietSp, other.idChiTietSp);
     }
-    
+
 }

@@ -4,6 +4,8 @@
  */
 package domainModels;
 
+import java.io.Serializable;
+import java.util.List;
 import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,7 +15,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -24,20 +25,19 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
-public class PhieuHoanNhap {
+public class PhieuHoanNhap implements Serializable {
 
     @Id
     @GeneratedValue
     @Column(name = "Id", columnDefinition = "uniqueidentifier")
     private UUID id;
-    
+
     @Column(name = "NgayTao")
     private Long ngayTao;
-    
+
     @Column(name = "GhiChu", columnDefinition = "NVARCHAR(255)")
     private String ghiChu;
-    
+
     @ManyToOne
     @JoinColumn(name = "idPhieuNhap")
     private PhieuNhap phieuNhap;
