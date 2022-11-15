@@ -5,6 +5,8 @@
  */
 package utilities;
 
+import domainModels.CoSo;
+import infrastructures.constant.CoSoConstant;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -37,7 +39,33 @@ public class Migrator {
         Transaction trans = session.beginTransaction();
 
         // insert database
-        // insert Nhà cung cấp
+        CoSo cs = new CoSo();
+        cs.setMa("CS001");
+        cs.setTen("Hà Nội");
+        cs.setViTri("Hà Nội");
+        cs.setTrangThai(CoSoConstant.DANG_HOAT_DONG);
+        session.save(cs);
+
+        CoSo cs1 = new CoSo();
+        cs1.setMa("CS002");
+        cs1.setTen("HCM");
+        cs1.setViTri("TP. HCM");
+        cs1.setTrangThai(CoSoConstant.DANG_HOAT_DONG);
+        session.save(cs1);
+
+        CoSo cs2 = new CoSo();
+        cs2.setMa("CS003");
+        cs2.setTen("Hải Phòng");
+        cs2.setViTri("Hải Phòng");
+        cs2.setTrangThai(CoSoConstant.DANG_HOAT_DONG);
+        session.save(cs2);
+
+        CoSo cs3 = new CoSo();
+        cs3.setMa("CS004");
+        cs3.setTen("Quảng Ninh");
+        cs3.setViTri("Quảng Ninh");
+        cs3.setTrangThai(CoSoConstant.DANG_HOAT_DONG);
+        session.save(cs3);
        
 
         trans.commit();
