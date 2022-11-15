@@ -4,19 +4,19 @@
  */
 package domainModels;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
  *
  * @author window
  */
-public class ChiTietPhieuHoanXuatId {
+public class ChiTietPhieuHoanXuatId implements Serializable {
+
     private PhieuHoanXuat idPhieuHoanXuat;
 
     private ChiTietSanPham idChiTietSp;
-    
-    private int soLuong;
-    
+
     @Override
     public int hashCode() {
         int hash = 3;
@@ -42,5 +42,5 @@ public class ChiTietPhieuHoanXuatId {
         }
         return Objects.equals(this.idChiTietSp, other.idChiTietSp);
     }
-    
+
 }
