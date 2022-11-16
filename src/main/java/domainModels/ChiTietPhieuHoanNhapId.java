@@ -6,25 +6,29 @@ package domainModels;
 
 import java.io.Serializable;
 import java.util.Objects;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
  *
- * @author QUOC HUY
+ * @author window
  */
 @Getter
 @Setter
-public class ChiTietPhieuXuatId implements Serializable{
+@NoArgsConstructor
+@AllArgsConstructor
+public class ChiTietPhieuHoanNhapId implements Serializable {
 
-    private PhieuXuat idPhieuXuat;
+    private PhieuHoanNhap idPhieuHoanNhap;
 
     private ChiTietSanPham idChiTietSp;
-    
+
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 71 * hash + Objects.hashCode(this.idPhieuXuat);
+        hash = 71 * hash + Objects.hashCode(this.idPhieuHoanNhap);
         hash = 71 * hash + Objects.hashCode(this.idChiTietSp);
         return hash;
     }
@@ -40,11 +44,11 @@ public class ChiTietPhieuXuatId implements Serializable{
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final ChiTietPhieuXuatId other = (ChiTietPhieuXuatId) obj;
-        if (!Objects.equals(this.idPhieuXuat, other.idPhieuXuat)) {
+        final ChiTietPhieuHoanNhapId other = (ChiTietPhieuHoanNhapId) obj;
+        if (!Objects.equals(this.idPhieuHoanNhap, other.idPhieuHoanNhap)) {
             return false;
         }
         return Objects.equals(this.idChiTietSp, other.idChiTietSp);
     }
-    
+
 }

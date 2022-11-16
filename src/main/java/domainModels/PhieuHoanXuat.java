@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package domainModels;
 
 import java.io.Serializable;
@@ -28,19 +24,21 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PhieuHoanXuat implements Serializable{
+public class PhieuHoanXuat implements Serializable {
+
     @Id
     @GeneratedValue
     @Column(name = "Id", columnDefinition = "uniqueidentifier")
     private UUID id;
-    
+
     @Column(name = "NgayTao")
     private Long ngayTao;
-    
+
     @Column(name = "GhiChu", columnDefinition = "NVARCHAR(255)")
     private String ghiChu;
-    
+
     @ManyToOne
     @JoinColumn(name = "idPhieuXuat")
     private PhieuXuat phieuXuat;
+
 }
