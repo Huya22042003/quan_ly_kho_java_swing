@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package cores.truongPhongs.customModels;
+package cores.nhanVienQuanLy.customModels;
 
 import java.util.UUID;
 import lombok.AllArgsConstructor;
@@ -18,13 +18,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class NvqlQuanLyPhieuNhapCustom {
+public class NvqlGetTenNhanVienCustom {
     private UUID id;
-    private String ghiChu;
-    private Long ngayNhan;
-    private Long ngayTao;
-    private UUID idNhanVien;
-    private String tenNhanVien;
-    private UUID idNcc;
-    private String tenNcc;
+    private String ten;
 }

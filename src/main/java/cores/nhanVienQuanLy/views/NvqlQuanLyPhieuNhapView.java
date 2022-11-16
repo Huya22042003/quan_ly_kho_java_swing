@@ -4,56 +4,65 @@
  */
 package cores.nhanVienQuanLy.views;
 
+import cores.nhanVienQuanLy.customModels.NvqlQuanLyPhieuNhapCustom;
+import cores.nhanVienQuanLy.services.NvqlQuanLyPhieuNhapService;
+import cores.nhanVienQuanLy.services.serviceImpls.NvqlQuanLyPhieuNhapServiceImpl;
 import viewDemos.*;
 import customModels.DemoCoSoCustom;
 import infrastructures.constant.CoSoConstant;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
-import services.DemoCoSoService;
-import services.serviceImpl.DemoCoSoServiceImpl;
 import utilities.Converter;
 
 /**
  *
  * @author QUOC HUY
  */
-public class NvqlQuanLyDonViView extends javax.swing.JPanel {
+public class NvqlQuanLyPhieuNhapView extends javax.swing.JPanel {
 
     /**
      * Creates new form DemoCoSoView
      */
-    private DemoCoSoService coSoService;
-    
-    private List<DemoCoSoCustom> getList;
+    private NvqlQuanLyPhieuNhapService phieuNhapService;
 
-    public NvqlQuanLyDonViView() {
-        coSoService = new DemoCoSoServiceImpl();
-        getList = new ArrayList<>();
+    private List<NvqlQuanLyPhieuNhapCustom> getListPhieuNhap;
+
+    public NvqlQuanLyPhieuNhapView() {
         initComponents();
+        phieuNhapService = new NvqlQuanLyPhieuNhapServiceImpl();
+        getListPhieuNhap = new ArrayList<>();
+        this.loadTable(getListPhieuNhap);
         clearForm();
     }
 
-    public List<DemoCoSoCustom> listSearch(int rdo) {
+    public List<NvqlQuanLyPhieuNhapCustom> listSearch(int rdo) {
         // nhập vào 
         String timKiem = this.txtSearchTheo.getText();
-        List<DemoCoSoCustom> listTimKiem = new ArrayList<>();
-        
+        List<NvqlQuanLyPhieuNhapCustom> listTimKiem = new ArrayList<>();
+
         // tìm kiếm theo tên mã vị trí
-        checkCbb(coSoService.loc(this.cbbTrangThai.getSelectedIndex())).parallelStream().forEach(el -> {
+        getListPhieuNhap.parallelStream().forEach(el -> {
             String search = "";
             List<String> strings = new ArrayList<>();
-            
+
             // truyền tham số
             switch (rdo) {
                 case 0:
-                    search = el.getMa();
+                    search = el.getId().toString();
                     break;
                 case 1:
-                    search = el.getTen();
+                    search = el.getNgayNhan().toString();
                     break;
                 case 2:
-                    search = el.getViTri();
+                    search = el.getNgayTao().toString();
+                    break;
+                case 3:
+                    search = el.getTenNcc();
+                    break;
+                case 4:
+                    search = el.getTenNhanVien();
                     break;
             }
             // cắt phần tử rồi ném vào mảng String[] vd Hà Nội =>  H, à , , N, ộ, i => [
@@ -74,49 +83,54 @@ public class NvqlQuanLyDonViView extends javax.swing.JPanel {
                 }
             }
         });
-        
+
         return listTimKiem;
     }
 
     public void searchRadio() {
         if (rdoMa.isSelected()) {
             loadTable(listSearch(0));
-        } else if (rdoTen.isSelected()) {
+        } else if (rdoNgayNhap.isSelected()) {
             loadTable(listSearch(1));
-        } else {
+        } else if (rdoNgayTao.isSelected()) {
             loadTable(listSearch(2));
+        } else if (rdoNcc.isSelected()) {
+            loadTable(listSearch(3));
+        } else {
+            loadTable(listSearch(4));
         }
     }
 
-    public List<DemoCoSoCustom> checkCbb(CoSoConstant cs) {
-        List<DemoCoSoCustom> listTimKiem = new ArrayList<>();
-        getList.forEach(el -> {
-            if (el.getTrangThai() == cs) {
-                listTimKiem.add(el);
-            }
-        });
-        return listTimKiem;
-    }
-    
+//    public List<DemoCoSoCustom> checkCbb(CoSoConstant cs) {
+//        List<DemoCoSoCustom> listTimKiem = new ArrayList<>();
+//        getList.forEach(el -> {
+//            if (el.getTrangThai() == cs) {
+//                listTimKiem.add(el);
+//            }
+//        });
+//        return listTimKiem;
+//    }
+//    
     public void clearForm() {
         this.txtSearchTheo.setText("");
-        this.rdoTen.setSelected(true);
-        coSoService.loadCombobox(cbbTrangThai);
-        this.cbbTrangThai.setSelectedIndex(0);
-        getList = coSoService.getListCoSo();
-        loadTable(checkCbb(CoSoConstant.DANG_HOAT_DONG));
+        this.rdoMa.setSelected(true);
+        getListPhieuNhap = phieuNhapService.getListPn();
+        searchRadio();
     }
 
-    public void loadTable(List<DemoCoSoCustom> list) {
-        DefaultTableModel dtm = (DefaultTableModel) this.tableAll.getModel();
+    public void loadTable(List<NvqlQuanLyPhieuNhapCustom> list) {
+        DefaultTableModel dtm = (DefaultTableModel) this.tblPhieuNhap.getModel();
         dtm.setRowCount(0);
-        for (DemoCoSoCustom el : list) {
+        Date d;
+        for (NvqlQuanLyPhieuNhapCustom el : list) {
             Object[] rowData = {
                 dtm.getRowCount() + 1,
-                el.getTen(),
-                el.getMa(),
-                el.getViTri(),
-                Converter.trangThaiCoSo(el.getTrangThai())
+                el.getId(),
+                el.getGhiChu(),
+                d = new Date(el.getNgayNhan()),
+                d = new Date(el.getNgayTao()),
+                el.getTenNcc(),
+                el.getTenNhanVien()
             };
             dtm.addRow(rowData);
         }
@@ -137,15 +151,16 @@ public class NvqlQuanLyDonViView extends javax.swing.JPanel {
         btnThem = new utilities.palette.UWPButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableAll = new utilities.palette.TableDark_1();
-        cbbTrangThai = new utilities.palette.Combobox();
+        tblPhieuNhap = new utilities.palette.TableDark_1();
         txtSearchTheo = new utilities.palette.TextField();
-        rdoTen = new utilities.palette.RadioButtonCustom();
         rdoMa = new utilities.palette.RadioButtonCustom();
-        rdoViTri = new utilities.palette.RadioButtonCustom();
+        rdoNgayNhap = new utilities.palette.RadioButtonCustom();
+        rdoNcc = new utilities.palette.RadioButtonCustom();
+        rdoNgayTao = new utilities.palette.RadioButtonCustom();
+        rdoNhanVien = new utilities.palette.RadioButtonCustom();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        uWPButton2 = new utilities.palette.UWPButton();
+        btnHienThi = new utilities.palette.UWPButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -160,49 +175,33 @@ public class NvqlQuanLyDonViView extends javax.swing.JPanel {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        tableAll.setModel(new javax.swing.table.DefaultTableModel(
+        tblPhieuNhap.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "STT", "Tên", "Mã", "Vị trí", "Trạng thái"
+                "STT", "Mã phiếu nhập", "Ghi chú", "Ngày nhận", "Ngày tạo", "Nhà cung cấp", "Nhân viên"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        tableAll.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblPhieuNhap.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tableAllMouseClicked(evt);
+                tblPhieuNhapMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tableAll);
-
-        cbbTrangThai.setLabeText("Trạng thái");
-        cbbTrangThai.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbbTrangThaiActionPerformed(evt);
-            }
-        });
+        jScrollPane1.setViewportView(tblPhieuNhap);
 
         txtSearchTheo.setLabelText("Search");
         txtSearchTheo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtSearchTheoKeyReleased(evt);
-            }
-        });
-
-        buttonGroup1.add(rdoTen);
-        rdoTen.setText("Tên");
-        rdoTen.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        rdoTen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdoTenActionPerformed(evt);
             }
         });
 
@@ -215,12 +214,39 @@ public class NvqlQuanLyDonViView extends javax.swing.JPanel {
             }
         });
 
-        buttonGroup1.add(rdoViTri);
-        rdoViTri.setText("Vị trí");
-        rdoViTri.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        rdoViTri.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(rdoNgayNhap);
+        rdoNgayNhap.setText("Ngày nhập");
+        rdoNgayNhap.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        rdoNgayNhap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdoViTriActionPerformed(evt);
+                rdoNgayNhapActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(rdoNcc);
+        rdoNcc.setText("Nhà cung cấp");
+        rdoNcc.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        rdoNcc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoNccActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(rdoNgayTao);
+        rdoNgayTao.setText("Ngày tạo");
+        rdoNgayTao.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        rdoNgayTao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoNgayTaoActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(rdoNhanVien);
+        rdoNhanVien.setText("Nhân viên");
+        rdoNhanVien.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        rdoNhanVien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoNhanVienActionPerformed(evt);
             }
         });
 
@@ -229,21 +255,22 @@ public class NvqlQuanLyDonViView extends javax.swing.JPanel {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(rdoTen, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46)
-                .addComponent(rdoMa, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
-                .addComponent(rdoViTri, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
-                .addComponent(cbbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(59, 59, 59)
-                .addComponent(txtSearchTheo, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(211, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(rdoMa, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(rdoNgayNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(rdoNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(rdoNcc, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(rdoNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
+                        .addComponent(txtSearchTheo, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -251,10 +278,11 @@ public class NvqlQuanLyDonViView extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtSearchTheo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rdoTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rdoViTri, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rdoNgayNhap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(rdoMa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbbTrangThai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(rdoNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rdoNcc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rdoNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 21, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29))
@@ -264,7 +292,7 @@ public class NvqlQuanLyDonViView extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Danh sách cơ sở");
+        jLabel1.setText("Danh sách phiếu nhập");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -283,10 +311,10 @@ public class NvqlQuanLyDonViView extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        uWPButton2.setText("HIển thị");
-        uWPButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnHienThi.setText("HIển thị");
+        btnHienThi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                uWPButton2ActionPerformed(evt);
+                btnHienThiActionPerformed(evt);
             }
         });
 
@@ -298,7 +326,7 @@ public class NvqlQuanLyDonViView extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(57, 57, 57)
-                .addComponent(uWPButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnHienThi, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(171, 171, 171)
                 .addComponent(uWPButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(43, 43, 43))
@@ -314,7 +342,7 @@ public class NvqlQuanLyDonViView extends javax.swing.JPanel {
                 .addGap(34, 34, 34)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnThem, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
-                    .addComponent(uWPButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnHienThi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(uWPButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -335,58 +363,62 @@ public class NvqlQuanLyDonViView extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cbbTrangThaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbTrangThaiActionPerformed
-        listSearch(this.cbbTrangThai.getSelectedIndex());
-        searchRadio();
-    }//GEN-LAST:event_cbbTrangThaiActionPerformed
-
     private void txtSearchTheoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchTheoKeyReleased
         searchRadio();
     }//GEN-LAST:event_txtSearchTheoKeyReleased
-
-    private void rdoTenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoTenActionPerformed
-        searchRadio();
-    }//GEN-LAST:event_rdoTenActionPerformed
 
     private void rdoMaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoMaActionPerformed
         searchRadio();
     }//GEN-LAST:event_rdoMaActionPerformed
 
-    private void rdoViTriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoViTriActionPerformed
-        searchRadio();
-    }//GEN-LAST:event_rdoViTriActionPerformed
-
-    private void uWPButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uWPButton2ActionPerformed
+    private void btnHienThiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHienThiActionPerformed
         clearForm();
-    }//GEN-LAST:event_uWPButton2ActionPerformed
+    }//GEN-LAST:event_btnHienThiActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        DemoCreateCoSoView create = new DemoCreateCoSoView();
+        NvqlCreatePhieuNhapView create = new NvqlCreatePhieuNhapView();
         create.setVisible(true);
     }//GEN-LAST:event_btnThemActionPerformed
 
-    private void tableAllMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableAllMouseClicked
-        int row = this.tableAll.getSelectedRow();
-        DemoRUDCoSoView rud = new DemoRUDCoSoView(coSoService.findCoSoByMa(tableAll.getValueAt(row, 2).toString()));
+    private void tblPhieuNhapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPhieuNhapMouseClicked
+        int row = this.tblPhieuNhap.getSelectedRow();
+        NvqlRUDPhieuNhapView rud = new NvqlRUDPhieuNhapView();
         rud.setVisible(true);
-    }//GEN-LAST:event_tableAllMouseClicked
+    }//GEN-LAST:event_tblPhieuNhapMouseClicked
+
+    private void rdoNgayNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoNgayNhapActionPerformed
+        searchRadio();
+    }//GEN-LAST:event_rdoNgayNhapActionPerformed
+
+    private void rdoNccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoNccActionPerformed
+        searchRadio();
+    }//GEN-LAST:event_rdoNccActionPerformed
+
+    private void rdoNgayTaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoNgayTaoActionPerformed
+        searchRadio();
+    }//GEN-LAST:event_rdoNgayTaoActionPerformed
+
+    private void rdoNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoNhanVienActionPerformed
+        searchRadio();
+    }//GEN-LAST:event_rdoNhanVienActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private utilities.palette.UWPButton btnHienThi;
     private utilities.palette.UWPButton btnThem;
     private javax.swing.ButtonGroup buttonGroup1;
-    private utilities.palette.Combobox cbbTrangThai;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private utilities.palette.RadioButtonCustom rdoMa;
-    private utilities.palette.RadioButtonCustom rdoTen;
-    private utilities.palette.RadioButtonCustom rdoViTri;
-    private utilities.palette.TableDark_1 tableAll;
+    private utilities.palette.RadioButtonCustom rdoNcc;
+    private utilities.palette.RadioButtonCustom rdoNgayNhap;
+    private utilities.palette.RadioButtonCustom rdoNgayTao;
+    private utilities.palette.RadioButtonCustom rdoNhanVien;
+    private utilities.palette.TableDark_1 tblPhieuNhap;
     private utilities.palette.TextField txtSearchTheo;
     private utilities.palette.UWPButton uWPButton1;
-    private utilities.palette.UWPButton uWPButton2;
     // End of variables declaration//GEN-END:variables
 }

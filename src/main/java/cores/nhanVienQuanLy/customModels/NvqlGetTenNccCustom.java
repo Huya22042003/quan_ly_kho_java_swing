@@ -4,8 +4,6 @@
  */
 package cores.nhanVienQuanLy.customModels;
 
-import infrastructures.constant.GioiTinhConstant;
-import java.util.Date;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,22 +12,14 @@ import lombok.Setter;
 
 /**
  *
- * @author window
+ * @author Acer
  */
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class NvghXemThongTinCaNhanCustom {
-
+public class NvqlGetTenNccCustom {
     private UUID id;
-    private String ma;
     private String ten;
-    private String email;
-    private String sdt;
-    private String matKhau;
-    private Date ngaySinh;
-    private GioiTinhConstant gioiTinh;
-    private String diaChi;
-
+    
 }

@@ -17,7 +17,7 @@ import utilities.MsgBox;
  *
  * @author QUOC HUY
  */
-public class NvqlRUDDonViView extends javax.swing.JFrame {
+public class NvqlRUDPhieuNhapView extends javax.swing.JFrame {
 
     /**
      * Creates new form DemoRUDCoSoView
@@ -25,7 +25,7 @@ public class NvqlRUDDonViView extends javax.swing.JFrame {
     private DemoCoSoService coSoService;
     DemoCoSoCustom csc = new DemoCoSoCustom();
     
-    public NvqlRUDDonViView() {
+    public NvqlRUDPhieuNhapView() {
         coSoService = new DemoCoSoServiceImpl();
         initComponents();
         coSoService.loadCombobox(cbbTrangThai);
@@ -35,7 +35,7 @@ public class NvqlRUDDonViView extends javax.swing.JFrame {
         setLocation(size.width / 2 - getWidth() / 2, size.height / 2 - getHeight() / 2);
     }
     
-    public NvqlRUDDonViView(DemoCoSoCustom cs) {
+    public NvqlRUDPhieuNhapView(DemoCoSoCustom cs) {
         csc = cs;
         coSoService = new DemoCoSoServiceImpl();
         initComponents();
@@ -318,14 +318,18 @@ public class NvqlRUDDonViView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NvqlRUDDonViView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NvqlRUDPhieuNhapView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NvqlRUDDonViView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NvqlRUDPhieuNhapView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NvqlRUDDonViView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NvqlRUDPhieuNhapView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NvqlRUDDonViView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NvqlRUDPhieuNhapView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -334,7 +338,7 @@ public class NvqlRUDDonViView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NvqlRUDDonViView().setVisible(true);
+                new NvqlRUDPhieuNhapView().setVisible(true);
             }
         });
     }
