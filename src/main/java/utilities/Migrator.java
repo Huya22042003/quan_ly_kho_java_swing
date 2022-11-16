@@ -5,8 +5,11 @@
  */
 package utilities;
 
+import domainModels.ChucVu;
 import domainModels.CoSo;
+import domainModels.NhanVien;
 import infrastructures.constant.CoSoConstant;
+import infrastructures.constant.GioiTinhConstant;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -67,6 +70,35 @@ public class Migrator {
         cs3.setViTri("Quảng Ninh");
         cs3.setTrangThai(CoSoConstant.DANG_HOAT_DONG);
         session.save(cs3);
+        
+        // Chức vụ
+        ChucVu chucVu = new ChucVu();
+        chucVu.setMa("CV0001");
+        chucVu.setTen("Trưởng Phòng");
+        session.save(chucVu);
+        
+        ChucVu chucVu1 = new ChucVu();
+        chucVu1.setMa("CV0002");
+        chucVu1.setTen("Nhân viên quản lý");
+        session.save(chucVu1);
+        
+        ChucVu chucVu2 = new ChucVu();
+        chucVu2.setMa("CV0003");
+        chucVu2.setTen("Nhân viên");
+        session.save(chucVu2);
+
+        NhanVien nhanVien = new NhanVien();
+        nhanVien.setMa("NV00001");
+        nhanVien.setTen("Nguyễn Quốc Huy");
+        nhanVien.setDiaChi("Hà Nội");
+        nhanVien.setEmail("huynqph26782@fpt.edu.vn");
+        nhanVien.setGioiTinh(GioiTinhConstant.NAM);
+        nhanVien.setHinhAnh(null);
+        nhanVien.setIdChucVu(chucVu);
+        nhanVien.setMatKhau("1");
+        nhanVien.setNgaySinh(Long.valueOf(100000000));
+        
+        
 
         trans.commit();
         session.close();
