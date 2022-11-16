@@ -7,6 +7,7 @@ package cores;
 
 
 import cores.truongPhongs.views.TpQuanLyNvghForm;
+import cores.truongPhongs.views.TpSendEmail;
 import java.awt.FlowLayout;
 
 /**
@@ -18,7 +19,7 @@ public class testAll extends javax.swing.JFrame {
     /** Creates new form testAll */
     public testAll() {
         initComponents();
-        TpQuanLyNvghForm a = new TpQuanLyNvghForm();
+        TpSendEmail a = new TpSendEmail();
         this.add(a);
         this.setLayout(new FlowLayout());
         this.pack();

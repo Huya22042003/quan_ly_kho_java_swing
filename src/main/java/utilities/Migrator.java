@@ -39,7 +39,6 @@ public class Migrator {
         Transaction trans = session.beginTransaction();
 
         // insert database
-        // insert Cơ sở
         CoSo cs = new CoSo();
         cs.setMa("CS001");
         cs.setTen("Hà Nội");
@@ -67,6 +66,7 @@ public class Migrator {
         cs3.setViTri("Quảng Ninh");
         cs3.setTrangThai(CoSoConstant.DANG_HOAT_DONG);
         session.save(cs3);
+       
 
         trans.commit();
         session.close();

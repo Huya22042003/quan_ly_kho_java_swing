@@ -4,6 +4,8 @@
  */
 package utilities;
 
+import domainModels.NhaCungCap;
+import infrastructures.NhaCungCapConstant;
 import infrastructures.constant.CoSoConstant;
 import infrastructures.constant.GioiTinhConstant;
 import infrastructures.constant.KhoHangConstant;
@@ -125,6 +127,22 @@ public class Converter {
                 break;
             case TAM_NGHI:
                 trangThai = "Tạm nghỉ";
+                break;
+            default:
+                throw new AssertionError();
+        }
+
+        return trangThai;
+    }
+    public static String trangThaiNhaCungCap(NhaCungCapConstant th) {
+        String trangThai = "";
+
+        switch (th) {
+            case DANG_SU_DUNG:
+                trangThai = "Đang sử dụng";
+                break;
+            case KHONG_SU_DUNG:
+                trangThai = "Không sử dụng";
                 break;
             default:
                 throw new AssertionError();
