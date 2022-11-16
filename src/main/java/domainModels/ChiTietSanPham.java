@@ -2,7 +2,6 @@ package domainModels;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -57,16 +55,5 @@ public class ChiTietSanPham implements Serializable {
     @ManyToOne
     @JoinColumn(name = "IdNamBaoHanh")
     private NamBaoHanh namBaoHanh;
-    
-//    @OneToMany(mappedBy = "idChiTietSp")
-//    private List<ChiTietPhieuHoanNhap> chiTietPhieuHoanNhaps;
-    
-    @OneToMany(mappedBy = "idChiTietSp")
-    private List<ChiTietPhieuHoanXuat> chiTietPhieuHoanXuats;
-//    
-//    @OneToMany(mappedBy = "idChiTietSp")
-//    private List<ChiTietPhieuNhap> chiTietPhieuNhaps;
-//    
-//    @OneToMany(mappedBy = "idChiTietSp")
-//    private List<ChiTietPhieuXuat> chiTietPhieuXuats;
+
 }

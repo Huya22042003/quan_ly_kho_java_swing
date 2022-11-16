@@ -5,7 +5,6 @@
 package domainModels;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
