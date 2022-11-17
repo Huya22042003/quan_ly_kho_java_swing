@@ -57,7 +57,7 @@ public class TpDonViServiceImpl implements TpDonViService {
   
  
        boolean check = true;
-        if (dv.getDonViGoc() != null) {
+//        if (dv.getDonViGoc() != null) {
             if (dv.getDonViGoc().trim().length() == 0) {
                 erroDonViGoc.setText("Đơn Vị Gốc không được để trống");
                 check = false;
@@ -72,8 +72,8 @@ public class TpDonViServiceImpl implements TpDonViService {
             else{
                 erroDonViGoc.setText("");
             }
-        }
-     if (dv.getDonViQuyDoi() != null) {
+//        }
+//     if (dv.getDonViQuyDoi() != null) {
             if (dv.getDonViQuyDoi().trim().length() == 0) {
                 erroDonViQuyDoi.setText("Đơn Vị Quy Đổi không được để trống");
                 check = false;
@@ -86,25 +86,26 @@ public class TpDonViServiceImpl implements TpDonViService {
             } else {
                 erroDonViQuyDoi.setText("");
             }
-        }
+//        }
+     
 
-//          if(String.valueOf(dv.getSoLuong()).isEmpty()){
+//          if(String.valueOf(dv.getSoLuong()).trim().length()==0){
 //                erroSoLuong.setText("k de trong");
 //                check = false;
 //            }else{
 //                erroSoLuong.setText("");
 //            }
 //
-        try {
-            int sl = Integer.parseInt(erroSoLuong.getText().trim());
-            if (sl <= 0) {
-                erroSoLuong.setText(" Số Lượng Phải Là Số Nguyên Dương");
-               check = false;
-            }
-        } catch (Exception e) {
-          erroSoLuong.setText(" Số Lượng Phải Là Số ");
-                check = false;
-        }
+//        try {
+//            int sl = Integer.parseInt(erroSoLuong.getText().trim());
+//            if (sl <= 0) {
+//                erroSoLuong.setText(" Số Lượng Phải Là Số Nguyên Dương");
+//               check = false;
+//            }
+//        } catch (Exception e) {
+//          erroSoLuong.setText(" Số Lượng Phải Là Số ");
+//                check = false;
+//        }
         
         if (!check) {
             return null;

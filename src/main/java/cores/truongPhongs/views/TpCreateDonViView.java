@@ -26,7 +26,7 @@ public class TpCreateDonViView extends javax.swing.JFrame {
         donViService = new TpDonViServiceImpl();
         initComponents();
 
-       Toolkit toolkit = getToolkit();
+        Toolkit toolkit = getToolkit();
         Dimension size = toolkit.getScreenSize();
         setLocation(size.width / 2 - getWidth() / 2, size.height / 2 - getHeight() / 2);
     }
@@ -188,15 +188,27 @@ public class TpCreateDonViView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
   public TpDonViCustom getFormData() {
         TpDonViCustom dvc = new TpDonViCustom();
-        dvc.setDonViGoc(this.txtDonViGoc.getText());
+        dvc.setDonViGoc(txtDonViGoc.getText());
         dvc.setDonViQuyDoi(txtDonViQuyDoi.getText());
-        dvc.setSoLuong(Integer.parseInt(txtSoLuong.getText()));
+//        dvc.setSoLuong(Integer.parseInt(txtSoLuong.getText()));
+        int SoLuong = dvc.getSoLuong();
+        String SL = String.valueOf(dvc);
+        txtSoLuong.setText("");
 
         return dvc;
     }
+
+    public void clear() {
+        this.erroDonViGoc.setText("");
+        this.erroDonViQuyDoi.setText("");
+        this.erroSoLuong.setText("");
+        this.txtDonViGoc.setText("");
+        this.txtDonViQuyDoi.setText("");
+        this.txtSoLuong.setText("");
+    }
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
-        TpDonViCustom check = donViService.checkValidate(getFormData(), erroDonViGoc,erroDonViQuyDoi,erroSoLuong);  
-                             
+        TpDonViCustom check = donViService.checkValidate(getFormData(), erroDonViGoc, erroDonViQuyDoi, erroSoLuong);
+
         if (check == null) {
             return;
         }
@@ -206,15 +218,18 @@ public class TpCreateDonViView extends javax.swing.JFrame {
         } else {
             MsgBox.alert(this, "Thêm thành công");
             this.setVisible(true);
+
         }
     }//GEN-LAST:event_btnLuuActionPerformed
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
         this.setVisible(false);
+        clear();
     }//GEN-LAST:event_btnCloseActionPerformed
 
     private void uWPButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uWPButton1ActionPerformed
         this.setVisible(false);
+        clear();
     }//GEN-LAST:event_uWPButton1ActionPerformed
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
@@ -222,12 +237,12 @@ public class TpCreateDonViView extends javax.swing.JFrame {
     }//GEN-LAST:event_formMouseClicked
 
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
-       xx = evt.getX();
-       xy = evt.getY();
+        xx = evt.getX();
+        xy = evt.getY();
     }//GEN-LAST:event_formMousePressed
-int xx,xy;
+    int xx, xy;
     private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
-         int x = evt.getXOnScreen();
+        int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
         this.setLocation(x - xx, y - xy);
     }//GEN-LAST:event_formMouseDragged

@@ -22,9 +22,9 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="178" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="184" max="-2" attributes="0"/>
               <Component id="btnThem" min="-2" pref="139" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
               <Component id="uWPButton2" min="-2" pref="134" max="-2" attributes="0"/>
               <EmptySpace pref="687" max="32767" attributes="0"/>
           </Group>
@@ -109,7 +109,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="&#x110;&#x1a1;n V&#x1ecb;"/>
+            <Property name="text" type="java.lang.String" value="&#x110;&#x1a1;n V&#x1ecb; Quy &#x110;&#x1ed5;i"/>
           </Properties>
         </Component>
       </SubComponents>

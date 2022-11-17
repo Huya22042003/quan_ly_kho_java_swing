@@ -103,7 +103,7 @@ public class TpDonViView extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(51, 102, 255));
 
         lable1.setForeground(new java.awt.Color(255, 255, 255));
-        lable1.setText("Đơn Vị");
+        lable1.setText("Đơn Vị Quy Đổi");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -174,9 +174,9 @@ public class TpDonViView extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(178, 178, 178)
+                .addGap(184, 184, 184)
                 .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(62, 62, 62)
+                .addGap(56, 56, 56)
                 .addComponent(uWPButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(687, Short.MAX_VALUE))
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -216,7 +216,7 @@ public class TpDonViView extends javax.swing.JPanel {
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
           createView.setVisible(true);
         rud.setVisible(false);
-
+       
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void tblDonViMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDonViMouseClicked

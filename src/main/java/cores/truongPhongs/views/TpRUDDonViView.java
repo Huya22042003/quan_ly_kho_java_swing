@@ -53,8 +53,20 @@ public class TpRUDDonViView extends javax.swing.JFrame {
         TpDonViCustom dvc = new TpDonViCustom();
         dvc.setDonViGoc(txtDonViGoc.getText());
         dvc.setDonViQuyDoi(txtDonViQuyDoi.getText());
-        dvc.setSoLuong(Integer.parseInt(txtSoLuong.getText()));
+//        dvc.setSoLuong(Integer.parseInt(txtSoLuong.getText()));
+        int SoLuong = dvc.getSoLuong();
+        String SL = String.valueOf(dvc);
+        txtSoLuong.setText("");
         return dvc;
+    }
+
+    public void clear() {
+        this.erroDonViGoc.setText("");
+        this.erroDonViQuyDoi.setText("");
+        this.erroSoLuong.setText("");
+        this.txtDonViGoc.setText("");
+        this.txtDonViQuyDoi.setText("");
+        this.txtSoLuong.setText("");
     }
 
     /**
@@ -235,6 +247,7 @@ public class TpRUDDonViView extends javax.swing.JFrame {
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
         this.setVisible(false);
+        clear();
     }//GEN-LAST:event_btnCloseActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
@@ -266,6 +279,7 @@ public class TpRUDDonViView extends javax.swing.JFrame {
 
     private void uWPButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uWPButton1ActionPerformed
         this.setVisible(false);
+        clear();
     }//GEN-LAST:event_uWPButton1ActionPerformed
     private int xy, xx;
     private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
