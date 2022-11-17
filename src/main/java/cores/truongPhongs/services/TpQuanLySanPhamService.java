@@ -22,7 +22,7 @@ public interface TpQuanLySanPhamService {
 
     boolean updateSanPham(TpQuanLySanPhamCustom custom);
 
-    boolean deleteCoSo(UUID id);
+    boolean deleteSanPham(UUID id);
 
     TpQuanLySanPhamCustom findSanPhamByMa(String ma);
 

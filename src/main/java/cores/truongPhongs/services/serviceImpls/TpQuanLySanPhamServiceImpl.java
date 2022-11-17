@@ -39,12 +39,12 @@ public class TpQuanLySanPhamServiceImpl implements TpQuanLySanPhamService{
         SanPham sp = new SanPham();
         sp.setMa(custom.getMa());
         sp.setTen(custom.getTen());
-        custom.setId(custom.getId());
+        sp.setId(custom.getId());
         return rp.updateSanPham(sp);
     }
 
     @Override
-    public boolean deleteCoSo(UUID id) {
+    public boolean deleteSanPham(UUID id) {
         return rp.deleteSanPham(id);
     }
 

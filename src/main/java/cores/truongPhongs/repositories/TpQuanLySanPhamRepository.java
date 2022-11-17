@@ -80,7 +80,7 @@ public class TpQuanLySanPhamRepository {
     }
 
     public TpQuanLySanPhamCustom findByMa(String ma) {
-        TpQuanLySanPhamCustom csc = new TpQuanLySanPhamCustom();
+        TpQuanLySanPhamCustom sp = new TpQuanLySanPhamCustom();
         try ( Session s = HibernateUtil.getSessionFactory().openSession()) {
             Query q = s.createQuery("select new cores.truongPhongs.customModels.TpQuanLySanPhamCustom ("
                 + "sp.id as id,"
@@ -88,12 +88,12 @@ public class TpQuanLySanPhamRepository {
                 + "sp.ten as ten"                
                 + ") from domainModels.SanPham sp WHERE sp.ma = :ma");
             q.setParameter("ma", ma);
-            csc = (TpQuanLySanPhamCustom) q.getSingleResult();
+            sp = (TpQuanLySanPhamCustom) q.getSingleResult();
         } catch (NoResultException e) {
             e.printStackTrace();
             return null;
         }
-        return csc;
+        return sp;
     }
     
     // cách tìm kiếm thứ 2
