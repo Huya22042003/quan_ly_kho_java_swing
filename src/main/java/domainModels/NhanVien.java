@@ -3,7 +3,6 @@ package domainModels;
 import infrastructures.constant.GioiTinhConstant;
 import infrastructures.constant.TrangThaiNhanVienConstant;
 import java.io.Serializable;
-import java.util.List;
 import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -68,10 +66,4 @@ public class NhanVien implements Serializable{
     @ManyToOne
     @JoinColumn(name = "idChucVu")
     private ChucVu idChucVu;
-//    
-//    @OneToMany(mappedBy = "nhanVien")
-//    private List<PhieuXuat> phieuXuats;
-//    
-//    @OneToMany(mappedBy = "nhanVien")
-//    private List<PhieuNhap> phieuNhaps;
 }
