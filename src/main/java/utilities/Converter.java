@@ -9,7 +9,8 @@ import infrastructures.constant.NhaCungCapConstant;
 import infrastructures.constant.CoSoConstant;
 import infrastructures.constant.GioiTinhConstant;
 import infrastructures.constant.KhoHangConstant;
-import infrastructures.constant.TrangThaiDonHangConstant;
+import infrastructures.constant.MauConstant;
+import infrastructures.constant.TrangThaiPhieuConstant;
 import infrastructures.constant.TrangThaiNhanVienConstant;
 
 /**
@@ -18,33 +19,18 @@ import infrastructures.constant.TrangThaiNhanVienConstant;
  */
 public class Converter {
 
-    public static String trangThaiDonHang(TrangThaiDonHangConstant th) {
+    public static String trangThaiDonHang(TrangThaiPhieuConstant th) {
         String trangThai = "";
 
         switch (th) {
-            case CHO_XAC_NHAN:
-                trangThai = "Chờ xác nhận";
+            case CHO_THANH_TOAN:
+                trangThai = "Chờ thanh toán";
                 break;
-            case DANG_XU_LY:
-                trangThai = "Đang xử lý";
+            case DA_HUY:
+                trangThai = "Đã hủy";
                 break;
-            case DANG_GIAO:
-                trangThai = "Đang giao";
-                break;
-            case DA_DEN_NOI:
-                trangThai = "Đã đến nơi";
-                break;
-            case GIAO_THANH_CONG:
-                trangThai = "Giao hàng thành công";
-                break;
-            case HOAN_DON:
-                trangThai = "Đang hoàn đơn";
-                break;
-            case HUY_DON:
-                trangThai = "Hủy đơn";
-                break;
-            case THANH_LY:
-                trangThai = "Thanh lý";
+            case DA_THANH_TOAN:
+                trangThai = "Đang thanh toán";
                 break;
             default:
                 throw new AssertionError();
@@ -52,6 +38,7 @@ public class Converter {
 
         return trangThai;
     }
+
     public static String trangThaiNhanVien(TrangThaiNhanVienConstant th) {
         String trangThai = "";
 
@@ -71,9 +58,9 @@ public class Converter {
 
         return trangThai;
     }
+
     public static String trangThaiGioiTinh(GioiTinhConstant th) {
         String trangThai = "";
-
         switch (th) {
             case KHAC:
                 trangThai = "Khác";
@@ -90,6 +77,7 @@ public class Converter {
 
         return trangThai;
     }
+
     public static String trangThaiKhoHang(KhoHangConstant th) {
         String trangThai = "";
 
@@ -112,6 +100,7 @@ public class Converter {
 
         return trangThai;
     }
+
     public static String trangThaiCoSo(CoSoConstant th) {
         String trangThai = "";
 
@@ -134,9 +123,9 @@ public class Converter {
 
         return trangThai;
     }
+
     public static String trangThaiNhaCungCap(NhaCungCapConstant th) {
         String trangThai = "";
-
         switch (th) {
             case DANG_SU_DUNG:
                 trangThai = "Đang sử dụng";
@@ -149,5 +138,38 @@ public class Converter {
         }
 
         return trangThai;
+    }
+
+    private static String mauSacConvert(MauConstant m) {
+        String mau = "";
+        switch (m) {
+            case CAM:
+                mau = "Cam";
+                break;
+            case DEN:
+                mau = "Đen";
+                break;
+            case DO:
+                mau = "Đỏ";
+                break;
+            case HONG:
+                mau = "Hồng";
+                break;
+            case TRANG:
+                mau = "Trắng";
+                break;
+            case VANG:
+                mau = "Vàng";
+                break;
+            case XANH_DUONG:
+                mau = "Xanh dương";
+                break;
+            case XANH_LA:
+                mau = "Xanh lá";
+                break;
+            default:
+                throw new AssertionError();
+        }
+        return mau;
     }
 }
