@@ -5,6 +5,7 @@
 package cores.nhanVienQuanLy.services;
 
 import cores.nhanVienQuanLy.customModels.NvqlQuanLyPhieuNhapCustom;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import javax.swing.JLabel;
@@ -18,7 +19,7 @@ public interface NvqlQuanLyPhieuNhapService {
     NvqlQuanLyPhieuNhapCustom addPn(NvqlQuanLyPhieuNhapCustom p);
     boolean updatePn(NvqlQuanLyPhieuNhapCustom p);
     boolean deletePn(UUID id);
-    NvqlQuanLyPhieuNhapCustom checkValidate(NvqlQuanLyPhieuNhapCustom pn,JLabel errNgayNhap, JLabel errNgayTao,JLabel errGhiCh);
-    
+    NvqlQuanLyPhieuNhapCustom checkValidate(String ghiChu,Date ngayNhap,Date ngayTao,JLabel errNgayNhap, JLabel errNgayTao,JLabel errGhiChu);
+    NvqlQuanLyPhieuNhapCustom findPhieuNhapById(UUID id);
     
 }

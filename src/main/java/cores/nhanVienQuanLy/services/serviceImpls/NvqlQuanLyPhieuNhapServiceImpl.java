@@ -13,6 +13,9 @@ import domainModels.NhaCungCap;
 import domainModels.NhanVien;
 import domainModels.PhieuNhap;
 import infrastructures.constant.ValidateConstant;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import javax.swing.JLabel;
@@ -40,8 +43,8 @@ public class NvqlQuanLyPhieuNhapServiceImpl implements NvqlQuanLyPhieuNhapServic
 
     @Override
     public NvqlQuanLyPhieuNhapCustom addPn(NvqlQuanLyPhieuNhapCustom p) {
-        NhaCungCap ncc = repoNcc.getNccById(p.getId());
-        NhanVien nv = repoNv.getNhanVienById(p.getId());
+        NhaCungCap ncc = repoNcc.getNccById(p.getIdNcc());
+        NhanVien nv = repoNv.getNhanVienById(p.getIdNhanVien());
         PhieuNhap pn = new PhieuNhap();
         pn.setGhiChu(p.getGhiChu());
         pn.setNgayNhan(p.getNgayNhan());
@@ -54,8 +57,8 @@ public class NvqlQuanLyPhieuNhapServiceImpl implements NvqlQuanLyPhieuNhapServic
 
     @Override
     public boolean updatePn(NvqlQuanLyPhieuNhapCustom p) {
-        NhaCungCap ncc = repoNcc.getNccById(p.getId());
-        NhanVien nv = repoNv.getNhanVienById(p.getId());
+        NhaCungCap ncc = repoNcc.getNccById(p.getIdNcc());
+        NhanVien nv = repoNv.getNhanVienById(p.getIdNhanVien());
         PhieuNhap pn = new PhieuNhap();
         pn.setId(p.getId());
         pn.setGhiChu(p.getGhiChu());
@@ -72,56 +75,80 @@ public class NvqlQuanLyPhieuNhapServiceImpl implements NvqlQuanLyPhieuNhapServic
     }
 
     @Override
-    public NvqlQuanLyPhieuNhapCustom checkValidate(NvqlQuanLyPhieuNhapCustom pn, JLabel errNgayNhap, JLabel errNgayTao, JLabel errGhiChu) {
+    public NvqlQuanLyPhieuNhapCustom checkValidate(String ghiChu, Date ngayTao, Date ngayNhan, JLabel errNgayNhap, JLabel errNgayTao, JLabel errGhiChu) {
         boolean check = true;
-        if (pn.getGhiChu() != null) {
-            if (pn.getGhiChu().length() > 255) {
-                errGhiChu.setText("Ghi chú không quá 255 kí tự!");
-                check = false;
-            } else if (pn.getGhiChu().trim().length() == 0) {
-                errGhiChu.setText("Ghi chú không được để trống!");
-                check = false;
-            } else {
-                errGhiChu.setText("");
-            }
-        }
-        if(pn.getGhiChu() == null){
+        if (ghiChu.trim().length() == 0) {
             errGhiChu.setText("Ghi chú không được để trống!");
-                check = false;
-        }
-
-        if (pn.getNgayNhan() == null) {
-            errNgayNhap.setText("Không được để trống ngày nhận!");
+            check = false;
+        } else if (ghiChu.trim().length() > 255) {
+            errGhiChu.setText("Ghi chú không quá 255 kí tự!");
             check = false;
         } else {
-            errNgayNhap.setText("");
+            errGhiChu.setText("");
         }
-        if (pn.getNgayTao() == null) {
-            errNgayTao.setText("Không được để trống ngày tạo!");
+
+        if (ngayTao == null) {
+            errNgayNhap.setText("Bạn chưa chọn ngày nhận!");
+            check =false;
+        } else {
+            errNgayTao.setText("");
+        }
+        if (ngayNhan  == null) {
+            errNgayTao.setText("Bạn chưa chọn ngày tạo!");
             check = false;
         } else {
             errNgayTao.setText("");
-
         }
-//        if (!String.valueOf(pn.getNgayNhan()).matches(ValidateConstant.REGEX_DATE)) {
+         if (!check) {
+            return null;
+        }
+//                SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
+//        Date nn;
+//        Date nt;
+//        try {
+//            nn = sdf.parse(ngayNhan.toString());
+//            nt = sdf.parse(ngayTao.toString());
+//        } catch (ParseException ex) {
+//            ex.printStackTrace();
+//            return null;   
+//        }
+       
+//        if (!String.valueOf(ngayNhan).matches(ValidateConstant.REGEX_DATE)) {
 //            errNgayNhap.setText("Sai định dạng ngày nhận!");
 //            check = false;
 //        } else {
 //            errNgayNhap.setText("");
 //
 //        }
-//        if (!String.valueOf(pn.getNgayTao()).matches(ValidateConstant.REGEX_DATE)) {
+//        if (!String.valueOf(ngayTao).matches(ValidateConstant.REGEX_DATE)) {
 //            errNgayTao.setText("Sai định dạng ngày tạo!");
 //            check = false;
 //        } else {
 //            errNgayTao.setText("");
-//
 //        }
         if (!check) {
             return null;
         }
+        NvqlQuanLyPhieuNhapCustom pn = new NvqlQuanLyPhieuNhapCustom();
+        pn.setGhiChu(ghiChu);
+        pn.setNgayNhan(ngayNhan.getTime());
+        pn.setNgayTao(ngayTao.getTime());
         return pn;
 
+    }
+
+    @Override
+    public NvqlQuanLyPhieuNhapCustom findPhieuNhapById(UUID id) {
+        NvqlQuanLyPhieuNhapCustom p = new NvqlQuanLyPhieuNhapCustom();
+        PhieuNhap pn = repo.findPhieuNhapById(id);
+        p.setId(pn.getId());
+        p.setIdNcc(pn.getNhaCungCap().getId());
+        p.setIdNhanVien(pn.getNhanVien().getId());
+        p.setGhiChu(pn.getGhiChu());
+        p.setNgayNhan(pn.getNgayTao());
+        p.setNgayTao(pn.getNgayNhan());
+       
+        return p;
     }
 
 }

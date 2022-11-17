@@ -27,5 +27,7 @@ public class NvqlQuanLyPhieuNhapCustom {
     private String tenNhanVien;
     private UUID idNcc;
     private String tenNcc;
+
+    
     
 }

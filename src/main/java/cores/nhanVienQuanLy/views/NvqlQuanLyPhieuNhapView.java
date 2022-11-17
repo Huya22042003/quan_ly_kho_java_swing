@@ -7,14 +7,13 @@ package cores.nhanVienQuanLy.views;
 import cores.nhanVienQuanLy.customModels.NvqlQuanLyPhieuNhapCustom;
 import cores.nhanVienQuanLy.services.NvqlQuanLyPhieuNhapService;
 import cores.nhanVienQuanLy.services.serviceImpls.NvqlQuanLyPhieuNhapServiceImpl;
-import viewDemos.*;
-import customModels.DemoCoSoCustom;
-import infrastructures.constant.CoSoConstant;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 import javax.swing.table.DefaultTableModel;
-import utilities.Converter;
+
 
 /**
  *
@@ -34,7 +33,7 @@ public class NvqlQuanLyPhieuNhapView extends javax.swing.JPanel {
         phieuNhapService = new NvqlQuanLyPhieuNhapServiceImpl();
         getListPhieuNhap = new ArrayList<>();
         this.loadTable(getListPhieuNhap);
-        clearForm();
+//        clearForm();
     }
 
     public List<NvqlQuanLyPhieuNhapCustom> listSearch(int rdo) {
@@ -101,16 +100,7 @@ public class NvqlQuanLyPhieuNhapView extends javax.swing.JPanel {
         }
     }
 
-//    public List<DemoCoSoCustom> checkCbb(CoSoConstant cs) {
-//        List<DemoCoSoCustom> listTimKiem = new ArrayList<>();
-//        getList.forEach(el -> {
-//            if (el.getTrangThai() == cs) {
-//                listTimKiem.add(el);
-//            }
-//        });
-//        return listTimKiem;
-//    }
-//    
+
     public void clearForm() {
         this.txtSearchTheo.setText("");
         this.rdoMa.setSelected(true);
@@ -382,7 +372,7 @@ public class NvqlQuanLyPhieuNhapView extends javax.swing.JPanel {
 
     private void tblPhieuNhapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPhieuNhapMouseClicked
         int row = this.tblPhieuNhap.getSelectedRow();
-        NvqlRUDPhieuNhapView rud = new NvqlRUDPhieuNhapView();
+        NvqlRUDPhieuNhapView1 rud = new NvqlRUDPhieuNhapView1(phieuNhapService.findPhieuNhapById((UUID) tblPhieuNhap.getValueAt(row, 1)));
         rud.setVisible(true);
     }//GEN-LAST:event_tblPhieuNhapMouseClicked
 

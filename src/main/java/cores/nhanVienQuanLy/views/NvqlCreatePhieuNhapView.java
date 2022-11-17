@@ -22,6 +22,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import utilities.DateTimeUtil;
 import utilities.MsgBox;
 
 /**
@@ -264,7 +265,7 @@ public class NvqlCreatePhieuNhapView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        NvqlQuanLyPhieuNhapCustom check = phieuNhapService.checkValidate(getFormData(), errNgayNhan, errNgayTao, errGhiChu);
+        NvqlQuanLyPhieuNhapCustom check = this.getFormData();
         if (check == null) {
             return;
         }
@@ -296,26 +297,13 @@ public class NvqlCreatePhieuNhapView extends javax.swing.JFrame {
 
     public NvqlQuanLyPhieuNhapCustom getFormData() {
 
-        NvqlQuanLyPhieuNhapCustom pn = new NvqlQuanLyPhieuNhapCustom();
-     
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
-        Date ngayNhan;
-        Date ngayTao;
-        try {
-            ngayNhan = sdf.parse(dateNgayNhan.toString());
-            ngayTao = sdf.parse(dateNgayTao.toString());
-        } catch (ParseException ex) {
-            ex.printStackTrace();
-            return null;   
-        }
-        Long nn = ngayNhan.getTime();
-        Long nt = ngayTao.getTime();
-        pn.setGhiChu(txtGhiChu.getText());
+        String ghiChu = txtGhiChu.getText();
+        Date ngayNhap = dateNgayNhan.getDate();
+        Date ngayTao = dateNgayTao.getDate();
+        NvqlQuanLyPhieuNhapCustom pn = phieuNhapService.checkValidate(ghiChu, ngayNhap, ngayTao, errNgayNhan, errNgayTao, errGhiChu);
         pn.setIdNcc(listNcc.get(cbbNhaCungCap.getSelectedIndex()).getId());
         pn.setIdNhanVien(listNv.get(cbbNhanVien.getSelectedIndex()).getId());
-        pn.setNgayNhan(nn);
-        pn.setNgayTao(nt);
-        
+
         return pn;
     }
 

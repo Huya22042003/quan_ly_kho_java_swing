@@ -76,4 +76,10 @@ public class NvqlQuanLyPhieuNhapRepository {
         }
         return true;
     }
+    public PhieuNhap findPhieuNhapById(UUID id){
+        Session s = HibernateUtil.getSessionFactory().openSession();
+        PhieuNhap p = s.find(PhieuNhap.class, id);
+        s.close();
+        return p;
+    }
 }
