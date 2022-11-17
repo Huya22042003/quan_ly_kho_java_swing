@@ -5,7 +5,7 @@
 package utilities;
 
 import domainModels.NhaCungCap;
-import infrastructures.NhaCungCapConstant;
+import infrastructures.constant.NhaCungCapConstant;
 import infrastructures.constant.CoSoConstant;
 import infrastructures.constant.GioiTinhConstant;
 import infrastructures.constant.KhoHangConstant;

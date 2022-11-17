@@ -6,7 +6,7 @@
 package cores;
 
 
-import cores.nhanVienQuanLy.views.NvqlXuatHangForm;
+import cores.nhanVienQuanLy.views.NvqlXuatHangView;
 import java.awt.FlowLayout;
 
 /**
@@ -18,7 +18,7 @@ public class testAll extends javax.swing.JFrame {
     /** Creates new form testAll */
     public testAll() {
         initComponents();
-        NvqlXuatHangForm a = new NvqlXuatHangForm();
+        NvqlXuatHangView a = new NvqlXuatHangView();
         this.add(a);
         this.setLayout(new FlowLayout());
         this.pack();
