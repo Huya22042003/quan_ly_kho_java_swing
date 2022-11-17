@@ -6,8 +6,7 @@
 package cores;
 
 
-import cores.truongPhongs.views.TpQuanLyNvghForm;
-import cores.truongPhongs.views.TpSendEmail;
+import cores.nhanVienQuanLy.views.NvqlXuatHangView;
 import java.awt.FlowLayout;
 
 /**
@@ -19,7 +18,7 @@ public class testAll extends javax.swing.JFrame {
     /** Creates new form testAll */
     public testAll() {
         initComponents();
-        TpSendEmail a = new TpSendEmail();
+        NvqlXuatHangView a = new NvqlXuatHangView();
         this.add(a);
         this.setLayout(new FlowLayout());
         this.pack();
