@@ -53,6 +53,7 @@ public class TpCreateDonViView extends javax.swing.JFrame {
         txtSoLuong = new utilities.palette.TextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 formMouseDragged(evt);
@@ -69,6 +70,10 @@ public class TpCreateDonViView extends javax.swing.JFrame {
 
         txtDonViGoc.setLabelText("Đơn vị gốc");
 
+        erroSoLuong.setFont(new java.awt.Font("Constantia", 1, 10)); // NOI18N
+
+        erroDonViQuyDoi.setFont(new java.awt.Font("Constantia", 1, 10)); // NOI18N
+
         btnLuu.setBackground(new java.awt.Color(255, 102, 51));
         btnLuu.setText("Save");
         btnLuu.addActionListener(new java.awt.event.ActionListener() {
@@ -76,6 +81,8 @@ public class TpCreateDonViView extends javax.swing.JFrame {
                 btnLuuActionPerformed(evt);
             }
         });
+
+        erroDonViGoc.setFont(new java.awt.Font("Constantia", 1, 10)); // NOI18N
 
         btnClose.setBackground(new java.awt.Color(255, 51, 0));
         btnClose.setText("Close");
@@ -188,8 +195,8 @@ public class TpCreateDonViView extends javax.swing.JFrame {
         return dvc;
     }
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
-        TpDonViCustom check = donViService.checkValidate(getFormData(), erroDonViGoc,
-                erroDonViQuyDoi,erroSoLuong);               
+        TpDonViCustom check = donViService.checkValidate(getFormData(), erroDonViGoc,erroDonViQuyDoi,erroSoLuong);  
+                             
         if (check == null) {
             return;
         }

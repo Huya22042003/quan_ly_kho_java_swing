@@ -54,9 +54,9 @@ public class TpDonViServiceImpl implements TpDonViService {
 
     @Override
     public TpDonViCustom checkValidate(TpDonViCustom dv, JLabel erroDonViGoc, JLabel erroDonViQuyDoi, JLabel erroSoLuong) {
-  boolean check = true;
+  
  
-
+       boolean check = true;
         if (dv.getDonViGoc() != null) {
             if (dv.getDonViGoc().trim().length() == 0) {
                 erroDonViGoc.setText("Đơn Vị Gốc không được để trống");
@@ -64,26 +64,54 @@ public class TpDonViServiceImpl implements TpDonViService {
             } else if (!dv.getDonViGoc().matches(ValidateConstant.REGEX_CHU_KHONG_CO_KHOANG_TRANG)) {
                 erroDonViGoc.setText("Đơn Vị Gốc không được có khoảng trắng");
                 check = false;
-            } else {
+            } 
+            else if (findDonViByDonViQuyDoi(dv.getDonViGoc()) != null){
+                erroDonViGoc.setText("Đơn Vị Gốc Đã Tồn Tại");
+                check = false;
+            }
+            else{
                 erroDonViGoc.setText("");
             }
         }
-   if (dv.getDonViQuyDoi() != null) {
+     if (dv.getDonViQuyDoi() != null) {
             if (dv.getDonViQuyDoi().trim().length() == 0) {
                 erroDonViQuyDoi.setText("Đơn Vị Quy Đổi không được để trống");
                 check = false;
             } else if (!dv.getDonViQuyDoi().matches(ValidateConstant.REGEX_CHU_KHONG_CO_KHOANG_TRANG)) {
                 erroDonViQuyDoi.setText("Đơn Vị Quy Đổi không được có khoảng trắng");
                 check = false;
+            } else if (findDonViByDonViQuyDoi(dv.getDonViQuyDoi()) != null) {
+                erroDonViQuyDoi.setText("Đơn Vị Quy Đổi đã tồn tại");
+                check = false;
             } else {
                 erroDonViQuyDoi.setText("");
             }
         }
 
-       
+//          if(String.valueOf(dv.getSoLuong()).isEmpty()){
+//                erroSoLuong.setText("k de trong");
+//                check = false;
+//            }else{
+//                erroSoLuong.setText("");
+//            }
+//
+        try {
+            int sl = Integer.parseInt(erroSoLuong.getText().trim());
+            if (sl <= 0) {
+                erroSoLuong.setText(" Số Lượng Phải Là Số Nguyên Dương");
+               check = false;
+            }
+        } catch (Exception e) {
+          erroSoLuong.setText(" Số Lượng Phải Là Số ");
+                check = false;
+        }
+        
+        if (!check) {
+            return null;
+        }
        return dv;  
     } 
-
+   
     @Override
     public List<TpDonViCustom> getListDonVi() {
          return rp.getList();

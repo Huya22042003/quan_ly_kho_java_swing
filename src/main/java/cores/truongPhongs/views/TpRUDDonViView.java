@@ -51,7 +51,7 @@ public class TpRUDDonViView extends javax.swing.JFrame {
 
     public TpDonViCustom getFormData() {
         TpDonViCustom dvc = new TpDonViCustom();
-        dvc.setDonViGoc(null);
+        dvc.setDonViGoc(txtDonViGoc.getText());
         dvc.setDonViQuyDoi(txtDonViQuyDoi.getText());
         dvc.setSoLuong(Integer.parseInt(txtSoLuong.getText()));
         return dvc;
@@ -82,6 +82,7 @@ public class TpRUDDonViView extends javax.swing.JFrame {
         uWPButton1 = new utilities.palette.UWPButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 formMouseDragged(evt);
@@ -114,9 +115,13 @@ public class TpRUDDonViView extends javax.swing.JFrame {
                 .addComponent(jLabel1))
         );
 
+        erroDonViGoc.setFont(new java.awt.Font("Constantia", 1, 10)); // NOI18N
+
         txtDonViGoc.setLabelText("Đơn Vị Gốc");
 
         textField1.setLabelText("Đơn Vị Quy Đổi");
+
+        erroSoLuong.setFont(new java.awt.Font("Constantia", 1, 10)); // NOI18N
 
         txtSoLuong.setLabelText("Số Lượng");
 
@@ -142,6 +147,8 @@ public class TpRUDDonViView extends javax.swing.JFrame {
                 btnCloseActionPerformed(evt);
             }
         });
+
+        erroDonViQuyDoi.setFont(new java.awt.Font("Constantia", 1, 10)); // NOI18N
 
         txtDonViQuyDoi.setLabelText("Đơn Vị Quy Đổi");
 
@@ -236,8 +243,8 @@ public class TpRUDDonViView extends javax.swing.JFrame {
         if (check == null) {
             return;
         }
-        TpDonViCustom dvcu = new TpDonViCustom(dvc.getId(), dvc.getDonViGoc(),
-                dvc.getDonViQuyDoi(), dvc.getSoLuong());
+        TpDonViCustom dvcu = new TpDonViCustom(dvc.getId(), check.getDonViGoc(),
+                check.getDonViQuyDoi(), check.getSoLuong());
         if (donViService.updateDonVi(dvcu)) {
             MsgBox.alert(this, "Sửa thành công");
             this.setVisible(false);

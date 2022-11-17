@@ -57,6 +57,7 @@ public class TpDonViView extends javax.swing.JPanel {
     public void clearForm() {
       rdoDonViGoc.setSelected(true);
       getList = donViService.findAllByRadio("", 0);
+      this.txtSearch.setText("");
 
     }
         public List<TpDonViCustom> listSearch(int rdo) {
@@ -67,7 +68,7 @@ public class TpDonViView extends javax.swing.JPanel {
           public void searchRadio() {
         if (rdoDonViGoc.isSelected()) {
             loadTable(listSearch(0));
-        } else if (rdoDonViQuyDoi.isSelected()) {
+        } else{
             loadTable(listSearch(1));
         } 
     }
@@ -222,7 +223,7 @@ public class TpDonViView extends javax.swing.JPanel {
      int row = this.tblDonVi.getSelectedRow();
         createView.setVisible(false);
         
-        rud.dvc = donViService.findDonViByDonViQuyDoi(tblDonVi.getValueAt(row, 2).toString());
+        rud.dvc = donViService.findDonViByDonViQuyDoi(tblDonVi.getValueAt(row,1).toString());
         rud.setVisible(true);
         rud.showData();
     }//GEN-LAST:event_tblDonViMouseClicked
