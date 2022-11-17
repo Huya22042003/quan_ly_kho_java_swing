@@ -3,13 +3,11 @@ package domainModels;
 import infrastructures.constant.DanhGiaConstant;
 import infrastructures.constant.KhachHangConstant;
 import java.io.Serializable;
-import java.util.List;
 import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -53,7 +51,4 @@ public class NhaCungCap implements Serializable {
 
     @Column(name = "TrangThai", columnDefinition = "INT")
     private KhachHangConstant trangThai;
-//
-//    @OneToMany(mappedBy = "nhaCungCap")
-//    private List<PhieuNhap> phieuNhaps;
 }
