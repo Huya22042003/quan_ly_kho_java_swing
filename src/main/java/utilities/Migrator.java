@@ -111,7 +111,7 @@ public class Migrator {
         nhanVien.setMa("NV00001");
         nhanVien.setTen("Nguyễn Quốc Huy");
         nhanVien.setDiaChi("Hà Nội");
-        nhanVien.setEmail("huynqph26782@fpt.edu.vn");
+        nhanVien.setEmail("a");
         nhanVien.setGioiTinh(GioiTinhConstant.NAM);
         nhanVien.setHinhAnh(null);
         nhanVien.setIdChucVu(chucVu);
@@ -125,7 +125,7 @@ public class Migrator {
         nhanVien1.setMa("NV00002");
         nhanVien1.setTen("Nguyễn Quốc Huy");
         nhanVien1.setDiaChi("Hà Nội");
-        nhanVien1.setEmail("huynqph26782@fpt.edu.vn");
+        nhanVien1.setEmail("b");
         nhanVien1.setGioiTinh(GioiTinhConstant.NAM);
         nhanVien1.setHinhAnh(null);
         nhanVien1.setIdChucVu(chucVu);
@@ -139,7 +139,7 @@ public class Migrator {
         nhanVien2.setMa("NV00003");
         nhanVien2.setTen("Nguyễn Quốc Huy");
         nhanVien2.setDiaChi("Hà Nội");
-        nhanVien2.setEmail("huynqph26782@fpt.edu.vn");
+        nhanVien2.setEmail("c");
         nhanVien2.setGioiTinh(GioiTinhConstant.NAM);
         nhanVien2.setHinhAnh(null);
         nhanVien2.setIdChucVu(chucVu1);
