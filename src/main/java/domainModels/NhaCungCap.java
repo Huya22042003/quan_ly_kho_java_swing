@@ -46,9 +46,9 @@ public class NhaCungCap implements Serializable {
     @Column(name = "Sdt", columnDefinition = "VARCHAR(10)")
     private String sdt;
 
-    @Column(name = "DanhGia", columnDefinition = "INT")
+    @Column(name = "DanhGia")
     private DanhGiaConstant danhGia;
 
-    @Column(name = "TrangThai", columnDefinition = "INT")
+    @Column(name = "TrangThai")
     private KhachHangConstant trangThai;
 }

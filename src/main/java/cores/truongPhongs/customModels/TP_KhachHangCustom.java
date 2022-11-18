@@ -1,27 +1,19 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package cores.truongPhongs.customModels;
 
+import infrastructures.constant.DanhGiaConstant;
 import infrastructures.constant.GioiTinhConstant;
-import infrastructures.constant.TrangThaiNhanVienConstant;
-import java.util.Date;
+import infrastructures.constant.KhachHangConstant;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-/**
- *
- * @author window
- */
-@Getter
 @Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TpQuanLyNvghCustom {
+public class TP_KhachHangCustom {
 
     private UUID id;
     private String ma;
@@ -29,10 +21,10 @@ public class TpQuanLyNvghCustom {
     private String sdt;
     private String email;
     private String matKhau;
-    private Date ngaySinh;
+    private Long ngaySinh;
     private String hinhAnh;
     private GioiTinhConstant gioiTinh;
     private String diaChi;
-    private TrangThaiNhanVienConstant trangThai;
-
+    private DanhGiaConstant danhGia;
+    private KhachHangConstant trangThai;
 }
