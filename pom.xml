@@ -23,11 +23,11 @@
             <version>10.2.0.jre8</version>
         </dependency>
         <dependency>
-		<groupId>org.projectlombok</groupId>
-		<artifactId>lombok</artifactId>
-		<version>1.18.24</version>
-		<scope>provided</scope>
-	</dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.24</version>
+            <scope>provided</scope>
+        </dependency>
 
         <dependency>
             <groupId>com.miglayout</groupId>
@@ -45,6 +45,17 @@
             <artifactId>AbsoluteLayout</artifactId>
             <version>RELEASE130</version>
         </dependency>
-
+        
+        <!-- https://mvnrepository.com/artifact/com.sun.mail/javax.mail -->
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>1.6.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.toedter</groupId>
+            <artifactId>jcalendar</artifactId>
+            <version>1.4</version>
+        </dependency>
     </dependencies>
 </project>

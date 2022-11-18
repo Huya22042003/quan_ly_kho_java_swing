@@ -15,4 +15,5 @@ public interface TP_ChucVuService {
     TP_ChucVuCustom findChucVuByMa(String ma);
     TP_ChucVuCustom checkValidate(TP_ChucVuCustom cv, JLabel erroMa, JLabel erroTen);
     List<TP_ChucVuCustom> findAllByRadio(String tk, int rdo);
+    
 }

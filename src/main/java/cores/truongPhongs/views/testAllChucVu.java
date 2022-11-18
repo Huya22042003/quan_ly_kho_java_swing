@@ -1,21 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package cores.truongPhongs.views;
 
-import cores.truongPhongs.customModels.TP_ChucVuCustom;
+
+
+
+
+
+
 import java.awt.FlowLayout;
 
-/**
- *
- * @author asus
- */
+
 public class testAllChucVu extends javax.swing.JFrame {
 
-    /**
-     * Creates new form testAllChucVu
-     */
+
     public testAllChucVu() {
         initComponents();
         TP_ChucVuForm a = new TP_ChucVuForm();

@@ -116,12 +116,5 @@ public class TP_ChucVuRepository {
         s.close();
         return list;
     }
-    public ChucVu findID(UUID id) {
-        Session s = HibernateUtil.getSessionFactory().openSession();
-        Transaction t = s.beginTransaction();
-        ChucVu cv = s.find(ChucVu.class, id);
-        t.commit();
-        s.close();
-        return cv;
-    }
+
 }
