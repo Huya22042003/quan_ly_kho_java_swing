@@ -100,7 +100,7 @@
                                   </Group>
                               </Group>
                               <Component id="errGhiChu" alignment="0" max="32767" attributes="0"/>
-                              <Component id="textAreaScroll1" alignment="0" max="32767" attributes="0"/>
+                              <Component id="textAreaScroll1" alignment="0" min="-2" pref="274" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -135,11 +135,11 @@
                       <Component id="cbbNhaCungCap" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Component id="cbbNhanVien" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                   <Component id="textAreaScroll1" min="-2" pref="90" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="errGhiChu" min="-2" pref="24" max="-2" attributes="0"/>
-                  <EmptySpace pref="27" max="32767" attributes="0"/>
+                  <EmptySpace pref="11" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnDelete" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnClose" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -231,21 +231,6 @@
             <Property name="labeText" type="java.lang.String" value="Nh&#xe0; cung c&#x1ea5;p"/>
           </Properties>
         </Component>
-        <Container class="utilities.palette.TextAreaScroll" name="textAreaScroll1">
-          <Properties>
-            <Property name="labelText" type="java.lang.String" value="Ghi ch&#xfa;"/>
-          </Properties>
-
-          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-          <SubComponents>
-            <Component class="utilities.palette.TextAreaCustom" name="txtGhiChu">
-              <Properties>
-                <Property name="columns" type="int" value="20"/>
-                <Property name="rows" type="int" value="5"/>
-              </Properties>
-            </Component>
-          </SubComponents>
-        </Container>
         <Component class="utilities.palette.UWPButton" name="btnDelete">
           <Properties>
             <Property name="text" type="java.lang.String" value="Delete"/>
@@ -293,6 +278,21 @@
             </Property>
           </Properties>
         </Component>
+        <Container class="utilities.palette.TextAreaScroll" name="textAreaScroll1">
+          <Properties>
+            <Property name="labelText" type="java.lang.String" value="Ghi ch&#xfa;"/>
+          </Properties>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+          <SubComponents>
+            <Component class="utilities.palette.TextAreaCustom" name="txtGhiChu">
+              <Properties>
+                <Property name="columns" type="int" value="20"/>
+                <Property name="rows" type="int" value="5"/>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
       </SubComponents>
     </Container>
   </SubComponents>

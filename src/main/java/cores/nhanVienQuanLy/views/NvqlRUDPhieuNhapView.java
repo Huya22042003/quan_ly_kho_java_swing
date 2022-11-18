@@ -88,8 +88,6 @@ public class NvqlRUDPhieuNhapView extends javax.swing.JFrame {
         cbbNhanVien = new utilities.palette.Combobox();
         errNgayNhan = new javax.swing.JLabel();
         cbbNhaCungCap = new utilities.palette.Combobox();
-        textAreaScroll1 = new utilities.palette.TextAreaScroll();
-        txtGhiChu = new utilities.palette.TextAreaCustom();
         btnDelete = new utilities.palette.UWPButton();
         btnUpdate = new utilities.palette.UWPButton();
         dateNgayTao = new com.toedter.calendar.JDateChooser();
@@ -98,6 +96,8 @@ public class NvqlRUDPhieuNhapView extends javax.swing.JFrame {
         dateNgayNhan = new com.toedter.calendar.JDateChooser();
         errNgayTao = new javax.swing.JLabel();
         errGhiChu = new javax.swing.JLabel();
+        textAreaScroll1 = new utilities.palette.TextAreaScroll();
+        txtGhiChu = new utilities.palette.TextAreaCustom();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setUndecorated(true);
@@ -163,12 +163,6 @@ public class NvqlRUDPhieuNhapView extends javax.swing.JFrame {
 
         cbbNhaCungCap.setLabeText("Nhà cung cấp");
 
-        textAreaScroll1.setLabelText("Ghi chú");
-
-        txtGhiChu.setColumns(20);
-        txtGhiChu.setRows(5);
-        textAreaScroll1.setViewportView(txtGhiChu);
-
         btnDelete.setText("Delete");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -191,6 +185,12 @@ public class NvqlRUDPhieuNhapView extends javax.swing.JFrame {
         errNgayTao.setForeground(new java.awt.Color(255, 51, 51));
 
         errGhiChu.setForeground(new java.awt.Color(255, 51, 51));
+
+        textAreaScroll1.setLabelText("Ghi chú");
+
+        txtGhiChu.setColumns(20);
+        txtGhiChu.setRows(5);
+        textAreaScroll1.setViewportView(txtGhiChu);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -229,9 +229,8 @@ public class NvqlRUDPhieuNhapView extends javax.swing.JFrame {
                                             .addComponent(jLabel2)
                                             .addComponent(errNgayNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(0, 0, Short.MAX_VALUE))))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(errGhiChu, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(textAreaScroll1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)))))
+                            .addComponent(errGhiChu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(textAreaScroll1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -256,11 +255,11 @@ public class NvqlRUDPhieuNhapView extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cbbNhaCungCap, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbbNhanVien, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(34, 34, 34)
                 .addComponent(textAreaScroll1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(errGhiChu, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
