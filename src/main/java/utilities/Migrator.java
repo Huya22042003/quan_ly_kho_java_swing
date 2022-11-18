@@ -383,8 +383,8 @@ public class Migrator {
         PhieuXuat phieuXuat = new PhieuXuat();
         phieuXuat.setGhiChu("");
         phieuXuat.setKhachHang(khachHang);
-        phieuNhap.setNgayThanhToan(convertDateToTimeStampSecond());
-        phieuNhap.setTrangThai(TrangThaiPhieuConstant.DA_THANH_TOAN);
+        phieuXuat.setNgayThanhToan(convertDateToTimeStampSecond());
+        phieuXuat.setTrangThai(TrangThaiPhieuConstant.DA_THANH_TOAN);
         phieuXuat.setNgayTao(convertDateToTimeStampSecond());
         phieuXuat.setNhanVien(nhanVien1);
         session.save(phieuXuat);
@@ -392,8 +392,8 @@ public class Migrator {
         PhieuXuat phieuXuat1 = new PhieuXuat();
         phieuXuat1.setGhiChu("");
         phieuXuat1.setKhachHang(khachHang);
-        phieuNhap.setNgayThanhToan(convertDateToTimeStampSecond());
-        phieuNhap.setTrangThai(TrangThaiPhieuConstant.DA_THANH_TOAN);
+        phieuXuat1.setNgayThanhToan(convertDateToTimeStampSecond());
+        phieuXuat1.setTrangThai(TrangThaiPhieuConstant.DA_THANH_TOAN);
         phieuXuat1.setNgayTao(convertDateToTimeStampSecond());
         phieuXuat1.setNhanVien(nhanVien1);
         session.save(phieuXuat1);
@@ -401,8 +401,8 @@ public class Migrator {
         PhieuXuat phieuXuat2 = new PhieuXuat();
         phieuXuat2.setGhiChu("");
         phieuXuat2.setKhachHang(khachHang);
-        phieuNhap.setNgayThanhToan(convertDateToTimeStampSecond());
-        phieuNhap.setTrangThai(TrangThaiPhieuConstant.DA_THANH_TOAN);
+        phieuXuat2.setNgayThanhToan(convertDateToTimeStampSecond());
+        phieuXuat2.setTrangThai(TrangThaiPhieuConstant.DA_THANH_TOAN);
         phieuXuat2.setNgayTao(convertDateToTimeStampSecond());
         phieuXuat2.setNhanVien(nhanVien1);
         session.save(phieuXuat2);
@@ -410,8 +410,8 @@ public class Migrator {
         PhieuXuat phieuXuat3 = new PhieuXuat();
         phieuXuat3.setGhiChu("");
         phieuXuat3.setKhachHang(khachHang);
-        phieuNhap.setNgayThanhToan(convertDateToTimeStampSecond());
-        phieuNhap.setTrangThai(TrangThaiPhieuConstant.DA_THANH_TOAN);
+        phieuXuat3.setNgayThanhToan(convertDateToTimeStampSecond());
+        phieuXuat3.setTrangThai(TrangThaiPhieuConstant.DA_THANH_TOAN);
         phieuXuat3.setNgayTao(convertDateToTimeStampSecond());
         phieuXuat3.setNhanVien(nhanVien1);
         session.save(phieuXuat3);
@@ -419,8 +419,8 @@ public class Migrator {
         PhieuXuat phieuXuat4 = new PhieuXuat();
         phieuXuat4.setGhiChu("");
         phieuXuat4.setKhachHang(khachHang);
-        phieuNhap.setNgayThanhToan(convertDateToTimeStampSecond());
-        phieuNhap.setTrangThai(TrangThaiPhieuConstant.DA_THANH_TOAN);
+        phieuXuat4.setNgayThanhToan(convertDateToTimeStampSecond());
+        phieuXuat4.setTrangThai(TrangThaiPhieuConstant.DA_THANH_TOAN);
         phieuXuat4.setNgayTao(convertDateToTimeStampSecond());
         phieuXuat4.setNhanVien(nhanVien1);
         session.save(phieuXuat4);
