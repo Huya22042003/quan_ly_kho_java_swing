@@ -1,7 +1,6 @@
 package cores.truongPhongs.repositories;
 
 import cores.truongPhongs.customModels.TP_KhachHangCustom;
-import infrastructures.constant.CoSoConstant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -10,7 +9,9 @@ import javax.persistence.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import utilities.HibernateUtil;
-import views.main.KhachHang;
+
+import domainModels.KhachHang;
+import infrastructures.constant.KhachHangConstant;
 
 public class TP_KhachHangRepository {
 
@@ -36,12 +37,12 @@ public class TP_KhachHangRepository {
         return list;
     }
 
-    public KhachHang addKH(KhachHang k) {
+    public KhachHang addKH(KhachHang kh) {
         Session s = HibernateUtil.getSessionFactory().openSession();
         try {
             Transaction tran = null;
             tran = s.beginTransaction();
-            s.save(k);
+            s.save(kh);
             tran.commit();
             s.close();
         } catch (Exception e) {
@@ -49,14 +50,14 @@ public class TP_KhachHangRepository {
             s.close();
             return null;
         }
-        return k;
+        return kh;
     }
 
-    public boolean updateKH(KhachHang k) {
+    public boolean updateKH(KhachHang kh) {
         Transaction tran = null;
         try ( Session s = HibernateUtil.getSessionFactory().openSession()) {
             tran = s.beginTransaction();
-            s.update(k);
+            s.update(kh);
             tran.commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -107,7 +108,7 @@ public class TP_KhachHangRepository {
         return csc;
     }
 
-    public List<TP_KhachHangCustom> findAllBySDT(String sdt, CoSoConstant tt) {
+    public List<TP_KhachHangCustom> findAllBySDT(String sdt, KhachHangConstant tt) {
         List<TP_KhachHangCustom> list = new ArrayList<>();
         Session s = HibernateUtil.getSessionFactory().openSession();
         Query q = s.createQuery("SELECT new cores.truongPhongs.customModels.TP_KhachHangCustom ("
@@ -131,7 +132,7 @@ public class TP_KhachHangRepository {
         return list;
     }
 
-    public List<TP_KhachHangCustom> findAllByTen(String ten, CoSoConstant tt) {
+    public List<TP_KhachHangCustom> findAllByTen(String ten, KhachHangConstant tt) {
         List<TP_KhachHangCustom> list = new ArrayList<>();
         Session s = HibernateUtil.getSessionFactory().openSession();
         Query q = s.createQuery("SELECT new cores.truongPhongs.customModels.TP_KhachHangCustom ("
@@ -155,7 +156,7 @@ public class TP_KhachHangRepository {
         return list;
     }
 
-    public List<TP_KhachHangCustom> findAllByDiaChi(String diaChi, CoSoConstant tt) {
+    public List<TP_KhachHangCustom> findAllByDiaChi(String diaChi, KhachHangConstant tt) {
         List<TP_KhachHangCustom> list = new ArrayList<>();
         Session s = HibernateUtil.getSessionFactory().openSession();
         Query q = s.createQuery("SELECT new cores.truongPhongs.customModels.TP_KhachHangCustom ("
