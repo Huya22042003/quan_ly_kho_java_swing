@@ -25,7 +25,7 @@ import utilities.MsgBox;
  *
  * @author QUOC HUY
  */
-public class NvqlRUDPhieuNhapView1 extends javax.swing.JFrame {
+public class NvqlRUDPhieuNhapView extends javax.swing.JFrame {
 
     /**
      * Creates new form DemoCreateCoSoView
@@ -37,7 +37,7 @@ public class NvqlRUDPhieuNhapView1 extends javax.swing.JFrame {
     NvqlQuanLyPhieuNhapCustom pnc = new NvqlQuanLyPhieuNhapCustom();
     private NvqlQuanLyPhieuNhapService phieuNhapService;
 
-    public NvqlRUDPhieuNhapView1() {
+    public NvqlRUDPhieuNhapView() {
         initComponents();
         phieuNhapService = new NvqlQuanLyPhieuNhapServiceImpl();
         tenNccService = new NvqlGetTenNccServiceImpl();
@@ -51,7 +51,7 @@ public class NvqlRUDPhieuNhapView1 extends javax.swing.JFrame {
         setLocation(size.width / 2 - getWidth() / 2, size.height / 2 - getHeight() / 2);
     }
 
-    public NvqlRUDPhieuNhapView1(NvqlQuanLyPhieuNhapCustom pn) {
+    public NvqlRUDPhieuNhapView(NvqlQuanLyPhieuNhapCustom pn) {
         initComponents();
         pnc = pn;
         phieuNhapService = new NvqlQuanLyPhieuNhapServiceImpl();
@@ -72,7 +72,7 @@ public class NvqlRUDPhieuNhapView1 extends javax.swing.JFrame {
         this.cbbNhaCungCap.setSelectedItem(pnc.getId());
         this.cbbNhanVien.setSelectedItem(pnc.getId());
         this.txtGhiChu.setText(pnc.getGhiChu());
-        this.dateNgayNhan.setDate(new Date(pnc.getNgayNhan()));
+        this.dateNgayNhan.setDate(new Date(pnc.getNgayThanhToan()));
         this.dateNgayTao.setDate(new Date(pnc.getNgayTao()));
         
     }
@@ -375,14 +375,30 @@ public class NvqlRUDPhieuNhapView1 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NvqlRUDPhieuNhapView1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NvqlRUDPhieuNhapView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NvqlRUDPhieuNhapView1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NvqlRUDPhieuNhapView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NvqlRUDPhieuNhapView1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NvqlRUDPhieuNhapView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NvqlRUDPhieuNhapView1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NvqlRUDPhieuNhapView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -403,7 +419,7 @@ public class NvqlRUDPhieuNhapView1 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NvqlRUDPhieuNhapView1().setVisible(true);
+                new NvqlRUDPhieuNhapView().setVisible(true);
             }
         });
     }

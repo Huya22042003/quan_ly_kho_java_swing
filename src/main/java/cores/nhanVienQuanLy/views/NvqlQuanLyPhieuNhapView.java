@@ -42,7 +42,7 @@ public class NvqlQuanLyPhieuNhapView extends javax.swing.JPanel {
         List<NvqlQuanLyPhieuNhapCustom> listTimKiem = new ArrayList<>();
 
         // tìm kiếm theo tên mã vị trí
-        getListPhieuNhap.parallelStream().forEach(el -> {
+        getListPhieuNhap.forEach(el -> {
             String search = "";
             List<String> strings = new ArrayList<>();
 
@@ -52,7 +52,7 @@ public class NvqlQuanLyPhieuNhapView extends javax.swing.JPanel {
                     search = el.getId().toString();
                     break;
                 case 1:
-                    search = el.getNgayNhan().toString();
+                    search = el.getNgayThanhToan().toString();
                     break;
                 case 2:
                     search = el.getNgayTao().toString();
@@ -111,14 +111,14 @@ public class NvqlQuanLyPhieuNhapView extends javax.swing.JPanel {
     public void loadTable(List<NvqlQuanLyPhieuNhapCustom> list) {
         DefaultTableModel dtm = (DefaultTableModel) this.tblPhieuNhap.getModel();
         dtm.setRowCount(0);
-        Date d;
         for (NvqlQuanLyPhieuNhapCustom el : list) {
+            
             Object[] rowData = {
                 dtm.getRowCount() + 1,
                 el.getId(),
                 el.getGhiChu(),
-                d = new Date(el.getNgayNhan()),
-                d = new Date(el.getNgayTao()),
+                el.getNgayThanhToan() == null ? "" :  new Date(el.getNgayThanhToan()),
+                 new Date(el.getNgayTao()),
                 el.getTenNcc(),
                 el.getTenNhanVien()
             };
@@ -372,7 +372,7 @@ public class NvqlQuanLyPhieuNhapView extends javax.swing.JPanel {
 
     private void tblPhieuNhapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPhieuNhapMouseClicked
         int row = this.tblPhieuNhap.getSelectedRow();
-        NvqlRUDPhieuNhapView1 rud = new NvqlRUDPhieuNhapView1(phieuNhapService.findPhieuNhapById((UUID) tblPhieuNhap.getValueAt(row, 1)));
+        NvqlRUDPhieuNhapView rud = new NvqlRUDPhieuNhapView(phieuNhapService.findPhieuNhapById((UUID) tblPhieuNhap.getValueAt(row, 1)));
         rud.setVisible(true);
     }//GEN-LAST:event_tblPhieuNhapMouseClicked
 

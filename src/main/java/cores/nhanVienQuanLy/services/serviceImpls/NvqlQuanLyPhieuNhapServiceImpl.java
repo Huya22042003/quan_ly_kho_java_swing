@@ -47,7 +47,7 @@ public class NvqlQuanLyPhieuNhapServiceImpl implements NvqlQuanLyPhieuNhapServic
         NhanVien nv = repoNv.getNhanVienById(p.getIdNhanVien());
         PhieuNhap pn = new PhieuNhap();
         pn.setGhiChu(p.getGhiChu());
-        pn.setNgayNhan(p.getNgayNhan());
+        pn.setNgayThanhToan(p.getNgayThanhToan());
         pn.setNgayTao(p.getNgayTao());
         pn.setNhaCungCap(ncc);
         pn.setNhanVien(nv);
@@ -62,7 +62,7 @@ public class NvqlQuanLyPhieuNhapServiceImpl implements NvqlQuanLyPhieuNhapServic
         PhieuNhap pn = new PhieuNhap();
         pn.setId(p.getId());
         pn.setGhiChu(p.getGhiChu());
-        pn.setNgayNhan(p.getNgayNhan());
+        pn.setNgayThanhToan(p.getNgayThanhToan());
         pn.setNgayTao(p.getNgayTao());
         pn.setNhaCungCap(ncc);
         pn.setNhanVien(nv);
@@ -131,7 +131,7 @@ public class NvqlQuanLyPhieuNhapServiceImpl implements NvqlQuanLyPhieuNhapServic
         }
         NvqlQuanLyPhieuNhapCustom pn = new NvqlQuanLyPhieuNhapCustom();
         pn.setGhiChu(ghiChu);
-        pn.setNgayNhan(ngayNhan.getTime());
+        pn.setNgayThanhToan(ngayNhan.getTime());
         pn.setNgayTao(ngayTao.getTime());
         return pn;
 
@@ -145,8 +145,8 @@ public class NvqlQuanLyPhieuNhapServiceImpl implements NvqlQuanLyPhieuNhapServic
         p.setIdNcc(pn.getNhaCungCap().getId());
         p.setIdNhanVien(pn.getNhanVien().getId());
         p.setGhiChu(pn.getGhiChu());
-        p.setNgayNhan(pn.getNgayTao());
-        p.setNgayTao(pn.getNgayNhan());
+        p.setNgayThanhToan(pn.getNgayThanhToan());
+        p.setNgayTao(pn.getNgayTao());
        
         return p;
     }

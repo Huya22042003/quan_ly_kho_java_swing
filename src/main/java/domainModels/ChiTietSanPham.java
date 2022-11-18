@@ -1,5 +1,6 @@
 package domainModels;
 
+import infrastructures.constant.MauConstant;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -43,7 +44,10 @@ public class ChiTietSanPham implements Serializable {
 
     @Column(name = "GiaBan")
     private BigDecimal GiaBan;
-
+    
+    @Column(name = "Mau")
+    private MauConstant mau;
+    
     @ManyToOne
     @JoinColumn(name = "IdSanPham")
     private SanPham sanPham;

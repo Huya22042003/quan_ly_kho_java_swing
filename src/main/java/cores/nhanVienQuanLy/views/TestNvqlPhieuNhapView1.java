@@ -10,14 +10,16 @@ import java.awt.FlowLayout;
  *
  * @author Acer
  */
-public class TestNvqlPhieuNhapView extends javax.swing.JFrame {
+public class TestNvqlPhieuNhapView1 extends javax.swing.JFrame {
 
     /**
-     * Creates new form TestNvqlPhieuNhapView
+     * Creates new form TestNvqlPhieuNhapView1
      */
-    public TestNvqlPhieuNhapView() {
+    public TestNvqlPhieuNhapView1() {
         initComponents();
         NvqlQuanLyPhieuNhapView a = new NvqlQuanLyPhieuNhapView();
+
+
         this.add(a);
         this.setLayout(new FlowLayout());
         this.pack();
@@ -66,20 +68,20 @@ public class TestNvqlPhieuNhapView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TestNvqlPhieuNhapView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TestNvqlPhieuNhapView1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TestNvqlPhieuNhapView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TestNvqlPhieuNhapView1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TestNvqlPhieuNhapView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TestNvqlPhieuNhapView1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TestNvqlPhieuNhapView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TestNvqlPhieuNhapView1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TestNvqlPhieuNhapView().setVisible(true);
+                new TestNvqlPhieuNhapView1().setVisible(true);
             }
         });
     }
