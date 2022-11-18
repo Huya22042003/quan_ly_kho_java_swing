@@ -6,15 +6,9 @@ package infrastructures.constant;
 
 /**
  *
- * @author QUOC HUY
+ * @author window
  */
-public enum TrangThaiDonHangConstant {
-    CHO_XAC_NHAN,
-    DANG_XU_LY,
-    DANG_GIAO,
-    DA_DEN_NOI,
-    GIAO_THANH_CONG,
-    HUY_DON,
-    HOAN_DON,
-    THANH_LY
+public enum NhaCungCapConstant {
+    DANG_SU_DUNG,
+    KHONG_SU_DUNG
 }

@@ -2,13 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package infrastructures;
+package infrastructures.constant;
 
 /**
  *
- * @author window
+ * @author QUOC HUY
  */
-public enum NhaCungCapConstant {
-    DANG_SU_DUNG,
-    KHONG_SU_DUNG
+public enum TrangThaiPhieuConstant {
+    CHO_THANH_TOAN,
+    DA_HUY,
+    DA_THANH_TOAN
 }
