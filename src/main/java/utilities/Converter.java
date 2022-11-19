@@ -140,32 +140,17 @@ public class Converter {
         return trangThai;
     }
 
-    private static String mauSacConvert(MauConstant m) {
+    public static String TrangThaiPhieuXuat(TrangThaiPhieuConstant p) {
         String mau = "";
-        switch (m) {
-            case CAM:
-                mau = "Cam";
+        switch (p) {
+            case CHO_THANH_TOAN:
+                mau = "Cho Thanh Toán";
                 break;
-            case DEN:
-                mau = "Đen";
+            case DA_HUY:
+                mau = "Đã Hủy";
                 break;
-            case DO:
-                mau = "Đỏ";
-                break;
-            case HONG:
-                mau = "Hồng";
-                break;
-            case TRANG:
-                mau = "Trắng";
-                break;
-            case VANG:
-                mau = "Vàng";
-                break;
-            case XANH_DUONG:
-                mau = "Xanh dương";
-                break;
-            case XANH_LA:
-                mau = "Xanh lá";
+            case DA_THANH_TOAN:
+                mau = "Đã Thanh Toán";
                 break;
             default:
                 throw new AssertionError();
