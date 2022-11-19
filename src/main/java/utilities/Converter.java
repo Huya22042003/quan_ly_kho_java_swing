@@ -65,13 +65,13 @@ public class Converter {
         String trangThai = "";
         switch (th) {
             case KHAC:
-                trangThai = "Nữ";
-                break;
-            case NAM:
                 trangThai = "Khác";
                 break;
-            case NU:
+            case NAM:
                 trangThai = "Nam";
+                break;
+            case NU:
+                trangThai = "Nữ";
                 break;
             default:
                 throw new AssertionError();
@@ -189,7 +189,7 @@ public class Converter {
                 trangThai = "Bất ổn";
                 break;
             case XAU:
-                trangThai = "xấu";
+                trangThai = "Xấu";
                 break;
             default:
                 throw new AssertionError();
