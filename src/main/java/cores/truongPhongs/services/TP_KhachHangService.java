@@ -5,7 +5,6 @@ import infrastructures.constant.CoSoConstant;
 import infrastructures.constant.DanhGiaConstant;
 import infrastructures.constant.GioiTinhConstant;
 import infrastructures.constant.KhachHangConstant;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import javax.swing.JLabel;
@@ -22,15 +21,17 @@ public interface TP_KhachHangService {
     boolean deleteKH(UUID id);
 
     void loadCbbTT(Combobox cbb);
+
     void loadCbbGT(Combobox cbb);
+
     void loadCbbDG(Combobox cbb);
 
-    TP_KhachHangCustom checkValidate(TP_KhachHangCustom kh, JLabel erroMa, JLabel erroTen, JLabel erroSDT, JLabel erroEmail,  JLabel erroDiaChi, JLabel erroMatKhau, JLabel erroNgaySinh);
+    TP_KhachHangCustom checkValidate(TP_KhachHangCustom kh, JLabel erroMa, JLabel erroTen, JLabel erroSDT, JLabel erroEmail, JLabel erroDiaChi, JLabel erroMatKhau, JLabel erroNgaySinh);
 
     KhachHangConstant loc(int a);
-    
+
     DanhGiaConstant loc1(int b);
-    
+
     GioiTinhConstant loc2(int c);
 
     TP_KhachHangCustom findKHByMa(String ma);

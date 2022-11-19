@@ -18,14 +18,14 @@ import utilities.Converter;
 import utilities.palette.Combobox;
 
 public class TP_KhachHangServiceImpl implements TP_KhachHangService {
-    
+
     private TP_KhachHangRepository rp = new TP_KhachHangRepository();
-    
+
     @Override
     public List<TP_KhachHangCustom> getListKH() {
         return rp.getList();
     }
-    
+
     @Override
     public TP_KhachHangCustom addKH(TP_KhachHangCustom custom) {
         KhachHang kh = new KhachHang();
@@ -43,7 +43,7 @@ public class TP_KhachHangServiceImpl implements TP_KhachHangService {
         custom.setId(rp.addKH(kh).getId());
         return custom;
     }
-    
+
     @Override
     public boolean updateKH(TP_KhachHangCustom custom) {
         KhachHang kh = new KhachHang();
@@ -61,26 +61,26 @@ public class TP_KhachHangServiceImpl implements TP_KhachHangService {
         kh.setId(custom.getId());
         return rp.updateKH(kh);
     }
-    
+
     @Override
     public boolean deleteKH(UUID id) {
         return rp.deleteKH(id);
     }
-    
+
     @Override
     public void loadCbbTT(Combobox cbb) {
         cbb.removeAll();
         cbb.addItem(Converter.trangThaiKhachHang(KhachHangConstant.DANG_LAM_VIEC));
         cbb.addItem(Converter.trangThaiKhachHang(KhachHangConstant.SAP_BO));
         cbb.addItem(Converter.trangThaiKhachHang(KhachHangConstant.DA_NGUNG_CUNG_CAP));
-        
+
     }
-    
+
     @Override
     public TP_KhachHangCustom findKHByMa(String ma) {
         return rp.findByMa(ma);
     }
-    
+
     @Override
     public List<TP_KhachHangCustom> findAllByRadio(String tk, KhachHangConstant tt, int rdo) {
         switch (rdo) {
@@ -94,11 +94,11 @@ public class TP_KhachHangServiceImpl implements TP_KhachHangService {
                 return null;
         }
     }
-    
+
     @Override
     public TP_KhachHangCustom checkValidate(TP_KhachHangCustom kh, JLabel erroMa, JLabel erroTen, JLabel erroSDT, JLabel erroEmail, JLabel erroDiaChi, JLabel erroMatKhau, JLabel erroNgaySinh) {
         boolean check = true;
-        
+
         if (kh.getMa() != null) {
             if (kh.getMa().trim().length() == 0) {
                 erroMa.setText("Mã không được để trống");
@@ -113,57 +113,57 @@ public class TP_KhachHangServiceImpl implements TP_KhachHangService {
                 erroMa.setText("");
             }
         }
-        
+
         if (kh.getTen().trim().length() == 0) {
             erroTen.setText("Tên không được để trống");
             check = false;
         } else {
             erroTen.setText("");
         }
-        
+
         if (kh.getSdt().trim().length() == 0) {
             erroSDT.setText("Số điện thoại không được để trống");
             check = false;
         } else {
             erroSDT.setText("");
         }
-        
+
         if (kh.getEmail().trim().length() == 0) {
             erroEmail.setText("Email không được để trống");
             check = false;
         } else {
             erroEmail.setText("");
         }
-        
+
         if (kh.getDiaChi().trim().length() == 0) {
             erroDiaChi.setText("Địa chỉ không được để trống");
             check = false;
         } else {
             erroDiaChi.setText("");
         }
-        
+
         if (kh.getMatKhau().trim().length() == 0) {
             erroMatKhau.setText("Mật khẩu không được để trống");
             check = false;
         } else {
             erroMatKhau.setText("");
         }
-        
+
         if (kh.getNgaySinh() == null) {
             erroNgaySinh.setText("Bạn phải chọn ngày sinh");
             check = false;
         } else {
             erroNgaySinh.setText("");
         }
-        
+
         if (!check) {
             return null;
         }
-        
+
         return kh;
-        
+
     }
-    
+
     @Override
     public KhachHangConstant loc(int a) {
         switch (a) {
@@ -177,7 +177,7 @@ public class TP_KhachHangServiceImpl implements TP_KhachHangService {
                 return null;
         }
     }
-    
+
     @Override
     public DanhGiaConstant loc1(int b) {
         switch (b) {
@@ -193,7 +193,7 @@ public class TP_KhachHangServiceImpl implements TP_KhachHangService {
                 return null;
         }
     }
-    
+
     @Override
     public GioiTinhConstant loc2(int c) {
         switch (c) {
@@ -207,14 +207,14 @@ public class TP_KhachHangServiceImpl implements TP_KhachHangService {
                 return null;
         }
     }
-    
+
     @Override
     public void loadCbbGT(Combobox cbb) {
         cbb.addItem(Converter.trangThaiGioiTinh(GioiTinhConstant.NU));
         cbb.addItem(Converter.trangThaiGioiTinh(GioiTinhConstant.KHAC));
         cbb.addItem(Converter.trangThaiGioiTinh(GioiTinhConstant.NAM));
     }
-    
+
     @Override
     public void loadCbbDG(Combobox cbb) {
         cbb.addItem(Converter.trangThaiDanhGia(DanhGiaConstant.TOT));
