@@ -7,7 +7,9 @@ package utilities;
 import domainModels.NhaCungCap;
 import infrastructures.constant.NhaCungCapConstant;
 import infrastructures.constant.CoSoConstant;
+import infrastructures.constant.DanhGiaConstant;
 import infrastructures.constant.GioiTinhConstant;
+import infrastructures.constant.KhachHangConstant;
 import infrastructures.constant.KhoHangConstant;
 import infrastructures.constant.MauConstant;
 import infrastructures.constant.TrangThaiPhieuConstant;
@@ -63,13 +65,13 @@ public class Converter {
         String trangThai = "";
         switch (th) {
             case KHAC:
-                trangThai = "Khác";
+                trangThai = "Nữ";
                 break;
             case NAM:
-                trangThai = "Nam";
+                trangThai = "Khác";
                 break;
             case NU:
-                trangThai = "Nữ";
+                trangThai = "Nam";
                 break;
             default:
                 throw new AssertionError();
@@ -171,5 +173,47 @@ public class Converter {
                 throw new AssertionError();
         }
         return mau;
+    }
+    
+    public static String trangThaiDanhGia(DanhGiaConstant th) {
+        String trangThai = "";
+
+        switch (th) {
+            case TOT:
+                trangThai = "Tốt";
+                break;
+            case TAM_ON:
+                trangThai = "Tạm ổn";
+                break;
+            case BAT_ON:
+                trangThai = "Bất ổn";
+                break;
+            case XAU:
+                trangThai = "xấu";
+                break;
+            default:
+                throw new AssertionError();
+        }
+
+        return trangThai;
+    }
+    
+    public static String trangThaiKhachHang(KhachHangConstant th) {
+        String trangThai = "";
+        switch (th) {
+            case  DANG_LAM_VIEC:
+                trangThai = "Đang làm việc";
+                break;
+            case SAP_BO:
+                trangThai = "Sắp bỏ";
+                break;
+            case DA_NGUNG_CUNG_CAP:
+                trangThai = "Đã ngừng cung cấp";
+                break;
+            default:
+                throw new AssertionError();
+        }
+
+        return trangThai;
     }
 }
