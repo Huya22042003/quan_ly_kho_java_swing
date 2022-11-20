@@ -24,8 +24,9 @@ public class TP_NamBaoHanhForm extends javax.swing.JPanel {
         createView = new TP_CreateNamBaoHangForm();
         rud = new TP_RUDNamBaoHangForm();
         initComponents();
-        clearForm();
+        getList = baoHanhService.getListNBH();
         loadTable(getList);
+        clearForm();
     }
 
     public void clearForm() {
@@ -260,8 +261,10 @@ public class TP_NamBaoHanhForm extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnHienThiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHienThiActionPerformed
-        clearForm();
+
+        getList = baoHanhService.getListNBH();
         loadTable(getList);
+        clearForm();
     }//GEN-LAST:event_btnHienThiActionPerformed
 
 
