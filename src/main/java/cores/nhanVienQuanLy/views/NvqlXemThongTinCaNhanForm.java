@@ -4,42 +4,56 @@
  */
 package cores.nhanVienQuanLy.views;
 
-import cores.nhanVienQuanLy.customModels.NvghXemThongTinCaNhanCustom;
-import cores.nhanVienQuanLy.services.NvghXemThongTinCaNhanService;
-import cores.nhanVienQuanLy.services.serviceImpls.NvghXemThongTinCaNhanServiceImpl;
+import cores.logins.custom.NhanVienCustom;
+import cores.nhanVienQuanLy.customModels.NvqlXemThongTinCaNhanCustom;
+import cores.nhanVienQuanLy.services.serviceImpls.NvqlXemThongTinCaNhanServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import utilities.Converter;
+import cores.nhanVienQuanLy.services.NvqlXemThongTinCaNhanService;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import utilities.Auth;
+import utilities.MaTuSinh;
 
 /**
  *
  * @author window
  */
-public class NvghXemThongTinCaNhanForm extends javax.swing.JPanel {
+public class NvqlXemThongTinCaNhanForm extends javax.swing.JPanel {
 
-    private List<NvghXemThongTinCaNhanCustom> listNvghXemThongTinCaNhanCustom = new ArrayList<>();
-    private NvghXemThongTinCaNhanService khXemThongTinCaNhanService = new NvghXemThongTinCaNhanServiceImpl();
+    private List<NvqlXemThongTinCaNhanCustom> listNvghXemThongTinCaNhanCustom = new ArrayList<>();
+    private NvqlXemThongTinCaNhanService khXemThongTinCaNhanService = new NvqlXemThongTinCaNhanServiceImpl();
+    private NhanVienCustom nhanVienCustom = new NhanVienCustom();
 
-    public NvghXemThongTinCaNhanForm() {
+    public NvqlXemThongTinCaNhanForm() {
         initComponents();
         listNvghXemThongTinCaNhanCustom = khXemThongTinCaNhanService.getAll();
-        showData(listNvghXemThongTinCaNhanCustom);
+        showData(nhanVienCustom);
     }
 
-    public void showData(List<NvghXemThongTinCaNhanCustom> list) {
-        for (NvghXemThongTinCaNhanCustom kh : list) {
-            txtMa.setText(kh.getMa());
-            txtTen.setText(kh.getTen());
-            txtGioiTinh.setText(Converter.trangThaiGioiTinh(kh.getGioiTinh()));
-            txtDienThoai.setText(kh.getSdt());
-            txtNgaySinh.setText(kh.getNgaySinh() + "");
-            txtDiaChi.setText(kh.getDiaChi());
-            txtVaiTro.setText("Nhân viên giao hàng");
-        }
+    public void showData(NhanVienCustom a) {
+        a = Auth.nhanVien;
+        Date d = new Date(a.getNgaySinh());
+        txtMa.setText(a.getMa());
+        txtTen.setText(a.getTen());
+        txtGioiTinh.setText(Converter.trangThaiGioiTinh(a.getGioiTinh()));
+        txtDienThoai.setText(a.getSdt());
+        txtNgaySinh.setText(d.toString());
+        txtDiaChi.setText(a.getDiaChi());
+        txtVaiTro.setText(a.getChucVu().getTen());
     }
 
-    public NvghXemThongTinCaNhanCustom checkPass() {
+    public NhanVienCustom checkPass() {
         String oldPass = txtOldPass.getText();
         String newPass = txtNewPass.getText();
         String cFPass = txtConfirmPass.getText();
@@ -47,7 +61,7 @@ public class NvghXemThongTinCaNhanForm extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Không được để trống trường nào");
             return null;
         }
-        if (!khXemThongTinCaNhanService.checkMatKhau(oldPass)) {
+        if (!Auth.nhanVien.getMatKhau().equals(oldPass)) {
             JOptionPane.showMessageDialog(this, "Mật khẩu cũ chưa chính xác");
             return null;
         }
@@ -60,9 +74,14 @@ public class NvghXemThongTinCaNhanForm extends javax.swing.JPanel {
             return null;
         }
 
-        NvghXemThongTinCaNhanCustom kh = new NvghXemThongTinCaNhanCustom();
-        kh.setMatKhau(newPass);
-        return kh;
+        Auth.nhanVien.setMatKhau(newPass);
+        return Auth.nhanVien;
+    }
+
+    public NhanVienCustom doiPass() {
+        String newPass = MaTuSinh.gen("MK");
+        Auth.nhanVien.setMatKhau(newPass);
+        return Auth.nhanVien;
     }
 
     /**
@@ -89,21 +108,29 @@ public class NvghXemThongTinCaNhanForm extends javax.swing.JPanel {
         txtNewPass = new utilities.palette.PasswordField();
         btnHuyBo = new utilities.palette.UWPButton();
         btnXacNhan = new utilities.palette.UWPButton();
+        lblDoiMatKhau = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
+        txtNgaySinh.setEditable(false);
         txtNgaySinh.setLabelText("Ngày sinh: ");
 
+        txtMa.setEditable(false);
         txtMa.setLabelText("Mã: ");
 
+        txtDienThoai.setEditable(false);
         txtDienThoai.setLabelText("Điện thoại: ");
 
+        txtVaiTro.setEditable(false);
         txtVaiTro.setLabelText("Vai trò: ");
 
+        txtDiaChi.setEditable(false);
         txtDiaChi.setLabelText("Địa chỉ: ");
 
+        txtGioiTinh.setEditable(false);
         txtGioiTinh.setLabelText("Giới tính: ");
 
+        txtTen.setEditable(false);
         txtTen.setLabelText("Tên: ");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -167,20 +194,29 @@ public class NvghXemThongTinCaNhanForm extends javax.swing.JPanel {
             }
         });
 
+        lblDoiMatKhau.setText("Quên mật khẩu");
+        lblDoiMatKhau.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblDoiMatKhauMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(36, 36, 36)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtNewPass, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtConfirmPass, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtOldPass, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnHuyBo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblDoiMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txtNewPass, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtConfirmPass, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtOldPass, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                            .addComponent(btnXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnHuyBo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -192,7 +228,9 @@ public class NvghXemThongTinCaNhanForm extends javax.swing.JPanel {
                 .addComponent(txtNewPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39)
                 .addComponent(txtConfirmPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
+                .addGap(13, 13, 13)
+                .addComponent(lblDoiMatKhau)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnHuyBo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -214,9 +252,8 @@ public class NvghXemThongTinCaNhanForm extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnHuyBoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyBoActionPerformed
-        txtConfirmPass.setText("");
-        txtOldPass.setText("");
-        txtNewPass.setText("");
+        test n = new test();
+        n.setVisible(false);
     }//GEN-LAST:event_btnHuyBoActionPerformed
 
     public void clearForm() {
@@ -225,17 +262,49 @@ public class NvghXemThongTinCaNhanForm extends javax.swing.JPanel {
         txtConfirmPass.setText("");
     }
     private void btnXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanActionPerformed
-        NvghXemThongTinCaNhanCustom kh = checkPass();
+        NhanVienCustom kh = checkPass();
         if (kh == null) {
             return;
         }
         String oldPass = txtOldPass.getText();
         String newPass = txtNewPass.getText();
 
-        khXemThongTinCaNhanService.doiMatKhau(txtNewPass.getText());
+        khXemThongTinCaNhanService.doiMatKhau(kh);
         JOptionPane.showMessageDialog(this, "Đổi mật khẩu thành công");
         clearForm();
     }//GEN-LAST:event_btnXacNhanActionPerformed
+
+    private void lblDoiMatKhauMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDoiMatKhauMouseClicked
+        NhanVienCustom kh = doiPass();
+        khXemThongTinCaNhanService.doiMatKhau(kh);
+        String ToEmail = "huynqph26782@fpt.edu.vn";
+        String FromEmail = "haipxph26772@fpt.edu.vn";
+        String Pass = "79802003hai";
+        Properties prop = new Properties();
+        prop.put("mail.smtp.host", "smtp.gmail.com");
+        prop.put("mail.smtp.port", "587");
+        prop.put("mail.smtp.auth", "true");
+        prop.put("mail.smtp.starttls.enable", "true"); //TLS
+
+        Session session = Session.getInstance(prop, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(FromEmail, Pass);
+            }
+        });
+        try {
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(FromEmail));
+            message.addRecipient(Message.RecipientType.TO,
+                    new InternetAddress(ToEmail)
+            );
+            message.setText("Your new password is: " + kh.getMatKhau() + ", Please don't be stupid!!");
+            Transport.send(message);
+            JOptionPane.showMessageDialog(this, "Mật khẩu của bạn đã được gửi về mail, vui lòng check mail của bạn!");
+            System.out.println("Done success");
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_lblDoiMatKhauMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -243,6 +312,7 @@ public class NvghXemThongTinCaNhanForm extends javax.swing.JPanel {
     private utilities.palette.UWPButton btnXacNhan;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lblDoiMatKhau;
     private utilities.palette.MaterialTabbed materialTabbed1;
     private utilities.palette.PasswordField txtConfirmPass;
     private utilities.palette.TextField txtDiaChi;

@@ -4,7 +4,8 @@
  */
 package cores.nhanVienQuanLy.repositories;
 
-import cores.nhanVienQuanLy.customModels.NvghXemThongTinCaNhanCustom;
+import cores.nhanVienQuanLy.customModels.NvqlXemThongTinCaNhanCustom;
+import domainModels.NhanVien;
 import java.util.List;
 import javax.persistence.Query;
 import org.hibernate.Session;
@@ -15,33 +16,33 @@ import utilities.HibernateUtil;
  *
  * @author window
  */
-public class NvghXemThongTinCaNhanRepository {
+public class NvqlXemThongTinCaNhanRepository {
 
-    public List<NvghXemThongTinCaNhanCustom> getAll() {
+    public List<NvqlXemThongTinCaNhanCustom> getAll() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         javax.persistence.Query query = session.createQuery("select "
-                + " new cores.khachHangs.customModels.NvghXemThongTinCaNhanCustom("
+                + " new cores.nhanVienQuanLy.customModels.NvqlXemThongTinCaNhanCustom("
                 + " m.id,"
                 + " m.ma as ma,"
                 + " m.ten as ten,"
-                + " m.email as email,"
                 + " m.sdt as sdt,"
+                + " m.email as email,"
                 + " m.matKhau as matKhau,"
                 + " m.ngaySinh as ngaySinh,"
                 + " m.gioiTinh as gioiTinh,"
                 + " m.diaChi as diaChi"
                 + " )"
-                + " from domainModels.NhanVienGiaoHang m where m.id = 'C63B9A29-B6B5-CA47-A92F-38354C216504' ");
+                + " from domainModels.NhanVien m where m.id = 'C63B9A29-B6B5-CA47-A92F-38354C216504' ");
 //        query.setParameter("id", id);
-        List<NvghXemThongTinCaNhanCustom> list = query.getResultList();
+        List<NvqlXemThongTinCaNhanCustom> list = query.getResultList();
         session.close();
         return list;
     }
-    
-    public NvghXemThongTinCaNhanCustom findByMatKhau(String matKhau) {
+
+    public NvqlXemThongTinCaNhanCustom findByMatKhau(String matKhau) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         javax.persistence.Query query = session.createQuery("select "
-                + " new cores.khachHangs.customModels.NvghXemThongTinCaNhanCustom("
+                + " new cores.nhanVienQuanLy.customModels.NvqlXemThongTinCaNhanCustom("
                 + " m.id,"
                 + " m.ma as ma,"
                 + " m.ten as ten,"
@@ -52,37 +53,33 @@ public class NvghXemThongTinCaNhanRepository {
                 + " m.gioiTinh as gioiTinh,"
                 + " m.diaChi as diaChi"
                 + " )"
-                + " from domainModels.NhanVienGiaoHang m where m.id = 'C63B9A29-B6B5-CA47-A92F-38354C216504' AND m.matKhau = :matKhau ");
+                + " from domainModels.NhanVien m where m.id = 'C63B9A29-B6B5-CA47-A92F-38354C216504' AND m.matKhau = :matKhau ");
         query.setParameter("matKhau", matKhau);
-        NvghXemThongTinCaNhanCustom kh = null;
+        NvqlXemThongTinCaNhanCustom kh = null;
         try {
-            kh = (NvghXemThongTinCaNhanCustom) query.getSingleResult();
+            kh = (NvqlXemThongTinCaNhanCustom) query.getSingleResult();
         } catch (Exception e) {
         }
         session.close();
-        if(kh == null){
+        if (kh == null) {
             return null;
         }
         return kh;
     }
-    
-     public boolean checkMatKhau(String matKhau){
-        NvghXemThongTinCaNhanCustom ql = findByMatKhau(matKhau);
-        if(ql != null){
+
+    public boolean checkMatKhau(String matKhau) {
+        NvqlXemThongTinCaNhanCustom ql = findByMatKhau(matKhau);
+        if (ql != null) {
             return true;
         }
         return false;
     }
 
-
-    public void doiMatKhau(String matKhau) {
+    public void doiMatKhau(NhanVien nv) {
         Transaction transaction = null;
-        String hql = "UPDATE NhanVienGiaoHang m SET MatKhau = :matKhau where m.id = 'C63B9A29-B6B5-CA47-A92F-38354C216504'";
         try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Query query = session.createQuery(hql);
             transaction = session.beginTransaction();
-            query.setParameter("matKhau", matKhau);
-            query.executeUpdate();
+            session.update(nv);
             transaction.commit();
         } catch (Exception e) {
             e.printStackTrace();

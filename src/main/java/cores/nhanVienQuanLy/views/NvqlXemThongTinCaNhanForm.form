@@ -87,36 +87,43 @@
           <SubComponents>
             <Component class="utilities.palette.TextField" name="txtNgaySinh">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="labelText" type="java.lang.String" value="Ng&#xe0;y sinh: "/>
               </Properties>
             </Component>
             <Component class="utilities.palette.TextField" name="txtMa">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="labelText" type="java.lang.String" value="M&#xe3;: "/>
               </Properties>
             </Component>
             <Component class="utilities.palette.TextField" name="txtDienThoai">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="labelText" type="java.lang.String" value="&#x110;i&#x1ec7;n tho&#x1ea1;i: "/>
               </Properties>
             </Component>
             <Component class="utilities.palette.TextField" name="txtVaiTro">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="labelText" type="java.lang.String" value="Vai tr&#xf2;: "/>
               </Properties>
             </Component>
             <Component class="utilities.palette.TextField" name="txtDiaChi">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="labelText" type="java.lang.String" value="&#x110;&#x1ecb;a ch&#x1ec9;: "/>
               </Properties>
             </Component>
             <Component class="utilities.palette.TextField" name="txtGioiTinh">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="labelText" type="java.lang.String" value="Gi&#x1edb;i t&#xed;nh: "/>
               </Properties>
             </Component>
             <Component class="utilities.palette.TextField" name="txtTen">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="labelText" type="java.lang.String" value="T&#xea;n: "/>
               </Properties>
             </Component>
@@ -136,14 +143,17 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="txtNewPass" min="-2" pref="234" max="-2" attributes="0"/>
-                          <Component id="txtConfirmPass" min="-2" pref="234" max="-2" attributes="0"/>
-                          <Component id="txtOldPass" min="-2" pref="234" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="btnXacNhan" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="btnHuyBo" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="lblDoiMatKhau" min="-2" pref="123" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="txtNewPass" min="-2" pref="234" max="-2" attributes="0"/>
+                              <Component id="txtConfirmPass" min="-2" pref="234" max="-2" attributes="0"/>
+                              <Component id="txtOldPass" min="-2" pref="234" max="-2" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="btnXacNhan" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="btnHuyBo" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                       <EmptySpace pref="34" max="32767" attributes="0"/>
@@ -159,7 +169,9 @@
                       <Component id="txtNewPass" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                       <Component id="txtConfirmPass" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                      <Component id="lblDoiMatKhau" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnHuyBo" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnXacNhan" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -202,6 +214,14 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnXacNhanActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lblDoiMatKhau">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Qu&#xea;n m&#x1ead;t kh&#x1ea9;u"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblDoiMatKhauMouseClicked"/>
               </Events>
             </Component>
           </SubComponents>

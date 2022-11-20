@@ -109,13 +109,13 @@ public class Migrator {
 
         NhanVien nhanVien = new NhanVien();
         nhanVien.setMa("NV00001");
-        nhanVien.setTen("Nguyễn Quốc Huy");
+        nhanVien.setTen("Phạm Xuân Hải");
         nhanVien.setDiaChi("Hà Nội");
         nhanVien.setEmail("a");
         nhanVien.setGioiTinh(GioiTinhConstant.NAM);
         nhanVien.setHinhAnh(null);
         nhanVien.setIdChucVu(chucVu);
-        nhanVien.setMatKhau("1");
+        nhanVien.setMatKhau("a");
         nhanVien.setNgaySinh(convertDateToTimeStampSecond());
         nhanVien.setSdt("0328843156");
         nhanVien.setTrangThai(TrangThaiNhanVienConstant.DANG_HOAT_DONG);

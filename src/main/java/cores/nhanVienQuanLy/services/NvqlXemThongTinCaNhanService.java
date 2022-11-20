@@ -4,15 +4,16 @@
  */
 package cores.nhanVienQuanLy.services;
 
-import cores.nhanVienQuanLy.customModels.NvghXemThongTinCaNhanCustom;
+import cores.logins.custom.NhanVienCustom;
+import cores.nhanVienQuanLy.customModels.NvqlXemThongTinCaNhanCustom;
 import java.util.List;
 
 /**
  *
  * @author window
  */
-public interface NvghXemThongTinCaNhanService {
-    public List<NvghXemThongTinCaNhanCustom> getAll();
-    public void doiMatKhau(String pass);
+public interface NvqlXemThongTinCaNhanService {
+    public List<NvqlXemThongTinCaNhanCustom> getAll();
+    public void doiMatKhau(NhanVienCustom nvc);
     public boolean checkMatKhau(String matKhau);
 }

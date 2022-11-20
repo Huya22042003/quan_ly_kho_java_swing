@@ -7,6 +7,9 @@ package views.main;
 import cores.logins.custom.NhanVienCustom;
 import cores.logins.service.ServiceImpl.UserServiceImpl;
 import cores.logins.service.UserService;
+import cores.nhanVienQuanLy.customModels.NvqlXemThongTinCaNhanCustom;
+import cores.nhanVienQuanLy.views.NvqlXemThongTinCaNhanForm;
+import cores.nhanVienQuanLy.views.test;
 import java.util.concurrent.ConcurrentHashMap;
 import javax.swing.JOptionPane;
 import utilities.Auth;
@@ -138,7 +141,7 @@ public class LoginView extends javax.swing.JFrame {
                 Auth.nhanVien = map.get(email);
                 JOptionPane.showMessageDialog(this, "Thành công" , "Welcome", JOptionPane.OK_OPTION);
                 // check chức vụ
-                Main n = new Main();
+                test n = new test();
                 n.setVisible(true);
                 
             } else {

@@ -1,5 +1,6 @@
 package cores.logins.custom;
 
+import domainModels.ChucVu;
 import infrastructures.constant.GioiTinhConstant;
 import infrastructures.constant.TrangThaiNhanVienConstant;
 import java.util.UUID;
@@ -29,7 +30,7 @@ public class NhanVienCustom {
     private GioiTinhConstant gioiTinh;
     private String diaChi;
     private TrangThaiNhanVienConstant trangThai;
-    private String chucVu;
+    private ChucVu chucVu;
     
     
 }

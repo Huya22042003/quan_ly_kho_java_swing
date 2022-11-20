@@ -20,15 +20,15 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class NvghXemThongTinCaNhanCustom {
+public class NvqlXemThongTinCaNhanCustom {
 
     private UUID id;
     private String ma;
     private String ten;
-    private String email;
     private String sdt;
+    private String email;
     private String matKhau;
-    private Date ngaySinh;
+    private Long ngaySinh;
     private GioiTinhConstant gioiTinh;
     private String diaChi;
 
