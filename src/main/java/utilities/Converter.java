@@ -4,12 +4,12 @@
  */
 package utilities;
 
-import domainModels.NhaCungCap;
 import infrastructures.constant.NhaCungCapConstant;
 import infrastructures.constant.CoSoConstant;
+import infrastructures.constant.DanhGiaConstant;
 import infrastructures.constant.GioiTinhConstant;
+import infrastructures.constant.KhachHangConstant;
 import infrastructures.constant.KhoHangConstant;
-import infrastructures.constant.MauConstant;
 import infrastructures.constant.TrangThaiPhieuConstant;
 import infrastructures.constant.TrangThaiNhanVienConstant;
 
@@ -140,36 +140,64 @@ public class Converter {
         return trangThai;
     }
 
-    private static String mauSacConvert(MauConstant m) {
-        String mau = "";
-        switch (m) {
-            case CAM:
-                mau = "Cam";
+    public static String TrangThaiPhieuXuat(TrangThaiPhieuConstant p) {
+        String trangThai = "";
+        switch (p) {
+            case CHO_THANH_TOAN:
+                trangThai = "Chờ Thanh Toán";
                 break;
-            case DEN:
-                mau = "Đen";
+            case DA_HUY:
+                trangThai = "Đã Hủy";
                 break;
-            case DO:
-                mau = "Đỏ";
-                break;
-            case HONG:
-                mau = "Hồng";
-                break;
-            case TRANG:
-                mau = "Trắng";
-                break;
-            case VANG:
-                mau = "Vàng";
-                break;
-            case XANH_DUONG:
-                mau = "Xanh dương";
-                break;
-            case XANH_LA:
-                mau = "Xanh lá";
+            case DA_THANH_TOAN:
+                trangThai = "Đã Thanh Toán";
                 break;
             default:
                 throw new AssertionError();
         }
-        return mau;
+        
+        return trangThai;
+    }
+    
+    public static String trangThaiDanhGia(DanhGiaConstant th) {
+        String trangThai = "";
+
+        switch (th) {
+            case TOT:
+                trangThai = "Tốt";
+                break;
+            case TAM_ON:
+                trangThai = "Tạm ổn";
+                break;
+            case BAT_ON:
+                trangThai = "Bất ổn";
+                break;
+            case XAU:
+                trangThai = "Xấu";
+                break;
+            default:
+                throw new AssertionError();
+        }
+
+        return trangThai;
+    }
+    
+    public static String trangThaiKhachHang(KhachHangConstant th) {
+        String trangThai = "";
+        switch (th) {
+            case  DANG_LAM_VIEC:
+                trangThai = "Đang làm việc";
+                break;
+            case SAP_BO:
+                trangThai = "Sắp bỏ";
+                break;
+            case DA_NGUNG_CUNG_CAP:
+                trangThai = "Đã ngừng cung cấp";
+                break;
+            default:
+                throw new AssertionError();
+        }
+
+        return trangThai;
     }
 }

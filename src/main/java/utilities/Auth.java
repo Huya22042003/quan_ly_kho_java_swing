@@ -1,23 +1,20 @@
 package utilities;
 
+import cores.logins.custom.NhanVienCustom;
 
 public class Auth {
 
-    public static String name;
-    private String passWord ;
-    
-//    private
+    public static NhanVienCustom nhanVien;
 
     public static void clear() {
-        Auth.name = "";
+        Auth.nhanVien = null;
     }
 
     public static boolean isLogin() {
-        
-        return Auth.name != null;
+        return Auth.nhanVien != null;
     }
 
-//    public static boolean isManager() {
-//        return Auth.isLogin() && user.;
-//    }
+    public static boolean isManager() {
+        return Auth.isLogin();
+    }
 }

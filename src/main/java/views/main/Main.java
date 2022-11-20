@@ -1,6 +1,5 @@
 package views.main;
 
-import cores.nhanVienQuanLy.views.NvqlXuatHangView;
 import views.component.Header;
 import views.component.Menu;
 import views.event.EventMenuSelected;
@@ -17,6 +16,7 @@ import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
+import viewDemos.DemoCoSoViewPast2;
 
 public class Main extends javax.swing.JFrame {
 
@@ -112,7 +112,7 @@ public class Main extends javax.swing.JFrame {
         });
 
         //  Start with this form
-        main.showForm(new NvqlXuatHangView());
+        main.showForm(new DemoCoSoViewPast2());
     }
 
     @SuppressWarnings("unchecked")
