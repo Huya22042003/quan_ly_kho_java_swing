@@ -5,6 +5,7 @@
 package cores.truongPhongs.repositories;
 
 import cores.truongPhongs.customModels.TpDonViCustom;
+import cores.truongPhongs.customModels.TpNhanVienCustom;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,14 +24,22 @@ public class test {
      */
     public static void main(String[] args) {
 
-        List<TpDonViCustom> list = new ArrayList<>();
+              List<TpNhanVienCustom> list = new ArrayList<>();
         Session s = HibernateUtil.getSessionFactory().openSession();
-        Query q = s.createQuery(" SELECT new cores.truongPhongs.customModels.TpDonViCustom ("
-                + " dv.id as id, "
-                + " dv.donViGoc as donViGoc, "
-                + " dv.donViQuyDoi as donViQuyDoi, "
-                + " dv.soLuong as soLuong "
-                + " ) FROM domainModels.DonVi dv"
+     Query q = s.createQuery(" SELECT new cores.truongPhongs.customModels.TpNhanVienCustom ("
+                + " nv.id as id, "
+                + " nv.ma as ma, "
+                + " nv.ten as ten, "
+                + " nv.sdt as sdt, "
+                + " nv.email as email, "
+                + " nv.matKhau as matKhau, "
+                + " nv.ngaySinh as ngaySinh, "
+                + " nv.hinhAnh as hinhAnh, "
+                + " nv.gioiTinh as gioiTinh, "
+                + " nv.diaChi as diaChi, "
+                + " nv.trangThai as trangThai, "
+                + " nv.idChucVu as idChucVu "
+                + " ) FROM domainModels.NhanVien nv"
         );
         list = q.getResultList();
         s.close();

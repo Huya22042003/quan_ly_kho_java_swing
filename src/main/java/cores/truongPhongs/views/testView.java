@@ -4,7 +4,7 @@
  */
 package cores.truongPhongs.views;
 
-import cores.truongPhongs.views.TpQuanLyNhanVienView;
+import cores.truongPhongs.views.TpQuanLyNhanVien;
 import java.awt.FlowLayout;
 
 /**
@@ -19,7 +19,7 @@ public class testView extends javax.swing.JFrame {
     public testView() {
         initComponents();
        
-        TpQuanLyNhanVienView a = new TpQuanLyNhanVienView();
+        TpQuanLyNhanVien a = new TpQuanLyNhanVien();
         this.add(a);
         this.setLayout(new FlowLayout());
         this.pack();

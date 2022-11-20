@@ -18,15 +18,13 @@ import javax.swing.JLabel;
  * @author LENOVO
  */
 public class TpDonViServiceImpl implements TpDonViService {
-
+    
     private TpDonViRepository rp;
-
+    
     public TpDonViServiceImpl() {
         rp = new TpDonViRepository();
     }
-
-
-
+    
     @Override
     public TpDonViCustom addDonVi(TpDonViCustom custom) {
         DonVi dv = new DonVi();
@@ -36,7 +34,7 @@ public class TpDonViServiceImpl implements TpDonViService {
         custom.setId(rp.addDonVi(dv).getId());
         return custom;
     }
-
+    
     @Override
     public boolean updateDonVi(TpDonViCustom custom) {
         DonVi dv = new DonVi();
@@ -46,96 +44,146 @@ public class TpDonViServiceImpl implements TpDonViService {
         dv.setId(custom.getId());
         return rp.updateDonVi(dv);
     }
-
+    
     @Override
     public boolean deleteDonVi(UUID id) {
         return rp.deleteDonVi(id);
     }
+//
 
-    @Override
-    public TpDonViCustom checkValidate(TpDonViCustom dv, JLabel erroDonViGoc, JLabel erroDonViQuyDoi, JLabel erroSoLuong) {
-  
- 
-       boolean check = true;
-//        if (dv.getDonViGoc() != null) {
-            if (dv.getDonViGoc().trim().length() == 0) {
-                erroDonViGoc.setText("Đơn Vị Gốc không được để trống");
-                check = false;
-            } else if (!dv.getDonViGoc().matches(ValidateConstant.REGEX_CHU_KHONG_CO_KHOANG_TRANG)) {
-                erroDonViGoc.setText("Đơn Vị Gốc không được có khoảng trắng");
-                check = false;
-            } 
-            else if (findDonViByDonViQuyDoi(dv.getDonViGoc()) != null){
-                erroDonViGoc.setText("Đơn Vị Gốc Đã Tồn Tại");
-                check = false;
-            }
-            else{
-                erroDonViGoc.setText("");
-            }
+//    @Override
+//    public TpDonViCustom checkValidate(TpDonViCustom dv, JLabel erroDonViGoc, JLabel erroDonViQuyDoi, JLabel erroSoLuong) {
+//
+//        boolean check = true;
+////        if (dv.getDonViGoc() != null) {
+//
+//        if (dv.getDonViGoc().trim().length() == 0) {
+//            erroDonViGoc.setText("Đơn Vị Gốc không được để trống");
+//            check = false;
+//        } else if (!dv.getDonViGoc().matches(ValidateConstant.REGEX_CHU_KHONG_CO_KHOANG_TRANG)) {
+//            erroDonViGoc.setText("Đơn Vị Gốc không được có khoảng trắng");
+//            check = false;
+//        } else if (findDonViByDonViQuyDoi(dv.getDonViGoc()) != null) {
+//            erroDonViGoc.setText("Đơn Vị Gốc Đã Tồn Tại");
+//            check = false;
+//        } else {
+//            erroDonViGoc.setText("");
 //        }
-//     if (dv.getDonViQuyDoi() != null) {
-            if (dv.getDonViQuyDoi().trim().length() == 0) {
-                erroDonViQuyDoi.setText("Đơn Vị Quy Đổi không được để trống");
-                check = false;
-            } else if (!dv.getDonViQuyDoi().matches(ValidateConstant.REGEX_CHU_KHONG_CO_KHOANG_TRANG)) {
-                erroDonViQuyDoi.setText("Đơn Vị Quy Đổi không được có khoảng trắng");
-                check = false;
-            } else if (findDonViByDonViQuyDoi(dv.getDonViQuyDoi()) != null) {
-                erroDonViQuyDoi.setText("Đơn Vị Quy Đổi đã tồn tại");
-                check = false;
-            } else {
-                erroDonViQuyDoi.setText("");
-            }
+////        }
+////     if (dv.getDonViQuyDoi() != null) {
+//        if (dv.getDonViQuyDoi().trim().length() == 0) {
+//            erroDonViQuyDoi.setText("Đơn Vị Quy Đổi không được để trống");
+//            check = false;
+//        } else if (!dv.getDonViQuyDoi().matches(ValidateConstant.REGEX_CHU_KHONG_CO_KHOANG_TRANG)) {
+//            erroDonViQuyDoi.setText("Đơn Vị Quy Đổi không được có khoảng trắng");
+//            check = false;
+//        } else if (findDonViByDonViQuyDoi(dv.getDonViQuyDoi()) != null) {
+//            erroDonViQuyDoi.setText("Đơn Vị Quy Đổi đã tồn tại");
+//            check = false;
+//        } else {
+//            erroDonViQuyDoi.setText("");
 //        }
-     
-
-//          if(String.valueOf(dv.getSoLuong()).trim().length()==0){
-//                erroSoLuong.setText("k de trong");
-//                check = false;
-//            }else{
-//                erroSoLuong.setText("");
-//            }
 //
 //        try {
-//            int sl = Integer.parseInt(erroSoLuong.getText().trim());
-//            if (sl <= 0) {
-//                erroSoLuong.setText(" Số Lượng Phải Là Số Nguyên Dương");
-//               check = false;
-//            }
-//        } catch (Exception e) {
-//          erroSoLuong.setText(" Số Lượng Phải Là Số ");
+//            String sl = String.valueOf(dv.getSoLuong());
+//            if (sl.equalsIgnoreCase("")) {
+//                erroSoLuong.setText(" Số Lượng Không Được Để Trống");
 //                check = false;
+//            }
+//            if (dv.getSoLuong() <= 0) {
+//                erroSoLuong.setText(" Số Lượng Phải Là Số Nguyên Dương");
+//                check = false;
+//            } else {
+//                erroSoLuong.setText("");
+//            }
+//        } catch (NumberFormatException e) {
+//            erroSoLuong.setText(" Số Lượng Phải Là Số ");
+//            check = false;
 //        }
-        
-        if (!check) {
-            return null;
-        }
-       return dv;  
-    } 
-   
+//
+//        if (!check) {
+//            return null;
+//        }
+//        return dv;
+//    }
+////   
     @Override
     public List<TpDonViCustom> getListDonVi() {
-         return rp.getList();
+        return rp.getList();
     }
-
+    
     @Override
     public TpDonViCustom findDonViByDonViQuyDoi(String donViQuyDoi) {
-   return rp.findByDonViGoc(donViQuyDoi);
+        return rp.findByDonViGoc(donViQuyDoi);
     }
-
+    
     @Override
     public List<TpDonViCustom> findAllByRadio(String donViGoc, int rdo) {
-  switch (rdo) {
+        switch (rdo) {
             case 0:
                 return rp.findAllByDonViGoc(donViGoc);
             case 1:
                 return rp.findAllByDonViQuyDoi(donViGoc);
             default:
-               return null; 
+                return null;
         }
     }
-}
-
-
-
+    
+    @Override
+    public TpDonViCustom checkValidate(String DonViGoc,
+            String DonViQuyDoi,
+            String SoLuong,
+            JLabel erroDonViGoc,
+            JLabel erroDonViQuyDoi,
+            JLabel erroSoLuong) {
         
+        boolean check = true;
+        if (DonViGoc.trim().length() == 0) {
+            erroDonViGoc.setText("Đơn Vị Gốc không được để trống");
+            check = false;
+        } else if (!DonViGoc.matches(ValidateConstant.REGEX_CHU_KHONG_CO_KHOANG_TRANG)) {
+            erroDonViGoc.setText("Đơn Vị Gốc không được có khoảng trắng");
+            check = false;
+        } else if (findDonViByDonViQuyDoi(DonViGoc) != null) {
+            erroDonViGoc.setText("Đơn Vị Gốc Đã Tồn Tại");
+            check = false;
+        } else {
+            erroDonViGoc.setText("");
+        }
+        
+        if (DonViQuyDoi.trim().length() == 0) {
+            erroDonViQuyDoi.setText("Đơn Vị Quy Đổi không được để trống");
+            check = false;
+        } else if (!DonViQuyDoi.matches(ValidateConstant.REGEX_CHU_KHONG_CO_KHOANG_TRANG)) {
+            erroDonViQuyDoi.setText("Đơn Vị Quy Đổi không được có khoảng trắng");
+            check = false;
+        } else if (findDonViByDonViQuyDoi(DonViQuyDoi) != null) {
+            erroDonViQuyDoi.setText("Đơn Vị Quy Đổi đã tồn tại");
+            check = false;
+        } else {
+            erroDonViQuyDoi.setText("");
+        }
+
+        String sl = String.valueOf(SoLuong);
+        if (sl.equalsIgnoreCase("")) {
+            erroSoLuong.setText(" Số Lượng Không Được Để Trống");
+            check = false;
+        } else if (!SoLuong.matches(ValidateConstant.REGEX_SO)) {
+            erroSoLuong.setText("Số Lượng Phải Là Số");
+            check = false;
+        }
+      else {
+            erroSoLuong.setText("");
+        }
+          
+        if (!check) {
+            return null;
+        }
+        TpDonViCustom td = new TpDonViCustom();
+        td.setDonViGoc(DonViGoc);
+        td.setDonViQuyDoi(DonViQuyDoi);
+        td.setSoLuong(Integer.parseInt(sl));
+        
+        return td;
+    }
+}

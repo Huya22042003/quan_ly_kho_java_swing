@@ -99,8 +99,8 @@ public class TpQuanLyNhanVienServiceImpl implements TpQuanLyNhanVienSevice {
 
     @Override
     public TpNhanVienCustom checkValidate(TpNhanVienCustom nv, JLabel erroMa, JLabel erroTen, JLabel erroSDT, JLabel erroEmail, JLabel erroMatKhau, JLabel erroNgaySinh, JLabel erroDiaChi) {
- boolean check = true;
 
+ boolean check = true;
         if (nv.getMa() != null) {
             if (nv.getMa().trim().length() == 0) {
                 erroMa.setText("Mã không được để trống");
@@ -158,6 +158,21 @@ public class TpQuanLyNhanVienServiceImpl implements TpQuanLyNhanVienSevice {
         }
 
         return nv;
+    }
+
+    @Override
+    public List<TpNhanVienCustom> findAllByRadio(String tk, TrangThaiNhanVienConstant tt, int rdo) {
+     switch (rdo) {
+            case 0:
+                return rp.findAllByMa(tk, tt);
+            case 1:
+                return rp.findAllByTen(tk, tt);
+            case 2:
+                return rp.findAllByDiaChi(tk, tt);
+            default:
+               return null; 
+        }
+
     }
 
 

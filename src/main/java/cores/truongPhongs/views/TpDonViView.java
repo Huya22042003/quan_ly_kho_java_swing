@@ -25,10 +25,10 @@ public class TpDonViView extends javax.swing.JPanel {
     private TpDonViService donViService;
     private List<TpDonViCustom> getList;
     private TpCreateDonViView createView;
-     private TpRUDDonViView rud;
-   
+    private TpRUDDonViView rud;
+
     public TpDonViView() {
-        
+
         donViService = new TpDonViServiceImpl();
         createView = new TpCreateDonViView();
         rud = new TpRUDDonViView();
@@ -48,30 +48,32 @@ public class TpDonViView extends javax.swing.JPanel {
                 el.getDonViGoc(),
                 el.getDonViQuyDoi(),
                 el.getSoLuong()
-
             };
             dtm.addRow(rowData);
         }
     }
 
     public void clearForm() {
-      rdoDonViGoc.setSelected(true);
-      getList = donViService.findAllByRadio("", 0);
-      this.txtSearch.setText("");
+        rdoDonViGoc.setSelected(true);
+        getList = donViService.findAllByRadio("", 0);
+        this.txtSearch.setText("");
 
     }
-        public List<TpDonViCustom> listSearch(int rdo) {
+
+    public List<TpDonViCustom> listSearch(int rdo) {
         String timKiem = this.txtSearch.getText();
         getList = donViService.findAllByRadio(timKiem, rdo);
         return getList;
     }
-          public void searchRadio() {
+
+    public void searchRadio() {
         if (rdoDonViGoc.isSelected()) {
             loadTable(listSearch(0));
-        } else{
+        } else {
             loadTable(listSearch(1));
-        } 
+        }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -214,27 +216,27 @@ public class TpDonViView extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-          createView.setVisible(true);
+        createView.setVisible(true);
         rud.setVisible(false);
-       
+
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void tblDonViMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDonViMouseClicked
-     int row = this.tblDonVi.getSelectedRow();
+        int row = this.tblDonVi.getSelectedRow();
         createView.setVisible(false);
-        
-        rud.dvc = donViService.findDonViByDonViQuyDoi(tblDonVi.getValueAt(row,1).toString());
+
+        rud.dvc = donViService.findDonViByDonViQuyDoi(tblDonVi.getValueAt(row, 1).toString());
         rud.setVisible(true);
         rud.showData();
     }//GEN-LAST:event_tblDonViMouseClicked
 
     private void uWPButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uWPButton2ActionPerformed
-          clearForm();
+        clearForm();
         loadTable(getList);
     }//GEN-LAST:event_uWPButton2ActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-      searchRadio();
+        searchRadio();
     }//GEN-LAST:event_btnSearchActionPerformed
 
 

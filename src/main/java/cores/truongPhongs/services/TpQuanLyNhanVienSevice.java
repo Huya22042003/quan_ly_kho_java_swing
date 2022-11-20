@@ -35,4 +35,5 @@ public interface TpQuanLyNhanVienSevice {
 
     TpNhanVienCustom finNhanVienByMa(String ma);
 
+    List<TpNhanVienCustom> findAllByRadio(String ten, TrangThaiNhanVienConstant tt, int rdo);
 }
