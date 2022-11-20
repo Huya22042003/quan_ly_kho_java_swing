@@ -1,6 +1,6 @@
 package views.main;
 
-import cores.nhanVienQuanLy.views.NvqlXuatHangView;
+import cores.nhanVienQuanLy.views.luongNhapHang;
 import views.component.Header;
 import views.component.Menu;
 import views.event.EventMenuSelected;
@@ -112,7 +112,7 @@ public class Main extends javax.swing.JFrame {
         });
 
         //  Start with this form
-        main.showForm(new NvqlXuatHangView());
+        main.showForm(new luongNhapHang());
     }
 
     @SuppressWarnings("unchecked")
