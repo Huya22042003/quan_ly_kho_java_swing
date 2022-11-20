@@ -1,46 +1,46 @@
-
 package cores.truongPhongs.views;
 
 import cores.truongPhongs.customModels.TP_KhachHangCustom;
 import cores.truongPhongs.services.TP_KhachHangService;
 import cores.truongPhongs.services.serviceImpls.TP_KhachHangServiceImpl;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import utilities.Converter;
 
-
 public class TP_KhachHangForm extends javax.swing.JPanel {
-        
-        private TP_KhachHangService hangService;
-        private List<TP_KhachHangCustom> getList;
-        private TP_CreateKhachHangForm createView;
-        private TP_RUDKhachHangForm rud;
-        public TP_KhachHangForm() {
+
+    private TP_KhachHangService hangService;
+    private List<TP_KhachHangCustom> getList;
+    private TP_CreateKhachHangForm createView;
+    private TP_RUDKhachHangForm rud;
+
+    public TP_KhachHangForm() {
         hangService = new TP_KhachHangServiceImpl();
         getList = new ArrayList<>();
         createView = new TP_CreateKhachHangForm();
         rud = new TP_RUDKhachHangForm();
         initComponents();
-        
+
         hangService.loadCbbTT(cbbTrangThai);
         clearForm();
         loadTable(getList);
-        
+
     }
-        
-        public void clearForm() {
+
+    public void clearForm() {
         rdoTen.setSelected(true);
         cbbTrangThai.setSelectedIndex(0);
         getList = hangService.findAllByRadio("", hangService.loc(cbbTrangThai.getSelectedIndex()), 0);
     }
-    
+
     public List<TP_KhachHangCustom> listSearch(int rdo) {
         String timKiem = this.txtSearchTheo.getText();
         getList = hangService.findAllByRadio(timKiem, hangService.loc(cbbTrangThai.getSelectedIndex()), rdo);
         return getList;
     }
-    
+
     public void searchRadio() {
         if (rdoTen.isSelected()) {
             loadTable(listSearch(0));
@@ -50,7 +50,7 @@ public class TP_KhachHangForm extends javax.swing.JPanel {
             loadTable(listSearch(2));
         }
     }
-    
+
     public void loadTable(List<TP_KhachHangCustom> list) {
         DefaultTableModel dtm = (DefaultTableModel) this.tableAll.getModel();
         dtm.setRowCount(0);
@@ -63,7 +63,7 @@ public class TP_KhachHangForm extends javax.swing.JPanel {
                 el.getEmail(),
                 el.getDiaChi(),
                 el.getMatKhau(),
-                el.getNgaySinh(),
+                el.getNgaySinh() == null ? "" : new Date(el.getNgaySinh()),
                 Converter.trangThaiDanhGia(el.getDanhGia()),
                 Converter.trangThaiGioiTinh(el.getGioiTinh()),
                 Converter.trangThaiKhachHang(el.getTrangThai()),
@@ -73,7 +73,6 @@ public class TP_KhachHangForm extends javax.swing.JPanel {
         }
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -138,11 +137,6 @@ public class TP_KhachHangForm extends javax.swing.JPanel {
         buttonGroup1.add(rdoDiaChi);
         rdoDiaChi.setText("Địa chỉ");
         rdoDiaChi.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        rdoDiaChi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdoDiaChiActionPerformed(evt);
-            }
-        });
 
         btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Search.png"))); // NOI18N
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -162,14 +156,15 @@ public class TP_KhachHangForm extends javax.swing.JPanel {
                         .addComponent(rdoTen, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(71, 71, 71)
                         .addComponent(rdoSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
                         .addComponent(rdoDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(46, 46, 46)
                         .addComponent(cbbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(txtSearchTheo, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(53, 53, 53)
+                        .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(47, 47, 47))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1)))
@@ -186,13 +181,11 @@ public class TP_KhachHangForm extends javax.swing.JPanel {
                             .addComponent(rdoTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(rdoDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(rdoSDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbbTrangThai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(34, 34, 34))
+                            .addComponent(cbbTrangThai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(48, Short.MAX_VALUE))
         );
@@ -293,10 +286,6 @@ public class TP_KhachHangForm extends javax.swing.JPanel {
         clearForm();
         loadTable(getList);
     }//GEN-LAST:event_btnHienThiActionPerformed
-
-    private void rdoDiaChiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoDiaChiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rdoDiaChiActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

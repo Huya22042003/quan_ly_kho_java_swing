@@ -7,6 +7,10 @@ import domainModels.KhachHang;
 import infrastructures.constant.DanhGiaConstant;
 import infrastructures.constant.GioiTinhConstant;
 import infrastructures.constant.KhachHangConstant;
+import infrastructures.constant.ValidateConstant;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import javax.swing.JLabel;
@@ -92,15 +96,15 @@ public class TP_KhachHangServiceImpl implements TP_KhachHangService {
     }
 
     @Override
-    public TP_KhachHangCustom checkValidate(TP_KhachHangCustom kh, JLabel erroMa, JLabel erroTen, JLabel erroSDT, JLabel erroEmail, JLabel erroDiaChi, JLabel erroMatKhau) {
+    public TP_KhachHangCustom checkValidate(TP_KhachHangCustom kh, JLabel erroMa, JLabel erroTen, JLabel erroSDT, JLabel erroEmail, JLabel erroDiaChi, JLabel erroMatKhau, JLabel erroNgaySinh) {
         boolean check = true;
 
         if (kh.getMa() != null) {
             if (kh.getMa().trim().length() == 0) {
                 erroMa.setText("Mã không được để trống");
                 check = false;
-//            } else if (!cs.getMa().matches(ValidateConstant.REGEX_CHU_KHONG_CO_KHOANG_TRANG)) {
-//                erroMa.setText("Mã không được có khoảng trắng");
+//            } else if (!kh.getMa().matches(ValidateConstant.REGEX_CHU_KHONG_CO_KHOANG_TRANG)) {
+//                erroMa.setText("Chữ không được có khoảng trắng");
 //                check = false;
             } else if (findKHByMa(kh.getMa()) != null) {
                 erroMa.setText("Mã đã tồn tại");
@@ -145,11 +149,19 @@ public class TP_KhachHangServiceImpl implements TP_KhachHangService {
             erroMatKhau.setText("");
         }
 
+        if (kh.getNgaySinh() == null) {
+            erroNgaySinh.setText("Bạn phải chọn ngày sinh");
+            check = false;
+        } else {
+            erroNgaySinh.setText("");
+        }
+
         if (!check) {
             return null;
         }
 
         return kh;
+
     }
 
     @Override
@@ -186,11 +198,11 @@ public class TP_KhachHangServiceImpl implements TP_KhachHangService {
     public GioiTinhConstant loc2(int c) {
         switch (c) {
             case 0:
-                return GioiTinhConstant.NAM;
-            case 1:
                 return GioiTinhConstant.NU;
-            case 2:
+            case 1:
                 return GioiTinhConstant.KHAC;
+            case 2:
+                return GioiTinhConstant.NAM;
             default:
                 return null;
         }
