@@ -10,5 +10,6 @@ package infrastructures.constant;
  */
 public enum TrangThaiPhieuHoanConstant {
     CHO_XAC_NHAN,
-    DA_HUY
+    DA_HUY,
+    HOAN_THANH_CONG
 }

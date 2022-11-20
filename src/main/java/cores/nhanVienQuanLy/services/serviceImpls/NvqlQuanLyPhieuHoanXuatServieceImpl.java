@@ -56,6 +56,7 @@ public class NvqlQuanLyPhieuHoanXuatServieceImpl implements NvqlQuanLyPhieuHoanX
         phx.setNgayThanhToan(phxcs.getNgayThanhToan());
         phx.setTrangThai(phxcs.getTrangThai());
         phx.setPhieuXuat(phxcs.getPhieuXuat());
+        phx.setLiDo(phxcs.getLiDo());
         phx.setId(phxcs.getId());
         return rp.updatePhieuHoanXuat(phx);
     }
@@ -100,33 +101,6 @@ public class NvqlQuanLyPhieuHoanXuatServieceImpl implements NvqlQuanLyPhieuHoanX
         return rp.findById(id);
     }
 
-//    @Override
-//    public void loadComBox(Combobox cbbTT) {
-//        cbbTT.removeAll();
-//        cbbTT.addItem(Converter.TrangThaiPhieuHoan(TrangThaiPhieuHoanConstant.CHO_XAC_NHAN));
-//        cbbTT.addItem(Converter.TrangThaiPhieuHoan(TrangThaiPhieuHoanConstant.DA_HUY));
-//    }
-
-    @Override
-    public TrangThaiPhieuConstant loc(int a) {
-        switch (a) {
-            case 0:
-                return TrangThaiPhieuConstant.CHO_THANH_TOAN;
-            case 1:
-                return TrangThaiPhieuConstant.DA_HUY;
-            case 2:
-                return TrangThaiPhieuConstant.DA_THANH_TOAN;
-            default:
-                return null;
-        }
-    }
-
-//    @Override
-//    public List<PhieuXuat> getListMaPhieuXuat() {
-//        listPX = rp.getListMaPhieuXuat();
-//        return listPX;
-//    }
-
     @Override
     public List<NvqlQuanLyPhieuHoanXuatCustom> getListByNgayThanhToan(Long ngayBatDau, Long ngayKetThuc) {
         return rp.getListByNgayThanhToan(ngayBatDau, ngayKetThuc);
@@ -143,7 +117,7 @@ public class NvqlQuanLyPhieuHoanXuatServieceImpl implements NvqlQuanLyPhieuHoanX
 
     @Override
     public PhieuXuat chonPX(int chon) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return listPX.get(chon);
     }
 
     @Override

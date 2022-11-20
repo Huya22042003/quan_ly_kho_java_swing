@@ -4,6 +4,14 @@
  */
 package cores.nhanVienQuanLy.views;
 
+import cores.nhanVienQuanLy.customModels.NvqlQuanLyPhieuHoanXuatCustom;
+import cores.nhanVienQuanLy.services.NvqlQuanLyPhieuHoanXuatService;
+import cores.nhanVienQuanLy.services.serviceImpls.NVQLQuanLyPhieuXuatServiceImpl;
+import cores.nhanVienQuanLy.services.serviceImpls.NvqlQuanLyPhieuHoanXuatServieceImpl;
+import java.util.Date;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import utilities.Converter;
 import utilities.MsgBox;
 
 /**
@@ -15,8 +23,34 @@ public class NvqlQuanLyPhieuHoanXuatView extends javax.swing.JPanel {
     /**
      * Creates new form NvqlQuanLyPhieuHoanXuatView
      */
+    private NvqlQuanLyPhieuHoanXuatService phieuHoanXuatService;
+    private List<NvqlQuanLyPhieuHoanXuatCustom> listPhieuHoanXuat;
     public NvqlQuanLyPhieuHoanXuatView() {
         initComponents();
+        phieuHoanXuatService = new NvqlQuanLyPhieuHoanXuatServieceImpl();
+        listPhieuHoanXuat = phieuHoanXuatService.getList();
+        loadTable(listPhieuHoanXuat);
+    }
+    
+    private void loadTable(List<NvqlQuanLyPhieuHoanXuatCustom> ls) {
+        DefaultTableModel dtm = (DefaultTableModel) this.tblPhieuHoanXuat.getModel();
+        dtm.setRowCount(0);
+        for (NvqlQuanLyPhieuHoanXuatCustom el : listPhieuHoanXuat) {
+            Date ngayTao = new Date(el.getNgayTao());
+            Date ngayThanhToan = new Date(el.getNgayThanhToan());
+            Object[] rowData = {
+                dtm.getRowCount() + 1,
+                el.getId(),
+                el.getPhieuXuat().getId(),
+                ngayTao,
+                ngayThanhToan,
+                el.getGhiChu(),
+                el.getLiDo(),
+                Converter.TrangThaiPhieuHoan(el.getTrangThai())
+            };
+            dtm.addRow(rowData);
+        }
+
     }
 
     /**
@@ -32,7 +66,7 @@ public class NvqlQuanLyPhieuHoanXuatView extends javax.swing.JPanel {
         btnThem = new utilities.palette.UWPButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblPhieuXuat = new utilities.palette.TableDark_1();
+        tblPhieuHoanXuat = new utilities.palette.TableDark_1();
         rdoNgayTao = new utilities.palette.RadioButtonCustom();
         rdoNgayThanhToan = new utilities.palette.RadioButtonCustom();
         jLabel2 = new javax.swing.JLabel();
@@ -58,28 +92,28 @@ public class NvqlQuanLyPhieuHoanXuatView extends javax.swing.JPanel {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        tblPhieuXuat.setModel(new javax.swing.table.DefaultTableModel(
+        tblPhieuHoanXuat.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "STT", "Mã phiếu hoàn xuất", "Mã phiếu xuất", "Ngày tạo", "Ngày thanh toán", "Ghi chú", "Trạng Thái"
+                "STT", "Mã phiếu hoàn xuất", "Mã phiếu xuất", "Ngày tạo", "Ngày thanh toán", "Ghi chú", "Lí do", "Trạng Thái"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        tblPhieuXuat.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblPhieuHoanXuat.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblPhieuXuatMouseClicked(evt);
+                tblPhieuHoanXuatMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tblPhieuXuat);
+        jScrollPane1.setViewportView(tblPhieuHoanXuat);
 
         rdoNgayTao.setBackground(new java.awt.Color(255, 153, 0));
         rdoNgayTao.setText("Ngày Tạo");
@@ -246,13 +280,13 @@ public class NvqlQuanLyPhieuHoanXuatView extends javax.swing.JPanel {
         creat.setVisible(true);
     }//GEN-LAST:event_btnThemActionPerformed
 
-    private void tblPhieuXuatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPhieuXuatMouseClicked
-        int row = this.tblPhieuXuat.getSelectedRow();
-        NVQLRUDPhieuXuatView rud = new NVQLRUDPhieuXuatView();
+    private void tblPhieuHoanXuatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPhieuHoanXuatMouseClicked
+        int row = this.tblPhieuHoanXuat.getSelectedRow();
+        NvqlRUDQuanLyPhieuHoanXuat rud = new NvqlRUDQuanLyPhieuHoanXuat();
 //        rud.pxcs = phieuXuatService.findByID(UUID.fromString(this.tblPhieuXuat.getValueAt(row, 1).toString()));
         rud.setVisible(true);
         rud.showData();
-    }//GEN-LAST:event_tblPhieuXuatMouseClicked
+    }//GEN-LAST:event_tblPhieuHoanXuatMouseClicked
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         if (ngayBatDau.getDate() == null) {
@@ -278,8 +312,8 @@ public class NvqlQuanLyPhieuHoanXuatView extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnLoadTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadTableActionPerformed
-//        list = phieuXuatService.getList();
-//        loadTable(list);
+        listPhieuHoanXuat = phieuHoanXuatService.getList();
+        loadTable(listPhieuHoanXuat);
     }//GEN-LAST:event_btnLoadTableActionPerformed
 
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
@@ -311,6 +345,6 @@ public class NvqlQuanLyPhieuHoanXuatView extends javax.swing.JPanel {
     private com.toedter.calendar.JDateChooser ngayKetThuc;
     private utilities.palette.RadioButtonCustom rdoNgayTao;
     private utilities.palette.RadioButtonCustom rdoNgayThanhToan;
-    private utilities.palette.TableDark_1 tblPhieuXuat;
+    private utilities.palette.TableDark_1 tblPhieuHoanXuat;
     // End of variables declaration//GEN-END:variables
 }

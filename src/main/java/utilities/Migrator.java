@@ -29,6 +29,7 @@ import infrastructures.constant.KhachHangConstant;
 import infrastructures.constant.MauConstant;
 import infrastructures.constant.TrangThaiNhanVienConstant;
 import infrastructures.constant.TrangThaiPhieuConstant;
+import infrastructures.constant.TrangThaiPhieuHoanConstant;
 import java.math.BigDecimal;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -841,8 +842,9 @@ public class Migrator {
         phn.setGhiChu("Đoán xem");
         phn.setLiDo("Đồ chán");
         phn.setNgayTao(convertDateToTimeStampSecond());
+        phn.setNgayThanhToan(convertDateToTimeStampSecond());
         phn.setPhieuNhap(phieuNhap);
-        phn.setTrangThai(TrangThaiPhieuConstant.DA_HUY);
+        phn.setTrangThai(TrangThaiPhieuHoanConstant.DA_HUY);
         session.save(phn);
         
         ChiTietPhieuHoanNhap ctphn = new ChiTietPhieuHoanNhap();
@@ -855,8 +857,9 @@ public class Migrator {
         phx.setLiDo("Thích thì hoàn");
         phn.setGhiChu("Đoán xem");
         phx.setNgayTao(convertDateToTimeStampSecond());
+        phx.setNgayThanhToan(convertDateToTimeStampSecond());
         phx.setPhieuXuat(phieuXuat);
-        phx.setTrangThai(TrangThaiPhieuConstant.DA_HUY);
+        phx.setTrangThai(TrangThaiPhieuHoanConstant.DA_HUY);
         session.save(phx);
         
         ChiTietPhieuHoanXuat ctphx = new ChiTietPhieuHoanXuat();
