@@ -26,9 +26,9 @@ public class NvqlQuanLyPhieuHoanXuatRepository {
         Query query = session.createQuery("SELECT new cores.nhanVienQuanLy.customModels.NvqlQuanLyPhieuHoanXuatCustom("
                 + "phx.id as id,"
                 + "phx.ngayTao as ngayTao,"
+                + "phx.ngayThanhToan as ngayThanhToan,"
                 + "phx.ghiChu as ghiChu,"
                 + "phx.liDo as liDo,"
-                + "phx.ngayThanhToan as ngayThanhToan,"
                 + "phx.trangThai as trangThai,"
                 + "phx.phieuXuat as phieuXuat"
                 + ") FROM domainModels.PhieuHoanXuat phx");
@@ -122,14 +122,14 @@ public class NvqlQuanLyPhieuHoanXuatRepository {
         NvqlQuanLyPhieuHoanXuatCustom phxcs = new NvqlQuanLyPhieuHoanXuatCustom();
         try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
             Query query = session.createQuery("SELECT new cores.nhanVienQuanLy.customModels.NvqlQuanLyPhieuHoanXuatCustom("
-                + "phx.id as id,"
-                + "phx.ngayTao as ngayTao,"
-                + "phx.ghiChu as ghiChu,"
-                + "phx.liDo as liDo,"
-                + "phx.ngayThanhToan as ngayThanhToan,"
-                + "phx.trangThai as trangThai,"
-                + "phx.phieuXuat as phieuXuat"
-                + ") FROM domainModels.PhieuHoanXuat phx WHERE phx.id =:id");
+                    + "phx.id as id,"
+                    + "phx.ngayTao as ngayTao,"
+                    + "phx.ghiChu as ghiChu,"
+                    + "phx.liDo as liDo,"
+                    + "phx.ngayThanhToan as ngayThanhToan,"
+                    + "phx.trangThai as trangThai,"
+                    + "phx.phieuXuat as phieuXuat"
+                    + ") FROM domainModels.PhieuHoanXuat phx WHERE phx.id =:id");
             query.setParameter("id", id);
             phxcs = (NvqlQuanLyPhieuHoanXuatCustom) query.getSingleResult();
         } catch (NoResultException e) {

@@ -26,7 +26,6 @@ public interface NvqlQuanLyPhieuHoanXuatService {
     boolean deletePhieuHoanXuat(UUID id);
     NvqlQuanLyPhieuHoanXuatCustom findByID(UUID id);
     void loadComBoBoxPx(Combobox cbbPX);
-    TrangThaiPhieuConstant loc(int a);
     List<PhieuXuat> getListMaPhieuXuat();
     PhieuXuat chonPX(int chon);
     List<NvqlQuanLyPhieuHoanXuatCustom> getListByNgayThanhToan(Long ngayBatDau, Long ngayKetThuc);

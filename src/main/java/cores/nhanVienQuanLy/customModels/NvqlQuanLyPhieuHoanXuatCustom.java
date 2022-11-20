@@ -5,7 +5,7 @@
 package cores.nhanVienQuanLy.customModels;
 
 import domainModels.PhieuXuat;
-import infrastructures.constant.TrangThaiPhieuConstant;
+import infrastructures.constant.TrangThaiPhieuHoanConstant;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,6 +27,6 @@ public class NvqlQuanLyPhieuHoanXuatCustom {
     private Long ngayThanhToan;
     private String ghiChu;
     private String liDo;
-    private TrangThaiPhieuConstant trangThai;
+    private TrangThaiPhieuHoanConstant trangThai;
     private PhieuXuat phieuXuat;
 }

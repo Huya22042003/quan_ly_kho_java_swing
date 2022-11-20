@@ -161,21 +161,27 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="utilities.palette.TableDark_1" name="tblPhieuXuat">
+                <Component class="utilities.palette.TableDark_1" name="tblPhieuHoanXuat">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="7" rowCount="0">
+                      <Table columnCount="8" rowCount="0">
                         <Column editable="false" title="STT" type="java.lang.Object"/>
                         <Column editable="false" title="M&#xe3; phi&#x1ebf;u ho&#xe0;n xu&#x1ea5;t" type="java.lang.Object"/>
                         <Column editable="false" title="M&#xe3; phi&#x1ebf;u xu&#x1ea5;t" type="java.lang.Object"/>
                         <Column editable="false" title="Ng&#xe0;y t&#x1ea1;o" type="java.lang.Object"/>
                         <Column editable="false" title="Ng&#xe0;y thanh to&#xe1;n" type="java.lang.Object"/>
                         <Column editable="false" title="Ghi ch&#xfa;" type="java.lang.Object"/>
-                        <Column editable="false" title="Tr&#x1ea1;ng Th&#xe1;i" type="java.lang.Object"/>
+                        <Column editable="false" title="L&#xed; do" type="java.lang.Object"/>
+                        <Column editable="true" title="Tr&#x1ea1;ng Th&#xe1;i" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                           <Title/>
                           <Editor/>
@@ -218,7 +224,7 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblPhieuXuatMouseClicked"/>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblPhieuHoanXuatMouseClicked"/>
                   </Events>
                 </Component>
               </SubComponents>
