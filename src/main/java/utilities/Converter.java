@@ -141,20 +141,22 @@ public class Converter {
     }
 
     public static String TrangThaiPhieuXuat(TrangThaiPhieuConstant p) {
-        String mau = "";
+        String trangThai = "";
         switch (p) {
             case CHO_THANH_TOAN:
-                mau = "Cho Thanh Toán";
+                trangThai = "Chờ Thanh Toán";
                 break;
             case DA_HUY:
-                mau = "Đã Hủy";
+                trangThai = "Đã Hủy";
                 break;
             case DA_THANH_TOAN:
-                mau = "Đã Thanh Toán";
+                trangThai = "Đã Thanh Toán";
                 break;
             default:
                 throw new AssertionError();
         }
-        return mau;
+        
+        return trangThai;
     }
+    
 }

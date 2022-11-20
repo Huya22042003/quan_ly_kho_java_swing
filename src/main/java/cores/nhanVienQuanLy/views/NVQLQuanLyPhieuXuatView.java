@@ -5,41 +5,38 @@
 package cores.nhanVienQuanLy.views;
 
 import cores.nhanVienQuanLy.services.serviceImpls.NVQLQuanLyPhieuXuatServiceImpl;
-import customModels.DemoCoSoCustom;
 import cores.nhanVienQuanLy.customModels.PhieuXuatCustom;
-import infrastructures.constant.CoSoConstant;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
-import services.DemoCoSoService;
-import services.serviceImpl.DemoCoSoServiceImpl;
-import utilities.Converter;
 import cores.nhanVienQuanLy.services.NVQLQuanLyPhieuXuatService;
 import java.sql.Date;
 import java.util.UUID;
+import utilities.Converter;
+import utilities.MsgBox;
 
 /**
  *
  * @author QUOC HUY
  */
 public class NVQLQuanLyPhieuXuatView extends javax.swing.JPanel {
-    
+
     private NVQLQuanLyPhieuXuatService phieuXuatService;
     private List<PhieuXuatCustom> list;
 //    private List<PhieuXuatCustom> ls;
+
     public NVQLQuanLyPhieuXuatView() {
         initComponents();
         phieuXuatService = new NVQLQuanLyPhieuXuatServiceImpl();
-        list = new ArrayList<>();
+//        list = new ArrayList<>();
 //        ls = phieuXuatService.getListByNgayTao(null);
         list = phieuXuatService.getList();
         clearForm();
     }
-    
+
     private void clearForm() {
-        this.txtSearchTheoMa.setText("");
+//        this.txtSearchNgayFrom.setText("");
     }
-    
+
     private void loadTable(List<PhieuXuatCustom> ls) {
         DefaultTableModel dtm = (DefaultTableModel) this.tblPhieuXuat.getModel();
         dtm.setRowCount(0);
@@ -51,31 +48,39 @@ public class NVQLQuanLyPhieuXuatView extends javax.swing.JPanel {
                 el.getId(),
                 ngayNhan,
                 el.getGhiChu(),
-                el.getTrangThai(),
                 ngayThanhToan,
-                el.getNhanVien(),
-                el.getKhachHang()
+                Converter.TrangThaiPhieuXuat(el.getTrangThai()),
+                el.getNhanVien().getMa(),
+                el.getKhachHang().getMa()
             };
             dtm.addRow(rowData);
         }
-        
+
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         btnThem = new utilities.palette.UWPButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPhieuXuat = new utilities.palette.TableDark_1();
-        txtSearchTheoMa = new utilities.palette.TextField();
+        rdoNgayTao = new utilities.palette.RadioButtonCustom();
+        rdoNgayThanhToan = new utilities.palette.RadioButtonCustom();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        btnSearch = new utilities.palette.ButtonGradient();
+        ngayBatDau = new com.toedter.calendar.JDateChooser();
+        ngayKetThuc = new com.toedter.calendar.JDateChooser();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btnLoadTable = new utilities.palette.UWPButton();
         btnThoat = new utilities.palette.UWPButton();
+        btnClear = new utilities.palette.UWPButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(950, 600));
@@ -112,15 +117,22 @@ public class NVQLQuanLyPhieuXuatView extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblPhieuXuat);
 
-        txtSearchTheoMa.setLabelText("Search");
-        txtSearchTheoMa.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                txtSearchTheoMaCaretUpdate(evt);
-            }
-        });
-        txtSearchTheoMa.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtSearchTheoMaKeyReleased(evt);
+        rdoNgayTao.setBackground(new java.awt.Color(255, 153, 0));
+        buttonGroup2.add(rdoNgayTao);
+        rdoNgayTao.setText("Ngày Tạo");
+
+        rdoNgayThanhToan.setBackground(new java.awt.Color(255, 102, 0));
+        buttonGroup2.add(rdoNgayThanhToan);
+        rdoNgayThanhToan.setText("Ngày Thanh Toán");
+
+        jLabel2.setText("From:");
+
+        jLabel3.setText("To:");
+
+        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Search.png"))); // NOI18N
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
             }
         });
 
@@ -129,20 +141,45 @@ public class NVQLQuanLyPhieuXuatView extends javax.swing.JPanel {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(382, 382, 382)
-                .addComponent(txtSearchTheoMa, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1188, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(rdoNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addComponent(rdoNgayThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(72, 72, 72)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(ngayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(ngayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(157, 157, 157)
+                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(26, Short.MAX_VALUE)
-                .addComponent(txtSearchTheoMa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap(26, Short.MAX_VALUE)
+                        .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ngayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(rdoNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(rdoNgayThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel2))
+                            .addComponent(jLabel3)
+                            .addComponent(ngayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -185,6 +222,14 @@ public class NVQLQuanLyPhieuXuatView extends javax.swing.JPanel {
             }
         });
 
+        btnClear.setText("ClearForm");
+        btnClear.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -196,6 +241,8 @@ public class NVQLQuanLyPhieuXuatView extends javax.swing.JPanel {
                 .addComponent(btnLoadTable, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(92, 92, 92)
                 .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(56, 56, 56)
+                .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
@@ -211,7 +258,8 @@ public class NVQLQuanLyPhieuXuatView extends javax.swing.JPanel {
                     .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnLoadTable, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
@@ -232,10 +280,6 @@ public class NVQLQuanLyPhieuXuatView extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
 
-    private void txtSearchTheoMaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchTheoMaKeyReleased
-
-    }//GEN-LAST:event_txtSearchTheoMaKeyReleased
-        
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         NVQLCreatePhieuXuatView creat = new NVQLCreatePhieuXuatView();
         creat.setVisible(true);
@@ -247,15 +291,8 @@ public class NVQLQuanLyPhieuXuatView extends javax.swing.JPanel {
         rud.pxcs = phieuXuatService.findByID(UUID.fromString(this.tblPhieuXuat.getValueAt(row, 1).toString()));
         rud.setVisible(true);
         rud.showData();
-        
-    }//GEN-LAST:event_tblPhieuXuatMouseClicked
 
-    private void txtSearchTheoMaCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtSearchTheoMaCaretUpdate
-//        String tk = txtSearchTheoMa.getText();
-//        Long search = Long.parseLong(tk);
-//        ls = phieuXuatService.getListByNgayTao(search);
-//        loadTable(ls);
-    }//GEN-LAST:event_txtSearchTheoMaCaretUpdate
+    }//GEN-LAST:event_tblPhieuXuatMouseClicked
 
     private void btnLoadTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadTableActionPerformed
         list = phieuXuatService.getList();
@@ -266,18 +303,57 @@ public class NVQLQuanLyPhieuXuatView extends javax.swing.JPanel {
         System.exit(0);
     }//GEN-LAST:event_btnThoatActionPerformed
 
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        if (ngayBatDau.getDate() == null) {
+            MsgBox.alert(this, "Bạn phải chọn ngày bắt đầu");
+            return;
+        }
+        if (ngayKetThuc.getDate() == null) {
+            MsgBox.alert(this, "Bạn phải chọn ngày Kết thúc");
+            return;
+        }
+        if (!rdoNgayTao.isSelected() && !rdoNgayThanhToan.isSelected()) {
+            MsgBox.alert(this, "Bạn phải lựa chọn ngày");
+            return;
+        }
+
+        if (rdoNgayTao.isSelected()) {
+            list = phieuXuatService.getListByNgayTao(ngayBatDau.getDate().getTime(), ngayKetThuc.getDate().getTime());
+            loadTable(list);
+        } else {
+            list = phieuXuatService.getListByNgayThanhToan(ngayBatDau.getDate().getTime(), ngayKetThuc.getDate().getTime());
+            loadTable(list);
+        }
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        this.ngayBatDau.setDate(null);
+        ngayKetThuc.setDate(null);
+        rdoNgayTao.setSelected(false);
+        rdoNgayThanhToan.setSelected(false);
+
+    }//GEN-LAST:event_btnClearActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private utilities.palette.UWPButton btnClear;
     private utilities.palette.UWPButton btnLoadTable;
+    private utilities.palette.ButtonGradient btnSearch;
     private utilities.palette.UWPButton btnThem;
     private utilities.palette.UWPButton btnThoat;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private com.toedter.calendar.JDateChooser ngayBatDau;
+    private com.toedter.calendar.JDateChooser ngayKetThuc;
+    private utilities.palette.RadioButtonCustom rdoNgayTao;
+    private utilities.palette.RadioButtonCustom rdoNgayThanhToan;
     private utilities.palette.TableDark_1 tblPhieuXuat;
-    private utilities.palette.TextField txtSearchTheoMa;
     // End of variables declaration//GEN-END:variables
 }

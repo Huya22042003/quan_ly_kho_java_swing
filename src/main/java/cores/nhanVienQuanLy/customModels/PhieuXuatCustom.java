@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package cores.nhanVienQuanLy.customModels;
 
 import domainModels.KhachHang;
@@ -23,7 +19,7 @@ public class PhieuXuatCustom {
     private String ghiChu;
     private Long ngayThanhToan;
     private TrangThaiPhieuConstant trangThai;
-    private UUID nhanVien;
-    private UUID khachHang;
+    private NhanVien nhanVien;
+    private KhachHang khachHang;
    
 }

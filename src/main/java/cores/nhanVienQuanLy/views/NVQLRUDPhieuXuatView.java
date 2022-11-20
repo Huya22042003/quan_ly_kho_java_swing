@@ -4,21 +4,15 @@
  */
 package cores.nhanVienQuanLy.views;
 
-import cores.nhanVienQuanLy.customModels.LayListKhachHangCustom;
-import cores.nhanVienQuanLy.customModels.LayListNhanVienCustom;
 import cores.nhanVienQuanLy.services.serviceImpls.NVQLQuanLyPhieuXuatServiceImpl;
 import customModels.DemoCoSoCustom;
 import cores.nhanVienQuanLy.customModels.PhieuXuatCustom;
-import cores.nhanVienQuanLy.services.LayListKhachHangService;
-import cores.nhanVienQuanLy.services.LayListNhanVienService;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import services.DemoCoSoService;
 import services.serviceImpl.DemoCoSoServiceImpl;
 import utilities.MsgBox;
 import cores.nhanVienQuanLy.services.NVQLQuanLyPhieuXuatService;
-import cores.nhanVienQuanLy.services.serviceImpls.LayListKhachHangServiceImpl;
-import cores.nhanVienQuanLy.services.serviceImpls.LayListNhanVienServiceImpl;
 import java.sql.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -31,19 +25,14 @@ import utilities.Converter;
 public class NVQLRUDPhieuXuatView extends javax.swing.JFrame {
 
     private NVQLQuanLyPhieuXuatService phieuNhapService;
-    private LayListKhachHangService khacHangService;
-    private LayListNhanVienService nhanVienService;
-    private List<LayListKhachHangCustom> listKH;
-    private List<LayListNhanVienCustom> listNV;
     PhieuXuatCustom pxcs = new PhieuXuatCustom();
 
     public NVQLRUDPhieuXuatView() {
         initComponents();
         phieuNhapService = new NVQLQuanLyPhieuXuatServiceImpl();
-        khacHangService = new LayListKhachHangServiceImpl();
-        nhanVienService = new LayListNhanVienServiceImpl();
-        listNV = nhanVienService.getList();
-        loadComBoBox();
+        phieuNhapService.loadComBox(cbbTrangThai);
+        phieuNhapService.loadComBoBoxKh(cbbKhachHang);
+        phieuNhapService.loadComBoBoxNV(cbbNhanVien);
         clearForm();
 
         Toolkit toolkit = getToolkit();
@@ -52,13 +41,12 @@ public class NVQLRUDPhieuXuatView extends javax.swing.JFrame {
     }
 
     public NVQLRUDPhieuXuatView(PhieuXuatCustom pxcst) {
-        pxcst = pxcs;
+        pxcs = pxcst;
         initComponents();
         phieuNhapService = new NVQLQuanLyPhieuXuatServiceImpl();
-        khacHangService = new LayListKhachHangServiceImpl();
-        nhanVienService = new LayListNhanVienServiceImpl();
-        listNV = nhanVienService.getList();
-        loadComBoBox();
+        phieuNhapService.loadComBoBoxKh(cbbKhachHang);
+        phieuNhapService.loadComBoBoxNV(cbbNhanVien);
+        phieuNhapService.loadComBox(cbbTrangThai);
         clearForm();
         showData();
 
@@ -79,25 +67,13 @@ public class NVQLRUDPhieuXuatView extends javax.swing.JFrame {
     }
 
     public void clearForm() {
-        this.txtGhiChu.setText("");
-        this.cbbKhachHang.setSelectedIndex(0);
-        this.cbbNhanVien.setSelectedIndex(0);
-        jdcNgayThanhToan.setDate(null);
-        jdcNgayTao.setDate(null);
-        cbbTrangThai.setSelectedIndex(0);
+//        this.txtGhiChu.setText("");
+//        this.cbbKhachHang.setSelectedIndex(0);
+//        this.cbbNhanVien.setSelectedIndex(0);
+//        jdcNgayThanhToan.setDate(null);
+//        jdcNgayTao.setDate(null);
+//        cbbTrangThai.setSelectedIndex(0);
 
-    }
-
-    public void loadComBoBox() {
-        cbbKhachHang.removeAll();
-        listKH = khacHangService.getList();
-        for (LayListKhachHangCustom kh : listKH) {
-            cbbKhachHang.addItem(kh.getMa());
-        }
-        listNV = nhanVienService.getList();
-        for (LayListNhanVienCustom nv : listNV) {
-            cbbNhanVien.addItem(nv.getMa());
-        }
     }
 
     @SuppressWarnings("unchecked")
@@ -239,10 +215,14 @@ public class NVQLRUDPhieuXuatView extends javax.swing.JFrame {
                                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addComponent(jLabel2)
                                                         .addComponent(jLabel3))
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(jdcNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(cbbNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                            .addComponent(cbbNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                            .addComponent(jdcNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                            .addGap(0, 0, Short.MAX_VALUE))))
                                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                                     .addGap(176, 176, 176)
                                                     .addComponent(erroNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -252,8 +232,9 @@ public class NVQLRUDPhieuXuatView extends javax.swing.JFrame {
                                                 .addComponent(txtGhiChu, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                                     .addComponent(jLabel4)
-                                                    .addGap(72, 72, 72)
-                                                    .addComponent(jdcNgayThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                    .addGap(51, 51, 51)
+                                                    .addComponent(jdcNgayThanhToan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addGap(56, 56, 56)))
                                             .addComponent(erroNgayNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(0, 118, Short.MAX_VALUE))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -356,12 +337,13 @@ public class NVQLRUDPhieuXuatView extends javax.swing.JFrame {
         pxcc.setGhiChu(check.getGhiChu());
         pxcc.setKhachHang(check.getKhachHang());
         pxcc.setNhanVien(check.getNhanVien());
-        if (phieuNhapService.updatePhieuXuat(pxcs)) {
+        pxcc.setTrangThai(check.getTrangThai());
+        if (phieuNhapService.updatePhieuXuat(pxcc)) {
             MsgBox.alert(this, "Update thành công");
-            this.setVisible(true);
+            this.setVisible(false);
         } else {
             MsgBox.alert(this, "Update thất bại");
-            this.setVisible(false);
+            this.setVisible(true);
         }
 
     }//GEN-LAST:event_btnUpdateActionPerformed
@@ -408,13 +390,10 @@ public class NVQLRUDPhieuXuatView extends javax.swing.JFrame {
 //        pnct.setNgayTao(Long.parseLong(String.valueOf(jdcNgayTao.getDate())));
         pnct.setNgayTao(jdcNgayTao.getDate().getTime());
         pnct.setNgayThanhToan(jdcNgayThanhToan.getDate().getTime());
-        pnct.setKhachHang(listKH.get(cbbKhachHang.getSelectedIndex()).getId());
-        pnct.setNhanVien(listNV.get(cbbNhanVien.getSelectedIndex()).getId());
+        pnct.setNhanVien(phieuNhapService.chonNV(cbbNhanVien.getSelectedIndex()));
+        pnct.setKhachHang(phieuNhapService.chonKH(cbbKhachHang.getSelectedIndex()));
+        pnct.setTrangThai(phieuNhapService.loc(cbbTrangThai.getSelectedIndex()));
         return pnct;
-//        pnct.setNgayTao(Long.parseLong(this.txtNgayTao.getText()));
-//        pnct.setGhiChu(txtGhiChu.getText());
-//        pnct.setNgayNhan(Long.parseLong(this.txtNgayNhan.getText()));
-//        pnct.setNhanVien();
     }
 
     /**

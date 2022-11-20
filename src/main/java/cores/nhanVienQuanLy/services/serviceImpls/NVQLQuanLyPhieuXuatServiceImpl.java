@@ -6,18 +6,15 @@ package cores.nhanVienQuanLy.services.serviceImpls;
 
 import cores.nhanVienQuanLy.repositories.NVQLQuanLyPhieuXuatRepository;
 import cores.nhanVienQuanLy.customModels.PhieuXuatCustom;
-import cores.nhanVienQuanLy.repositories.LayListKhachHangRepository;
-import cores.nhanVienQuanLy.repositories.LayListNhanVienRepository;
-import domainModels.PhieuNhap;
 import java.util.List;
 import java.util.UUID;
-import javax.swing.JLabel;
 import utilities.palette.Combobox;
 import cores.nhanVienQuanLy.services.NVQLQuanLyPhieuXuatService;
 import domainModels.KhachHang;
 import domainModels.NhanVien;
 import domainModels.PhieuXuat;
 import infrastructures.constant.TrangThaiPhieuConstant;
+import java.util.ArrayList;
 import utilities.Converter;
 
 /**
@@ -27,46 +24,43 @@ import utilities.Converter;
 public class NVQLQuanLyPhieuXuatServiceImpl implements NVQLQuanLyPhieuXuatService {
 
     private NVQLQuanLyPhieuXuatRepository rp;
-    private LayListNhanVienRepository rpNV;
-    private LayListKhachHangRepository rpKH;
+
+    private List<NhanVien> listNV;
+    private List<KhachHang> listKH;
 
     public NVQLQuanLyPhieuXuatServiceImpl() {
         rp = new NVQLQuanLyPhieuXuatRepository();
-        rpNV = new LayListNhanVienRepository();
-        rpKH = new LayListKhachHangRepository();
+        listNV = new ArrayList<>();
+        listKH = new ArrayList<>();
     }
 
     @Override
-    public List<PhieuXuatCustom> getListByNgayTao(Long ngayTao) {
-        return rp.getListByNgayTao(ngayTao);
+    public List<PhieuXuatCustom> getListByNgayTao(Long ngayBatDau, Long ngayKetThuc) {
+        return rp.getListByNgayTao(ngayBatDau, ngayKetThuc);
     }
 
     @Override
     public PhieuXuatCustom addPhieuXuat(PhieuXuatCustom pxcs) {
-        KhachHang kh = rpKH.getListByID(pxcs.getKhachHang());
-        NhanVien nv = rpNV.getListByID(pxcs.getNhanVien());
         PhieuXuat px = new PhieuXuat();
         px.setNgayTao(pxcs.getNgayTao());
         px.setGhiChu(pxcs.getGhiChu());
         px.setNgayThanhToan(pxcs.getNgayThanhToan());
         px.setTrangThai(pxcs.getTrangThai());
-        px.setNhanVien(nv);
-        px.setKhachHang(kh);
+        px.setNhanVien(pxcs.getNhanVien());
+        px.setKhachHang(pxcs.getKhachHang());
         pxcs.setId(rp.addPhieuXuat(px).getId());
         return pxcs;
     }
 
     @Override
     public boolean updatePhieuXuat(PhieuXuatCustom pxcs) {
-        KhachHang kh = rpKH.getListByID(pxcs.getKhachHang());
-        NhanVien nv = rpNV.getListByID(pxcs.getNhanVien());
         PhieuXuat px = new PhieuXuat();
         px.setNgayTao(pxcs.getNgayTao());
         px.setGhiChu(pxcs.getGhiChu());
         px.setNgayThanhToan(pxcs.getNgayThanhToan());
         px.setTrangThai(pxcs.getTrangThai());
-        px.setNhanVien(nv);
-        px.setKhachHang(kh);
+        px.setNhanVien(pxcs.getNhanVien());
+        px.setKhachHang(pxcs.getKhachHang());
         px.setId(pxcs.getId());
         return rp.updatePhieuXuat(px);
     }
@@ -119,16 +113,66 @@ public class NVQLQuanLyPhieuXuatServiceImpl implements NVQLQuanLyPhieuXuatServic
         cbbTT.addItem(Converter.TrangThaiPhieuXuat(TrangThaiPhieuConstant.DA_THANH_TOAN));
     }
 
+    @Override
     public TrangThaiPhieuConstant loc(int a) {
         switch (a) {
-            case 1:
+            case 0:
                 return TrangThaiPhieuConstant.CHO_THANH_TOAN;
-            case 2:
+            case 1:
                 return TrangThaiPhieuConstant.DA_HUY;
-            case 3:
+            case 2:
                 return TrangThaiPhieuConstant.DA_THANH_TOAN;
             default:
                 return null;
         }
+    }
+
+    @Override
+    public void loadComBoBoxNV(Combobox cbbNV) {
+        listNV = rp.getListMaNhanVien();
+        cbbNV.removeAll();
+        for (NhanVien nv : listNV) {
+            cbbNV.addItem(nv.getMa());
+        }
+    }
+
+    @Override
+    public void loadComBoBoxKh(Combobox cbbKH) {
+        listKH = rp.getListMaKhachHang();
+        cbbKH.removeAll();
+        for (KhachHang kh : listKH) {
+            cbbKH.addItem(kh.getMa());
+        }
+    }
+//        for (LayListNhanVienCustom nv : listNV) {
+//            cbbNhanVien.addItem(nv.getMa());
+//        }
+//    }
+
+    @Override
+    public List<NhanVien> getListMaNhanVien() {
+        listNV = rp.getListMaNhanVien();
+        return listNV;
+    }
+
+    @Override
+    public List<KhachHang> getListMaKhachHang() {
+        listKH = rp.getListMaKhachHang();
+        return listKH;
+    }
+
+    @Override
+    public NhanVien chonNV(int chon) {
+        return listNV.get(chon);
+    }
+
+    @Override
+    public KhachHang chonKH(int chon) {
+        return listKH.get(chon);
+    }
+
+    @Override
+    public List<PhieuXuatCustom> getListByNgayThanhToan(Long ngayBatDau, Long ngayKetThuc) {
+        return rp.getListByNgayThanhToan(ngayBatDau, ngayKetThuc);
     }
 }
