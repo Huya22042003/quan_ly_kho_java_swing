@@ -37,6 +37,9 @@ public class PhieuHoanNhap implements Serializable {
 
     @Column(name = "GhiChu", columnDefinition = "NVARCHAR(255)")
     private String ghiChu;
+    
+    @Column(name = "LiDo", columnDefinition = "NVARCHAR(255)")
+    private String liDo;
 
     @Column(name = "NgayThanhToan")
     private Long ngayThanhToan;

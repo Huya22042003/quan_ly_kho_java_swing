@@ -37,12 +37,15 @@ public class PhieuHoanXuat implements Serializable {
 
     @Column(name = "NgayThanhToan")
     private Long ngayThanhToan;
-    
+
     @Column(name = "TrangThai")
     private TrangThaiPhieuConstant trangThai;
 
     @Column(name = "GhiChu", columnDefinition = "NVARCHAR(255)")
     private String ghiChu;
+
+    @Column(name = "LiDo", columnDefinition = "NVARCHAR(255)")
+    private String liDo;
 
     @ManyToOne
     @JoinColumn(name = "idPhieuXuat")

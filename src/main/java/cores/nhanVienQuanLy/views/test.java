@@ -4,6 +4,9 @@
  */
 package cores.nhanVienQuanLy.views;
 
+import cores.truongPhongs.views.TP_ChucVuForm;
+import cores.truongPhongs.views.TP_KhachHangForm;
+import cores.truongPhongs.views.TP_NamBaoHanhForm;
 import java.awt.FlowLayout;
 
 /**
@@ -17,7 +20,7 @@ public class test extends javax.swing.JFrame {
      */
     public test() {
         initComponents();
-        NvqlXemThongTinCaNhanForm a = new NvqlXemThongTinCaNhanForm();
+        NvqlXuatHangView a = new NvqlXuatHangView();
         this.add(a);
         this.setLayout(new FlowLayout());
         this.pack();

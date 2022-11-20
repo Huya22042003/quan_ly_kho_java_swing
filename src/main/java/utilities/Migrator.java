@@ -137,7 +137,7 @@ public class Migrator {
         
         NhanVien nhanVien2 = new NhanVien();
         nhanVien2.setMa("NV00003");
-        nhanVien2.setTen("Nguyễn Quốc Huy");
+        nhanVien2.setTen("Đinh Anh Tuấn");
         nhanVien2.setDiaChi("Hà Nội");
         nhanVien2.setEmail("c");
         nhanVien2.setGioiTinh(GioiTinhConstant.NAM);
@@ -151,7 +151,7 @@ public class Migrator {
         
         NhanVien nhanVien3 = new NhanVien();
         nhanVien3.setMa("NV00004");
-        nhanVien3.setTen("Nguyễn Quốc Huy");
+        nhanVien3.setTen("Nguyễn Văn Thắng");
         nhanVien3.setDiaChi("Hà Nội");
         nhanVien3.setEmail("huynqph26782@fpt.edu.vn");
         nhanVien3.setGioiTinh(GioiTinhConstant.NAM);
@@ -165,7 +165,7 @@ public class Migrator {
         
         NhanVien nhanVien4 = new NhanVien();
         nhanVien4.setMa("NV00005");
-        nhanVien4.setTen("Nguyễn Quốc Huy");
+        nhanVien4.setTen("Phạm Hải Quân");
         nhanVien4.setDiaChi("Hà Nội");
         nhanVien4.setEmail("huynqph26782@fpt.edu.vn");
         nhanVien4.setGioiTinh(GioiTinhConstant.NAM);
@@ -187,7 +187,7 @@ public class Migrator {
         khachHang.setMatKhau("1");
         khachHang.setNgaySinh(convertDateToTimeStampSecond());
         khachHang.setSdt("0328843156");
-        khachHang.setTen("Nguyễn Quốc Huy");
+        khachHang.setTen("Nguyễn Tiến Tài");
         khachHang.setTrangThai(KhachHangConstant.DANG_LAM_VIEC);
         session.save(khachHang);
         
@@ -201,7 +201,7 @@ public class Migrator {
         khachHang1.setMatKhau("1");
         khachHang1.setNgaySinh(convertDateToTimeStampSecond());
         khachHang1.setSdt("0328843156");
-        khachHang1.setTen("Nguyễn Quốc Huy");
+        khachHang1.setTen("Nguyễn Văn Thắng");
         khachHang1.setTrangThai(KhachHangConstant.DANG_LAM_VIEC);
         session.save(khachHang1);
         
@@ -229,7 +229,7 @@ public class Migrator {
         khachHang3.setMatKhau("1");
         khachHang3.setNgaySinh(convertDateToTimeStampSecond());
         khachHang3.setSdt("0328843156");
-        khachHang3.setTen("Nguyễn Quốc Huy");
+        khachHang3.setTen("Phạm Xuân Hải");
         khachHang3.setTrangThai(KhachHangConstant.DANG_LAM_VIEC);
         session.save(khachHang3);
         
@@ -838,9 +838,11 @@ public class Migrator {
         session.save(ctpx5);
         
         PhieuHoanNhap phn = new PhieuHoanNhap();
-        phn.setGhiChu("Đồ chán");
+        phn.setGhiChu("Đoán xem");
+        phn.setLiDo("Đồ chán");
         phn.setNgayTao(convertDateToTimeStampSecond());
         phn.setPhieuNhap(phieuNhap);
+        phn.setTrangThai(TrangThaiPhieuConstant.DA_HUY);
         session.save(phn);
         
         ChiTietPhieuHoanNhap ctphn = new ChiTietPhieuHoanNhap();
@@ -850,9 +852,11 @@ public class Migrator {
         session.save(ctphn);
         
         PhieuHoanXuat phx = new PhieuHoanXuat();
-        phx.setGhiChu("Thích thì hoàn");
+        phx.setLiDo("Thích thì hoàn");
+        phn.setGhiChu("Đoán xem");
         phx.setNgayTao(convertDateToTimeStampSecond());
         phx.setPhieuXuat(phieuXuat);
+        phx.setTrangThai(TrangThaiPhieuConstant.DA_HUY);
         session.save(phx);
         
         ChiTietPhieuHoanXuat ctphx = new ChiTietPhieuHoanXuat();
