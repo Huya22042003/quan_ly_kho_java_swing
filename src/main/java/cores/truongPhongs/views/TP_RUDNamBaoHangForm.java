@@ -40,7 +40,6 @@ public class TP_RUDNamBaoHangForm extends javax.swing.JFrame {
 //        this.txtTen.setText(custom.getTen());
 //
 //    }
-
     public TP_NamBaoHanhCustom getFormData() {
         TP_NamBaoHanhCustom custom = new TP_NamBaoHanhCustom();
         custom.setMa(null);
@@ -116,6 +115,7 @@ public class TP_RUDNamBaoHangForm extends javax.swing.JFrame {
         });
 
         txtMa.setEditable(false);
+        txtMa.setEnabled(false);
         txtMa.setLabelText("Mã");
 
         txtTen.setLabelText("Tên ");

@@ -9,12 +9,16 @@ import infrastructures.constant.KhachHangConstant;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import utilities.Converter;
 import utilities.MsgBox;
 
@@ -22,9 +26,11 @@ public class TP_RUDKhachHangForm extends javax.swing.JFrame {
 
     private TP_KhachHangService hangService;
     TP_KhachHangCustom custom = new TP_KhachHangCustom();
+    String duongdananh = getClass().getResource("/icons/FPT_Polytechnic_doc.png").getPath();
 
     public TP_RUDKhachHangForm() {
         hangService = new TP_KhachHangServiceImpl();
+
         initComponents();
         hangService.loadCbbTT(cbbTrangThai);
         hangService.loadCbbDG(cbbDanhGia);
@@ -53,7 +59,7 @@ public class TP_RUDKhachHangForm extends javax.swing.JFrame {
         this.txtSDT.setText(custom.getSdt());
         this.txtEmail.setText(custom.getEmail());
         this.txtDicChi.setText(custom.getDiaChi());
-        this.lbHinhAnh.setText(custom.getHinhAnh());
+        this.lbHinhAnh.setIcon(new javax.swing.ImageIcon(custom.getHinhAnh()));
         this.txtMatKhau.setText(custom.getMatKhau());
         this.txtDate.setDate(new Date(custom.getNgaySinh()));
         this.cbbTrangThai.setSelectedItem(Converter.trangThaiKhachHang(custom.getTrangThai()));
@@ -68,7 +74,7 @@ public class TP_RUDKhachHangForm extends javax.swing.JFrame {
         csc.setSdt(txtSDT.getText());
         csc.setEmail(txtEmail.getText());
         csc.setDiaChi(txtDicChi.getText());
-        csc.setHinhAnh(lbHinhAnh.getText());
+        csc.setHinhAnh(duongdananh);
         csc.setMatKhau(txtMatKhau.getText());
         csc.setNgaySinh(txtDate.getDate().getTime());
         csc.setTrangThai(hangService.loc(this.cbbTrangThai.getSelectedIndex()));
@@ -108,6 +114,7 @@ public class TP_RUDKhachHangForm extends javax.swing.JFrame {
         btnDelete = new utilities.palette.UWPButton();
         btnClose = new utilities.palette.UWPButton();
         btnClear = new utilities.palette.UWPButton();
+        btnChonAnh = new utilities.palette.UWPButton();
         jPanel2 = new javax.swing.JPanel();
         test = new javax.swing.JLabel();
 
@@ -126,12 +133,6 @@ public class TP_RUDKhachHangForm extends javax.swing.JFrame {
         });
 
         lbHinhAnh.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        lbHinhAnh.setText("Hình ảnh");
-        lbHinhAnh.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lbHinhAnhMouseClicked(evt);
-            }
-        });
 
         jPanel3.setBackground(new java.awt.Color(255, 204, 204));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông tin khách hàng"));
@@ -317,6 +318,13 @@ public class TP_RUDKhachHangForm extends javax.swing.JFrame {
                 .addContainerGap(34, Short.MAX_VALUE))
         );
 
+        btnChonAnh.setText("Chọn ảnh");
+        btnChonAnh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChonAnhActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -326,8 +334,13 @@ public class TP_RUDKhachHangForm extends javax.swing.JFrame {
                 .addComponent(btnX, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(lbHinhAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(lbHinhAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(76, 76, 76)
+                        .addComponent(btnChonAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -344,7 +357,9 @@ public class TP_RUDKhachHangForm extends javax.swing.JFrame {
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(11, 11, 11)
-                        .addComponent(lbHinhAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lbHinhAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(btnChonAnh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(584, 584, 584))
@@ -385,6 +400,7 @@ public class TP_RUDKhachHangForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_btnCloseActionPerformed
@@ -397,10 +413,11 @@ public class TP_RUDKhachHangForm extends javax.swing.JFrame {
             MsgBox.alert(this, "Xóa thất bại");
             this.setVisible(true);
         }
+
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        TP_KhachHangCustom check = hangService.checkValidate(getFormData(), erroMa, erroTen, erroSDT, erroEmail,erroDiaChi,erroMatKhau,erroNgaySinh);
+        TP_KhachHangCustom check = hangService.checkValidate(getFormData(), erroMa, erroTen, erroSDT, erroEmail, erroDiaChi, erroMatKhau, erroNgaySinh);
         if (check == null) {
             return;
         }
@@ -412,22 +429,8 @@ public class TP_RUDKhachHangForm extends javax.swing.JFrame {
             MsgBox.alert(this, "Sửa thất bại");
             this.setVisible(false);
         }
-    }//GEN-LAST:event_btnUpdateActionPerformed
 
-    private void lbHinhAnhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbHinhAnhMouseClicked
-        try {
-            JFileChooser jfc = new JFileChooser("");
-            jfc.showOpenDialog(null);
-            File file = jfc.getSelectedFile();
-            Image img = ImageIO.read(file);
-            lbHinhAnh.setText("");
-            int width = lbHinhAnh.getWidth();
-            int height = lbHinhAnh.getHeight();
-            lbHinhAnh.setIcon(new ImageIcon(img.getScaledInstance(width, height, 0)));
-        } catch (Exception e) {
-            System.out.println("Error:" + e.toString());
-        }
-    }//GEN-LAST:event_lbHinhAnhMouseClicked
+    }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXActionPerformed
         this.setVisible(false);
@@ -440,10 +443,35 @@ public class TP_RUDKhachHangForm extends javax.swing.JFrame {
         txtMatKhau.setText("");
         txtSDT.setText("");
         txtTen.setText("");
+        txtDate.setCalendar(null);
         cbbDanhGia.setSelectedIndex(0);
         cbbGioiTinh.setSelectedIndex(0);
         cbbTrangThai.setSelectedIndex(0);
     }//GEN-LAST:event_btnClearActionPerformed
+
+    public ImageIcon ResizeImage(String ImagePath) {
+        ImageIcon MyImage = new ImageIcon(ImagePath);
+        Image img = MyImage.getImage();
+        Image newImg = img.getScaledInstance(lbHinhAnh.getWidth(), lbHinhAnh.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon image = new ImageIcon(newImg);
+        return image;
+    }
+    private void btnChonAnhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonAnhActionPerformed
+        try {
+            JFileChooser f = new JFileChooser();
+            f.setDialogTitle("Mở file");
+            f.showOpenDialog(null);
+            File ftenanh = f.getSelectedFile();
+            duongdananh = ftenanh.getAbsolutePath();
+            lbHinhAnh.setIcon(new javax.swing.ImageIcon(duongdananh));
+            System.out.println(duongdananh);
+
+        } catch (Exception e) {
+            System.out.println("Ban chua chon anh");
+            System.out.println(duongdananh);
+        }
+
+    }//GEN-LAST:event_btnChonAnhActionPerformed
 
     /**
      * @param args the command line arguments
@@ -484,6 +512,7 @@ public class TP_RUDKhachHangForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private utilities.palette.UWPButton btnChonAnh;
     private utilities.palette.UWPButton btnClear;
     private utilities.palette.UWPButton btnClose;
     private utilities.palette.UWPButton btnDelete;
