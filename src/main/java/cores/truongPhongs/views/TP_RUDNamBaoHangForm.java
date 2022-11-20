@@ -218,7 +218,7 @@ public class TP_RUDNamBaoHangForm extends javax.swing.JFrame {
         }
         TP_NamBaoHanhCustom cs = new TP_NamBaoHanhCustom(custom.getId(), custom.getMa(), check.getTen());
         if (baoHanhService.updateNBH(cs)) {
-            MsgBox.alert(this, "Sửa thành côhg");
+            MsgBox.alert(this, "Sửa thành công");
             this.setVisible(true);
         } else {
             MsgBox.alert(this, "Sửa thất bại");
