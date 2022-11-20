@@ -1,6 +1,8 @@
 package cores.truongPhongs.repositories;
 
 import cores.truongPhongs.customModels.TP_KhachHangCustom;
+import domainModels.KhachHang;
+import infrastructures.constant.KhachHangConstant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -10,8 +12,6 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import utilities.HibernateUtil;
 
-import domainModels.KhachHang;
-import infrastructures.constant.KhachHangConstant;
 
 public class TP_KhachHangRepository {
 
@@ -71,8 +71,8 @@ public class TP_KhachHangRepository {
         Transaction tran = null;
         try ( Session s = HibernateUtil.getSessionFactory().openSession()) {
             tran = s.beginTransaction();
-            KhachHang k = s.find(KhachHang.class, id);
-            s.delete(k);
+            KhachHang kh = s.find(KhachHang.class, id);
+            s.delete(kh);
             tran.commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -108,6 +108,31 @@ public class TP_KhachHangRepository {
         return csc;
     }
 
+    // cách tìm kiếm thứ 2
+    public List<TP_KhachHangCustom> findAllByTen(String ten, KhachHangConstant tt) {
+        List<TP_KhachHangCustom> list = new ArrayList<>();
+        Session s = HibernateUtil.getSessionFactory().openSession();
+        Query q = s.createQuery("SELECT new cores.truongPhongs.customModels.TP_KhachHangCustom("
+                + "k.id as id, "
+                + "k.ma as ma, "
+                + "k.ten as ten,"
+                + "k.sdt as sdt,"
+                + "k.email as email,"
+                + "k.matKhau as matKhau,"
+                + "k.ngaySinh as ngaySinh,"
+                + "k.hinhAnh as hinhAnh,"
+                + "k.gioiTinh as gioiTinh,"
+                + "k.diaChi as diaChi,"
+                + "k.danhGia as danhGia,"
+                + "k.trangThai as trangThai"
+                + ") FROM domainModels.KhachHang k WHERE k.ten LIKE CONCAT('%',:ten,'%') AND k.trangThai = :tt");
+        q.setParameter("ten", ten);
+        q.setParameter("tt", tt);
+        list = q.getResultList();
+        s.close();
+        return list;
+    }
+
     public List<TP_KhachHangCustom> findAllBySDT(String sdt, KhachHangConstant tt) {
         List<TP_KhachHangCustom> list = new ArrayList<>();
         Session s = HibernateUtil.getSessionFactory().openSession();
@@ -126,30 +151,6 @@ public class TP_KhachHangRepository {
                 + "k.trangThai as trangThai"
                 + ") FROM domainModels.KhachHang k WHERE k.sdt LIKE CONCAT('%',:sdt,'%') AND k.trangThai = :tt");
         q.setParameter("sdt", sdt);
-        q.setParameter("tt", tt);
-        list = q.getResultList();
-        s.close();
-        return list;
-    }
-
-    public List<TP_KhachHangCustom> findAllByTen(String ten, KhachHangConstant tt) {
-        List<TP_KhachHangCustom> list = new ArrayList<>();
-        Session s = HibernateUtil.getSessionFactory().openSession();
-        Query q = s.createQuery("SELECT new cores.truongPhongs.customModels.TP_KhachHangCustom ("
-                + "k.id as id, "
-                + "k.ma as ma, "
-                + "k.ten as ten,"
-                + "k.sdt as sdt,"
-                + "k.email as email,"
-                + "k.matKhau as matKhau,"
-                + "k.ngaySinh as ngaySinh,"
-                + "k.hinhAnh as hinhAnh,"
-                + "k.gioiTinh as gioiTinh,"
-                + "k.diaChi as diaChi,"
-                + "k.danhGia as danhGia,"
-                + "k.trangThai as trangThai"
-                + ") FROM domainModels.KhachHang k WHERE k.ten LIKE CONCAT('%',:ten,'%') AND k.trangThai = :tt");
-        q.setParameter("ten", ten);
         q.setParameter("tt", tt);
         list = q.getResultList();
         s.close();
@@ -179,5 +180,4 @@ public class TP_KhachHangRepository {
         s.close();
         return list;
     }
-
 }
