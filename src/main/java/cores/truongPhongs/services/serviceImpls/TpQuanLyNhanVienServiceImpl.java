@@ -204,7 +204,7 @@ public class TpQuanLyNhanVienServiceImpl implements TpQuanLyNhanVienSevice {
         } else {
             erroDiaChi.setText("");
         }
-    
+
         if (nv.getNgaySinh() == null) {
             erroNgaySinh.setText("Bạn phải chọn ngày sinh");
             check = false;

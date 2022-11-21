@@ -67,7 +67,9 @@ public class TpCreateQuanLyNhanVien extends javax.swing.JFrame {
             nvc.setNgaySinh(txtDate.getDate().getTime());
         } catch (Exception e) {
 //lại
-            nvc.setNgaySinh(DateTimeUtil.convertDateToTimeStampSecond());
+            e.printStackTrace();
+              nvc.setNgaySinh(null);
+//            nvc.setNgaySinh(DateTimeUtil.convertDateToTimeStampSecond());
         }
 //        nvc.setNgaySinh(txtDate.getDate().getTime());
         nvc.setTrangThai(nhanVienSevice.loc(this.cbbTrangThai.getSelectedIndex()));
