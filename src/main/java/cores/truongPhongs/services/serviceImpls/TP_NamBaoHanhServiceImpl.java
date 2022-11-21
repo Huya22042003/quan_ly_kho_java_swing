@@ -57,7 +57,7 @@ public class TP_NamBaoHanhServiceImpl implements TP_NamBaoHanhService {
 //            } else if (!nbh.getMa().matches(ValidateConstant.REGEX_CHU_KHONG_CO_KHOANG_TRANG)) {
 //                erroMa.setText("Mã không được có khoảng trắng");
 //                check = false;
-            } else if (findNBHByMa(nbh.getMa()) != null) {
+            } else if (findNBHByMa(nbh.getMa().trim()) != null) {
                 erroMa.setText("Mã đã tồn tại");
                 check = false;
             } else {
@@ -67,6 +67,9 @@ public class TP_NamBaoHanhServiceImpl implements TP_NamBaoHanhService {
 
         if (nbh.getTen().trim().length() == 0) {
             erroTen.setText("Tên không được để trống");
+            check = false;
+        } else if (nbh.getTen().trim().matches("\\d+")) {
+            erroTen.setText("Tên phải là kiểu chữ");
             check = false;
         } else {
             erroTen.setText("");
