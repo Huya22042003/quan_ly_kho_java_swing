@@ -65,6 +65,7 @@ public class TpQuanLyNhanVienServiceImpl implements TpQuanLyNhanVienSevice {
         nv.setHinhAnh(ct.getHinhAnh());
         nv.setGioiTinh(ct.getGioiTinh());
         nv.setDiaChi(ct.getDiaChi());
+        nv.setNgaySinh(ct.getNgaySinh());
         nv.setTrangThai(ct.getTrangThai());
         nv.setId(ct.getId());
         nv.setIdChucVu(ct.getIdChucVu());
@@ -146,19 +147,21 @@ public class TpQuanLyNhanVienServiceImpl implements TpQuanLyNhanVienSevice {
             if (nv.getMa().trim().length() == 0) {
                 erroMa.setText("Mã không được để trống");
                 check = false;
-            } else if (!nv.getMa().matches(ValidateConstant.REGEX_CHU_KHONG_CO_KHOANG_TRANG)) {
-                erroMa.setText("Mã không được có khoảng trắng");
-                check = false;
-            } else if (finNhanVienByMa(nv.getMa()) != null) {
+            } else if (finNhanVienByMa(nv.getMa().trim()) != null) {
                 erroMa.setText("Mã đã tồn tại");
+                check = false;
+            } else if (!nv.getMa().trim().matches(nv.getMa().toUpperCase())) {
+                erroMa.setText("Mã phải viết hoa");
                 check = false;
             } else {
                 erroMa.setText("");
             }
         }
-
         if (nv.getTen().trim().length() == 0) {
             erroTen.setText("Tên không được để trống");
+            check = false;
+        } else if (!nv.getTen().trim().matches("[A-Z a-z]+")) {
+            erroTen.setText("Tên phải là kiểu chữ");
             check = false;
         } else {
             erroTen.setText("");
@@ -166,14 +169,17 @@ public class TpQuanLyNhanVienServiceImpl implements TpQuanLyNhanVienSevice {
         if (nv.getEmail().trim().length() == 0) {
             erroEmail.setText("Email không được để trống");
             check = false;
+        } else if (!nv.getEmail().trim().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
+            erroEmail.setText("Email sai định dạng");
+            check = false;
         } else {
             erroEmail.setText("");
         }
         if (nv.getSdt().length() == 0) {
             erroSDT.setText("SDT không được để trống");
             check = false;
-        } else if (!nv.getSdt().matches(ValidateConstant.REGEX_SO)) {
-            erroSDT.setText("SDT Phải bắt đầu bằng số 0");
+        } else if (!nv.getSdt().trim().matches(ValidateConstant.REGEX_PHONE_NUMBER)) {
+            erroSDT.setText("SĐT sai định dạng");
             check = false;
         } else {
             erroSDT.setText("");
@@ -182,28 +188,35 @@ public class TpQuanLyNhanVienServiceImpl implements TpQuanLyNhanVienSevice {
         if (nv.getMatKhau().trim().length() == 0) {
             erroMatKhau.setText("Mật Khẩu không được để trống");
             check = false;
+        } else if (!nv.getMatKhau().trim().matches("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,15})")) {
+            erroMatKhau.setText("Mật khẩu sai định dạng");
+            check = false;
+
         } else {
             erroMatKhau.setText("");
         }
         if (nv.getDiaChi().trim().length() == 0) {
             erroDiaChi.setText("Địa chỉ không được để trống");
             check = false;
+        } else if (!nv.getDiaChi().trim().matches("^[A-Z a-z 0-9]+$")) {
+            erroDiaChi.setText("Địa chỉ sai định dạng");
+            check = false;
         } else {
             erroDiaChi.setText("");
         }
-
+    
         if (nv.getNgaySinh() == null) {
             erroNgaySinh.setText("Bạn phải chọn ngày sinh");
             check = false;
         } else {
             erroNgaySinh.setText("");
         }
-        if (nv.getDiaChi().trim().length() == 0) {
-            erroDiaChi.setText("Địa chỉ không được để trống");
-            check = false;
-        } else {
-            erroDiaChi.setText("");
-        }
+//        if (nv.getDiaChi().trim().length() == 0) {
+//            erroDiaChi.setText("Địa chỉ không được để trống");
+//            check = false;
+//        } else {
+//            erroDiaChi.setText("");
+//        }
 
         if (!check) {
             return null;

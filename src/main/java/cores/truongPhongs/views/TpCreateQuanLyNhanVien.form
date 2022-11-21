@@ -66,11 +66,9 @@
                                   <Component id="cbbGioiTinh" min="-2" pref="191" max="-2" attributes="0"/>
                                   <Component id="txtDate" min="-2" pref="183" max="-2" attributes="0"/>
                                   <Component id="lbHinhAnh" alignment="0" min="-2" pref="171" max="-2" attributes="0"/>
+                                  <Component id="cbbTrangThai" alignment="0" min="-2" pref="191" max="-2" attributes="0"/>
                                   <Component id="erroNgaySinh" min="-2" pref="194" max="-2" attributes="0"/>
-                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="cbbChucVu" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="cbbTrangThai" alignment="0" pref="191" max="32767" attributes="0"/>
-                                  </Group>
+                                  <Component id="cbbChucVu" min="-2" pref="191" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -109,24 +107,18 @@
                   <Component id="lbHinhAnh" alignment="0" min="-2" pref="208" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                       <Component id="cbbGioiTinh" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="txtDate" min="-2" pref="30" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="erroNgaySinh" min="-2" pref="23" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="cbbTrangThai" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="cbbChucVu" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnThem" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnThoat" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="txtSDT" min="-2" max="-2" attributes="0"/>
@@ -140,9 +132,14 @@
                       <Component id="txtDiaChi" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="erroDiaChi" min="-2" pref="23" max="-2" attributes="0"/>
-                      <EmptySpace pref="123" max="32767" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace pref="44" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnThem" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnThoat" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -306,9 +303,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="lbHinhAnh">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="&#x1ea2;nh"/>
-      </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lbHinhAnhMouseClicked"/>
       </Events>
@@ -322,6 +316,9 @@
       <Properties>
         <Property name="labeText" type="java.lang.String" value="Ch&#x1ee9;c V&#x1ee5;"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbbChucVuActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
