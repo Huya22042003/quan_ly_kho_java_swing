@@ -1,14 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package views.main;
 
+import cores.truongPhongs.views.TP_ChucVuForm;
+import cores.truongPhongs.views.TP_KhachHangForm;
+import cores.truongPhongs.views.TpDonViView;
+import cores.truongPhongs.views.TpQuanLyChiTietSanPhamForm;
+import cores.truongPhongs.views.TpQuanLySanPhamForm;
 import views.component.Header;
-import views.component.Menu;
 import views.event.EventMenuSelected;
 import views.event.EventShowPopupMenu;
-import views.form.Form1;
 import views.form.MainForm;
 import views.swing.MenuItem;
 import views.swing.PopupMenu;
@@ -16,10 +15,14 @@ import java.awt.Component;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
+import utilities.Auth;
+import views.component.MenuTruongPhong;
+import views.component.TrangChu;
 
 /**
  *
@@ -28,7 +31,7 @@ import org.jdesktop.animation.timing.TimingTargetAdapter;
 public class TruongPhong extends javax.swing.JFrame {
 
     private MigLayout layout;
-    private Menu menu;
+    private MenuTruongPhong menu;
     private Header header;
     private MainForm main;
     private Animator animator;
@@ -45,19 +48,39 @@ public class TruongPhong extends javax.swing.JFrame {
     private void init() {
         layout = new MigLayout("fill", "0[]0[100%, fill]0", "0[fill, top]0");
         bg.setLayout(layout);
-        menu = new Menu();
+        menu = new MenuTruongPhong();
         header = new Header();
         main = new MainForm();
         menu.addEvent(new EventMenuSelected() {
             @Override
             public void menuSelected(int menuIndex, int subMenuIndex) {
                 if (menuIndex == 0) {
-                    if (subMenuIndex == 0) {
-                        main.showForm(new Form1());
-                    } else if (subMenuIndex == 1) {
-                        main.showForm(new Form1());
+                    main.showForm(new TrangChu());
+                }
+                if (menuIndex == 1) {
+                    main.showForm(new TP_ChucVuForm());
+                }
+                if(menuIndex == 2) {
+                    main.showForm(new TP_KhachHangForm());
+                }
+                if(menuIndex == 3) {
+                    main.showForm(new TpQuanLyChiTietSanPhamForm());
+                }
+                if(menuIndex == 4) {
+                    main.showForm(new TpDonViView());
+                } 
+                if(menuIndex == 7) {
+                    if(subMenuIndex == 2) {
+                        int chon = JOptionPane.showConfirmDialog(frame, "Bạn có muốn đăng xuất ???", "Say oh yeahh!!!", JOptionPane.QUESTION_MESSAGE);
+                        if(chon == 1) {
+                            Auth.clear();
+                            frame.setVisible(false);
+                            LoginView lg = new LoginView();
+                            lg.setVisible(true);
+                        }
                     }
                 }
+                
             }
         });
         menu.addEventShowPopup(new EventShowPopupMenu() {
@@ -119,7 +142,7 @@ public class TruongPhong extends javax.swing.JFrame {
         });
 
         //  Start with this form
-        main.showForm(new Form1());
+        main.showForm(new TrangChu());
     }
 
     @SuppressWarnings("unchecked")
@@ -147,23 +170,23 @@ public class TruongPhong extends javax.swing.JFrame {
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);
         bgLayout.setHorizontalGroup(
-            bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1366, Short.MAX_VALUE)
+                bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 1366, Short.MAX_VALUE)
         );
         bgLayout.setVerticalGroup(
-            bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 783, Short.MAX_VALUE)
+                bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 783, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(bg)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(bg)
         );
 
         pack();
@@ -171,6 +194,7 @@ public class TruongPhong extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     int xy, xx;
+
     private void bgMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bgMouseDragged
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();

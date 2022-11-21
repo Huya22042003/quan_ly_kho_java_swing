@@ -5,7 +5,6 @@
 package cores.truongPhongs.services.serviceImpls;
 
 import cores.truongPhongs.customModels.TpQuanLySanPhamCustom;
-import cores.truongPhongs.repositories.TpQuanLyNvghRepository;
 import cores.truongPhongs.repositories.TpQuanLySanPhamRepository;
 import cores.truongPhongs.services.TpQuanLySanPhamService;
 import domainModels.SanPham;

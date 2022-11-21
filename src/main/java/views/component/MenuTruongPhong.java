@@ -6,6 +6,10 @@ package views.component;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.GradientPaint;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import net.miginfocom.swing.MigLayout;
@@ -64,20 +68,15 @@ public class MenuTruongPhong extends javax.swing.JPanel {
     }
 
     public void initMenuItem() {
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/1.png")), "Dashboard", "Home", "Buttons", "Cards", "Tabs", "Accordions", "Modals"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/2.png")), "Charts", "Morris", "Flot", "Line"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/3.png")), "Report", "Income", "Expense", "Profit"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/4.png")), "Message", "Sender", "Inbox", "User"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/5.png")), "Staff", "Sender", "Inbox", "User"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/6.png")), "Student", "Menu 001", "Menu 002", "Menu 003"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/7.png")), "Library", "Menu 001", "Menu 002", "Menu 003"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/8.png")), "Holiday", "Menu 001", "Menu 002", "Menu 003"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/9.png")), "Calendar", "Menu 001", "Menu 002", "Menu 003"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/10.png")), "Chat App", "Menu 001", "Menu 002", "Menu 003"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/11.png")), "Contace", "Menu 001", "Menu 002", "Menu 003"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/12.png")), "File Manager", "Menu 001", "Menu 002", "Menu 003"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/13.png")), "Our Centres"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/14.png")), "Gallery"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/Home.png")), "Trang Chủ"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/leader.png")), "Chức Vụ"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/rating.png")), "Khách Hàng"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/Search.png")), "Sản Phẩm"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/team.png")), "Nhân Viên"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/cost.png")), "Đơn vị"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/Statistics.png")), "Thống kê"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/bill.png")), "Phiếu", "Phiếu nhập", "Phiếu hoàn - nhập"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/Gear.png")), "Cài đặt", "Thay đổi thông tin", "Hỗ trợ", "Đăng xuất"));
     }
 
     private void addMenu(ModelMenu menu) {
@@ -117,6 +116,16 @@ public class MenuTruongPhong extends javax.swing.JPanel {
     
     public void addMenuEvent(ActionListener event) {
         cmdMenu.addActionListener(event);
+    }
+    
+    @Override
+    protected void paintComponent(Graphics grphcs) {
+        Graphics2D g2 = (Graphics2D) grphcs;
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        GradientPaint gra = new GradientPaint(0, 0, new Color(19,106,138), getWidth(), 0, new Color(38,120,113));
+        g2.setPaint(gra);
+        g2.fillRect(0, 0, getWidth(), getHeight());
+        super.paintComponent(grphcs);
     }
 
     /**

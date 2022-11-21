@@ -1,11 +1,9 @@
 package views.main;
 
-import cores.nhanVienQuanLy.views.NvqlLuongNhapHangView;
 import views.component.Header;
 import views.component.Menu;
 import views.event.EventMenuSelected;
 import views.event.EventShowPopupMenu;
-import views.form.Form1;
 import views.form.MainForm;
 import views.swing.MenuItem;
 import views.swing.PopupMenu;
@@ -17,7 +15,7 @@ import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
-import viewDemos.DemoCoSoViewPast2;
+import views.component.TrangChu;
 
 public class Main extends javax.swing.JFrame {
 
@@ -47,9 +45,9 @@ public class Main extends javax.swing.JFrame {
             public void menuSelected(int menuIndex, int subMenuIndex) {
                 if (menuIndex == 0) {
                     if (subMenuIndex == 0) {
-                        main.showForm(new Form1());
+                        main.showForm(new TrangChu());
                     } else if (subMenuIndex == 1) {
-                        main.showForm(new Form1());
+                        main.showForm(new TrangChu());
                     }
                 }
             }
@@ -113,7 +111,7 @@ public class Main extends javax.swing.JFrame {
         });
 
         //  Start with this form
-        main.showForm(new NvqlLuongNhapHangView());
+        main.showForm(new MainForm());
     }
 
     @SuppressWarnings("unchecked")

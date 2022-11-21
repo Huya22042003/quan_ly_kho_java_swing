@@ -21,8 +21,8 @@ public class Header extends javax.swing.JPanel {
      */
     public Header() {
         initComponents();
-//        nv = Auth.nhanVien;
-//        txtName.setText("Hello, " + nv.getTen());
+        nv = Auth.nhanVien;
+        txtName.setText("Hello, " + nv.getTen());
     }
 
     /**
@@ -77,8 +77,8 @@ public class Header extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 814, Short.MAX_VALUE)
-                        .addGap(170, 170, 170)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 844, Short.MAX_VALUE)
+                        .addGap(176, 176, 176)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnSap, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -86,7 +86,7 @@ public class Header extends javax.swing.JPanel {
                                 .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(txtName)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(imgInfor, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(14, 14, 14))
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -106,7 +106,7 @@ public class Header extends javax.swing.JPanel {
                             .addComponent(imgInfor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(txtName)
-                                .addGap(19, 19, 19))))
+                                .addGap(17, 17, 17))))
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
