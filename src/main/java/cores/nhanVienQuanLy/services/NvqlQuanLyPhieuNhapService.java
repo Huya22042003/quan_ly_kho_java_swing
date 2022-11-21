@@ -16,6 +16,7 @@ import javax.swing.JLabel;
  * @author Acer
  */
 public interface NvqlQuanLyPhieuNhapService {
+    
     List<NvqlQuanLyPhieuNhapCustom> getListPn();
     NvqlQuanLyPhieuNhapCustom addPn(NvqlQuanLyPhieuNhapCustom p);
     boolean updatePn(NvqlQuanLyPhieuNhapCustom p);
@@ -27,3 +28,5 @@ public interface NvqlQuanLyPhieuNhapService {
     List<NvqlQuanLyPhieuNhapCustom> getListByNgayTao(Long ngayTao, Long ngayKetThuc);
     
 }
+
+    

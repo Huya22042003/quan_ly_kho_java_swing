@@ -20,6 +20,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import javax.swing.JLabel;
+import utilities.DateTimeUtil;
 
 /**
  *
@@ -90,45 +91,25 @@ public class NvqlQuanLyPhieuNhapServiceImpl implements NvqlQuanLyPhieuNhapServic
             errGhiChu.setText("");
         }
 
-        if (ngayTao == null) {
-            errNgayNhap.setText("Bạn chưa chọn ngày nhận!");
-            check =false;
-        } else {
-            errNgayTao.setText("");
-        }
-        if (ngayNhan  == null) {
-            errNgayTao.setText("Bạn chưa chọn ngày tạo!");
+//        if (ngayTao == null) {
+//            errNgayNhap.setText("Bạn chưa chọn ngày tao!");
+//            check =false;
+//        } else {
+//            errNgayTao.setText("");
+//        }
+        if (ngayTao  == null) {
+            errNgayTao.setText("Bạn chưa chọn ngày thanh toán!");
             check = false;
         } else {
             errNgayTao.setText("");
         }
-         if (!check) {
-            return null;
+        if(ngayTao.getTime() < DateTimeUtil.convertDateToTimeStampSecond()){
+            errNgayNhap.setText("Ngay thanh toán phải lớn hơn hoặc bằng ngày tạo!");
+            check = false;
         }
-//                SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
-//        Date nn;
-//        Date nt;
-//        try {
-//            nn = sdf.parse(ngayNhan.toString());
-//            nt = sdf.parse(ngayTao.toString());
-//        } catch (ParseException ex) {
-//            ex.printStackTrace();
-//            return null;   
-//        }
-       
-//        if (!String.valueOf(ngayNhan).matches(ValidateConstant.REGEX_DATE)) {
-//            errNgayNhap.setText("Sai định dạng ngày nhận!");
-//            check = false;
-//        } else {
-//            errNgayNhap.setText("");
-//
-//        }
-//        if (!String.valueOf(ngayTao).matches(ValidateConstant.REGEX_DATE)) {
-//            errNgayTao.setText("Sai định dạng ngày tạo!");
-//            check = false;
-//        } else {
-//            errNgayTao.setText("");
-//        }
+            
+        
+
         if (!check) {
             return null;
         }
@@ -178,5 +159,6 @@ public class NvqlQuanLyPhieuNhapServiceImpl implements NvqlQuanLyPhieuNhapServic
     public List<NvqlQuanLyPhieuNhapCustom> getListByNgayTao(Long ngayTao, Long ngayKetThuc) {
         return repo.getListByNgayTao(ngayTao, ngayKetThuc);
     }
+
 
 }

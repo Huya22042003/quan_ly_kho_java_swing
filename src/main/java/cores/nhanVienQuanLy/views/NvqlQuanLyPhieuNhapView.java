@@ -33,7 +33,8 @@ public class NvqlQuanLyPhieuNhapView extends javax.swing.JPanel {
     public NvqlQuanLyPhieuNhapView() {
         initComponents();
         phieuNhapService = new NvqlQuanLyPhieuNhapServiceImpl();
-        getListPhieuNhap = new ArrayList<>();
+//        getListPhieuNhap = new ArrayList<>();
+ getListPhieuNhap = phieuNhapService.getListPn();
         this.loadTable(getListPhieuNhap);
         this.loadCbbTrangThai();
 //        clearForm();

@@ -429,7 +429,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                      <Component id="myButton5" min="-2" pref="100" max="-2" attributes="0"/>
+                      <Component id="btnThem" min="-2" pref="100" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="myButton9" min="-2" pref="100" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -443,7 +443,7 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="myButton5" pref="43" max="32767" attributes="0"/>
+                          <Component id="btnThem" pref="43" max="32767" attributes="0"/>
                           <Component id="myButton9" alignment="0" max="32767" attributes="0"/>
                           <Component id="myButton10" alignment="0" max="32767" attributes="0"/>
                       </Group>
@@ -474,7 +474,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="myButton9ActionPerformed"/>
               </Events>
             </Component>
-            <Component class="utilities.palette.MyButton" name="myButton5">
+            <Component class="utilities.palette.MyButton" name="btnThem">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="f4" green="f2" red="dd" type="rgb"/>
@@ -492,7 +492,7 @@
                 <Property name="radius" type="int" value="50"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="myButton5ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThemActionPerformed"/>
               </Events>
             </Component>
             <Component class="utilities.palette.MyButton" name="myButton10">
