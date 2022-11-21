@@ -1,22 +1,26 @@
 package cores.truongPhongs.views;
 
-
 import cores.truongPhongs.customModels.TP_KhachHangCustom;
 import cores.truongPhongs.services.TP_KhachHangService;
 import cores.truongPhongs.services.serviceImpls.TP_KhachHangServiceImpl;
 import java.awt.Dimension;
 import java.awt.Image;
+
 import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
 import java.io.File;
+
 import java.util.Date;
-import javax.imageio.ImageIO;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import utilities.MsgBox;
 
 public class TP_CreateKhachHangForm extends javax.swing.JFrame {
 
     private TP_KhachHangService hangService;
+    String duongdananh = getClass().getResource("/icons/FPT_Polytechnic_doc.png").getPath();
 
     public TP_CreateKhachHangForm() {
         hangService = new TP_KhachHangServiceImpl();
@@ -37,7 +41,7 @@ public class TP_CreateKhachHangForm extends javax.swing.JFrame {
         csc.setEmail(txtEmail.getText());
         csc.setDiaChi(txtDiaChi.getText());
         csc.setMatKhau(txtMatKhau.getText());
-        csc.setHinhAnh(lbHinhAnh.getText());
+        csc.setHinhAnh(duongdananh);
         try {
             csc.setNgaySinh(txtDate.getDate().getTime());
         } catch (Exception e) {
@@ -82,6 +86,7 @@ public class TP_CreateKhachHangForm extends javax.swing.JFrame {
         cbbDanhGia = new utilities.palette.Combobox();
         cbbGioiTinh = new utilities.palette.Combobox();
         cbbTrangThai = new utilities.palette.Combobox();
+        btnChonAnh = new utilities.palette.UWPButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -170,12 +175,7 @@ public class TP_CreateKhachHangForm extends javax.swing.JFrame {
         );
 
         lbHinhAnh.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        lbHinhAnh.setText("Hình ảnh");
-        lbHinhAnh.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lbHinhAnhMouseClicked(evt);
-            }
-        });
+        lbHinhAnh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/anh1.jpg.jpg"))); // NOI18N
 
         jPanel5.setBackground(new java.awt.Color(255, 204, 204));
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông tin khách hàng"));
@@ -291,6 +291,13 @@ public class TP_CreateKhachHangForm extends javax.swing.JFrame {
                 .addContainerGap(111, Short.MAX_VALUE))
         );
 
+        btnChonAnh.setText("Chọn ảnh");
+        btnChonAnh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChonAnhActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -302,8 +309,13 @@ public class TP_CreateKhachHangForm extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnX, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(lbHinhAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(78, 78, 78)
+                                .addComponent(btnChonAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(lbHinhAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(32, 32, 32)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -320,7 +332,10 @@ public class TP_CreateKhachHangForm extends javax.swing.JFrame {
                 .addGap(11, 11, 11)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbHinhAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lbHinhAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(btnChonAnh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(46, 46, 46)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(41, Short.MAX_VALUE))
@@ -340,6 +355,7 @@ public class TP_CreateKhachHangForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+
     private void btnXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_btnXActionPerformed
@@ -358,26 +374,12 @@ public class TP_CreateKhachHangForm extends javax.swing.JFrame {
             this.setVisible(false);
         }
 
+
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_btnCloseActionPerformed
-
-    private void lbHinhAnhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbHinhAnhMouseClicked
-        try {
-            JFileChooser jfc = new JFileChooser("");
-            jfc.showOpenDialog(null);
-            File file = jfc.getSelectedFile();
-            Image img = ImageIO.read(file);
-            lbHinhAnh.setText("");
-            int width = lbHinhAnh.getWidth();
-            int height = lbHinhAnh.getHeight();
-            lbHinhAnh.setIcon(new ImageIcon(img.getScaledInstance(width, height, 0)));
-        } catch (Exception e) {
-            System.out.println("Error:" + e.toString());
-        }
-    }//GEN-LAST:event_lbHinhAnhMouseClicked
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         txtDiaChi.setText("");
@@ -386,10 +388,36 @@ public class TP_CreateKhachHangForm extends javax.swing.JFrame {
         txtMatKhau.setText("");
         txtSDT.setText("");
         txtTen.setText("");
+        txtDate.setCalendar(null);
         cbbDanhGia.setSelectedIndex(0);
         cbbGioiTinh.setSelectedIndex(0);
         cbbTrangThai.setSelectedIndex(0);
     }//GEN-LAST:event_btnClearActionPerformed
+
+    public ImageIcon ResizeImage(String ImagePath) {
+        ImageIcon MyImage = new ImageIcon(ImagePath);
+        Image img = MyImage.getImage();
+        Image newImg = img.getScaledInstance(lbHinhAnh.getWidth(), lbHinhAnh.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon image = new ImageIcon(newImg);
+        return image;
+    }
+    private void btnChonAnhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonAnhActionPerformed
+        try {
+            JFileChooser f = new JFileChooser();
+            f.setDialogTitle("Mở file");
+            f.showOpenDialog(null);
+            File ftenanh = f.getSelectedFile();
+            duongdananh = ftenanh.getAbsolutePath();
+
+            lbHinhAnh.setIcon(new javax.swing.ImageIcon(duongdananh));
+            System.out.println(duongdananh);
+
+        } catch (Exception e) {
+            System.out.println("Ban chua chon anh");
+            System.out.println(duongdananh);
+        }
+
+    }//GEN-LAST:event_btnChonAnhActionPerformed
 
     /**
      * @param args the command line arguments
@@ -428,6 +456,7 @@ public class TP_CreateKhachHangForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private utilities.palette.UWPButton btnChonAnh;
     private utilities.palette.UWPButton btnClear;
     private utilities.palette.UWPButton btnClose;
     private utilities.palette.UWPButton btnThem;

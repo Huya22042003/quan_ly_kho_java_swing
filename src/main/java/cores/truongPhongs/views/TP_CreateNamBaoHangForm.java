@@ -1,4 +1,3 @@
-
 package cores.truongPhongs.views;
 
 import cores.truongPhongs.customModels.TP_NamBaoHanhCustom;
@@ -10,7 +9,8 @@ import utilities.MsgBox;
 
 public class TP_CreateNamBaoHangForm extends javax.swing.JFrame {
 
-    private TP_NamBaoHanhService baoHanhService ;
+    private TP_NamBaoHanhService baoHanhService;
+
     public TP_CreateNamBaoHangForm() {
         baoHanhService = new TP_NamBaoHanhServiceImpl();
         initComponents();
@@ -25,6 +25,7 @@ public class TP_CreateNamBaoHangForm extends javax.swing.JFrame {
         custom.setTen(txtTen.getText());
         return custom;
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -175,11 +176,11 @@ public class TP_CreateNamBaoHangForm extends javax.swing.JFrame {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         TP_NamBaoHanhCustom check = baoHanhService.checkValidate(getFormData(), erroMa, erroTen);
-        if(check == null) {
+        if (check == null) {
             return;
         }
 
-        if(baoHanhService.addNBH(check) == null) {
+        if (baoHanhService.addNBH(check) == null) {
             MsgBox.alert(this, "Thêm thất bại");
             this.setVisible(true);
         } else {

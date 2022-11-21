@@ -200,6 +200,7 @@
         </Component>
         <Component class="utilities.palette.TextField" name="txtMa">
           <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="labelText" type="java.lang.String" value="M&#xe3;"/>
           </Properties>
         </Component>
