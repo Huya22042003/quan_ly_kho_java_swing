@@ -1,5 +1,6 @@
 package views.main;
 
+import cores.nhanVienQuanLy.views.NvqlLuongNhapHangView;
 import views.component.Header;
 import views.component.Menu;
 import views.event.EventMenuSelected;
@@ -112,7 +113,7 @@ public class Main extends javax.swing.JFrame {
         });
 
         //  Start with this form
-        main.showForm(new DemoCoSoViewPast2());
+        main.showForm(new NvqlLuongNhapHangView());
     }
 
     @SuppressWarnings("unchecked")
