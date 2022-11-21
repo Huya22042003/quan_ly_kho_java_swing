@@ -314,7 +314,7 @@ public TpRUDQuanLyNhanVien(TpNhanVienCustom nv) {
         this.cbbGioiTinh.setSelectedItem(Converter.trangThaiGioiTinh(custom.getGioiTinh()));
         this.txtDiaChi.setText(custom.getDiaChi());
         this.cbbTrangThai.setSelectedItem(Converter.trangThaiNhanVien(custom.getTrangThai()));
-        
+
     }
 
     public TpNhanVienCustom getFormData() {

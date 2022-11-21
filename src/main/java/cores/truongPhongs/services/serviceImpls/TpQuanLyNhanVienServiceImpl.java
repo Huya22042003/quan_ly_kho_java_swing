@@ -47,6 +47,7 @@ public class TpQuanLyNhanVienServiceImpl implements TpQuanLyNhanVienSevice {
         nv.setHinhAnh(ct.getHinhAnh());
         nv.setGioiTinh(ct.getGioiTinh());
         nv.setDiaChi(ct.getDiaChi());
+        nv.setNgaySinh(ct.getNgaySinh());
         nv.setTrangThai(ct.getTrangThai());
         nv.setIdChucVu(ct.getIdChucVu());
         ct.setId(rp.addNhanVien(nv).getId());
@@ -66,7 +67,7 @@ public class TpQuanLyNhanVienServiceImpl implements TpQuanLyNhanVienSevice {
         nv.setDiaChi(ct.getDiaChi());
         nv.setTrangThai(ct.getTrangThai());
         nv.setId(ct.getId());
-          nv.setIdChucVu(ct.getIdChucVu());
+        nv.setIdChucVu(ct.getIdChucVu());
         return rp.updateNhanVien(nv);
     }
 
@@ -218,7 +219,7 @@ public class TpQuanLyNhanVienServiceImpl implements TpQuanLyNhanVienSevice {
 
     @Override
     public ChucVu findIDCV(UUID id) {
-return rp.findIDCV(id);
+        return rp.findIDCV(id);
     }
 
 }

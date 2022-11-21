@@ -212,9 +212,8 @@ public class TpCreateDonViView extends javax.swing.JFrame {
         TpDonViCustom check = donViService.checkValidate(txtDonViGoc.getText(),
                 txtDonViQuyDoi.getText(),
                 txtSoLuong.getText(), erroDonViGoc,
-             erroDonViQuyDoi,
-             erroSoLuong);
-            
+                erroDonViQuyDoi,
+                erroSoLuong);
 
         if (check == null) {
             return;

@@ -269,9 +269,9 @@ public class TpQuanLyNhanVien extends javax.swing.JPanel {
 
     private void tblQLNVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblQLNVMouseClicked
 
-        int row = this.tblQLNV.getSelectedRow();        
+        int row = this.tblQLNV.getSelectedRow();
         create.setVisible(false);
-        rud.custom = nhanVienSevice.finNhanVienByMa(tblQLNV.getValueAt(row,2).toString());
+        rud.custom = nhanVienSevice.finNhanVienByMa(tblQLNV.getValueAt(row, 2).toString());
         rud.setVisible(true);
         rud.showData();
     }//GEN-LAST:event_tblQLNVMouseClicked

@@ -20,6 +20,7 @@ import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import utilities.DateTimeUtil;
 import utilities.MsgBox;
 
 /**
@@ -34,7 +35,8 @@ public class TpCreateQuanLyNhanVien extends javax.swing.JFrame {
      */
     private TpQuanLyNhanVienSevice nhanVienSevice;
 
-private List<TP_ChucVuCustom> ListCV;
+    private List<TP_ChucVuCustom> ListCV;
+
     public TpCreateQuanLyNhanVien() {
         nhanVienSevice = new TpQuanLyNhanVienServiceImpl();
 
@@ -42,7 +44,7 @@ private List<TP_ChucVuCustom> ListCV;
         initComponents();
         loadList();
         loadCBB();
-        
+
         nhanVienSevice.loadComboboxTT(cbbTrangThai);
         nhanVienSevice.loadComboboxGT(cbbGioiTinh);
         Toolkit toolkit = getToolkit();
@@ -60,10 +62,11 @@ private List<TP_ChucVuCustom> ListCV;
         nvc.setMatKhau(txtMatKhau.getText());
         nvc.setHinhAnh(lbHinhAnh.getText());
         try {
+
             nvc.setNgaySinh(txtDate.getDate().getTime());
         } catch (Exception e) {
-
-            nvc.setNgaySinh(null);
+//lại
+            nvc.setNgaySinh(DateTimeUtil.convertDateToTimeStampSecond());
         }
 //        nvc.setNgaySinh(txtDate.getDate().getTime());
         nvc.setTrangThai(nhanVienSevice.loc(this.cbbTrangThai.getSelectedIndex()));
@@ -74,14 +77,14 @@ private List<TP_ChucVuCustom> ListCV;
 
     public void loadList() {
         ListCV = nhanVienSevice.getListCV();
- 
+
     }
 
     public void loadCBB() {
 
         cbbChucVu.removeAllItems();
         for (TP_ChucVuCustom tP_ChucVuCustom : ListCV) {
-          cbbChucVu.addItem(tP_ChucVuCustom.getTen());
+            cbbChucVu.addItem(tP_ChucVuCustom.getTen());
         }
     }
 

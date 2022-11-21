@@ -197,7 +197,8 @@ public class TpQuanLyNhanVienRepository {
         s.close();
         return list;
     }
-  public List<TP_ChucVuCustom> getListCV() {
+
+    public List<TP_ChucVuCustom> getListCV() {
         List<TP_ChucVuCustom> list = new ArrayList<>();
         Session s = HibernateUtil.getSessionFactory().openSession();
         Query q = s.createQuery("SELECT new cores.truongPhongs.customModels.TP_ChucVuCustom ("
@@ -209,7 +210,8 @@ public class TpQuanLyNhanVienRepository {
         s.close();
         return list;
     }
-  public ChucVu findIDCV(UUID id) {
+
+    public ChucVu findIDCV(UUID id) {
         Session s = HibernateUtil.getSessionFactory().openSession();
         Transaction t = s.beginTransaction();
         ChucVu sp = s.find(ChucVu.class, id);

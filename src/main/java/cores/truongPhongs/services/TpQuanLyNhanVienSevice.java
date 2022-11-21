@@ -43,6 +43,7 @@ public interface TpQuanLyNhanVienSevice {
     TpNhanVienCustom finNhanVienByMa(String ma);
 
     List<TP_ChucVuCustom> getListCV();
+
     public ChucVu findIDCV(UUID id);
 
     List<TpNhanVienCustom> findAllByRadio(String ten, TrangThaiNhanVienConstant tt, int rdo);
