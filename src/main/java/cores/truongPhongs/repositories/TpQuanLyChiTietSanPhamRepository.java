@@ -12,6 +12,7 @@ import domainModels.ChiTietSanPham;
 import domainModels.DonVi;
 import domainModels.NamBaoHanh;
 import domainModels.SanPham;
+import infrastructures.constant.MauConstant;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +38,7 @@ public class TpQuanLyChiTietSanPhamRepository {
                 + "ct.hinhAnh as hinhAnh,"
                 + "ct.GiaNhap as GiaNhap,"
                 + "ct.GiaBan as GiaBan,"
+                + "ct.mau as mau,"
                 + "ct.sanPham as ten,"
                 + "ct.donVi as donViGoc,"
                 + "ct.namBaoHanh as ten"
@@ -100,6 +102,7 @@ public class TpQuanLyChiTietSanPhamRepository {
                     + "ct.hinhAnh as hinhAnh,"
                     + "ct.GiaNhap as GiaNhap,"
                     + "ct.GiaBan as GiaBan,"
+                    + "ct.mau as mau,"
                     + "ct.sanPham as ten,"
                     + "ct.donVi as donViGoc,"
                     + "ct.namBaoHanh as ten"
@@ -122,6 +125,7 @@ public class TpQuanLyChiTietSanPhamRepository {
                     + "ct.hinhAnh as hinhAnh,"
                     + "ct.GiaNhap as GiaNhap,"
                     + "ct.GiaBan as GiaBan,"
+                    + "ct.mau as mau,"
                     + "ct.sanPham as ten,"
                     + "ct.donVi as donViGoc,"
                     + "ct.namBaoHanh as ten"
@@ -135,8 +139,7 @@ public class TpQuanLyChiTietSanPhamRepository {
         return sp;
     }
 
-    // cách tìm kiếm thứ 2
-    public List<TpQuanLyChiTietSanPhamCustom> findAllByGiaNhap(String giaNhap) {
+    public List<TpQuanLyChiTietSanPhamCustom> findAllByGiaNhap(String giaNhap,MauConstant tt) {
         List<TpQuanLyChiTietSanPhamCustom> list = new ArrayList<>();
         Session s = HibernateUtil.getSessionFactory().openSession();
         Query q = s.createQuery("select new cores.truongPhongs.customModels.TpQuanLyChiTietSanPhamCustom ("
@@ -145,17 +148,19 @@ public class TpQuanLyChiTietSanPhamRepository {
                 + "ct.hinhAnh as hinhAnh,"
                 + "ct.GiaNhap as GiaNhap,"
                 + "ct.GiaBan as GiaBan,"
+                + "ct.mau as mau,"
                 + "ct.sanPham as ten,"
                 + "ct.donVi as donViGoc,"
                 + "ct.namBaoHanh as ten"
-                + ") from domainModels.ChiTietSanPham ct WHERE ct.GiaNhap LIKE CONCAT('%',:GiaNhap,'%') ");
+                + ") from domainModels.ChiTietSanPham ct WHERE ct.GiaNhap LIKE CONCAT('%',:GiaNhap,'%') AND ct.mau = :tt");
         q.setParameter("GiaNhap", giaNhap);
+        q.setParameter("tt", tt);
         list = q.getResultList();
         s.close();
         return list;
     }
 
-    public List<TpQuanLyChiTietSanPhamCustom> findAllByGiaBan(String giaBan) {
+    public List<TpQuanLyChiTietSanPhamCustom> findAllByGiaBan(String giaBan,MauConstant tt) {
         List<TpQuanLyChiTietSanPhamCustom> list = new ArrayList<>();
         Session s = HibernateUtil.getSessionFactory().openSession();
         Query q = s.createQuery("select new cores.truongPhongs.customModels.TpQuanLyChiTietSanPhamCustom ("
@@ -164,11 +169,13 @@ public class TpQuanLyChiTietSanPhamRepository {
                 + "ct.hinhAnh as hinhAnh,"
                 + "ct.GiaNhap as GiaNhap,"
                 + "ct.GiaBan as GiaBan,"
+                + "ct.mau as mau,"
                 + "ct.sanPham as ten,"
                 + "ct.donVi as donViGoc,"
                 + "ct.namBaoHanh as ten"
-                + ") from domainModels.ChiTietSanPham ct WHERE ct.GiaBan LIKE CONCAT('%',:GiaBan,'%') ");
+                + ") from domainModels.ChiTietSanPham ct WHERE ct.GiaBan LIKE CONCAT('%',:GiaBan,'%') AND ct.mau = :tt ");
         q.setParameter("GiaBan", giaBan);
+        q.setParameter("tt", tt);
         list = q.getResultList();
         s.close();
         return list;
@@ -183,6 +190,7 @@ public class TpQuanLyChiTietSanPhamRepository {
                 + "ct.hinhAnh as hinhAnh,"
                 + "ct.GiaNhap as GiaNhap,"
                 + "ct.GiaBan as GiaBan,"
+                + "ct.mau as mau,"
                 + "ct.sanPham as ten,"
                 + "ct.donVi as donViGoc,"
                 + "ct.namBaoHanh as ten"
