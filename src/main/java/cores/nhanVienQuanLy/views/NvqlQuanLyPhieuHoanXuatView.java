@@ -10,6 +10,7 @@ import cores.nhanVienQuanLy.services.serviceImpls.NVQLQuanLyPhieuXuatServiceImpl
 import cores.nhanVienQuanLy.services.serviceImpls.NvqlQuanLyPhieuHoanXuatServieceImpl;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 import javax.swing.table.DefaultTableModel;
 import utilities.Converter;
 import utilities.MsgBox;
@@ -283,7 +284,7 @@ public class NvqlQuanLyPhieuHoanXuatView extends javax.swing.JPanel {
     private void tblPhieuHoanXuatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPhieuHoanXuatMouseClicked
         int row = this.tblPhieuHoanXuat.getSelectedRow();
         NvqlRUDQuanLyPhieuHoanXuat rud = new NvqlRUDQuanLyPhieuHoanXuat();
-//        rud.pxcs = phieuXuatService.findByID(UUID.fromString(this.tblPhieuXuat.getValueAt(row, 1).toString()));
+        rud.pxcs = phieuHoanXuatService.findByID(UUID.fromString(this.tblPhieuHoanXuat.getValueAt(row, 1).toString()));
         rud.setVisible(true);
         rud.showData();
     }//GEN-LAST:event_tblPhieuHoanXuatMouseClicked

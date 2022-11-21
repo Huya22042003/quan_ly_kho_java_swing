@@ -13,6 +13,7 @@ import cores.nhanVienQuanLy.services.NvqlQuanLyPhieuHoanXuatService;
 import domainModels.PhieuHoanXuat;
 import domainModels.PhieuXuat;
 import infrastructures.constant.TrangThaiPhieuConstant;
+import infrastructures.constant.TrangThaiPhieuHoanConstant;
 import java.util.ArrayList;
 
 /**
@@ -124,5 +125,19 @@ public class NvqlQuanLyPhieuHoanXuatServieceImpl implements NvqlQuanLyPhieuHoanX
     public List<PhieuXuat> getListMaPhieuXuat() {
         listPX = rp.getListMaPhieuXuat();
         return listPX;
+    }
+
+    @Override
+    public TrangThaiPhieuHoanConstant loc(int a) {
+        switch (a) {
+            case 0:
+                return TrangThaiPhieuHoanConstant.CHO_XAC_NHAN;
+            case 1:
+                return TrangThaiPhieuHoanConstant.DA_HUY;
+            case 2:
+                return TrangThaiPhieuHoanConstant.HOAN_THANH_CONG;
+            default:
+                return null;
+        }
     }
 }
