@@ -1,4 +1,3 @@
-
 package cores.truongPhongs.views;
 
 import cores.truongPhongs.customModels.TP_ChucVuCustom;
@@ -8,11 +7,11 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import utilities.MsgBox;
 
-
 public class TP_RUDChucVuForm extends javax.swing.JFrame {
 
     private TP_ChucVuService chucVuService;
     TP_ChucVuCustom custom = new TP_ChucVuCustom();
+
     public TP_RUDChucVuForm() {
         chucVuService = new TP_ChucVuServiceImpl();
         initComponents();
@@ -20,7 +19,8 @@ public class TP_RUDChucVuForm extends javax.swing.JFrame {
         Dimension size = toolkit.getScreenSize();
         setLocation(size.width / 2 - getWidth() / 2, size.height / 2 - getHeight() / 2);
     }
-   public TP_RUDChucVuForm(TP_ChucVuCustom cs) {
+
+    public TP_RUDChucVuForm(TP_ChucVuCustom cs) {
         custom = cs;
         chucVuService = new TP_ChucVuServiceImpl();
         initComponents();
@@ -34,13 +34,14 @@ public class TP_RUDChucVuForm extends javax.swing.JFrame {
         this.txtMa.setText(custom.getMa());
         this.txtTen.setText(custom.getTen());
     }
+
     public TP_ChucVuCustom getFormData() {
         TP_ChucVuCustom custom = new TP_ChucVuCustom();
         custom.setMa(null);
         custom.setTen(txtTen.getText());
         return custom;
     }
-   
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -108,6 +109,7 @@ public class TP_RUDChucVuForm extends javax.swing.JFrame {
             }
         });
 
+        txtMa.setEnabled(false);
         txtMa.setLabelText("Mã");
 
         txtTen.setLabelText("Tên ");

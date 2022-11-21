@@ -10,13 +10,13 @@ import javax.swing.table.DefaultTableModel;
 
 public class TP_NamBaoHanhForm extends javax.swing.JPanel {
 
-    private TP_NamBaoHanhService baoHanhService ;
+    private TP_NamBaoHanhService baoHanhService;
 
-    private List<TP_NamBaoHanhCustom> getList ;
+    private List<TP_NamBaoHanhCustom> getList;
 
-    private TP_CreateNamBaoHangForm createView ;
+    private TP_CreateNamBaoHangForm createView;
 
-    private TP_RUDNamBaoHangForm rud ;
+    private TP_RUDNamBaoHangForm rud;
 
     public TP_NamBaoHanhForm() {
         baoHanhService = new TP_NamBaoHanhServiceImpl();
@@ -249,8 +249,8 @@ public class TP_NamBaoHanhForm extends javax.swing.JPanel {
     private void tableAllMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableAllMouseClicked
         int row = this.tableAll.getSelectedRow();
         createView.setVisible(false);
-        
-        rud.custom = baoHanhService.findNBHByMa(tableAll.getValueAt(row,1).toString());
+
+        rud.custom = baoHanhService.findNBHByMa(tableAll.getValueAt(row, 1).toString());
         rud.setVisible(true);
         rud.showData();
     }//GEN-LAST:event_tableAllMouseClicked
