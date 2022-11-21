@@ -7,7 +7,7 @@ import javax.swing.JLabel;
 
 public interface TP_ChucVuService {
 
-    List<TP_ChucVuCustom> getListNBH();
+    List<TP_ChucVuCustom> getListCV();
 
     TP_ChucVuCustom addChucVu(TP_ChucVuCustom custom);
 

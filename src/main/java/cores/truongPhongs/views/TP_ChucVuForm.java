@@ -20,8 +20,9 @@ public class TP_ChucVuForm extends javax.swing.JPanel {
         rud = new TP_RUDChucVuForm();
         createChucVu = new TP_CreateChucVuForm();
         initComponents();
-        clearForm();
+        getList = chucVuService.getListCV();
         loadTable(getList);
+        clearForm();
     }
 
     public void clearForm() {
@@ -256,8 +257,9 @@ public class TP_ChucVuForm extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnHienThiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHienThiActionPerformed
-        clearForm();
+        getList = chucVuService.getListCV();
         loadTable(getList);
+        clearForm();
     }//GEN-LAST:event_btnHienThiActionPerformed
 
 
