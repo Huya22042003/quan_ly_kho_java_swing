@@ -21,9 +21,10 @@ public class TpQuanLySanPhamFormAdd extends javax.swing.JFrame {
      * Creates new form TpQuanLySanPhamFormAdd
      */
     private TpQuanLySanPhamService serviceSP = new TpQuanLySanPhamServiceImpl();
+
     public TpQuanLySanPhamFormAdd() {
         initComponents();
-         Toolkit toolkit = getToolkit();
+        Toolkit toolkit = getToolkit();
         Dimension size = toolkit.getScreenSize();
         setLocation(size.width / 2 - getWidth() / 2, size.height / 2 - getHeight() / 2);
     }
@@ -32,9 +33,10 @@ public class TpQuanLySanPhamFormAdd extends javax.swing.JFrame {
         TpQuanLySanPhamCustom sp = new TpQuanLySanPhamCustom();
         sp.setMa(this.txtMa.getText());
         sp.setTen(txtTen.getText());
-        
+
         return sp;
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -51,6 +53,7 @@ public class TpQuanLySanPhamFormAdd extends javax.swing.JFrame {
         erroTen = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -184,11 +187,11 @@ public class TpQuanLySanPhamFormAdd extends javax.swing.JFrame {
 
     private void uWPButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uWPButton2ActionPerformed
         TpQuanLySanPhamCustom check = serviceSP.checkValidate(getFormData(), erroMa, erroTen);
-        if(check == null) {
+        if (check == null) {
             return;
-        } 
-        
-        if(serviceSP.addSanPham(check) == null) {
+        }
+
+        if (serviceSP.addSanPham(check) == null) {
             MsgBox.alert(this, "Thêm thất bại");
             this.setVisible(true);
         } else {

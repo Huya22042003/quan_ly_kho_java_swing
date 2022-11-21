@@ -28,12 +28,13 @@ public class TpQuanLySanPhamRepository {
         Query q = s.createQuery("select new cores.truongPhongs.customModels.TpQuanLySanPhamCustom ("
                 + "sp.id as id,"
                 + "sp.ma as ma,"
-                + "sp.ten as ten"                
+                + "sp.ten as ten"
                 + ") from domainModels.SanPham sp");
         list = q.getResultList();
         s.close();
         return list;
     }
+
     public SanPham addSanPham(SanPham sp) {
         Session s = HibernateUtil.getSessionFactory().openSession();
         try {
@@ -52,7 +53,7 @@ public class TpQuanLySanPhamRepository {
 
     public boolean updateSanPham(SanPham sp) {
         Transaction tran = null;
-        try ( Session s = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session s = HibernateUtil.getSessionFactory().openSession()) {
             tran = s.beginTransaction();
             s.update(sp);
             tran.commit();
@@ -66,7 +67,7 @@ public class TpQuanLySanPhamRepository {
 
     public boolean deleteSanPham(UUID id) {
         Transaction tran = null;
-        try ( Session s = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session s = HibernateUtil.getSessionFactory().openSession()) {
             tran = s.beginTransaction();
             SanPham cs = s.find(SanPham.class, id);
             s.delete(cs);
@@ -81,12 +82,12 @@ public class TpQuanLySanPhamRepository {
 
     public TpQuanLySanPhamCustom findByMa(String ma) {
         TpQuanLySanPhamCustom sp = new TpQuanLySanPhamCustom();
-        try ( Session s = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session s = HibernateUtil.getSessionFactory().openSession()) {
             Query q = s.createQuery("select new cores.truongPhongs.customModels.TpQuanLySanPhamCustom ("
-                + "sp.id as id,"
-                + "sp.ma as ma,"
-                + "sp.ten as ten"                
-                + ") from domainModels.SanPham sp WHERE sp.ma = :ma");
+                    + "sp.id as id,"
+                    + "sp.ma as ma,"
+                    + "sp.ten as ten"
+                    + ") from domainModels.SanPham sp WHERE sp.ma = :ma");
             q.setParameter("ma", ma);
             sp = (TpQuanLySanPhamCustom) q.getSingleResult();
         } catch (NoResultException e) {
@@ -95,7 +96,7 @@ public class TpQuanLySanPhamRepository {
         }
         return sp;
     }
-    
+
     // cách tìm kiếm thứ 2
     public List<TpQuanLySanPhamCustom> findAllByMa(String ma) {
         List<TpQuanLySanPhamCustom> list = new ArrayList<>();
@@ -103,27 +104,34 @@ public class TpQuanLySanPhamRepository {
         Query q = s.createQuery("select new cores.truongPhongs.customModels.TpQuanLySanPhamCustom ("
                 + "sp.id as id,"
                 + "sp.ma as ma,"
-                + "sp.ten as ten"                
+                + "sp.ten as ten"
                 + ") from domainModels.SanPham sp WHERE sp.ma LIKE CONCAT('%',:ma,'%') ");
         q.setParameter("ma", ma);
         list = q.getResultList();
         s.close();
         return list;
     }
-    
+
     public List<TpQuanLySanPhamCustom> findAllByTen(String ten) {
         List<TpQuanLySanPhamCustom> list = new ArrayList<>();
         Session s = HibernateUtil.getSessionFactory().openSession();
         Query q = s.createQuery("select new cores.truongPhongs.customModels.TpQuanLySanPhamCustom ("
                 + "sp.id as id,"
                 + "sp.ma as ma,"
-                + "sp.ten as ten"                
+                + "sp.ten as ten"
                 + ") from domainModels.SanPham sp WHERE sp.ten LIKE CONCAT('%',:ten,'%') ");
         q.setParameter("ten", ten);
         list = q.getResultList();
         s.close();
         return list;
     }
-    
-    
+
+    public SanPham findID(UUID id) {
+        Session s = HibernateUtil.getSessionFactory().openSession();
+        Transaction t = s.beginTransaction();
+        SanPham sp = s.find(SanPham.class, id);
+        t.commit();
+        s.close();
+        return sp;
+    }
 }

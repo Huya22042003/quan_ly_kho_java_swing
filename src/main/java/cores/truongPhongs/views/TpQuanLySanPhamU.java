@@ -27,7 +27,7 @@ public class TpQuanLySanPhamU extends javax.swing.JFrame {
         Dimension size = toolkit.getScreenSize();
         setLocation(size.width / 2 - getWidth() / 2, size.height / 2 - getHeight() / 2);
     }
-    
+
     public TpQuanLySanPhamU(TpQuanLySanPhamCustom cs) {
         tp = cs;
         serviceSP = new TpQuanLySanPhamServiceImpl();
@@ -70,6 +70,7 @@ public class TpQuanLySanPhamU extends javax.swing.JFrame {
         btnDelete = new utilities.palette.UWPButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));

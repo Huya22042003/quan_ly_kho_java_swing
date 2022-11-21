@@ -25,6 +25,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TpQuanLyChiTietSanPhamCustom {
+
     private UUID id;
 
     private int soLuongTon;
@@ -37,14 +38,8 @@ public class TpQuanLyChiTietSanPhamCustom {
 
     private SanPham sanPham;
 
-
     private DonVi donVi;
 
-
     private NamBaoHanh namBaoHanh;
-    
-//    @OneToMany(mappedBy = "idChiTietSp")
-//    private List<ChiTietPhieuHoanNhap> chiTietPhieuHoanNhaps;
-    
-    private List<ChiTietPhieuHoanXuat> chiTietPhieuHoanXuats;
+
 }

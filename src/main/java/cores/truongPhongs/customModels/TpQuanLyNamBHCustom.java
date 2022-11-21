@@ -5,7 +5,6 @@
 package cores.truongPhongs.customModels;
 
 import java.util.UUID;
-import javax.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,12 +18,10 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TpQuanLySanPhamCustom {
-
+public class TpQuanLyNamBHCustom {
     private UUID id;
 
     private String ma;
 
     private String ten;
-
 }

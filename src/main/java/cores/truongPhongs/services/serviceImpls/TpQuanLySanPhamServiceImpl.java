@@ -18,8 +18,10 @@ import javax.swing.JLabel;
  *
  * @author MMC
  */
-public class TpQuanLySanPhamServiceImpl implements TpQuanLySanPhamService{
-        private TpQuanLySanPhamRepository rp = new TpQuanLySanPhamRepository();
+public class TpQuanLySanPhamServiceImpl implements TpQuanLySanPhamService {
+
+    private TpQuanLySanPhamRepository rp = new TpQuanLySanPhamRepository();
+
     @Override
     public List<TpQuanLySanPhamCustom> getAll() {
         return rp.getAll();
@@ -59,24 +61,24 @@ public class TpQuanLySanPhamServiceImpl implements TpQuanLySanPhamService{
             case 0:
                 return rp.findAllByMa(ten);
             case 1:
-                return rp.findAllByTen(ten);            
+                return rp.findAllByTen(ten);
             default:
-               return null; 
+                return null;
         }
     } //
 
     @Override
     public TpQuanLySanPhamCustom checkValidate(TpQuanLySanPhamCustom sp, JLabel erroMa, JLabel erroTen) {
-        
+
         boolean check = true;
 
         if (sp.getMa() != null) {
             if (sp.getMa().trim().length() == 0) {
                 erroMa.setText("Mã không được để trống");
                 check = false;
-//            } else if (!sp.getMa().matches(ValidateConstant.REGEX_CHU_KHONG_CO_KHOANG_TRANG)) {
-//                erroMa.setText("Mã không được có khoảng trắng");
-//                check = false;
+            } else if (!sp.getMa().matches(ValidateConstant.REGEX_CHU_KHONG_CO_KHOANG_TRANG)) {
+                erroMa.setText("Mã không được có khoảng trắng");
+                check = false;
             } else if (findSanPhamByMa(sp.getMa()) != null) {
                 erroMa.setText("Mã đã tồn tại");
                 check = false;
@@ -88,17 +90,24 @@ public class TpQuanLySanPhamServiceImpl implements TpQuanLySanPhamService{
         if (sp.getTen().trim().length() == 0) {
             erroTen.setText("Tên không được để trống");
             check = false;
-        } else {
+        } else if (sp.getTen().matches("\\d+")){
+            erroTen.setText("Tên phải là chữ");
+            check = false;
+        }
+        else {
             erroTen.setText("");
         }
 
-        
         if (!check) {
             return null;
         }
 
         return sp;
     }
-    
-    
+
+    @Override
+    public SanPham findID(UUID id) {
+        return rp.findID(id);
+    }
+
 }

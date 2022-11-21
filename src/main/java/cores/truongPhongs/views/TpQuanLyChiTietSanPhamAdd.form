@@ -3,6 +3,7 @@
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="undecorated" type="boolean" value="true"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -57,65 +58,52 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="uWPButton1" min="-2" pref="53" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="106" max="-2" attributes="0"/>
-                                  <Component id="uWPButton2" min="-2" pref="97" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
-                                  <Component id="uWPButton3" min="-2" pref="97" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="119" pref="119" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="erroGiaNhap" min="-2" pref="171" max="-2" attributes="0"/>
-                                              <EmptySpace max="32767" attributes="0"/>
-                                              <Component id="erroGiaBan" min="-2" pref="171" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="txtMa" min="-2" pref="171" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
-                                              <Component id="txtTen" min="-2" pref="171" max="-2" attributes="0"/>
-                                          </Group>
+                                          <Component id="txtSoLuongTon" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="cbbDonVi" alignment="0" pref="270" max="32767" attributes="0"/>
+                                          <Component id="erroGiaNhap" max="32767" attributes="0"/>
+                                          <Component id="erroSoLuongTon" alignment="0" max="32767" attributes="0"/>
                                       </Group>
-                                      <Group type="102" alignment="0" attributes="0">
+                                      <Component id="txtGiaNhap" alignment="0" min="-2" pref="270" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="erroGiaBan" max="32767" attributes="0"/>
+                                      <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="combobox1" alignment="0" min="-2" pref="171" max="-2" attributes="0"/>
-                                              <Component id="textField1" alignment="0" min="-2" pref="171" max="-2" attributes="0"/>
-                                              <Component id="erroSoLuongTon" alignment="0" min="-2" pref="171" max="-2" attributes="0"/>
-                                              <Component id="erroIdDonVi" alignment="0" min="-2" pref="171" max="-2" attributes="0"/>
+                                              <Component id="txtGiaBan" min="-2" pref="272" max="-2" attributes="0"/>
+                                              <Component id="cbbSanPham" alignment="0" min="-2" pref="269" max="-2" attributes="0"/>
+                                              <Component id="cbbNamBH" alignment="0" min="-2" pref="269" max="-2" attributes="0"/>
                                           </Group>
-                                          <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="combobox2" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="combobox3" alignment="0" max="32767" attributes="0"/>
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Component id="erroIdNamBH" alignment="0" min="-2" pref="171" max="-2" attributes="0"/>
-                                                      <Component id="erroIdSP" alignment="0" min="-2" pref="171" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                              </Group>
-                                          </Group>
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
-                          </Group>
-                          <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lblHinhAnh" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                                  <Component id="lable2" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="244" max="-2" attributes="0"/>
+                                  <Component id="btnSave" min="-2" pref="97" max="-2" attributes="0"/>
+                                  <EmptySpace pref="214" max="32767" attributes="0"/>
+                                  <Component id="btnClose" min="-2" pref="97" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lblHinhAnh" min="-2" pref="175" max="-2" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="erroHinhAnh" min="-2" pref="137" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
                   </Group>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -125,59 +113,52 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="uWPButton1" min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="txtMa" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtTen" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="txtGiaNhap" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtGiaBan" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="erroGiaNhap" alignment="0" min="-2" pref="24" max="-2" attributes="0"/>
+                                      <Component id="erroGiaBan" alignment="0" min="-2" pref="24" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Component id="lblHinhAnh" min="-2" pref="154" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="erroGiaNhap" alignment="0" min="-2" pref="24" max="-2" attributes="0"/>
-                              <Component id="erroGiaBan" alignment="0" min="-2" pref="24" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
+                              <Group type="102" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="textField1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtSoLuongTon" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                                  <Component id="combobox3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="erroHinhAnh" min="-2" pref="24" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="erroSoLuongTon" alignment="0" min="-2" pref="24" max="-2" attributes="0"/>
-                              <Component id="erroIdSP" alignment="0" min="-2" pref="24" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="combobox1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="combobox2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="erroIdDonVi" min="-2" pref="24" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="erroIdNamBH" alignment="1" min="-2" pref="24" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="uWPButton3" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="uWPButton2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
-                          <Component id="lblHinhAnh" min="-2" pref="154" max="-2" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="cbbSanPham" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="lable2" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
+                  <Component id="erroSoLuongTon" min="-2" pref="24" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="cbbDonVi" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cbbNamBH" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="38" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="btnClose" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnSave" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
               </Group>
               <Component id="jPanel2" alignment="0" max="32767" attributes="0"/>
           </Group>
@@ -232,7 +213,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="utilities.palette.UWPButton" name="uWPButton2">
+        <Component class="utilities.palette.UWPButton" name="btnSave">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="66" green="99" red="ff" type="rgb"/>
@@ -240,10 +221,10 @@
             <Property name="text" type="java.lang.String" value="Save"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="uWPButton2ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSaveActionPerformed"/>
           </Events>
         </Component>
-        <Component class="utilities.palette.UWPButton" name="uWPButton3">
+        <Component class="utilities.palette.UWPButton" name="btnClose">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="33" green="33" red="ff" type="rgb"/>
@@ -251,15 +232,15 @@
             <Property name="text" type="java.lang.String" value="Close"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="uWPButton3ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCloseActionPerformed"/>
           </Events>
         </Component>
-        <Component class="utilities.palette.TextField" name="txtMa">
+        <Component class="utilities.palette.TextField" name="txtGiaNhap">
           <Properties>
             <Property name="labelText" type="java.lang.String" value="Gi&#xe1; Nh&#x1ead;p"/>
           </Properties>
         </Component>
-        <Component class="utilities.palette.TextField" name="txtTen">
+        <Component class="utilities.palette.TextField" name="txtGiaBan">
           <Properties>
             <Property name="labelText" type="java.lang.String" value="Gi&#xe1; B&#xe1;n "/>
           </Properties>
@@ -278,25 +259,28 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="utilities.palette.TextField" name="textField1">
+        <Component class="utilities.palette.TextField" name="txtSoLuongTon">
           <Properties>
             <Property name="labelText" type="java.lang.String" value="S&#x1ed1; L&#x1b0;&#x1ee3;ng T&#x1ed3;n"/>
           </Properties>
         </Component>
-        <Component class="utilities.palette.Combobox" name="combobox1">
+        <Component class="utilities.palette.Combobox" name="cbbDonVi">
           <Properties>
             <Property name="labeText" type="java.lang.String" value="Ch&#x1ecd;n &#x110;&#x1a1;n V&#x1ecb;"/>
           </Properties>
         </Component>
-        <Component class="utilities.palette.Combobox" name="combobox2">
+        <Component class="utilities.palette.Combobox" name="cbbNamBH">
           <Properties>
             <Property name="labeText" type="java.lang.String" value="Ch&#x1ecd;n N&#x103;m B&#x1ea3;o H&#xe0;nh"/>
           </Properties>
         </Component>
-        <Component class="utilities.palette.Combobox" name="combobox3">
+        <Component class="utilities.palette.Combobox" name="cbbSanPham">
           <Properties>
             <Property name="labeText" type="java.lang.String" value="Ch&#x1ecd;n S&#x1ea3;n Ph&#x1ea9;m"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbbSanPhamActionPerformed"/>
+          </Events>
         </Component>
         <Component class="utilities.palette.lable" name="lblHinhAnh">
           <Properties>
@@ -306,11 +290,9 @@
               </Border>
             </Property>
           </Properties>
-        </Component>
-        <Component class="utilities.palette.lable" name="lable2">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="H&#xec;nh &#x1ea3;nh"/>
-          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblHinhAnhMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="erroSoLuongTon">
           <Properties>
@@ -319,21 +301,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="erroIdDonVi">
-          <Properties>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="33" green="33" red="ff" type="rgb"/>
-            </Property>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="erroIdNamBH">
-          <Properties>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="33" green="33" red="ff" type="rgb"/>
-            </Property>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="erroIdSP">
+        <Component class="javax.swing.JLabel" name="erroHinhAnh">
           <Properties>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="33" green="33" red="ff" type="rgb"/>
