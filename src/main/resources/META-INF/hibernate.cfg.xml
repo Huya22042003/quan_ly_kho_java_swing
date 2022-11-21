@@ -9,7 +9,6 @@
         <property name="connection.driver_class">
             com.microsoft.sqlserver.jdbc.SQLServerDriver
         </property>
-
         <property name="connection.url">
             jdbc:sqlserver://localhost:1433;databaseName=DU_AN_MOT;encrypt=true;trustServerCertificate=true;
         </property>

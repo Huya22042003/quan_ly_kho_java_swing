@@ -19,7 +19,7 @@ public class ValidateConstant {
     public static final String REGEX_PHONE_NUMBER = "(0?)(3[2-9]|5[6|8|9]|7[0|6-9]"
             + "|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}"; // LÀ SỐ BẮT ĐẦU TỪ 0
     public static final String REGEX_CMND = "\\d{12}"; // LÀ SỐ 10 KÝ TỰ
-    public static final String REGEX_CHU_KHONG_CO_KHOANG_TRANG = "[a-zA-Z]+";
+    public static final String REGEX_CHU_KHONG_CO_KHOANG_TRANG = "[a-zA-Z0-9]+";
     public static final String REGEX_USER_NAME = "[a-zA-Z0-9]+.{12,}";  // số và chữ ít nhất 12 ký tự
     public static final String REGEX_SO = "[0-9]+";
     public static final String REGEX_DATE = "[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2]"

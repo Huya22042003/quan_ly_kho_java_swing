@@ -13,7 +13,7 @@ public class TP_ChucVuServiceImpl implements TP_ChucVuService {
     private TP_ChucVuRepository rp = new TP_ChucVuRepository();
 
     @Override
-    public List<TP_ChucVuCustom> getListNBH() {
+    public List<TP_ChucVuCustom> getListCV() {
         return rp.getList();
     }
 
@@ -56,7 +56,7 @@ public class TP_ChucVuServiceImpl implements TP_ChucVuService {
 //            } else if (!nbh.getMa().matches(ValidateConstant.REGEX_CHU_KHONG_CO_KHOANG_TRANG)) {
 //                erroMa.setText("Mã không được có khoảng trắng");
 //                check = false;
-            } else if (findChucVuByMa(cv.getMa()) != null) {
+            } else if (findChucVuByMa(cv.getMa().trim()) != null) {
                 erroMa.setText("Mã đã tồn tại");
                 check = false;
             } else {
@@ -66,6 +66,9 @@ public class TP_ChucVuServiceImpl implements TP_ChucVuService {
 
         if (cv.getTen().trim().length() == 0) {
             erroTen.setText("Tên không được để trống");
+            check = false;
+        } else if (cv.getTen().trim().matches("\\d+")) {
+            erroTen.setText("Tên phải là kiểu chữ");
             check = false;
         } else {
             erroTen.setText("");

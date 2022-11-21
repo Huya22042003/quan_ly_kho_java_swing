@@ -222,7 +222,7 @@ public class NVQLQuanLyPhieuXuatView extends javax.swing.JPanel {
             }
         });
 
-        btnClear.setText("ClearForm");
+        btnClear.setText("Clear");
         btnClear.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
