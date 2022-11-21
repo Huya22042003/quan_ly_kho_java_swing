@@ -38,6 +38,7 @@ public class NvqlXemChiTietPhieuNhapForm extends javax.swing.JPanel {
         panelRound5 = new utilities.palette.PanelRound();
         jLabel2 = new javax.swing.JLabel();
         panelRound8 = new utilities.palette.PanelRound();
+        myButton8 = new utilities.palette.MyButton();
         panelRound15 = new utilities.palette.PanelRound();
         myButton6 = new utilities.palette.MyButton();
         myButton7 = new utilities.palette.MyButton();
@@ -60,11 +61,11 @@ public class NvqlXemChiTietPhieuNhapForm extends javax.swing.JPanel {
 
             },
             new String [] {
-                "STT", "Mã phiếu", "Tên sản phẩm", "Hình ảnh", "Màu", "Đơn vị", "Năm bảo hành", "Số lượng", "Tổng tiền"
+                "STT", "Tên sản phẩm", "Màu", "Đơn vị", "Năm bảo hành", "Số lượng", "Giá nhập"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, true, false, false, false, true, false
+                false, false, false, false, false, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -184,15 +185,31 @@ public class NvqlXemChiTietPhieuNhapForm extends javax.swing.JPanel {
         panelRound8.setRoundTopLeft(50);
         panelRound8.setRoundTopRight(50);
 
+        myButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/update.png"))); // NOI18N
+        myButton8.setBorderColor(new java.awt.Color(221, 242, 244));
+        myButton8.setColor(new java.awt.Color(221, 242, 244));
+        myButton8.setRadius(50);
+        myButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myButton8ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelRound8Layout = new javax.swing.GroupLayout(panelRound8);
         panelRound8.setLayout(panelRound8Layout);
         panelRound8Layout.setHorizontalGroup(
             panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(panelRound8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(myButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         panelRound8Layout.setVerticalGroup(
             panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(panelRound8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(myButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         panelRound15.setBackground(new java.awt.Color(67, 130, 187));
@@ -275,7 +292,7 @@ public class NvqlXemChiTietPhieuNhapForm extends javax.swing.JPanel {
         textField13.setBackground(new java.awt.Color(221, 242, 244));
         textField13.setToolTipText("");
         textField13.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        textField13.setLabelText("Tổng tiền");
+        textField13.setLabelText("Giá nhập");
 
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
         panelRound1.setLayout(panelRound1Layout);
@@ -385,6 +402,10 @@ public class NvqlXemChiTietPhieuNhapForm extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_combobox1ActionPerformed
 
+    private void myButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_myButton8ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private utilities.palette.Combobox combobox1;
@@ -392,6 +413,7 @@ public class NvqlXemChiTietPhieuNhapForm extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private utilities.palette.MyButton myButton6;
     private utilities.palette.MyButton myButton7;
+    private utilities.palette.MyButton myButton8;
     private utilities.palette.PanelRound panelRound1;
     private utilities.palette.PanelRound panelRound15;
     private utilities.palette.PanelRound panelRound4;

@@ -12,6 +12,7 @@ import cores.nhanVienQuanLy.services.NvqlQuanLyPhieuNhapService;
 import domainModels.NhaCungCap;
 import domainModels.NhanVien;
 import domainModels.PhieuNhap;
+import infrastructures.constant.TrangThaiPhieuConstant;
 import infrastructures.constant.ValidateConstant;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -51,6 +52,7 @@ public class NvqlQuanLyPhieuNhapServiceImpl implements NvqlQuanLyPhieuNhapServic
         pn.setNgayTao(p.getNgayTao());
         pn.setNhaCungCap(ncc);
         pn.setNhanVien(nv);
+        pn.setTrangThai(p.getTrangThai());
         p.setId(repo.addPn(pn).getId());
         return p;
     }
@@ -61,6 +63,7 @@ public class NvqlQuanLyPhieuNhapServiceImpl implements NvqlQuanLyPhieuNhapServic
         NhanVien nv = repoNv.getNhanVienById(p.getIdNhanVien());
         PhieuNhap pn = new PhieuNhap();
         pn.setId(p.getId());
+        pn.setTrangThai(p.getTrangThai());
         pn.setGhiChu(p.getGhiChu());
         pn.setNgayThanhToan(p.getNgayThanhToan());
         pn.setNgayTao(p.getNgayTao());
@@ -142,6 +145,7 @@ public class NvqlQuanLyPhieuNhapServiceImpl implements NvqlQuanLyPhieuNhapServic
         NvqlQuanLyPhieuNhapCustom p = new NvqlQuanLyPhieuNhapCustom();
         PhieuNhap pn = repo.findPhieuNhapById(id);
         p.setId(pn.getId());
+        p.setTrangThai(pn.getTrangThai());
         p.setIdNcc(pn.getNhaCungCap().getId());
         p.setIdNhanVien(pn.getNhanVien().getId());
         p.setGhiChu(pn.getGhiChu());
@@ -149,6 +153,30 @@ public class NvqlQuanLyPhieuNhapServiceImpl implements NvqlQuanLyPhieuNhapServic
         p.setNgayTao(pn.getNgayTao());
        
         return p;
+    }
+
+    @Override
+    public TrangThaiPhieuConstant loc(int a) {
+         switch (a) {
+            case 0:
+                return TrangThaiPhieuConstant.DA_THANH_TOAN;
+            case 1:
+                return TrangThaiPhieuConstant.DA_HUY;
+            case 2:
+                return TrangThaiPhieuConstant.CHO_THANH_TOAN;
+            default:
+                return null;
+        }
+    }
+
+    @Override
+    public List<NvqlQuanLyPhieuNhapCustom> getListByNgayThanhToan(Long ngayBatDau, Long ngayKetThuc) {
+        return repo.getListByNgayThanhToan(ngayBatDau, ngayKetThuc);
+    }
+
+    @Override
+    public List<NvqlQuanLyPhieuNhapCustom> getListByNgayTao(Long ngayTao, Long ngayKetThuc) {
+        return repo.getListByNgayTao(ngayTao, ngayKetThuc);
     }
 
 }

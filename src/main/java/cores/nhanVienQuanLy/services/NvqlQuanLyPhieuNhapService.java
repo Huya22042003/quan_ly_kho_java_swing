@@ -5,6 +5,7 @@
 package cores.nhanVienQuanLy.services;
 
 import cores.nhanVienQuanLy.customModels.NvqlQuanLyPhieuNhapCustom;
+import infrastructures.constant.TrangThaiPhieuConstant;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -21,5 +22,8 @@ public interface NvqlQuanLyPhieuNhapService {
     boolean deletePn(UUID id);
     NvqlQuanLyPhieuNhapCustom checkValidate(String ghiChu,Date ngayNhap,Date ngayTao,JLabel errNgayNhap, JLabel errNgayTao,JLabel errGhiChu);
     NvqlQuanLyPhieuNhapCustom findPhieuNhapById(UUID id);
+    TrangThaiPhieuConstant loc(int a);
+    List<NvqlQuanLyPhieuNhapCustom> getListByNgayThanhToan(Long ngayBatDau, Long ngayKetThuc);
+    List<NvqlQuanLyPhieuNhapCustom> getListByNgayTao(Long ngayTao, Long ngayKetThuc);
     
 }

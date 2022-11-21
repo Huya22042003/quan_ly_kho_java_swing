@@ -100,7 +100,12 @@
                                   </Group>
                               </Group>
                               <Component id="errGhiChu" alignment="0" max="32767" attributes="0"/>
-                              <Component id="textAreaScroll1" alignment="0" min="-2" pref="274" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="textAreaScroll1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="cbbTrangThai" min="-2" pref="125" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                   </Group>
@@ -136,7 +141,10 @@
                       <Component id="cbbNhanVien" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                  <Component id="textAreaScroll1" min="-2" pref="90" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="textAreaScroll1" min="-2" pref="90" max="-2" attributes="0"/>
+                      <Component id="cbbTrangThai" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="errGhiChu" min="-2" pref="24" max="-2" attributes="0"/>
                   <EmptySpace pref="11" max="32767" attributes="0"/>
@@ -296,6 +304,11 @@
             </Component>
           </SubComponents>
         </Container>
+        <Component class="utilities.palette.Combobox" name="cbbTrangThai">
+          <Properties>
+            <Property name="labeText" type="java.lang.String" value="Tr&#x1ea1;ng th&#xe1;i"/>
+          </Properties>
+        </Component>
       </SubComponents>
     </Container>
   </SubComponents>
