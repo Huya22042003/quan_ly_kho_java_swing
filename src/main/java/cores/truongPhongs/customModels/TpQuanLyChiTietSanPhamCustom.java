@@ -8,6 +8,7 @@ import domainModels.ChiTietPhieuHoanXuat;
 import domainModels.DonVi;
 import domainModels.NamBaoHanh;
 import domainModels.SanPham;
+import infrastructures.constant.MauConstant;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
@@ -35,6 +36,8 @@ public class TpQuanLyChiTietSanPhamCustom {
     private BigDecimal GiaNhap;
 
     private BigDecimal GiaBan;
+    
+    private MauConstant mau;
 
     private SanPham sanPham;
 

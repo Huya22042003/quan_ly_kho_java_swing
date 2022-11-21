@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import javax.swing.table.DefaultTableModel;
+import utilities.Converter;
 
 /**
  *
@@ -39,9 +40,10 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
         rud = new TpQuanLyChiTietSanPhamU();
         initComponents();
         tbChiTietSanPham.setModel(dtm);
-        String[] hearders = {"STT", "GiaBan", "GiaNhap", "SoLuongTon", "DonVi", "NamBH", "SanPham"};
+        String[] hearders = {"STT", "Giá Bán", "Giá Nhập", "Số Lượng Tồn", "Đơn Vị", "Năm Bảo Hành", "Sản Phẩm", "Màu"};
         dtm.setColumnIdentifiers(hearders);
         listChiTietSP = serviceChiTietSP.getAll();
+        serviceChiTietSP.loadCombobox(cbbMauSac);
         showData(listChiTietSP);
     }
 
@@ -51,14 +53,15 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
             dtm.addRow(new Object[]{
                 dtm.getRowCount() + 1,
                 ct.getGiaBan(), ct.getGiaNhap(), ct.getSoLuongTon(), ct.getDonVi().getDonViGoc(),
-                ct.getNamBaoHanh().getTen(), ct.getSanPham().getTen()
+                ct.getNamBaoHanh().getTen(), ct.getSanPham().getTen(),
+                Converter.trangThaiMauSac(ct.getMau())
             });
         }
     }
 
     public List<TpQuanLyChiTietSanPhamCustom> listSearch(int rdo) {
         String timKiem = this.txtSearchTheo.getText();
-        listChiTietSP = serviceChiTietSP.findAllByRadio(rdo, timKiem);
+        listChiTietSP = serviceChiTietSP.findAllByRadio(rdo, serviceChiTietSP.loc(cbbMauSac.getSelectedIndex()), timKiem);
         return listChiTietSP;
     }
 
@@ -74,7 +77,7 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
 
     public void clearForm() {
         rdoGiaNhap.setSelected(true);
-        listChiTietSP = serviceChiTietSP.findAllByRadio(0, "");
+        listChiTietSP = serviceChiTietSP.findAllByRadio(0, serviceChiTietSP.loc(cbbMauSac.getSelectedIndex()), "");
     }
 
     @SuppressWarnings("unchecked")
@@ -93,6 +96,7 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
         txtSearchTheo = new utilities.palette.TextField();
         btnTimKiem = new utilities.palette.UWPButton();
         rdoTenSP = new utilities.palette.RadioButtonCustom();
+        cbbMauSac = new utilities.palette.Combobox();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
 
@@ -152,6 +156,8 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
         rdoTenSP.setText("Tên SP");
         rdoTenSP.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
+        cbbMauSac.setLabeText("Màu Sắc");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -163,24 +169,27 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
                 .addComponent(rdoGiaBan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
                 .addComponent(rdoTenSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
-                .addComponent(txtSearchTheo, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54)
+                .addGap(47, 47, 47)
+                .addComponent(cbbMauSac, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addComponent(txtSearchTheo, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46)
                 .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(150, 150, 150))
+                .addGap(40, 40, 40))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(rdoGiaNhap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(rdoGiaBan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtSearchTheo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(rdoTenSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(45, Short.MAX_VALUE))
+                        .addComponent(rdoTenSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbbMauSac, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(204, 204, 255));
@@ -222,7 +231,7 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 89, Short.MAX_VALUE)
+                        .addGap(0, 105, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane1)
                             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -239,9 +248,9 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55)
+                .addGap(39, 39, 39)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(154, 154, 154))
+                .addGap(223, 223, 223))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -262,8 +271,9 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnHienThiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHienThiActionPerformed
-        clearForm();
         showData(listChiTietSP);
+        clearForm();
+
     }//GEN-LAST:event_btnHienThiActionPerformed
 
     private void tbChiTietSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbChiTietSanPhamMouseClicked
@@ -286,6 +296,7 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
     private utilities.palette.UWPButton btnThem;
     private utilities.palette.UWPButton btnTimKiem;
     private javax.swing.ButtonGroup buttonGroup1;
+    private utilities.palette.Combobox cbbMauSac;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
