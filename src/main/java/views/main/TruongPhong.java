@@ -1,7 +1,9 @@
 package views.main;
 
+import cores.nhanVienQuanLy.views.NvqlXemThongTinCaNhanForm;
 import cores.truongPhongs.views.TP_ChucVuForm;
 import cores.truongPhongs.views.TP_KhachHangForm;
+import cores.truongPhongs.views.TP_NamBaoHanhForm;
 import cores.truongPhongs.views.TpDonViView;
 import cores.truongPhongs.views.TpQuanLyChiTietSanPhamForm;
 import cores.truongPhongs.views.TpQuanLySanPhamForm;
@@ -15,12 +17,12 @@ import java.awt.Component;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JOptionPane;
 import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 import utilities.Auth;
+import viewDemos.DemoCoSoViewPast2;
 import views.component.MenuTruongPhong;
 import views.component.TrangChu;
 
@@ -60,27 +62,53 @@ public class TruongPhong extends javax.swing.JFrame {
                 if (menuIndex == 1) {
                     main.showForm(new TP_ChucVuForm());
                 }
-                if(menuIndex == 2) {
+                if (menuIndex == 2) {
                     main.showForm(new TP_KhachHangForm());
                 }
-                if(menuIndex == 3) {
+                if (menuIndex == 3) {
                     main.showForm(new TpQuanLyChiTietSanPhamForm());
                 }
-                if(menuIndex == 4) {
+                if (menuIndex == 4) {
                     main.showForm(new TpDonViView());
-                } 
-                if(menuIndex == 7) {
-                    if(subMenuIndex == 2) {
-                        int chon = JOptionPane.showConfirmDialog(frame, "Bạn có muốn đăng xuất ???", "Say oh yeahh!!!", JOptionPane.QUESTION_MESSAGE);
-                        if(chon == 1) {
-                            Auth.clear();
-                            frame.setVisible(false);
-                            LoginView lg = new LoginView();
-                            lg.setVisible(true);
+                }
+                if (menuIndex == 5) {
+                    main.showForm(new TP_NamBaoHanhForm());
+                }
+                if (menuIndex == 6) {
+                    main.showForm(new DemoCoSoViewPast2());
+                }
+                if (menuIndex == 10) {
+                    if (subMenuIndex == 2) {
+                        Auth.clear();
+                        frame.setVisible(false);
+                        try {
+                            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                                if ("Windows".equals(info.getName())) {
+                                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                                    break;
+                                }
+                            }
+                        } catch (ClassNotFoundException ex) {
+                            java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                        } catch (InstantiationException ex) {
+                            java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                        } catch (IllegalAccessException ex) {
+                            java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+                            java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
                         }
+                        //</editor-fold>
+                        //</editor-fold>
+
+                        /* Create and display the form */
+                        java.awt.EventQueue.invokeLater(new Runnable() {
+                            public void run() {
+                                new LoginView().setVisible(true);
+                            }
+                        });
                     }
                 }
-                
+
             }
         });
         menu.addEventShowPopup(new EventShowPopupMenu() {
@@ -138,6 +166,12 @@ public class TruongPhong extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 frame.setExtendedState(frame.ICONIFIED);
+            }
+        });
+        header.openNavBar(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                main.showForm(new NvqlXemThongTinCaNhanForm());
             }
         });
 

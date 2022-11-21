@@ -1,5 +1,8 @@
 package views.main;
 
+import cores.nhanVienQuanLy.views.NVQLQuanLyPhieuXuatView;
+import cores.nhanVienQuanLy.views.NvqlQuanLyPhieuNhapView;
+import cores.nhanVienQuanLy.views.NvqlXemThongTinCaNhanForm;
 import views.component.Header;
 import views.event.EventMenuSelected;
 import views.event.EventShowPopupMenu;
@@ -14,6 +17,7 @@ import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
+import utilities.Auth;
 import views.component.MenuNhanVienQuanLy;
 import views.component.TrangChu;
 
@@ -48,12 +52,47 @@ public class NhanVienQuanLy extends javax.swing.JFrame {
             @Override
             public void menuSelected(int menuIndex, int subMenuIndex) {
                 if (menuIndex == 0) {
-                    if (subMenuIndex == 0) {
-                        main.showForm(new TrangChu());
-                    } else if (subMenuIndex == 1) {
-                        main.showForm(new TrangChu());
+                    main.showForm(new TrangChu());
+                }
+                if (menuIndex == 1) {
+                    main.showForm(new NvqlQuanLyPhieuNhapView());
+                }
+                if (menuIndex == 2) {
+                    main.showForm(new NVQLQuanLyPhieuXuatView());
+                }
+
+                if (menuIndex == 7) {
+                    if (subMenuIndex == 2) {
+                        Auth.clear();
+                        frame.setVisible(false);
+                        try {
+                            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                                if ("Windows".equals(info.getName())) {
+                                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                                    break;
+                                }
+                            }
+                        } catch (ClassNotFoundException ex) {
+                            java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                        } catch (InstantiationException ex) {
+                            java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                        } catch (IllegalAccessException ex) {
+                            java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+                            java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                        }
+                        //</editor-fold>
+                        //</editor-fold>
+
+                        /* Create and display the form */
+                        java.awt.EventQueue.invokeLater(new Runnable() {
+                            public void run() {
+                                new LoginView().setVisible(true);
+                            }
+                        });
                     }
                 }
+
             }
         });
         menu.addEventShowPopup(new EventShowPopupMenu() {
@@ -113,6 +152,13 @@ public class NhanVienQuanLy extends javax.swing.JFrame {
                 frame.setExtendedState(frame.ICONIFIED);
             }
         });
+        
+        header.openNavBar(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                main.showForm(new NvqlXemThongTinCaNhanForm());
+            }
+        });
 
         //  Start with this form
         main.showForm(new TrangChu());
@@ -143,23 +189,23 @@ public class NhanVienQuanLy extends javax.swing.JFrame {
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);
         bgLayout.setHorizontalGroup(
-            bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1366, Short.MAX_VALUE)
+                bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 1366, Short.MAX_VALUE)
         );
         bgLayout.setVerticalGroup(
-            bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 783, Short.MAX_VALUE)
+                bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 783, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(bg)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(bg)
         );
 
         pack();
@@ -167,6 +213,7 @@ public class NhanVienQuanLy extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     int xy, xx;
+
     private void bgMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bgMouseDragged
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();

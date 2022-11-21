@@ -135,6 +135,8 @@ public class LoginView extends javax.swing.JFrame {
 
                 // check chức vụ
                 if (Auth.nhanVien.getChucVu().getMa().equalsIgnoreCase("CV0001")) {
+                    JOptionPane.showMessageDialog(this, "Thành công", "Welcome", JOptionPane.PLAIN_MESSAGE);
+                    this.setVisible(false);
                     try {
                         for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                             if ("Nimbus".equals(info.getName())) {
@@ -160,9 +162,10 @@ public class LoginView extends javax.swing.JFrame {
                             new TruongPhong().setVisible(true);
                         }
                     });
-                    this.setVisible(false);
-                    JOptionPane.showMessageDialog(this, "Thành công", "Welcome", JOptionPane.DEFAULT_OPTION);
+                    
                 } else if (Auth.nhanVien.getChucVu().getMa().equalsIgnoreCase("CV0002")) {
+                    this.setVisible(false);
+                    JOptionPane.showMessageDialog(this, "Thành công", "Welcome", JOptionPane.PLAIN_MESSAGE);
                     try {
                         for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                             if ("Nimbus".equals(info.getName())) {
@@ -188,8 +191,7 @@ public class LoginView extends javax.swing.JFrame {
                             new NhanVienQuanLy().setVisible(true);
                         }
                     });
-                    this.setVisible(false);
-                    JOptionPane.showMessageDialog(this, "Thành công", "Welcome", JOptionPane.DEFAULT_OPTION);
+
                 } else {
                     JOptionPane.showMessageDialog(this, "Tài khoản không có quyền truy cập", "ERROR !!!", JOptionPane.ERROR_MESSAGE);
                 }

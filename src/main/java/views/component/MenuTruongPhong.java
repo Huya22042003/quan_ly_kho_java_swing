@@ -75,6 +75,8 @@ public class MenuTruongPhong extends javax.swing.JPanel {
         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/team.png")), "Nhân Viên"));
         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/cost.png")), "Đơn vị"));
         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/Statistics.png")), "Thống kê"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/Statistics.png")), "Năm bảo hành"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/Statistics.png")), "Cơ Sở"));
         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/bill.png")), "Phiếu", "Phiếu nhập", "Phiếu hoàn - nhập"));
         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/Gear.png")), "Cài đặt", "Thay đổi thông tin", "Hỗ trợ", "Đăng xuất"));
     }
