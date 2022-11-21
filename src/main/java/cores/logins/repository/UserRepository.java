@@ -31,7 +31,7 @@ public class UserRepository {
                 + " nv.gioiTinh as gioiTinh, "
                 + " nv.diaChi as diaChi,"
                 + " nv.trangThai as trangThai,"
-                + " nv.idChucVu.ten as chucVu"
+                + " nv.idChucVu as chucVu"
                 + " ) FROM domainModels.NhanVien nv");
         list = q.getResultList();
         s.close();

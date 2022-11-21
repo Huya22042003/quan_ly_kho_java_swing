@@ -5,6 +5,7 @@
 package domainModels;
 
 import infrastructures.constant.TrangThaiPhieuConstant;
+import infrastructures.constant.TrangThaiPhieuHoanConstant;
 import java.io.Serializable;
 import java.util.UUID;
 import javax.persistence.Column;
@@ -37,12 +38,15 @@ public class PhieuHoanNhap implements Serializable {
 
     @Column(name = "GhiChu", columnDefinition = "NVARCHAR(255)")
     private String ghiChu;
+    
+    @Column(name = "LiDo", columnDefinition = "NVARCHAR(255)")
+    private String liDo;
 
     @Column(name = "NgayThanhToan")
     private Long ngayThanhToan;
 
     @Column(name = "TrangThai")
-    private TrangThaiPhieuConstant trangThai;
+    private TrangThaiPhieuHoanConstant trangThai;
 
     @ManyToOne
     @JoinColumn(name = "idPhieuNhap")
