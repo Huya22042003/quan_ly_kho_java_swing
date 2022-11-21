@@ -62,8 +62,8 @@ public class NVQLRUDPhieuXuatView extends javax.swing.JFrame {
         jdcNgayTao.setDate(ngayTao);
         jdcNgayThanhToan.setDate(ngayNhan);
         cbbTrangThai.setSelectedItem(Converter.TrangThaiPhieuXuat(pxcs.getTrangThai()));
-        cbbKhachHang.setSelectedItem(pxcs.getKhachHang());
-        cbbNhanVien.setSelectedItem(pxcs.getNhanVien());
+        cbbKhachHang.setSelectedItem(pxcs.getKhachHang().getMa());
+        cbbNhanVien.setSelectedItem(pxcs.getNhanVien().getMa());
     }
 
     public void clearForm() {

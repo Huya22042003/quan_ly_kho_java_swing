@@ -103,7 +103,7 @@ public class NVQLQuanLyPhieuXuatRepository {
         return true;
     }
 
-    public boolean deletePhieuNhap(UUID id) {
+    public boolean deletePhieuXuat(UUID id) {
         Session s = HibernateUtil.getSessionFactory().openSession();
         try {
             Transaction transaction = null;

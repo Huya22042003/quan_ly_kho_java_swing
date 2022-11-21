@@ -67,7 +67,7 @@ public class NVQLQuanLyPhieuXuatServiceImpl implements NVQLQuanLyPhieuXuatServic
 
     @Override
     public boolean deletePhieuXuat(UUID id) {
-        return rp.deletePhieuNhap(id);
+        return rp.deletePhieuXuat(id);
     }
 
 //    public PhieuXuatCustom checkValidate(PhieuXuatCustom pncs, JLabel errNgayTao, JLabel errGhiChu, JLabel errNgayNhan) {
