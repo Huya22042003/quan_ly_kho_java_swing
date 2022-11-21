@@ -13,7 +13,7 @@ import services.DemoCoSoService;
 import services.serviceImpl.DemoCoSoServiceImpl;
 import utilities.MsgBox;
 import cores.nhanVienQuanLy.services.NVQLQuanLyPhieuXuatService;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import utilities.Converter;
