@@ -1,4 +1,3 @@
-
 package cores.truongPhongs.views;
 
 import cores.truongPhongs.customModels.TP_ChucVuCustom;
@@ -8,10 +7,10 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import utilities.MsgBox;
 
-
 public class TP_CreateChucVuForm extends javax.swing.JFrame {
 
-   private TP_ChucVuService chucVuService ;
+    private TP_ChucVuService chucVuService;
+
     public TP_CreateChucVuForm() {
         chucVuService = new TP_ChucVuServiceImpl();
         initComponents();
@@ -26,6 +25,7 @@ public class TP_CreateChucVuForm extends javax.swing.JFrame {
         custom.setTen(txtTen.getText());
         return custom;
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -176,11 +176,11 @@ public class TP_CreateChucVuForm extends javax.swing.JFrame {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         TP_ChucVuCustom check = chucVuService.checkValidate(getFormData(), erroMa, erroTen);
-        if(check == null) {
+        if (check == null) {
             return;
         }
 
-        if(chucVuService.addChucVu(check) == null) {
+        if (chucVuService.addChucVu(check) == null) {
             MsgBox.alert(this, "Thêm thất bại");
             this.setVisible(true);
         } else {

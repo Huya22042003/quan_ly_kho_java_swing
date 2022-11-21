@@ -17,6 +17,8 @@ import javax.swing.JLabel;
 import utilities.Converter;
 import utilities.palette.Combobox;
 
+import cores.truongPhongs.repositories.TP_KhachHangRepository;
+
 public class TP_KhachHangServiceImpl implements TP_KhachHangService {
 
     private TP_KhachHangRepository rp = new TP_KhachHangRepository();
@@ -103,10 +105,11 @@ public class TP_KhachHangServiceImpl implements TP_KhachHangService {
             if (kh.getMa().trim().length() == 0) {
                 erroMa.setText("Mã không được để trống");
                 check = false;
-//            } else if (!kh.getMa().matches(ValidateConstant.REGEX_CHU_KHONG_CO_KHOANG_TRANG)) {
-//                erroMa.setText("Chữ không được có khoảng trắng");
-//                check = false;
-            } else if (findKHByMa(kh.getMa()) != null) {
+
+            } else if (!kh.getMa().trim().matches(kh.getMa().toUpperCase())) {
+                erroMa.setText("Mã phải viết hoa");
+                check = false;
+            } else if (findKHByMa(kh.getMa().trim()) != null) {
                 erroMa.setText("Mã đã tồn tại");
                 check = false;
             } else {
@@ -117,12 +120,18 @@ public class TP_KhachHangServiceImpl implements TP_KhachHangService {
         if (kh.getTen().trim().length() == 0) {
             erroTen.setText("Tên không được để trống");
             check = false;
+        } else if (!kh.getTen().trim().matches("[A-Z a-z]+")) {
+            erroTen.setText("Tên phải là kiểu chữ");
+            check = false;
         } else {
             erroTen.setText("");
         }
 
         if (kh.getSdt().trim().length() == 0) {
             erroSDT.setText("Số điện thoại không được để trống");
+            check = false;
+        } else if (!kh.getSdt().trim().matches(ValidateConstant.REGEX_PHONE_NUMBER)) {
+            erroSDT.setText("SĐT sai định dạng");
             check = false;
         } else {
             erroSDT.setText("");
@@ -131,6 +140,9 @@ public class TP_KhachHangServiceImpl implements TP_KhachHangService {
         if (kh.getEmail().trim().length() == 0) {
             erroEmail.setText("Email không được để trống");
             check = false;
+        } else if (!kh.getEmail().trim().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
+            erroEmail.setText("Email sai định dạng");
+            check = false;
         } else {
             erroEmail.setText("");
         }
@@ -138,13 +150,19 @@ public class TP_KhachHangServiceImpl implements TP_KhachHangService {
         if (kh.getDiaChi().trim().length() == 0) {
             erroDiaChi.setText("Địa chỉ không được để trống");
             check = false;
+        } else if (!kh.getDiaChi().trim().matches("^[A-Z a-z 0-9]+$")) {
+            erroDiaChi.setText("Địa chỉ sai định dạng");
+            check = false;
         } else {
             erroDiaChi.setText("");
         }
-
         if (kh.getMatKhau().trim().length() == 0) {
             erroMatKhau.setText("Mật khẩu không được để trống");
             check = false;
+        } else if (!kh.getMatKhau().trim().matches("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,15})")) {
+            erroMatKhau.setText("Mật khẩu sai định dạng");
+            check = false;
+
         } else {
             erroMatKhau.setText("");
         }
