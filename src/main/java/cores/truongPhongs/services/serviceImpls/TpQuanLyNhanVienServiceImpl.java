@@ -4,6 +4,7 @@
  */
 package cores.truongPhongs.services.serviceImpls;
 
+import cores.truongPhongs.customModels.TP_ChucVuCustom;
 import cores.truongPhongs.customModels.TpNhanVienCustom;
 import domainModels.NhanVien;
 import infrastructures.constant.TrangThaiNhanVienConstant;
@@ -15,6 +16,8 @@ import cores.truongPhongs.repositories.TpQuanLyNhanVienRepository;
 import utilities.Converter;
 import utilities.palette.Combobox;
 import cores.truongPhongs.services.TpQuanLyNhanVienSevice;
+import domainModels.ChucVu;
+import infrastructures.constant.GioiTinhConstant;
 
 /**
  *
@@ -45,6 +48,7 @@ public class TpQuanLyNhanVienServiceImpl implements TpQuanLyNhanVienSevice {
         nv.setGioiTinh(ct.getGioiTinh());
         nv.setDiaChi(ct.getDiaChi());
         nv.setTrangThai(ct.getTrangThai());
+        nv.setIdChucVu(ct.getIdChucVu());
         ct.setId(rp.addNhanVien(nv).getId());
         return ct;
     }
@@ -62,6 +66,7 @@ public class TpQuanLyNhanVienServiceImpl implements TpQuanLyNhanVienSevice {
         nv.setDiaChi(ct.getDiaChi());
         nv.setTrangThai(ct.getTrangThai());
         nv.setId(ct.getId());
+          nv.setIdChucVu(ct.getIdChucVu());
         return rp.updateNhanVien(nv);
     }
 
@@ -71,7 +76,7 @@ public class TpQuanLyNhanVienServiceImpl implements TpQuanLyNhanVienSevice {
     }
 
     @Override
-    public void loadCombobox(Combobox cbb) {
+    public void loadComboboxTT(Combobox cbb) {
         cbb.removeAll();
         cbb.addItem(Converter.trangThaiNhanVien(TrangThaiNhanVienConstant.CHUA_HOAT_DONG));
         cbb.addItem(Converter.trangThaiNhanVien(TrangThaiNhanVienConstant.DANG_HOAT_DONG));
@@ -80,15 +85,15 @@ public class TpQuanLyNhanVienServiceImpl implements TpQuanLyNhanVienSevice {
 
     @Override
     public TrangThaiNhanVienConstant loc(int a) {
-        switch(a){
+        switch (a) {
             case 0:
                 return TrangThaiNhanVienConstant.CHUA_HOAT_DONG;
-                  case 1:
+            case 1:
                 return TrangThaiNhanVienConstant.DANG_HOAT_DONG;
-                  case 2:
+            case 2:
                 return TrangThaiNhanVienConstant.DA_NGHI_VIEC;
-                default:
-                    return null;
+            default:
+                return null;
         }
     }
 
@@ -98,9 +103,44 @@ public class TpQuanLyNhanVienServiceImpl implements TpQuanLyNhanVienSevice {
     }
 
     @Override
-    public TpNhanVienCustom checkValidate(TpNhanVienCustom nv, JLabel erroMa, JLabel erroTen, JLabel erroSDT, JLabel erroEmail, JLabel erroMatKhau, JLabel erroNgaySinh, JLabel erroDiaChi) {
+    public List<TpNhanVienCustom> findAllByRadio(String tk, TrangThaiNhanVienConstant tt, int rdo) {
+        switch (rdo) {
+            case 0:
+                return rp.findAllByMa(tk, tt);
+            case 1:
+                return rp.findAllByTen(tk, tt);
+            case 2:
+                return rp.findAllByDiaChi(tk, tt);
+            default:
+                return null;
+        }
 
- boolean check = true;
+    }
+
+    @Override
+    public GioiTinhConstant loc1(int b) {
+        switch (b) {
+            case 0:
+                return GioiTinhConstant.NU;
+            case 1:
+                return GioiTinhConstant.KHAC;
+            case 2:
+                return GioiTinhConstant.NAM;
+            default:
+                return null;
+        }
+    }
+
+    @Override
+    public void loadComboboxGT(Combobox cbb) {
+        cbb.addItem(Converter.trangThaiGioiTinh(GioiTinhConstant.NU));
+        cbb.addItem(Converter.trangThaiGioiTinh(GioiTinhConstant.KHAC));
+        cbb.addItem(Converter.trangThaiGioiTinh(GioiTinhConstant.NAM));
+    }
+
+    @Override
+    public TpNhanVienCustom checkValidate(TpNhanVienCustom nv, JLabel erroMa, JLabel erroTen, JLabel erroEmail, JLabel erroSDT, JLabel erroMatKhau, JLabel erroDiaChi, JLabel erroNgaySinh) {
+        boolean check = true;
         if (nv.getMa() != null) {
             if (nv.getMa().trim().length() == 0) {
                 erroMa.setText("Mã không được để trống");
@@ -122,36 +162,47 @@ public class TpQuanLyNhanVienServiceImpl implements TpQuanLyNhanVienSevice {
         } else {
             erroTen.setText("");
         }
-   if (nv.getSdt().trim().length() == 0) {
-            erroSDT.setText("SDT không được để trống");
-            check = false;
-        } else {
-            erroSDT.setText("");
-        }
-   if (nv.getEmail().trim().length() == 0) {
+        if (nv.getEmail().trim().length() == 0) {
             erroEmail.setText("Email không được để trống");
             check = false;
         } else {
             erroEmail.setText("");
         }
-  if (nv.getMatKhau().trim().length() == 0) {
+        if (nv.getSdt().length() == 0) {
+            erroSDT.setText("SDT không được để trống");
+            check = false;
+        } else if (!nv.getSdt().matches(ValidateConstant.REGEX_SO)) {
+            erroSDT.setText("SDT Phải bắt đầu bằng số 0");
+            check = false;
+        } else {
+            erroSDT.setText("");
+        }
+
+        if (nv.getMatKhau().trim().length() == 0) {
             erroMatKhau.setText("Mật Khẩu không được để trống");
             check = false;
         } else {
             erroMatKhau.setText("");
-        } 
-//  if (Long.valueOf(nv.getNgaySinh().trim().length() == 0) ) {
-//            erroEmail.setText("Ngày Sinh không được để trống");
-//            check = false;
-//        } else {
-//            erroEmail.setText("");
-//        }
-  if (nv.getDiaChi().trim().length() == 0) {
+        }
+        if (nv.getDiaChi().trim().length() == 0) {
             erroDiaChi.setText("Địa chỉ không được để trống");
             check = false;
         } else {
             erroDiaChi.setText("");
-        } 
+        }
+
+        if (nv.getNgaySinh() == null) {
+            erroNgaySinh.setText("Bạn phải chọn ngày sinh");
+            check = false;
+        } else {
+            erroNgaySinh.setText("");
+        }
+        if (nv.getDiaChi().trim().length() == 0) {
+            erroDiaChi.setText("Địa chỉ không được để trống");
+            check = false;
+        } else {
+            erroDiaChi.setText("");
+        }
 
         if (!check) {
             return null;
@@ -161,22 +212,13 @@ public class TpQuanLyNhanVienServiceImpl implements TpQuanLyNhanVienSevice {
     }
 
     @Override
-    public List<TpNhanVienCustom> findAllByRadio(String tk, TrangThaiNhanVienConstant tt, int rdo) {
-     switch (rdo) {
-            case 0:
-                return rp.findAllByMa(tk, tt);
-            case 1:
-                return rp.findAllByTen(tk, tt);
-            case 2:
-                return rp.findAllByDiaChi(tk, tt);
-            default:
-               return null; 
-        }
-
+    public List<TP_ChucVuCustom> getListCV() {
+        return rp.getListCV();
     }
 
-
-
- 
+    @Override
+    public ChucVu findIDCV(UUID id) {
+return rp.findIDCV(id);
+    }
 
 }

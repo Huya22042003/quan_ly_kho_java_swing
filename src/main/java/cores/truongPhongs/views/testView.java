@@ -19,11 +19,12 @@ public class testView extends javax.swing.JFrame {
     public testView() {
         initComponents();
        
-        TpQuanLyNhanVien a = new TpQuanLyNhanVien();
-        this.add(a);
+        TpQuanLyNhanVien nv = new TpQuanLyNhanVien();
+
+        this.add(nv);
         this.setLayout(new FlowLayout());
         this.pack();
-        a.setVisible(true);
+        nv.setVisible(true);
     }
 
     /**

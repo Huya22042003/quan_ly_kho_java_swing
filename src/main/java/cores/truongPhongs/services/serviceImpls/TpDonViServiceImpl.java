@@ -18,13 +18,13 @@ import javax.swing.JLabel;
  * @author LENOVO
  */
 public class TpDonViServiceImpl implements TpDonViService {
-    
+
     private TpDonViRepository rp;
-    
+
     public TpDonViServiceImpl() {
         rp = new TpDonViRepository();
     }
-    
+
     @Override
     public TpDonViCustom addDonVi(TpDonViCustom custom) {
         DonVi dv = new DonVi();
@@ -34,7 +34,7 @@ public class TpDonViServiceImpl implements TpDonViService {
         custom.setId(rp.addDonVi(dv).getId());
         return custom;
     }
-    
+
     @Override
     public boolean updateDonVi(TpDonViCustom custom) {
         DonVi dv = new DonVi();
@@ -44,7 +44,7 @@ public class TpDonViServiceImpl implements TpDonViService {
         dv.setId(custom.getId());
         return rp.updateDonVi(dv);
     }
-    
+
     @Override
     public boolean deleteDonVi(UUID id) {
         return rp.deleteDonVi(id);
@@ -111,12 +111,12 @@ public class TpDonViServiceImpl implements TpDonViService {
     public List<TpDonViCustom> getListDonVi() {
         return rp.getList();
     }
-    
+
     @Override
     public TpDonViCustom findDonViByDonViQuyDoi(String donViQuyDoi) {
         return rp.findByDonViGoc(donViQuyDoi);
     }
-    
+
     @Override
     public List<TpDonViCustom> findAllByRadio(String donViGoc, int rdo) {
         switch (rdo) {
@@ -128,7 +128,7 @@ public class TpDonViServiceImpl implements TpDonViService {
                 return null;
         }
     }
-    
+
     @Override
     public TpDonViCustom checkValidate(String DonViGoc,
             String DonViQuyDoi,
@@ -136,7 +136,7 @@ public class TpDonViServiceImpl implements TpDonViService {
             JLabel erroDonViGoc,
             JLabel erroDonViQuyDoi,
             JLabel erroSoLuong) {
-        
+
         boolean check = true;
         if (DonViGoc.trim().length() == 0) {
             erroDonViGoc.setText("Đơn Vị Gốc không được để trống");
@@ -150,7 +150,7 @@ public class TpDonViServiceImpl implements TpDonViService {
         } else {
             erroDonViGoc.setText("");
         }
-        
+
         if (DonViQuyDoi.trim().length() == 0) {
             erroDonViQuyDoi.setText("Đơn Vị Quy Đổi không được để trống");
             check = false;
@@ -171,11 +171,10 @@ public class TpDonViServiceImpl implements TpDonViService {
         } else if (!SoLuong.matches(ValidateConstant.REGEX_SO)) {
             erroSoLuong.setText("Số Lượng Phải Là Số");
             check = false;
-        }
-      else {
+        } else {
             erroSoLuong.setText("");
         }
-          
+
         if (!check) {
             return null;
         }
@@ -183,7 +182,7 @@ public class TpDonViServiceImpl implements TpDonViService {
         td.setDonViGoc(DonViGoc);
         td.setDonViQuyDoi(DonViQuyDoi);
         td.setSoLuong(Integer.parseInt(sl));
-        
+
         return td;
     }
 }

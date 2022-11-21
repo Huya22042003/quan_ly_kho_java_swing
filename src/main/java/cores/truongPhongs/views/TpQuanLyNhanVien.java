@@ -7,11 +7,13 @@ package cores.truongPhongs.views;
 import cores.truongPhongs.customModels.TpNhanVienCustom;
 import cores.truongPhongs.services.TpQuanLyNhanVienSevice;
 import cores.truongPhongs.services.serviceImpls.TpQuanLyNhanVienServiceImpl;
-import cores.truongPhongs.views.TpCreateQuanLyNhanVienView;
+import cores.truongPhongs.views.TpCreateQuanLyNhanVien;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import utilities.Converter;
+import utilities.HibernateUtil;
 
 /**
  *
@@ -21,19 +23,19 @@ public class TpQuanLyNhanVien extends javax.swing.JPanel {
 
     private TpQuanLyNhanVienSevice nhanVienSevice;
     private List<TpNhanVienCustom> getList;
-    private TpCreateQuanLyNhanVienView createview;
-
-    private TpRUDQuanLyNhanVienView rud;
+    private TpCreateQuanLyNhanVien create;
+    private TpRUDQuanLyNhanVien rud;
 
     public TpQuanLyNhanVien() {
         nhanVienSevice = new TpQuanLyNhanVienServiceImpl();
         getList = new ArrayList<>();
-        createview = new TpCreateQuanLyNhanVienView();
-        rud = new TpRUDQuanLyNhanVienView();
+        create = new TpCreateQuanLyNhanVien();
+        rud = new TpRUDQuanLyNhanVien();
         initComponents();
-        nhanVienSevice.loadCombobox(cbbTrangThai);
-        clearForm();
+        getList = nhanVienSevice.getListNhanVien();
+        nhanVienSevice.loadComboboxTT(cbbTrangThai);
         loadTable(getList);
+        clearForm();
     }
 
     /**
@@ -70,6 +72,11 @@ public class TpQuanLyNhanVien extends javax.swing.JPanel {
         });
 
         btnHienThi.setText("Hiển Thị");
+        btnHienThi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHienThiActionPerformed(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(51, 102, 255));
 
@@ -108,6 +115,14 @@ public class TpQuanLyNhanVien extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tblQLNV.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblQLNVMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                tblQLNVMouseEntered(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblQLNV);
 
         jPanel2.setBackground(new java.awt.Color(51, 102, 255));
@@ -116,6 +131,11 @@ public class TpQuanLyNhanVien extends javax.swing.JPanel {
 
         btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Search.png"))); // NOI18N
         btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(rdoTen);
         rdoTen.setSelected(true);
@@ -225,27 +245,51 @@ public class TpQuanLyNhanVien extends javax.swing.JPanel {
     public void loadTable(List<TpNhanVienCustom> list) {
         DefaultTableModel dtm = (DefaultTableModel) this.tblQLNV.getModel();
         dtm.setRowCount(0);
-        for (TpNhanVienCustom el : list) {
+        for (TpNhanVienCustom nv : list) {
             Object[] rowData = {
                 dtm.getRowCount() + 1,
-                el.getTen(),
-                el.getMa(),
-                el.getSdt(),
-                el.getEmail(),
-                el.getMatKhau(),
-                el.getNgaySinh(),
-                el.getHinhAnh(),
-                el.getGioiTinh(),
-                el.getDiaChi(),
-                Converter.trangThaiNhanVien(el.getTrangThai())
+                nv.getTen(),
+                nv.getMa(),
+                nv.getSdt(),
+                nv.getEmail(),
+                nv.getMatKhau(),
+                nv.getNgaySinh() == null ? "" : new Date(nv.getNgaySinh()),
+                nv.getHinhAnh(),
+                Converter.trangThaiGioiTinh(nv.getGioiTinh()),
+                nv.getDiaChi(),
+                Converter.trangThaiNhanVien(nv.getTrangThai())
             };
             dtm.addRow(rowData);
         }
     }
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        createview.setVisible(true);
+        create.setVisible(true);
         rud.setVisible(false);
     }//GEN-LAST:event_btnThemActionPerformed
+
+    private void tblQLNVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblQLNVMouseClicked
+
+        int row = this.tblQLNV.getSelectedRow();        
+        create.setVisible(false);
+        rud.custom = nhanVienSevice.finNhanVienByMa(tblQLNV.getValueAt(row,2).toString());
+        rud.setVisible(true);
+        rud.showData();
+    }//GEN-LAST:event_tblQLNVMouseClicked
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+
+        searchRadio();
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void btnHienThiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHienThiActionPerformed
+        getList = nhanVienSevice.getListNhanVien();
+        loadTable(getList);
+        clearForm();
+    }//GEN-LAST:event_btnHienThiActionPerformed
+
+    private void tblQLNVMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblQLNVMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblQLNVMouseEntered
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

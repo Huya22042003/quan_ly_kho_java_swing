@@ -83,14 +83,15 @@ public class TpDonViRepository {
         }
         return true;
     }
+
     public TpDonViCustom findByDonViGoc(String donViGoc) {
         TpDonViCustom dvc = new TpDonViCustom();
         try ( Session s = HibernateUtil.getSessionFactory().openSession()) {
             Query q = s.createQuery(" SELECT new cores.truongPhongs.customModels.TpDonViCustom ("
-                + " dv.id as id, "
-                + " dv.donViGoc as donViGoc, "
-                + " dv.donViQuyDoi as donViQuyDoi, "
-                + " dv.soLuong as soLuong "
+                    + " dv.id as id, "
+                    + " dv.donViGoc as donViGoc, "
+                    + " dv.donViQuyDoi as donViQuyDoi, "
+                    + " dv.soLuong as soLuong "
                     + ") FROM domainModels.DonVi dv WHERE dv.donViGoc = :donViGoc");
             q.setParameter("donViGoc", donViGoc);
             dvc = (TpDonViCustom) q.getSingleResult();
@@ -100,6 +101,7 @@ public class TpDonViRepository {
         }
         return dvc;
     }
+
     public List<TpDonViCustom> findAllByDonViGoc(String donViGoc) {
         List<TpDonViCustom> list = new ArrayList<>();
         Session s = HibernateUtil.getSessionFactory().openSession();
@@ -116,10 +118,11 @@ public class TpDonViRepository {
         s.close();
         return list;
     }
- public List<TpDonViCustom> findAllByDonViQuyDoi(String donViQuyDoi) {
+
+    public List<TpDonViCustom> findAllByDonViQuyDoi(String donViQuyDoi) {
         List<TpDonViCustom> list = new ArrayList<>();
         Session s = HibernateUtil.getSessionFactory().openSession();
-       Query q = s.createQuery(" SELECT new cores.truongPhongs.customModels.TpDonViCustom ("
+        Query q = s.createQuery(" SELECT new cores.truongPhongs.customModels.TpDonViCustom ("
                 + " dv.id as id, "
                 + " dv.donViGoc as donViGoc, "
                 + " dv.donViQuyDoi as donViQuyDoi, "

@@ -19,8 +19,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TpDonViCustom {
-    
-     private UUID id;  
+
+    private UUID id;
 
     private String donViGoc;
 
