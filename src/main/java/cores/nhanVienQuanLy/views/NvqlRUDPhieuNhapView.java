@@ -68,12 +68,13 @@ public class NvqlRUDPhieuNhapView extends javax.swing.JFrame {
     }
 
     public void fillData(){
-        
+        String b;
         this.cbbNhaCungCap.setSelectedItem(pnc.getId());
         this.cbbNhanVien.setSelectedItem(pnc.getId());
         this.txtGhiChu.setText(pnc.getGhiChu());
-        this.dateNgayNhan.setDate(new Date(pnc.getNgayThanhToan()));
+        b  =  pnc.getNgayThanhToan() == null ? null :  new Date(pnc.getNgayThanhToan()).toString();
         this.dateNgayTao.setDate(new Date(pnc.getNgayTao()));
+        this.dateNgayNhan.setDateFormatString(b);
         
     }
     @SuppressWarnings("unchecked")
@@ -177,6 +178,8 @@ public class NvqlRUDPhieuNhapView extends javax.swing.JFrame {
                 btnUpdateActionPerformed(evt);
             }
         });
+
+        dateNgayTao.setEnabled(false);
 
         jLabel1.setText("Ngày tạo");
 
