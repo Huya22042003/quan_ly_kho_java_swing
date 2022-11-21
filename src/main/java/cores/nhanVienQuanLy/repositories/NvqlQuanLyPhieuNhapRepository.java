@@ -83,4 +83,41 @@ public class NvqlQuanLyPhieuNhapRepository {
         s.close();
         return p;
     }
+      public List<NvqlQuanLyPhieuNhapCustom> getListByNgayTao(Long ngayBatDau, Long ngayKetThuc) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("Select new  cores.nhanVienQuanLy.customModels.NvqlQuanLyPhieuNhapCustom ( "
+                + "p.id as id,"
+                + "p.ghiChu as ghiChu,"
+                + "p.ngayThanhToan as ngayThanhToan,"
+                + "p.ngayTao as ngayTao,"
+                + "p.trangThai as trangThai,"
+                + "p.nhanVien.id as idNhanVien,"
+                + "p.nhanVien.ten as tenNhanVien,"
+                + "p.nhaCungCap.id as idNcc,"
+                + "p.nhaCungCap.ten as tenNcc) "
+                + "from domainModels.PhieuNhap p WHERE p.ngayThanhToan > :ngayBatDau AND p.ngayThanhToan < :ngayKetThuc");
+        query.setParameter("ngayBatDau", ngayBatDau);
+        query.setParameter("ngayKetThuc", ngayKetThuc);
+        List<NvqlQuanLyPhieuNhapCustom> list = query.getResultList();
+        return list;
+    }
+    
+        public List<NvqlQuanLyPhieuNhapCustom> getListByNgayThanhToan(Long ngayBatDau, Long ngayKetThuc) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("Select new  cores.nhanVienQuanLy.customModels.NvqlQuanLyPhieuNhapCustom ( "
+                + "p.id as id,"
+                + "p.ghiChu as ghiChu,"
+                + "p.ngayThanhToan as ngayThanhToan,"
+                + "p.ngayTao as ngayTao,"
+                + "p.trangThai as trangThai,"
+                + "p.nhanVien.id as idNhanVien,"
+                + "p.nhanVien.ten as tenNhanVien,"
+                + "p.nhaCungCap.id as idNcc,"
+                + "p.nhaCungCap.ten as tenNcc) "
+                + "from domainModels.PhieuNhap p WHERE p.ngayThanhToan > :ngayBatDau AND p.ngayThanhToan < :ngayKetThuc");
+        query.setParameter("ngayBatDau", ngayBatDau);
+        query.setParameter("ngayKetThuc", ngayKetThuc);
+        List<NvqlQuanLyPhieuNhapCustom> list = query.getResultList();
+        return list;
+    }
 }
