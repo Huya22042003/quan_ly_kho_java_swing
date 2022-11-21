@@ -22,10 +22,11 @@ public class TP_KhachHangForm extends javax.swing.JPanel {
         createView = new TP_CreateKhachHangForm();
         rud = new TP_RUDKhachHangForm();
         initComponents();
-
+        getList = hangService.getListKH();
         hangService.loadCbbTT(cbbTrangThai);
-        clearForm();
+        
         loadTable(getList);
+        clearForm();
 
     }
 
@@ -283,8 +284,9 @@ public class TP_KhachHangForm extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnHienThiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHienThiActionPerformed
-        clearForm();
+        getList = hangService.getListKH();      
         loadTable(getList);
+        clearForm();
     }//GEN-LAST:event_btnHienThiActionPerformed
 
 

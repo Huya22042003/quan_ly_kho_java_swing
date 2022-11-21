@@ -10,8 +10,10 @@ import infrastructures.constant.DanhGiaConstant;
 import infrastructures.constant.GioiTinhConstant;
 import infrastructures.constant.KhachHangConstant;
 import infrastructures.constant.KhoHangConstant;
+import infrastructures.constant.MauConstant;
 import infrastructures.constant.TrangThaiPhieuConstant;
 import infrastructures.constant.TrangThaiNhanVienConstant;
+import infrastructures.constant.TrangThaiPhieuHoanConstant;
 
 /**
  *
@@ -159,6 +161,22 @@ public class Converter {
         return trangThai;
     }
     
+    public static String TrangThaiPhieuHoan(TrangThaiPhieuHoanConstant p) {
+        String trangThai = "";
+        switch (p) {
+            case CHO_XAC_NHAN:
+                trangThai = "Chờ Xác Nhận";
+                break;
+            case DA_HUY:
+                trangThai = "Đã Hủy";
+                break;
+            default:
+                throw new AssertionError();
+        }
+        
+        return trangThai;
+    }
+    
     public static String trangThaiDanhGia(DanhGiaConstant th) {
         String trangThai = "";
 
@@ -193,6 +211,40 @@ public class Converter {
                 break;
             case DA_NGUNG_CUNG_CAP:
                 trangThai = "Đã ngừng cung cấp";
+                break;
+            default:
+                throw new AssertionError();
+        }
+
+        return trangThai;
+    }
+    public static String trangThaiMauSac(MauConstant ms) {
+        String trangThai = "";
+
+        switch (ms) {
+            case VANG:
+                trangThai = "Vàng";
+                break;
+            case XANH_LA:
+                trangThai = "Xanh lá";
+                break;
+            case DO:
+                trangThai = "Đỏ";
+                break;
+            case XANH_DUONG:
+                trangThai = "Xanh dương";
+                break;
+            case HONG:
+                trangThai = "Hồng";
+                break;
+            case CAM:
+                trangThai = "Cam";
+                break;
+            case DEN:
+                trangThai = "Đen";
+                break;
+            case TRANG:
+                trangThai = "Trắng";
                 break;
             default:
                 throw new AssertionError();

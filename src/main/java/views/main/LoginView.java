@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package views.main;
 
 import cores.logins.custom.NhanVienCustom;
@@ -136,36 +132,69 @@ public class LoginView extends javax.swing.JFrame {
         if (map.containsKey(email)) {
             if (map.get(email).getMatKhau().equals(txtPassWord.getText())) {
                 Auth.nhanVien = map.get(email);
-                JOptionPane.showMessageDialog(this, "Thành công", "Welcome", JOptionPane.OK_OPTION);
-                // check chức vụ
-//                Main n = new Main();
-//                n.setVisible(true);
-                try {
-                    for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                        if ("Nimbus".equals(info.getName())) {
-                            javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                            break;
-                        }
-                    }
-                } catch (ClassNotFoundException ex) {
-                    java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-                } catch (InstantiationException ex) {
-                    java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-                } catch (IllegalAccessException ex) {
-                    java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-                } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-                    java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-                }
-                //</editor-fold>
 
-                /* Create and display the form */
-                java.awt.EventQueue.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        new Main().setVisible(true);
+                // check chức vụ
+                if (Auth.nhanVien.getChucVu().getMa().equalsIgnoreCase("CV0001")) {
+                    JOptionPane.showMessageDialog(this, "Thành công", "Welcome", JOptionPane.PLAIN_MESSAGE);
+                    this.setVisible(false);
+                    try {
+                        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                            if ("Nimbus".equals(info.getName())) {
+                                javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                                break;
+                            }
+                        }
+                    } catch (ClassNotFoundException ex) {
+                        java.util.logging.Logger.getLogger(TruongPhong.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                    } catch (InstantiationException ex) {
+                        java.util.logging.Logger.getLogger(TruongPhong.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                    } catch (IllegalAccessException ex) {
+                        java.util.logging.Logger.getLogger(TruongPhong.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                    } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+                        java.util.logging.Logger.getLogger(TruongPhong.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
                     }
-                });
-                this.setVisible(false);
+                    //</editor-fold>
+
+                    /* Create and display the form */
+                    java.awt.EventQueue.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            new TruongPhong().setVisible(true);
+                        }
+                    });
+                    
+                } else if (Auth.nhanVien.getChucVu().getMa().equalsIgnoreCase("CV0002")) {
+                    this.setVisible(false);
+                    JOptionPane.showMessageDialog(this, "Thành công", "Welcome", JOptionPane.PLAIN_MESSAGE);
+                    try {
+                        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                            if ("Nimbus".equals(info.getName())) {
+                                javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                                break;
+                            }
+                        }
+                    } catch (ClassNotFoundException ex) {
+                        java.util.logging.Logger.getLogger(NhanVienQuanLy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                    } catch (InstantiationException ex) {
+                        java.util.logging.Logger.getLogger(NhanVienQuanLy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                    } catch (IllegalAccessException ex) {
+                        java.util.logging.Logger.getLogger(NhanVienQuanLy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                    } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+                        java.util.logging.Logger.getLogger(NhanVienQuanLy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                    }
+                    //</editor-fold>
+
+                    /* Create and display the form */
+                    java.awt.EventQueue.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            new NhanVienQuanLy().setVisible(true);
+                        }
+                    });
+
+                } else {
+                    JOptionPane.showMessageDialog(this, "Tài khoản không có quyền truy cập", "ERROR !!!", JOptionPane.ERROR_MESSAGE);
+                }
 
             } else {
                 JOptionPane.showMessageDialog(this, "Mật khẩu không chính sác", "ERROR !!!", JOptionPane.ERROR_MESSAGE);
