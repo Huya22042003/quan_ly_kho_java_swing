@@ -13,12 +13,14 @@ import cores.nhanVienQuanLy.services.NvqlQuanLyPhieuNhapService;
 import cores.nhanVienQuanLy.services.serviceImpls.NvqlGetTenNccServiceImpl;
 import cores.nhanVienQuanLy.services.serviceImpls.NvqlGetTenNvServiceImpl;
 import cores.nhanVienQuanLy.services.serviceImpls.NvqlQuanLyPhieuNhapServiceImpl;
+import infrastructures.constant.TrangThaiPhieuConstant;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import utilities.Converter;
 import utilities.MsgBox;
 
 /**
@@ -46,6 +48,7 @@ public class NvqlRUDPhieuNhapView extends javax.swing.JFrame {
         listNv = tenNvService.getList();
         this.loadCbbNcc();
         this.loadCbbNv();
+        this.loadCbbTrangThai();
         Toolkit toolkit = getToolkit();
         Dimension size = toolkit.getScreenSize();
         setLocation(size.width / 2 - getWidth() / 2, size.height / 2 - getHeight() / 2);
@@ -61,21 +64,27 @@ public class NvqlRUDPhieuNhapView extends javax.swing.JFrame {
         listNv = tenNvService.getList();
         this.loadCbbNcc();
         this.loadCbbNv();
+        this.loadCbbTrangThai();
         fillData();
+
         Toolkit toolkit = getToolkit();
         Dimension size = toolkit.getScreenSize();
         setLocation(size.width / 2 - getWidth() / 2, size.height / 2 - getHeight() / 2);
     }
 
-    public void fillData(){
-        
+    public void fillData() {
+        String b;
         this.cbbNhaCungCap.setSelectedItem(pnc.getId());
         this.cbbNhanVien.setSelectedItem(pnc.getId());
         this.txtGhiChu.setText(pnc.getGhiChu());
-        this.dateNgayNhan.setDate(new Date(pnc.getNgayThanhToan()));
+        b = pnc.getNgayThanhToan() == null ? null : new Date(pnc.getNgayThanhToan()).toString();
         this.dateNgayTao.setDate(new Date(pnc.getNgayTao()));
-        
+        this.dateNgayNhan.setDateFormatString(b);
+
+        this.cbbTrangThai.setSelectedItem(Converter.trangThaiDonHang(pnc.getTrangThai()));
+
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -98,6 +107,7 @@ public class NvqlRUDPhieuNhapView extends javax.swing.JFrame {
         errGhiChu = new javax.swing.JLabel();
         textAreaScroll1 = new utilities.palette.TextAreaScroll();
         txtGhiChu = new utilities.palette.TextAreaCustom();
+        cbbTrangThai = new utilities.palette.Combobox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setUndecorated(true);
@@ -178,6 +188,8 @@ public class NvqlRUDPhieuNhapView extends javax.swing.JFrame {
             }
         });
 
+        dateNgayTao.setEnabled(false);
+
         jLabel1.setText("Ngày tạo");
 
         jLabel2.setText("Ngày nhận");
@@ -191,6 +203,8 @@ public class NvqlRUDPhieuNhapView extends javax.swing.JFrame {
         txtGhiChu.setColumns(20);
         txtGhiChu.setRows(5);
         textAreaScroll1.setViewportView(txtGhiChu);
+
+        cbbTrangThai.setLabeText("Trạng thái");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -230,7 +244,11 @@ public class NvqlRUDPhieuNhapView extends javax.swing.JFrame {
                                             .addComponent(errNgayNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(0, 0, Short.MAX_VALUE))))
                             .addComponent(errGhiChu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(textAreaScroll1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(textAreaScroll1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cbbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(31, 31, 31)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -256,7 +274,9 @@ public class NvqlRUDPhieuNhapView extends javax.swing.JFrame {
                     .addComponent(cbbNhaCungCap, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbbNhanVien, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34)
-                .addComponent(textAreaScroll1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(textAreaScroll1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(errGhiChu, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
@@ -284,6 +304,12 @@ public class NvqlRUDPhieuNhapView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+      private void loadCbbTrangThai() {
+        this.cbbTrangThai.addItem(Converter.trangThaiDonHang(TrangThaiPhieuConstant.DA_THANH_TOAN));
+        this.cbbTrangThai.addItem(Converter.trangThaiDonHang(TrangThaiPhieuConstant.DA_HUY));
+        this.cbbTrangThai.addItem(Converter.trangThaiDonHang(TrangThaiPhieuConstant.CHO_THANH_TOAN));
+    }
+
     private void loadCbbNcc() {
         for (NvqlGetTenNccCustom nvqlGetTenNccCustom : listNcc) {
             this.cbbNhaCungCap.addItem(nvqlGetTenNccCustom.getTen());
@@ -320,12 +346,12 @@ public class NvqlRUDPhieuNhapView extends javax.swing.JFrame {
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         NvqlQuanLyPhieuNhapCustom check = this.getFormData();
-        if(check == null) {
+        if (check == null) {
             return;
         }
         check.setId(pnc.getId());
-        
-        if(phieuNhapService.updatePn(check)) {
+
+        if (phieuNhapService.updatePn(check)) {
             MsgBox.alert(this, "Sửa thành công");
             this.setVisible(false);
         } else {
@@ -336,7 +362,7 @@ public class NvqlRUDPhieuNhapView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-         if(phieuNhapService.deletePn(pnc.getId())) {
+        if (phieuNhapService.deletePn(pnc.getId())) {
             MsgBox.alert(this, "Xóa thành công");
             this.setVisible(false);
         } else {
@@ -345,7 +371,7 @@ public class NvqlRUDPhieuNhapView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
- public NvqlQuanLyPhieuNhapCustom getFormData() {
+    public NvqlQuanLyPhieuNhapCustom getFormData() {
 
         String ghiChu = txtGhiChu.getText();
         Date ngayNhap = dateNgayNhan.getDate();
@@ -353,10 +379,12 @@ public class NvqlRUDPhieuNhapView extends javax.swing.JFrame {
         NvqlQuanLyPhieuNhapCustom pn = phieuNhapService.checkValidate(ghiChu, ngayNhap, ngayTao, errNgayNhan, errNgayTao, errGhiChu);
         pn.setIdNcc(listNcc.get(cbbNhaCungCap.getSelectedIndex()).getId());
         pn.setIdNhanVien(listNv.get(cbbNhanVien.getSelectedIndex()).getId());
+        pn.setTrangThai(phieuNhapService.loc(cbbTrangThai.getSelectedIndex()));
 
         return pn;
     }
 //    
+
     /**
      * @param args the command line arguments
      */
@@ -462,6 +490,7 @@ public class NvqlRUDPhieuNhapView extends javax.swing.JFrame {
     private utilities.palette.UWPButton btnUpdate;
     private utilities.palette.Combobox cbbNhaCungCap;
     private utilities.palette.Combobox cbbNhanVien;
+    private utilities.palette.Combobox cbbTrangThai;
     private com.toedter.calendar.JDateChooser dateNgayNhan;
     private com.toedter.calendar.JDateChooser dateNgayTao;
     private javax.swing.JLabel errGhiChu;

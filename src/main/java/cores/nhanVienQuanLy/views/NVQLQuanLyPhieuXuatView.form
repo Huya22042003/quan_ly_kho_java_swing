@@ -348,7 +348,7 @@
         </Component>
         <Component class="utilities.palette.UWPButton" name="btnClear">
           <Properties>
-            <Property name="text" type="java.lang.String" value="ClearForm"/>
+            <Property name="text" type="java.lang.String" value="Clear"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="18" style="1"/>
             </Property>
