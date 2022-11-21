@@ -5,20 +5,12 @@
 package cores.nhanVienQuanLy.views;
 
 import cores.nhanVienQuanLy.customModels.NvqlQuanLyPhieuHoanXuatCustom;
-import cores.nhanVienQuanLy.services.serviceImpls.NVQLQuanLyPhieuXuatServiceImpl;
-import customModels.DemoCoSoCustom;
-import cores.nhanVienQuanLy.customModels.PhieuXuatCustom;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import services.DemoCoSoService;
-import services.serviceImpl.DemoCoSoServiceImpl;
 import utilities.MsgBox;
-import cores.nhanVienQuanLy.services.NVQLQuanLyPhieuXuatService;
 import cores.nhanVienQuanLy.services.NvqlQuanLyPhieuHoanXuatService;
 import cores.nhanVienQuanLy.services.serviceImpls.NvqlQuanLyPhieuHoanXuatServieceImpl;
 import java.sql.Date;
-import java.util.List;
-import javax.swing.JOptionPane;
 import utilities.Converter;
 
 /**
@@ -65,8 +57,8 @@ public class NvqlRUDQuanLyPhieuHoanXuat extends javax.swing.JFrame {
         this.txtGhiChu.setText(pxcs.getGhiChu());
         jdcNgayTao.setDate(ngayTao);
         jdcNgayThanhToan.setDate(ngayNhan);
-        pxcs.setTrangThai(phieuHoanXuatService.loc(this.cbbTrangThai.getSelectedIndex()));
-        pxcs.setPhieuXuat(phieuHoanXuatService.chonPX(cbbPhieuXuat.getSelectedIndex()));
+        cbbPhieuXuat.setSelectedItem(pxcs.getPhieuXuat().getId());
+        cbbTrangThai.setSelectedItem(Converter.TrangThaiPhieuHoan(pxcs.getTrangThai()));
     }
 
     @SuppressWarnings("unchecked")
@@ -369,14 +361,14 @@ public class NvqlRUDQuanLyPhieuHoanXuat extends javax.swing.JFrame {
         if (!check) {
             return null;
         }
-        NvqlQuanLyPhieuHoanXuatCustom pnct = new NvqlQuanLyPhieuHoanXuatCustom();
-        pnct.setGhiChu(txtGhiChu.getText());
-        pnct.setLiDo(txtLiDo.getText());
-        pnct.setNgayTao(jdcNgayTao.getDate().getTime());
-        pnct.setNgayThanhToan(jdcNgayThanhToan.getDate().getTime());
-        pnct.setTrangThai(phieuHoanXuatService.loc(this.cbbTrangThai.getSelectedIndex()));
-        pnct.setPhieuXuat(phieuHoanXuatService.chonPX(cbbPhieuXuat.getSelectedIndex()));
-        return pnct;
+        NvqlQuanLyPhieuHoanXuatCustom phxct = new NvqlQuanLyPhieuHoanXuatCustom();
+        phxct.setGhiChu(txtGhiChu.getText());
+        phxct.setLiDo(txtLiDo.getText());
+        phxct.setNgayTao(jdcNgayTao.getDate().getTime());
+        phxct.setNgayThanhToan(jdcNgayThanhToan.getDate().getTime());
+        phxct.setTrangThai(phieuHoanXuatService.loc(this.cbbTrangThai.getSelectedIndex()));
+        phxct.setPhieuXuat(phieuHoanXuatService.chonPX(cbbPhieuXuat.getSelectedIndex()));
+        return phxct;
     }
 
     /**

@@ -63,6 +63,7 @@ public class NvqlQuanLyPhieuHoanXuatView extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         btnThem = new utilities.palette.UWPButton();
         jPanel2 = new javax.swing.JPanel();
@@ -117,9 +118,12 @@ public class NvqlQuanLyPhieuHoanXuatView extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tblPhieuHoanXuat);
 
         rdoNgayTao.setBackground(new java.awt.Color(255, 153, 0));
+        buttonGroup1.add(rdoNgayTao);
+        rdoNgayTao.setSelected(true);
         rdoNgayTao.setText("Ngày Tạo");
 
         rdoNgayThanhToan.setBackground(new java.awt.Color(255, 102, 0));
+        buttonGroup1.add(rdoNgayThanhToan);
         rdoNgayThanhToan.setText("Ngày Thanh Toán");
 
         jLabel2.setText("From:");
@@ -285,6 +289,7 @@ public class NvqlQuanLyPhieuHoanXuatView extends javax.swing.JPanel {
         int row = this.tblPhieuHoanXuat.getSelectedRow();
         NvqlRUDQuanLyPhieuHoanXuat rud = new NvqlRUDQuanLyPhieuHoanXuat();
         rud.pxcs = phieuHoanXuatService.findByID(UUID.fromString(this.tblPhieuHoanXuat.getValueAt(row, 1).toString()));
+        System.out.println(phieuHoanXuatService.findByID(UUID.fromString(this.tblPhieuHoanXuat.getValueAt(row, 1).toString())));
         rud.setVisible(true);
         rud.showData();
     }//GEN-LAST:event_tblPhieuHoanXuatMouseClicked
@@ -335,6 +340,7 @@ public class NvqlQuanLyPhieuHoanXuatView extends javax.swing.JPanel {
     private utilities.palette.ButtonGradient btnSearch;
     private utilities.palette.UWPButton btnThem;
     private utilities.palette.UWPButton btnThoat;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
