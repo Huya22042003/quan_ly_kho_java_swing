@@ -72,19 +72,13 @@ public class NhanVienVanDon extends javax.swing.JFrame {
             }
         });
         menu.initMenuItem();
-        bg.add(menu, "w 230!, spany 2");    // Span Y 2cell
-        bg.add(header, "h 120!, wrap");
+        bg.add(menu, "w 60!, spany 2");    // Span Y 2cell
+        bg.add(header, "h 107!, wrap");
         bg.add(main, "w 100%, h 100%");
         TimingTarget target = new TimingTargetAdapter() {
             @Override
             public void timingEvent(float fraction) {
-                double width;
-                if (menu.isShowMenu()) {
-                    width = 60 + (170 * (1f - fraction));
-                } else {
-                    width = 60 + (170 * fraction);
-                }
-                layout.setComponentConstraints(menu, "w " + width + "!, spany2");
+                layout.setComponentConstraints(menu, "w " + 60 + "!, spany2");
                 menu.revalidate();
             }
 

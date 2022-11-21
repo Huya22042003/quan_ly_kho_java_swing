@@ -21,8 +21,8 @@ public class Header extends javax.swing.JPanel {
      */
     public Header() {
         initComponents();
-        nv = Auth.nhanVien;
-        txtName.setText("Hello, " + nv.getTen());
+//        nv = Auth.nhanVien;
+//        txtName.setText("Hello, " + nv.getTen());
     }
 
     /**
@@ -77,7 +77,7 @@ public class Header extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 614, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 814, Short.MAX_VALUE)
                         .addGap(170, 170, 170)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
