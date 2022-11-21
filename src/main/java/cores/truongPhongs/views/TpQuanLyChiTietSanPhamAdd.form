@@ -56,54 +56,68 @@
                   <Component id="jPanel2" min="-2" pref="56" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="uWPButton1" min="-2" pref="53" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="119" pref="119" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="txtSoLuongTon" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="cbbDonVi" alignment="0" pref="270" max="32767" attributes="0"/>
-                                          <Component id="erroGiaNhap" max="32767" attributes="0"/>
-                                          <Component id="erroSoLuongTon" alignment="0" max="32767" attributes="0"/>
-                                      </Group>
-                                      <Component id="txtGiaNhap" alignment="0" min="-2" pref="270" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="erroGiaBan" max="32767" attributes="0"/>
-                                      <Group type="102" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="txtGiaBan" min="-2" pref="272" max="-2" attributes="0"/>
-                                              <Component id="cbbSanPham" alignment="0" min="-2" pref="269" max="-2" attributes="0"/>
-                                              <Component id="cbbNamBH" alignment="0" min="-2" pref="269" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                      </Group>
-                                  </Group>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="uWPButton1" min="-2" pref="53" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="244" max="-2" attributes="0"/>
-                                  <Component id="btnSave" min="-2" pref="97" max="-2" attributes="0"/>
-                                  <EmptySpace pref="214" max="32767" attributes="0"/>
-                                  <Component id="btnClose" min="-2" pref="97" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace min="-2" pref="244" max="-2" attributes="0"/>
+                                          <Component id="btnSave" min="-2" pref="97" max="-2" attributes="0"/>
+                                          <EmptySpace pref="214" max="32767" attributes="0"/>
+                                          <Component id="btnClose" min="-2" pref="97" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="121" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="txtSoLuongTon" alignment="1" min="-2" pref="270" max="-2" attributes="0"/>
+                                              <Component id="erroSoLuongTon" alignment="1" min="-2" pref="270" max="-2" attributes="0"/>
+                                              <Component id="erroGiaNhap" alignment="1" min="-2" pref="270" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="384" pref="384" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="lblHinhAnh" min="-2" pref="175" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Group type="103" groupAlignment="1" attributes="0">
+                                              <Component id="cbbMauSac" min="-2" pref="153" max="-2" attributes="0"/>
+                                              <Component id="erroHinhAnh" min="-2" pref="137" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="119" pref="119" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lblHinhAnh" min="-2" pref="175" max="-2" attributes="0"/>
+                              <Component id="cbbDonVi" alignment="0" min="-2" pref="270" max="-2" attributes="0"/>
+                              <Component id="txtGiaNhap" alignment="1" min="-2" pref="270" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
-                                  <Component id="erroHinhAnh" min="-2" pref="137" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="cbbNamBH" min="-2" pref="269" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="230" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="erroGiaBan" min="-2" pref="269" max="-2" attributes="0"/>
+                                      <Component id="txtGiaBan" min="-2" pref="272" max="-2" attributes="0"/>
+                                      <Component id="cbbSanPham" alignment="1" min="-2" pref="269" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -112,48 +126,46 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="uWPButton1" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Group type="102" attributes="0">
+                  <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="lblHinhAnh" min="-2" pref="154" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                          <Component id="erroHinhAnh" min="-2" pref="24" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="txtGiaNhap" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="txtGiaBan" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="erroGiaNhap" alignment="0" min="-2" pref="24" max="-2" attributes="0"/>
-                                      <Component id="erroGiaBan" alignment="0" min="-2" pref="24" max="-2" attributes="0"/>
+                                      <Component id="erroGiaNhap" min="-2" pref="24" max="-2" attributes="0"/>
+                                      <Component id="erroGiaBan" min="-2" pref="24" max="-2" attributes="0"/>
                                   </Group>
+                                  <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="lblHinhAnh" min="-2" pref="154" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="txtSoLuongTon" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                                  <Component id="erroHinhAnh" min="-2" pref="24" max="-2" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="txtSoLuongTon" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="cbbSanPham" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="cbbSanPham" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="erroSoLuongTon" min="-2" pref="24" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <Component id="erroSoLuongTon" min="-2" pref="24" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace type="unrelated" pref="30" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="cbbDonVi" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="cbbNamBH" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cbbMauSac" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="38" max="32767" attributes="0"/>
+                  <EmptySpace pref="54" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnClose" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnSave" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -269,18 +281,15 @@
             <Property name="labeText" type="java.lang.String" value="Ch&#x1ecd;n &#x110;&#x1a1;n V&#x1ecb;"/>
           </Properties>
         </Component>
-        <Component class="utilities.palette.Combobox" name="cbbNamBH">
+        <Component class="utilities.palette.Combobox" name="cbbMauSac">
           <Properties>
-            <Property name="labeText" type="java.lang.String" value="Ch&#x1ecd;n N&#x103;m B&#x1ea3;o H&#xe0;nh"/>
+            <Property name="labeText" type="java.lang.String" value="Ch&#x1ecd;n M&#xe0;u S&#x1eaf;c"/>
           </Properties>
         </Component>
         <Component class="utilities.palette.Combobox" name="cbbSanPham">
           <Properties>
             <Property name="labeText" type="java.lang.String" value="Ch&#x1ecd;n S&#x1ea3;n Ph&#x1ea9;m"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbbSanPhamActionPerformed"/>
-          </Events>
         </Component>
         <Component class="utilities.palette.lable" name="lblHinhAnh">
           <Properties>
@@ -306,6 +315,11 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="33" green="33" red="ff" type="rgb"/>
             </Property>
+          </Properties>
+        </Component>
+        <Component class="utilities.palette.Combobox" name="cbbNamBH">
+          <Properties>
+            <Property name="labeText" type="java.lang.String" value="Ch&#x1ecd;n N&#x103;m B&#x1ea3;o H&#xe0;nh"/>
           </Properties>
         </Component>
       </SubComponents>

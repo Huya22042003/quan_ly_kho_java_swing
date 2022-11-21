@@ -24,6 +24,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.table.DefaultTableModel;
+import utilities.Converter;
 import utilities.MsgBox;
 
 /**
@@ -44,27 +45,18 @@ public class TpQuanLyChiTietSanPhamU extends javax.swing.JFrame {
         initComponents();
         loadList();
         loadCBB();
+        serviceChiTietSP.loadCombobox(cbbMauSac);
         Toolkit toolkit = getToolkit();
         Dimension size = toolkit.getScreenSize();
         setLocation(size.width / 2 - getWidth() / 2, size.height / 2 - getHeight() / 2);
     }
 
-//    public TpQuanLyChiTietSanPhamU(TpQuanLyChiTietSanPhamCustom sp) {
-//        ct = sp;
-//        initComponents();
-//        loadList();
-//        loadCBB();
-//        System.out.println();
-//        showData();
-//        Toolkit toolkit = getToolkit();
-//        Dimension size = toolkit.getScreenSize();
-//        setLocation(size.width / 2 - getWidth() / 2, size.height / 2 - getHeight() / 2);
-//    }
     public void showData() {
         this.txtGiaNhap.setText(String.valueOf(ct.getGiaNhap()));
         this.txtGiaBan.setText(String.valueOf(ct.getGiaBan()));
         this.txtSoLuongTon.setText(String.valueOf(ct.getSoLuongTon()));
         this.lblHinhAnh.setIcon(new javax.swing.ImageIcon(ct.getHinhAnh()));
+        this.cbbMauSac.setSelectedItem(Converter.trangThaiMauSac(ct.getMau()));
         cbbDonVi.setSelectedItem(ct.getDonVi().getDonViGoc());
         cbbNamBH.setSelectedItem(ct.getNamBaoHanh().getTen());
         cbbSanPham.setSelectedItem(ct.getSanPham().getTen());
@@ -75,16 +67,9 @@ public class TpQuanLyChiTietSanPhamU extends javax.swing.JFrame {
         TpQuanLyChiTietSanPhamCustom sp = serviceChiTietSP.checkValidate(serviceChiTietSP.getAllDonVi().get(cbbDonVi.getSelectedIndex()).getId(),
                 serviceChiTietSP.getAllNamBH().get(cbbNamBH.getSelectedIndex()).getId(),
                 serviceChiTietSP.getAllSanPham().get(cbbSanPham.getSelectedIndex()).getId(),
-                lblHinhAnh.getText(),txtGiaNhap.getText(), txtGiaBan.getText(), txtSoLuongTon.getText(),erroHinhAnh, erroGiaNhap, erroGiaBan, erroSoLuongTon);
-//        BigDecimal giaNhap = BigDecimal.valueOf(Double.parseDouble(txtGiaNhap.getText()));
-//        BigDecimal giaBan = BigDecimal.valueOf(Double.parseDouble(txtGiaBan.getText()));
-//        sp.setGiaNhap(giaNhap);
-//        sp.setGiaBan(giaBan);
-//        sp.setHinhAnh(duongdananh);
-////        sp.setSoLuongTon(Integer.parseInt(txtSoLuongTon.getText()));
-//        sp.setDonVi(serviceChiTietSP.findIDDonVi(serviceChiTietSP.getAllDonVi().get(cbbDonVi.getSelectedIndex()).getId()));
-//        sp.setNamBaoHanh(serviceChiTietSP.findIDBaoHanh(serviceChiTietSP.getAllNamBH().get(cbbNamBH.getSelectedIndex()).getId()));
-//        sp.setSanPham(serviceChiTietSP.findIDSanPham(serviceChiTietSP.getAllSanPham().get(cbbSanPham.getSelectedIndex()).getId()));
+                lblHinhAnh.getText(), txtGiaNhap.getText(), txtGiaBan.getText(), txtSoLuongTon.getText(),
+                erroHinhAnh, erroGiaNhap, erroGiaBan, erroSoLuongTon, serviceChiTietSP.loc(this.cbbMauSac.getSelectedIndex()));
+
         return sp;
     }
 
@@ -132,6 +117,7 @@ public class TpQuanLyChiTietSanPhamU extends javax.swing.JFrame {
         erroSoLuongTon = new javax.swing.JLabel();
         btnDelete = new utilities.palette.UWPButton();
         erroHinhAnh = new javax.swing.JLabel();
+        cbbMauSac = new utilities.palette.Combobox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -219,6 +205,8 @@ public class TpQuanLyChiTietSanPhamU extends javax.swing.JFrame {
 
         erroHinhAnh.setForeground(new java.awt.Color(255, 51, 51));
 
+        cbbMauSac.setLabeText("Chọn Màu Sắc");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -261,9 +249,11 @@ public class TpQuanLyChiTietSanPhamU extends javax.swing.JFrame {
                                 .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(115, 115, 115))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(lblHinhAnh, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
-                                    .addComponent(erroHinhAnh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cbbMauSac, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(erroHinhAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lblHinhAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(22, 22, 22))))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -294,7 +284,8 @@ public class TpQuanLyChiTietSanPhamU extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbbDonVi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbbNamBH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbbNamBH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbbMauSac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -328,7 +319,7 @@ public class TpQuanLyChiTietSanPhamU extends javax.swing.JFrame {
             return;
         }
 
-        TpQuanLyChiTietSanPhamCustom sp = new TpQuanLyChiTietSanPhamCustom(ct.getId(), check.getSoLuongTon(), check.getHinhAnh(), check.getGiaBan(), check.getGiaNhap(), check.getSanPham(), check.getDonVi(), check.getNamBaoHanh());
+        TpQuanLyChiTietSanPhamCustom sp = new TpQuanLyChiTietSanPhamCustom(ct.getId(), check.getSoLuongTon(), check.getHinhAnh(), check.getGiaBan(), check.getGiaNhap(), check.getMau(), check.getSanPham(), check.getDonVi(), check.getNamBaoHanh());
 
         if (serviceChiTietSP.updateCTSanPham(sp)) {
             MsgBox.alert(this, "Sửa thành công");
@@ -370,7 +361,6 @@ public class TpQuanLyChiTietSanPhamU extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_lblHinhAnhMouseClicked
 
-
     /**
      * @param args the command line arguments
      */
@@ -411,6 +401,7 @@ public class TpQuanLyChiTietSanPhamU extends javax.swing.JFrame {
     private utilities.palette.UWPButton btnDelete;
     private utilities.palette.UWPButton btnUpdate;
     private utilities.palette.Combobox cbbDonVi;
+    private utilities.palette.Combobox cbbMauSac;
     private utilities.palette.Combobox cbbNamBH;
     private utilities.palette.Combobox cbbSanPham;
     private javax.swing.JLabel erroGiaBan;
