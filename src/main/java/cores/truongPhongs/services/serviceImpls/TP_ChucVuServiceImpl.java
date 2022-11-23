@@ -13,7 +13,7 @@ public class TP_ChucVuServiceImpl implements TP_ChucVuService {
     private TP_ChucVuRepository rp = new TP_ChucVuRepository();
 
     @Override
-    public List<TP_ChucVuCustom> getListNBH() {
+    public List<TP_ChucVuCustom> getListCV() {
         return rp.getList();
     }
 
