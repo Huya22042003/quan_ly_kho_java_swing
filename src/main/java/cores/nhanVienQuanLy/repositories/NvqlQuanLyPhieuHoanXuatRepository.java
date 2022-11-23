@@ -41,9 +41,9 @@ public class NvqlQuanLyPhieuHoanXuatRepository {
         Query query = session.createQuery("SELECT new cores.nhanVienQuanLy.customModels.NvqlQuanLyPhieuHoanXuatCustom("
                 + "phx.id as id,"
                 + "phx.ngayTao as ngayTao,"
+                + "phx.ngayThanhToan as ngayThanhToan,"
                 + "phx.ghiChu as ghiChu,"
                 + "phx.liDo as liDo,"
-                + "phx.ngayThanhToan as ngayThanhToan,"
                 + "phx.trangThai as trangThai,"
                 + "phx.phieuXuat as phieuXuat"
                 + ") FROM domainModels.PhieuHoanXuat phx WHERE phx.ngayTao > :ngayBatDau AND phx.ngayTao < :ngayKetThuc");
@@ -58,9 +58,9 @@ public class NvqlQuanLyPhieuHoanXuatRepository {
         Query query = session.createQuery("SELECT new cores.nhanVienQuanLy.customModels.NvqlQuanLyPhieuHoanXuatCustom("
                 + "phx.id as id,"
                 + "phx.ngayTao as ngayTao,"
+                + "phx.ngayThanhToan as ngayThanhToan,"
                 + "phx.ghiChu as ghiChu,"
                 + "phx.liDo as liDo,"
-                + "phx.ngayThanhToan as ngayThanhToan,"
                 + "phx.trangThai as trangThai,"
                 + "phx.phieuXuat as phieuXuat"
                 + ") FROM domainModels.PhieuHoanXuat phx WHERE phx.ngayThanhToan > :ngayBatDau AND phx.ngayThanhToan < :ngayKetThuc");
@@ -124,9 +124,9 @@ public class NvqlQuanLyPhieuHoanXuatRepository {
             Query query = session.createQuery("SELECT new cores.nhanVienQuanLy.customModels.NvqlQuanLyPhieuHoanXuatCustom("
                     + "phx.id as id,"
                     + "phx.ngayTao as ngayTao,"
+                    + "phx.ngayThanhToan as ngayThanhToan,"
                     + "phx.ghiChu as ghiChu,"
                     + "phx.liDo as liDo,"
-                    + "phx.ngayThanhToan as ngayThanhToan,"
                     + "phx.trangThai as trangThai,"
                     + "phx.phieuXuat as phieuXuat"
                     + ") FROM domainModels.PhieuHoanXuat phx WHERE phx.id =:id");

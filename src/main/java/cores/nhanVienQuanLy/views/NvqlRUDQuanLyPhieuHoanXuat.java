@@ -4,18 +4,13 @@
  */
 package cores.nhanVienQuanLy.views;
 
-import cores.nhanVienQuanLy.services.serviceImpls.NVQLQuanLyPhieuXuatServiceImpl;
-import customModels.DemoCoSoCustom;
-import cores.nhanVienQuanLy.customModels.PhieuXuatCustom;
+import cores.nhanVienQuanLy.customModels.NvqlQuanLyPhieuHoanXuatCustom;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import services.DemoCoSoService;
-import services.serviceImpl.DemoCoSoServiceImpl;
 import utilities.MsgBox;
-import cores.nhanVienQuanLy.services.NVQLQuanLyPhieuXuatService;
+import cores.nhanVienQuanLy.services.NvqlQuanLyPhieuHoanXuatService;
+import cores.nhanVienQuanLy.services.serviceImpls.NvqlQuanLyPhieuHoanXuatServieceImpl;
 import java.sql.Date;
-import java.util.List;
-import javax.swing.JOptionPane;
 import utilities.Converter;
 
 /**
@@ -24,33 +19,36 @@ import utilities.Converter;
  */
 public class NvqlRUDQuanLyPhieuHoanXuat extends javax.swing.JFrame {
 
-    private NVQLQuanLyPhieuXuatService phieuNhapService;
-    PhieuXuatCustom pxcs = new PhieuXuatCustom();
+    private NvqlQuanLyPhieuHoanXuatService phieuHoanXuatService;
+    NvqlQuanLyPhieuHoanXuatCustom pxcs = new NvqlQuanLyPhieuHoanXuatCustom();
 
     public NvqlRUDQuanLyPhieuHoanXuat() {
         initComponents();
-        phieuNhapService = new NVQLQuanLyPhieuXuatServiceImpl();
-        phieuNhapService.loadComBox(cbbTrangThai);
-        phieuNhapService.loadComBoBoxNV(cbbNhanVien);
-        clearForm();
+        phieuHoanXuatService = new NvqlQuanLyPhieuHoanXuatServieceImpl();
+        phieuHoanXuatService.loadComBoBoxPx(cbbPhieuXuat);
+        showData();
+        Toolkit toolkit = getToolkit();
+        Dimension size = toolkit.getScreenSize();
+        setLocation(size.width / 2 - getWidth() / 2, size.height / 2 - getHeight() / 2);
+    }
+
+    public NvqlRUDQuanLyPhieuHoanXuat(NvqlQuanLyPhieuHoanXuatCustom pxcst) {
+        pxcs = pxcst;
+        initComponents();
+        phieuHoanXuatService = new NvqlQuanLyPhieuHoanXuatServieceImpl();
+        phieuHoanXuatService.loadComBoBoxPx(cbbPhieuXuat);
+        showData();
 
         Toolkit toolkit = getToolkit();
         Dimension size = toolkit.getScreenSize();
         setLocation(size.width / 2 - getWidth() / 2, size.height / 2 - getHeight() / 2);
     }
 
-    public NvqlRUDQuanLyPhieuHoanXuat(PhieuXuatCustom pxcst) {
-        pxcs = pxcst;
-        initComponents();
-        phieuNhapService = new NVQLQuanLyPhieuXuatServiceImpl();
-        phieuNhapService.loadComBoBoxNV(cbbNhanVien);
-        phieuNhapService.loadComBox(cbbTrangThai);
-        clearForm();
-        showData();
-
-        Toolkit toolkit = getToolkit();
-        Dimension size = toolkit.getScreenSize();
-        setLocation(size.width / 2 - getWidth() / 2, size.height / 2 - getHeight() / 2);
+    public void clearForm() {
+        this.txtGhiChu.setText("");
+        this.cbbPhieuXuat.setSelectedIndex(0);
+        jdcNgayThanhToan.setDate(null);
+        jdcNgayTao.setDate(null);
     }
 
     public void showData() {
@@ -59,18 +57,8 @@ public class NvqlRUDQuanLyPhieuHoanXuat extends javax.swing.JFrame {
         this.txtGhiChu.setText(pxcs.getGhiChu());
         jdcNgayTao.setDate(ngayTao);
         jdcNgayThanhToan.setDate(ngayNhan);
-        cbbTrangThai.setSelectedItem(Converter.TrangThaiPhieuXuat(pxcs.getTrangThai()));
-        cbbNhanVien.setSelectedItem(pxcs.getNhanVien());
-    }
-
-    public void clearForm() {
-//        this.txtGhiChu.setText("");
-//        this.cbbKhachHang.setSelectedIndex(0);
-//        this.cbbNhanVien.setSelectedIndex(0);
-//        jdcNgayThanhToan.setDate(null);
-//        jdcNgayTao.setDate(null);
-//        cbbTrangThai.setSelectedIndex(0);
-
+        cbbPhieuXuat.setSelectedItem(pxcs.getPhieuXuat().getId());
+        cbbTrangThai.setSelectedItem(Converter.TrangThaiPhieuHoan(pxcs.getTrangThai()));
     }
 
     @SuppressWarnings("unchecked")
@@ -88,7 +76,7 @@ public class NvqlRUDQuanLyPhieuHoanXuat extends javax.swing.JFrame {
         erroGhiChu = new javax.swing.JLabel();
         erroNgayNhan = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        cbbNhanVien = new utilities.palette.Combobox();
+        cbbPhieuXuat = new utilities.palette.Combobox();
         jdcNgayTao = new com.toedter.calendar.JDateChooser();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -96,7 +84,7 @@ public class NvqlRUDQuanLyPhieuHoanXuat extends javax.swing.JFrame {
         btnDelete = new utilities.palette.UWPButton();
         jLabel5 = new javax.swing.JLabel();
         cbbTrangThai = new utilities.palette.Combobox();
-        txtGhiChu1 = new utilities.palette.TextField();
+        txtLiDo = new utilities.palette.TextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setUndecorated(true);
@@ -183,9 +171,11 @@ public class NvqlRUDQuanLyPhieuHoanXuat extends javax.swing.JFrame {
 
         jLabel5.setText("Trạng Thái");
 
-        cbbTrangThai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "Chờ xác nhận", "Đã hủy" }));
+        cbbTrangThai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Chờ xác nhận", "Đã hủy", "Hoàn thành công" }));
+        cbbTrangThai.setSelectedIndex(-1);
+        cbbTrangThai.setToolTipText("");
 
-        txtGhiChu1.setLabelText("Lí do");
+        txtLiDo.setLabelText("Lí do");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -216,7 +206,7 @@ public class NvqlRUDQuanLyPhieuHoanXuat extends javax.swing.JFrame {
                                                         .addComponent(jLabel3))
                                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(cbbNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(cbbPhieuXuat, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addComponent(jdcNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                                     .addGap(176, 176, 176)
@@ -225,7 +215,7 @@ public class NvqlRUDQuanLyPhieuHoanXuat extends javax.swing.JFrame {
                                                     .addGap(66, 66, 66)
                                                     .addComponent(erroGhiChu, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addComponent(txtGhiChu, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(txtGhiChu1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                .addComponent(txtLiDo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                             .addComponent(erroNgayNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -250,7 +240,7 @@ public class NvqlRUDQuanLyPhieuHoanXuat extends javax.swing.JFrame {
                 .addGap(36, 36, 36)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(cbbNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbbPhieuXuat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(50, 50, 50)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
@@ -258,7 +248,7 @@ public class NvqlRUDQuanLyPhieuHoanXuat extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(txtGhiChu, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
-                .addComponent(txtGhiChu1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtLiDo, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(erroNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
@@ -311,20 +301,20 @@ public class NvqlRUDQuanLyPhieuHoanXuat extends javax.swing.JFrame {
     }//GEN-LAST:event_btnThoatActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        PhieuXuatCustom check = this.getFormData();
+        NvqlQuanLyPhieuHoanXuatCustom check = this.getFormData();
         if (check == null) {
-            MsgBox.alert(this, "Lỗi không thêm được");
+            MsgBox.alert(this, "Lỗi không sửa được");
             return;
         }
-        PhieuXuatCustom pxcc = new PhieuXuatCustom();
+        NvqlQuanLyPhieuHoanXuatCustom pxcc = new NvqlQuanLyPhieuHoanXuatCustom();
         pxcc.setId(pxcs.getId());
         pxcc.setNgayTao(check.getNgayTao());
         pxcc.setNgayThanhToan(check.getNgayThanhToan());
         pxcc.setGhiChu(check.getGhiChu());
-        pxcc.setKhachHang(check.getKhachHang());
-        pxcc.setNhanVien(check.getNhanVien());
+        pxcc.setLiDo(check.getLiDo());
+        pxcc.setPhieuXuat(check.getPhieuXuat());
         pxcc.setTrangThai(check.getTrangThai());
-        if (phieuNhapService.updatePhieuXuat(pxcc)) {
+        if (phieuHoanXuatService.updatePhieuHoanXuat(pxcc)) {
             MsgBox.alert(this, "Update thành công");
             this.setVisible(false);
         } else {
@@ -346,7 +336,7 @@ public class NvqlRUDQuanLyPhieuHoanXuat extends javax.swing.JFrame {
     }//GEN-LAST:event_formMousePressed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        if (phieuNhapService.deletePhieuXuat(pxcs.getId())) {
+        if (phieuHoanXuatService.deletePhieuHoanXuat(pxcs.getId())) {
             MsgBox.alert(this, "Xóa thành công");
             this.setVisible(false);
         } else {
@@ -354,7 +344,7 @@ public class NvqlRUDQuanLyPhieuHoanXuat extends javax.swing.JFrame {
             this.setVisible(true);
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
-    public PhieuXuatCustom getFormData() {
+    public NvqlQuanLyPhieuHoanXuatCustom getFormData() {
         boolean check = true;
         if (jdcNgayTao.getDate() == null) {
             erroNgayTao.setText("Bạn phải chọn ngày tạo");
@@ -371,21 +361,21 @@ public class NvqlRUDQuanLyPhieuHoanXuat extends javax.swing.JFrame {
         if (!check) {
             return null;
         }
-        PhieuXuatCustom pnct = new PhieuXuatCustom();
-        pnct.setGhiChu(txtGhiChu.getText());
-//        pnct.setNgayTao(Long.parseLong(String.valueOf(jdcNgayTao.getDate())));
-        pnct.setNgayTao(jdcNgayTao.getDate().getTime());
-        pnct.setNgayThanhToan(jdcNgayThanhToan.getDate().getTime());
-        pnct.setNhanVien(phieuNhapService.chonNV(cbbNhanVien.getSelectedIndex()));
-        pnct.setTrangThai(phieuNhapService.loc(cbbTrangThai.getSelectedIndex()));
-        return pnct;
+        NvqlQuanLyPhieuHoanXuatCustom phxct = new NvqlQuanLyPhieuHoanXuatCustom();
+        phxct.setGhiChu(txtGhiChu.getText());
+        phxct.setLiDo(txtLiDo.getText());
+        phxct.setNgayTao(jdcNgayTao.getDate().getTime());
+        phxct.setNgayThanhToan(jdcNgayThanhToan.getDate().getTime());
+        phxct.setTrangThai(phieuHoanXuatService.loc(this.cbbTrangThai.getSelectedIndex()));
+        phxct.setPhieuXuat(phieuHoanXuatService.chonPX(cbbPhieuXuat.getSelectedIndex()));
+        return phxct;
     }
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new NvqlRUDQuanLyPhieuHoanXuat().setVisible(true);
@@ -397,7 +387,7 @@ public class NvqlRUDQuanLyPhieuHoanXuat extends javax.swing.JFrame {
     private utilities.palette.UWPButton btnDelete;
     private utilities.palette.UWPButton btnThoat;
     private utilities.palette.UWPButton btnUpdate;
-    private utilities.palette.Combobox cbbNhanVien;
+    private utilities.palette.Combobox cbbPhieuXuat;
     private utilities.palette.Combobox cbbTrangThai;
     private javax.swing.JLabel erroGhiChu;
     private javax.swing.JLabel erroNgayNhan;
@@ -412,7 +402,7 @@ public class NvqlRUDQuanLyPhieuHoanXuat extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser jdcNgayThanhToan;
     private javax.swing.JLabel test;
     private utilities.palette.TextField txtGhiChu;
-    private utilities.palette.TextField txtGhiChu1;
+    private utilities.palette.TextField txtLiDo;
     private utilities.palette.UWPButton uWPButton1;
     // End of variables declaration//GEN-END:variables
 }

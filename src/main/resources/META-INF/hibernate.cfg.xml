@@ -41,11 +41,13 @@
         <mapping class = "domainModels.NamBaoHanh"/>
         <mapping class = "domainModels.PhieuNhap"/>
         <mapping class = "domainModels.PhieuXuat"/>
+        <mapping class = "domainModels.PhieuKiemKe"/>
         <mapping class = "domainModels.PhieuHoanXuat"/>
         <mapping class = "domainModels.PhieuHoanNhap"/>
         <mapping class = "domainModels.ChiTietSanPham"/>
         <mapping class = "domainModels.ChiTietPhieuNhap"/>
         <mapping class = "domainModels.ChiTietPhieuXuat"/>
+        <mapping class = "domainModels.ChiTietPhieuKiemKe"/>
         <mapping class = "domainModels.ChiTietPhieuHoanXuat"/>
         <mapping class = "domainModels.ChiTietPhieuHoanNhap"/>
         
