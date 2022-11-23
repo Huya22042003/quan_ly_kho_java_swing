@@ -1,7 +1,7 @@
 package views.main;
 
 import cores.nhanVienQuanLy.views.NVQLQuanLyPhieuXuatView;
-import cores.nhanVienQuanLy.views.NvqlQuanLyPhieuNhapView;
+import cores.truongPhongs.views.NvqlQuanLyPhieuNhapView;
 import cores.nhanVienQuanLy.views.NvqlXemThongTinCaNhanForm;
 import views.component.Header;
 import views.event.EventMenuSelected;

@@ -2,17 +2,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package cores.nhanVienQuanLy.views;
+package cores.truongPhongs.views;
 
 import cores.nhanVienQuanLy.customModels.NvqlGetTenNccCustom;
 import cores.nhanVienQuanLy.customModels.NvqlGetTenNhanVienCustom;
-import cores.nhanVienQuanLy.customModels.NvqlQuanLyPhieuNhapCustom;
+import cores.truongPhongs.customModels.NvqlQuanLyPhieuNhapCustom;
 import cores.nhanVienQuanLy.services.NvqlGetTenNccService;
 import cores.nhanVienQuanLy.services.NvqlGetTenNvService;
-import cores.nhanVienQuanLy.services.NvqlQuanLyPhieuNhapService;
+import cores.truongPhongs.services.NvqlQuanLyPhieuNhapService;
 import cores.nhanVienQuanLy.services.serviceImpls.NvqlGetTenNccServiceImpl;
 import cores.nhanVienQuanLy.services.serviceImpls.NvqlGetTenNvServiceImpl;
-import cores.nhanVienQuanLy.services.serviceImpls.NvqlQuanLyPhieuNhapServiceImpl;
+import cores.truongPhongs.services.serviceImpls.NvqlQuanLyPhieuNhapServiceImpl;
 import infrastructures.constant.TrangThaiPhieuConstant;
 
 import java.awt.Dimension;

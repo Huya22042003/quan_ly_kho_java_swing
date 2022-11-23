@@ -4,6 +4,7 @@
  */
 package cores.nhanVienQuanLy.views;
 
+import cores.truongPhongs.views.NvqlQuanLyPhieuNhapView;
 import java.awt.FlowLayout;
 
 /**

@@ -2,13 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package cores.nhanVienQuanLy.services.serviceImpls;
+package cores.truongPhongs.services.serviceImpls;
 
-import cores.nhanVienQuanLy.customModels.NvqlQuanLyPhieuNhapCustom;
+import cores.truongPhongs.customModels.NvqlQuanLyPhieuNhapCustom;
 import cores.nhanVienQuanLy.repositories.NvqlGetTenNccRepository;
 import cores.nhanVienQuanLy.repositories.NvqlGetTenNhanVienRepository;
-import cores.nhanVienQuanLy.repositories.NvqlQuanLyPhieuNhapRepository;
-import cores.nhanVienQuanLy.services.NvqlQuanLyPhieuNhapService;
+import cores.truongPhongs.repositories.NvqlQuanLyPhieuNhapRepository;
+import cores.truongPhongs.services.NvqlQuanLyPhieuNhapService;
 import domainModels.NhaCungCap;
 import domainModels.NhanVien;
 import domainModels.PhieuNhap;

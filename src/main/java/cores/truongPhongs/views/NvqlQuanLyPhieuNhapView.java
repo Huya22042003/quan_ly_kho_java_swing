@@ -2,11 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package cores.nhanVienQuanLy.views;
+package cores.truongPhongs.views;
 
-import cores.nhanVienQuanLy.customModels.NvqlQuanLyPhieuNhapCustom;
-import cores.nhanVienQuanLy.services.NvqlQuanLyPhieuNhapService;
-import cores.nhanVienQuanLy.services.serviceImpls.NvqlQuanLyPhieuNhapServiceImpl;
+import cores.truongPhongs.views.NvqlRUDPhieuNhapView;
+import cores.truongPhongs.views.NvqlCreatePhieuNhapView;
+import cores.truongPhongs.customModels.NvqlQuanLyPhieuNhapCustom;
+import cores.truongPhongs.services.NvqlQuanLyPhieuNhapService;
+import cores.truongPhongs.services.serviceImpls.NvqlQuanLyPhieuNhapServiceImpl;
 import infrastructures.constant.TrangThaiPhieuConstant;
 
 import java.util.ArrayList;
@@ -322,7 +324,6 @@ public class NvqlQuanLyPhieuNhapView extends javax.swing.JPanel {
                             .addComponent(ngayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(6, 6, 6)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE)
                 .addGap(28, 28, 28))
         );

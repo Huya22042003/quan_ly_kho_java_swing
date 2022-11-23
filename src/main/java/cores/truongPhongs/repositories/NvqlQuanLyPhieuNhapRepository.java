@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package cores.nhanVienQuanLy.repositories;
+package cores.truongPhongs.repositories;
 
-import cores.nhanVienQuanLy.customModels.NvqlQuanLyPhieuNhapCustom;
+import cores.truongPhongs.customModels.NvqlQuanLyPhieuNhapCustom;
 import java.util.List;
 import javax.persistence.Query;
 import org.hibernate.Session;

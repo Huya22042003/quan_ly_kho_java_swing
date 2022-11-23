@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package cores.nhanVienQuanLy.services;
+package cores.truongPhongs.services;
 
-import cores.nhanVienQuanLy.customModels.NvqlQuanLyPhieuNhapCustom;
+import cores.truongPhongs.customModels.NvqlQuanLyPhieuNhapCustom;
 import infrastructures.constant.TrangThaiPhieuConstant;
 import java.util.Date;
 import java.util.List;
