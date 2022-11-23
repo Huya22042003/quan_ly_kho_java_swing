@@ -29,15 +29,16 @@ import utilities.MsgBox;
  */
 public class TpCreateQuanLyNhanVien extends javax.swing.JFrame {
 
-    String strImage = null;
     /**
      * Creates new form CreateQuanLyNhanVienView
      */
     private TpQuanLyNhanVienSevice nhanVienSevice;
 
     private List<TP_ChucVuCustom> ListCV;
+   String duongdananh = getClass().getResource("/icons/FPT_Polytechnic_doc.png").getPath();
 
     public TpCreateQuanLyNhanVien() {
+        
         nhanVienSevice = new TpQuanLyNhanVienServiceImpl();
 
         ListCV = new ArrayList<>();
@@ -60,13 +61,15 @@ public class TpCreateQuanLyNhanVien extends javax.swing.JFrame {
         nvc.setEmail(txtEmail.getText());
         nvc.setDiaChi(txtDiaChi.getText());
         nvc.setMatKhau(txtMatKhau.getText());
-        nvc.setHinhAnh(lbHinhAnh.getText());
+        nvc.setHinhAnh(duongdananh);
         try {
 
             nvc.setNgaySinh(txtDate.getDate().getTime());
         } catch (Exception e) {
 //lại
-            nvc.setNgaySinh(DateTimeUtil.convertDateToTimeStampSecond());
+            e.printStackTrace();
+              nvc.setNgaySinh(null);
+//            nvc.setNgaySinh(DateTimeUtil.convertDateToTimeStampSecond());
         }
 //        nvc.setNgaySinh(txtDate.getDate().getTime());
         nvc.setTrangThai(nhanVienSevice.loc(this.cbbTrangThai.getSelectedIndex()));
@@ -199,7 +202,6 @@ public class TpCreateQuanLyNhanVien extends javax.swing.JFrame {
 
         erroNgaySinh.setFont(new java.awt.Font("Constantia", 1, 8)); // NOI18N
 
-        lbHinhAnh.setText("Ảnh");
         lbHinhAnh.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lbHinhAnhMouseClicked(evt);
@@ -209,6 +211,11 @@ public class TpCreateQuanLyNhanVien extends javax.swing.JFrame {
         cbbTrangThai.setLabeText("Trạng Thái");
 
         cbbChucVu.setLabeText("Chức Vụ");
+        cbbChucVu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbbChucVuActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -246,10 +253,9 @@ public class TpCreateQuanLyNhanVien extends javax.swing.JFrame {
                                     .addComponent(cbbGioiTinh, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lbHinhAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(erroNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(cbbChucVu, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(cbbTrangThai, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE))))
+                                    .addComponent(cbbChucVu, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGap(184, 184, 184)
                                 .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -278,23 +284,18 @@ public class TpCreateQuanLyNhanVien extends javax.swing.JFrame {
                         .addComponent(erroEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lbHinhAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
                         .addComponent(cbbGioiTinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(37, 37, 37)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(erroNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(cbbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(cbbChucVu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(54, 54, 54))
+                        .addGap(7, 7, 7))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(6, 6, 6)
@@ -306,8 +307,12 @@ public class TpCreateQuanLyNhanVien extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(erroDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(123, Short.MAX_VALUE))))
+                        .addComponent(erroDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(54, 54, 54))
         );
 
         pack();
@@ -330,20 +335,19 @@ public class TpCreateQuanLyNhanVien extends javax.swing.JFrame {
 
     private void lbHinhAnhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbHinhAnhMouseClicked
 
-        try {
-            JFileChooser jfc = new JFileChooser("C:\\Users\\LENOVO\\OneDrive\\Desktop\\Du_An_1\\src\\main\\resources\\icons");
-            jfc.showOpenDialog(null);
-            File file = jfc.getSelectedFile();
-            strImage = file.getName();
-            Image img = ImageIO.read(file);
-            this.lbHinhAnh.setText("");
-            int width = this.lbHinhAnh.getWidth();
-            int height = this.lbHinhAnh.getHeight();
-            this.lbHinhAnh.setIcon(new ImageIcon(img.getScaledInstance(width, height, 0)));
+  try {
+            JFileChooser f = new JFileChooser();
+            f.setDialogTitle("Mở file");
+            f.showOpenDialog(null);
+            File ftenanh = f.getSelectedFile();
+            duongdananh = ftenanh.getAbsolutePath();
 
-        } catch (IOException e) {
+            lbHinhAnh.setIcon(new javax.swing.ImageIcon(duongdananh));
+            System.out.println(duongdananh);
 
-            e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println("Ban chua chon anh");
+            System.out.println(duongdananh);
         }
     }//GEN-LAST:event_lbHinhAnhMouseClicked
 
@@ -355,6 +359,10 @@ public class TpCreateQuanLyNhanVien extends javax.swing.JFrame {
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_btnThoatActionPerformed
+
+    private void cbbChucVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbChucVuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbbChucVuActionPerformed
 
     /**
      * @param args the command line arguments

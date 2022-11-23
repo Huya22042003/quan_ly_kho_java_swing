@@ -29,7 +29,7 @@ import utilities.MsgBox;
  */
 public class TpRUDQuanLyNhanVien extends javax.swing.JFrame {
 
-    String strImage = null;
+String duongdananh = getClass().getResource("/icons/FPT_Polytechnic_doc.png").getPath();
     /**
      * Creates new form RUDQuanLyNhanVienView
      */
@@ -104,6 +104,7 @@ public class TpRUDQuanLyNhanVien extends javax.swing.JFrame {
 
         erroSDT.setFont(new java.awt.Font("Constantia", 1, 8)); // NOI18N
 
+        txtMa.setEnabled(false);
         txtMa.setLabelText("Mã");
 
         erroTen.setFont(new java.awt.Font("Constantia", 1, 8)); // NOI18N
@@ -112,7 +113,6 @@ public class TpRUDQuanLyNhanVien extends javax.swing.JFrame {
 
         cbbTrangThai.setLabeText("Trạng Thái");
 
-        lblAnh.setText("Ảnh");
         lblAnh.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblAnhMouseClicked(evt);
@@ -310,7 +310,7 @@ public TpRUDQuanLyNhanVien(TpNhanVienCustom nv) {
         this.txtEmail.setText(custom.getEmail());
         this.txtMatKhau.setText(custom.getMatKhau());
         this.txtDate.setDate(new Date(custom.getNgaySinh()));
-        this.lblAnh.setText(custom.getHinhAnh());
+       this.lblAnh.setIcon(new javax.swing.ImageIcon(custom.getHinhAnh()));
         this.cbbGioiTinh.setSelectedItem(Converter.trangThaiGioiTinh(custom.getGioiTinh()));
         this.txtDiaChi.setText(custom.getDiaChi());
         this.cbbTrangThai.setSelectedItem(Converter.trangThaiNhanVien(custom.getTrangThai()));
@@ -331,7 +331,7 @@ public TpRUDQuanLyNhanVien(TpNhanVienCustom nv) {
 
             nvc.setNgaySinh(null);
         }
-        nvc.setHinhAnh(lblAnh.getText());
+        nvc.setHinhAnh(duongdananh);
         nvc.setGioiTinh(nhanVienSevice.loc1(this.cbbGioiTinh.getSelectedIndex()));
         nvc.setDiaChi(txtDiaChi.getText());
         nvc.setTrangThai(nhanVienSevice.loc(this.cbbTrangThai.getSelectedIndex()));
@@ -380,20 +380,19 @@ public TpRUDQuanLyNhanVien(TpNhanVienCustom nv) {
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void lblAnhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAnhMouseClicked
-        try {
-            JFileChooser jfc = new JFileChooser("C:\\Users\\LENOVO\\OneDrive\\Desktop\\Du_An_1\\src\\main\\resources\\icons");
-            jfc.showOpenDialog(null);
-            File file = jfc.getSelectedFile();
-            strImage = file.getName();
-            Image img = ImageIO.read(file);
-            this.lblAnh.setText("");
-            int width = this.lblAnh.getWidth();
-            int height = this.lblAnh.getHeight();
-            this.lblAnh.setIcon(new ImageIcon(img.getScaledInstance(width, height, 0)));
+ try {
+            JFileChooser f = new JFileChooser();
+            f.setDialogTitle("Mở file");
+            f.showOpenDialog(null);
+            File ftenanh = f.getSelectedFile();
+            duongdananh = ftenanh.getAbsolutePath();
 
-        } catch (IOException e) {
+            lblAnh.setIcon(new javax.swing.ImageIcon(duongdananh));
+            System.out.println(duongdananh);
 
-            e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println("Ban chua chon anh");
+            System.out.println(duongdananh);
         }
     }//GEN-LAST:event_lblAnhMouseClicked
 

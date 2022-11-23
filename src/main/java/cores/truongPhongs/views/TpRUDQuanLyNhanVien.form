@@ -219,6 +219,7 @@
     </Component>
     <Component class="utilities.palette.TextField" name="txtMa">
       <Properties>
+        <Property name="enabled" type="boolean" value="false"/>
         <Property name="labelText" type="java.lang.String" value="M&#xe3;"/>
       </Properties>
     </Component>
@@ -242,9 +243,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="lblAnh">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="&#x1ea2;nh"/>
-      </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblAnhMouseClicked"/>
       </Events>
