@@ -4,17 +4,20 @@
  */
 package cores.truongPhongs.views;
 
+import cores.truongPhongs.services.TpQuanlyNhaCungCapService;
+import cores.truongPhongs.services.serviceImpls.TpQuanlyNhaCungCapServiceImpl;
+
 /**
  *
  * @author Acer
  */
 public class Tp_ThemNccVaoPhieuNhapView extends javax.swing.JPanel {
 
-    /**
-     * Creates new form Tp_ThemNccVaoPhieuNhapView
-     */
+    private TpQuanlyNhaCungCapService nccService = new TpQuanlyNhaCungCapServiceImpl();
+  
     public Tp_ThemNccVaoPhieuNhapView() {
         initComponents();
+        
     }
 
     /**
@@ -35,6 +38,8 @@ public class Tp_ThemNccVaoPhieuNhapView extends javax.swing.JPanel {
         textFieldAnimation1 = new utilities.palette.SearchCustom.TextFieldAnimation();
         rdoMa1 = new utilities.palette.RadioButtonCustom();
         combobox1 = new utilities.palette.Combobox();
+        myButton6 = new utilities.palette.MyButton();
+        rdoMa2 = new utilities.palette.RadioButtonCustom();
         panelRound5 = new utilities.palette.PanelRound();
         jLabel2 = new javax.swing.JLabel();
 
@@ -90,7 +95,7 @@ public class Tp_ThemNccVaoPhieuNhapView extends javax.swing.JPanel {
 
         rdoMa1.setBackground(new java.awt.Color(67, 130, 187));
         rdoMa1.setForeground(new java.awt.Color(255, 255, 255));
-        rdoMa1.setText("Email");
+        rdoMa1.setText("SĐT");
         rdoMa1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         rdoMa1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,18 +115,42 @@ public class Tp_ThemNccVaoPhieuNhapView extends javax.swing.JPanel {
             }
         });
 
+        myButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/update.png"))); // NOI18N
+        myButton6.setBorderColor(new java.awt.Color(221, 242, 244));
+        myButton6.setColor(new java.awt.Color(221, 242, 244));
+        myButton6.setRadius(50);
+        myButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myButton6ActionPerformed(evt);
+            }
+        });
+
+        rdoMa2.setBackground(new java.awt.Color(67, 130, 187));
+        rdoMa2.setForeground(new java.awt.Color(255, 255, 255));
+        rdoMa2.setText("Email");
+        rdoMa2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        rdoMa2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoMa2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelRound4Layout = new javax.swing.GroupLayout(panelRound4);
         panelRound4.setLayout(panelRound4Layout);
         panelRound4Layout.setHorizontalGroup(
             panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound4Layout.createSequentialGroup()
-                .addContainerGap(112, Short.MAX_VALUE)
+                .addGap(14, 14, 14)
+                .addComponent(myButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44)
                 .addComponent(rdoNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGap(32, 32, 32)
                 .addComponent(rdoNcc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addComponent(rdoMa2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23)
                 .addComponent(rdoMa1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addGap(18, 18, 18)
                 .addComponent(combobox1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(textFieldAnimation1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -129,18 +158,19 @@ public class Tp_ThemNccVaoPhieuNhapView extends javax.swing.JPanel {
         );
         panelRound4Layout.setVerticalGroup(
             panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(rdoNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(rdoNcc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(rdoMa2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(panelRound4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelRound4Layout.createSequentialGroup()
-                        .addComponent(combobox1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(panelRound4Layout.createSequentialGroup()
-                        .addComponent(textFieldAnimation1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(8, Short.MAX_VALUE))))
-            .addComponent(rdoMa1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(rdoNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(rdoNcc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(textFieldAnimation1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound4Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(myButton6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(combobox1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap())
+            .addComponent(rdoMa1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         panelRound5.setBackground(new java.awt.Color(67, 130, 187));
@@ -182,7 +212,7 @@ public class Tp_ThemNccVaoPhieuNhapView extends javax.swing.JPanel {
                         .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(panelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 19, Short.MAX_VALUE))
+                .addGap(0, 76, Short.MAX_VALUE))
         );
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -193,14 +223,14 @@ public class Tp_ThemNccVaoPhieuNhapView extends javax.swing.JPanel {
                     .addComponent(panelRound4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(120, Short.MAX_VALUE))
+                .addContainerGap(122, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1016, Short.MAX_VALUE)
+            .addGap(0, 1179, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -234,15 +264,25 @@ public class Tp_ThemNccVaoPhieuNhapView extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_combobox1ActionPerformed
 
+    private void myButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_myButton6ActionPerformed
+
+    private void rdoMa2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoMa2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rdoMa2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private utilities.palette.Combobox combobox1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private utilities.palette.MyButton myButton6;
     private utilities.palette.PanelRound panelRound1;
     private utilities.palette.PanelRound panelRound4;
     private utilities.palette.PanelRound panelRound5;
     private utilities.palette.RadioButtonCustom rdoMa1;
+    private utilities.palette.RadioButtonCustom rdoMa2;
     private utilities.palette.RadioButtonCustom rdoNcc;
     private utilities.palette.RadioButtonCustom rdoNhanVien;
     private utilities.palette.TableDark_1 tableDark_11;
