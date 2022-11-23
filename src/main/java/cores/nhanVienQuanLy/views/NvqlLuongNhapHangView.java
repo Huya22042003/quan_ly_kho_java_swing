@@ -47,9 +47,8 @@ public class NvqlLuongNhapHangView extends javax.swing.JPanel {
         myButton8 = new utilities.palette.MyButton();
         panelRound15 = new utilities.palette.PanelRound();
         myButton9 = new utilities.palette.MyButton();
-        btnThem = new utilities.palette.MyButton();
+        btnThemPhieuNhapMoi = new utilities.palette.MyButton();
         myButton10 = new utilities.palette.MyButton();
-        myButton6 = new utilities.palette.MyButton();
         panelRound3 = new utilities.palette.PanelRound();
         jLabel1 = new javax.swing.JLabel();
         textField3 = new utilities.palette.TextField();
@@ -247,15 +246,15 @@ public class NvqlLuongNhapHangView extends javax.swing.JPanel {
             }
         });
 
-        btnThem.setBackground(new java.awt.Color(221, 242, 244));
-        btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Addd.png"))); // NOI18N
-        btnThem.setToolTipText("Thêm mới phiếu nhập");
-        btnThem.setBorderColor(new java.awt.Color(221, 242, 244));
-        btnThem.setColor(new java.awt.Color(221, 242, 244));
-        btnThem.setRadius(50);
-        btnThem.addActionListener(new java.awt.event.ActionListener() {
+        btnThemPhieuNhapMoi.setBackground(new java.awt.Color(221, 242, 244));
+        btnThemPhieuNhapMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Addd.png"))); // NOI18N
+        btnThemPhieuNhapMoi.setToolTipText("Thêm mới phiếu nhập");
+        btnThemPhieuNhapMoi.setBorderColor(new java.awt.Color(221, 242, 244));
+        btnThemPhieuNhapMoi.setColor(new java.awt.Color(221, 242, 244));
+        btnThemPhieuNhapMoi.setRadius(50);
+        btnThemPhieuNhapMoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThemActionPerformed(evt);
+                btnThemPhieuNhapMoiActionPerformed(evt);
             }
         });
 
@@ -277,7 +276,7 @@ public class NvqlLuongNhapHangView extends javax.swing.JPanel {
             panelRound15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound15Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnThemPhieuNhapMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(myButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -289,16 +288,11 @@ public class NvqlLuongNhapHangView extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound15Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelRound15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnThem, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
+                    .addComponent(btnThemPhieuNhapMoi, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
                     .addComponent(myButton9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(myButton10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
-
-        myButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/update.png"))); // NOI18N
-        myButton6.setBorderColor(new java.awt.Color(221, 242, 244));
-        myButton6.setColor(new java.awt.Color(221, 242, 244));
-        myButton6.setRadius(50);
 
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
         panelRound1.setLayout(panelRound1Layout);
@@ -318,10 +312,6 @@ public class NvqlLuongNhapHangView extends javax.swing.JPanel {
                         .addComponent(panelRound8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(18, 18, 18))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(myButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(174, 174, 174))
         );
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -336,8 +326,6 @@ public class NvqlLuongNhapHangView extends javax.swing.JPanel {
                     .addComponent(panelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, 49, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(myButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -497,9 +485,9 @@ public class NvqlLuongNhapHangView extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_combobox1ActionPerformed
 
-    private void btnThemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+    private void btnThemPhieuNhapMoiActionPerformed(ActionEvent evt) {//GEN-FIRST:event_btnThemPhieuNhapMoiActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnThemActionPerformed
+    }//GEN-LAST:event_btnThemPhieuNhapMoiActionPerformed
 
     private void textField4ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_textField4ActionPerformed
         // TODO add your handling code here:
@@ -527,13 +515,12 @@ public class NvqlLuongNhapHangView extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private utilities.palette.MyButton btnThem;
+    private utilities.palette.MyButton btnThemPhieuNhapMoi;
     private utilities.palette.Combobox combobox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private utilities.palette.MyButton myButton10;
-    private utilities.palette.MyButton myButton6;
     private utilities.palette.MyButton myButton7;
     private utilities.palette.MyButton myButton8;
     private utilities.palette.MyButton myButton9;
