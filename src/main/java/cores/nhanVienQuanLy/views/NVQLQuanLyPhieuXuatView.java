@@ -9,7 +9,7 @@ import cores.nhanVienQuanLy.customModels.PhieuXuatCustom;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import cores.nhanVienQuanLy.services.NVQLQuanLyPhieuXuatService;
-import java.sql.Date;
+import java.util.Date;
 import java.util.UUID;
 import utilities.Converter;
 import utilities.MsgBox;
@@ -22,6 +22,7 @@ public class NVQLQuanLyPhieuXuatView extends javax.swing.JPanel {
 
     private NVQLQuanLyPhieuXuatService phieuXuatService;
     private List<PhieuXuatCustom> list;
+    private NVQLRUDPhieuXuatView rud ;
 //    private List<PhieuXuatCustom> ls;
 
     public NVQLQuanLyPhieuXuatView() {
@@ -30,6 +31,7 @@ public class NVQLQuanLyPhieuXuatView extends javax.swing.JPanel {
 //        list = new ArrayList<>();
 //        ls = phieuXuatService.getListByNgayTao(null);
         list = phieuXuatService.getList();
+        rud = new NVQLRUDPhieuXuatView();
         clearForm();
     }
 
@@ -148,15 +150,15 @@ public class NVQLQuanLyPhieuXuatView extends javax.swing.JPanel {
                 .addComponent(rdoNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addComponent(rdoNgayThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(72, 72, 72)
+                .addGap(55, 55, 55)
                 .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addComponent(ngayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(ngayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(ngayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(157, 157, 157)
+                .addComponent(ngayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(128, 128, 128)
                 .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -287,7 +289,7 @@ public class NVQLQuanLyPhieuXuatView extends javax.swing.JPanel {
 
     private void tblPhieuXuatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPhieuXuatMouseClicked
         int row = this.tblPhieuXuat.getSelectedRow();
-        NVQLRUDPhieuXuatView rud = new NVQLRUDPhieuXuatView();
+
         rud.pxcs = phieuXuatService.findByID(UUID.fromString(this.tblPhieuXuat.getValueAt(row, 1).toString()));
         rud.setVisible(true);
         rud.showData();
