@@ -7,6 +7,7 @@ package utilities;
 
 import domainModels.ChiTietPhieuHoanNhap;
 import domainModels.ChiTietPhieuHoanXuat;
+import domainModels.ChiTietPhieuKiemKe;
 import domainModels.ChiTietPhieuNhap;
 import domainModels.ChiTietPhieuXuat;
 import domainModels.ChiTietSanPham;
@@ -19,6 +20,7 @@ import domainModels.NhaCungCap;
 import domainModels.NhanVien;
 import domainModels.PhieuHoanNhap;
 import domainModels.PhieuHoanXuat;
+import domainModels.PhieuKiemKe;
 import domainModels.PhieuNhap;
 import domainModels.PhieuXuat;
 import domainModels.SanPham;
@@ -28,6 +30,7 @@ import infrastructures.constant.GioiTinhConstant;
 import infrastructures.constant.KhachHangConstant;
 import infrastructures.constant.MauConstant;
 import infrastructures.constant.TrangThaiNhanVienConstant;
+import infrastructures.constant.TrangThaiPhieuKiem;
 import infrastructures.constant.TrangThaiPhieuConstant;
 import infrastructures.constant.TrangThaiPhieuHoanConstant;
 import java.math.BigDecimal;
@@ -425,6 +428,47 @@ public class Migrator {
         phieuXuat4.setNgayTao(convertDateToTimeStampSecond());
         phieuXuat4.setNhanVien(nhanVien1);
         session.save(phieuXuat4);
+        
+        PhieuKiemKe phieuKiemKe = new PhieuKiemKe();
+        phieuKiemKe.setGhiChu("");
+        phieuKiemKe.setMa("PKK290703");
+        phieuKiemKe.setNgayTao(convertDateToTimeStampSecond());
+        phieuKiemKe.setNhanVien(nhanVien);
+        phieuKiemKe.setNgayXacNhan(convertDateToTimeStampSecond());
+        phieuKiemKe.setTrangThai(TrangThaiPhieuKiem.DA_XAC_NHAN);
+        session.save(phieuKiemKe);
+        
+        PhieuKiemKe phieuKiemKe1 = new PhieuKiemKe();
+        phieuKiemKe1.setGhiChu("");
+        phieuKiemKe1.setMa("PKK170703");
+        phieuKiemKe1.setNgayTao(convertDateToTimeStampSecond());
+        phieuKiemKe1.setNhanVien(nhanVien);
+        phieuKiemKe1.setNgayXacNhan(convertDateToTimeStampSecond());
+        phieuKiemKe1.setTrangThai(TrangThaiPhieuKiem.MOI_TAO);
+        session.save(phieuKiemKe1);
+        
+        SanPham sanPham100 = new SanPham();
+        sanPham100.setMa("SP00100");
+        sanPham100.setTen("Giày ahiahii");
+        session.save(sanPham100);
+        
+        ChiTietSanPham ctsp100 = new ChiTietSanPham();
+        ctsp100.setDonVi(null);
+        ctsp100.setGiaBan(new BigDecimal(10000000));
+        ctsp100.setGiaNhap(new BigDecimal(100000000));
+        ctsp100.setHinhAnh(null);
+        ctsp100.setNamBaoHanh(null);
+        ctsp100.setSanPham(sanPham100);
+        ctsp100.setMau(MauConstant.DEN);
+        ctsp100.setSoLuongTon(100);
+        session.save(ctsp100);
+        
+        ChiTietPhieuKiemKe chiTietPhieuKiemKe = new ChiTietPhieuKiemKe();
+        chiTietPhieuKiemKe.setIdChiTietSp(ctsp100);
+        chiTietPhieuKiemKe.setIdPhieuKiemKe(phieuKiemKe);
+        chiTietPhieuKiemKe.setSoLuongTon(50);
+        chiTietPhieuKiemKe.setSoLuongThucTon(100);
+        session.save(chiTietPhieuKiemKe);
         
         DonVi donVi = new DonVi();
         donVi.setSoLuong(0);
