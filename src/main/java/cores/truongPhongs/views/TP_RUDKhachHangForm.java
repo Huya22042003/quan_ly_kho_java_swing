@@ -121,7 +121,7 @@ public class TP_RUDKhachHangForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
-        jPanel1.setBackground(new java.awt.Color(204, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         btnX.setBackground(new java.awt.Color(255, 51, 51));
@@ -134,7 +134,7 @@ public class TP_RUDKhachHangForm extends javax.swing.JFrame {
 
         lbHinhAnh.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jPanel3.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông tin khách hàng"));
 
         txtMa.setEnabled(false);
@@ -257,7 +257,7 @@ public class TP_RUDKhachHangForm extends javax.swing.JFrame {
                 .addContainerGap(102, Short.MAX_VALUE))
         );
 
-        jPanel4.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         btnUpdate.setBackground(new java.awt.Color(255, 153, 102));
@@ -424,7 +424,7 @@ public class TP_RUDKhachHangForm extends javax.swing.JFrame {
         TP_KhachHangCustom cs = new TP_KhachHangCustom(custom.getId(), custom.getMa(), check.getTen(), check.getSdt(), check.getEmail(), check.getMatKhau(), check.getNgaySinh(), check.getHinhAnh(), check.getGioiTinh(), check.getDiaChi(), check.getDanhGia(), check.getTrangThai());
         if (hangService.updateKH(cs)) {
             MsgBox.alert(this, "Sửa thành công");
-            this.setVisible(true);
+            this.setVisible(false);
         } else {
             MsgBox.alert(this, "Sửa thất bại");
             this.setVisible(false);
