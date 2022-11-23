@@ -28,7 +28,6 @@ public class NvqlLuongKiemKeRepository {
                 + " m.trangThai as trangThai) "
                 + " from domainModels.PhieuKiemKe m ORDER BY m.ngayTao DESC");
         List<NvqlLuongKiemKeCustom> list = query.getResultList();
-        System.out.println(list.size());
         session.close();
         return list;
     }

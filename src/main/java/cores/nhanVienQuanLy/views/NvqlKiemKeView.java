@@ -41,6 +41,7 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
     private NhanVien nhanVien;
     private Map<String, NvqlLuongKiemKeCtpkCustom> mapPhieuKiemChiTiet = new HashMap<>();
     private NvqlLuongKiemKeCtpkService nvqlLuongKiemKeCtpkService;
+//    private List<NvqlLuongKiemKeCtpkCustom> list 
 
     public NvqlKiemKeView() {
         kiemKeService = new NvqlLuongKiemKeServiceImpl();
@@ -83,6 +84,23 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
             });
         });
     }
+    
+//    public void fillTablePhieuKiemChiTiet() {
+//        DefaultTableModel model = (DefaultTableModel) tbPhieuKiemChiTiet.getModel();
+//        
+//        for (Map.Entry<String, NvqlLuongKiemKeCtpkCustom> entry : mapPhieuKiemChiTiet.entrySet()) {
+//            NvqlLuongKiemKeCtpkCustom m = entry.getValue();
+//            Object[] row = new Object[]{
+//                model.getRowCount() + 1,
+//                m.getMa(),
+//                m.getTen(),
+//                m.getSoLuongTon(),
+//                m.getSoLuongThucTon(),
+//                m.getChenhLech()
+//            };
+//            model.addRow(row);
+//        }
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -542,7 +560,8 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
     }//GEN-LAST:event_myButton8ActionPerformed
 
     private void btnChiTietPhieuKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChiTietPhieuKiemActionPerformed
-        // TODO add your handling code here:
+        NvqlKiemKeCtpkView a = new NvqlKiemKeCtpkView();
+        a.setVisible(true);
     }//GEN-LAST:event_btnChiTietPhieuKiemActionPerformed
 
     public NvqlLuongKiemKeCustom getFormData() {
@@ -560,7 +579,8 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
     }//GEN-LAST:event_btnTaoPhieuActionPerformed
 
     private void btnThemSPKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemSPKiemActionPerformed
-        NvqlKiemKeCtspView create = new NvqlKiemKeCtspView();
+        NvqlKiemKeCtspView create = new NvqlKiemKeCtspView(listPhieuKiemKeCustom.get(tbPhieuKiemKe.getSelectedRow()).getId());
+        System.out.println(tbPhieuKiemKe.getValueAt(tbPhieuKiemKe.getSelectedRow(), 1).toString());
         create.setVisible(true);
     }//GEN-LAST:event_btnThemSPKiemActionPerformed
 
@@ -588,6 +608,7 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
         for (NvqlLuongKiemKeCtpkCustom a : nvqlLuongKiemKeCtpkService.getAll(listPhieuKiemKeCustom.get(s).getId())) {
             mapPhieuKiemChiTiet.put(a.getMa(), a);
         }
+        
     }//GEN-LAST:event_tbPhieuKiemKeMouseClicked
 
 
