@@ -213,7 +213,7 @@ public class TP_RUDChucVuForm extends javax.swing.JFrame {
         TP_ChucVuCustom cs = new TP_ChucVuCustom(custom.getId(), custom.getMa(), check.getTen());
         if (chucVuService.updateChucVu(cs)) {
             MsgBox.alert(this, "Sửa thành công");
-            this.setVisible(true);
+            this.setVisible(false);
         } else {
             MsgBox.alert(this, "Sửa thất bại");
             this.setVisible(false);

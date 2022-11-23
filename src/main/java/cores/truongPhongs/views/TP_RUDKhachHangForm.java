@@ -424,7 +424,7 @@ public class TP_RUDKhachHangForm extends javax.swing.JFrame {
         TP_KhachHangCustom cs = new TP_KhachHangCustom(custom.getId(), custom.getMa(), check.getTen(), check.getSdt(), check.getEmail(), check.getMatKhau(), check.getNgaySinh(), check.getHinhAnh(), check.getGioiTinh(), check.getDiaChi(), check.getDanhGia(), check.getTrangThai());
         if (hangService.updateKH(cs)) {
             MsgBox.alert(this, "Sửa thành công");
-            this.setVisible(true);
+            this.setVisible(false);
         } else {
             MsgBox.alert(this, "Sửa thất bại");
             this.setVisible(false);
