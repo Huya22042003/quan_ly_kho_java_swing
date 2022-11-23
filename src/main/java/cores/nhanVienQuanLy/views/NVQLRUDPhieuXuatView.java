@@ -13,7 +13,7 @@ import services.DemoCoSoService;
 import services.serviceImpl.DemoCoSoServiceImpl;
 import utilities.MsgBox;
 import cores.nhanVienQuanLy.services.NVQLQuanLyPhieuXuatService;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import utilities.Converter;
@@ -62,8 +62,8 @@ public class NVQLRUDPhieuXuatView extends javax.swing.JFrame {
         jdcNgayTao.setDate(ngayTao);
         jdcNgayThanhToan.setDate(ngayNhan);
         cbbTrangThai.setSelectedItem(Converter.TrangThaiPhieuXuat(pxcs.getTrangThai()));
-        cbbKhachHang.setSelectedItem(pxcs.getKhachHang());
-        cbbNhanVien.setSelectedItem(pxcs.getNhanVien());
+        cbbKhachHang.setSelectedItem(pxcs.getKhachHang().getMa());
+        cbbNhanVien.setSelectedItem(pxcs.getNhanVien().getMa());
     }
 
     public void clearForm() {
