@@ -44,10 +44,13 @@ public class ChiTietSanPham implements Serializable {
 
     @Column(name = "GiaBan")
     private BigDecimal GiaBan;
-    
+
+    @JoinColumn(name = "NamBaoHanh")
+    private int namBaoHanh;
+
     @Column(name = "Mau")
     private MauConstant mau;
-    
+
     @ManyToOne
     @JoinColumn(name = "IdSanPham")
     private SanPham sanPham;
@@ -55,9 +58,5 @@ public class ChiTietSanPham implements Serializable {
     @ManyToOne
     @JoinColumn(name = "IdDonVi")
     private DonVi donVi;
-
-    @ManyToOne
-    @JoinColumn(name = "IdNamBaoHanh")
-    private NamBaoHanh namBaoHanh;
 
 }
