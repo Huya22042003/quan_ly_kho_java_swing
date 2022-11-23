@@ -193,7 +193,7 @@ public class TpQuanLyNhanVien extends javax.swing.JPanel {
         panelRound7.setRoundTopLeft(50);
         panelRound7.setRoundTopRight(50);
 
-        btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/add-to-basket.png"))); // NOI18N
+        btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Addd.png"))); // NOI18N
         btnThem.setToolTipText("Thêm Thông Tin Nhân Viên");
         btnThem.setBorderColor(new java.awt.Color(221, 242, 244));
         btnThem.setColor(new java.awt.Color(221, 242, 244));
@@ -205,7 +205,7 @@ public class TpQuanLyNhanVien extends javax.swing.JPanel {
             }
         });
 
-        btnHienThi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/bill.png"))); // NOI18N
+        btnHienThi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Properties.png"))); // NOI18N
         btnHienThi.setToolTipText("Hiển Thị");
         btnHienThi.setBorderColor(new java.awt.Color(221, 242, 244));
         btnHienThi.setColor(new java.awt.Color(221, 242, 244));

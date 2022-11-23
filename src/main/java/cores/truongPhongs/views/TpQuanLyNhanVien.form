@@ -354,7 +354,7 @@
         <Component class="utilities.palette.MyButton" name="btnThem">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/icons/add-to-basket.png"/>
+              <Image iconType="3" name="/icons/Addd.png"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Th&#xea;m Th&#xf4;ng Tin Nh&#xe2;n Vi&#xea;n"/>
             <Property name="borderColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -375,7 +375,7 @@
         <Component class="utilities.palette.MyButton" name="btnHienThi">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/icons/bill.png"/>
+              <Image iconType="3" name="/icons/Properties.png"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Hi&#x1ec3;n Th&#x1ecb;"/>
             <Property name="borderColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
