@@ -13,6 +13,7 @@ import infrastructures.constant.KhoHangConstant;
 import infrastructures.constant.MauConstant;
 import infrastructures.constant.TrangThaiPhieuConstant;
 import infrastructures.constant.TrangThaiNhanVienConstant;
+import infrastructures.constant.TrangThaiPhieuKiem;
 import infrastructures.constant.TrangThaiPhieuHoanConstant;
 
 /**
@@ -157,10 +158,10 @@ public class Converter {
             default:
                 throw new AssertionError();
         }
-        
+
         return trangThai;
     }
-    
+
     public static String TrangThaiPhieuHoan(TrangThaiPhieuHoanConstant p) {
         String trangThai = "";
         switch (p) {
@@ -173,10 +174,29 @@ public class Converter {
             default:
                 throw new AssertionError();
         }
-        
+
         return trangThai;
     }
-    
+
+    public static String TrangThaiPhieuKiem(TrangThaiPhieuKiem p) {
+        String trangThai = "";
+        switch (p) {
+            case MOI_TAO:
+                trangThai = "Mới tạo";
+                break;
+            case CHUA_XAC_NHAN:
+                trangThai = "Chưa xác nhận";
+                break;
+            case DA_XAC_NHAN:
+                trangThai = "Đã xác nhận";
+                break;
+            default:
+                throw new AssertionError();
+        }
+
+        return trangThai;
+    }
+
     public static String trangThaiDanhGia(DanhGiaConstant th) {
         String trangThai = "";
 
@@ -199,11 +219,11 @@ public class Converter {
 
         return trangThai;
     }
-    
+
     public static String trangThaiKhachHang(KhachHangConstant th) {
         String trangThai = "";
         switch (th) {
-            case  DANG_LAM_VIEC:
+            case DANG_LAM_VIEC:
                 trangThai = "Đang làm việc";
                 break;
             case SAP_BO:
@@ -218,6 +238,7 @@ public class Converter {
 
         return trangThai;
     }
+
     public static String trangThaiMauSac(MauConstant ms) {
         String trangThai = "";
 

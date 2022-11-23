@@ -155,7 +155,7 @@ public class NvqlXuatHangView extends javax.swing.JPanel {
         textField4 = new utilities.palette.TextField();
         textField5 = new utilities.palette.TextField();
         textField6 = new utilities.palette.TextField();
-        buttonGradient1 = new utilities.palette.ButtonGradient();
+        btnXacNhan = new utilities.palette.ButtonGradient();
         textField7 = new utilities.palette.TextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
@@ -340,8 +340,8 @@ public class NvqlXuatHangView extends javax.swing.JPanel {
         textField6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         textField6.setLabelText("Tổng tiền");
 
-        buttonGradient1.setText("Thanh toán");
-        buttonGradient1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnXacNhan.setText("Thanh toán");
+        btnXacNhan.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
         textField7.setEditable(false);
         textField7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -367,7 +367,7 @@ public class NvqlXuatHangView extends javax.swing.JPanel {
                     .addComponent(textField5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addGap(50, 50, 50)
-                        .addComponent(buttonGradient1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(textField3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(textField2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -395,7 +395,7 @@ public class NvqlXuatHangView extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(textField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(buttonGradient1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(43, 43, 43))
         );
 
@@ -518,8 +518,8 @@ public class NvqlXuatHangView extends javax.swing.JPanel {
 
     private void tbPhieuXuatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPhieuXuatMouseClicked
         int row = this.tbPhieuXuat.getSelectedRow();
-        NvqlXuatHangCtspView rud = new NvqlXuatHangCtspView(coSoService.findCoSoByMa(tbPhieuXuat.getValueAt(row, 2).toString()));
-        rud.setVisible(true);
+//        NvqlKiemKeCtspView rud = new NvqlKiemKeCtspView(coSoService.findCoSoByMa(tbPhieuXuat.getValueAt(row, 2).toString()));
+//        rud.setVisible(true);
     }//GEN-LAST:event_tbPhieuXuatMouseClicked
 
     private void btnCtpnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCtpnActionPerformed
@@ -527,7 +527,7 @@ public class NvqlXuatHangView extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCtpnActionPerformed
 
     private void btnCtspActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCtspActionPerformed
-        NvqlXuatHangCtspView create = new NvqlXuatHangCtspView();
+        NvqlKiemKeCtspView create = new NvqlKiemKeCtspView();
         create.setVisible(true);
     }//GEN-LAST:event_btnCtspActionPerformed
 
@@ -536,7 +536,7 @@ public class NvqlXuatHangView extends javax.swing.JPanel {
     private utilities.palette.UWPButton btnCtpn;
     private utilities.palette.UWPButton btnCtsp;
     private utilities.palette.UWPButton btnThem;
-    private utilities.palette.ButtonGradient buttonGradient1;
+    private utilities.palette.ButtonGradient btnXacNhan;
     private javax.swing.ButtonGroup buttonGroup1;
     private utilities.palette.Combobox cbbTrangThai;
     private javax.swing.JLabel jLabel1;
