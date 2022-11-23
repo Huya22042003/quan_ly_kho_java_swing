@@ -98,7 +98,7 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
         if (giaNhap.trim().length() == 0) {
             erroGiaNhap.setText("Giá nhập không được để trống");
             check = false;
-        } else if (!giaNhap.matches("\\d+")) {
+        } else if (giaNhap.matches("[A-Z a-z]+")) {
             erroGiaNhap.setText("Giá nhập không được là chữ");
             check = false;
         } else {
@@ -107,7 +107,7 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
         if (giaBan.trim().length() == 0) {
             erroGiaBan.setText("Giá bán không được để trống");
             check = false;
-        } else if (!giaBan.matches("\\d+")) {
+        } else if (giaBan.matches("[A-Z a-z]+")) {
             erroGiaBan.setText("Giá bán không được là chữ");
             check = false;
         } else {
