@@ -8,6 +8,7 @@ import cores.nhanVienQuanLy.customModels.PhieuXuatCustom;
 import domainModels.KhachHang;
 import domainModels.NhanVien;
 import domainModels.PhieuXuat;
+import infrastructures.constant.TrangThaiPhieuConstant;
 import java.util.List;
 import java.util.UUID;
 import javax.persistence.NoResultException;
@@ -54,8 +55,8 @@ public class NVQLQuanLyPhieuXuatRepository {
         List<PhieuXuatCustom> list = query.getResultList();
         return list;
     }
-    
-        public List<PhieuXuatCustom> getListByNgayThanhToan(Long ngayBatDau, Long ngayKetThuc) {
+
+    public List<PhieuXuatCustom> getListByNgayThanhToan(Long ngayBatDau, Long ngayKetThuc) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery("SELECT new cores.nhanVienQuanLy.customModels.PhieuXuatCustom("
                 + "px.id as id,"
@@ -71,13 +72,13 @@ public class NVQLQuanLyPhieuXuatRepository {
         List<PhieuXuatCustom> list = query.getResultList();
         return list;
     }
-    
+
     public PhieuXuat addPhieuXuat(PhieuXuat px) {
         Session s = HibernateUtil.getSessionFactory().openSession();
         try {
             Transaction transaction = null;
             transaction = s.beginTransaction();
-            s.save(px);;
+            s.save(px);
             transaction.commit();
             s.close();
         } catch (Exception e) {
@@ -153,5 +154,55 @@ public class NVQLQuanLyPhieuXuatRepository {
         Query query = s.createQuery("FROM domainModels.KhachHang kh");
         List<KhachHang> listKh = query.getResultList();
         return listKh;
+    }
+
+    public List<PhieuXuatCustom> findAllByIdPhieu(UUID id) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("SELECT new cores.nhanVienQuanLy.customModels.PhieuXuatCustom("
+                + "px.id as id,"
+                + "px.ngayTao as ngayTao,"
+                + "px.ghiChu as ghiChu,"
+                + "px.ngayThanhToan as ngayThanhToan,"
+                + "px.trangThai as trangThai,"
+                + "px.nhanVien as nhanVien,"
+                + "px.khachHang as khachHang"
+                + ") FROM domainModels.PhieuXuat px WHERE px.id =:id");
+        query.setParameter("id", id);
+        List<PhieuXuatCustom> list = query.getResultList();
+        return list;
+    }
+
+    public List<PhieuXuatCustom> findAllByIdNhanVien(String maNV, TrangThaiPhieuConstant tt) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("SELECT new cores.nhanVienQuanLy.customModels.PhieuXuatCustom("
+                + "px.id as id,"
+                + "px.ngayTao as ngayTao,"
+                + "px.ghiChu as ghiChu,"
+                + "px.ngayThanhToan as ngayThanhToan,"
+                + "px.trangThai as trangThai,"
+                + "px.nhanVien as nhanVien,"
+                + "px.khachHang as khachHang"
+                + ") FROM domainModels.PhieuXuat px WHERE px.nhanVien.ma LIKE CONCAT('%',:ma,'%') AND px.trangThai =:tt");
+        query.setParameter("ma", maNV);
+        query.setParameter("tt", tt);
+        List<PhieuXuatCustom> list = query.getResultList();
+        return list;
+    }
+
+    public List<PhieuXuatCustom> findAllByIdKhachHang(String maKH, TrangThaiPhieuConstant tt) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("SELECT new cores.nhanVienQuanLy.customModels.PhieuXuatCustom("
+                + "px.id as id,"
+                + "px.ngayTao as ngayTao,"
+                + "px.ghiChu as ghiChu,"
+                + "px.ngayThanhToan as ngayThanhToan,"
+                + "px.trangThai as trangThai,"
+                + "px.nhanVien as nhanVien,"
+                + "px.khachHang as khachHang"
+                + ") FROM domainModels.PhieuXuat px WHERE px.khachHang.ma LIKE CONCAT('%',:ma,'%') AND px.trangThai =:tt");
+        query.setParameter("ma", maKH);
+        query.setParameter("tt", tt);
+        List<PhieuXuatCustom> list = query.getResultList();
+        return list;
     }
 }
