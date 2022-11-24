@@ -37,12 +37,14 @@ public class TpQuanLyChiTietSanPhamCustom {
 
     private BigDecimal GiaBan;
     
+    private int namBaoHanh;
+    
     private MauConstant mau;
 
     private SanPham sanPham;
 
     private DonVi donVi;
 
-    private NamBaoHanh namBaoHanh;
+    
 
 }
