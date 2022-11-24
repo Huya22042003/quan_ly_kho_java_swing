@@ -175,4 +175,27 @@ public class NVQLQuanLyPhieuXuatServiceImpl implements NVQLQuanLyPhieuXuatServic
     public List<PhieuXuatCustom> getListByNgayThanhToan(Long ngayBatDau, Long ngayKetThuc) {
         return rp.getListByNgayThanhToan(ngayBatDau, ngayKetThuc);
     }
+
+    @Override
+    public List<PhieuXuatCustom> findAllByKhAndNV(String ma, TrangThaiPhieuConstant tt, int rdo) {
+        switch (rdo) {
+            case 0:
+                return rp.findAllByIdNhanVien(ma, tt);
+            case 1:
+                return rp.findAllByIdKhachHang(ma, tt);
+            default:
+                return rp.findAllByIdKhachHang("", tt);
+        }
+    }
+
+//    @Override
+//    public List<PhieuXuatCustom> findByMaAndTT(UUID id, TrangThaiPhieuConstant tt) {
+//        return rp.findAllByIdPhieu(id, tt);
+//    }
+
+    @Override
+    public List<PhieuXuatCustom> findByMa(UUID id) {
+        return rp.findAllByIdPhieu(id);
+    }
+
 }
