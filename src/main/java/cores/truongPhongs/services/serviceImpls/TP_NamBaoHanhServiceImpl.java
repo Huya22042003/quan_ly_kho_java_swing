@@ -54,9 +54,10 @@ public class TP_NamBaoHanhServiceImpl implements TP_NamBaoHanhService {
             if (nbh.getMa().trim().length() == 0) {
                 erroMa.setText("Mã không được để trống");
                 check = false;
-//            } else if (!nbh.getMa().matches(ValidateConstant.REGEX_CHU_KHONG_CO_KHOANG_TRANG)) {
-//                erroMa.setText("Mã không được có khoảng trắng");
-//                check = false;
+
+            } else if (!nbh.getMa().trim().matches(nbh.getMa().toUpperCase())) {
+                erroMa.setText("Mã phải viết hoa");
+                check = false;
             } else if (findNBHByMa(nbh.getMa().trim()) != null) {
                 erroMa.setText("Mã đã tồn tại");
                 check = false;
