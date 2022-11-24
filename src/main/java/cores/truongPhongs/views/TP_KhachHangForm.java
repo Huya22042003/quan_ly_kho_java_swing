@@ -66,9 +66,9 @@ public class TP_KhachHangForm extends javax.swing.JPanel {
                 el.getMatKhau(),
                 el.getNgaySinh() == null ? "" : new Date(el.getNgaySinh()),
                 Converter.trangThaiDanhGia(el.getDanhGia()),
-                Converter.trangThaiGioiTinh(el.getGioiTinh()),
+//                Converter.trangThaiGioiTinh(el.getGioiTinh()),
                 Converter.trangThaiKhachHang(el.getTrangThai()),
-                el.getHinhAnh()
+//                el.getHinhAnh()
             };
             dtm.addRow(rowData);
         }
@@ -106,7 +106,7 @@ public class TP_KhachHangForm extends javax.swing.JPanel {
 
             },
             new String [] {
-                "STT", "Mã", "Tên", "SĐT", "Email", "Địa chỉ", "Mật khẩu", "Ngày sinh", "Đánh giá", "Giới tính", "Trạng thái", "Hình ảnh"
+                "STT", "Mã", "Tên", "SĐT", "Email", "Địa chỉ", "Mật khẩu", "Ngày sinh", "Đánh giá", "Trạng thái"
             }
         ));
         tableAll.addMouseListener(new java.awt.event.MouseAdapter() {
