@@ -80,6 +80,7 @@ public class TP_KhachHangForm extends javax.swing.JPanel {
 //                Converter.trangThaiGioiTinh(el.getGioiTinh()),
                 Converter.trangThaiKhachHang(el.getTrangThai()),
 //                el.getHinhAnh()
+                
             };
             dtm.addRow(rowData);
         }
