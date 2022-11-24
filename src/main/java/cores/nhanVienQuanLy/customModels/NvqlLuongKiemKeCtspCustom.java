@@ -28,6 +28,6 @@ public class NvqlLuongKiemKeCtspCustom {
     private int soLuongTon;
     private String donVi;
     private MauConstant mau;
-    private String namBaoHanh;
+    private int namBaoHanh;
     private BigDecimal giaBan;
 }
