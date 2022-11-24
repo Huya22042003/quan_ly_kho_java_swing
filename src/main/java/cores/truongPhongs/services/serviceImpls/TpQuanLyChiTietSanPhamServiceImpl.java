@@ -93,12 +93,12 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
     }
 
     @Override
-    public TpQuanLyChiTietSanPhamCustom checkValidate(UUID donVi, UUID namBH, UUID sanPham, String hinhAnh, String giaNhap, String giaBan, String soLuong, JLabel erroHinhAnh, JLabel erroGiaNhap, JLabel erroGiaBan, JLabel erroSoLuong,MauConstant mau) {
+    public TpQuanLyChiTietSanPhamCustom checkValidate(UUID donVi, String namBH, UUID sanPham, String hinhAnh, String giaNhap, String giaBan, String soLuong, JLabel erroHinhAnh, JLabel erroGiaNhap, JLabel erroGiaBan, JLabel erroNamBH, JLabel erroSoLuong,MauConstant mau) {
         boolean check = true;
         if (giaNhap.trim().length() == 0) {
             erroGiaNhap.setText("Giá nhập không được để trống");
             check = false;
-        } else if (!giaNhap.matches("\\d+")) {
+        } else if (giaNhap.matches("[A-Z a-z]+")) {
             erroGiaNhap.setText("Giá nhập không được là chữ");
             check = false;
         } else {
@@ -107,7 +107,7 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
         if (giaBan.trim().length() == 0) {
             erroGiaBan.setText("Giá bán không được để trống");
             check = false;
-        } else if (!giaBan.matches("\\d+")) {
+        } else if (giaBan.matches("[A-Z a-z]+")) {
             erroGiaBan.setText("Giá bán không được là chữ");
             check = false;
         } else {
@@ -121,6 +121,15 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
             check = false;
         } else {
             erroSoLuong.setText("");
+        }
+        if (namBH.trim().length() == 0) {
+            erroNamBH.setText("Năm bảo hành không được để trống");
+            check = false;
+        } else if (!namBH.matches("\\d+")) {
+            erroNamBH.setText("Năm bảo hành không được là chữ");
+            check = false;
+        } else {
+            erroNamBH.setText("");
         }
 
 //        if(hinhAnh.trim().length() == 0){
@@ -138,8 +147,8 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
         sp.setSoLuongTon(Integer.parseInt(soLuong));
         sp.setHinhAnh(hinhAnh);
         sp.setMau(mau);
+        sp.setNamBaoHanh(Integer.parseInt(namBH));
         sp.setDonVi(rp.findIDDonVi(donVi));
-        sp.setNamBaoHanh(rp.findIDNamBH(namBH));
         sp.setSanPham(rp.findIDSanPham(sanPham));
         return sp;
     }
@@ -157,16 +166,6 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
     @Override
     public DonVi findIDDonVi(UUID id) {
         return rp.findIDDonVi(id);
-    }
-
-    @Override
-    public List<TpQuanLyNamBHCustom> getAllNamBH() {
-        return rp.getAllNamBH();
-    }
-
-    @Override
-    public NamBaoHanh findIDBaoHanh(UUID id) {
-        return rp.findIDNamBH(id);
     }
 
     @Override
