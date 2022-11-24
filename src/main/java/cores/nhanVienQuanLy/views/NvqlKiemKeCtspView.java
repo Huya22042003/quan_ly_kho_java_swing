@@ -55,7 +55,6 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
         listCtpk = new ArrayList<>();
         listCtpk = ctpkService.getAll(phieu);
         fillTableSanPham();
-        fillTablePhieuKiemChiTiet();
         System.out.println(phieu);
         Toolkit toolkit = getToolkit();
         Dimension size = toolkit.getScreenSize();
