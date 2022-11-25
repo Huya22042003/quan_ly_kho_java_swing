@@ -38,6 +38,21 @@ public class NVQLQuanLyPhieuXuatRepository {
         List<PhieuXuatCustom> list = query.getResultList();
         return list;
     }
+        public List<PhieuXuatCustom> getListDaThanhToan() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("SELECT new cores.nhanVienQuanLy.customModels.PhieuXuatCustom("
+                + "px.id as id,"
+                + "px.ngayTao as ngayTao,"
+                + "px.ghiChu as ghiChu,"
+                + "px.ngayThanhToan as ngayThanhToan,"
+                + "px.trangThai as trangThai,"
+                + "px.nhanVien as nhanVien,"
+                + "px.khachHang as khachHang"
+                + ") FROM domainModels.PhieuXuat px WHERE px.trangThai = :trangThai");
+        query.setParameter("trangThai", TrangThaiPhieuConstant.DA_THANH_TOAN);
+        List<PhieuXuatCustom> list = query.getResultList();
+        return list;
+    }
 
     public List<PhieuXuatCustom> getListByNgayTao(Long ngayBatDau, Long ngayKetThuc) {
         Session session = HibernateUtil.getSessionFactory().openSession();

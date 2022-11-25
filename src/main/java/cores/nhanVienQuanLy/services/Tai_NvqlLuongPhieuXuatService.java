@@ -4,6 +4,8 @@
  */
 package cores.nhanVienQuanLy.services;
 
+import cores.nhanVienQuanLy.customModels.LuongBanHang_ChiTietSanPhamCustom;
+import cores.nhanVienQuanLy.customModels.Luong_ChiTietPhieuXuatCustom;
 import cores.nhanVienQuanLy.customModels.PhieuXuatCustom;
 import domainModels.ChiTietPhieuXuat;
 import domainModels.ChiTietSanPham;
@@ -20,14 +22,14 @@ import java.util.UUID;
  */
 public interface Tai_NvqlLuongPhieuXuatService {
 
-    public List<ChiTietSanPham> getListCTSanPhamBanHang(BigDecimal giaBatDau, BigDecimal giaKetThuc);
+    public List<LuongBanHang_ChiTietSanPhamCustom> getListCTSanPhamBanHang(BigDecimal giaBatDau, BigDecimal giaKetThuc);
 
     public KhachHang getKhachHangByMa(String ma);
 
     public NhanVien getNhanVienByMa(String ma);
-    List<ChiTietPhieuXuat> getListCTPhieuXuat(UUID idPX);
-    public List<ChiTietSanPham> getListCTSanPham();
-    public ChiTietPhieuXuat addCTPX(ChiTietPhieuXuat ctpx);
-    public void updateCTSP(ChiTietSanPham ctsp);
-    void updateCTPX(ChiTietPhieuXuat ctpx);
+    List<Luong_ChiTietPhieuXuatCustom> getListCTPhieuXuat(UUID idPX);
+    public List<LuongBanHang_ChiTietSanPhamCustom> getListCTSanPham();
+    public boolean addCTPX(Luong_ChiTietPhieuXuatCustom ctpxct);
+    public void updateCTSP(LuongBanHang_ChiTietSanPhamCustom ctspct);
+    void updateCTPX(Luong_ChiTietPhieuXuatCustom ctpxct);
 }
