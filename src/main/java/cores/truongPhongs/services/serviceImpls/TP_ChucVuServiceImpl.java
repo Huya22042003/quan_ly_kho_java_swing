@@ -53,9 +53,10 @@ public class TP_ChucVuServiceImpl implements TP_ChucVuService {
             if (cv.getMa().trim().length() == 0) {
                 erroMa.setText("Mã không được để trống");
                 check = false;
-//            } else if (!nbh.getMa().matches(ValidateConstant.REGEX_CHU_KHONG_CO_KHOANG_TRANG)) {
-//                erroMa.setText("Mã không được có khoảng trắng");
-//                check = false;
+
+            } else if (!cv.getMa().trim().matches(cv.getMa().toUpperCase())) {
+                erroMa.setText("Mã phải viết hoa");
+                check = false;
             } else if (findChucVuByMa(cv.getMa().trim()) != null) {
                 erroMa.setText("Mã đã tồn tại");
                 check = false;

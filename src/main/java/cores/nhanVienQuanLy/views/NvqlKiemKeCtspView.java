@@ -55,7 +55,7 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
         listCtpk = new ArrayList<>();
         listCtpk = ctpkService.getAll(phieu);
         fillTableSanPham();
-//        fillTablePhieuKiemChiTiet();
+        fillTablePhieuKiemChiTiet();
         System.out.println(phieu);
         Toolkit toolkit = getToolkit();
         Dimension size = toolkit.getScreenSize();
@@ -91,21 +91,21 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
         }
     }
 
-//    public void fillTablePhieuKiemChiTiet() {
-//        DefaultTableModel model = (DefaultTableModel) tbPhieuKiemChiTiet.getModel();
-//        model.setRowCount(0);
-//        for (NvqlLuongKiemKeCtpkCustom m : listCtpk) {
-//            Object[] row = new Object[]{
-//                model.getRowCount() + 1,
-//                m.getMa(),
-//                m.getTen(),
-//                m.getSoLuongTon(),
-//                m.getSoLuongThucTon(),
-//                m.getChenhLech()
-//            };
-//            model.addRow(row);
-//        }
-//    }
+    public void fillTablePhieuKiemChiTiet() {
+        DefaultTableModel model = (DefaultTableModel) tbPhieuKiemChiTiet.getModel();
+        model.setRowCount(0);
+        for (NvqlLuongKiemKeCtpkCustom m : listCtpk) {
+            Object[] row = new Object[]{
+                model.getRowCount() + 1,
+                m.getMa(),
+                m.getTen(),
+                m.getSoLuongTon(),
+                m.getSoLuongThucTon(),
+                m.getChenhLech()
+            };
+            model.addRow(row);
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -395,7 +395,7 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
             );
             listCtpk.add(ct);
         }
-//        fillTablePhieuKiemChiTiet();
+        fillTablePhieuKiemChiTiet();
     }//GEN-LAST:event_tbSanPhamMouseClicked
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed

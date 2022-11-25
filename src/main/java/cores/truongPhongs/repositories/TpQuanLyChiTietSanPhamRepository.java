@@ -38,10 +38,10 @@ public class TpQuanLyChiTietSanPhamRepository {
                 + "ct.hinhAnh as hinhAnh,"
                 + "ct.GiaNhap as GiaNhap,"
                 + "ct.GiaBan as GiaBan,"
+                + "ct.namBaoHanh as namBaoHanh,"
                 + "ct.mau as mau,"
                 + "ct.sanPham as ten,"
-                + "ct.donVi as donViGoc,"
-                + "ct.namBaoHanh as ten"
+                + "ct.donVi as donViGoc"
                 + ") from domainModels.ChiTietSanPham ct");
         ct = q.getResultList();
         s.close();
@@ -102,10 +102,10 @@ public class TpQuanLyChiTietSanPhamRepository {
                     + "ct.hinhAnh as hinhAnh,"
                     + "ct.GiaNhap as GiaNhap,"
                     + "ct.GiaBan as GiaBan,"
+                    + "ct.namBaoHanh as namBaoHanh,"
                     + "ct.mau as mau,"
                     + "ct.sanPham as ten,"
-                    + "ct.donVi as donViGoc,"
-                    + "ct.namBaoHanh as ten"
+                    + "ct.donVi as donViGoc"
                     + ") from domainModels.ChiTietSanPham ct WHERE ct.id = :id");
             q.setParameter("id", id);
             sp = (TpQuanLyChiTietSanPhamCustom) q.getSingleResult();
@@ -125,10 +125,10 @@ public class TpQuanLyChiTietSanPhamRepository {
                     + "ct.hinhAnh as hinhAnh,"
                     + "ct.GiaNhap as GiaNhap,"
                     + "ct.GiaBan as GiaBan,"
+                    + "ct.namBaoHanh as namBaoHanh,"
                     + "ct.mau as mau,"
                     + "ct.sanPham as ten,"
-                    + "ct.donVi as donViGoc,"
-                    + "ct.namBaoHanh as ten"
+                    + "ct.donVi as donViGoc"
                     + ") from domainModels.ChiTietSanPham ct WHERE ct.GiaBan = :GiaBan");
             q.setParameter("GiaBan", gia);
             sp = (TpQuanLyChiTietSanPhamCustom) q.getSingleResult();
@@ -139,7 +139,7 @@ public class TpQuanLyChiTietSanPhamRepository {
         return sp;
     }
 
-    public List<TpQuanLyChiTietSanPhamCustom> findAllByGiaNhap(String giaNhap,MauConstant tt) {
+    public List<TpQuanLyChiTietSanPhamCustom> findAllByGiaNhap(String giaNhap, MauConstant tt) {
         List<TpQuanLyChiTietSanPhamCustom> list = new ArrayList<>();
         Session s = HibernateUtil.getSessionFactory().openSession();
         Query q = s.createQuery("select new cores.truongPhongs.customModels.TpQuanLyChiTietSanPhamCustom ("
@@ -148,10 +148,10 @@ public class TpQuanLyChiTietSanPhamRepository {
                 + "ct.hinhAnh as hinhAnh,"
                 + "ct.GiaNhap as GiaNhap,"
                 + "ct.GiaBan as GiaBan,"
+                + "ct.namBaoHanh as namBaoHanh,"
                 + "ct.mau as mau,"
                 + "ct.sanPham as ten,"
-                + "ct.donVi as donViGoc,"
-                + "ct.namBaoHanh as ten"
+                + "ct.donVi as donViGoc"
                 + ") from domainModels.ChiTietSanPham ct WHERE ct.GiaNhap LIKE CONCAT('%',:GiaNhap,'%') AND ct.mau = :tt");
         q.setParameter("GiaNhap", giaNhap);
         q.setParameter("tt", tt);
@@ -160,7 +160,7 @@ public class TpQuanLyChiTietSanPhamRepository {
         return list;
     }
 
-    public List<TpQuanLyChiTietSanPhamCustom> findAllByGiaBan(String giaBan,MauConstant tt) {
+    public List<TpQuanLyChiTietSanPhamCustom> findAllByGiaBan(String giaBan, MauConstant tt) {
         List<TpQuanLyChiTietSanPhamCustom> list = new ArrayList<>();
         Session s = HibernateUtil.getSessionFactory().openSession();
         Query q = s.createQuery("select new cores.truongPhongs.customModels.TpQuanLyChiTietSanPhamCustom ("
@@ -169,10 +169,10 @@ public class TpQuanLyChiTietSanPhamRepository {
                 + "ct.hinhAnh as hinhAnh,"
                 + "ct.GiaNhap as GiaNhap,"
                 + "ct.GiaBan as GiaBan,"
+                + "ct.namBaoHanh as namBaoHanh,"
                 + "ct.mau as mau,"
                 + "ct.sanPham as ten,"
-                + "ct.donVi as donViGoc,"
-                + "ct.namBaoHanh as ten"
+                + "ct.donVi as donViGoc"
                 + ") from domainModels.ChiTietSanPham ct WHERE ct.GiaBan LIKE CONCAT('%',:GiaBan,'%') AND ct.mau = :tt ");
         q.setParameter("GiaBan", giaBan);
         q.setParameter("tt", tt);
@@ -190,10 +190,10 @@ public class TpQuanLyChiTietSanPhamRepository {
                 + "ct.hinhAnh as hinhAnh,"
                 + "ct.GiaNhap as GiaNhap,"
                 + "ct.GiaBan as GiaBan,"
+                + "ct.namBaoHanh as namBaoHanh,"
                 + "ct.mau as mau,"
                 + "ct.sanPham as ten,"
-                + "ct.donVi as donViGoc,"
-                + "ct.namBaoHanh as ten"
+                + "ct.donVi as donViGoc"
                 + ") from domainModels.ChiTietSanPham ct WHERE ct.sanPham.ten LIKE CONCAT('%',:ten,'%') ");
         q.setParameter("ten", ten);
         list = q.getResultList();
@@ -209,7 +209,7 @@ public class TpQuanLyChiTietSanPhamRepository {
                 + "dv.donViGoc as donViGoc,"
                 + "dv.donViQuyDoi as donViQuyDoi,"
                 + "dv.soLuong as soLuong"
-                + ") from domainModels.DonVi dv");
+                + " )from domainModels.DonVi dv");
         list = q.getResultList();
         s.close();
         return list;
@@ -220,29 +220,6 @@ public class TpQuanLyChiTietSanPhamRepository {
         Session s = HibernateUtil.getSessionFactory().openSession();
         Transaction t = s.beginTransaction();
         DonVi sp = s.find(DonVi.class, id);
-        t.commit();
-        s.close();
-        return sp;
-    }
-
-    public List<TpQuanLyNamBHCustom> getAllNamBH() {
-        List<TpQuanLyNamBHCustom> list = new ArrayList<>();
-        Session s = HibernateUtil.getSessionFactory().openSession();
-        Query q = s.createQuery("select new cores.truongPhongs.customModels.TpQuanLyNamBHCustom ("
-                + "n.id as id,"
-                + "n.ma as ma,"
-                + "n.ten as ten"
-                + ") from domainModels.NamBaoHanh n");
-        list = q.getResultList();
-        s.close();
-        return list;
-
-    }
-
-    public NamBaoHanh findIDNamBH(UUID id) {
-        Session s = HibernateUtil.getSessionFactory().openSession();
-        Transaction t = s.beginTransaction();
-        NamBaoHanh sp = s.find(NamBaoHanh.class, id);
         t.commit();
         s.close();
         return sp;

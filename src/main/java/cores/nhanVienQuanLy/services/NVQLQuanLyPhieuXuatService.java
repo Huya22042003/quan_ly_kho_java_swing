@@ -33,4 +33,6 @@ public interface NVQLQuanLyPhieuXuatService {
     NhanVien chonNV(int chon);
     KhachHang chonKH(int chon);
     List<PhieuXuatCustom> getListByNgayThanhToan(Long ngayBatDau, Long ngayKetThuc);
+    List<PhieuXuatCustom> findAllByKhAndNV(String ma, TrangThaiPhieuConstant tt, int rdo);
+    List<PhieuXuatCustom> findByMa(UUID id);
 }
