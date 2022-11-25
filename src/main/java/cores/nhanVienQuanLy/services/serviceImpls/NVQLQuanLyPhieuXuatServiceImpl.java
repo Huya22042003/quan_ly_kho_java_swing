@@ -198,4 +198,9 @@ public class NVQLQuanLyPhieuXuatServiceImpl implements NVQLQuanLyPhieuXuatServic
         return rp.findAllByIdPhieu(id);
     }
 
+    @Override
+    public List<PhieuXuatCustom> getListDaThanhToan() {
+        return rp.getListDaThanhToan();
+    }
+
 }

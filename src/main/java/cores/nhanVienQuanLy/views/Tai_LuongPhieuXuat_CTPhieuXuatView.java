@@ -4,11 +4,14 @@
  */
 package cores.nhanVienQuanLy.views;
 
+import cores.nhanVienQuanLy.customModels.LuongBanHang_ChiTietSanPhamCustom;
+import cores.nhanVienQuanLy.customModels.Luong_ChiTietPhieuXuatCustom;
 import cores.nhanVienQuanLy.services.Tai_NvqlLuongPhieuXuatService;
 import cores.nhanVienQuanLy.services.serviceImpls.Tai_NvqlLuongPhieuXuatServiceImpl;
 import domainModels.ChiTietPhieuXuat;
 import domainModels.ChiTietSanPham;
 import domainModels.PhieuXuat;
+import infrastructures.constant.TrangThaiPhieuConstant;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,10 +29,10 @@ import utilities.MsgBox;
 public class Tai_LuongPhieuXuat_CTPhieuXuatView extends javax.swing.JFrame {
 
     public Tai_NvqlLuongPhieuXuatService luongService;
-    public List<ChiTietPhieuXuat> listCTPX;
+    public List<Luong_ChiTietPhieuXuatCustom> listCTPX;
     private PhieuXuat phieuXuat;
     public ChiTietPhieuXuat ctpx;
-    private List<ChiTietSanPham> listCTSP;
+    private List<LuongBanHang_ChiTietSanPhamCustom> listCTSP;
     public double tongTien;
     private String duongDan = getClass().getResource("/icons/file.png").getPath();
 
@@ -55,10 +58,10 @@ public class Tai_LuongPhieuXuat_CTPhieuXuatView extends javax.swing.JFrame {
         tblCTPhieuXuat.removeAll();
     }
 
-    public void loadTable(List<ChiTietPhieuXuat> list) {
+    public void loadTable(List<Luong_ChiTietPhieuXuatCustom> list) {
         DefaultTableModel dtm = (DefaultTableModel) this.tblCTPhieuXuat.getModel();
         dtm.setRowCount(0);
-        for (ChiTietPhieuXuat ctpx : listCTPX) {
+        for (Luong_ChiTietPhieuXuatCustom ctpx : listCTPX) {
             Object[] rowData = {
                 dtm.getRowCount() + 1,
                 ctpx.getIdPhieuXuat().getId(),
@@ -442,7 +445,10 @@ public class Tai_LuongPhieuXuat_CTPhieuXuatView extends javax.swing.JFrame {
         txtGiaBan.setText(tblCTPhieuXuat.getValueAt(row, 4).toString());
         txtNamBH.setText(tblCTPhieuXuat.getValueAt(row, 5).toString());
         txtMau.setText(tblCTPhieuXuat.getValueAt(row, 6).toString());
-
+        if (phieuXuat.getTrangThai().equals(TrangThaiPhieuConstant.DA_THANH_TOAN)) {
+            MsgBox.alert(this, "Phiếu xuất này đã ở trạng thái đã thanh toán nên không thể sửa số lượng! ");
+            return;
+        }
         String suaSL = JOptionPane.showInputDialog("Bạn muốn sửa số lượng thành bao nhiêu ?");
         int sl = 0;
         try {
@@ -459,8 +465,8 @@ public class Tai_LuongPhieuXuat_CTPhieuXuatView extends javax.swing.JFrame {
 //            JOptionPane.showMessageDialog(this, "Bạn phải nhập số lượng nhỏ hơn số lượng ban đầu");
 //            return;
 //        }
-        ChiTietPhieuXuat ctPhieuXuat = listCTPX.get(row);
-        for (ChiTietSanPham ctsp : luongService.getListCTSanPham()) {
+        Luong_ChiTietPhieuXuatCustom ctPhieuXuat = listCTPX.get(row);
+        for (LuongBanHang_ChiTietSanPhamCustom ctsp : luongService.getListCTSanPham()) {
             if (listCTPX.get(row).getIdChiTietSp().getId().equals(ctsp.getId())) {
                 System.out.println(ctsp.getSoLuongTon());
                 System.out.println((ctPhieuXuat.getSoLuong() - sl));

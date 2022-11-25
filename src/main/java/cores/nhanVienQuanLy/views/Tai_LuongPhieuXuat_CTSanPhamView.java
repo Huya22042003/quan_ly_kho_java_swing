@@ -4,11 +4,16 @@
  */
 package cores.nhanVienQuanLy.views;
 
+import cores.nhanVienQuanLy.customModels.LuongBanHang_ChiTietSanPhamCustom;
+import cores.nhanVienQuanLy.customModels.Luong_ChiTietPhieuXuatCustom;
 import cores.nhanVienQuanLy.services.Tai_NvqlLuongPhieuXuatService;
 import cores.nhanVienQuanLy.services.serviceImpls.Tai_NvqlLuongPhieuXuatServiceImpl;
 import domainModels.ChiTietPhieuXuat;
 import domainModels.ChiTietSanPham;
 import domainModels.PhieuXuat;
+import infrastructures.constant.MauConstant;
+import infrastructures.constant.TrangThaiPhieuConstant;
+import infrastructures.constant.TrangThaiSanPhamConstanst;
 import java.math.BigDecimal;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -24,7 +29,7 @@ import utilities.MsgBox;
 public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
 
     private Tai_NvqlLuongPhieuXuatService luongService;
-    private List<ChiTietSanPham> listCTSP;
+    private List<LuongBanHang_ChiTietSanPhamCustom> listCTSP;
     private Tai_LuongPhieuXuat_CTPhieuXuatView ctpxView;
     public PhieuXuat phieuXuat;
     private String duongDan = getClass().getResource("/icons/file.png").getPath();
@@ -42,10 +47,10 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
         loadTable(listCTSP);
     }
 
-    public void loadTable(List<ChiTietSanPham> list) {
+    public void loadTable(List<LuongBanHang_ChiTietSanPhamCustom> list) {
         DefaultTableModel dtm = (DefaultTableModel) this.tblCTSanPham.getModel();
         dtm.setRowCount(0);
-        for (ChiTietSanPham ctsp : list) {
+        for (LuongBanHang_ChiTietSanPhamCustom ctsp : list) {
             Object[] rowData = {
                 dtm.getRowCount() + 1,
                 ctsp.getSanPham().getMa(),
@@ -280,7 +285,6 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
             }
         });
 
-        btnHienThi.setBackground(new java.awt.Color(255, 255, 102));
         btnHienThi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Show.png"))); // NOI18N
         btnHienThi.setText("\n");
         btnHienThi.addActionListener(new java.awt.event.ActionListener() {
@@ -289,7 +293,6 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
             }
         });
 
-        myButton1.setBackground(new java.awt.Color(255, 255, 102));
         myButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/delete_2.png"))); // NOI18N
         myButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -297,7 +300,6 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
             }
         });
 
-        btnSearch.setBackground(new java.awt.Color(255, 255, 102));
         btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Search.png"))); // NOI18N
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -440,12 +442,16 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
         txtGiaBan.setText(tblCTSanPham.getValueAt(row, 5).toString());
         txtMau.setText(tblCTSanPham.getValueAt(row, 6).toString());
         txtNamBH.setText(tblCTSanPham.getValueAt(row, 7).toString());
-        ChiTietSanPham ctsp = listCTSP.get(row);
+        LuongBanHang_ChiTietSanPhamCustom ctsp = listCTSP.get(row);
 //        for (ChiTietSanPham sp : listCTSP) {
 //            if (ctsp.getSanPham().getId().equals(sp.getSanPham().getId())) {
 //                ctsp.setSoLuongTon(sp.getSoLuongTon());
 //            }
 //        }
+        if (phieuXuat.getTrangThai().equals(TrangThaiPhieuConstant.DA_THANH_TOAN)) {
+            MsgBox.alert(this, "Phiếu xuất này đã ở trạng thái đã thanh toán nên không thể mua hàng! Vui tạo tạo phiếu xuất mới");
+            return;
+        }
         String input = JOptionPane.showInputDialog("Bạn mua muốn bao nhiêu ?");
         int sl = 0;
         try {
@@ -466,8 +472,9 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
         ctsp.setSoLuongTon(ctsp.getSoLuongTon() - sl);
         luongService.updateCTSP(ctsp);
 //        JOptionPane.showMessageDialog(this, "Sửa thành công");
-        ChiTietPhieuXuat ctPhieuXuat = new ChiTietPhieuXuat();
-        ctPhieuXuat.setIdChiTietSp(ctsp);
+        Luong_ChiTietPhieuXuatCustom ctPhieuXuat = new Luong_ChiTietPhieuXuatCustom();
+        ChiTietSanPham ctsanpham = new ChiTietSanPham(ctsp.getId(), ctsp.getSoLuongTon(), ctsp.getHinhAnh(), ctsp.getGiaNhap(), ctsp.getGiaBan(), ctsp.getNamBaoHanh(), ctsp.getMau(), ctsp.getTrangThai(), ctsp.getSanPham(), ctsp.getDonVi());
+        ctPhieuXuat.setIdChiTietSp(ctsanpham);
         ctPhieuXuat.setSoLuong(sl);
         ctPhieuXuat.setIdPhieuXuat(this.phieuXuat);
         luongService.addCTPX(ctPhieuXuat);
@@ -475,9 +482,9 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
         ctpxView.listCTPX.add(ctPhieuXuat);
         loadTable(luongService.getListCTSanPham());
 
-        if (listCTSP.get(row).getHinhAnh() == null ) {
+        if (listCTSP.get(row).getHinhAnh() == null) {
             this.btnAnh.setIcon(new ImageIcon(duongDan));
-        }else {
+        } else {
             btnAnh.setIcon(new ImageIcon(listCTSP.get(row).getHinhAnh()));
         }
     }//GEN-LAST:event_tblCTSanPhamMouseClicked

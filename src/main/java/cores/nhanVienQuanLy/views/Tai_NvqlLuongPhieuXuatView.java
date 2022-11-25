@@ -4,13 +4,14 @@
  */
 package cores.nhanVienQuanLy.views;
 
+import cores.nhanVienQuanLy.customModels.LuongBanHang_ChiTietSanPhamCustom;
+import cores.nhanVienQuanLy.customModels.Luong_ChiTietPhieuXuatCustom;
 import cores.nhanVienQuanLy.customModels.PhieuXuatCustom;
 import cores.nhanVienQuanLy.services.NVQLQuanLyPhieuXuatService;
 import cores.nhanVienQuanLy.services.Tai_NvqlLuongPhieuXuatService;
 import cores.nhanVienQuanLy.services.serviceImpls.NVQLQuanLyPhieuXuatServiceImpl;
 import cores.nhanVienQuanLy.services.serviceImpls.Tai_NvqlLuongPhieuXuatServiceImpl;
 import domainModels.ChiTietPhieuXuat;
-import domainModels.ChiTietSanPham;
 import domainModels.PhieuXuat;
 import infrastructures.constant.TrangThaiPhieuConstant;
 import java.awt.event.ActionEvent;
@@ -32,7 +33,7 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
 
     private Tai_NvqlLuongPhieuXuatService luongPxService;
     private NVQLQuanLyPhieuXuatService phieuXuatService;
-    private List<ChiTietSanPham> listCTSP;
+    private List<LuongBanHang_ChiTietSanPhamCustom> listCTSP;
     private List<PhieuXuatCustom> listPhieuXuat;
     private Tai_LuongPhieuXuat_CTPhieuXuatView ctpxView;
     private Tai_LuongPhieuXuat_CTSanPhamView ctspView;
@@ -778,12 +779,16 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
         txtKhachHang.setText(khachHang);
         txtGhiChu.setText(listPhieuXuat.get(row).getGhiChu());
         double tien = 0;
-        List<ChiTietPhieuXuat> listCTPX = luongPxService.getListCTPhieuXuat(listPhieuXuat.get(row).getId());
-        for (ChiTietPhieuXuat ctpx : listCTPX) {
+        List<Luong_ChiTietPhieuXuatCustom> listCTPX = luongPxService.getListCTPhieuXuat(listPhieuXuat.get(row).getId());
+        for (Luong_ChiTietPhieuXuatCustom ctpx : listCTPX) {
             tien += ctpx.getIdChiTietSp().getGiaBan().multiply(new BigDecimal(ctpx.getSoLuong())).doubleValue();
         }
         txtTienPhaitra.setText(tien + "");
-
+        if (txtTrangThai.getText().equalsIgnoreCase("Đã Thanh Toán")) {
+            btnThanhToan.setEnabled(false);
+        }else{
+            btnThanhToan.setEnabled(true);
+        }
     }//GEN-LAST:event_tblPhieuXuatMouseClicked
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
