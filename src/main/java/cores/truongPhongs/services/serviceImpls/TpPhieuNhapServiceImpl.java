@@ -4,47 +4,44 @@
  */
 package cores.truongPhongs.services.serviceImpls;
 
-import cores.truongPhongs.customModels.NvqlQuanLyPhieuNhapCustom;
+import cores.truongPhongs.customModels.TpPhieuNhapCustom;
 import cores.nhanVienQuanLy.repositories.NvqlGetTenNccRepository;
 import cores.nhanVienQuanLy.repositories.NvqlGetTenNhanVienRepository;
-import cores.truongPhongs.repositories.NvqlQuanLyPhieuNhapRepository;
-import cores.truongPhongs.services.NvqlQuanLyPhieuNhapService;
+import cores.truongPhongs.repositories.TpPhieuNhapRepository;
 import domainModels.NhaCungCap;
 import domainModels.NhanVien;
 import domainModels.PhieuNhap;
 import infrastructures.constant.TrangThaiPhieuConstant;
-import infrastructures.constant.ValidateConstant;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import javax.swing.JLabel;
 import utilities.DateTimeUtil;
+import cores.truongPhongs.services.TpPhieuNhapService;
 
 /**
  *
  * @author Acer
  */
-public class NvqlQuanLyPhieuNhapServiceImpl implements NvqlQuanLyPhieuNhapService {
+public class TpPhieuNhapServiceImpl implements TpPhieuNhapService {
 
-    private NvqlQuanLyPhieuNhapRepository repo;
+    private TpPhieuNhapRepository repo;
     private NvqlGetTenNccRepository repoNcc;
     private NvqlGetTenNhanVienRepository repoNv;
 
-    public NvqlQuanLyPhieuNhapServiceImpl() {
-        repo = new NvqlQuanLyPhieuNhapRepository();
+    public TpPhieuNhapServiceImpl() {
+        repo = new TpPhieuNhapRepository();
         repoNcc = new NvqlGetTenNccRepository();
         repoNv = new NvqlGetTenNhanVienRepository();
     }
 
     @Override
-    public List<NvqlQuanLyPhieuNhapCustom> getListPn() {
+    public List<TpPhieuNhapCustom> getListPn() {
         return repo.getListPhieuNhap();
     }
 
     @Override
-    public NvqlQuanLyPhieuNhapCustom addPn(NvqlQuanLyPhieuNhapCustom p) {
+    public TpPhieuNhapCustom addPn(TpPhieuNhapCustom p) {
         NhaCungCap ncc = repoNcc.getNccById(p.getIdNcc());
         NhanVien nv = repoNv.getNhanVienById(p.getIdNhanVien());
         PhieuNhap pn = new PhieuNhap();
@@ -59,7 +56,7 @@ public class NvqlQuanLyPhieuNhapServiceImpl implements NvqlQuanLyPhieuNhapServic
     }
 
     @Override
-    public boolean updatePn(NvqlQuanLyPhieuNhapCustom p) {
+    public boolean updatePn(TpPhieuNhapCustom p) {
         NhaCungCap ncc = repoNcc.getNccById(p.getIdNcc());
         NhanVien nv = repoNv.getNhanVienById(p.getIdNhanVien());
         PhieuNhap pn = new PhieuNhap();
@@ -79,7 +76,7 @@ public class NvqlQuanLyPhieuNhapServiceImpl implements NvqlQuanLyPhieuNhapServic
     }
 
     @Override
-    public NvqlQuanLyPhieuNhapCustom checkValidate(String ghiChu, Date ngayTao, Date ngayNhan, JLabel errNgayNhap, JLabel errNgayTao, JLabel errGhiChu) {
+    public TpPhieuNhapCustom checkValidate(String ghiChu, Date ngayTao, Date ngayNhan, JLabel errNgayNhap, JLabel errNgayTao, JLabel errGhiChu) {
         boolean check = true;
         if (ghiChu.trim().length() == 0) {
             errGhiChu.setText("Ghi chú không được để trống!");
@@ -113,7 +110,7 @@ public class NvqlQuanLyPhieuNhapServiceImpl implements NvqlQuanLyPhieuNhapServic
         if (!check) {
             return null;
         }
-        NvqlQuanLyPhieuNhapCustom pn = new NvqlQuanLyPhieuNhapCustom();
+        TpPhieuNhapCustom pn = new TpPhieuNhapCustom();
         pn.setGhiChu(ghiChu);
         pn.setNgayThanhToan(ngayNhan.getTime());
         pn.setNgayTao(ngayTao.getTime());
@@ -122,8 +119,8 @@ public class NvqlQuanLyPhieuNhapServiceImpl implements NvqlQuanLyPhieuNhapServic
     }
 
     @Override
-    public NvqlQuanLyPhieuNhapCustom findPhieuNhapById(UUID id) {
-        NvqlQuanLyPhieuNhapCustom p = new NvqlQuanLyPhieuNhapCustom();
+    public TpPhieuNhapCustom findPhieuNhapById(UUID id) {
+        TpPhieuNhapCustom p = new TpPhieuNhapCustom();
         PhieuNhap pn = repo.findPhieuNhapById(id);
         p.setId(pn.getId());
         p.setTrangThai(pn.getTrangThai());
@@ -132,6 +129,8 @@ public class NvqlQuanLyPhieuNhapServiceImpl implements NvqlQuanLyPhieuNhapServic
         p.setGhiChu(pn.getGhiChu());
         p.setNgayThanhToan(pn.getNgayThanhToan());
         p.setNgayTao(pn.getNgayTao());
+        p.setTenNcc(pn.getNhaCungCap().getTen());
+        p.setTenNhanVien(pn.getNhanVien().getTen());
        
         return p;
     }
@@ -151,12 +150,12 @@ public class NvqlQuanLyPhieuNhapServiceImpl implements NvqlQuanLyPhieuNhapServic
     }
 
     @Override
-    public List<NvqlQuanLyPhieuNhapCustom> getListByNgayThanhToan(Long ngayBatDau, Long ngayKetThuc) {
+    public List<TpPhieuNhapCustom> getListByNgayThanhToan(Long ngayBatDau, Long ngayKetThuc) {
         return repo.getListByNgayThanhToan(ngayBatDau, ngayKetThuc);
     }
 
     @Override
-    public List<NvqlQuanLyPhieuNhapCustom> getListByNgayTao(Long ngayTao, Long ngayKetThuc) {
+    public List<TpPhieuNhapCustom> getListByNgayTao(Long ngayTao, Long ngayKetThuc) {
         return repo.getListByNgayTao(ngayTao, ngayKetThuc);
     }
 

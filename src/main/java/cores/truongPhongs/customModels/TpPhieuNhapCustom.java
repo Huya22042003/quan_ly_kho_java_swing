@@ -19,7 +19,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class NvqlQuanLyPhieuNhapCustom {
+public class TpPhieuNhapCustom {
     private UUID id;
     private String ghiChu;
     private Long ngayThanhToan;
@@ -29,8 +29,5 @@ public class NvqlQuanLyPhieuNhapCustom {
     private String tenNhanVien;
     private UUID idNcc;
     private String tenNcc;
-    
 
-    
-    
 }

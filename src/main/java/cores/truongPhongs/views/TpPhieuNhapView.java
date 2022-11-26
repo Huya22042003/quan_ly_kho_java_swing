@@ -6,9 +6,8 @@ package cores.truongPhongs.views;
 
 import cores.truongPhongs.views.NvqlRUDPhieuNhapView;
 import cores.truongPhongs.views.NvqlCreatePhieuNhapView;
-import cores.truongPhongs.customModels.NvqlQuanLyPhieuNhapCustom;
-import cores.truongPhongs.services.NvqlQuanLyPhieuNhapService;
-import cores.truongPhongs.services.serviceImpls.NvqlQuanLyPhieuNhapServiceImpl;
+import cores.truongPhongs.customModels.TpPhieuNhapCustom;
+import cores.truongPhongs.services.serviceImpls.TpPhieuNhapServiceImpl;
 import infrastructures.constant.TrangThaiPhieuConstant;
 
 import java.util.ArrayList;
@@ -18,23 +17,24 @@ import java.util.UUID;
 import javax.swing.table.DefaultTableModel;
 import utilities.Converter;
 import utilities.MsgBox;
+import cores.truongPhongs.services.TpPhieuNhapService;
 
 /**
  *
  * @author QUOC HUY
  */
-public class NvqlQuanLyPhieuNhapView extends javax.swing.JPanel {
+public class TpPhieuNhapView extends javax.swing.JPanel {
 
     /**
      * Creates new form DemoCoSoView
      */
-    private NvqlQuanLyPhieuNhapService phieuNhapService;
+    private TpPhieuNhapService phieuNhapService;
     
-    private List<NvqlQuanLyPhieuNhapCustom> getListPhieuNhap;
+    private List<TpPhieuNhapCustom> getListPhieuNhap;
     
-    public NvqlQuanLyPhieuNhapView() {
+    public TpPhieuNhapView() {
         initComponents();
-        phieuNhapService = new NvqlQuanLyPhieuNhapServiceImpl();
+        phieuNhapService = new TpPhieuNhapServiceImpl();
 //        getListPhieuNhap = new ArrayList<>();
  getListPhieuNhap = phieuNhapService.getListPn();
         this.loadTable(getListPhieuNhap);
@@ -47,10 +47,10 @@ public class NvqlQuanLyPhieuNhapView extends javax.swing.JPanel {
           this.cbbTrangThai.addItem(Converter.trangThaiDonHang(TrangThaiPhieuConstant.DA_HUY));
             this.cbbTrangThai.addItem(Converter.trangThaiDonHang(TrangThaiPhieuConstant.CHO_THANH_TOAN));
     }
-    public List<NvqlQuanLyPhieuNhapCustom> listSearch(int rdo) {
+    public List<TpPhieuNhapCustom> listSearch(int rdo) {
         // nhập vào 
         String timKiem = this.txtSearchTheo.getText();
-        List<NvqlQuanLyPhieuNhapCustom> listTimKiem = new ArrayList<>();
+        List<TpPhieuNhapCustom> listTimKiem = new ArrayList<>();
 
         // tìm kiếm theo tên mã vị trí
         checkCbb(phieuNhapService.loc(this.cbbTrangThai.getSelectedIndex())).forEach(el -> {
@@ -92,8 +92,8 @@ public class NvqlQuanLyPhieuNhapView extends javax.swing.JPanel {
         return listTimKiem;
     }
     
-    public List<NvqlQuanLyPhieuNhapCustom> checkCbb(TrangThaiPhieuConstant cs) {
-        List<NvqlQuanLyPhieuNhapCustom> listTimKiem = new ArrayList<>();
+    public List<TpPhieuNhapCustom> checkCbb(TrangThaiPhieuConstant cs) {
+        List<TpPhieuNhapCustom> listTimKiem = new ArrayList<>();
         getListPhieuNhap.forEach(el -> {
             if (el.getTrangThai() == cs) {
                 listTimKiem.add(el);
@@ -118,10 +118,10 @@ public class NvqlQuanLyPhieuNhapView extends javax.swing.JPanel {
         searchRadio();
     }
     
-    public void loadTable(List<NvqlQuanLyPhieuNhapCustom> list) {
+    public void loadTable(List<TpPhieuNhapCustom> list) {
         DefaultTableModel dtm = (DefaultTableModel) this.tblPhieuNhap.getModel();
         dtm.setRowCount(0);
-        for (NvqlQuanLyPhieuNhapCustom el : list) {
+        for (TpPhieuNhapCustom el : list) {
             
             Object[] rowData = {
                 dtm.getRowCount() + 1,
