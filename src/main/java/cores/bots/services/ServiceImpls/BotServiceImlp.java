@@ -1,13 +1,23 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package cores.bots.services.ServiceImpls;
+
+import cores.bots.repositoris.BotRepository;
+import cores.bots.services.BotService;
 
 /**
  *
  * @author QUOC HUY
  */
-public class BotServiceImlp {
+public class BotServiceImlp implements BotService{
+    
+    private BotRepository rp;
+
+    public BotServiceImlp() {
+        rp = new BotRepository();
+    }
+    
+    @Override
+    public boolean updateTrangThai() {
+        return rp.updateTrangThai();
+    }
     
 }

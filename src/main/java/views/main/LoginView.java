@@ -134,7 +134,8 @@ public class LoginView extends javax.swing.JFrame {
         if (map.containsKey(email)) {
             if (map.get(email).getMatKhau().equals(txtPassWord.getText())) {
                 Auth.nhanVien = map.get(email);
-
+                Bot bot = new Bot();
+                bot.setVisible(true);
                 // check chức vụ
                 if (Auth.nhanVien.getChucVu().getMa().equalsIgnoreCase("CV0001")) {
                     JOptionPane.showMessageDialog(this, "Thành công", "Welcome", JOptionPane.PLAIN_MESSAGE);
