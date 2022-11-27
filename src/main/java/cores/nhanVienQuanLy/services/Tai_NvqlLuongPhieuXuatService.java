@@ -23,13 +23,11 @@ import java.util.UUID;
 public interface Tai_NvqlLuongPhieuXuatService {
 
     public List<LuongBanHang_ChiTietSanPhamCustom> getListCTSanPhamBanHang(BigDecimal giaBatDau, BigDecimal giaKetThuc);
-
-    public KhachHang getKhachHangByMa(String ma);
-
     public NhanVien getNhanVienByMa(String ma);
-    List<Luong_ChiTietPhieuXuatCustom> getListCTPhieuXuat(UUID idPX);
+    List<Luong_ChiTietPhieuXuatCustom> getListCTPhieuXuatByID(UUID idPX);
     public List<LuongBanHang_ChiTietSanPhamCustom> getListCTSanPham();
     public boolean addCTPX(Luong_ChiTietPhieuXuatCustom ctpxct);
     public void updateCTSP(LuongBanHang_ChiTietSanPhamCustom ctspct);
     void updateCTPX(Luong_ChiTietPhieuXuatCustom ctpxct);
+    List<Luong_ChiTietPhieuXuatCustom> getListCTPhieuXuat();
 }

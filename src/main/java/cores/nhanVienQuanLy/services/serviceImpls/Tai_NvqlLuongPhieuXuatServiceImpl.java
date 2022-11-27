@@ -33,18 +33,9 @@ public class Tai_NvqlLuongPhieuXuatServiceImpl implements Tai_NvqlLuongPhieuXuat
         return rp.getListCTSanPhamBanHang(giaBatDau, giaKetThuc);
     }
 
-    @Override
-    public KhachHang getKhachHangByMa(String ma) {
-        return rp.getKhachHangByMa(ma);
-    }
 
     @Override
-    public NhanVien getNhanVienByMa(String ma) {
-        return rp.getNhanVienByMa(ma);
-    }
-
-    @Override
-    public List<Luong_ChiTietPhieuXuatCustom> getListCTPhieuXuat(UUID idPX) {
+    public List<Luong_ChiTietPhieuXuatCustom> getListCTPhieuXuatByID(UUID idPX) {
         return rp.getListCTPhieuXuat(idPX);
     }
 
@@ -85,6 +76,16 @@ public class Tai_NvqlLuongPhieuXuatServiceImpl implements Tai_NvqlLuongPhieuXuat
         ctpx.setIdPhieuXuat(ctpxct.getIdPhieuXuat());
         ctpx.setSoLuong(ctpxct.getSoLuong());
         rp.updateCTPX(ctpx);
+    }
+
+    @Override
+    public List<Luong_ChiTietPhieuXuatCustom> getListCTPhieuXuat() {
+        return rp.getListCTPhieuXuat();
+    }
+
+    @Override
+    public NhanVien getNhanVienByMa(String ma) {
+        return rp.getNhanVienByMa(ma);
     }
 
 }
