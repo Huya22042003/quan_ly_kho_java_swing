@@ -10,8 +10,6 @@ import cores.nhanVienQuanLy.repositories.NvqlXemThongTinCaNhanRepository;
 import java.util.List;
 import cores.nhanVienQuanLy.services.NvqlXemThongTinCaNhanService;
 import domainModels.NhanVien;
-import infrastructures.constant.GioiTinhConstant;
-import infrastructures.constant.TrangThaiNhanVienConstant;
 
 /**
  *

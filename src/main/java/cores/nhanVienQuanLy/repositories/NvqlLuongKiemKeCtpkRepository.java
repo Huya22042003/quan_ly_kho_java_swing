@@ -5,9 +5,11 @@
 package cores.nhanVienQuanLy.repositories;
 
 import cores.nhanVienQuanLy.customModels.NvqlLuongKiemKeCtpkCustom;
+import domainModels.ChiTietPhieuKiemKe;
 import java.util.List;
 import java.util.UUID;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import utilities.HibernateUtil;
 
 /**
@@ -31,5 +33,17 @@ public class NvqlLuongKiemKeCtpkRepository {
         List<NvqlLuongKiemKeCtpkCustom> list = query.getResultList();
         session.close();
         return list;
+    }
+    public void addCTPK(ChiTietPhieuKiemKe ctpx) {
+        Session s = HibernateUtil.getSessionFactory().openSession();
+        try {
+            Transaction trans = s.beginTransaction();
+            s.save(ctpx);
+            trans.commit();
+            s.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            s.close();
+        }
     }
 }

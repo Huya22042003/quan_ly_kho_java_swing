@@ -145,6 +145,7 @@ public class LoginView extends javax.swing.JFrame {
                                 javax.swing.UIManager.setLookAndFeel(info.getClassName());
                                 break;
                             }
+                            
                         }
                     } catch (ClassNotFoundException ex) {
                         java.util.logging.Logger.getLogger(TruongPhong.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
