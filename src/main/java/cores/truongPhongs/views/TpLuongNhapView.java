@@ -16,6 +16,7 @@ import cores.truongPhongs.services.TpPhieuNhapService;
 import infrastructures.constant.TrangThaiPhieuConstant;
 import java.util.Date;
 import java.util.UUID;
+import javax.swing.JOptionPane;
 import utilities.Converter;
 import utilities.palette.SearchCustom.EventCallBack;
 import utilities.palette.SearchCustom.EventTextField;
@@ -24,7 +25,7 @@ import utilities.palette.SearchCustom.EventTextField;
  *
  * @author Acer
  */
-public class NvqlLuongNhapHangView extends javax.swing.JPanel {
+public class TpLuongNhapView extends javax.swing.JPanel {
 
     /**
      * Creates new form luongNhapHang
@@ -32,7 +33,7 @@ public class NvqlLuongNhapHangView extends javax.swing.JPanel {
     private TpPhieuNhapService phieuNhapService;
     private List<TpPhieuNhapCustom> listPn ;
 
-    public NvqlLuongNhapHangView() {
+    public TpLuongNhapView() {
         initComponents();
         listPn = new ArrayList<>();
         phieuNhapService = new TpPhieuNhapServiceImpl();
@@ -62,12 +63,23 @@ public class NvqlLuongNhapHangView extends javax.swing.JPanel {
         });
     }
 
-    private void loadCbbTrangThai() {
-        this.cbbTrangThai.addItem(Converter.trangThaiDonHang(TrangThaiPhieuConstant.DA_THANH_TOAN));
-        this.cbbTrangThai.addItem(Converter.trangThaiDonHang(TrangThaiPhieuConstant.DA_HUY));
-        this.cbbTrangThai.addItem(Converter.trangThaiDonHang(TrangThaiPhieuConstant.CHO_THANH_TOAN));
+    TpLuongNhapView(UUID id) {
+        initComponents();
+        phieuNhapService = new TpPhieuNhapServiceImpl();
+          listPn = new ArrayList<>();
+        TpPhieuNhapCustom phieuNhap = new TpPhieuNhapCustom();
+        phieuNhap.setIdNcc(id);
+        phieuNhap.setIdNhanVien(UUID.fromString("6e6bd9d9-e92b-7247-b2ee-f75d2f528127"));
+        phieuNhapService.addPn(phieuNhap);
+        this.loadTablePn(listPn);
     }
 
+    private void loadCbbTrangThai() { 
+        this.cbbTrangThai.addItem(Converter.trangThaiDonHang(TrangThaiPhieuConstant.CHO_THANH_TOAN));
+        this.cbbTrangThai.addItem(Converter.trangThaiDonHang(TrangThaiPhieuConstant.DA_HUY));
+        this.cbbTrangThai.addItem(Converter.trangThaiPhieuNhap(TrangThaiPhieuConstant.DA_THANH_TOAN));
+    }
+   
     public List<TpPhieuNhapCustom> listSearch(int rdo) {
         // nhập vào 
         String timKiem = this.txtSearch.getText();
@@ -150,7 +162,7 @@ public class NvqlLuongNhapHangView extends javax.swing.JPanel {
                 pn.getNgayThanhToan() == null ? null : new Date(pn.getNgayThanhToan()),
                 pn.getTenNcc(),
                 pn.getTenNhanVien(),
-                Converter.trangThaiDonHang(pn.getTrangThai())
+                Converter.trangThaiPhieuNhap(pn.getTrangThai())
             };
             dtm.addRow(rowData);
         }
@@ -515,6 +527,7 @@ public class NvqlLuongNhapHangView extends javax.swing.JPanel {
         txtGhiChu.setDisabledTextColor(new java.awt.Color(204, 204, 255));
         textAreaScroll1.setViewportView(txtGhiChu);
 
+        txtTienPhaiTra.setEditable(false);
         txtTienPhaiTra.setBackground(new java.awt.Color(228, 206, 224));
         txtTienPhaiTra.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtTienPhaiTra.setLabelText("Tiền phải trả");
@@ -542,6 +555,7 @@ public class NvqlLuongNhapHangView extends javax.swing.JPanel {
             }
         });
 
+        txtTrangThai.setEditable(false);
         txtTrangThai.setBackground(new java.awt.Color(228, 206, 224));
         txtTrangThai.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtTrangThai.setLabelText("Trạng thái");
@@ -641,7 +655,9 @@ public class NvqlLuongNhapHangView extends javax.swing.JPanel {
     }//GEN-LAST:event_cbbTrangThaiActionPerformed
 
     private void btnThemPhieuNhapMoiActionPerformed(ActionEvent evt) {//GEN-FIRST:event_btnThemPhieuNhapMoiActionPerformed
-
+            Tp_ThemNccVaoPhieuNhapForm themNcc = new Tp_ThemNccVaoPhieuNhapForm();
+            themNcc.setVisible(true);
+            
     }//GEN-LAST:event_btnThemPhieuNhapMoiActionPerformed
 
     private void txtMaPhieuActionPerformed(ActionEvent evt) {//GEN-FIRST:event_txtMaPhieuActionPerformed
@@ -667,7 +683,17 @@ public class NvqlLuongNhapHangView extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTrangThaiActionPerformed
 
     private void btnThemSpVaoPhieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemSpVaoPhieuActionPerformed
-        // TODO add your handling code here:
+        int row = this.tblPhieuNhap.getSelectedRow();
+        if(row==-1){
+            JOptionPane.showMessageDialog(this, "Bạn phải chọn một phiếu nhập chưa thanh toán!");
+            return;
+        }
+        if(tblPhieuNhap.getValueAt(row, 6).toString().equals("Đã thanh toán") || tblPhieuNhap.getValueAt(row, 6).toString().equals("Đã hủy")){
+            JOptionPane.showMessageDialog(this, "Bạn phải chọn một phiếu nhập chưa thanh toán!");
+            return;
+        }
+        TpChonSanPhamThemVaoPhieuNhap chonSp = new TpChonSanPhamThemVaoPhieuNhap(listPn.get(row).getId());
+        chonSp.setVisible(true);
     }//GEN-LAST:event_btnThemSpVaoPhieuActionPerformed
 
     private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed

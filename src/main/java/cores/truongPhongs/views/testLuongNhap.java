@@ -18,7 +18,7 @@ public class testLuongNhap extends javax.swing.JFrame {
      */
     public testLuongNhap() {
         initComponents();
-        NvqlLuongNhapHangView a = new NvqlLuongNhapHangView();
+        TpLuongNhapView a = new TpLuongNhapView();
         this.add(a);
         this.setLayout(new FlowLayout());
         this.pack();

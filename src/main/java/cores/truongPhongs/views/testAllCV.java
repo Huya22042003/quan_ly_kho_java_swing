@@ -2,25 +2,22 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package cores.nhanVienQuanLy.views;
+package cores.truongPhongs.views;
 
-import cores.truongPhongs.views.TpPhieuNhapView;
 import java.awt.FlowLayout;
 
 /**
  *
- * @author Acer
+ * @author asus
  */
-public class TestNvqlPhieuNhapView1 extends javax.swing.JFrame {
+public class testAllCV extends javax.swing.JFrame {
 
     /**
-     * Creates new form TestNvqlPhieuNhapView1
+     * Creates new form testAllCV
      */
-    public TestNvqlPhieuNhapView1() {
+    public testAllCV() {
         initComponents();
-        TpPhieuNhapView a = new TpPhieuNhapView();
-
-
+        TP_ChucVuForm a = new TP_ChucVuForm();
         this.add(a);
         this.setLayout(new FlowLayout());
         this.pack();
@@ -69,21 +66,20 @@ public class TestNvqlPhieuNhapView1 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TestNvqlPhieuNhapView1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(testAllCV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TestNvqlPhieuNhapView1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(testAllCV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TestNvqlPhieuNhapView1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(testAllCV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TestNvqlPhieuNhapView1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(testAllCV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TestNvqlPhieuNhapView1().setVisible(true);
+                new testAllCV().setVisible(true);
             }
         });
     }

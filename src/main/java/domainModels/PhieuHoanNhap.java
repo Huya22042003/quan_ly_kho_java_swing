@@ -4,7 +4,6 @@
  */
 package domainModels;
 
-import infrastructures.constant.TrangThaiPhieuConstant;
 import infrastructures.constant.TrangThaiPhieuHoanConstant;
 import java.io.Serializable;
 import java.util.UUID;

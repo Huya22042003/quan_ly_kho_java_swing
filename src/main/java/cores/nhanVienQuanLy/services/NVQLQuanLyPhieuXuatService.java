@@ -19,6 +19,7 @@ import utilities.palette.Combobox;
  */
 public interface NVQLQuanLyPhieuXuatService {
     List<PhieuXuatCustom> getList();
+    List<PhieuXuatCustom> getListDaThanhToan();
     List<PhieuXuatCustom> getListByNgayTao(Long ngayTao, Long ngayKetThuc);
     PhieuXuatCustom addPhieuXuat(PhieuXuatCustom pncs);
     boolean updatePhieuXuat(PhieuXuatCustom pncs);
@@ -33,4 +34,6 @@ public interface NVQLQuanLyPhieuXuatService {
     NhanVien chonNV(int chon);
     KhachHang chonKH(int chon);
     List<PhieuXuatCustom> getListByNgayThanhToan(Long ngayBatDau, Long ngayKetThuc);
+    List<PhieuXuatCustom> findAllByKhAndNV(String ma, TrangThaiPhieuConstant tt, int rdo);
+    List<PhieuXuatCustom> findByMa(UUID id);
 }

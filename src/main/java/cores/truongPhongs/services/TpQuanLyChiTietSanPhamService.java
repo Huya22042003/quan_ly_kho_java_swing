@@ -39,15 +39,11 @@ public interface TpQuanLyChiTietSanPhamService {
     List<TpQuanLyChiTietSanPhamCustom> findAllByRadio(int rdo,MauConstant tt, String tk);
 
     //TpQuanLyChiTietSanPhamCustom checkValidate(TpQuanLyChiTietSanPhamCustom sp, JLabel erroGiaNhap, JLabel erroGiaBan, JLabel erroSoLuong);
-    TpQuanLyChiTietSanPhamCustom checkValidate(UUID donVi,UUID namBH, UUID sanPham,String hinhAnh,String giaNhap, String giaBan, String soLuong,JLabel erroHinhAnh,JLabel erroGiaNhap, JLabel erroGiaBan, JLabel erroSoLuong ,MauConstant mau);
+    TpQuanLyChiTietSanPhamCustom checkValidate(UUID donVi,String namBH, UUID sanPham,String hinhAnh,String giaNhap, String giaBan, String soLuong,JLabel erroHinhAnh,JLabel erroGiaNhap, JLabel erroGiaBan, JLabel erroSoLuong, JLabel erroNamBH ,MauConstant mau);
     
     public List<TpQuanLyDonViCustom> getAllDonVi();
     
     public DonVi findIDDonVi(UUID id);
-    
-    public List<TpQuanLyNamBHCustom> getAllNamBH();
-    
-    public NamBaoHanh findIDBaoHanh(UUID id);
     
     public List<TpQuanLySanPhamCustom> getAllSanPham();
     

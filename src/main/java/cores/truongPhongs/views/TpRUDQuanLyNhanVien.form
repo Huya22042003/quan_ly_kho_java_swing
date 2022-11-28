@@ -25,325 +25,357 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="erroEmail" alignment="1" pref="194" max="32767" attributes="0"/>
-                          <Component id="txtEmail" alignment="1" pref="194" max="32767" attributes="0"/>
-                          <Component id="erroMatKhau" alignment="1" pref="194" max="32767" attributes="0"/>
-                          <Component id="erroSDT" alignment="1" pref="194" max="32767" attributes="0"/>
-                          <Component id="txtSDT" alignment="1" pref="194" max="32767" attributes="0"/>
-                          <Component id="erroDiaChi" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtDiaChi" alignment="1" pref="194" max="32767" attributes="0"/>
-                          <Component id="erroTen" alignment="1" pref="194" max="32767" attributes="0"/>
-                          <Component id="txtTen" alignment="1" pref="194" max="32767" attributes="0"/>
-                          <Component id="erroMa" alignment="1" pref="194" max="32767" attributes="0"/>
-                          <Component id="txtMa" alignment="1" pref="194" max="32767" attributes="0"/>
-                          <Component id="txtMatKhau" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="cbbChucVu" alignment="0" max="32767" attributes="0"/>
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                          <Component id="cbbTrangThai" min="-2" pref="191" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" attributes="0">
-                                          <Component id="lblAnh" min="-2" pref="171" max="-2" attributes="0"/>
-                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-                                      <Component id="erroNgaySinh" min="-2" pref="194" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="cbbGioiTinh" min="-2" pref="191" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="txtDate" alignment="1" min="-2" pref="191" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                      </Group>
-                      <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
-                      <Component id="uWPButton1" min="-2" pref="47" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="82" max="32767" attributes="0"/>
-                      <Component id="btnUpdate" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
-                      <Component id="btnXoa" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
-                      <Component id="btnExit" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="177" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="panelRound1" min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="txtDate" min="-2" pref="30" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="erroNgaySinh" min="-2" pref="23" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                      <Component id="cbbTrangThai" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="lblAnh" min="-2" pref="208" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="cbbGioiTinh" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="txtMa" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="erroMa" min="-2" pref="23" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="txtTen" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="erroTen" min="-2" pref="23" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
-                                      <Component id="txtEmail" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                                      <Component id="erroEmail" min="-2" pref="23" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="txtSDT" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                          </Group>
-                          <Component id="uWPButton1" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="erroSDT" min="-2" pref="23" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="txtMatKhau" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                      <Component id="erroMatKhau" min="-2" pref="23" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txtDiaChi" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="cbbChucVu" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="erroDiaChi" min="-2" pref="23" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnXoa" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnExit" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnUpdate" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="32767" attributes="0"/>
-          </Group>
-          <Component id="jPanel1" max="32767" attributes="0"/>
+          <Component id="panelRound1" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="com.toedter.calendar.JDateChooser" name="txtDate">
-    </Component>
-    <Component class="utilities.palette.lable" name="erroNgaySinh">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Constantia" size="8" style="1"/>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="utilities.palette.TextField" name="txtTen">
-      <Properties>
-        <Property name="labelText" type="java.lang.String" value="T&#xea;n"/>
-      </Properties>
-    </Component>
-    <Component class="utilities.palette.TextField" name="txtEmail">
-      <Properties>
-        <Property name="labelText" type="java.lang.String" value="Email"/>
-      </Properties>
-    </Component>
-    <Component class="utilities.palette.TextField" name="txtDiaChi">
-      <Properties>
-        <Property name="labelText" type="java.lang.String" value="&#x110;&#x1ecb;a Ch&#x1ec9;"/>
-      </Properties>
-    </Component>
-    <Component class="utilities.palette.lable" name="erroDiaChi">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Constantia" size="8" style="1"/>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="utilities.palette.lable" name="erroMatKhau">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Constantia" size="8" style="1"/>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="utilities.palette.TextField" name="txtSDT">
-      <Properties>
-        <Property name="labelText" type="java.lang.String" value="SDT"/>
-      </Properties>
-    </Component>
-    <Component class="utilities.palette.lable" name="erroEmail">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Constantia" size="8" style="1"/>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="utilities.palette.lable" name="erroSDT">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Constantia" size="8" style="1"/>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="utilities.palette.TextField" name="txtMa">
-      <Properties>
-        <Property name="labelText" type="java.lang.String" value="M&#xe3;"/>
-      </Properties>
-    </Component>
-    <Component class="utilities.palette.lable" name="erroTen">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Constantia" size="8" style="1"/>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="utilities.palette.lable" name="erroMa">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Constantia" size="8" style="1"/>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="utilities.palette.Combobox" name="cbbTrangThai">
-      <Properties>
-        <Property name="labeText" type="java.lang.String" value="Tr&#x1ea1;ng Th&#xe1;i"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="lblAnh">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="&#x1ea2;nh"/>
-      </Properties>
-      <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblAnhMouseClicked"/>
-      </Events>
-    </Component>
-    <Container class="javax.swing.JPanel" name="jPanel1">
+    <Container class="utilities.palette.PanelRound" name="panelRound1">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="66" red="0" type="rgb"/>
+          <Color blue="f4" green="f2" red="dd" type="rgb"/>
         </Property>
+        <Property name="roundBottomLeft" type="int" value="50"/>
+        <Property name="roundBottomRight" type="int" value="50"/>
+        <Property name="roundTopLeft" type="int" value="50"/>
+        <Property name="roundTopRight" type="int" value="50"/>
       </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="jLabel1" min="-2" pref="40" max="-2" attributes="0"/>
-                  <EmptySpace pref="30" max="32767" attributes="0"/>
+              <Group type="102" alignment="1" attributes="0">
+                  <Component id="panelRound3" min="-2" pref="74" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                          <Component id="lblAnh" min="-2" pref="171" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="btnExit" pref="100" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="btnXoa" pref="100" max="32767" attributes="0"/>
+                                  <Component id="btnUpdate" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                  <Component id="panelRound2" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                  <Component id="uWPButton1" min="-2" pref="47" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace min="0" pref="394" max="32767" attributes="0"/>
-                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <Component id="panelRound3" alignment="0" max="32767" attributes="0"/>
+              <Group type="102" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="lblAnh" min="-2" pref="208" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
+                          <Component id="btnUpdate" min="-2" pref="34" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                          <Component id="btnXoa" min="-2" pref="34" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                          <Component id="btnExit" min="-2" pref="34" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="panelRound2" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                          <Component id="uWPButton1" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="jLabel1">
+        <Container class="utilities.palette.PanelRound" name="panelRound2">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/icons/FPT_Polytechnic_doc.png"/>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="jLabel1"/>
+            <Property name="roundBottomLeft" type="int" value="50"/>
+            <Property name="roundBottomRight" type="int" value="50"/>
+            <Property name="roundTopLeft" type="int" value="50"/>
+            <Property name="roundTopRight" type="int" value="50"/>
           </Properties>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="cbbTrangThai" max="32767" attributes="0"/>
+                          <Component id="erroNgaySinh" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtMa" alignment="0" max="32767" attributes="0"/>
+                          <Component id="erroMa" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtTen" alignment="0" max="32767" attributes="0"/>
+                          <Component id="erroTen" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtEmail" alignment="0" max="32767" attributes="0"/>
+                          <Component id="erroEmail" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtSDT" alignment="0" max="32767" attributes="0"/>
+                          <Component id="erroSDT" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtMatKhau" max="32767" attributes="0"/>
+                          <Component id="txtDiaChi" alignment="0" max="32767" attributes="0"/>
+                          <Component id="erroMatKhau" alignment="0" max="32767" attributes="0"/>
+                          <Component id="erroDiaChi" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtDate" pref="300" max="32767" attributes="0"/>
+                          <Component id="cbbGioiTinh" alignment="0" max="32767" attributes="0"/>
+                          <Component id="cbbChucVu" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="34" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                      <Component id="txtMa" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="erroMa" min="-2" pref="23" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="txtTen" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="erroTen" min="-2" pref="23" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="txtEmail" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="erroEmail" min="-2" pref="23" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="txtSDT" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="erroSDT" min="-2" pref="23" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="txtMatKhau" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="erroMatKhau" min="-2" pref="23" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="txtDiaChi" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="erroDiaChi" min="-2" pref="23" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="txtDate" min="-2" pref="30" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="erroNgaySinh" min="-2" pref="23" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="cbbGioiTinh" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                      <Component id="cbbTrangThai" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                      <Component id="cbbChucVu" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="33" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="utilities.palette.lable" name="erroDiaChi">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Constantia" size="8" style="1"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="utilities.palette.lable" name="erroMatKhau">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Constantia" size="8" style="1"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="utilities.palette.TextField" name="txtSDT">
+              <Properties>
+                <Property name="labelText" type="java.lang.String" value="SDT"/>
+              </Properties>
+            </Component>
+            <Component class="utilities.palette.lable" name="erroEmail">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Constantia" size="8" style="1"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="utilities.palette.lable" name="erroSDT">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Constantia" size="8" style="1"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="utilities.palette.TextField" name="txtMa">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+                <Property name="labelText" type="java.lang.String" value="M&#xe3;"/>
+              </Properties>
+            </Component>
+            <Component class="utilities.palette.lable" name="erroTen">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Constantia" size="8" style="1"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="utilities.palette.PasswordField" name="txtMatKhau">
+              <Properties>
+                <Property name="labelText" type="java.lang.String" value="M&#x1ead;t Kh&#x1ea9;u"/>
+              </Properties>
+            </Component>
+            <Component class="utilities.palette.lable" name="erroMa">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Constantia" size="8" style="1"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="utilities.palette.TextField" name="txtTen">
+              <Properties>
+                <Property name="labelText" type="java.lang.String" value="T&#xea;n"/>
+              </Properties>
+            </Component>
+            <Component class="utilities.palette.TextField" name="txtEmail">
+              <Properties>
+                <Property name="labelText" type="java.lang.String" value="Email"/>
+              </Properties>
+            </Component>
+            <Component class="utilities.palette.TextField" name="txtDiaChi">
+              <Properties>
+                <Property name="labelText" type="java.lang.String" value="&#x110;&#x1ecb;a Ch&#x1ec9;"/>
+              </Properties>
+            </Component>
+            <Component class="com.toedter.calendar.JDateChooser" name="txtDate">
+            </Component>
+            <Component class="utilities.palette.lable" name="erroNgaySinh">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Constantia" size="8" style="1"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="utilities.palette.Combobox" name="cbbGioiTinh">
+              <Properties>
+                <Property name="labeText" type="java.lang.String" value="Gi&#x1edb;i T&#xed;nh"/>
+              </Properties>
+            </Component>
+            <Component class="utilities.palette.Combobox" name="cbbTrangThai">
+              <Properties>
+                <Property name="labeText" type="java.lang.String" value="Tr&#x1ea1;ng Th&#xe1;i"/>
+              </Properties>
+            </Component>
+            <Component class="utilities.palette.Combobox" name="cbbChucVu">
+              <Properties>
+                <Property name="labeText" type="java.lang.String" value="Ch&#x1ee9;c V&#x1ee5;"/>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Container class="utilities.palette.PanelRound" name="panelRound3">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="99" red="33" type="rgb"/>
+            </Property>
+            <Property name="roundBottomLeft" type="int" value="50"/>
+            <Property name="roundBottomRight" type="int" value="50"/>
+            <Property name="roundTopLeft" type="int" value="50"/>
+            <Property name="roundTopRight" type="int" value="50"/>
+          </Properties>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                      <Component id="test" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="test" min="-2" pref="159" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="test">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/icons/FPT_Polytechnic_doc.png"/>
+                </Property>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Component class="javax.swing.JButton" name="lblAnh">
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblAnhMouseClicked"/>
+          </Events>
+        </Component>
+        <Component class="utilities.palette.UWPButton" name="btnExit">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="33" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Close"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExitActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="utilities.palette.UWPButton" name="btnUpdate">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="33" green="66" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Update"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUpdateActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="utilities.palette.UWPButton" name="btnXoa">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="66" red="0" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Delete"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnXoaActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="utilities.palette.UWPButton" name="uWPButton1">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="33" green="33" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="X"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="uWPButton1ActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
-    <Component class="utilities.palette.UWPButton" name="uWPButton1">
-      <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="33" green="33" red="ff" type="rgb"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="X"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="uWPButton1ActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="utilities.palette.UWPButton" name="btnXoa">
-      <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="66" red="0" type="rgb"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Delete"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnXoaActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="utilities.palette.UWPButton" name="btnExit">
-      <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="0" green="33" red="ff" type="rgb"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Close"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExitActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="utilities.palette.UWPButton" name="btnUpdate">
-      <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="33" green="66" red="ff" type="rgb"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Update"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUpdateActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="utilities.palette.Combobox" name="cbbGioiTinh">
-      <Properties>
-        <Property name="labeText" type="java.lang.String" value="Gi&#x1edb;i T&#xed;nh"/>
-      </Properties>
-    </Component>
-    <Component class="utilities.palette.PasswordField" name="txtMatKhau">
-      <Properties>
-        <Property name="labelText" type="java.lang.String" value="M&#x1ead;t Kh&#x1ea9;u"/>
-      </Properties>
-    </Component>
-    <Component class="utilities.palette.Combobox" name="cbbChucVu">
-      <Properties>
-        <Property name="labeText" type="java.lang.String" value="Ch&#x1ee9;c V&#x1ee5;"/>
-      </Properties>
-    </Component>
   </SubComponents>
 </Form>

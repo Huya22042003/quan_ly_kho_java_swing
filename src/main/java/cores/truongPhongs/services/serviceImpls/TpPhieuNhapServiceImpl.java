@@ -18,6 +18,8 @@ import java.util.UUID;
 import javax.swing.JLabel;
 import utilities.DateTimeUtil;
 import cores.truongPhongs.services.TpPhieuNhapService;
+import infrastructures.constant.TrangThaiPhieuNhapConstant;
+import utilities.Auth;
 
 /**
  *
@@ -42,6 +44,8 @@ public class TpPhieuNhapServiceImpl implements TpPhieuNhapService {
 
     @Override
     public TpPhieuNhapCustom addPn(TpPhieuNhapCustom p) {
+        p.setNgayTao(utilities.DateTimeUtil.convertDateToTimeStampSecond());
+        p.setIdNhanVien(UUID.fromString("6e6bd9d9-e92b-7247-b2ee-f75d2f528127"));
         NhaCungCap ncc = repoNcc.getNccById(p.getIdNcc());
         NhanVien nv = repoNv.getNhanVienById(p.getIdNhanVien());
         PhieuNhap pn = new PhieuNhap();
@@ -50,6 +54,7 @@ public class TpPhieuNhapServiceImpl implements TpPhieuNhapService {
         pn.setNgayTao(p.getNgayTao());
         pn.setNhaCungCap(ncc);
         pn.setNhanVien(nv);
+        p.setTrangThai(TrangThaiPhieuConstant.CHO_THANH_TOAN);
         pn.setTrangThai(p.getTrangThai());
         p.setId(repo.addPn(pn).getId());
         return p;
@@ -58,7 +63,7 @@ public class TpPhieuNhapServiceImpl implements TpPhieuNhapService {
     @Override
     public boolean updatePn(TpPhieuNhapCustom p) {
         NhaCungCap ncc = repoNcc.getNccById(p.getIdNcc());
-        NhanVien nv = repoNv.getNhanVienById(p.getIdNhanVien());
+        NhanVien nv = repoNv.getNhanVienById(Auth.nhanVien.getId());
         PhieuNhap pn = new PhieuNhap();
         pn.setId(p.getId());
         pn.setTrangThai(p.getTrangThai());
@@ -76,44 +81,11 @@ public class TpPhieuNhapServiceImpl implements TpPhieuNhapService {
     }
 
     @Override
-    public TpPhieuNhapCustom checkValidate(String ghiChu, Date ngayTao, Date ngayNhan, JLabel errNgayNhap, JLabel errNgayTao, JLabel errGhiChu) {
-        boolean check = true;
-        if (ghiChu.trim().length() == 0) {
-            errGhiChu.setText("Ghi chú không được để trống!");
-            check = false;
-        } else if (ghiChu.trim().length() > 255) {
-            errGhiChu.setText("Ghi chú không quá 255 kí tự!");
-            check = false;
-        } else {
-            errGhiChu.setText("");
-        }
+    public TpPhieuNhapCustom checkValidate(String ghiChu, Date ngayThanhToan, JLabel errNgayThanhToan, JLabel errGhiChu) {
 
-//        if (ngayTao == null) {
-//            errNgayNhap.setText("Bạn chưa chọn ngày tao!");
-//            check =false;
-//        } else {
-//            errNgayTao.setText("");
-//        }
-        if (ngayTao  == null) {
-            errNgayTao.setText("Bạn chưa chọn ngày thanh toán!");
-            check = false;
-        } else {
-            errNgayTao.setText("");
-        }
-        if(ngayTao.getTime() < DateTimeUtil.convertDateToTimeStampSecond()){
-            errNgayNhap.setText("Ngay thanh toán phải lớn hơn hoặc bằng ngày tạo!");
-            check = false;
-        }
-            
-        
-
-        if (!check) {
-            return null;
-        }
         TpPhieuNhapCustom pn = new TpPhieuNhapCustom();
-        pn.setGhiChu(ghiChu);
-        pn.setNgayThanhToan(ngayNhan.getTime());
-        pn.setNgayTao(ngayTao.getTime());
+        pn.setNgayTao(DateTimeUtil.convertDateToTimeStampSecond());
+
         return pn;
 
     }
@@ -131,19 +103,19 @@ public class TpPhieuNhapServiceImpl implements TpPhieuNhapService {
         p.setNgayTao(pn.getNgayTao());
         p.setTenNcc(pn.getNhaCungCap().getTen());
         p.setTenNhanVien(pn.getNhanVien().getTen());
-       
+
         return p;
     }
 
     @Override
     public TrangThaiPhieuConstant loc(int a) {
-         switch (a) {
+        switch (a) {
             case 0:
-                return TrangThaiPhieuConstant.DA_THANH_TOAN;
+                return TrangThaiPhieuConstant.CHO_THANH_TOAN;
             case 1:
                 return TrangThaiPhieuConstant.DA_HUY;
             case 2:
-                return TrangThaiPhieuConstant.CHO_THANH_TOAN;
+                return TrangThaiPhieuConstant.DA_THANH_TOAN;
             default:
                 return null;
         }
@@ -158,6 +130,5 @@ public class TpPhieuNhapServiceImpl implements TpPhieuNhapService {
     public List<TpPhieuNhapCustom> getListByNgayTao(Long ngayTao, Long ngayKetThuc) {
         return repo.getListByNgayTao(ngayTao, ngayKetThuc);
     }
-
 
 }
