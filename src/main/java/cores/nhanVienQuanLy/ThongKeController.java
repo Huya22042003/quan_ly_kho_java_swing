@@ -49,7 +49,7 @@ public class ThongKeController {
                     dataset, PlotOrientation.VERTICAL, false, true, false);
 
             ChartPanel chartPanel = new ChartPanel(barChart);
-            chartPanel.setPreferredSize(new Dimension(1100, 350));
+            chartPanel.setPreferredSize(new Dimension(1100, 250));
 
             jpnItem.removeAll();
             jpnItem.setLayout(new CardLayout());
@@ -82,7 +82,7 @@ public class ThongKeController {
         }
 //
         ChartPanel chartPanel = new ChartPanel(ganttChart);
-        chartPanel.setPreferredSize(new Dimension(1100, 350));
+        chartPanel.setPreferredSize(new Dimension(1100, 250));
 
         jpnItem.removeAll();
         jpnItem.setLayout(new CardLayout());

@@ -13,6 +13,7 @@ import cores.truongPhongs.services.TpQuanLySanPhamService;
 import cores.truongPhongs.services.serviceImpls.TpQuanLyChiTietSanPhamServiceImpl;
 import cores.truongPhongs.services.serviceImpls.TpQuanLySanPhamServiceImpl;
 import infrastructures.constant.MauConstant;
+import infrastructures.constant.TrangThaiSanPhamConstanst;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -344,8 +345,29 @@ public class TpQuanLyChiTietSanPhamU extends javax.swing.JFrame {
             return;
         }
 
-        TpQuanLyChiTietSanPhamCustom sp = new TpQuanLyChiTietSanPhamCustom(ct.getId(), check.getSoLuongTon(), check.getHinhAnh(), check.getGiaBan(), check.getGiaNhap(), check.getNamBaoHanh(), check.getMau(), check.getSanPham(), check.getDonVi());
-
+//        TpQuanLyChiTietSanPhamCustom sp = 
+//                new TpQuanLyChiTietSanPhamCustom(
+//                        ct.getId()
+//                , check.getSoLuongTon()
+//                , check.getHinhAnh()
+//                , check.getGiaBan()
+//                , check.getGiaNhap()
+//                , check.getNamBaoHanh()
+//                , check.getMau()
+//                , check.getSanPham()
+//                , check.getDonVi());
+        
+          TpQuanLyChiTietSanPhamCustom sp = 
+                new TpQuanLyChiTietSanPhamCustom(ct.getId(), check.getSoLuongTon()
+                        , check.getHinhAnh()
+                        , check.getGiaBan()
+                        , check.getGiaBan()
+                        , check.getMau()
+                        , check.getSanPham()
+                        , check.getDonVi()
+                        , check.getNamBaoHanh()
+                        , TrangThaiSanPhamConstanst.DA_MO_BAN);
+        
         if (serviceChiTietSP.updateCTSanPham(sp)) {
             MsgBox.alert(this, "Sửa thành công");
             this.setVisible(false);
