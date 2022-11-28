@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package cores.truongPhongs.services.serviceImpls;
 
 import cores.truongPhongs.customModels.NhaCungCapCustom;
@@ -12,7 +8,6 @@ import infrastructures.constant.DanhGiaConstant;
 import infrastructures.constant.KhachHangConstant;
 import java.util.List;
 import java.util.UUID;
-import utilities.Converter;
 import utilities.palette.Combobox;
 
 /**

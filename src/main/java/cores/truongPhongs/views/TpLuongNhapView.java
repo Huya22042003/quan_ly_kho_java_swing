@@ -1,11 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package cores.truongPhongs.views;
 
-import cores.nhanVienQuanLy.services.NVQLQuanLyPhieuXuatService;
-import cores.nhanVienQuanLy.services.serviceImpls.NVQLQuanLyPhieuXuatServiceImpl;
 import cores.truongPhongs.customModels.TpPhieuNhapCustom;
 import cores.truongPhongs.services.serviceImpls.TpPhieuNhapServiceImpl;
 import java.awt.event.ActionEvent;

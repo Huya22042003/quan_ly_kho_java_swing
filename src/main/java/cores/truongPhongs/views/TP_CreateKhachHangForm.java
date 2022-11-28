@@ -7,14 +7,10 @@ import java.awt.Dimension;
 import java.awt.Image;
 
 import java.awt.Toolkit;
-import java.awt.image.BufferedImage;
 import java.io.File;
-
-import java.util.Date;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 import utilities.MsgBox;
 
 public class TP_CreateKhachHangForm extends javax.swing.JFrame {

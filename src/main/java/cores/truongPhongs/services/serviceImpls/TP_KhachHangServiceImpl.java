@@ -1,16 +1,12 @@
 package cores.truongPhongs.services.serviceImpls;
 
 import cores.truongPhongs.customModels.TP_KhachHangCustom;
-import cores.truongPhongs.repositories.TP_KhachHangRepository;
 import cores.truongPhongs.services.TP_KhachHangService;
 import domainModels.KhachHang;
 import infrastructures.constant.DanhGiaConstant;
 import infrastructures.constant.GioiTinhConstant;
 import infrastructures.constant.KhachHangConstant;
 import infrastructures.constant.ValidateConstant;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import javax.swing.JLabel;

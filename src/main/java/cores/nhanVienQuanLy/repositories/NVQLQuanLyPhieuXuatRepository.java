@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package cores.nhanVienQuanLy.repositories;
 
 import cores.nhanVienQuanLy.customModels.PhieuXuatCustom;
@@ -15,7 +11,6 @@ import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import utilities.DateTimeUtil;
 import utilities.HibernateUtil;
 
 /**

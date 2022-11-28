@@ -1,7 +1,6 @@
 package cores.truongPhongs.views;
 
 import cores.truongPhongs.customModels.TP_HoanNhap_ctpCusTom;
-import cores.truongPhongs.customModels.TP_HoanNhap_spCustom;
 import cores.truongPhongs.customModels.TP_PhieuHoanNhapCustom;
 import cores.truongPhongs.services.TP_PhieuHoanNhapService;
 import cores.truongPhongs.services.serviceImpls.TP_PhieuHoanNhapServiceImpl;
