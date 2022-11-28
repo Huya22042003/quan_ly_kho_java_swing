@@ -13,7 +13,7 @@ import infrastructures.constant.KhoHangConstant;
 import infrastructures.constant.MauConstant;
 import infrastructures.constant.TrangThaiPhieuConstant;
 import infrastructures.constant.TrangThaiNhanVienConstant;
-import infrastructures.constant.TrangThaiPhieuKiem;
+import infrastructures.constant.TrangThaiPhieuKiemConstant;
 import infrastructures.constant.TrangThaiPhieuHoanConstant;
 import infrastructures.constant.TrangThaiSanPhamConstanst;
 
@@ -182,7 +182,7 @@ public class Converter {
         return trangThai;
     }
 
-    public static String TrangThaiPhieuKiem(TrangThaiPhieuKiem p) {
+    public static String TrangThaiPhieuKiem(TrangThaiPhieuKiemConstant p) {
         String trangThai = "";
         switch (p) {
             case MOI_TAO:

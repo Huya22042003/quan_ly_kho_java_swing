@@ -15,4 +15,5 @@ import java.util.List;
 public interface NvqlLuongKiemKeService {
     public List<NvqlLuongKiemKeCustom> getAll();
     void Insert(NvqlLuongKiemKeCustom phieuKiemKe);
+    boolean UpdateTrangThai(NvqlLuongKiemKeCustom phieuKiemKe);
 }
