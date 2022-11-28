@@ -5,7 +5,7 @@
 package cores.nhanVienQuanLy.customModels;
 
 import domainModels.NhanVien;
-import infrastructures.constant.TrangThaiPhieuKiem;
+import infrastructures.constant.TrangThaiPhieuKiemConstant;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,5 +25,16 @@ public class NvqlLuongKiemKeCustom {
     private String maPhieuKiem;
     private Long ngayTao;
     private NhanVien idNV;
-    private TrangThaiPhieuKiem trangThai;
+    private TrangThaiPhieuKiemConstant trangThai;
+    private String ghiChu;
+
+    public NvqlLuongKiemKeCustom(UUID id, String maPhieuKiem, Long ngayTao, NhanVien idNV, TrangThaiPhieuKiemConstant trangThai) {
+        this.id = id;
+        this.maPhieuKiem = maPhieuKiem;
+        this.ngayTao = ngayTao;
+        this.idNV = idNV;
+        this.trangThai = trangThai;
+    }
+    
+    
 }

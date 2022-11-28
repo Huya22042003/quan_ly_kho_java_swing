@@ -4,7 +4,7 @@
  */
 package domainModels;
 
-import infrastructures.constant.TrangThaiPhieuKiem;
+import infrastructures.constant.TrangThaiPhieuKiemConstant;
 import infrastructures.constant.TrangThaiPhieuConstant;
 import java.util.UUID;
 import javax.persistence.Column;
@@ -50,7 +50,7 @@ public class PhieuKiemKe {
     private String ghiChu;
     
     @Column(name = "TrangThai")
-    private TrangThaiPhieuKiem trangThai;
+    private TrangThaiPhieuKiemConstant trangThai;
     
     @ManyToOne
     @JoinColumn(name = "IdNhanVien")
@@ -60,7 +60,7 @@ public class PhieuKiemKe {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 //    }
 
-    public PhieuKiemKe(String ma, Long ngayTao, TrangThaiPhieuKiem trangThai, NhanVien nhanVien) {
+    public PhieuKiemKe(String ma, Long ngayTao, TrangThaiPhieuKiemConstant trangThai, NhanVien nhanVien) {
         this.ma = ma;
         this.ngayTao = ngayTao;
         this.trangThai = trangThai;

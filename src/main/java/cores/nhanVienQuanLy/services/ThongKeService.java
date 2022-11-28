@@ -1,15 +1,17 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package infrastructures.constant;
+package cores.nhanVienQuanLy.services;
+
+import cores.nhanVienQuanLy.customModels.ThongKeCustom;
+import java.util.List;
 
 /**
  *
  * @author window
  */
-public enum TrangThaiPhieuKiem {
-    MOI_TAO,
-    CHUA_XAC_NHAN,
-    DA_XAC_NHAN
+public interface ThongKeService {
+    List<ThongKeCustom> thongKeSoLuongTonNhieuNhat();
 }

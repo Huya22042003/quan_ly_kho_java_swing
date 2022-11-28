@@ -38,10 +38,11 @@ public class TpQuanLyChiTietSanPhamRepository {
                 + "ct.hinhAnh as hinhAnh,"
                 + "ct.GiaNhap as GiaNhap,"
                 + "ct.GiaBan as GiaBan,"
-                + "ct.namBaoHanh as namBaoHanh,"
                 + "ct.mau as mau,"
                 + "ct.sanPham as ten,"
-                + "ct.donVi as donViGoc"
+                + "ct.donVi as donViGoc,"
+                + "ct.namBaoHanh as namBaoHanh,"
+                + "ct.trangThai as trangThai"
                 + ") from domainModels.ChiTietSanPham ct");
         ct = q.getResultList();
         s.close();
