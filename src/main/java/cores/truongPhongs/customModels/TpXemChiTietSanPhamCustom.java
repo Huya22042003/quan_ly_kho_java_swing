@@ -4,14 +4,11 @@
  */
 package cores.truongPhongs.customModels;
 
-import domainModels.ChiTietPhieuHoanXuat;
 import domainModels.DonVi;
-import domainModels.NamBaoHanh;
 import domainModels.SanPham;
 import infrastructures.constant.MauConstant;
 import infrastructures.constant.TrangThaiSanPhamConstanst;
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,32 +17,30 @@ import lombok.Setter;
 
 /**
  *
- * @author MMC
+ * @author Acer
  */
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TpQuanLyChiTietSanPhamCustom {
+public class TpXemChiTietSanPhamCustom {
 
     private UUID id;
 
-    private int soLuongTon;
 
     private String hinhAnh;
 
-    private BigDecimal giaNhap;
+    private BigDecimal GiaNhap;
 
-    private BigDecimal giaBan;
-    
+    private BigDecimal GiaBan;
+
+    private int namBaoHanh;
+
     private MauConstant mau;
 
     private SanPham sanPham;
 
     private DonVi donVi;
-
-    private NamBaoHanh namBaoHanh;
     
     private TrangThaiSanPhamConstanst trangThai;
-
 }
