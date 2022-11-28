@@ -44,7 +44,7 @@ public class TpQuanLyChiTietSanPhamCustom {
 
     private DonVi donVi;
 
-    private NamBaoHanh namBaoHanh;
+    private int namBaoHanh;
     
     private TrangThaiSanPhamConstanst trangThai;
 
