@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package cores.truongPhongs.views;
 
 import cores.nhanVienQuanLy.customModels.NvqlGetTenNccCustom;
@@ -15,13 +11,9 @@ import cores.truongPhongs.services.serviceImpls.TpPhieuNhapServiceImpl;
 import infrastructures.constant.TrangThaiPhieuConstant;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import utilities.Converter;
 import utilities.DateTimeUtil;
 import utilities.MsgBox;

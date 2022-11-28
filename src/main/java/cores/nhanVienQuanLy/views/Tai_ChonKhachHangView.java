@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package cores.nhanVienQuanLy.views;
 
 import cores.nhanVienQuanLy.customModels.PhieuXuatCustom;
@@ -9,8 +5,6 @@ import cores.nhanVienQuanLy.services.NVQLQuanLyPhieuXuatService;
 import cores.nhanVienQuanLy.services.Tai_NvqlLuongPhieuXuatService;
 import cores.nhanVienQuanLy.services.serviceImpls.NVQLQuanLyPhieuXuatServiceImpl;
 import cores.nhanVienQuanLy.services.serviceImpls.Tai_NvqlLuongPhieuXuatServiceImpl;
-import java.awt.FlowLayout;
-import cores.truongPhongs.views.*;
 import cores.truongPhongs.customModels.TP_KhachHangCustom;
 import cores.truongPhongs.services.TP_KhachHangService;
 import cores.truongPhongs.services.serviceImpls.TP_KhachHangServiceImpl;

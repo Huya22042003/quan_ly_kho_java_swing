@@ -1,18 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package cores.truongPhongs.views;
 
 import cores.truongPhongs.customModels.TpDonViCustom;
 import cores.truongPhongs.services.TpDonViService;
 import cores.truongPhongs.services.serviceImpls.TpDonViServiceImpl;
-import infrastructures.constant.ValidateConstant;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.util.List;
-import javax.swing.JLabel;
-import javax.swing.table.DefaultTableModel;
 import utilities.MsgBox;
 
 /**

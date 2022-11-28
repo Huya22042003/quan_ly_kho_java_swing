@@ -1,19 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package cores.nhanVienQuanLy.views;
 
 import cores.nhanVienQuanLy.services.serviceImpls.NVQLQuanLyPhieuXuatServiceImpl;
-import customModels.DemoCoSoCustom;
 import cores.nhanVienQuanLy.customModels.PhieuXuatCustom;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import services.DemoCoSoService;
-import services.serviceImpl.DemoCoSoServiceImpl;
 import utilities.MsgBox;
 import cores.nhanVienQuanLy.services.NVQLQuanLyPhieuXuatService;
-import java.util.List;
 
 /**
  *

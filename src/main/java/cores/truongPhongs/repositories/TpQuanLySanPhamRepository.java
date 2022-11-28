@@ -1,12 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package cores.truongPhongs.repositories;
 
 import cores.truongPhongs.customModels.TpQuanLySanPhamCustom;
 import domainModels.SanPham;
-import infrastructures.constant.CoSoConstant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;

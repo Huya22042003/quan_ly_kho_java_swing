@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package cores.nhanVienQuanLy.views;
 
 import cores.logins.custom.NhanVienCustom;
@@ -12,7 +8,6 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import utilities.Converter;
 import cores.nhanVienQuanLy.services.NvqlXemThongTinCaNhanService;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Properties;
 import javax.mail.Message;

@@ -3,7 +3,6 @@ package cores.truongPhongs.views;
 import cores.truongPhongs.customModels.NhaCungCapCustom;
 import cores.truongPhongs.services.TpQuanlyNhaCungCapService;
 import cores.truongPhongs.services.serviceImpls.TpQuanlyNhaCungCapServiceImpl;
-import infrastructures.constant.DanhGiaConstant;
 import infrastructures.constant.ValidateConstant;
 import java.awt.Dimension;
 import java.awt.Toolkit;

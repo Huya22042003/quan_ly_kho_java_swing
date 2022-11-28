@@ -1,26 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package cores.truongPhongs.views;
 
 import cores.truongPhongs.customModels.TP_ChucVuCustom;
 import cores.truongPhongs.customModels.TpNhanVienCustom;
-import cores.truongPhongs.services.TP_ChucVuService;
 import cores.truongPhongs.services.TpQuanLyNhanVienSevice;
-import cores.truongPhongs.services.serviceImpls.TP_ChucVuServiceImpl;
 import cores.truongPhongs.services.serviceImpls.TpQuanLyNhanVienServiceImpl;
 import java.awt.Dimension;
-import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-import utilities.DateTimeUtil;
 import utilities.MsgBox;
 
 /**

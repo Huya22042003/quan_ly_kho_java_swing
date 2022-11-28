@@ -4,7 +4,6 @@ import cores.truongPhongs.customModels.TP_NamBaoHanhCustom;
 import cores.truongPhongs.repositories.TP_NamBaoHanhRepository;
 import cores.truongPhongs.services.TP_NamBaoHanhService;
 import domainModels.NamBaoHanh;
-import infrastructures.constant.ValidateConstant;
 import java.util.List;
 import java.util.UUID;
 import javax.swing.JLabel;
