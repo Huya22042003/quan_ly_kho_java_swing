@@ -2,17 +2,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package cores.nhanVienQuanLy.views;
+package cores.truongPhongs.views;
 
 import cores.nhanVienQuanLy.customModels.NvqlGetTenNccCustom;
 import cores.nhanVienQuanLy.customModels.NvqlGetTenNhanVienCustom;
-import cores.nhanVienQuanLy.customModels.NvqlQuanLyPhieuNhapCustom;
+import cores.truongPhongs.customModels.TpPhieuNhapCustom;
 import cores.nhanVienQuanLy.services.NvqlGetTenNccService;
 import cores.nhanVienQuanLy.services.NvqlGetTenNvService;
-import cores.nhanVienQuanLy.services.NvqlQuanLyPhieuNhapService;
 import cores.nhanVienQuanLy.services.serviceImpls.NvqlGetTenNccServiceImpl;
 import cores.nhanVienQuanLy.services.serviceImpls.NvqlGetTenNvServiceImpl;
-import cores.nhanVienQuanLy.services.serviceImpls.NvqlQuanLyPhieuNhapServiceImpl;
+import cores.truongPhongs.services.serviceImpls.TpPhieuNhapServiceImpl;
 import infrastructures.constant.TrangThaiPhieuConstant;
 
 import java.awt.Dimension;
@@ -22,6 +21,7 @@ import java.util.Date;
 import java.util.List;
 import utilities.Converter;
 import utilities.MsgBox;
+import cores.truongPhongs.services.TpPhieuNhapService;
 
 /**
  *
@@ -36,12 +36,12 @@ public class NvqlRUDPhieuNhapView extends javax.swing.JFrame {
     private NvqlGetTenNvService tenNvService;
     private List<NvqlGetTenNccCustom> listNcc = new ArrayList<>();
     private List<NvqlGetTenNhanVienCustom> listNv = new ArrayList<>();
-    NvqlQuanLyPhieuNhapCustom pnc = new NvqlQuanLyPhieuNhapCustom();
-    private NvqlQuanLyPhieuNhapService phieuNhapService;
+    TpPhieuNhapCustom pnc = new TpPhieuNhapCustom();
+    private TpPhieuNhapService phieuNhapService;
 
     public NvqlRUDPhieuNhapView() {
         initComponents();
-        phieuNhapService = new NvqlQuanLyPhieuNhapServiceImpl();
+        phieuNhapService = new TpPhieuNhapServiceImpl();
         tenNccService = new NvqlGetTenNccServiceImpl();
         tenNvService = new NvqlGetTenNvServiceImpl();
         listNcc = tenNccService.getList();
@@ -54,10 +54,10 @@ public class NvqlRUDPhieuNhapView extends javax.swing.JFrame {
         setLocation(size.width / 2 - getWidth() / 2, size.height / 2 - getHeight() / 2);
     }
 
-    public NvqlRUDPhieuNhapView(NvqlQuanLyPhieuNhapCustom pn) {
+    public NvqlRUDPhieuNhapView(TpPhieuNhapCustom pn) {
         initComponents();
         pnc = pn;
-        phieuNhapService = new NvqlQuanLyPhieuNhapServiceImpl();
+        phieuNhapService = new TpPhieuNhapServiceImpl();
         tenNccService = new NvqlGetTenNccServiceImpl();
         tenNvService = new NvqlGetTenNvServiceImpl();
         listNcc = tenNccService.getList();
@@ -345,7 +345,7 @@ public class NvqlRUDPhieuNhapView extends javax.swing.JFrame {
     }//GEN-LAST:event_cbbNhanVienActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        NvqlQuanLyPhieuNhapCustom check = this.getFormData();
+        TpPhieuNhapCustom check = this.getFormData();
         if (check == null) {
             return;
         }
@@ -371,12 +371,12 @@ public class NvqlRUDPhieuNhapView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
-    public NvqlQuanLyPhieuNhapCustom getFormData() {
+    public TpPhieuNhapCustom getFormData() {
 
         String ghiChu = txtGhiChu.getText();
         Date ngayNhap = dateNgayNhan.getDate();
         Date ngayTao = dateNgayTao.getDate();
-        NvqlQuanLyPhieuNhapCustom pn = phieuNhapService.checkValidate(ghiChu, ngayNhap, ngayTao, errNgayNhan, errNgayTao, errGhiChu);
+        TpPhieuNhapCustom pn = phieuNhapService.checkValidate(ghiChu, ngayNhap, ngayTao, errNgayNhan, errNgayTao, errGhiChu);
         pn.setIdNcc(listNcc.get(cbbNhaCungCap.getSelectedIndex()).getId());
         pn.setIdNhanVien(listNv.get(cbbNhanVien.getSelectedIndex()).getId());
         pn.setTrangThai(phieuNhapService.loc(cbbTrangThai.getSelectedIndex()));

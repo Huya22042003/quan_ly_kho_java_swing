@@ -4,22 +4,21 @@
  */
 package cores.truongPhongs.views;
 
+import cores.nhanVienQuanLy.views.NvqlKiemKeView;
 import java.awt.FlowLayout;
 
 /**
  *
- * @author LENOVO
+ * @author Acer
  */
-public class view extends javax.swing.JFrame {
+public class testLuongNhap extends javax.swing.JFrame {
 
     /**
-     * Creates new form view
+     * Creates new form testLuongNhap
      */
-    public view() {
+    public testLuongNhap() {
         initComponents();
-        TpPhieuNhapView a = new TpPhieuNhapView();
-
-
+        TpLuongNhapView a = new TpLuongNhapView();
         this.add(a);
         this.setLayout(new FlowLayout());
         this.pack();
@@ -68,20 +67,20 @@ public class view extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(view.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(testLuongNhap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(view.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(testLuongNhap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(view.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(testLuongNhap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(view.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(testLuongNhap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new view().setVisible(true);
+                new testLuongNhap().setVisible(true);
             }
         });
     }

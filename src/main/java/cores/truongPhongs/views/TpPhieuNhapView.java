@@ -2,11 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package cores.nhanVienQuanLy.views;
+package cores.truongPhongs.views;
 
-import cores.nhanVienQuanLy.customModels.NvqlQuanLyPhieuNhapCustom;
-import cores.nhanVienQuanLy.services.NvqlQuanLyPhieuNhapService;
-import cores.nhanVienQuanLy.services.serviceImpls.NvqlQuanLyPhieuNhapServiceImpl;
+import cores.truongPhongs.views.NvqlRUDPhieuNhapView;
+import cores.truongPhongs.views.NvqlCreatePhieuNhapView;
+import cores.truongPhongs.customModels.TpPhieuNhapCustom;
+import cores.truongPhongs.services.serviceImpls.TpPhieuNhapServiceImpl;
 import infrastructures.constant.TrangThaiPhieuConstant;
 
 import java.util.ArrayList;
@@ -16,24 +17,26 @@ import java.util.UUID;
 import javax.swing.table.DefaultTableModel;
 import utilities.Converter;
 import utilities.MsgBox;
+import cores.truongPhongs.services.TpPhieuNhapService;
 
 /**
  *
  * @author QUOC HUY
  */
-public class NvqlQuanLyPhieuNhapView extends javax.swing.JPanel {
+public class TpPhieuNhapView extends javax.swing.JPanel {
 
     /**
      * Creates new form DemoCoSoView
      */
-    private NvqlQuanLyPhieuNhapService phieuNhapService;
+    private TpPhieuNhapService phieuNhapService;
     
-    private List<NvqlQuanLyPhieuNhapCustom> getListPhieuNhap;
+    private List<TpPhieuNhapCustom> getListPhieuNhap;
     
-    public NvqlQuanLyPhieuNhapView() {
+    public TpPhieuNhapView() {
         initComponents();
-        phieuNhapService = new NvqlQuanLyPhieuNhapServiceImpl();
-        getListPhieuNhap = new ArrayList<>();
+        phieuNhapService = new TpPhieuNhapServiceImpl();
+//        getListPhieuNhap = new ArrayList<>();
+ getListPhieuNhap = phieuNhapService.getListPn();
         this.loadTable(getListPhieuNhap);
         this.loadCbbTrangThai();
 //        clearForm();
@@ -44,10 +47,10 @@ public class NvqlQuanLyPhieuNhapView extends javax.swing.JPanel {
           this.cbbTrangThai.addItem(Converter.trangThaiDonHang(TrangThaiPhieuConstant.DA_HUY));
             this.cbbTrangThai.addItem(Converter.trangThaiDonHang(TrangThaiPhieuConstant.CHO_THANH_TOAN));
     }
-    public List<NvqlQuanLyPhieuNhapCustom> listSearch(int rdo) {
+    public List<TpPhieuNhapCustom> listSearch(int rdo) {
         // nhập vào 
         String timKiem = this.txtSearchTheo.getText();
-        List<NvqlQuanLyPhieuNhapCustom> listTimKiem = new ArrayList<>();
+        List<TpPhieuNhapCustom> listTimKiem = new ArrayList<>();
 
         // tìm kiếm theo tên mã vị trí
         checkCbb(phieuNhapService.loc(this.cbbTrangThai.getSelectedIndex())).forEach(el -> {
@@ -89,8 +92,8 @@ public class NvqlQuanLyPhieuNhapView extends javax.swing.JPanel {
         return listTimKiem;
     }
     
-    public List<NvqlQuanLyPhieuNhapCustom> checkCbb(TrangThaiPhieuConstant cs) {
-        List<NvqlQuanLyPhieuNhapCustom> listTimKiem = new ArrayList<>();
+    public List<TpPhieuNhapCustom> checkCbb(TrangThaiPhieuConstant cs) {
+        List<TpPhieuNhapCustom> listTimKiem = new ArrayList<>();
         getListPhieuNhap.forEach(el -> {
             if (el.getTrangThai() == cs) {
                 listTimKiem.add(el);
@@ -115,10 +118,10 @@ public class NvqlQuanLyPhieuNhapView extends javax.swing.JPanel {
         searchRadio();
     }
     
-    public void loadTable(List<NvqlQuanLyPhieuNhapCustom> list) {
+    public void loadTable(List<TpPhieuNhapCustom> list) {
         DefaultTableModel dtm = (DefaultTableModel) this.tblPhieuNhap.getModel();
         dtm.setRowCount(0);
-        for (NvqlQuanLyPhieuNhapCustom el : list) {
+        for (TpPhieuNhapCustom el : list) {
             
             Object[] rowData = {
                 dtm.getRowCount() + 1,
@@ -321,7 +324,6 @@ public class NvqlQuanLyPhieuNhapView extends javax.swing.JPanel {
                             .addComponent(ngayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(6, 6, 6)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE)
                 .addGap(28, 28, 28))
         );
