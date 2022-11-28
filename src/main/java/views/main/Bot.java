@@ -4,6 +4,10 @@
  */
 package views.main;
 
+import cores.bots.services.BotService;
+import cores.bots.services.ServiceImpls.BotServiceImlp;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author QUOC HUY
@@ -13,8 +17,70 @@ public class Bot extends javax.swing.JFrame {
     /**
      * Creates new form Bot
      */
+    private BotService botService;
+
     public Bot() {
         initComponents();
+        botService = new BotServiceImlp();
+
+        Thread clockThread = new Thread(() -> {
+            int seconds = -1;
+            int minutes = 0;
+            int hours = 0;
+
+            String s = "00";
+            String m = "00";
+            String h = "00";
+            while (true) {
+                try {
+                    seconds++;
+                    if (seconds < 10) {
+                        s = "0" + String.valueOf(seconds);
+                    } else if (seconds >= 10 && seconds < 60) {
+                        s = String.valueOf(seconds);
+                    } else if (seconds >= 60) {
+                        seconds = 0;
+                        s = String.valueOf(seconds);
+                        minutes++;
+                    }
+                    if (minutes < 10) {
+                        m = "0" + String.valueOf(minutes);
+                    } else if (minutes >= 10 && minutes < 60) {
+                        m = String.valueOf(minutes);
+                    } else if (minutes >= 60) {
+                        minutes = 0;
+                        m = String.valueOf(minutes);
+                        hours++;
+                    }
+                    if (hours < 10) {
+                        h = "0" + String.valueOf(hours);
+                    } else if (hours >= 10) {
+                        h = String.valueOf(hours);
+                    }
+
+                    txtTime.setText(h + " : " + m + " : " + s);
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        clockThread.start();
+
+        Thread bot = new Thread(() -> {
+            while (true) {
+                try {
+                    if(botService.updateTrangThai()) {
+                        JOptionPane.showMessageDialog(this, "Đã update phiếu xuất", "WARNING !!!", JOptionPane.WARNING_MESSAGE);
+                    }
+                    Thread.sleep(3600000);
+//                    Thread.sleep(10000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        bot.start();
     }
 
     /**
@@ -27,31 +93,16 @@ public class Bot extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        uWPButton1 = new utilities.palette.UWPButton();
         uWPButton2 = new utilities.palette.UWPButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        textAreaCustom1 = new utilities.palette.TextAreaCustom();
-        txtTime = new javax.swing.JLabel();
         panelRound1 = new utilities.palette.PanelRound();
+        txtTime = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(255, 153, 153));
 
-        uWPButton1.setBackground(new java.awt.Color(255, 0, 0));
-        uWPButton1.setText("X");
-        uWPButton1.setToolTipText("Thoát");
-
         uWPButton2.setText("-");
-
-        textAreaCustom1.setColumns(20);
-        textAreaCustom1.setRows(5);
-        jScrollPane1.setViewportView(textAreaCustom1);
-
-        txtTime.setBackground(new java.awt.Color(255, 255, 255));
-        txtTime.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        txtTime.setForeground(new java.awt.Color(255, 255, 255));
-        txtTime.setText("00:00:00");
 
         panelRound1.setBackground(new java.awt.Color(0, 51, 204));
         panelRound1.setForeground(new java.awt.Color(86, 76, 76));
@@ -60,15 +111,26 @@ public class Bot extends javax.swing.JFrame {
         panelRound1.setRoundTopLeft(50);
         panelRound1.setRoundTopRight(50);
 
+        txtTime.setBackground(new java.awt.Color(255, 255, 255));
+        txtTime.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txtTime.setForeground(new java.awt.Color(255, 255, 255));
+        txtTime.setText("00:00:00");
+
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
         panelRound1.setLayout(panelRound1Layout);
         panelRound1Layout.setHorizontalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 229, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
+                .addContainerGap(61, Short.MAX_VALUE)
+                .addComponent(txtTime, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16))
         );
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 51, Short.MAX_VALUE)
+            .addGroup(panelRound1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtTime, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -76,47 +138,37 @@ public class Bot extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(uWPButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(uWPButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(txtTime, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 27, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addGap(42, 42, 42)
+                .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(67, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(uWPButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(uWPButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(uWPButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addGap(12, 12, 12)
+                .addComponent(uWPButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(txtTime)
-                .addGap(31, 31, 31))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -159,11 +211,8 @@ public class Bot extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private utilities.palette.PanelRound panelRound1;
-    private utilities.palette.TextAreaCustom textAreaCustom1;
     private javax.swing.JLabel txtTime;
-    private utilities.palette.UWPButton uWPButton1;
     private utilities.palette.UWPButton uWPButton2;
     // End of variables declaration//GEN-END:variables
 }

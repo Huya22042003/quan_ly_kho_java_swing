@@ -19,6 +19,7 @@ import utilities.palette.Combobox;
  */
 public interface NVQLQuanLyPhieuXuatService {
     List<PhieuXuatCustom> getList();
+    List<PhieuXuatCustom> getListDaThanhToan();
     List<PhieuXuatCustom> getListByNgayTao(Long ngayTao, Long ngayKetThuc);
     PhieuXuatCustom addPhieuXuat(PhieuXuatCustom pncs);
     boolean updatePhieuXuat(PhieuXuatCustom pncs);

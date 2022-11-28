@@ -172,6 +172,9 @@ public class Converter {
             case DA_HUY:
                 trangThai = "Đã Hủy";
                 break;
+            case HOAN_THANH_CONG:
+                trangThai = "Hoàn Thành Công";
+                break;
             default:
                 throw new AssertionError();
         }
@@ -274,7 +277,7 @@ public class Converter {
 
         return trangThai;
     }
-    
+
     public static String trangThaiSanPham(TrangThaiSanPhamConstanst th) {
         String trangThai = "";
         switch (th) {

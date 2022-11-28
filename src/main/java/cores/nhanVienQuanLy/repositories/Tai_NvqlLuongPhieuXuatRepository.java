@@ -4,6 +4,8 @@
  */
 package cores.nhanVienQuanLy.repositories;
 
+import cores.nhanVienQuanLy.customModels.LuongBanHang_ChiTietSanPhamCustom;
+import cores.nhanVienQuanLy.customModels.Luong_ChiTietPhieuXuatCustom;
 import domainModels.ChiTietPhieuXuat;
 import domainModels.ChiTietSanPham;
 import domainModels.KhachHang;
@@ -23,30 +25,45 @@ import utilities.HibernateUtil;
  */
 public class Tai_NvqlLuongPhieuXuatRepository {
 
-    public List<ChiTietSanPham> getListCTSanPhamBanHang(BigDecimal giaBatDau, BigDecimal giaKetThuc) {
+    public List<LuongBanHang_ChiTietSanPhamCustom> getListCTSanPhamBanHang(BigDecimal giaBatDau, BigDecimal giaKetThuc) {
         Session s = HibernateUtil.getSessionFactory().openSession();
-        Query query = s.createQuery("FROM domainModels.ChiTietSanPham ctsp WHERE ctsp.GiaBan > :giaBatDau AND ctsp.GiaBan < :giaKetThuc");
+        Query query = s.createQuery("SELECT new cores.nhanVienQuanLy.customModels.LuongBanHang_ChiTietSanPhamCustom("
+                + "ctsp.id as id,"
+                + "ctsp.soLuongTon as soLuongTon,"
+                + "ctsp.hinhAnh as hinhAnh,"
+                + "ctsp.GiaNhap as GiaNhap,"
+                + "ctsp.GiaBan as GiaBan,"
+                + "ctsp.namBaoHanh as namBaoHanh,"
+                + "ctsp.mau as mau,"
+                + "ctsp.trangThai as trangThai,"
+                + "ctsp.sanPham as sanPham,"
+                + "ctsp.donVi as donVi"
+                + ")FROM domainModels.ChiTietSanPham ctsp WHERE ctsp.GiaBan > :giaBatDau AND ctsp.GiaBan < :giaKetThuc");
         query.setParameter("giaBatDau", giaBatDau);
         query.setParameter("giaKetThuc", giaKetThuc);
-        List<ChiTietSanPham> listCTSP = query.getResultList();
+        List<LuongBanHang_ChiTietSanPhamCustom> listCTSP = query.getResultList();
         return listCTSP;
     }
 
-    public List<ChiTietSanPham> getListCTSanPham() {
+    public List<LuongBanHang_ChiTietSanPhamCustom> getListCTSanPham() {
         Session s = HibernateUtil.getSessionFactory().openSession();
-        Query query = s.createQuery("FROM domainModels.ChiTietSanPham ctsp WHERE ctsp.trangThai = :trangThai");
+        Query query = s.createQuery("SELECT new cores.nhanVienQuanLy.customModels.LuongBanHang_ChiTietSanPhamCustom("
+                + "ctsp.id as id,"
+                + "ctsp.soLuongTon as soLuongTon,"
+                + "ctsp.hinhAnh as hinhAnh,"
+                + "ctsp.GiaNhap as GiaNhap,"
+                + "ctsp.GiaBan as GiaBan,"
+                + "ctsp.namBaoHanh as namBaoHanh,"
+                + "ctsp.mau as mau,"
+                + "ctsp.trangThai as trangThai,"
+                + "ctsp.sanPham as sanPham,"
+                + "ctsp.donVi as donVi"
+                + ")FROM domainModels.ChiTietSanPham ctsp WHERE ctsp.trangThai = :trangThai");
         query.setParameter("trangThai", TrangThaiSanPhamConstanst.DA_MO_BAN);
-        List<ChiTietSanPham> listCTSP = query.getResultList();
+        List<LuongBanHang_ChiTietSanPhamCustom> listCTSP = query.getResultList();
         return listCTSP;
     }
 
-    public KhachHang getKhachHangByMa(String ma) {
-        Session s = HibernateUtil.getSessionFactory().openSession();
-        Query query = s.createQuery("FROM domainModels.KhachHang kh WHERE kh.ma =:ma");
-        query.setParameter("ma", ma);
-        KhachHang kh = (KhachHang) query.getSingleResult();
-        return kh;
-    }
 
     public NhanVien getNhanVienByMa(String ma) {
         Session s = HibernateUtil.getSessionFactory().openSession();
@@ -56,15 +73,30 @@ public class Tai_NvqlLuongPhieuXuatRepository {
         return nv;
     }
 
-    public List<ChiTietPhieuXuat> getListCTPhieuXuat(UUID id) {
+    public List<Luong_ChiTietPhieuXuatCustom> getListCTPhieuXuat(UUID id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        Query query = session.createQuery("FROM domainModels.ChiTietPhieuXuat ctpx WHERE ctpx.idPhieuXuat.id =:id");
+        Query query = session.createQuery("SELECT new cores.nhanVienQuanLy.customModels.Luong_ChiTietPhieuXuatCustom("
+                + "ctpx.idPhieuXuat as idPhieuXuat,"
+                + "ctpx.idChiTietSp as idChiTietSp,"
+                + "ctpx.soLuong as soLuong"
+                + ") FROM domainModels.ChiTietPhieuXuat ctpx WHERE ctpx.idPhieuXuat.id =:id");
         query.setParameter("id", id);
-        List<ChiTietPhieuXuat> list = query.getResultList();
+        List<Luong_ChiTietPhieuXuatCustom> list = query.getResultList();
         return list;
     }
 
-    public ChiTietPhieuXuat addCTPX(ChiTietPhieuXuat ctpx) {
+    public List<Luong_ChiTietPhieuXuatCustom> getListCTPhieuXuat() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("SELECT new cores.nhanVienQuanLy.customModels.Luong_ChiTietPhieuXuatCustom("
+                + "ctpx.idPhieuXuat as idPhieuXuat,"
+                + "ctpx.idChiTietSp as idChiTietSp,"
+                + "ctpx.soLuong as soLuong"
+                + ") FROM domainModels.ChiTietPhieuXuat ctpx");
+        List<Luong_ChiTietPhieuXuatCustom> list = query.getResultList();
+        return list;
+    }
+
+    public boolean addCTPX(ChiTietPhieuXuat ctpx) {
         Session s = HibernateUtil.getSessionFactory().openSession();
         try {
             Transaction trans = s.beginTransaction();
@@ -74,8 +106,9 @@ public class Tai_NvqlLuongPhieuXuatRepository {
         } catch (Exception e) {
             e.printStackTrace();
             s.close();
+            return false;
         }
-        return ctpx;
+        return true;
     }
 
     public void updateCTPX(ChiTietPhieuXuat ctpx) {
@@ -90,7 +123,6 @@ public class Tai_NvqlLuongPhieuXuatRepository {
             s.close();
         }
     }
-
 
 //    public ChiTietSanPham addCTSP(ChiTietSanPham ctsp) {
 //        Session s = HibernateUtil.getSessionFactory().openSession();

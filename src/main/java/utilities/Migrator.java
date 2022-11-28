@@ -425,6 +425,30 @@ public class Migrator {
         phieuXuat4.setNhanVien(nhanVien1);
         session.save(phieuXuat4);
         
+        PhieuXuat phieuXuat5 = new PhieuXuat();
+        phieuXuat5.setGhiChu("");
+        phieuXuat5.setKhachHang(khachHang);
+        phieuXuat5.setTrangThai(TrangThaiPhieuConstant.CHO_THANH_TOAN);
+        phieuXuat5.setNgayTao(convertDateToTimeStampSecond()-172804492);
+        phieuXuat5.setNhanVien(nhanVien1);
+        session.save(phieuXuat5);
+        
+        PhieuXuat phieuXuat6 = new PhieuXuat();
+        phieuXuat6.setGhiChu("");
+        phieuXuat6.setKhachHang(khachHang);
+        phieuXuat6.setTrangThai(TrangThaiPhieuConstant.CHO_THANH_TOAN);
+        phieuXuat6.setNgayTao(convertDateToTimeStampSecond()-13320);
+        phieuXuat6.setNhanVien(nhanVien1);
+        session.save(phieuXuat6);
+        
+        PhieuXuat phieuXuat7 = new PhieuXuat();
+        phieuXuat7.setGhiChu("");
+        phieuXuat7.setKhachHang(khachHang);
+        phieuXuat7.setTrangThai(TrangThaiPhieuConstant.CHO_THANH_TOAN);
+        phieuXuat7.setNgayTao(convertDateToTimeStampSecond()-172804492);
+        phieuXuat7.setNhanVien(nhanVien1);
+        session.save(phieuXuat7);
+        
         PhieuKiemKe phieuKiemKe = new PhieuKiemKe();
         phieuKiemKe.setGhiChu("");
         phieuKiemKe.setMa("PKK290703");
