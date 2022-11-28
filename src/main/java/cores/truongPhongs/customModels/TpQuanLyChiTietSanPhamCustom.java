@@ -9,7 +9,6 @@ import domainModels.DonVi;
 import domainModels.NamBaoHanh;
 import domainModels.SanPham;
 import infrastructures.constant.MauConstant;
-import infrastructures.constant.TrangThaiSanPhamConstanst;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
@@ -34,9 +33,11 @@ public class TpQuanLyChiTietSanPhamCustom {
 
     private String hinhAnh;
 
-    private BigDecimal giaNhap;
+    private BigDecimal GiaNhap;
 
-    private BigDecimal giaBan;
+    private BigDecimal GiaBan;
+    
+    private int namBaoHanh;
     
     private MauConstant mau;
 
@@ -44,8 +45,6 @@ public class TpQuanLyChiTietSanPhamCustom {
 
     private DonVi donVi;
 
-    private NamBaoHanh namBaoHanh;
     
-    private TrangThaiSanPhamConstanst trangThai;
 
 }

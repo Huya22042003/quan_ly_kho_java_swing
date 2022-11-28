@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package cores.truongPhongs.repositories;
+package cores.nhanVienQuanLy.repositories;
 
-import cores.truongPhongs.customModels.TpPhieuNhapCustom;
+import cores.nhanVienQuanLy.customModels.NvqlQuanLyPhieuNhapCustom;
 import java.util.List;
 import javax.persistence.Query;
 import org.hibernate.Session;
@@ -16,10 +16,10 @@ import org.hibernate.Transaction;
  *
  * @author Acer
  */
-public class TpPhieuNhapRepository {
-    public List<TpPhieuNhapCustom> getListPhieuNhap(){
+public class NvqlQuanLyPhieuNhapRepository {
+    public List<NvqlQuanLyPhieuNhapCustom> getListPhieuNhap(){
         Session s = HibernateUtil.getSessionFactory().openSession();
-        Query q = s.createQuery("Select new  cores.truongPhongs.customModels.TpPhieuNhapCustom ( "
+        Query q = s.createQuery("Select new  cores.nhanVienQuanLy.customModels.NvqlQuanLyPhieuNhapCustom ( "
                 + "p.id as id,"
                 + "p.ghiChu as ghiChu,"
                 + "p.ngayThanhToan as ngayThanhToan,"
@@ -30,7 +30,7 @@ public class TpPhieuNhapRepository {
                 + "p.nhaCungCap.id as idNcc,"
                 + "p.nhaCungCap.ten as tenNcc) "
                 + "from domainModels.PhieuNhap p");
-        List<TpPhieuNhapCustom> listPn = q.getResultList();
+        List<NvqlQuanLyPhieuNhapCustom> listPn = q.getResultList();
         s.close();
         return listPn;
     }
@@ -83,7 +83,7 @@ public class TpPhieuNhapRepository {
         s.close();
         return p;
     }
-      public List<TpPhieuNhapCustom> getListByNgayTao(Long ngayBatDau, Long ngayKetThuc) {
+      public List<NvqlQuanLyPhieuNhapCustom> getListByNgayTao(Long ngayBatDau, Long ngayKetThuc) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery("Select new  cores.nhanVienQuanLy.customModels.NvqlQuanLyPhieuNhapCustom ( "
                 + "p.id as id,"
@@ -98,11 +98,11 @@ public class TpPhieuNhapRepository {
                 + "from domainModels.PhieuNhap p WHERE p.ngayThanhToan > :ngayBatDau AND p.ngayThanhToan < :ngayKetThuc");
         query.setParameter("ngayBatDau", ngayBatDau);
         query.setParameter("ngayKetThuc", ngayKetThuc);
-        List<TpPhieuNhapCustom> list = query.getResultList();
+        List<NvqlQuanLyPhieuNhapCustom> list = query.getResultList();
         return list;
     }
     
-        public List<TpPhieuNhapCustom> getListByNgayThanhToan(Long ngayBatDau, Long ngayKetThuc) {
+        public List<NvqlQuanLyPhieuNhapCustom> getListByNgayThanhToan(Long ngayBatDau, Long ngayKetThuc) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery("Select new  cores.nhanVienQuanLy.customModels.NvqlQuanLyPhieuNhapCustom ( "
                 + "p.id as id,"
@@ -117,7 +117,7 @@ public class TpPhieuNhapRepository {
                 + "from domainModels.PhieuNhap p WHERE p.ngayThanhToan > :ngayBatDau AND p.ngayThanhToan < :ngayKetThuc");
         query.setParameter("ngayBatDau", ngayBatDau);
         query.setParameter("ngayKetThuc", ngayKetThuc);
-        List<TpPhieuNhapCustom> list = query.getResultList();
+        List<NvqlQuanLyPhieuNhapCustom> list = query.getResultList();
         return list;
     }
 }
