@@ -479,8 +479,8 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="txtTenKH" alignment="0" pref="281" max="32767" attributes="0"/>
-                              <Component id="txtMaKH" alignment="1" max="32767" attributes="0"/>
+                              <Component id="txtTenNV" alignment="0" pref="281" max="32767" attributes="0"/>
+                              <Component id="txtMaNV" alignment="1" max="32767" attributes="0"/>
                               <Component id="txtSDT" alignment="0" max="32767" attributes="0"/>
                               <Component id="txtEmail" alignment="0" max="32767" attributes="0"/>
                               <Component id="txtDiaChi" alignment="1" max="32767" attributes="0"/>
@@ -499,9 +499,9 @@
                   <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" pref="35" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="txtMaKH" min="-2" pref="46" max="-2" attributes="0"/>
+                  <Component id="txtMaNV" min="-2" pref="46" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="txtTenKH" min="-2" pref="46" max="-2" attributes="0"/>
+                  <Component id="txtTenNV" min="-2" pref="46" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="txtSDT" min="-2" pref="46" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -528,7 +528,7 @@
             <Property name="text" type="java.lang.String" value="Th&#xf4;ng tin nh&#xe2;n vi&#xea;n"/>
           </Properties>
         </Component>
-        <Component class="utilities.palette.TextField" name="txtTenKH">
+        <Component class="utilities.palette.TextField" name="txtTenNV">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -540,7 +540,7 @@
             <Property name="labelText" type="java.lang.String" value="T&#xea;n nh&#xe2;n vi&#xea;n"/>
           </Properties>
         </Component>
-        <Component class="utilities.palette.TextField" name="txtMaKH">
+        <Component class="utilities.palette.TextField" name="txtMaNV">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="e0" green="ce" red="e4" type="rgb"/>

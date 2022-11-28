@@ -62,8 +62,8 @@ public class TpQuanLyNhanVien extends javax.swing.JPanel {
         txtSearchtheo = new utilities.palette.SearchCustom.TextFieldAnimation();
         panelRound3 = new utilities.palette.PanelRound();
         jLabel1 = new javax.swing.JLabel();
-        txtTenKH = new utilities.palette.TextField();
-        txtMaKH = new utilities.palette.TextField();
+        txtTenNV = new utilities.palette.TextField();
+        txtMaNV = new utilities.palette.TextField();
         myButton7 = new utilities.palette.MyButton();
         txtSDT = new utilities.palette.TextField();
         txtEmail = new utilities.palette.TextField();
@@ -316,14 +316,14 @@ public class TpQuanLyNhanVien extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setText("Thông tin nhân viên");
 
-        txtTenKH.setEditable(false);
-        txtTenKH.setBackground(new java.awt.Color(228, 206, 224));
-        txtTenKH.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtTenKH.setLabelText("Tên nhân viên");
+        txtTenNV.setEditable(false);
+        txtTenNV.setBackground(new java.awt.Color(228, 206, 224));
+        txtTenNV.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtTenNV.setLabelText("Tên nhân viên");
 
-        txtMaKH.setBackground(new java.awt.Color(228, 206, 224));
-        txtMaKH.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtMaKH.setLabelText("Mã nhân viên");
+        txtMaNV.setBackground(new java.awt.Color(228, 206, 224));
+        txtMaNV.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtMaNV.setLabelText("Mã nhân viên");
 
         myButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/close.png"))); // NOI18N
         myButton7.setText("Clear");
@@ -376,8 +376,8 @@ public class TpQuanLyNhanVien extends javax.swing.JPanel {
                     .addGroup(panelRound3Layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtTenKH, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
-                            .addComponent(txtMaKH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtTenNV, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
+                            .addComponent(txtMaNV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtSDT, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtDiaChi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -391,9 +391,9 @@ public class TpQuanLyNhanVien extends javax.swing.JPanel {
                 .addGap(12, 12, 12)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtMaKH, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(txtTenKH, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtTenNV, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -439,6 +439,17 @@ public class TpQuanLyNhanVien extends javax.swing.JPanel {
         getList = nhanVienSevice.findAllByRadio(timKiem, nhanVienSevice.loc(cbbTrangThai.getSelectedIndex()), rdo);
         return getList;
     }
+    public void fillData(int index){
+        getList = nhanVienSevice.getListNhanVien();
+        TpNhanVienCustom ql = getList.get(index);
+        txtMaNV.setText(ql.getMa());
+        txtTenNV.setText(ql.getTen());
+        txtEmail.setText(ql.getEmail());
+        txtDiaChi.setText(ql.getDiaChi());
+        txtNgaySinh.setText(new Date(ql.getNgaySinh()).toString());
+        txtSDT.setText(ql.getSdt());
+        txtTrangThai.setText(String.valueOf(ql.getTrangThai()));
+    }
 
     public void searchRadio() {
         if (rdoMa.isSelected()) {
@@ -474,6 +485,7 @@ public class TpQuanLyNhanVien extends javax.swing.JPanel {
 
         int row = this.tblQLNV.getSelectedRow();
         create.setVisible(false);
+        fillData(row);
         rud.custom = nhanVienSevice.finNhanVienByMa(tblQLNV.getValueAt(row, 2).toString());
         rud.setVisible(true);
         rud.showData();
@@ -498,10 +510,10 @@ public class TpQuanLyNhanVien extends javax.swing.JPanel {
  
         txtDiaChi.setText("");
         txtEmail.setText("");
-        txtMaKH.setText("");
+        txtMaNV.setText("");
         txtNgaySinh.setText("");
         txtSDT.setText("");
-        txtTenKH.setText("");
+        txtTenNV.setText("");
         txtTrangThai.setText("");
     }//GEN-LAST:event_myButton7ActionPerformed
 
@@ -528,11 +540,11 @@ public class TpQuanLyNhanVien extends javax.swing.JPanel {
     private utilities.palette.TableDark_1 tblQLNV;
     private utilities.palette.TextField txtDiaChi;
     private utilities.palette.TextField txtEmail;
-    private utilities.palette.TextField txtMaKH;
+    private utilities.palette.TextField txtMaNV;
     private utilities.palette.TextField txtNgaySinh;
     private utilities.palette.TextField txtSDT;
     private utilities.palette.SearchCustom.TextFieldAnimation txtSearchtheo;
-    private utilities.palette.TextField txtTenKH;
+    private utilities.palette.TextField txtTenNV;
     private utilities.palette.TextField txtTrangThai;
     // End of variables declaration//GEN-END:variables
 }
