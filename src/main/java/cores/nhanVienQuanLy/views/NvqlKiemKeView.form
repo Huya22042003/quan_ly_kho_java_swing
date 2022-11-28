@@ -401,21 +401,27 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                      <Component id="btnTaoPhieu" min="-2" pref="100" max="-2" attributes="0"/>
+                      <Component id="btnTaoPhieu" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="btnChiTietPhieuKiem" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnChiTietPhieuKiem" min="-2" pref="100" max="-2" attributes="0"/>
+                      <Component id="btnThemSPKiem" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnThemSPKiem" min="-2" pref="100" max="-2" attributes="0"/>
-                      <EmptySpace pref="23" max="32767" attributes="0"/>
+                      <Component id="btnHienThi" min="-2" pref="87" max="-2" attributes="0"/>
+                      <EmptySpace pref="31" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="btnTaoPhieu" alignment="1" pref="43" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="btnHienThi" min="-2" pref="47" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="btnTaoPhieu" alignment="1" max="32767" attributes="0"/>
                           <Component id="btnChiTietPhieuKiem" alignment="0" max="32767" attributes="0"/>
                           <Component id="btnThemSPKiem" alignment="0" max="32767" attributes="0"/>
                       </Group>
@@ -486,6 +492,21 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThemSPKiemActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="utilities.palette.MyButton" name="btnHienThi">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="66" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/icons/Show.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="&#xa;"/>
+                <Property name="toolTipText" type="java.lang.String" value="Load l&#x1ea1;i table"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHienThiActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
@@ -585,7 +606,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
-                              <Component id="myButton7" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnXacNhan" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
@@ -621,7 +642,7 @@
                       <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                       <Component id="textAreaScroll1" min="-2" pref="90" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                      <Component id="myButton7" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnXacNhan" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -686,7 +707,7 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="utilities.palette.MyButton" name="myButton7">
+            <Component class="utilities.palette.MyButton" name="btnXacNhan">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/icons/credit-card.png"/>
@@ -704,6 +725,9 @@
                 </Property>
                 <Property name="radius" type="int" value="50"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnXacNhanActionPerformed"/>
+              </Events>
             </Component>
             <Component class="utilities.palette.TextField" name="txtTenNhanVien">
               <Properties>

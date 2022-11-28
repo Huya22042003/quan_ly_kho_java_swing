@@ -45,7 +45,9 @@ public class NvqlLuongKiemKeCtspRepository {
         Session s = HibernateUtil.getSessionFactory().openSession();
         try {
             Transaction trans = s.beginTransaction();
-            s.update(nvqlLuongKiemKeCtspCustom);
+            ChiTietSanPham c = s.find(ChiTietSanPham.class, nvqlLuongKiemKeCtspCustom.getId());
+            c.setSoLuongTon(nvqlLuongKiemKeCtspCustom.getSoLuongTon());
+            s.update(c);
             trans.commit();
             s.close();
         } catch (Exception e) {

@@ -11,6 +11,7 @@ import cores.nhanVienQuanLy.services.NvqlLuongKiemKeCtpkService;
 import cores.nhanVienQuanLy.services.NvqlLuongKiemKeCtspService;
 import cores.nhanVienQuanLy.services.serviceImpls.NvqlLuongKiemKeCtpkServiceImpl;
 import cores.nhanVienQuanLy.services.serviceImpls.NvqlLuongKiemKeCtspServiceImpl;
+import domainModels.ChiTietSanPham;
 import domainModels.PhieuKiemKe;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -478,23 +479,26 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Vui lòng nhập số", "Erorr", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            nvqlLuongKiemKeCtspCustom.setSoLuongTon(nvqlLuongKiemKeCtspCustom.getSoLuongTon() - a);
-            ctspService.updateSoLuong(nvqlLuongKiemKeCtspCustom);
+            PhieuKiemKe haha = new PhieuKiemKe();
+            haha.setId(phieu.getId());
+            ChiTietSanPham hihi = new ChiTietSanPham();
+            hihi.setId(nvqlLuongKiemKeCtspCustom.getId());
+            
             NvqlLuongKiemKeCtpkCustom ct = new NvqlLuongKiemKeCtpkCustom(
                     nvqlLuongKiemKeCtspCustom.getMa(),
                     nvqlLuongKiemKeCtspCustom.getTen(),
                     nvqlLuongKiemKeCtspCustom.getSoLuongTon(),
                     a,
-                    phieu.getId(),
-                    nvqlLuongKiemKeCtspCustom.getId()
+                    haha,
+                    hihi
             );
+            nvqlLuongKiemKeCtspCustom.setSoLuongTon(a);
+            ctspService.updateSoLuong(nvqlLuongKiemKeCtspCustom);
+            
             ctpkService.addCTPK(ct);
             ctpkView.listCtpk.add(ct);
-            JOptionPane.showMessageDialog(this, "Thêm sản phẩm thành công");
+            JOptionPane.showMessageDialog(this, "Update thành công số lượng tồn trong kho");
             fillTableSanPham(ctspService.getAll());
-            System.out.println(ctpkView.listCtpk.size());
-            System.out.println(phieu.getId() + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-            System.out.println(nvqlLuongKiemKeCtspCustom.getId() + "bbbbbbbbbbbbbbbbbbbbbbbb");
         }
     }//GEN-LAST:event_tbSanPhamMouseClicked
 

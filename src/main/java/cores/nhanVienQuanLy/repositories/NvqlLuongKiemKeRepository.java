@@ -44,4 +44,19 @@ public class NvqlLuongKiemKeRepository {
             t.rollback(); //hoàn lại kết quả
         }
     }
+    public boolean updateTrangThai(PhieuKiemKe phieuKiemKe){
+        Session s = HibernateUtil.getSessionFactory().openSession();
+        try {
+            Transaction transaction = null;
+            transaction = s.beginTransaction();
+            s.update(phieuKiemKe);
+            transaction.commit();
+            s.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            s.close();
+            return false;
+        }
+        return true;
+    }
 }

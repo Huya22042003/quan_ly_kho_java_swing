@@ -25,7 +25,7 @@ import infrastructures.constant.GioiTinhConstant;
 import infrastructures.constant.KhachHangConstant;
 import infrastructures.constant.MauConstant;
 import infrastructures.constant.TrangThaiNhanVienConstant;
-import infrastructures.constant.TrangThaiPhieuKiem;
+import infrastructures.constant.TrangThaiPhieuKiemConstant;
 import infrastructures.constant.TrangThaiPhieuConstant;
 import infrastructures.constant.TrangThaiPhieuHoanConstant;
 import infrastructures.constant.TrangThaiSanPhamConstanst;
@@ -431,7 +431,7 @@ public class Migrator {
         phieuKiemKe.setNgayTao(convertDateToTimeStampSecond());
         phieuKiemKe.setNhanVien(nhanVien);
         phieuKiemKe.setNgayXacNhan(convertDateToTimeStampSecond());
-        phieuKiemKe.setTrangThai(TrangThaiPhieuKiem.DA_XAC_NHAN);
+        phieuKiemKe.setTrangThai(TrangThaiPhieuKiemConstant.DA_XAC_NHAN);
         session.save(phieuKiemKe);
         
         PhieuKiemKe phieuKiemKe1 = new PhieuKiemKe();
@@ -440,7 +440,7 @@ public class Migrator {
         phieuKiemKe1.setNgayTao(convertDateToTimeStampSecond());
         phieuKiemKe1.setNhanVien(nhanVien);
         phieuKiemKe1.setNgayXacNhan(convertDateToTimeStampSecond());
-        phieuKiemKe1.setTrangThai(TrangThaiPhieuKiem.MOI_TAO);
+        phieuKiemKe1.setTrangThai(TrangThaiPhieuKiemConstant.MOI_TAO);
         session.save(phieuKiemKe1);
         
         SanPham sanPham100 = new SanPham();

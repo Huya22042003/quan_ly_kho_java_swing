@@ -8,7 +8,7 @@ package infrastructures.constant;
  *
  * @author window
  */
-public enum TrangThaiPhieuKiem {
+public enum TrangThaiPhieuKiemConstant {
     MOI_TAO,
     CHUA_XAC_NHAN,
     DA_XAC_NHAN
