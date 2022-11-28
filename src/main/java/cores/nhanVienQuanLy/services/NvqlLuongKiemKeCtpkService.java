@@ -14,4 +14,6 @@ import java.util.UUID;
  */
 public interface NvqlLuongKiemKeCtpkService {
     public List<NvqlLuongKiemKeCtpkCustom> getAll(UUID id);
+    
+    public void addCTPK(NvqlLuongKiemKeCtpkCustom nvqlLuongKiemKeCtpkCustom);
 }

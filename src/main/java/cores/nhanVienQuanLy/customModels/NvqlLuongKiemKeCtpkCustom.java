@@ -4,6 +4,8 @@
  */
 package cores.nhanVienQuanLy.customModels;
 
+import domainModels.ChiTietSanPham;
+import domainModels.PhieuKiemKe;
 import java.math.BigDecimal;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
@@ -24,8 +26,8 @@ public class NvqlLuongKiemKeCtpkCustom {
     private String ten;
     private int soLuongTon;
     private int soLuongThucTon;
-    private UUID idPhieuKiem;
-    private UUID idChiTietSanPham;
+    private PhieuKiemKe idPhieuKiem;
+    private ChiTietSanPham idChiTietSanPham;
     
     public int getChenhLech() {
         return soLuongThucTon - soLuongTon;
