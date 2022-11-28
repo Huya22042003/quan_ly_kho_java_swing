@@ -1,19 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package cores.truongPhongs.views;
 
 import cores.truongPhongs.customModels.TpNhanVienCustom;
 import cores.truongPhongs.services.TpQuanLyNhanVienSevice;
 import cores.truongPhongs.services.serviceImpls.TpQuanLyNhanVienServiceImpl;
-import cores.truongPhongs.views.TpCreateQuanLyNhanVien;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import utilities.Converter;
-import utilities.HibernateUtil;
 
 /**
  *

@@ -433,9 +433,6 @@
                 </Property>
                 <Property name="radius" type="int" value="50"/>
               </Properties>
-              <AccessibilityProperties>
-                <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value="Hi&#x1ec7;n th&#x1ecb; danh s&#xe1;ch phi&#x1ebf;u xu&#x1ea5;t"/>
-              </AccessibilityProperties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnShowActionPerformed"/>
               </Events>

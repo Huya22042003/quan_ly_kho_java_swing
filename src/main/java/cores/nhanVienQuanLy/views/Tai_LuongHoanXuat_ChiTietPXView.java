@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package cores.nhanVienQuanLy.views;
 
 import cores.nhanVienQuanLy.customModels.ChiTietPhieuHoanXuatCustom;
@@ -11,12 +7,8 @@ import cores.nhanVienQuanLy.services.Tai_LuongHoanXuatService;
 import cores.nhanVienQuanLy.services.Tai_NvqlLuongPhieuXuatService;
 import cores.nhanVienQuanLy.services.serviceImpls.Tai_LuongHoanXuatServiceImpl;
 import cores.nhanVienQuanLy.services.serviceImpls.Tai_NvqlLuongPhieuXuatServiceImpl;
-import domainModels.ChiTietPhieuXuat;
 import domainModels.ChiTietSanPham;
 import domainModels.PhieuHoanXuat;
-import domainModels.PhieuXuat;
-import infrastructures.constant.TrangThaiPhieuHoanConstant;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;

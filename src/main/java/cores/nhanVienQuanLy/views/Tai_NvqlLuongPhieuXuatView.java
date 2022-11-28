@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package cores.nhanVienQuanLy.views;
 
 import cores.nhanVienQuanLy.customModels.LuongBanHang_ChiTietSanPhamCustom;
@@ -11,7 +7,6 @@ import cores.nhanVienQuanLy.services.NVQLQuanLyPhieuXuatService;
 import cores.nhanVienQuanLy.services.Tai_NvqlLuongPhieuXuatService;
 import cores.nhanVienQuanLy.services.serviceImpls.NVQLQuanLyPhieuXuatServiceImpl;
 import cores.nhanVienQuanLy.services.serviceImpls.Tai_NvqlLuongPhieuXuatServiceImpl;
-import domainModels.ChiTietPhieuXuat;
 import domainModels.PhieuXuat;
 import infrastructures.constant.TrangThaiPhieuConstant;
 import java.awt.event.ActionEvent;
@@ -22,7 +17,6 @@ import java.util.UUID;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import utilities.Converter;
-import utilities.DateTimeUtil;
 import utilities.MsgBox;
 
 /**

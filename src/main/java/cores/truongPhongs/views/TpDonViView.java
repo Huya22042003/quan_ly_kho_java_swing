@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package cores.truongPhongs.views;
 
 import cores.truongPhongs.customModels.TpDonViCustom;
@@ -10,8 +6,6 @@ import cores.truongPhongs.services.serviceImpls.TpDonViServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
-import viewDemos.DemoCreateCoSoView;
-import viewDemos.DemoRUDCoSoView;
 
 public class TpDonViView extends javax.swing.JPanel {
 

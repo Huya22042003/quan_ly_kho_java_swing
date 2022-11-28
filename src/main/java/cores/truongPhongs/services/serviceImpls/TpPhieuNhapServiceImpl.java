@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package cores.truongPhongs.services.serviceImpls;
 
 import cores.truongPhongs.customModels.TpPhieuNhapCustom;
@@ -18,7 +14,6 @@ import java.util.UUID;
 import javax.swing.JLabel;
 import utilities.DateTimeUtil;
 import cores.truongPhongs.services.TpPhieuNhapService;
-import infrastructures.constant.TrangThaiPhieuNhapConstant;
 import utilities.Auth;
 
 /**

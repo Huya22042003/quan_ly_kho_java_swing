@@ -1,21 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package cores.truongPhongs.services.serviceImpls;
 
 import cores.truongPhongs.customModels.TpQuanLyChiTietSanPhamCustom;
 import cores.truongPhongs.customModels.TpQuanLyDonViCustom;
-import cores.truongPhongs.customModels.TpQuanLyNamBHCustom;
 import cores.truongPhongs.customModels.TpQuanLySanPhamCustom;
 import cores.truongPhongs.repositories.TpQuanLyChiTietSanPhamRepository;
 import cores.truongPhongs.services.TpQuanLyChiTietSanPhamService;
 import domainModels.ChiTietSanPham;
 import domainModels.DonVi;
-import domainModels.NamBaoHanh;
 import domainModels.SanPham;
 import infrastructures.constant.MauConstant;
-import infrastructures.constant.ValidateConstant;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;

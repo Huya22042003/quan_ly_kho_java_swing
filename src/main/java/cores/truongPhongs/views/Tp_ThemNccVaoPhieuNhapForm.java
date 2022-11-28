@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package cores.truongPhongs.views;
 
 import cores.truongPhongs.customModels.NhaCungCapCustom;
@@ -9,7 +5,6 @@ import cores.truongPhongs.services.TpQuanlyNhaCungCapService;
 import cores.truongPhongs.services.serviceImpls.TpQuanlyNhaCungCapServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JColorChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import utilities.Converter;

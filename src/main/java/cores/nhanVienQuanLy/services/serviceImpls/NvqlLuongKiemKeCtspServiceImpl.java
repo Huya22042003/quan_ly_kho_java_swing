@@ -1,17 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package cores.nhanVienQuanLy.services.serviceImpls;
 
 import cores.nhanVienQuanLy.customModels.NvqlLuongKiemKeCtspCustom;
 import cores.nhanVienQuanLy.repositories.NvqlLuongKiemKeCtspRepository;
-import cores.nhanVienQuanLy.services.NvqlLuongKiemKeCtpkService;
 import cores.nhanVienQuanLy.services.NvqlLuongKiemKeCtspService;
 import domainModels.ChiTietSanPham;
-import infrastructures.constant.MauConstant;
-import infrastructures.constant.TrangThaiSanPhamConstanst;
-import java.math.BigDecimal;
 import java.util.List;
 
 /**
