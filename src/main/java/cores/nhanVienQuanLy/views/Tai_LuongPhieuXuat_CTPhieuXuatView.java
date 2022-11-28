@@ -489,7 +489,7 @@ public class Tai_LuongPhieuXuat_CTPhieuXuatView extends javax.swing.JFrame {
 
 
     private void btnShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowActionPerformed
-        listCTPX = luongService.getListCTPhieuXuat(this.phieuXuat.getId());
+        listCTPX = luongService.getListCTPhieuXuatByID(this.phieuXuat.getId());
         loadTable(listCTPX);
     }//GEN-LAST:event_btnShowActionPerformed
 

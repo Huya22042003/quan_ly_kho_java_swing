@@ -13,4 +13,6 @@ import java.util.List;
  */
 public interface NvqlLuongKiemKeCtspService {
     public List<NvqlLuongKiemKeCtspCustom> getAll();
+    
+    public void updateSoLuong(NvqlLuongKiemKeCtspCustom nvqlLuongKiemKeCtpkService);
 }
