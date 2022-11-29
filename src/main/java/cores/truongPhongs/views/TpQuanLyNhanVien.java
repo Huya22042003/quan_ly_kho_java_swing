@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import utilities.Converter;
+import utilities.Page;
 
 /**
  *
@@ -25,13 +26,13 @@ public class TpQuanLyNhanVien extends javax.swing.JPanel {
         getList = new ArrayList<>();
         create = new TpCreateQuanLyNhanVien();
         rud = new TpRUDQuanLyNhanVien();
+
         initComponents();
         getList = nhanVienSevice.getListNhanVien();
         nhanVienSevice.loadComboboxTT(cbbTrangThai);
         loadTable(getList);
         clearForm();
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -215,7 +216,7 @@ public class TpQuanLyNhanVien extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound8Layout.createSequentialGroup()
                 .addGroup(panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(panelRound8Layout.createSequentialGroup()
-                        .addContainerGap(13, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(cbbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelRound8Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -298,7 +299,7 @@ public class TpQuanLyNhanVien extends javax.swing.JPanel {
                     .addComponent(panelRound6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
         panelRound3.setBackground(new java.awt.Color(228, 206, 224));
@@ -416,9 +417,9 @@ public class TpQuanLyNhanVien extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(panelRound3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelRound1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelRound3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -426,6 +427,7 @@ public class TpQuanLyNhanVien extends javax.swing.JPanel {
         rdoTen.setSelected(true);
         cbbTrangThai.setSelectedIndex(0);
         getList = nhanVienSevice.findAllByRadio("", nhanVienSevice.loc(cbbTrangThai.getSelectedIndex()), 0);
+
     }
 
     public List<TpNhanVienCustom> listSearch(int rdo) {
@@ -447,6 +449,7 @@ public class TpQuanLyNhanVien extends javax.swing.JPanel {
     public void loadTable(List<TpNhanVienCustom> list) {
         DefaultTableModel dtm = (DefaultTableModel) this.tblQLNV.getModel();
         dtm.setRowCount(0);
+
         for (TpNhanVienCustom nv : list) {
             Object[] rowData = {
                 dtm.getRowCount() + 1,
@@ -454,10 +457,10 @@ public class TpQuanLyNhanVien extends javax.swing.JPanel {
                 nv.getMa(),
                 nv.getSdt(),
                 nv.getEmail(),
-//                nv.getMatKhau(),
+                //                nv.getMatKhau(),
                 nv.getNgaySinh() == null ? "" : new Date(nv.getNgaySinh()),
-//                nv.getHinhAnh(),
-//                Converter.trangThaiGioiTinh(nv.getGioiTinh()),
+                //                nv.getHinhAnh(),
+                //                Converter.trangThaiGioiTinh(nv.getGioiTinh()),
                 nv.getDiaChi(),
                 Converter.trangThaiNhanVien(nv.getTrangThai())
             };
@@ -489,7 +492,7 @@ public class TpQuanLyNhanVien extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void myButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton7ActionPerformed
- 
+
         txtDiaChi.setText("");
         txtEmail.setText("");
         txtMaKH.setText("");
@@ -498,7 +501,6 @@ public class TpQuanLyNhanVien extends javax.swing.JPanel {
         txtTenKH.setText("");
         txtTrangThai.setText("");
     }//GEN-LAST:event_myButton7ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private utilities.palette.MyButton btnHienThi;

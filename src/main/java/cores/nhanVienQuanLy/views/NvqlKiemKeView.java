@@ -17,6 +17,7 @@ import utilities.Auth;
 import utilities.Converter;
 import utilities.MaTuSinh;
 import utilities.MsgBox;
+import utilities.Page;
 
 /**
  *
@@ -36,6 +37,7 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
 //    private List<NvqlLuongKiemKeCtpkCustom> list 
 
     public NvqlKiemKeView() {
+
         initComponents();
         kiemKeService = new NvqlLuongKiemKeServiceImpl();
         ctpkService = new NvqlLuongKiemKeCtpkServiceImpl();
@@ -61,17 +63,22 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
     public void fillTablePhieuKiemKe(List<NvqlLuongKiemKeCustom> list) {
         DefaultTableModel model = (DefaultTableModel) tbPhieuKiemKe.getModel();
         model.setRowCount(0);
+
         listPhieuKiemKeCustom.forEach((m) -> {
             Date ngayTao = new Date(m.getNgayTao());
             model.addRow(new Object[]{
+                //            Object[] rowData = {
                 model.getRowCount() + 1,
                 m.getMaPhieuKiem(),
                 ngayTao,
                 m.getIdNV().getTen(),
                 Converter.TrangThaiPhieuKiem(m.getTrangThai())
             });
+
         });
+
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -211,7 +218,7 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
             panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -373,7 +380,7 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16)
                 .addComponent(ngayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelRound9Layout.setVerticalGroup(
             panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -623,7 +630,7 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_rdoNgayTaoActionPerformed
 
-    public void hienThi(){
+    public void hienThi() {
         listPhieuKiemKeCustom = kiemKeService.getAll();
         fillTablePhieuKiemKe(listPhieuKiemKeCustom);
     }

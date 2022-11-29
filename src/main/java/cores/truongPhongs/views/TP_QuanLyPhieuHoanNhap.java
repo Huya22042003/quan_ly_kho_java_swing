@@ -9,6 +9,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import utilities.Converter;
+import utilities.Page;
 
 /**
  *
@@ -22,10 +23,24 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
     private TP_QuanLyPhieuHoanNhap_sp hoanNhap_sp;
     private TP_QuanLyPhieuHoanNhap_ctp ctp;
 
+    //
+    //
+    private Page p;
+
+    private int limit = 7;
+
+    private int offset = 0;
+
+    private int sizes = 0;
+
+    private int index = 1;
+
     public TP_QuanLyPhieuHoanNhap() {
         phieuHoanNhapService = new TP_PhieuHoanNhapServiceImpl();
         tn = new TP_QuanLyPhieuHoanNhap_pn();
         hoanNhapCustoms = new ArrayList<>();
+        //
+        p = new Page();
         initComponents();
         hoanNhapCustoms = phieuHoanNhapService.getListPhieuHoanNhap();
         clearForm();
@@ -35,7 +50,17 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
     private void loadTable() {
         DefaultTableModel dtm = (DefaultTableModel) tblPhieuHoanNhap.getModel();
         dtm.setRowCount(0);
-        for (TP_PhieuHoanNhapCustom el : hoanNhapCustoms) {
+        //
+        int sum = limit + offset;
+        if (hoanNhapCustoms.size() <= sum) {
+            sum = hoanNhapCustoms.size();
+        }
+        for (int i = offset; i < sum; i++) {
+            if (hoanNhapCustoms.get(i) == null) {
+                return;
+            }
+            TP_PhieuHoanNhapCustom el = hoanNhapCustoms.get(i);
+//        for (TP_PhieuHoanNhapCustom el : hoanNhapCustoms) {
             Object[] rowData = {
                 dtm.getRowCount() + 1,
                 el.getId(),
@@ -57,6 +82,11 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
         txtNgayThanhToan.setText("");
         txtTongTien.setText("");
         txtTrangThai.setText("");
+        sizes = hoanNhapCustoms.size();
+        offset = 0;
+        index = 1;
+        loadIndex();
+
     }
 
     @SuppressWarnings("unchecked")
@@ -74,6 +104,9 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
         myButton10 = new utilities.palette.MyButton();
         myButton11 = new utilities.palette.MyButton();
         myButton14 = new utilities.palette.MyButton();
+        btnPre = new utilities.palette.UWPButton();
+        txtIndex = new javax.swing.JLabel();
+        btnNext = new utilities.palette.UWPButton();
         panelRound2 = new utilities.palette.PanelRound();
         jLabel1 = new javax.swing.JLabel();
         txtMaPhieu = new utilities.palette.TextField();
@@ -247,6 +280,22 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
+        btnPre.setText("Pre");
+        btnPre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPreActionPerformed(evt);
+            }
+        });
+
+        txtIndex.setText("1/1");
+
+        btnNext.setText("Next");
+        btnNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
         panelRound1.setLayout(panelRound1Layout);
         panelRound1Layout.setHorizontalGroup(
@@ -260,8 +309,15 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
                             .addComponent(panelRound15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(panelRound1Layout.createSequentialGroup()
                         .addGap(13, 13, 13)
-                        .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(12, Short.MAX_VALUE))
+                        .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelRound1Layout.createSequentialGroup()
+                        .addGap(234, 234, 234)
+                        .addComponent(btnPre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(71, 71, 71)
+                        .addComponent(txtIndex)
+                        .addGap(100, 100, 100)
+                        .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -272,7 +328,12 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
                 .addComponent(panelRound15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(95, 95, 95))
+                .addGap(31, 31, 31)
+                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnPre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtIndex)
+                    .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39))
         );
 
         panelRound2.setBackground(new java.awt.Color(228, 206, 224));
@@ -505,8 +566,8 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Bạn phải chọn một dòng", "ERROR !!!", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
-        if(ctp != null && tn != null) {
+
+        if (ctp != null && tn != null) {
             tn.setVisible(false);
             ctp.setVisible(false);
         }
@@ -555,8 +616,26 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
         loadTable();
     }//GEN-LAST:event_myButton14ActionPerformed
 
+    private void btnPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreActionPerformed
+        index = p.prevIndex(offset, limit, index);
+        offset = p.prev(offset, limit);
+        loadIndex();
+        loadTable();
+    }//GEN-LAST:event_btnPreActionPerformed
 
+    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
+        index = p.nextIndex(offset, limit, sizes, index);
+        offset = p.next(offset, limit, sizes);
+        loadIndex();
+        loadTable();
+    }//GEN-LAST:event_btnNextActionPerformed
+
+    private void loadIndex() {
+        this.txtIndex.setText(String.valueOf(index) + " / " + (Math.round((sizes / limit) + 0.5)));
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private utilities.palette.UWPButton btnNext;
+    private utilities.palette.UWPButton btnPre;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
@@ -577,6 +656,7 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
     private utilities.palette.TextAreaScroll textAreaScroll1;
     private utilities.palette.TextAreaScroll textAreaScroll2;
     private utilities.palette.TextAreaCustom txtGhiChu;
+    private javax.swing.JLabel txtIndex;
     private utilities.palette.TextAreaCustom txtLiDo;
     private utilities.palette.TextField txtMaPhieu;
     private utilities.palette.TextField txtNgayTao;
