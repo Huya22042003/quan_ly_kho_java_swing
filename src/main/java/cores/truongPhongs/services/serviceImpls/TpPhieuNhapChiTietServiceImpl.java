@@ -24,8 +24,8 @@ public class TpPhieuNhapChiTietServiceImpl implements TpPhieuNhapChiTietService{
     
     @Override
     public TpPhieuNhapChiTietCustom addPhieuNhap(TpPhieuNhapChiTietCustom pnct) {
-        PhieuNhap pn = repo.findPnById(pnct.getIdPhieuNhap());
-        ChiTietSanPham sp = repo.findSpById(pnct.getIdSanPham());
+        PhieuNhap pn = repo.findPnById(pnct.getIdPhieuNhap().getId());
+        ChiTietSanPham sp = repo.findSpById(pnct.getIdSanPham().getId());
         ChiTietPhieuNhap ctpn = new ChiTietPhieuNhap();
         ctpn.setSoLuong(pnct.getSoLuong());
         ctpn.setIdChiTietSp(sp);
