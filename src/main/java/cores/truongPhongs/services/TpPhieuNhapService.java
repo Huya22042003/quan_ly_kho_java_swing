@@ -22,7 +22,7 @@ public interface TpPhieuNhapService {
     TrangThaiPhieuConstant loc(int a);
     List<TpPhieuNhapCustom> getListByNgayThanhToan(Long ngayBatDau, Long ngayKetThuc);
     List<TpPhieuNhapCustom> getListByNgayTao(Long ngayTao, Long ngayKetThuc);
-    
+   
 }
 
     

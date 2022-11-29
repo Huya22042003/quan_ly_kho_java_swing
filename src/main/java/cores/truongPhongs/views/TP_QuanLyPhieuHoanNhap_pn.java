@@ -1,6 +1,7 @@
 package cores.truongPhongs.views;
 
 import cores.truongPhongs.customModels.TP_HoanNhap_PhieuNhapCustom;
+import cores.truongPhongs.customModels.TP_PhieuHoanNhapCustom;
 import cores.truongPhongs.services.TP_PhieuHoanNhapService;
 import cores.truongPhongs.services.serviceImpls.TP_PhieuHoanNhapServiceImpl;
 import java.util.ArrayList;
@@ -18,21 +19,23 @@ public class TP_QuanLyPhieuHoanNhap_pn extends javax.swing.JFrame {
 
     private TP_PhieuHoanNhapService hoanNhapService;
     private List<TP_HoanNhap_PhieuNhapCustom> listPhieuNhap;
-    
+    private List<TP_PhieuHoanNhapCustom> hoanNhapCustoms;
+
     public TP_QuanLyPhieuHoanNhap_pn() {
         hoanNhapService = new TP_PhieuHoanNhapServiceImpl();
         listPhieuNhap = new ArrayList<>();
         initComponents();
         listPhieuNhap = hoanNhapService.getListPhieuNhap();
+        hoanNhapCustoms = hoanNhapService.getListPhieuHoanNhap();
         loadTable();
     }
-    
+
     private void loadTable() {
         DefaultTableModel dtm = (DefaultTableModel) tblPhieuNhap.getModel();
         dtm.setRowCount(0);
         for (TP_HoanNhap_PhieuNhapCustom el : listPhieuNhap) {
-            Object [] rowData = {
-                dtm.getRowCount()+1,
+            Object[] rowData = {
+                dtm.getRowCount() + 1,
                 el.getId(),
                 new Date(el.getNgayTao()),
                 el.getNhaCungCap().getTen(),
@@ -395,7 +398,7 @@ public class TP_QuanLyPhieuHoanNhap_pn extends javax.swing.JFrame {
 
     private void tblPhieuNhapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPhieuNhapMouseClicked
         int row = this.tblPhieuNhap.getSelectedRow();
-        if(row == -1) {
+        if (row == -1) {
             return;
         }
 
@@ -419,18 +422,25 @@ public class TP_QuanLyPhieuHoanNhap_pn extends javax.swing.JFrame {
 
     private void myButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton6ActionPerformed
         int row = this.tblPhieuNhap.getSelectedRow();
-        if(row == -1) {
+        if (row == -1) {
             JOptionPane.showMessageDialog(this, "Phải chọn một dòng", "ERROR !!!", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        for (TP_PhieuHoanNhapCustom hoanNhapCustom : hoanNhapService.getListPhieuHoanNhap()) {
+            if (listPhieuNhap.get(row).getId().equals(hoanNhapCustom.getPhieuNhap().getId())) {
+                JOptionPane.showMessageDialog(this, "Phiếu nhập này đã có phiếu xuất ! Xin vui lòng chọn phiếu khác");
+                return;
+            }
+        }
         TP_HoanNhap_PhieuNhapCustom pn = this.listPhieuNhap.get(row);
-        if(hoanNhapService.addPhieuNhap(pn, txtGhiChu.getText(), txtLiDo.getText())) {
+        if (hoanNhapService.addPhieuNhap(pn, txtGhiChu.getText(), txtLiDo.getText())) {
             JOptionPane.showMessageDialog(this, "Thêm thành công", "Thành công !!!", JOptionPane.INFORMATION_MESSAGE);
             this.setVisible(false);
         } else {
             JOptionPane.showMessageDialog(this, "Thêm thất bại", "ERROR !!!", JOptionPane.ERROR_MESSAGE);
             this.setVisible(true);
         }
+
     }//GEN-LAST:event_myButton6ActionPerformed
 
     private void txtTrangThai1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTrangThai1ActionPerformed
