@@ -29,7 +29,8 @@ public class NVQLQuanLyPhieuXuatRepository {
                 + "px.trangThai as trangThai,"
                 + "px.nhanVien as nhanVien,"
                 + "px.khachHang as khachHang"
-                + ") FROM domainModels.PhieuXuat px");
+                + ") FROM domainModels.PhieuXuat px"
+                + " ORDER BY px.ngayTao DESC");
         List<PhieuXuatCustom> list = query.getResultList();
         return list;
     }
@@ -43,7 +44,8 @@ public class NVQLQuanLyPhieuXuatRepository {
                 + "px.trangThai as trangThai,"
                 + "px.nhanVien as nhanVien,"
                 + "px.khachHang as khachHang"
-                + ") FROM domainModels.PhieuXuat px WHERE px.trangThai = :trangThai");
+                + ") FROM domainModels.PhieuXuat px WHERE px.trangThai = :trangThai"
+                + " ORDER BY px.ngayTao DESC");
         query.setParameter("trangThai", TrangThaiPhieuConstant.DA_THANH_TOAN);
         List<PhieuXuatCustom> list = query.getResultList();
         return list;
@@ -59,7 +61,8 @@ public class NVQLQuanLyPhieuXuatRepository {
                 + "px.trangThai as trangThai,"
                 + "px.nhanVien as nhanVien,"
                 + "px.khachHang as khachHang"
-                + ") FROM domainModels.PhieuXuat px WHERE px.ngayTao > :ngayBatDau AND px.ngayTao < :ngayKetThuc");
+                + ") FROM domainModels.PhieuXuat px WHERE px.ngayTao > :ngayBatDau AND px.ngayTao < :ngayKetThuc "
+                + " ORDER BY px.ngayTao DESC");
         query.setParameter("ngayBatDau", ngayBatDau);
         query.setParameter("ngayKetThuc", ngayKetThuc);
         List<PhieuXuatCustom> list = query.getResultList();
@@ -76,7 +79,8 @@ public class NVQLQuanLyPhieuXuatRepository {
                 + "px.trangThai as trangThai,"
                 + "px.nhanVien as nhanVien,"
                 + "px.khachHang as khachHang"
-                + ") FROM domainModels.PhieuXuat px WHERE px.ngayThanhToan > :ngayBatDau AND px.ngayThanhToan < :ngayKetThuc");
+                + ") FROM domainModels.PhieuXuat px WHERE px.ngayThanhToan > :ngayBatDau AND px.ngayThanhToan < :ngayKetThuc "
+                + " ORDER BY px.ngayTao DESC");
         query.setParameter("ngayBatDau", ngayBatDau);
         query.setParameter("ngayKetThuc", ngayKetThuc);
         List<PhieuXuatCustom> list = query.getResultList();
@@ -142,7 +146,8 @@ public class NVQLQuanLyPhieuXuatRepository {
                     + "px.trangThai as trangThai,"
                     + "px.nhanVien as nhanVien,"
                     + "px.khachHang as khachHang"
-                    + ") FROM domainModels.PhieuXuat px WHERE px.id =:id");
+                    + ") FROM domainModels.PhieuXuat px WHERE px.id =:id "
+                    + " ORDER BY px.ngayTao DESC");
             query.setParameter("id", id);
             pxcs = (PhieuXuatCustom) query.getSingleResult();
         } catch (NoResultException e) {
@@ -176,7 +181,8 @@ public class NVQLQuanLyPhieuXuatRepository {
                 + "px.trangThai as trangThai,"
                 + "px.nhanVien as nhanVien,"
                 + "px.khachHang as khachHang"
-                + ") FROM domainModels.PhieuXuat px WHERE px.id =:id");
+                + ") FROM domainModels.PhieuXuat px WHERE px.id =:id "
+                + " ORDER BY px.ngayTao DESC");
         query.setParameter("id", id);
         List<PhieuXuatCustom> list = query.getResultList();
         return list;
@@ -192,7 +198,8 @@ public class NVQLQuanLyPhieuXuatRepository {
                 + "px.trangThai as trangThai,"
                 + "px.nhanVien as nhanVien,"
                 + "px.khachHang as khachHang"
-                + ") FROM domainModels.PhieuXuat px WHERE px.nhanVien.ma LIKE CONCAT('%',:ma,'%') AND px.trangThai =:tt");
+                + ") FROM domainModels.PhieuXuat px WHERE px.nhanVien.ma LIKE CONCAT('%',:ma,'%') AND px.trangThai =:tt "
+                + " ORDER BY px.ngayTao DESC");
         query.setParameter("ma", maNV);
         query.setParameter("tt", tt);
         List<PhieuXuatCustom> list = query.getResultList();
@@ -209,7 +216,8 @@ public class NVQLQuanLyPhieuXuatRepository {
                 + "px.trangThai as trangThai,"
                 + "px.nhanVien as nhanVien,"
                 + "px.khachHang as khachHang"
-                + ") FROM domainModels.PhieuXuat px WHERE px.khachHang.ma LIKE CONCAT('%',:ma,'%') AND px.trangThai =:tt");
+                + ") FROM domainModels.PhieuXuat px WHERE px.khachHang.ma LIKE CONCAT('%',:ma,'%') AND px.trangThai =:tt "
+                + " ORDER BY px.ngayTao DESC");
         query.setParameter("ma", maKH);
         query.setParameter("tt", tt);
         List<PhieuXuatCustom> list = query.getResultList();

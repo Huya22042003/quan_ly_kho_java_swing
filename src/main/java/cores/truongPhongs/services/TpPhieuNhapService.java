@@ -1,6 +1,8 @@
 package cores.truongPhongs.services;
 
 import cores.truongPhongs.customModels.TpPhieuNhapCustom;
+import domainModels.NhaCungCap;
+import domainModels.NhanVien;
 import infrastructures.constant.TrangThaiPhieuConstant;
 import java.util.Date;
 import java.util.List;
@@ -22,7 +24,7 @@ public interface TpPhieuNhapService {
     TrangThaiPhieuConstant loc(int a);
     List<TpPhieuNhapCustom> getListByNgayThanhToan(Long ngayBatDau, Long ngayKetThuc);
     List<TpPhieuNhapCustom> getListByNgayTao(Long ngayTao, Long ngayKetThuc);
-    
+    public NhanVien getNhanVienByMa(String ma);
 }
 
     

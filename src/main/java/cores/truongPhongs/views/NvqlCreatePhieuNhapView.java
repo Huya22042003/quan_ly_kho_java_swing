@@ -265,18 +265,18 @@ public class NvqlCreatePhieuNhapView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        TpPhieuNhapCustom check = this.getFormData();
-        if (check == null) {
-            return;
-        }
-
-        if (phieuNhapService.addPn(check) == null) {
-            MsgBox.alert(this, "Thêm thất bại");
-            this.setVisible(true);
-        } else {
-            MsgBox.alert(this, "Thêm thành công");
-            this.setVisible(false);
-        }
+//        TpPhieuNhapCustom check = this.getFormData();
+//        if (check == null) {
+//            return;
+//        }
+//
+//        if (phieuNhapService.addPn(check) == null) {
+//            MsgBox.alert(this, "Thêm thất bại");
+//            this.setVisible(true);
+//        } else {
+//            MsgBox.alert(this, "Thêm thành công");
+//            this.setVisible(false);
+//        }
 
     }//GEN-LAST:event_btnSaveActionPerformed
     int xx, xy;
@@ -295,18 +295,18 @@ public class NvqlCreatePhieuNhapView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbbNhanVienActionPerformed
 
-    public TpPhieuNhapCustom getFormData() {
-
-        String ghiChu = txtGhiChu.getText();
-        Date ngayNhap = dateNgayNhan.getDate();
-        Date ngayTao = new Date(DateTimeUtil.convertDateToTimeStampSecond());
-        TpPhieuNhapCustom pn = phieuNhapService.checkValidate(ghiChu, ngayNhap, ngayTao, errNgayNhan, errNgayTao, errGhiChu);
-        pn.setIdNcc(listNcc.get(cbbNhaCungCap.getSelectedIndex()).getId());
-        pn.setIdNhanVien(listNv.get(cbbNhanVien.getSelectedIndex()).getId());
-        pn.setTrangThai(phieuNhapService.loc(cbbTrangThai.getSelectedIndex()));
-
-        return pn;
-    }
+//    public TpPhieuNhapCustom getFormData() {
+//
+//        String ghiChu = txtGhiChu.getText();
+//        Date ngayNhap = dateNgayNhan.getDate();
+//        Date ngayTao = new Date(DateTimeUtil.convertDateToTimeStampSecond());
+//        TpPhieuNhapCustom pn = phieuNhapService.checkValidate(ghiChu, ngayNhap, ngayTao, errNgayNhan, errNgayTao, errGhiChu);
+//        pn.setIdNcc(listNcc.get(cbbNhaCungCap.getSelectedIndex()).getId());
+//        pn.setIdNhanVien(listNv.get(cbbNhanVien.getSelectedIndex()).getId());
+//        pn.setTrangThai(phieuNhapService.loc(cbbTrangThai.getSelectedIndex()));
+//
+//        return pn;
+//    }
 
     /**
      * @param args the command line arguments

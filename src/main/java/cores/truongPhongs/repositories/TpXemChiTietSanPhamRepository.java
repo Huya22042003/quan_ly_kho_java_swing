@@ -23,8 +23,9 @@ public class TpXemChiTietSanPhamRepository {
                 + "ct.namBaoHanh as namBaoHanh,"
                 + "ct.mau as mau,"
                 + "ct.sanPham as sanPham,"
-                + "ct.donVi as donVi,"
-                + "ct.trangThai as trangThai"
+                + "ct.donVi.donViGoc as donVi,"
+                + "ct.trangThai as trangThai,"
+                + "ct.soLuongTon as soLuongTon"
                 + ") from domainModels.ChiTietSanPham ct");
         ct = q.getResultList();
         s.close();

@@ -5,7 +5,6 @@
 package cores.truongPhongs.customModels;
 
 import infrastructures.constant.TrangThaiPhieuConstant;
-import infrastructures.constant.TrangThaiPhieuNhapConstant;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
