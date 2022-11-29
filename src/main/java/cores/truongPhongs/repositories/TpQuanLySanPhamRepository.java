@@ -48,7 +48,7 @@ public class TpQuanLySanPhamRepository {
 
     public boolean updateSanPham(SanPham sp) {
         Transaction tran = null;
-        try (Session s = HibernateUtil.getSessionFactory().openSession()) {
+        try ( Session s = HibernateUtil.getSessionFactory().openSession()) {
             tran = s.beginTransaction();
             s.update(sp);
             tran.commit();
@@ -62,7 +62,7 @@ public class TpQuanLySanPhamRepository {
 
     public boolean deleteSanPham(UUID id) {
         Transaction tran = null;
-        try (Session s = HibernateUtil.getSessionFactory().openSession()) {
+        try ( Session s = HibernateUtil.getSessionFactory().openSession()) {
             tran = s.beginTransaction();
             SanPham cs = s.find(SanPham.class, id);
             s.delete(cs);
@@ -77,7 +77,7 @@ public class TpQuanLySanPhamRepository {
 
     public TpQuanLySanPhamCustom findByMa(String ma) {
         TpQuanLySanPhamCustom sp = new TpQuanLySanPhamCustom();
-        try (Session s = HibernateUtil.getSessionFactory().openSession()) {
+        try ( Session s = HibernateUtil.getSessionFactory().openSession()) {
             Query q = s.createQuery("select new cores.truongPhongs.customModels.TpQuanLySanPhamCustom ("
                     + "sp.id as id,"
                     + "sp.ma as ma,"
@@ -129,4 +129,27 @@ public class TpQuanLySanPhamRepository {
         s.close();
         return sp;
     }
+
+    public static List<SanPham> getABC(Long ngayThanhToan) {
+        List<SanPham> list = new ArrayList<>();
+        Session s = HibernateUtil.getSessionFactory().openSession();
+        Query q = s.createNativeQuery("""                                           
+                                      select sp.Id, sp.ma, sp.ten,sum(ctpx.soluong) as SL, px.ngayThanhToan from sanpham sp
+                                      join chiTietSanPham ctsp on ctsp.idSanPham = sp.id
+                                      join chitietPhieuXuat ctpx on ctsp.id = ctpx.IdChiTietSP
+                                      join phieuXuat px  on px.id = ctpx.idphieuXuat
+                                      where px.NgayThanhToan = :ngayThanhToan
+                                      group by sp.id, sp.ma, sp.ten,px.NgayThanhToan
+                                      order by sum(ctpx.soluong) Desc                                           
+                                      """, SanPham.class);
+        q.setParameter("ngayThanhToan", ngayThanhToan);
+        list = q.getResultList();
+        s.close();
+        System.out.println(list.size());
+        return list;
+    }
+    public static void main(String[] args) {
+        getABC(16000L);
+    }
 }
+

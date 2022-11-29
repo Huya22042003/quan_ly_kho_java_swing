@@ -85,11 +85,10 @@ public class TpQuanLySanPhamServiceImpl implements TpQuanLySanPhamService {
         if (sp.getTen().trim().length() == 0) {
             erroTen.setText("Tên không được để trống");
             check = false;
-        } else if (sp.getTen().matches("\\d+")){
+        } else if (sp.getTen().matches("\\d+")) {
             erroTen.setText("Tên phải là chữ");
             check = false;
-        }
-        else {
+        } else {
             erroTen.setText("");
         }
 
@@ -103,6 +102,11 @@ public class TpQuanLySanPhamServiceImpl implements TpQuanLySanPhamService {
     @Override
     public SanPham findID(UUID id) {
         return rp.findID(id);
+    }
+
+    @Override
+    public List<SanPham> getABC(Long ngayThanhToan) {
+        return rp.getABC(ngayThanhToan);
     }
 
 }
