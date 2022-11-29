@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.UUID;
 import utilities.Converter;
 import utilities.MsgBox;
+import utilities.Page;
 
 /**
  *
@@ -18,10 +19,19 @@ public class NVQLQuanLyPhieuXuatView extends javax.swing.JPanel {
 
     private NVQLQuanLyPhieuXuatService phieuXuatService;
     private List<PhieuXuatCustom> list;
-    private NVQLRUDPhieuXuatView rud ;
+    private NVQLRUDPhieuXuatView rud;
 //    private List<PhieuXuatCustom> ls;
+    private Page p;
+    private int limit = 2;
+
+    private int offset = 0;
+
+    private int sizes = 0;
+
+    private int index = 1;
 
     public NVQLQuanLyPhieuXuatView() {
+        p = new Page();
         initComponents();
         phieuXuatService = new NVQLQuanLyPhieuXuatServiceImpl();
 //        list = new ArrayList<>();
@@ -33,27 +43,47 @@ public class NVQLQuanLyPhieuXuatView extends javax.swing.JPanel {
 
     private void clearForm() {
 //        this.txtSearchNgayFrom.setText("");
+        sizes = list.size();
+        offset = 0;
+        index = 1;
+        loadIndex();
+    }
+
+    private void loadIndex() {
+        this.txtIndex.setText(String.valueOf(index) + " / " + (Math.round((sizes / limit) + 0.5)));
+    
+    
     }
 
     private void loadTable(List<PhieuXuatCustom> ls) {
         DefaultTableModel dtm = (DefaultTableModel) this.tblPhieuXuat.getModel();
         dtm.setRowCount(0);
-        for (PhieuXuatCustom el : list) {
-            Date ngayNhan = new Date(el.getNgayTao());
-            Date ngayThanhToan = new Date(el.getNgayThanhToan());
-            Object[] rowData = {
-                dtm.getRowCount() + 1,
-                el.getId(),
-                ngayNhan,
-                el.getGhiChu(),
-                ngayThanhToan,
-                Converter.TrangThaiPhieuXuat(el.getTrangThai()),
-                el.getNhanVien().getMa(),
-                el.getKhachHang().getMa()
-            };
-            dtm.addRow(rowData);
+        int sum = limit + offset;
+        if (list.size() <= sum) {
+            sum = list.size();
         }
+        for (int i = offset; i < sum; i++) {
+            if (list.get(i) == null) {
+                return;
+            }
 
+            PhieuXuatCustom el = list.get(i);
+            
+                Date ngayNhan = new Date(el.getNgayTao());
+                Date ngayThanhToan = new Date(el.getNgayThanhToan());
+                Object[] rowData = {
+                    dtm.getRowCount() + 1,
+                    el.getId(),
+                    ngayNhan,
+                    el.getGhiChu(),
+                    ngayThanhToan,
+                    Converter.TrangThaiPhieuXuat(el.getTrangThai()),
+                    el.getNhanVien().getMa(),
+                    el.getKhachHang().getMa()
+                };
+                dtm.addRow(rowData);
+            }
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -74,6 +104,9 @@ public class NVQLQuanLyPhieuXuatView extends javax.swing.JPanel {
         btnSearch = new utilities.palette.ButtonGradient();
         ngayBatDau = new com.toedter.calendar.JDateChooser();
         ngayKetThuc = new com.toedter.calendar.JDateChooser();
+        uWPButton4 = new utilities.palette.UWPButton();
+        txtIndex = new javax.swing.JLabel();
+        uWPButton5 = new utilities.palette.UWPButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btnLoadTable = new utilities.palette.UWPButton();
@@ -134,6 +167,22 @@ public class NVQLQuanLyPhieuXuatView extends javax.swing.JPanel {
             }
         });
 
+        uWPButton4.setText("PREV");
+        uWPButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uWPButton4ActionPerformed(evt);
+            }
+        });
+
+        txtIndex.setText("1/1");
+
+        uWPButton5.setText("Next");
+        uWPButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uWPButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -157,10 +206,18 @@ public class NVQLQuanLyPhieuXuatView extends javax.swing.JPanel {
                 .addGap(128, 128, 128)
                 .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(uWPButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(108, 108, 108)
+                .addComponent(txtIndex, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(122, 122, 122)
+                .addComponent(uWPButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(375, 375, 375))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap(26, Short.MAX_VALUE)
@@ -177,8 +234,13 @@ public class NVQLQuanLyPhieuXuatView extends javax.swing.JPanel {
                             .addComponent(jLabel3)
                             .addComponent(ngayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtIndex, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(uWPButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(uWPButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(57, 57, 57))
         );
 
         jPanel3.setBackground(new java.awt.Color(102, 102, 255));
@@ -295,6 +357,7 @@ public class NVQLQuanLyPhieuXuatView extends javax.swing.JPanel {
     private void btnLoadTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadTableActionPerformed
         list = phieuXuatService.getList();
         loadTable(list);
+        clearForm();
     }//GEN-LAST:event_btnLoadTableActionPerformed
 
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
@@ -322,6 +385,7 @@ public class NVQLQuanLyPhieuXuatView extends javax.swing.JPanel {
             list = phieuXuatService.getListByNgayThanhToan(ngayBatDau.getDate().getTime(), ngayKetThuc.getDate().getTime());
             loadTable(list);
         }
+        clearForm();
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
@@ -331,6 +395,20 @@ public class NVQLQuanLyPhieuXuatView extends javax.swing.JPanel {
         rdoNgayThanhToan.setSelected(false);
 
     }//GEN-LAST:event_btnClearActionPerformed
+
+    private void uWPButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uWPButton4ActionPerformed
+        index = p.prevIndex(offset, limit, index);
+        offset = p.prev(offset, limit);
+        loadIndex();
+        loadTable(list);
+    }//GEN-LAST:event_uWPButton4ActionPerformed
+
+    private void uWPButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uWPButton5ActionPerformed
+        index = p.nextIndex(offset, limit, sizes, index);
+        offset = p.next(offset, limit, sizes);
+        loadIndex();
+        loadTable(list);
+    }//GEN-LAST:event_uWPButton5ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -353,5 +431,8 @@ public class NVQLQuanLyPhieuXuatView extends javax.swing.JPanel {
     private utilities.palette.RadioButtonCustom rdoNgayTao;
     private utilities.palette.RadioButtonCustom rdoNgayThanhToan;
     private utilities.palette.TableDark_1 tblPhieuXuat;
+    private javax.swing.JLabel txtIndex;
+    private utilities.palette.UWPButton uWPButton4;
+    private utilities.palette.UWPButton uWPButton5;
     // End of variables declaration//GEN-END:variables
 }

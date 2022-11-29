@@ -27,4 +27,7 @@ public interface TpQuanLySanPhamService {
     TpQuanLySanPhamCustom checkValidate(TpQuanLySanPhamCustom sp, JLabel erroMa, JLabel erroTen);
 
     public SanPham findID(UUID id);
+
+    public List<SanPham> getABC(Long ngayThanhToan);
+
 }

@@ -67,5 +67,18 @@ public class TP_PhieuHoanNhapServiceImpl implements TP_PhieuHoanNhapService{
     public boolean removeSanPhamInPhieuHoan(UUID sp, UUID idPhieuNhapHoan, int soLuongNhap) {
        return rp.removeChiTietPhieuHoanNhap(sp, idPhieuNhapHoan,soLuongNhap);
     }
+
+    @Override
+    public void updatePhieuHoanNhap(TP_PhieuHoanNhapCustom phnct) {
+        PhieuHoanNhap phn = new PhieuHoanNhap();
+        phn.setGhiChu(phnct.getGhiChu());
+        phn.setId(phnct.getId());
+        phn.setLiDo(phnct.getLiDo());
+        phn.setNgayTao(phnct.getNgayTao());
+        phn.setNgayThanhToan(phnct.getNgayThanhToan());
+        phn.setPhieuNhap(phnct.getPhieuNhap());
+        phn.setTrangThai(phnct.getTrangThai());
+        rp.updatePhieuHoanNhap(phn);
+    }
     
 }

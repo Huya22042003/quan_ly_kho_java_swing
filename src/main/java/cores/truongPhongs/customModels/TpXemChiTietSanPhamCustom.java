@@ -27,7 +27,6 @@ public class TpXemChiTietSanPhamCustom {
 
     private UUID id;
 
-
     private String hinhAnh;
 
     private BigDecimal GiaNhap;
@@ -40,7 +39,9 @@ public class TpXemChiTietSanPhamCustom {
 
     private SanPham sanPham;
 
-    private DonVi donVi;
+    private String donVi;
     
     private TrangThaiSanPhamConstanst trangThai;
+    
+    private int soLuongTon;
 }

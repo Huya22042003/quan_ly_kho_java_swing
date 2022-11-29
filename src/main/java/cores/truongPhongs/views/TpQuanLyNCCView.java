@@ -6,6 +6,7 @@ import cores.truongPhongs.services.serviceImpls.TpQuanlyNhaCungCapServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import utilities.Page;
 
 /**
  *
@@ -16,8 +17,17 @@ public class TpQuanLyNCCView extends javax.swing.JPanel {
     private TpQuanlyNhaCungCapService nccService;
     private List<NhaCungCapCustom> getList;
     private TpCreateNCCView creat;
+     private Page p;
+    private int limit = 7;
+
+    private int offset = 0;
+
+    private int sizes = 0;
+
+    private int index = 1;
 
     public TpQuanLyNCCView() {
+        p = new Page();
         initComponents();
         nccService = new TpQuanlyNhaCungCapServiceImpl();
         getList = new ArrayList<>();
@@ -29,11 +39,30 @@ public class TpQuanLyNCCView extends javax.swing.JPanel {
 
     private void clearForm() {
         this.txtSearchTheoMa.setText("");
+        sizes = getList.size();
+        offset = 0;
+        index = 1;
+        loadIndex();
     }
+
+    private void loadIndex() {
+        this.txtIndex.setText(String.valueOf(index) + " / " + (Math.ceil((sizes / limit) + 0.5)));
+    }
+    
 
     private void loadTable(List<NhaCungCapCustom> list) {
         DefaultTableModel dtm = (DefaultTableModel) this.tblNhaCungCap.getModel();
         dtm.setRowCount(0);
+        int sum = limit + offset;
+        if (list.size() <= sum) {
+            sum = list.size();
+        }
+        for (int i = offset; i < sum; i++) {
+            if (list.get(i) == null) {
+                return;
+            }
+
+        NhaCungCapCustom nc = list.get(i);
         for (NhaCungCapCustom el : getList) {
             Object[] rowData = {
                 dtm.getRowCount() + 1,
@@ -46,6 +75,7 @@ public class TpQuanLyNCCView extends javax.swing.JPanel {
                 el.getTrangThai()
             };
             dtm.addRow(rowData);
+        }
         }
     }
     public void fillData(int i){
@@ -74,6 +104,9 @@ public class TpQuanLyNCCView extends javax.swing.JPanel {
         panelRound16 = new utilities.palette.PanelRound();
         btnThem = new utilities.palette.MyButton();
         btnHienThi = new utilities.palette.MyButton();
+        uWPButton4 = new utilities.palette.UWPButton();
+        txtIndex = new javax.swing.JLabel();
+        uWPButton5 = new utilities.palette.UWPButton();
         panelRound3 = new utilities.palette.PanelRound();
         jLabel1 = new javax.swing.JLabel();
         txtTen = new utilities.palette.TextField();
@@ -209,6 +242,22 @@ public class TpQuanLyNCCView extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        uWPButton4.setText("PREV");
+        uWPButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uWPButton4ActionPerformed(evt);
+            }
+        });
+
+        txtIndex.setText("1/1");
+
+        uWPButton5.setText("Next");
+        uWPButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uWPButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
         panelRound1.setLayout(panelRound1Layout);
         panelRound1Layout.setHorizontalGroup(
@@ -230,6 +279,14 @@ public class TpQuanLyNCCView extends javax.swing.JPanel {
                                 .addComponent(panelRound16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(38, 38, 38)))))
                 .addContainerGap(33, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(uWPButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(108, 108, 108)
+                .addComponent(txtIndex, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(122, 122, 122)
+                .addComponent(uWPButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(180, 180, 180))
         );
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -237,14 +294,19 @@ public class TpQuanLyNCCView extends javax.swing.JPanel {
                 .addGap(39, 39, 39)
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(panelRound16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelRound15, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(panelRound15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(62, 62, 62)
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtSearchTheoMa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtIndex, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(uWPButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(uWPButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(29, 29, 29))
         );
 
         panelRound3.setBackground(new java.awt.Color(228, 206, 224));
@@ -385,6 +447,7 @@ public class TpQuanLyNCCView extends javax.swing.JPanel {
     private void txtSearchTheoMaCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtSearchTheoMaCaretUpdate
         getList = nccService.getListByMa(txtSearchTheoMa.getText());
         loadTable(getList);
+        clearForm();
     }//GEN-LAST:event_txtSearchTheoMaCaretUpdate
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
@@ -408,6 +471,20 @@ public class TpQuanLyNCCView extends javax.swing.JPanel {
         txtTrangThai.setText("");
     }//GEN-LAST:event_myButton7ActionPerformed
 
+    private void uWPButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uWPButton4ActionPerformed
+        index = p.prevIndex(offset, limit, index);
+        offset = p.prev(offset, limit);
+        loadIndex();
+        loadTable(getList);
+    }//GEN-LAST:event_uWPButton4ActionPerformed
+
+    private void uWPButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uWPButton5ActionPerformed
+        index = p.nextIndex(offset, limit, sizes, index);
+        offset = p.next(offset, limit, sizes);
+        loadIndex();
+        loadTable(getList);
+    }//GEN-LAST:event_uWPButton5ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private utilities.palette.MyButton btnHienThi;
@@ -426,10 +503,13 @@ public class TpQuanLyNCCView extends javax.swing.JPanel {
     private utilities.palette.TextField txtDanhGia;
     private utilities.palette.TextField txtDiaChi;
     private utilities.palette.TextField txtEmail;
+    private javax.swing.JLabel txtIndex;
     private utilities.palette.TextField txtSDT;
     private utilities.palette.TextField txtSearchTheoMa;
     private utilities.palette.TextField txtTen;
     private utilities.palette.TextField txtTrangThai;
     private utilities.palette.TextField txtma;
+    private utilities.palette.UWPButton uWPButton4;
+    private utilities.palette.UWPButton uWPButton5;
     // End of variables declaration//GEN-END:variables
 }

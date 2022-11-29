@@ -90,6 +90,15 @@
                   </Group>
                   <EmptySpace pref="19" max="32767" attributes="0"/>
               </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="uWPButton4" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="108" max="-2" attributes="0"/>
+                  <Component id="txtIndex" min="-2" pref="72" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="122" max="-2" attributes="0"/>
+                  <Component id="uWPButton5" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="333" max="-2" attributes="0"/>
+              </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -123,8 +132,16 @@
                       <Component id="panelRound4" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" min="-2" pref="315" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                  <Component id="jScrollPane1" min="-2" pref="251" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                          <Component id="uWPButton4" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
+                          <Component id="txtIndex" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="uWPButton5" alignment="0" min="-2" pref="49" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -255,9 +272,6 @@
                   <Font name="Segoe UI" size="14" style="1"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdoNhanVienActionPerformed"/>
-              </Events>
             </Component>
             <Component class="utilities.palette.RadioButtonCustom" name="rdoNcc">
               <Properties>
@@ -272,9 +286,6 @@
                   <Font name="Segoe UI" size="14" style="1"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdoNccActionPerformed"/>
-              </Events>
             </Component>
             <Component class="utilities.palette.SearchCustom.TextFieldAnimation" name="textFieldAnimation1">
             </Component>
@@ -291,9 +302,6 @@
                   <Font name="Segoe UI" size="14" style="1"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdoMa1ActionPerformed"/>
-              </Events>
             </Component>
             <Component class="utilities.palette.Combobox" name="combobox1">
               <Properties>
@@ -301,11 +309,13 @@
                   <Color blue="bb" green="82" red="43" type="rgb"/>
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="2">
-                    <StringItem index="0" value="deadae"/>
-                    <StringItem index="1" value="edde"/>
+                  <StringArray count="3">
+                    <StringItem index="0" value="Blue"/>
+                    <StringItem index="1" value="Red"/>
+                    <StringItem index="2" value="Pig"/>
                   </StringArray>
                 </Property>
+                <Property name="selectedIndex" type="int" value="-1"/>
                 <Property name="toolTipText" type="java.lang.String" value="Ch&#x1ecd;n m&#xe0;u s&#x1eaf;c s&#x1ea3;n ph&#x1ea9;m mu&#x1ed1;n t&#xec;m ki&#x1ebf;m"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="1"/>
@@ -315,9 +325,6 @@
                   <Color blue="f9" green="c8" red="91" type="rgb"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="combobox1ActionPerformed"/>
-              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -436,7 +443,7 @@
                       <Component id="myButton6" min="-2" pref="75" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="myButton7" min="-2" pref="75" max="-2" attributes="0"/>
-                      <EmptySpace pref="7" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -572,6 +579,27 @@
               <Font name="Segoe UI" size="12" style="1"/>
             </Property>
             <Property name="labelText" type="java.lang.String" value="Gi&#xe1; nh&#x1ead;p"/>
+          </Properties>
+        </Component>
+        <Component class="utilities.palette.UWPButton" name="uWPButton4">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="PREV"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="uWPButton4ActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="utilities.palette.UWPButton" name="uWPButton5">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Next"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="uWPButton5ActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="txtIndex">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="1/1"/>
           </Properties>
         </Component>
       </SubComponents>

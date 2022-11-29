@@ -17,7 +17,7 @@ public class testAllKH extends javax.swing.JFrame {
      */
     public testAllKH() {
         initComponents();
-        TP_KhachHangForm a = new TP_KhachHangForm();
+        TpChonSanPhamThemVaoPhieuNhap a = new TpChonSanPhamThemVaoPhieuNhap();
         this.add(a);
         this.setLayout(new FlowLayout());
         this.pack();

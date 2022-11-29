@@ -38,7 +38,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="40" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="51" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -63,7 +63,13 @@
                   <Component id="jPanel2" min="-2" pref="56" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="827" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="349" max="-2" attributes="0"/>
+                          <Component id="uWPButton4" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="108" max="-2" attributes="0"/>
+                          <Component id="txtIndex" min="-2" pref="72" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="122" max="-2" attributes="0"/>
+                          <Component id="uWPButton5" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="erroMa" min="-2" pref="171" max="-2" attributes="0"/>
                               <Component id="erroViTri" alignment="1" min="-2" pref="171" max="-2" attributes="0"/>
@@ -111,12 +117,19 @@
                       </Group>
                       <Component id="panelRound3" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="erroMa" alignment="0" min="-2" pref="24" max="-2" attributes="0"/>
-                      <Component id="erroTen" alignment="0" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="erroMa" alignment="0" min="-2" pref="24" max="-2" attributes="0"/>
+                              <Component id="erroTen" alignment="0" min="-2" pref="24" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="erroViTri" min="-2" pref="24" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="txtIndex" alignment="1" min="-2" pref="48" max="-2" attributes="0"/>
+                      <Component id="uWPButton5" alignment="1" min="-2" pref="48" max="-2" attributes="0"/>
+                      <Component id="uWPButton4" alignment="0" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="erroViTri" min="-2" pref="24" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -498,6 +511,27 @@
               <Image iconType="3" name="/icons/d8566d8da1401a4114298a7726147ec8.jpg"/>
             </Property>
           </Properties>
+        </Component>
+        <Component class="utilities.palette.UWPButton" name="uWPButton4">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="PREV"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="uWPButton4ActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="txtIndex">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="1/1"/>
+          </Properties>
+        </Component>
+        <Component class="utilities.palette.UWPButton" name="uWPButton5">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Next"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="uWPButton5ActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

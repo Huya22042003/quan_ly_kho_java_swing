@@ -17,8 +17,7 @@ public class view extends javax.swing.JFrame {
      */
     public view() {
         initComponents();
-        TpPhieuNhapView a = new TpPhieuNhapView();
-
+        TpLuongNhapView a = new TpLuongNhapView();
 
         this.add(a);
         this.setLayout(new FlowLayout());
