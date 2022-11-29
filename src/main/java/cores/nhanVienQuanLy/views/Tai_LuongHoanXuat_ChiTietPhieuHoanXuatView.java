@@ -256,6 +256,7 @@ public class Tai_LuongHoanXuat_ChiTietPhieuHoanXuatView extends javax.swing.JFra
         txtIDSP.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtIDSP.setLabelText("ID Sản phẩm");
 
+        txtMaPhieu.setEditable(false);
         txtMaPhieu.setBackground(new java.awt.Color(228, 206, 224));
         txtMaPhieu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtMaPhieu.setLabelText("Mã phiếu hoàn");

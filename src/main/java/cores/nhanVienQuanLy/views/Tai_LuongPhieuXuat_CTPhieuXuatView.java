@@ -286,6 +286,7 @@ public class Tai_LuongPhieuXuat_CTPhieuXuatView extends javax.swing.JFrame {
         txtIDSP.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtIDSP.setLabelText("ID Sản phẩm");
 
+        txtMaPhieu.setEditable(false);
         txtMaPhieu.setBackground(new java.awt.Color(228, 206, 224));
         txtMaPhieu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtMaPhieu.setLabelText("Mã phiếu ");
@@ -310,6 +311,7 @@ public class Tai_LuongPhieuXuat_CTPhieuXuatView extends javax.swing.JFrame {
             }
         });
 
+        txtMau.setEditable(false);
         txtMau.setBackground(new java.awt.Color(228, 206, 224));
         txtMau.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtMau.setLabelText("Màu");

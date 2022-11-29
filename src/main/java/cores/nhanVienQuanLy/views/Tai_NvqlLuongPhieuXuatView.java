@@ -33,6 +33,7 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
     private Tai_LuongPhieuXuat_CTPhieuXuatView ctpxView;
     private Tai_LuongPhieuXuat_CTSanPhamView ctspView;
     private Tai_ChonKhachHangView chonKhView;
+
     private Page p;
 
     private int limit = 7;
@@ -44,7 +45,6 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
     private int index = 1;
 
     public Tai_NvqlLuongPhieuXuatView() {
-        p = new Page();
         initComponents();
         luongPxService = new Tai_NvqlLuongPhieuXuatServiceImpl();
         phieuXuatService = new NVQLQuanLyPhieuXuatServiceImpl();
@@ -88,6 +88,7 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
     private void clearForm() {
         txtGhiChu.setText("");
 //        cbbKhachHang.setSelectedIndex(0);
+        txtMaKhachHang.setText("");
         txtMaPhieu.setText("");
         txtNgayTao.setText("");
         txtNgayThanhToan.setText("");
@@ -110,6 +111,7 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
         index = 1;
         loadIndex();
     }
+
     private void loadIndex() {
         this.txtIndex.setText(String.valueOf(index) + " / " + (Math.round((sizes / limit) + 0.5)));
     }
@@ -569,6 +571,7 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
         txtNgayTao.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtNgayTao.setLabelText("Ngày tạo");
 
+        txtMaPhieu.setEditable(false);
         txtMaPhieu.setBackground(new java.awt.Color(228, 206, 224));
         txtMaPhieu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtMaPhieu.setLabelText("Mã phiếu ");
@@ -582,12 +585,14 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
         textAreaScroll1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         textAreaScroll1.setLabelText("Ghi chú");
 
+        txtGhiChu.setEditable(false);
         txtGhiChu.setBackground(new java.awt.Color(228, 206, 224));
         txtGhiChu.setColumns(20);
         txtGhiChu.setRows(5);
         txtGhiChu.setDisabledTextColor(new java.awt.Color(204, 204, 255));
         textAreaScroll1.setViewportView(txtGhiChu);
 
+        txtTienPhaitra.setEditable(false);
         txtTienPhaitra.setBackground(new java.awt.Color(228, 206, 224));
         txtTienPhaitra.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtTienPhaitra.setLabelText("Tiền phải trả");
@@ -605,6 +610,7 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
             }
         });
 
+        txtTrangThai.setEditable(false);
         txtTrangThai.setBackground(new java.awt.Color(228, 206, 224));
         txtTrangThai.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtTrangThai.setLabelText("Trạng thái");
@@ -628,6 +634,7 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
             }
         });
 
+        txtTienThua.setEditable(false);
         txtTienThua.setBackground(new java.awt.Color(228, 206, 224));
         txtTienThua.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtTienThua.setLabelText("Tiền thừa");
@@ -811,7 +818,9 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
         for (Luong_ChiTietPhieuXuatCustom ctpx : listCTPX) {
             tien += ctpx.getIdChiTietSp().getGiaBan().multiply(new BigDecimal(ctpx.getSoLuong())).doubleValue();
         }
-        txtTienPhaitra.setText(tien + "");
+        int tongTien =(int)tien;
+
+        txtTienPhaitra.setText(tongTien + "");
         if (txtTrangThai.getText().equalsIgnoreCase("Đã Thanh Toán")) {
             btnThanhToan.setEnabled(false);
         } else {
@@ -877,7 +886,8 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
         }
 
         double tienThua = tienKhach - Double.valueOf(tienPhaiTra);
-        txtTienThua.setText(tienThua + "");
+        int tien = (int) tienThua;
+        txtTienThua.setText(tien + "");
     }//GEN-LAST:event_txtTienKhachDuaCaretUpdate
 
     private void btnChiTietSP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChiTietSP1ActionPerformed
