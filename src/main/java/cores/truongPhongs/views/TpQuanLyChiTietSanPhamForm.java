@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import utilities.Converter;
+import utilities.Page;
 
 /**
  *
@@ -24,10 +25,20 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
 
     private TpQuanLyChiTietSanPhamAdd createView;
     private TpQuanLyChiTietSanPhamU rud;
+    private Page p;
+
+    private int limit = 7;
+
+    private int offset = 0;
+
+    private int sizes = 0;
+
+    private int index = 1;
 
     public TpQuanLyChiTietSanPhamForm() {
         createView = new TpQuanLyChiTietSanPhamAdd();
         rud = new TpQuanLyChiTietSanPhamU();
+        p = new Page();
         initComponents();
         tbChiTietSanPham.setModel(dtm);
         String[] hearders = {"STT", "Giá Bán", "Giá Nhập", "Sản Phẩm", "Màu"};
@@ -39,7 +50,16 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
 
     public void showData(List<TpQuanLyChiTietSanPhamCustom> list) {
         dtm.setRowCount(0);
-        for (TpQuanLyChiTietSanPhamCustom ct : list) {
+        int sum = limit + offset;
+        if (list.size() <= sum) {
+            sum = list.size();
+        }
+        for (int i = offset; i < sum; i++) {
+            if (list.get(i) == null) {
+                return;
+            }
+            TpQuanLyChiTietSanPhamCustom ct = list.get(i);
+
             dtm.addRow(new Object[]{
                 dtm.getRowCount() + 1,
                 ct.getGiaBan(), ct.getGiaNhap(), ct.getSanPham().getTen(),
@@ -67,8 +87,14 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
     public void clearForm() {
         rdoGiaNhap.setSelected(true);
         listChiTietSP = serviceChiTietSP.findAllByRadio(0, serviceChiTietSP.loc(cbMauSac.getSelectedIndex()), "");
+        sizes = listChiTietSP.size();
+        offset = 0;
+        index = 1;
+        loadIndex();
     }
-
+    private void loadIndex() {
+        this.txtIndex.setText(String.valueOf(index) + " / " + (Math.round((sizes / limit) + 0.5)));
+    }
     public void fillData(int i) {
         TpQuanLyChiTietSanPhamCustom ct = listChiTietSP.get(i);
         txtTenSP.setText(ct.getSanPham().getTen());
@@ -112,6 +138,9 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
         btnSearch = new utilities.palette.MyButton();
         panelRound5 = new utilities.palette.PanelRound();
         jLabel3 = new javax.swing.JLabel();
+        txtIndex = new javax.swing.JLabel();
+        uWPButton5 = new utilities.palette.UWPButton();
+        uWPButton4 = new utilities.palette.UWPButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -230,7 +259,7 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
         panelRound6Layout.setVerticalGroup(
             panelRound6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound6Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(445, Short.MAX_VALUE)
                 .addComponent(test1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(71, 71, 71))
         );
@@ -438,24 +467,50 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
+        txtIndex.setText("1/1");
+
+        uWPButton5.setText("Next");
+        uWPButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uWPButton5ActionPerformed(evt);
+            }
+        });
+
+        uWPButton4.setText("PREV");
+        uWPButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uWPButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
         panelRound1.setLayout(panelRound1Layout);
         panelRound1Layout.setHorizontalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
                 .addComponent(panelRound6, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53)
-                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(127, 127, 127)
-                        .addComponent(panelRound8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addComponent(panelRound15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35)
-                        .addComponent(panelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1))
-                .addContainerGap(43, Short.MAX_VALUE))
+                        .addGap(53, 53, 53)
+                        .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(panelRound1Layout.createSequentialGroup()
+                                .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(127, 127, 127)
+                                .addComponent(panelRound8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelRound1Layout.createSequentialGroup()
+                                .addComponent(panelRound15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(35, 35, 35)
+                                .addComponent(panelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1))
+                        .addContainerGap(43, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(uWPButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(108, 108, 108)
+                        .addComponent(txtIndex, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(122, 122, 122)
+                        .addComponent(uWPButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(156, 156, 156))))
         );
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -470,8 +525,14 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
                     .addComponent(panelRound15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(panelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(46, 46, 46)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(uWPButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtIndex, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(uWPButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -524,6 +585,20 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
         showData(listChiTietSP);
     }//GEN-LAST:event_btnHienThiActionPerformed
 
+    private void uWPButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uWPButton5ActionPerformed
+        index = p.nextIndex(offset, limit, sizes, index);
+        offset = p.next(offset, limit, sizes);
+        loadIndex();
+        showData(listChiTietSP);
+    }//GEN-LAST:event_uWPButton5ActionPerformed
+
+    private void uWPButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uWPButton4ActionPerformed
+        index = p.prevIndex(offset, limit, index);
+        offset = p.prev(offset, limit);
+        loadIndex();
+        showData(listChiTietSP);
+    }//GEN-LAST:event_uWPButton4ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private utilities.palette.MyButton btnChon;
@@ -549,11 +624,14 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
     private utilities.palette.TableDark_1 tbChiTietSanPham;
     private javax.swing.JLabel test1;
     private utilities.palette.TextField txtDonVi;
+    private javax.swing.JLabel txtIndex;
     private utilities.palette.TextField txtMaSP;
     private utilities.palette.TextField txtMau;
     private utilities.palette.TextField txtNamBH;
     private utilities.palette.SearchCustom.TextFieldAnimation txtSearchTheo;
     private utilities.palette.TextField txtSoLuongTon;
     private utilities.palette.TextField txtTenSP;
+    private utilities.palette.UWPButton uWPButton4;
+    private utilities.palette.UWPButton uWPButton5;
     // End of variables declaration//GEN-END:variables
 }

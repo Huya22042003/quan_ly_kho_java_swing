@@ -9,32 +9,52 @@ import java.util.UUID;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import utilities.Converter;
+import utilities.Page;
 
 /**
  *
  * @author Acer
  */
 public class TpChonSanPhamThemVaoPhieuNhap extends javax.swing.JFrame {
-
+    
     private TpXemChiTietSanPhamService ctspService = new TpXemChiTietSanPhamImpl();
     private List<TpXemChiTietSanPhamCustom> listSp = new ArrayList<>();
+    private Page p;
     
+    private int limit = 7;
+    
+    private int offset = 0;
+    
+    private int sizes = 0;
+    
+    private int index = 1;
+
     public TpChonSanPhamThemVaoPhieuNhap() {
+        p = new Page();
         initComponents();
         listSp = ctspService.listCtsp();
         loadTableNcc(listSp);
     }
-
+    
     TpChonSanPhamThemVaoPhieuNhap(UUID id) {
         initComponents();
         listSp = ctspService.listCtsp();
         loadTableNcc(listSp);
     }
-
+    
     private void loadTableNcc(List<TpXemChiTietSanPhamCustom> list) {
         DefaultTableModel dtm = (DefaultTableModel) this.tblCtsp.getModel();
         dtm.setRowCount(0);
-        for (TpXemChiTietSanPhamCustom sp : list) {
+        int sum = limit + offset;
+        if (list.size() <= sum) {
+            sum = list.size();
+        }
+        for (int i = offset; i < sum; i++) {
+            if (list.get(i) == null) {
+                return;
+            }
+            TpXemChiTietSanPhamCustom sp = list.get(i);
+            
             Object[] rowData = {
                 dtm.getRowCount() + 1,
                 sp.getSanPham().getMa(),
@@ -48,6 +68,10 @@ public class TpChonSanPhamThemVaoPhieuNhap extends javax.swing.JFrame {
             };
             dtm.addRow(rowData);
         }
+    }
+
+    private void loadIndex() {
+        this.txtIndex.setText(String.valueOf(index) + " / " + (Math.round((sizes / limit) + 0.5)));
     }
 
     @SuppressWarnings("unchecked")
@@ -76,6 +100,9 @@ public class TpChonSanPhamThemVaoPhieuNhap extends javax.swing.JFrame {
         textField13 = new utilities.palette.TextField();
         textField14 = new utilities.palette.TextField();
         btnOK = new utilities.palette.MyButton();
+        uWPButton4 = new utilities.palette.UWPButton();
+        uWPButton5 = new utilities.palette.UWPButton();
+        txtIndex = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -302,7 +329,6 @@ public class TpChonSanPhamThemVaoPhieuNhap extends javax.swing.JFrame {
         textField14.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         textField14.setLabelText("Đơn vị");
 
-        btnOK.setBackground(new java.awt.Color(0, 0, 153));
         btnOK.setBorder(null);
         btnOK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Accept.png"))); // NOI18N
         btnOK.setBorderColor(new java.awt.Color(221, 242, 244));
@@ -313,6 +339,22 @@ public class TpChonSanPhamThemVaoPhieuNhap extends javax.swing.JFrame {
                 btnOKActionPerformed(evt);
             }
         });
+
+        uWPButton4.setText("PREV");
+        uWPButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uWPButton4ActionPerformed(evt);
+            }
+        });
+
+        uWPButton5.setText("Next");
+        uWPButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uWPButton5ActionPerformed(evt);
+            }
+        });
+
+        txtIndex.setText("1/1");
 
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
         panelRound1.setLayout(panelRound1Layout);
@@ -351,6 +393,14 @@ public class TpChonSanPhamThemVaoPhieuNhap extends javax.swing.JFrame {
                                 .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap(17, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(uWPButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(108, 108, 108)
+                .addComponent(txtIndex, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(122, 122, 122)
+                .addComponent(uWPButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(333, 333, 333))
         );
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -383,8 +433,14 @@ public class TpChonSanPhamThemVaoPhieuNhap extends javax.swing.JFrame {
                     .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(panelRound4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(uWPButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtIndex, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(uWPButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -447,9 +503,9 @@ public class TpChonSanPhamThemVaoPhieuNhap extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Bạn hãy chọn một sản phẩm !");
             return;
         }
-
-       String chuso = JOptionPane.showInputDialog("Bạn muốn nhập vào bao nhiêu sản phẩm này?");
-       int soluong = 0;
+        
+        String chuso = JOptionPane.showInputDialog("Bạn muốn nhập vào bao nhiêu sản phẩm này?");
+        int soluong = 0;
         try {
             soluong = Integer.parseInt(chuso);
         } catch (Exception e) {
@@ -457,15 +513,28 @@ public class TpChonSanPhamThemVaoPhieuNhap extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Bạn phải nhập số lượng là chữ số!");
             return;
         }
-        if(soluong<= 0){
+        if (soluong <= 0) {
             JOptionPane.showMessageDialog(this, "Số lượng phải lớn hơn 0!");
             return;
         }
 //        if()
         
-        
 
     }//GEN-LAST:event_btnOKActionPerformed
+
+    private void uWPButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uWPButton4ActionPerformed
+        index = p.prevIndex(offset, limit, index);
+        offset = p.prev(offset, limit);
+        loadIndex();
+        loadTableNcc(listSp);
+    }//GEN-LAST:event_uWPButton4ActionPerformed
+
+    private void uWPButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uWPButton5ActionPerformed
+        index = p.nextIndex(offset, limit, sizes, index);
+        offset = p.next(offset, limit, sizes);
+        loadIndex();
+        loadTableNcc(listSp);
+    }//GEN-LAST:event_uWPButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -526,5 +595,8 @@ public class TpChonSanPhamThemVaoPhieuNhap extends javax.swing.JFrame {
     private utilities.palette.TextField textField8;
     private utilities.palette.TextField textField9;
     private utilities.palette.SearchCustom.TextFieldAnimation textFieldAnimation1;
+    private javax.swing.JLabel txtIndex;
+    private utilities.palette.UWPButton uWPButton4;
+    private utilities.palette.UWPButton uWPButton5;
     // End of variables declaration//GEN-END:variables
 }

@@ -20,7 +20,7 @@ public class test extends javax.swing.JFrame {
      */
     public test() {
         initComponents();
-        ThongKeView a = new ThongKeView();
+        Tai_NvqlLuongPhieuXuatView a = new Tai_NvqlLuongPhieuXuatView();
         this.add(a);
         this.setLayout(new FlowLayout());
         this.pack();
