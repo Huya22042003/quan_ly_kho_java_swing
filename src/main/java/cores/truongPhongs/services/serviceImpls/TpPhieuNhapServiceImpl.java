@@ -44,10 +44,10 @@ public class TpPhieuNhapServiceImpl implements TpPhieuNhapService {
 
     @Override
     public TpPhieuNhapCustom addPn(TpPhieuNhapCustom p) {
-        p.setNgayTao(utilities.DateTimeUtil.convertDateToTimeStampSecond());
-        p.setIdNhanVien(UUID.fromString("6e6bd9d9-e92b-7247-b2ee-f75d2f528127"));
+//        p.setNgayTao(utilities.DateTimeUtil.convertDateToTimeStampSecond());
+//        p.setIdNhanVien(UUID.fromString("0E949885-8C5C-6A44-8E30-A8A8A3526A01"));
         NhaCungCap ncc = repoNcc.getNccById(p.getIdNcc());
-        NhanVien nv = repoNv.getNhanVienById(p.getIdNhanVien());
+        NhanVien nv = repoNv.getNhanVienById(Auth.nhanVien.getId());
         PhieuNhap pn = new PhieuNhap();
         pn.setGhiChu(p.getGhiChu());
         pn.setNgayThanhToan(p.getNgayThanhToan());
@@ -129,6 +129,11 @@ public class TpPhieuNhapServiceImpl implements TpPhieuNhapService {
     @Override
     public List<TpPhieuNhapCustom> getListByNgayTao(Long ngayTao, Long ngayKetThuc) {
         return repo.getListByNgayTao(ngayTao, ngayKetThuc);
+    }
+
+    @Override
+    public NhanVien getNhanVienByMa(String ma) {
+        return repo.getNhanVienByMa(ma);
     }
 
 }

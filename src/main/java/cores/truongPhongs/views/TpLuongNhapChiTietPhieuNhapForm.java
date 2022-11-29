@@ -4,16 +4,26 @@
  */
 package cores.truongPhongs.views;
 
+import cores.truongPhongs.customModels.TpPhieuNhapChiTietCustom;
+import cores.truongPhongs.customModels.TpPhieuNhapCustom;
+
 /**
  *
  * @author Acer
  */
-public class NvqlXemChiTietPhieuNhapForm extends javax.swing.JPanel {
+public class TpLuongNhapChiTietPhieuNhapForm extends javax.swing.JPanel {
 
     /**
      * Creates new form NvqlXemChiTietPhieuNhapForm
      */
-    public NvqlXemChiTietPhieuNhapForm() {
+    private TpPhieuNhapCustom phieuNhap;
+
+    public void setPhieuNhap(TpPhieuNhapCustom phieuNhap) {
+        this.phieuNhap = phieuNhap;
+
+    }
+
+    public TpLuongNhapChiTietPhieuNhapForm() {
         initComponents();
     }
 
@@ -84,43 +94,24 @@ public class NvqlXemChiTietPhieuNhapForm extends javax.swing.JPanel {
         rdoNhanVien.setForeground(new java.awt.Color(255, 255, 255));
         rdoNhanVien.setText("Mã sản phẩm");
         rdoNhanVien.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        rdoNhanVien.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdoNhanVienActionPerformed(evt);
-            }
-        });
 
         rdoNcc.setBackground(new java.awt.Color(67, 130, 187));
         rdoNcc.setForeground(new java.awt.Color(255, 255, 255));
         rdoNcc.setText("Tên sản phẩm");
         rdoNcc.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        rdoNcc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdoNccActionPerformed(evt);
-            }
-        });
 
         rdoMa1.setBackground(new java.awt.Color(67, 130, 187));
         rdoMa1.setForeground(new java.awt.Color(255, 255, 255));
         rdoMa1.setText("Năm bảo hành");
         rdoMa1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        rdoMa1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdoMa1ActionPerformed(evt);
-            }
-        });
 
         combobox1.setBackground(new java.awt.Color(67, 130, 187));
-        combobox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "deadae", "edde" }));
+        combobox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Blue", "Red", "Pig" }));
+        combobox1.setSelectedIndex(-1);
         combobox1.setToolTipText("Chọn màu sắc sản phẩm muốn tìm kiếm");
         combobox1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         combobox1.setLabeText("Màu sắc");
         combobox1.setLineColor(new java.awt.Color(145, 200, 249));
-        combobox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                combobox1ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout panelRound4Layout = new javax.swing.GroupLayout(panelRound4);
         panelRound4.setLayout(panelRound4Layout);
@@ -247,7 +238,7 @@ public class NvqlXemChiTietPhieuNhapForm extends javax.swing.JPanel {
                 .addComponent(myButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(myButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelRound15Layout.setVerticalGroup(
             panelRound15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -378,18 +369,6 @@ public class NvqlXemChiTietPhieuNhapForm extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void rdoNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoNhanVienActionPerformed
-        //        searchRadio();
-    }//GEN-LAST:event_rdoNhanVienActionPerformed
-
-    private void rdoNccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoNccActionPerformed
-        //searchRadio();
-    }//GEN-LAST:event_rdoNccActionPerformed
-
-    private void rdoMa1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoMa1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rdoMa1ActionPerformed
-
     private void myButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_myButton6ActionPerformed
@@ -397,10 +376,6 @@ public class NvqlXemChiTietPhieuNhapForm extends javax.swing.JPanel {
     private void myButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton7ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_myButton7ActionPerformed
-
-    private void combobox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combobox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_combobox1ActionPerformed
 
     private void myButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton8ActionPerformed
         // TODO add your handling code here:

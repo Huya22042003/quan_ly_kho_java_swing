@@ -59,7 +59,7 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
         nhanVien.setNgaySinh(Auth.nhanVien.getNgaySinh());
         nhanVien.setSdt(Auth.nhanVien.getSdt());
         nhanVien.setTen(Auth.nhanVien.getTen());
-        nhanVien.setTrangThai(Auth.nhanVien.getTrangThai());
+        nhanVien.setTrangThai(Auth.nhanVien.getTrangThai());    
     }
 
     public void fillTablePhieuKiemKe(List<NvqlLuongKiemKeCustom> list) {

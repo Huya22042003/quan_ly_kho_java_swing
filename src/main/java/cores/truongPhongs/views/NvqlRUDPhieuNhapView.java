@@ -345,20 +345,20 @@ public class NvqlRUDPhieuNhapView extends javax.swing.JFrame {
     }//GEN-LAST:event_cbbNhanVienActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        TpPhieuNhapCustom check = this.getFormData();
-        if (check == null) {
-            return;
-        }
-        check.setId(pnc.getId());
-
-        if (phieuNhapService.updatePn(check)) {
-            MsgBox.alert(this, "Sửa thành công");
-            this.setVisible(false);
-        } else {
-            MsgBox.alert(this, "Sửa thất bại");
-            this.setVisible(true);
-        }
-
+//        TpPhieuNhapCustom check = this.getFormData();
+//        if (check == null) {
+//            return;
+//        }
+//        check.setId(pnc.getId());
+//
+//        if (phieuNhapService.updatePn(check)) {
+//            MsgBox.alert(this, "Sửa thành công");
+//            this.setVisible(false);
+//        } else {
+//            MsgBox.alert(this, "Sửa thất bại");
+//            this.setVisible(true);
+//        }
+//
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
@@ -371,18 +371,18 @@ public class NvqlRUDPhieuNhapView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
-    public TpPhieuNhapCustom getFormData() {
-
-        String ghiChu = txtGhiChu.getText();
-        Date ngayNhap = dateNgayNhan.getDate();
-        Date ngayTao = dateNgayTao.getDate();
-        TpPhieuNhapCustom pn = phieuNhapService.checkValidate(ghiChu, ngayNhap, ngayTao, errNgayNhan, errNgayTao, errGhiChu);
-        pn.setIdNcc(listNcc.get(cbbNhaCungCap.getSelectedIndex()).getId());
-        pn.setIdNhanVien(listNv.get(cbbNhanVien.getSelectedIndex()).getId());
-        pn.setTrangThai(phieuNhapService.loc(cbbTrangThai.getSelectedIndex()));
-
-        return pn;
-    }
+//    public TpPhieuNhapCustom getFormData() {
+//
+//        String ghiChu = txtGhiChu.getText();
+//        Date ngayNhap = dateNgayNhan.getDate();
+//        Date ngayTao = dateNgayTao.getDate();
+//        TpPhieuNhapCustom pn = phieuNhapService.checkValidate(ghiChu, ngayNhap, ngayTao, errNgayNhan, errNgayTao, errGhiChu);
+//        pn.setIdNcc(listNcc.get(cbbNhaCungCap.getSelectedIndex()).getId());
+//        pn.setIdNhanVien(listNv.get(cbbNhanVien.getSelectedIndex()).getId());
+//        pn.setTrangThai(phieuNhapService.loc(cbbTrangThai.getSelectedIndex()));
+//
+//        return pn;
+//    }
 //    
 
     /**
