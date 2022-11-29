@@ -1,30 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package cores.truongPhongs.views;
 
 import cores.truongPhongs.customModels.TpQuanLyChiTietSanPhamCustom;
 import cores.truongPhongs.customModels.TpQuanLyDonViCustom;
-import cores.truongPhongs.customModels.TpQuanLyNamBHCustom;
 import cores.truongPhongs.customModels.TpQuanLySanPhamCustom;
 import cores.truongPhongs.services.TpQuanLyChiTietSanPhamService;
-import cores.truongPhongs.services.TpQuanLySanPhamService;
 import cores.truongPhongs.services.serviceImpls.TpQuanLyChiTietSanPhamServiceImpl;
-import cores.truongPhongs.services.serviceImpls.TpQuanLySanPhamServiceImpl;
-import infrastructures.constant.MauConstant;
+import infrastructures.constant.TrangThaiSanPhamConstanst;
 import java.awt.Dimension;
-import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.File;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-import javax.swing.table.DefaultTableModel;
 import utilities.Converter;
 import utilities.MsgBox;
 
@@ -344,8 +331,29 @@ public class TpQuanLyChiTietSanPhamU extends javax.swing.JFrame {
             return;
         }
 
-        TpQuanLyChiTietSanPhamCustom sp = new TpQuanLyChiTietSanPhamCustom(ct.getId(), check.getSoLuongTon(), check.getHinhAnh(), check.getGiaBan(), check.getGiaNhap(), check.getNamBaoHanh(), check.getMau(), check.getSanPham(), check.getDonVi());
-
+//        TpQuanLyChiTietSanPhamCustom sp = 
+//                new TpQuanLyChiTietSanPhamCustom(
+//                        ct.getId()
+//                , check.getSoLuongTon()
+//                , check.getHinhAnh()
+//                , check.getGiaBan()
+//                , check.getGiaNhap()
+//                , check.getNamBaoHanh()
+//                , check.getMau()
+//                , check.getSanPham()
+//                , check.getDonVi());
+        
+          TpQuanLyChiTietSanPhamCustom sp = 
+                new TpQuanLyChiTietSanPhamCustom(ct.getId(), check.getSoLuongTon()
+                        , check.getHinhAnh()
+                        , check.getGiaBan()
+                        , check.getGiaBan()
+                        , check.getMau()
+                        , check.getSanPham()
+                        , check.getDonVi()
+                        , check.getNamBaoHanh()
+                        , TrangThaiSanPhamConstanst.DA_MO_BAN);
+        
         if (serviceChiTietSP.updateCTSanPham(sp)) {
             MsgBox.alert(this, "Sửa thành công");
             this.setVisible(false);

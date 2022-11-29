@@ -1,7 +1,6 @@
 package cores.truongPhongs.services;
 
 import cores.truongPhongs.customModels.TP_KhachHangCustom;
-import infrastructures.constant.CoSoConstant;
 import infrastructures.constant.DanhGiaConstant;
 import infrastructures.constant.GioiTinhConstant;
 import infrastructures.constant.KhachHangConstant;

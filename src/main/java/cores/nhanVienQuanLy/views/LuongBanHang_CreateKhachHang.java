@@ -1,6 +1,5 @@
 package cores.nhanVienQuanLy.views;
 
-import cores.truongPhongs.views.*;
 import cores.truongPhongs.customModels.TP_KhachHangCustom;
 import cores.truongPhongs.services.TP_KhachHangService;
 import cores.truongPhongs.services.serviceImpls.TP_KhachHangServiceImpl;
@@ -8,14 +7,11 @@ import java.awt.Dimension;
 import java.awt.Image;
 
 import java.awt.Toolkit;
-import java.awt.image.BufferedImage;
 import java.io.File;
 
-import java.util.Date;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 import utilities.MsgBox;
 
 public class LuongBanHang_CreateKhachHang extends javax.swing.JFrame {

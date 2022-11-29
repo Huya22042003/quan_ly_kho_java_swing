@@ -1,7 +1,6 @@
 package cores.nhanVienQuanLy.customModels;
 
 import domainModels.KhachHang;
-import domainModels.NhaCungCap;
 import domainModels.NhanVien;
 import infrastructures.constant.TrangThaiPhieuConstant;
 import java.util.UUID;

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package cores.nhanVienQuanLy.repositories;
 
 import cores.nhanVienQuanLy.customModels.NvqlLuongKiemKeCustom;
@@ -43,5 +39,20 @@ public class NvqlLuongKiemKeRepository {
             e.printStackTrace();
             t.rollback(); //hoàn lại kết quả
         }
+    }
+    public boolean updateTrangThai(PhieuKiemKe phieuKiemKe){
+        Session s = HibernateUtil.getSessionFactory().openSession();
+        try {
+            Transaction transaction = null;
+            transaction = s.beginTransaction();
+            s.update(phieuKiemKe);
+            transaction.commit();
+            s.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            s.close();
+            return false;
+        }
+        return true;
     }
 }

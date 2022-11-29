@@ -1,16 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package cores.truongPhongs.repositories;
 
 import cores.truongPhongs.customModels.TpQuanLyChiTietSanPhamCustom;
 import cores.truongPhongs.customModels.TpQuanLyDonViCustom;
-import cores.truongPhongs.customModels.TpQuanLyNamBHCustom;
 import cores.truongPhongs.customModels.TpQuanLySanPhamCustom;
 import domainModels.ChiTietSanPham;
 import domainModels.DonVi;
-import domainModels.NamBaoHanh;
 import domainModels.SanPham;
 import infrastructures.constant.MauConstant;
 import java.math.BigDecimal;
@@ -38,10 +32,11 @@ public class TpQuanLyChiTietSanPhamRepository {
                 + "ct.hinhAnh as hinhAnh,"
                 + "ct.GiaNhap as GiaNhap,"
                 + "ct.GiaBan as GiaBan,"
-                + "ct.namBaoHanh as namBaoHanh,"
                 + "ct.mau as mau,"
                 + "ct.sanPham as ten,"
-                + "ct.donVi as donViGoc"
+                + "ct.donVi as donViGoc,"
+                + "ct.namBaoHanh as namBaoHanh,"
+                + "ct.trangThai as trangThai"
                 + ") from domainModels.ChiTietSanPham ct");
         ct = q.getResultList();
         s.close();

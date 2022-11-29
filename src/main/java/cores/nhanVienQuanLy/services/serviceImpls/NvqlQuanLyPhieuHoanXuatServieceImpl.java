@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package cores.nhanVienQuanLy.services.serviceImpls;
 
 import cores.nhanVienQuanLy.customModels.NvqlQuanLyPhieuHoanXuatCustom;
@@ -12,7 +8,6 @@ import utilities.palette.Combobox;
 import cores.nhanVienQuanLy.services.NvqlQuanLyPhieuHoanXuatService;
 import domainModels.PhieuHoanXuat;
 import domainModels.PhieuXuat;
-import infrastructures.constant.TrangThaiPhieuConstant;
 import infrastructures.constant.TrangThaiPhieuHoanConstant;
 import java.util.ArrayList;
 

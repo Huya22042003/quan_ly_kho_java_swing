@@ -3,6 +3,7 @@ package cores.truongPhongs.customModels;
 import domainModels.DonVi;
 import domainModels.SanPham;
 import infrastructures.constant.MauConstant;
+import infrastructures.constant.TrangThaiSanPhamConstanst;
 import java.math.BigDecimal;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
@@ -26,16 +27,18 @@ public class TpQuanLyChiTietSanPhamCustom {
 
     private String hinhAnh;
 
-    private BigDecimal GiaNhap;
+    private BigDecimal giaNhap;
 
-    private BigDecimal GiaBan;
-    
-    private int namBaoHanh;
+    private BigDecimal giaBan;
     
     private MauConstant mau;
 
     private SanPham sanPham;
 
     private DonVi donVi;
+
+    private int namBaoHanh;
+    
+    private TrangThaiSanPhamConstanst trangThai;
 
 }
