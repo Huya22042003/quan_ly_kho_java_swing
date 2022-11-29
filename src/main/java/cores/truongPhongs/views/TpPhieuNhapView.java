@@ -12,6 +12,7 @@ import javax.swing.table.DefaultTableModel;
 import utilities.Converter;
 import utilities.MsgBox;
 import cores.truongPhongs.services.TpPhieuNhapService;
+import utilities.Page;
 
 /**
  *
@@ -23,24 +24,34 @@ public class TpPhieuNhapView extends javax.swing.JPanel {
      * Creates new form DemoCoSoView
      */
     private TpPhieuNhapService phieuNhapService;
-    
+
     private List<TpPhieuNhapCustom> getListPhieuNhap;
-    
+    private Page p;
+    private int limit = 7;
+
+    private int offset = 0;
+
+    private int sizes = 0;
+
+    private int index = 1;
+
     public TpPhieuNhapView() {
+        p = new Page();
         initComponents();
         phieuNhapService = new TpPhieuNhapServiceImpl();
 //        getListPhieuNhap = new ArrayList<>();
- getListPhieuNhap = phieuNhapService.getListPn();
+        getListPhieuNhap = phieuNhapService.getListPn();
         this.loadTable(getListPhieuNhap);
         this.loadCbbTrangThai();
 //        clearForm();
     }
-    
-     private void loadCbbTrangThai(){
+
+    private void loadCbbTrangThai() {
         this.cbbTrangThai.addItem(Converter.trangThaiDonHang(TrangThaiPhieuConstant.DA_THANH_TOAN));
-          this.cbbTrangThai.addItem(Converter.trangThaiDonHang(TrangThaiPhieuConstant.DA_HUY));
-            this.cbbTrangThai.addItem(Converter.trangThaiDonHang(TrangThaiPhieuConstant.CHO_THANH_TOAN));
+        this.cbbTrangThai.addItem(Converter.trangThaiDonHang(TrangThaiPhieuConstant.DA_HUY));
+        this.cbbTrangThai.addItem(Converter.trangThaiDonHang(TrangThaiPhieuConstant.CHO_THANH_TOAN));
     }
+
     public List<TpPhieuNhapCustom> listSearch(int rdo) {
         // nhập vào 
         String timKiem = this.txtSearchTheo.getText();
@@ -56,7 +67,7 @@ public class TpPhieuNhapView extends javax.swing.JPanel {
                 case 0:
                     search = el.getId().toString();
                     break;
-              
+
                 case 1:
                     search = el.getTenNcc();
                     break;
@@ -82,10 +93,10 @@ public class TpPhieuNhapView extends javax.swing.JPanel {
                 }
             }
         });
-        
+
         return listTimKiem;
     }
-    
+
     public List<TpPhieuNhapCustom> checkCbb(TrangThaiPhieuConstant cs) {
         List<TpPhieuNhapCustom> listTimKiem = new ArrayList<>();
         getListPhieuNhap.forEach(el -> {
@@ -95,40 +106,61 @@ public class TpPhieuNhapView extends javax.swing.JPanel {
         });
         return listTimKiem;
     }
+
     public void searchRadio() {
         if (rdoMa.isSelected()) {
             loadTable(listSearch(0));
-        }  else if (rdoNcc.isSelected()) {
+        } else if (rdoNcc.isSelected()) {
             loadTable(listSearch(1));
         } else {
             loadTable(listSearch(2));
         }
     }
-    
+
     public void clearForm() {
         this.txtSearchTheo.setText("");
         this.rdoMa.setSelected(true);
         getListPhieuNhap = phieuNhapService.getListPn();
         searchRadio();
+        sizes = getListPhieuNhap.size();
+        offset = 0;
+        index = 1;
+        loadIndex();
     }
+
+    private void loadIndex() {
+        this.txtIndex.setText(String.valueOf(index) + " / " + (Math.round((sizes / limit) + 0.5)));
     
+    }
+
     public void loadTable(List<TpPhieuNhapCustom> list) {
         DefaultTableModel dtm = (DefaultTableModel) this.tblPhieuNhap.getModel();
         dtm.setRowCount(0);
-        for (TpPhieuNhapCustom el : list) {
-            
-            Object[] rowData = {
-                dtm.getRowCount() + 1,
-                el.getId(),
-                el.getGhiChu(),
-                el.getNgayThanhToan() == null ? "" : new Date(el.getNgayThanhToan()),
-                new Date(el.getNgayTao()),
-                el.getTenNcc(),
-                el.getTenNhanVien(),
-                Converter.trangThaiDonHang(el.getTrangThai())            
-            };
-            dtm.addRow(rowData);
+        int sum = limit + offset;
+        if (list.size() <= sum) {
+            sum = list.size();
         }
+        for (int i = offset; i < sum; i++) {
+            if (list.get(i) == null) {
+                return;
+            }
+
+            TpPhieuNhapCustom el = list.get(i);
+            
+
+                Object[] rowData = {
+                    dtm.getRowCount() + 1,
+                    el.getId(),
+                    el.getGhiChu(),
+                    el.getNgayThanhToan() == null ? "" : new Date(el.getNgayThanhToan()),
+                    new Date(el.getNgayTao()),
+                    el.getTenNcc(),
+                    el.getTenNhanVien(),
+                    Converter.trangThaiDonHang(el.getTrangThai())
+                };
+                dtm.addRow(rowData);
+            }
+        
     }
 
     /**
@@ -158,6 +190,9 @@ public class TpPhieuNhapView extends javax.swing.JPanel {
         ngayBatDau = new com.toedter.calendar.JDateChooser();
         ngayKetThuc = new com.toedter.calendar.JDateChooser();
         cbbTrangThai = new utilities.palette.Combobox();
+        uWPButton4 = new utilities.palette.UWPButton();
+        txtIndex = new javax.swing.JLabel();
+        uWPButton5 = new utilities.palette.UWPButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btnHienThi = new utilities.palette.UWPButton();
@@ -266,12 +301,28 @@ public class TpPhieuNhapView extends javax.swing.JPanel {
             }
         });
 
+        uWPButton4.setText("PREV");
+        uWPButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uWPButton4ActionPerformed(evt);
+            }
+        });
+
+        txtIndex.setText("1/1");
+
+        uWPButton5.setText("Next");
+        uWPButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uWPButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(37, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1148, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -296,6 +347,14 @@ public class TpPhieuNhapView extends javax.swing.JPanel {
                         .addComponent(cbbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtSearchTheo, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(37, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(398, 398, 398)
+                .addComponent(uWPButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(108, 108, 108)
+                .addComponent(txtIndex, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(122, 122, 122)
+                .addComponent(uWPButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -318,8 +377,13 @@ public class TpPhieuNhapView extends javax.swing.JPanel {
                             .addComponent(ngayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(6, 6, 6)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE)
-                .addGap(28, 28, 28))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtIndex, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(uWPButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(uWPButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(42, 42, 42))
         );
 
         jPanel3.setBackground(new java.awt.Color(102, 102, 255));
@@ -399,7 +463,7 @@ public class TpPhieuNhapView extends javax.swing.JPanel {
 
     private void txtSearchTheoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchTheoKeyReleased
         searchRadio();
-       
+        clearForm();
     }//GEN-LAST:event_txtSearchTheoKeyReleased
 
     private void rdoMaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoMaActionPerformed
@@ -418,7 +482,7 @@ public class TpPhieuNhapView extends javax.swing.JPanel {
     private void tblPhieuNhapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPhieuNhapMouseClicked
         int row = this.tblPhieuNhap.getSelectedRow();
         NvqlRUDPhieuNhapView rud = new NvqlRUDPhieuNhapView(phieuNhapService.findPhieuNhapById((UUID) tblPhieuNhap.getValueAt(row, 1)));
-       
+
         rud.setVisible(true);
     }//GEN-LAST:event_tblPhieuNhapMouseClicked
 
@@ -440,27 +504,27 @@ public class TpPhieuNhapView extends javax.swing.JPanel {
 
     private void txtSearchTheoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSearchTheoMouseExited
         // TODO add your handling code here:
-         if (rdoNgayTao.isSelected()) {
-             if (ngayBatDau.getDate() == null) {
-            MsgBox.alert(this, "Bạn phải chọn ngày bắt đầu");
-            return;
-        }
-        if (ngayKetThuc.getDate() == null) {
-            MsgBox.alert(this, "Bạn phải chọn ngày Kết thúc");
-            return;
-        }
+        if (rdoNgayTao.isSelected()) {
+            if (ngayBatDau.getDate() == null) {
+                MsgBox.alert(this, "Bạn phải chọn ngày bắt đầu");
+                return;
+            }
+            if (ngayKetThuc.getDate() == null) {
+                MsgBox.alert(this, "Bạn phải chọn ngày Kết thúc");
+                return;
+            }
             getListPhieuNhap = phieuNhapService.getListByNgayTao(ngayBatDau.getDate().getTime(), ngayKetThuc.getDate().getTime());
             loadTable(getListPhieuNhap);
         }
         if (rdoNgayThanhToan.isSelected()) {
-             if (ngayBatDau.getDate() == null) {
-            MsgBox.alert(this, "Bạn phải chọn ngày bắt đầu");
-            return;
-        }
-        if (ngayKetThuc.getDate() == null) {
-            MsgBox.alert(this, "Bạn phải chọn ngày Kết thúc");
-            return;
-        }
+            if (ngayBatDau.getDate() == null) {
+                MsgBox.alert(this, "Bạn phải chọn ngày bắt đầu");
+                return;
+            }
+            if (ngayKetThuc.getDate() == null) {
+                MsgBox.alert(this, "Bạn phải chọn ngày Kết thúc");
+                return;
+            }
             getListPhieuNhap = phieuNhapService.getListByNgayTao(ngayBatDau.getDate().getTime(), ngayKetThuc.getDate().getTime());
             loadTable(getListPhieuNhap);
         }
@@ -470,6 +534,20 @@ public class TpPhieuNhapView extends javax.swing.JPanel {
         listSearch(this.cbbTrangThai.getSelectedIndex());
         searchRadio();
     }//GEN-LAST:event_cbbTrangThaiActionPerformed
+
+    private void uWPButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uWPButton4ActionPerformed
+        index = p.prevIndex(offset, limit, index);
+        offset = p.prev(offset, limit);
+        loadIndex();
+        loadTable(getListPhieuNhap);
+    }//GEN-LAST:event_uWPButton4ActionPerformed
+
+    private void uWPButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uWPButton5ActionPerformed
+        index = p.nextIndex(offset, limit, sizes, index);
+        offset = p.next(offset, limit, sizes);
+        loadIndex();
+        loadTable(getListPhieuNhap);
+    }//GEN-LAST:event_uWPButton5ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -492,7 +570,10 @@ public class TpPhieuNhapView extends javax.swing.JPanel {
     private utilities.palette.RadioButtonCustom rdoNgayThanhToan;
     private utilities.palette.RadioButtonCustom rdoNhanVien;
     private utilities.palette.TableDark_1 tblPhieuNhap;
+    private javax.swing.JLabel txtIndex;
     private utilities.palette.TextField txtSearchTheo;
     private utilities.palette.UWPButton uWPButton1;
+    private utilities.palette.UWPButton uWPButton4;
+    private utilities.palette.UWPButton uWPButton5;
     // End of variables declaration//GEN-END:variables
 }
