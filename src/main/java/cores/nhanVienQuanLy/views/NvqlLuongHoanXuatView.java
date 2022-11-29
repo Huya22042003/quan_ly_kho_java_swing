@@ -314,6 +314,7 @@ public class NvqlLuongHoanXuatView extends javax.swing.JPanel {
         txtNgayTao.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtNgayTao.setLabelText("Ngày tạo");
 
+        txtMaPhieu.setEditable(false);
         txtMaPhieu.setBackground(new java.awt.Color(228, 206, 224));
         txtMaPhieu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtMaPhieu.setLabelText("Mã phiếu ");
@@ -327,12 +328,14 @@ public class NvqlLuongHoanXuatView extends javax.swing.JPanel {
         textAreaScroll1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         textAreaScroll1.setLabelText("Ghi chú");
 
+        txtGhiChu.setEditable(false);
         txtGhiChu.setBackground(new java.awt.Color(228, 206, 224));
         txtGhiChu.setColumns(20);
         txtGhiChu.setRows(5);
         txtGhiChu.setDisabledTextColor(new java.awt.Color(204, 204, 255));
         textAreaScroll1.setViewportView(txtGhiChu);
 
+        txtTongTienPhaiTraKhach.setEditable(false);
         txtTongTienPhaiTraKhach.setBackground(new java.awt.Color(228, 206, 224));
         txtTongTienPhaiTraKhach.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtTongTienPhaiTraKhach.setLabelText("Tổng tiền phải trả lại khách");
@@ -365,6 +368,7 @@ public class NvqlLuongHoanXuatView extends javax.swing.JPanel {
             }
         });
 
+        txtTrangThai.setEditable(false);
         txtTrangThai.setBackground(new java.awt.Color(228, 206, 224));
         txtTrangThai.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtTrangThai.setLabelText("Trạng thái");
@@ -388,6 +392,7 @@ public class NvqlLuongHoanXuatView extends javax.swing.JPanel {
             }
         });
 
+        txtTienThua.setEditable(false);
         txtTienThua.setBackground(new java.awt.Color(228, 206, 224));
         txtTienThua.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtTienThua.setLabelText("Tiền thừa");
@@ -397,6 +402,7 @@ public class NvqlLuongHoanXuatView extends javax.swing.JPanel {
             }
         });
 
+        txtLiDo.setEditable(false);
         txtLiDo.setBackground(new java.awt.Color(228, 206, 224));
         txtLiDo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtLiDo.setLabelText("Lí do");
@@ -586,7 +592,8 @@ public class NvqlLuongHoanXuatView extends javax.swing.JPanel {
         for (ChiTietPhieuHoanXuatCustom ctphxct : listCTPHX) {
             tien += ctphxct.getIdChiTietSp().getGiaBan().multiply(new BigDecimal(ctphxct.getSoLuong())).doubleValue();
         }
-        txtTongTienPhaiTraKhach.setText(tien + "");
+        int tongTien =(int) tien;
+        txtTongTienPhaiTraKhach.setText(tongTien + "");
         if (txtTrangThai.getText().equalsIgnoreCase("Hoàn Thành Công")) {
             btnThanhToan.setEnabled(false);
         } else {
@@ -650,7 +657,8 @@ public class NvqlLuongHoanXuatView extends javax.swing.JPanel {
         }
 
         double tienThua = tienKhach - Double.valueOf(tienPhaiTra);
-        txtTienThua.setText(tienThua + "");
+        int tongTien = (int)tienThua;
+        txtTienThua.setText(tongTien + "");
     }//GEN-LAST:event_txtNhapTienCaretUpdate
 
     private void btnChiTietSP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChiTietSP1ActionPerformed

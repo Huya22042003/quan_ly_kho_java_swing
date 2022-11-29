@@ -510,6 +510,7 @@
                 </Component>
                 <Component class="utilities.palette.TextField" name="txtMaPhieu">
                   <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="e0" green="ce" red="e4" type="rgb"/>
                     </Property>
@@ -551,6 +552,7 @@
                 </Component>
                 <Component class="utilities.palette.TextField" name="txtMau">
                   <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="e0" green="ce" red="e4" type="rgb"/>
                     </Property>
