@@ -3,22 +3,41 @@ package cores.truongPhongs.services.serviceImpls;
 import cores.truongPhongs.customModels.TpXemChiTietSanPhamCustom;
 import cores.truongPhongs.repositories.TpXemChiTietSanPhamRepository;
 import cores.truongPhongs.services.TpXemChiTietSanPhamService;
+import domainModels.ChiTietSanPham;
+import domainModels.DonVi;
 import java.util.List;
 
 /**
  *
  * @author Acer
  */
-public class TpXemChiTietSanPhamImpl implements TpXemChiTietSanPhamService{
-    private TpXemChiTietSanPhamRepository repo ;
+public class TpXemChiTietSanPhamImpl implements TpXemChiTietSanPhamService {
+
+    private TpXemChiTietSanPhamRepository repo;
 
     public TpXemChiTietSanPhamImpl() {
         repo = new TpXemChiTietSanPhamRepository();
     }
-    
+
     @Override
     public List<TpXemChiTietSanPhamCustom> listCtsp() {
         return repo.getAll();
     }
-    
+
+    @Override
+    public TpXemChiTietSanPhamCustom addCTSanPham(TpXemChiTietSanPhamCustom custom) {
+        ChiTietSanPham sp = new ChiTietSanPham();
+        sp.setGiaBan(custom.getGiaBan());
+        sp.setGiaNhap(custom.getGiaNhap());
+        sp.setHinhAnh(custom.getHinhAnh());
+        sp.setSoLuongTon(custom.getSoLuongTon());
+        sp.setMau(custom.getMau());
+        sp.setDonVi(custom.getDonVi());
+        sp.setTrangThai(custom.getTrangThai());
+        sp.setNamBaoHanh(custom.getNamBaoHanh());
+        sp.setSanPham(custom.getSanPham());
+        custom.setId(repo.addCTSanPham(sp).getId());
+        return custom;
+    }
+
 }

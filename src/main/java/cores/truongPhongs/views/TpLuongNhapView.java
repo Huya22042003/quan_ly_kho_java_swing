@@ -1,21 +1,26 @@
 package cores.truongPhongs.views;
 
+import cores.truongPhongs.customModels.TpPhieuNhapChiTietCustom;
 import cores.truongPhongs.customModels.TpPhieuNhapCustom;
+import cores.truongPhongs.services.TpPhieuNhapChiTietService;
 import cores.truongPhongs.services.serviceImpls.TpPhieuNhapServiceImpl;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import cores.truongPhongs.services.TpPhieuNhapService;
+import cores.truongPhongs.services.serviceImpls.TpPhieuNhapChiTietServiceImpl;
 import domainModels.NhanVien;
 import domainModels.PhieuNhap;
 import infrastructures.constant.TrangThaiPhieuConstant;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 import javax.swing.JOptionPane;
 import utilities.Auth;
 import utilities.Converter;
+import utilities.MsgBox;
 import utilities.palette.SearchCustom.EventCallBack;
 import utilities.palette.SearchCustom.EventTextField;
 
@@ -32,15 +37,18 @@ public class TpLuongNhapView extends javax.swing.JPanel {
     private List<TpPhieuNhapCustom> listPn;
     private NhanVien nhanVien;
     private TpLuongNhapChiTietSanPhamForm ctspView;
-    private TpLuongNhapChiTietPhieuNhapForm ctpkView = new TpLuongNhapChiTietPhieuNhapForm();
+    private TpLuongNhapChiTietPhieuNhapForm ctpnView;
+    private TpPhieuNhapChiTietService tpncts;
 
     public TpLuongNhapView() {
         initComponents();
         listPn = new ArrayList<>();
         phieuNhapService = new TpPhieuNhapServiceImpl();
+        tpncts = new TpPhieuNhapChiTietServiceImpl();
         listPn = phieuNhapService.getListPn();
         loadTablePn(listPn);
         ctspView = new TpLuongNhapChiTietSanPhamForm();
+        ctpnView = new TpLuongNhapChiTietPhieuNhapForm();
         clearForm();
         txtSearch.addEvent(new EventTextField() {
             @Override
@@ -139,13 +147,6 @@ public class TpLuongNhapView extends javax.swing.JPanel {
         return listTimKiem;
     }
 
-    public void clearForm() {
-        this.txtSearch.setText("");
-        this.rdoMa.setSelected(true);
-        listPn = phieuNhapService.getListPn();
-        searchRadio();
-    }
-
     public void searchRadio() {
         if (rdoMa.isSelected()) {
             loadTablePn(listSearch(0));
@@ -212,7 +213,7 @@ public class TpLuongNhapView extends javax.swing.JPanel {
         textAreaScroll1 = new utilities.palette.TextAreaScroll();
         txtGhiChu = new utilities.palette.TextAreaCustom();
         txtTienPhaiTra = new utilities.palette.TextField();
-        myButton7 = new utilities.palette.MyButton();
+        btnThanhToan = new utilities.palette.MyButton();
         txtNhaCungCap = new utilities.palette.TextField();
         txtNhanVien = new utilities.palette.TextField();
         txtTrangThai = new utilities.palette.TextField();
@@ -262,42 +263,22 @@ public class TpLuongNhapView extends javax.swing.JPanel {
         rdoMa.setForeground(new java.awt.Color(255, 255, 255));
         rdoMa.setText("Mã");
         rdoMa.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        rdoMa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdoMaActionPerformed(evt);
-            }
-        });
 
         rdoNcc.setBackground(new java.awt.Color(67, 130, 187));
         buttonGroup1.add(rdoNcc);
         rdoNcc.setForeground(new java.awt.Color(255, 255, 255));
         rdoNcc.setText("Nhà cung cấp");
         rdoNcc.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        rdoNcc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdoNccActionPerformed(evt);
-            }
-        });
 
         rdoNhanVien.setBackground(new java.awt.Color(67, 130, 187));
         buttonGroup1.add(rdoNhanVien);
         rdoNhanVien.setForeground(new java.awt.Color(255, 255, 255));
         rdoNhanVien.setText("Nhân viên");
         rdoNhanVien.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        rdoNhanVien.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdoNhanVienActionPerformed(evt);
-            }
-        });
 
         txtSearch.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtSearchMouseClicked(evt);
-            }
-        });
-        txtSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSearchActionPerformed(evt);
             }
         });
 
@@ -560,14 +541,10 @@ public class TpLuongNhapView extends javax.swing.JPanel {
         txtNgayTao.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtNgayTao.setLabelText("Ngày tạo");
 
+        txtMaPhieu.setEditable(false);
         txtMaPhieu.setBackground(new java.awt.Color(228, 206, 224));
         txtMaPhieu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtMaPhieu.setLabelText("Mã phiếu ");
-        txtMaPhieu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMaPhieuActionPerformed(evt);
-            }
-        });
 
         textAreaScroll1.setBackground(new java.awt.Color(153, 204, 255));
         textAreaScroll1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -584,13 +561,18 @@ public class TpLuongNhapView extends javax.swing.JPanel {
         txtTienPhaiTra.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtTienPhaiTra.setLabelText("Tiền phải trả");
 
-        myButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/credit-card.png"))); // NOI18N
-        myButton7.setText("THANH TOÁN");
-        myButton7.setToolTipText("THANH TOÁN");
-        myButton7.setBorderColor(new java.awt.Color(221, 242, 244));
-        myButton7.setColor(new java.awt.Color(221, 242, 244));
-        myButton7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        myButton7.setRadius(50);
+        btnThanhToan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/credit-card.png"))); // NOI18N
+        btnThanhToan.setText("THANH TOÁN");
+        btnThanhToan.setToolTipText("THANH TOÁN");
+        btnThanhToan.setBorderColor(new java.awt.Color(221, 242, 244));
+        btnThanhToan.setColor(new java.awt.Color(221, 242, 244));
+        btnThanhToan.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnThanhToan.setRadius(50);
+        btnThanhToan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThanhToanActionPerformed(evt);
+            }
+        });
 
         txtNhaCungCap.setEditable(false);
         txtNhaCungCap.setBackground(new java.awt.Color(228, 206, 224));
@@ -601,21 +583,11 @@ public class TpLuongNhapView extends javax.swing.JPanel {
         txtNhanVien.setBackground(new java.awt.Color(228, 206, 224));
         txtNhanVien.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtNhanVien.setLabelText("Nhân viên");
-        txtNhanVien.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNhanVienActionPerformed(evt);
-            }
-        });
 
         txtTrangThai.setEditable(false);
         txtTrangThai.setBackground(new java.awt.Color(228, 206, 224));
         txtTrangThai.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtTrangThai.setLabelText("Trạng thái");
-        txtTrangThai.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTrangThaiActionPerformed(evt);
-            }
-        });
 
         txtTienKhachDua.setBackground(new java.awt.Color(228, 206, 224));
         txtTienKhachDua.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -626,9 +598,10 @@ public class TpLuongNhapView extends javax.swing.JPanel {
             }
         });
 
+        txtTienThua.setEditable(false);
         txtTienThua.setBackground(new java.awt.Color(228, 206, 224));
         txtTienThua.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtTienThua.setLabelText("Còn nợ");
+        txtTienThua.setLabelText("Còn thừa");
         txtTienThua.setName(""); // NOI18N
         txtTienThua.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
@@ -656,7 +629,7 @@ public class TpLuongNhapView extends javax.swing.JPanel {
                             .addComponent(textAreaScroll1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)))))
             .addGroup(panelRound3Layout.createSequentialGroup()
                 .addGap(60, 60, 60)
-                .addComponent(myButton7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
@@ -686,7 +659,7 @@ public class TpLuongNhapView extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtTienThua, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
-                .addComponent(myButton7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
         );
 
@@ -753,18 +726,6 @@ public class TpLuongNhapView extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void rdoNhanVienActionPerformed(ActionEvent evt) {//GEN-FIRST:event_rdoNhanVienActionPerformed
-        searchRadio();
-    }//GEN-LAST:event_rdoNhanVienActionPerformed
-
-    private void rdoNccActionPerformed(ActionEvent evt) {//GEN-FIRST:event_rdoNccActionPerformed
-        searchRadio();
-    }//GEN-LAST:event_rdoNccActionPerformed
-
-    private void rdoMaActionPerformed(ActionEvent evt) {//GEN-FIRST:event_rdoMaActionPerformed
-        searchRadio();
-    }//GEN-LAST:event_rdoMaActionPerformed
-
     private void cbbTrangThaiActionPerformed(ActionEvent evt) {//GEN-FIRST:event_cbbTrangThaiActionPerformed
         // TODO add your handling code here:
         listSearch(this.cbbTrangThai.getSelectedIndex());
@@ -777,10 +738,6 @@ public class TpLuongNhapView extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnThemPhieuNhapMoiActionPerformed
 
-    private void txtMaPhieuActionPerformed(ActionEvent evt) {//GEN-FIRST:event_txtMaPhieuActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtMaPhieuActionPerformed
-
     private void btnKhoangTimeActionPerformed(ActionEvent evt) {//GEN-FIRST:event_btnKhoangTimeActionPerformed
         // TODO add your handling code here:
         TpLuongNhapChonKhongTimeView time = new TpLuongNhapChonKhongTimeView();
@@ -791,22 +748,10 @@ public class TpLuongNhapView extends javax.swing.JPanel {
         if (chon() == null) {
             return;
         }
-        int s = tblPhieuNhap.getSelectedRow();
-        if (s == -1) {
-            JOptionPane.showMessageDialog(this, "Bạn cần chọn 1 phiếu kiểm");
-            return;
-        }
-        ctpkView.setPhieuNhap(chon());
-        ctpkView.setVisible(true);
+        TpLuongNhapChiTietPhieuNhapForm chonStpn = new TpLuongNhapChiTietPhieuNhapForm();
+        chonStpn.setPhieuNhap(chon());
+        chonStpn.setVisible(true);
     }//GEN-LAST:event_btnPhieuNhapChiTietActionPerformed
-
-    private void txtNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNhanVienActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNhanVienActionPerformed
-
-    private void txtTrangThaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTrangThaiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTrangThaiActionPerformed
 
     public TpPhieuNhapCustom chon() {
         int row = this.tblPhieuNhap.getSelectedRow();
@@ -843,11 +788,6 @@ public class TpLuongNhapView extends javax.swing.JPanel {
         chonSp.setVisible(true);
     }//GEN-LAST:event_btnThemSpVaoPhieuActionPerformed
 
-    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
-        // TODO add your handling code here:
-        searchRadio();
-    }//GEN-LAST:event_txtSearchActionPerformed
-
     private void txtSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSearchMouseClicked
         // TODO add your handling code here:
         searchRadio();
@@ -858,15 +798,51 @@ public class TpLuongNhapView extends javax.swing.JPanel {
         if (row == -1) {
             return;
         }
-//        TpPhieuNhapCustom pn = phieuNhapService.findPhieuNhapById((UUID) tblPhieuNhap.getValueAt(row, 1));
-//        txtGhiChu.setText(pn.getGhiChu());
-//        txtMaPhieu.setText(pn.getId().toString());
-//        txtNgayTao.setText(new Date(pn.getNgayTao()).toString());
-//        txtNhaCungCap.setText(pn.getTenNcc());
-//        txtNhanVien.setText(pn.getTenNhanVien());
-//        txtTrangThai.setText(Converter.trangThaiDonHang(listPn.get(row).getTrangThai()));
+        String maPhieu = this.tblPhieuNhap.getValueAt(row, 1).toString();
+        String ngayTao = this.tblPhieuNhap.getValueAt(row, 2).toString();
+        String ngayThanhToan = this.tblPhieuNhap.getValueAt(row, 3).toString();
+        String nhaCungCap = this.tblPhieuNhap.getValueAt(row, 4).toString();
+        String nhanVien = this.tblPhieuNhap.getValueAt(row, 5).toString();
+        String trangThai = this.tblPhieuNhap.getValueAt(row, 6).toString();
+
+        txtMaPhieu.setText(maPhieu);
+        txtNgayTao.setText(ngayTao);
+        txtTrangThai.setText(trangThai);
+        txtNhanVien.setText(nhanVien);
+        txtNhaCungCap.setText(nhaCungCap);
+        txtGhiChu.setText("new");
+
+        double tien = 0;
+        List<TpPhieuNhapChiTietCustom> listCTPX = tpncts.getListCTPhieuNhapByID(listPn.get(row).getId());
+        for (TpPhieuNhapChiTietCustom ctpx : listCTPX) {
+            tien += ctpx.getIdSanPham().getGiaNhap().multiply(new BigDecimal(ctpx.getSoLuong())).doubleValue();
+        }
+        txtTienPhaiTra.setText(tien + "");
+        if (txtTrangThai.getText().equalsIgnoreCase("Đã Thanh Toán")) {
+            btnThanhToan.setEnabled(false);
+        } else {
+            btnThanhToan.setEnabled(true);
+        }
+
     }//GEN-LAST:event_tblPhieuNhapMouseClicked
 
+        private void clearForm() {
+        txtGhiChu.setText("");
+        txtMaPhieu.setText("");
+        txtNgayTao.setText("");
+        txtNhaCungCap.setText("");
+        txtTienKhachDua.setText("");
+        txtTienPhaiTra.setText("");
+        txtTienThua.setText("");
+        txtTrangThai.setText("");
+        rdoMa.setSelected(false);
+        rdoNhanVien.setSelected(false);
+        cbbTrangThai.setSelectedItem(Converter.TrangThaiPhieuXuat(TrangThaiPhieuConstant.DA_THANH_TOAN));
+        ngayBatDau.setDate(null);
+        ngayKetThuc.setDate(null);
+        rdoNgayTao.setSelected(false);
+        rdoNgayThanhToan.setSelected(false);
+    }
     private void btnShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowActionPerformed
         listPn = phieuNhapService.getListPn();
         loadTablePn(listPn);
@@ -874,9 +850,42 @@ public class TpLuongNhapView extends javax.swing.JPanel {
     }//GEN-LAST:event_btnShowActionPerformed
 
     private void txtTienKhachDuaCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtTienKhachDuaCaretUpdate
-//        String tienKhachDua = txtTienKhachDua.getText();
-//        String tienPhaiTra = txtTienPhaitra.getText();
-//        double tienKhach = 0;
+        String tienKhachDua = txtTienKhachDua.getText();
+        String tienPhaiTra = txtTienPhaiTra.getText();
+        double tienKhach = 0;
+        try {
+            tienKhach = Double.parseDouble(tienKhachDua);
+            if (tienKhach <= 0) {
+                MsgBox.alert(this, "Phải nhập tiền là kiểu số nguyên dương");
+                return;
+            }
+        } catch (NumberFormatException e) {
+            return;
+        }
+
+        double tienThua = tienKhach - Double.valueOf(tienPhaiTra);
+        txtTienThua.setText(tienThua + "");
+    }//GEN-LAST:event_txtTienKhachDuaCaretUpdate
+
+    private void txtTienThuaCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtTienThuaCaretUpdate
+
+    }//GEN-LAST:event_txtTienThuaCaretUpdate
+
+    
+    private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
+        clearForm();
+        int row = this.tblPhieuNhap.getSelectedRow();
+        if (row == -1) {
+            MsgBox.alert(this, "Bạn phải chọn 1 phiếu nhập");
+            return;
+        }
+        if (listPn.get(row).getTrangThai() == TrangThaiPhieuConstant.DA_THANH_TOAN) {
+            MsgBox.alert(this, "Phiếu nhập này đã thanh toán. Vui lòng thanh toán phiếu nhập khác");
+            return;
+        }
+        String tienKhachDua = txtTienKhachDua.getText();
+        String tienPhaiTra = txtTienPhaiTra.getText();
+        double tienKhach = 0;
 //        try {
 //            tienKhach = Double.parseDouble(tienKhachDua);
 //            if (tienKhach <= 0) {
@@ -884,23 +893,29 @@ public class TpLuongNhapView extends javax.swing.JPanel {
 //                return;
 //            }
 //        } catch (NumberFormatException e) {
-//            //            MsgBox.alert(this, "Phải nhập tiền là kiểu số");
+//            MsgBox.alert(this, "Phải nhập tiền là kiểu số");
 //            return;
 //        }
-//
-//        double tienThua = tienKhach - Double.valueOf(tienPhaiTra);
-//        txtTienThua.setText(tienThua + "");
-    }//GEN-LAST:event_txtTienKhachDuaCaretUpdate
+//        if (tienKhach < Double.valueOf(tienPhaiTra)) {
+//            MsgBox.alert(this, "Phải nhập tiền lớn hơn tiền phải trả");
+//            return;
+//        }
 
-    private void txtTienThuaCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtTienThuaCaretUpdate
-
-    }//GEN-LAST:event_txtTienThuaCaretUpdate
+        TpPhieuNhapCustom pxcs = listPn.get(row);
+        pxcs.setTrangThai(TrangThaiPhieuConstant.DA_THANH_TOAN);
+        phieuNhapService.updatePn(pxcs);
+        MsgBox.alert(this, "Bạn đã thanh toán thành công");
+        listPn.set(row, pxcs);
+        loadTablePn(listPn);
+        clearForm();
+    }//GEN-LAST:event_btnThanhToanActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private utilities.palette.MyButton btnKhoangTime;
     private utilities.palette.MyButton btnPhieuNhapChiTiet;
     private utilities.palette.MyButton btnShow;
+    private utilities.palette.MyButton btnThanhToan;
     private utilities.palette.MyButton btnThemPhieuNhapMoi;
     private utilities.palette.MyButton btnThemSpVaoPhieu;
     private javax.swing.ButtonGroup buttonGroup1;
@@ -910,7 +925,6 @@ public class TpLuongNhapView extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private utilities.palette.MyButton myButton7;
     private com.toedter.calendar.JDateChooser ngayBatDau;
     private com.toedter.calendar.JDateChooser ngayKetThuc;
     private utilities.palette.PanelRound panelRound1;

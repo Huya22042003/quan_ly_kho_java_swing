@@ -20,7 +20,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TpPhieuNhapChiTietCustom {
-
     private int soLuong;
     private ChiTietSanPham idSanPham;
     private PhieuNhap idPhieuNhap;

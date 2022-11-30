@@ -9,4 +9,5 @@ import java.util.List;
  */
 public interface TpXemChiTietSanPhamService {
     List<TpXemChiTietSanPhamCustom> listCtsp();
+    TpXemChiTietSanPhamCustom addCTSanPham(TpXemChiTietSanPhamCustom custom);
 }

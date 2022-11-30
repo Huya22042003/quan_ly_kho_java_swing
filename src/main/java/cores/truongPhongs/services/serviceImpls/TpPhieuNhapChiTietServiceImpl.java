@@ -6,6 +6,8 @@ import cores.truongPhongs.services.TpPhieuNhapChiTietService;
 import domainModels.ChiTietPhieuNhap;
 import domainModels.ChiTietSanPham;
 import domainModels.PhieuNhap;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -28,6 +30,20 @@ public class TpPhieuNhapChiTietServiceImpl implements TpPhieuNhapChiTietService{
         ctpn.setIdPhieuNhap(pn);
         repo.addPhieuNhap(ctpn);
                 return pnct;
+    }
+
+    @Override
+    public List<TpPhieuNhapChiTietCustom> getListCTPhieuNhapByID(UUID idPX) {
+        return repo.getListCTPhieuNhapByID(idPX);
+    }
+
+    @Override
+    public boolean addCTPN(TpPhieuNhapChiTietCustom ctpxct) {
+        ChiTietPhieuNhap ct = new ChiTietPhieuNhap();
+        ct.setIdChiTietSp(ctpxct.getIdSanPham());
+        ct.setIdPhieuNhap(ctpxct.getIdPhieuNhap());
+        ct.setSoLuong(ctpxct.getSoLuong());
+        return repo.addCTPN(ct);
     }
     
     
