@@ -18,7 +18,8 @@ import utilities.DateTimeUtil;
  *
  * @author admin
  */
-public class Tai_LuongHoanXuatServiceImpl implements Tai_LuongHoanXuatService{
+public class Tai_LuongHoanXuatServiceImpl
+        implements Tai_LuongHoanXuatService{
     private Tai_LuongHoanXuat_Repository rp ;
 
     public Tai_LuongHoanXuatServiceImpl() {
@@ -95,6 +96,11 @@ public class Tai_LuongHoanXuatServiceImpl implements Tai_LuongHoanXuatService{
             map.put(el.getPhieuXuat().getId(), "hehe");
         });
         return map;
+    }
+
+    @Override
+    public List<ChiTietPhieuHoanXuatCustom> getListCTphx() {
+        return rp.getListCTphx();
     }
     
 }

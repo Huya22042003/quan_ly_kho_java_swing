@@ -28,6 +28,7 @@ public class Tai_LuongHoanXuat_ChiTietPXView extends javax.swing.JFrame {
     public List<Luong_ChiTietPhieuXuatCustom> listCTPX;
     private Tai_LuongHoanXuatService luongHoanXuatService;
     public PhieuHoanXuat phieuHoanXuat;
+    private List<ChiTietPhieuHoanXuatCustom> listCTPHX;
     private String duongDan = getClass().getResource("/icons/file.png").getPath();
 
     public void setPhieuXuat(PhieuHoanXuat phieuXuat) {
@@ -38,6 +39,7 @@ public class Tai_LuongHoanXuat_ChiTietPXView extends javax.swing.JFrame {
         initComponents();
         luongHoanXuatService = new Tai_LuongHoanXuatServiceImpl();
         luongService = new Tai_NvqlLuongPhieuXuatServiceImpl();
+        listCTPHX = luongHoanXuatService.getListCTphx();
         listCTPX = new ArrayList<>();
         loadTable(listCTPX);
     }
@@ -398,7 +400,7 @@ public class Tai_LuongHoanXuat_ChiTietPXView extends javax.swing.JFrame {
         txtGiaBan.setText(tblCTPhieuXuat.getValueAt(row, 4).toString());
         txtMau.setText(tblCTPhieuXuat.getValueAt(row, 5).toString());
         txtNamBH.setText(tblCTPhieuXuat.getValueAt(row, 6).toString());
-        
+
         int namBH = listCTPX.get(row).getIdChiTietSp().getNamBaoHanh();
         if ((DateTimeUtil.convertDateToTimeStampSecond() - listCTPX.get(row).getIdPhieuXuat().getNgayThanhToan()) > 31536010484L * namBH) {
             MsgBox.alert(this, "Sản phẩm đã quá thời gian bảo hành !");
@@ -423,6 +425,25 @@ public class Tai_LuongHoanXuat_ChiTietPXView extends javax.swing.JFrame {
 
         }
         Luong_ChiTietPhieuXuatCustom ctPhieuXuat = listCTPX.get(row);
+        for (ChiTietPhieuHoanXuatCustom ctphx : luongHoanXuatService.getListCTphx()) {
+            if (listCTPX.get(row).getIdChiTietSp().getId().equals(ctphx.getIdChiTietSp().getId()) && phieuHoanXuat.getId().equals(ctphx.getIdPhieuHoanXuat().getId())) {
+                ctphx.setSoLuong(ctphx.getSoLuong() + sl);
+                luongHoanXuatService.updateCtPHX(ctphx);
+                System.out.println("Sản phẩm này đã được hoàn và vừa update lại số lượng");
+                ctPhieuXuat.setSoLuong(ctPhieuXuat.getSoLuong() - sl);
+                luongService.updateCTPX(ctPhieuXuat);
+                MsgBox.alert(this, "Bạn đã update lại số lượng hoàn của sản phẩm này thành công !");
+                listCTPX.set(row, ctPhieuXuat);
+                loadTable(listCTPX);
+                if (ctPhieuXuat.getIdChiTietSp().getHinhAnh() == null) {
+                    this.btnAnh.setIcon(new ImageIcon(duongDan));
+                } else {
+                    btnAnh.setIcon(new ImageIcon(ctPhieuXuat.getIdChiTietSp().getHinhAnh()));
+                }
+                return;
+            }
+        }
+
         for (LuongBanHang_ChiTietSanPhamCustom ctsp : luongService.getListCTSanPham()) {
             if (listCTPX.get(row).getIdChiTietSp().getId().equals(ctsp.getId())) {
                 ctsp.setSoLuongTon(ctsp.getSoLuongTon() + sl);
