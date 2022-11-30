@@ -6,6 +6,7 @@ import cores.truongPhongs.services.serviceImpls.TP_NamBaoHanhServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import utilities.Page;
 
 public class TP_NamBaoHanhForm extends javax.swing.JPanel {
 
@@ -16,12 +17,24 @@ public class TP_NamBaoHanhForm extends javax.swing.JPanel {
     private TP_CreateNamBaoHangForm createView;
 
     private TP_RUDNamBaoHangForm rud;
+    //
+    private Page p;
+
+    private int limit = 7;
+
+    private int offset = 0;
+
+    private int sizes = 0;
+
+    private int index = 1;
 
     public TP_NamBaoHanhForm() {
         baoHanhService = new TP_NamBaoHanhServiceImpl();
         getList = new ArrayList<>();
         createView = new TP_CreateNamBaoHangForm();
         rud = new TP_RUDNamBaoHangForm();
+        //
+        p = new Page();
         initComponents();
         getList = baoHanhService.getListNBH();
         loadTable(getList);
@@ -31,6 +44,10 @@ public class TP_NamBaoHanhForm extends javax.swing.JPanel {
     public void clearForm() {
         rdoTen.setSelected(true);
         getList = baoHanhService.findAllByRadio("", 0);
+        sizes = getList.size();
+        offset = 0;
+        index = 1;
+        loadIndex();
     }
 
     public List<TP_NamBaoHanhCustom> listSearch(int rdo) {
@@ -51,7 +68,16 @@ public class TP_NamBaoHanhForm extends javax.swing.JPanel {
     public void loadTable(List<TP_NamBaoHanhCustom> list) {
         DefaultTableModel dtm = (DefaultTableModel) this.tableAll.getModel();
         dtm.setRowCount(0);
-        for (TP_NamBaoHanhCustom el : list) {
+        int sum = limit + offset;
+        if (list.size() <= sum) {
+            sum = list.size();
+        }
+        for (int i = offset; i < sum; i++) {
+            if (list.get(i) == null) {
+                return;
+            }
+            TP_NamBaoHanhCustom el = list.get(i);
+//        for (TP_NamBaoHanhCustom el : list) {
             Object[] rowData = {
                 dtm.getRowCount() + 1,
                 el.getMa(),
@@ -60,7 +86,8 @@ public class TP_NamBaoHanhForm extends javax.swing.JPanel {
             dtm.addRow(rowData);
         }
     }
-    public void fillData(int i){
+
+    public void fillData(int i) {
         TP_NamBaoHanhCustom ql = getList.get(i);
         txtMaNBH.setText(ql.getMa());
         txtTenNBH.setText(ql.getTen());
@@ -84,6 +111,9 @@ public class TP_NamBaoHanhForm extends javax.swing.JPanel {
         btnHienThi = new utilities.palette.MyButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableAll = new utilities.palette.TableDark_1();
+        btnPre = new utilities.palette.UWPButton();
+        txtIndex = new javax.swing.JLabel();
+        btnNext = new utilities.palette.UWPButton();
         panelRound3 = new utilities.palette.PanelRound();
         jLabel1 = new javax.swing.JLabel();
         txtTenNBH = new utilities.palette.TextField();
@@ -253,20 +283,45 @@ public class TP_NamBaoHanhForm extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tableAll);
 
+        btnPre.setText("Pre");
+        btnPre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPreActionPerformed(evt);
+            }
+        });
+
+        txtIndex.setText("1/1");
+
+        btnNext.setText("Next");
+        btnNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
         panelRound1.setLayout(panelRound1Layout);
         panelRound1Layout.setHorizontalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 821, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelRound1Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
                         .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(panelRound16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(panelRound15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 821, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panelRound1Layout.createSequentialGroup()
+                                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(panelRound16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(panelRound15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(panelRound1Layout.createSequentialGroup()
+                        .addGap(253, 253, 253)
+                        .addComponent(btnPre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(77, 77, 77)
+                        .addComponent(txtIndex)
+                        .addGap(87, 87, 87)
+                        .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
         panelRound1Layout.setVerticalGroup(
@@ -280,7 +335,12 @@ public class TP_NamBaoHanhForm extends javax.swing.JPanel {
                     .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnPre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtIndex)
+                    .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         panelRound3.setBackground(new java.awt.Color(228, 206, 224));
@@ -384,6 +444,7 @@ public class TP_NamBaoHanhForm extends javax.swing.JPanel {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         searchRadio();
+        clearForm();
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
@@ -406,9 +467,28 @@ public class TP_NamBaoHanhForm extends javax.swing.JPanel {
         txtTenNBH.setText("");
     }//GEN-LAST:event_myButton7ActionPerformed
 
+    private void btnPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreActionPerformed
+        index = p.prevIndex(offset, limit, index);
+        offset = p.prev(offset, limit);
+        loadIndex();
+        loadTable(getList);
+    }//GEN-LAST:event_btnPreActionPerformed
+
+    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
+        index = p.nextIndex(offset, limit, sizes, index);
+        offset = p.next(offset, limit, sizes);
+        loadIndex();
+        loadTable(getList);
+    }//GEN-LAST:event_btnNextActionPerformed
+
+    private void loadIndex() {
+        this.txtIndex.setText(String.valueOf(index) + " / " + (Math.round((sizes / limit) + 0.5)));
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private utilities.palette.MyButton btnHienThi;
+    private utilities.palette.UWPButton btnNext;
+    private utilities.palette.UWPButton btnPre;
     private utilities.palette.MyButton btnSearch;
     private utilities.palette.MyButton btnThem;
     private javax.swing.ButtonGroup buttonGroup1;
@@ -424,6 +504,7 @@ public class TP_NamBaoHanhForm extends javax.swing.JPanel {
     private utilities.palette.RadioButtonCustom rdoMa;
     private utilities.palette.RadioButtonCustom rdoTen;
     private utilities.palette.TableDark_1 tableAll;
+    private javax.swing.JLabel txtIndex;
     private utilities.palette.TextField txtMaNBH;
     private utilities.palette.SearchCustom.TextFieldAnimation txtSearchTheo1;
     private utilities.palette.TextField txtTenNBH;

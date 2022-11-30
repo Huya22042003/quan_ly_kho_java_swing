@@ -25,6 +25,7 @@ public interface TpPhieuNhapService {
     List<TpPhieuNhapCustom> getListByNgayThanhToan(Long ngayBatDau, Long ngayKetThuc);
     List<TpPhieuNhapCustom> getListByNgayTao(Long ngayTao, Long ngayKetThuc);
     public NhanVien getNhanVienByMa(String ma);
+
 }
 
     
