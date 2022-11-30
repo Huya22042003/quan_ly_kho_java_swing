@@ -41,7 +41,7 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
         p = new Page();
         initComponents();
         tbChiTietSanPham.setModel(dtm);
-        String[] hearders = {"STT", "Giá Bán", "Giá Nhập", "Sản Phẩm", "Màu"};
+        String[] hearders = {"STT", "Giá Bán", "Giá Nhập", "Sản Phẩm", "Màu", "Size"};
         dtm.setColumnIdentifiers(hearders);
         serviceChiTietSP.loadCombobox(cbMauSac);
         listChiTietSP = serviceChiTietSP.getAll();
@@ -103,6 +103,7 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
         txtNamBH.setText(String.valueOf(ct.getNamBaoHanh()));
         txtSoLuongTon.setText(String.valueOf(ct.getSoLuongTon()));
         txtMau.setText(String.valueOf(ct.getMau()));
+        txtSize.setText(String.valueOf(ct.getSize()));
     }
 
     @SuppressWarnings("unchecked")
@@ -119,6 +120,7 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
         txtSoLuongTon = new utilities.palette.TextField();
         txtDonVi = new utilities.palette.TextField();
         txtNamBH = new utilities.palette.TextField();
+        txtSize = new utilities.palette.TextField();
         panelRound1 = new utilities.palette.PanelRound();
         panelRound6 = new utilities.palette.PanelRound();
         test1 = new javax.swing.JLabel();
@@ -188,6 +190,10 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
         txtNamBH.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtNamBH.setLabelText("Năm Bảo Hành");
 
+        txtSize.setBackground(new java.awt.Color(228, 206, 224));
+        txtSize.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtSize.setLabelText("Size");
+
         javax.swing.GroupLayout panelRound3Layout = new javax.swing.GroupLayout(panelRound3);
         panelRound3.setLayout(panelRound3Layout);
         panelRound3Layout.setHorizontalGroup(
@@ -205,9 +211,10 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
                             .addComponent(txtMau, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtSoLuongTon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtDonVi, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtNamBH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(txtNamBH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtSize, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(panelRound3Layout.createSequentialGroup()
-                        .addGap(94, 94, 94)
+                        .addGap(101, 101, 101)
                         .addComponent(myButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(50, Short.MAX_VALUE))
         );
@@ -228,7 +235,9 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
                 .addComponent(txtNamBH, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtMau, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(81, 81, 81)
+                .addGap(18, 18, 18)
+                .addComponent(txtSize, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(70, 70, 70)
                 .addComponent(myButton7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -629,6 +638,7 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
     private utilities.palette.TextField txtMau;
     private utilities.palette.TextField txtNamBH;
     private utilities.palette.SearchCustom.TextFieldAnimation txtSearchTheo;
+    private utilities.palette.TextField txtSize;
     private utilities.palette.TextField txtSoLuongTon;
     private utilities.palette.TextField txtTenSP;
     private utilities.palette.UWPButton uWPButton4;

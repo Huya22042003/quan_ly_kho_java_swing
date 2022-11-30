@@ -33,8 +33,14 @@ public class NvqlLuongKiemKeCtspCustom {
     private BigDecimal giaNhap;
     private TrangThaiSanPhamConstanst trangThai;
     private SanPham sanPham;
+    private int size;
+    private Long ngayTao;
 
-    public NvqlLuongKiemKeCtspCustom(UUID id, String ma, String ten, int soLuongTon, DonVi donVi, MauConstant mau, int namBaoHanh, BigDecimal giaBan) {
+    public NvqlLuongKiemKeCtspCustom(UUID id, String ma, String ten
+            , int soLuongTon, DonVi donVi, MauConstant mau
+            , int namBaoHanh, BigDecimal giaBan
+            , int size, Long ngayNhap
+    ) {
         this.id = id;
         this.ma = ma;
         this.ten = ten;
@@ -43,6 +49,8 @@ public class NvqlLuongKiemKeCtspCustom {
         this.mau = mau;
         this.namBaoHanh = namBaoHanh;
         this.giaBan = giaBan;
+        this.size = size;
+        this.ngayTao = ngayNhap;
     }
     
     
