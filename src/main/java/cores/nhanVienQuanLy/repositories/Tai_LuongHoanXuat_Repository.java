@@ -51,7 +51,8 @@ public class Tai_LuongHoanXuat_Repository {
             e.printStackTrace();
         }
     }
-        public void addChiTietPhieuHoanXuat(ChiTietPhieuHoanXuat ctphx) {
+
+    public void addChiTietPhieuHoanXuat(ChiTietPhieuHoanXuat ctphx) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             Transaction transaction = session.beginTransaction();
@@ -62,7 +63,7 @@ public class Tai_LuongHoanXuat_Repository {
             e.printStackTrace();
         }
     }
-    
+
     public List<ChiTietPhieuHoanXuatCustom> getListCTphxByID(UUID id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery("SELECT new cores.nhanVienQuanLy.customModels.ChiTietPhieuHoanXuatCustom("
@@ -71,6 +72,17 @@ public class Tai_LuongHoanXuat_Repository {
                 + "ctphx.soLuong as soLuong"
                 + ") FROM domainModels.ChiTietPhieuHoanXuat ctphx WHERE ctphx.idPhieuHoanXuat.id = :id");
         query.setParameter("id", id);
+        List<ChiTietPhieuHoanXuatCustom> list = query.getResultList();
+        return list;
+    }
+
+    public List<ChiTietPhieuHoanXuatCustom> getListCTphx() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("SELECT new cores.nhanVienQuanLy.customModels.ChiTietPhieuHoanXuatCustom("
+                + "ctphx.idPhieuHoanXuat as idPhieuHoanXuat,"
+                + "ctphx.idChiTietSp as idChiTietSp,"
+                + "ctphx.soLuong as soLuong"
+                + ") FROM domainModels.ChiTietPhieuHoanXuat ctphx");
         List<ChiTietPhieuHoanXuatCustom> list = query.getResultList();
         return list;
     }
