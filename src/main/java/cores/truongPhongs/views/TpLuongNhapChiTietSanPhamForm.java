@@ -26,12 +26,14 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
     private TpXemChiTietSanPhamService ctspService;
     private List<TpXemChiTietSanPhamCustom> listSp = new ArrayList<>();
     private TpPhieuNhapCustom phieuNhap;
+    private TpLuongNhapAddChiTietSanPhamForm createView;
 
     public void setPhieuNhap(TpPhieuNhapCustom phieuNhap) {
         this.phieuNhap = phieuNhap;
     }
 
     public TpLuongNhapChiTietSanPhamForm() {
+        createView = new TpLuongNhapAddChiTietSanPhamForm();
         initComponents();
         ctspService = new TpXemChiTietSanPhamImpl();
         listSp = ctspService.listCtsp();
@@ -55,7 +57,7 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
                 sp.getSanPham().getTen(),
                 sp.getSoLuongTon(),
                 sp.getGiaNhap(),
-                sp.getDonVi(),
+                sp.getDonVi().getDonViGoc(),
                 sp.getMau(),
                 sp.getNamBaoHanh(),
                 Converter.trangThaiSanPham(sp.getTrangThai())
@@ -522,6 +524,17 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
     public TpXemChiTietSanPhamCustom mouseClickSanPham(int row) {
         return listSp.get(row);
     }
+    public void fillData(int i){
+        TpXemChiTietSanPhamCustom ct = listSp.get(i);
+        txtMa.setText(ct.getSanPham().getMa());
+        txtTenSp.setText(ct.getSanPham().getTen());
+        txtDonVi.setText(ct.getDonVi().getDonViGoc());
+        txtNamBH.setText(String.valueOf(ct.getNamBaoHanh()));
+        txtMau.setText(String.valueOf(ct.getMau()));
+        txtTrangThai.setText(Converter.trangThaiSanPham(ct.getTrangThai()));
+    }
+    
+    
     private void tblCtspMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCtspMouseClicked
         // TODO add your handling code here:
         int row = this.tblCtsp.getSelectedRow();
@@ -543,24 +556,31 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
             MsgBox.alert(this, "Phiếu nhập này đã ở trạng thái đã thanh toán nên không thể sửa! ");
             return;
         }
-        String suaSL = JOptionPane.showInputDialog("Bạn muốn nhập số lượng bao nhiêu ?");
-        int sl = 0;
-        try {
-            sl = Integer.parseInt(suaSL);
-            if (sl <= 0) {
-                JOptionPane.showMessageDialog(this, "Bạn phải nhập lớn hơn 0");
-                return;
-            }
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Bạn phải nhập là kiểu số");
-            return;
-        }
-        String suaĐG = JOptionPane.showInputDialog("Bạn muốn đơn giá bao nhiêu ?");
-
-        JOptionPane.showMessageDialog(this, suaĐG + suaSL);
+//        String suaSL = JOptionPane.showInputDialog("Bạn muốn nhập số lượng bao nhiêu ?");
+//        int sl = 0;
+//        try {
+//            sl = Integer.parseInt(suaSL);
+//            if (sl <= 0) {
+//                JOptionPane.showMessageDialog(this, "Bạn phải nhập lớn hơn 0");
+//                return;
+//            }
+//        } catch (NumberFormatException e) {
+//            JOptionPane.showMessageDialog(this, "Bạn phải nhập là kiểu số");
+//            return;
+//        }
+//        String suaĐG = JOptionPane.showInputDialog("Bạn muốn đơn giá bao nhiêu ?");
+//
+//        JOptionPane.showMessageDialog(this, suaĐG + suaSL);
 
 //        TpXemChiTietSanPhamCustom ctsp = listSp.get(row);
-
+//          TpLuongNhapAddChiTietSanPhamForm add = new TpLuongNhapAddChiTietSanPhamForm();
+//          add.setVisible(true);
+        fillData(row);
+        createView.ct = listSp.get(row);
+        createView.setPhieuNhap(phieuNhap);
+        createView.setVisible(true);
+        createView.showData();
+          
 
     }//GEN-LAST:event_tblCtspMouseClicked
 
@@ -595,8 +615,8 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnHienThi1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHienThi1ActionPerformed
-//        listCTSP = luongService.getListCTSanPham();
-//        loadTable(listCTSP);
+        listSp = ctspService.listCtsp();
+        loadTableNcc(listSp);
     }//GEN-LAST:event_btnHienThi1ActionPerformed
 
     private void myButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton1ActionPerformed

@@ -39,9 +39,23 @@ public class TpXemChiTietSanPhamCustom {
 
     private SanPham sanPham;
 
-    private String donVi;
+    private DonVi donVi;
     
     private TrangThaiSanPhamConstanst trangThai;
     
     private int soLuongTon;
+
+    public TpXemChiTietSanPhamCustom(String hinhAnh, BigDecimal GiaNhap, BigDecimal GiaBan, int namBaoHanh, MauConstant mau, SanPham sanPham, DonVi donVi, TrangThaiSanPhamConstanst trangThai, int soLuongTon) {
+        this.hinhAnh = hinhAnh;
+        this.GiaNhap = GiaNhap;
+        this.GiaBan = GiaBan;
+        this.namBaoHanh = namBaoHanh;
+        this.mau = mau;
+        this.sanPham = sanPham;
+        this.donVi = donVi;
+        this.trangThai = trangThai;
+        this.soLuongTon = soLuongTon;
+    }
+    
+    
 }

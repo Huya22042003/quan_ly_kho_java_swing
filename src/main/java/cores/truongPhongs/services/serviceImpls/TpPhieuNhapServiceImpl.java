@@ -63,7 +63,7 @@ public class TpPhieuNhapServiceImpl implements TpPhieuNhapService {
         pn.setId(p.getId());
         pn.setTrangThai(p.getTrangThai());
         pn.setGhiChu(p.getGhiChu());
-        pn.setNgayThanhToan(p.getNgayThanhToan());
+        pn.setNgayThanhToan(new Date().getTime());
         pn.setNgayTao(p.getNgayTao());
         pn.setNhaCungCap(ncc);
         pn.setNhanVien(nv);
