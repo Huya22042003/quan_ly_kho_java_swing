@@ -19,7 +19,6 @@ import infrastructures.constant.TrangThaiSanPhamConstanst;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.File;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -94,7 +93,7 @@ public class TpLuongNhapAddChiTietSanPhamNewForm extends javax.swing.JFrame {
                 txtGiaNhap.getText(), 
                 txtSoLuongNhap.getText(), 
                 txtSize.getText(), 
-                null,
+                serviceQlsp.loc(cbbMauSac.getSelectedIndex()),
                 new Date().getTime(),
                 Converter.trangThaiSanPham(TrangThaiSanPhamConstanst.CHO_XAC_NHAN)
         );
