@@ -5,6 +5,8 @@ import cores.truongPhongs.repositories.TpXemChiTietSanPhamRepository;
 import cores.truongPhongs.services.TpXemChiTietSanPhamService;
 import domainModels.ChiTietSanPham;
 import domainModels.DonVi;
+import infrastructures.constant.TrangThaiSanPhamConstanst;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -39,5 +41,23 @@ public class TpXemChiTietSanPhamImpl implements TpXemChiTietSanPhamService {
         custom.setId(repo.addCTSanPham(sp).getId());
         return custom;
     }
+
+    @Override
+    public TrangThaiSanPhamConstanst locTt(int a) {
+        switch (a) {
+            case 0:
+                return TrangThaiSanPhamConstanst.CHO_XAC_NHAN;
+            case 1:
+                return TrangThaiSanPhamConstanst.DA_MO_BAN;
+            default:
+                return null;
+        }
+
+    }
+
+    @Override
+    public List<TpXemChiTietSanPhamCustom> getListGiaNhap(BigDecimal giaBatDau, BigDecimal giaKetThuc) {
+        return repo.getListByGiaNhap(giaBatDau, giaKetThuc);
+   }
 
 }
