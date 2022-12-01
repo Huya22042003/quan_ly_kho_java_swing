@@ -10,6 +10,7 @@ import domainModels.ChiTietSanPham;
 import domainModels.DonVi;
 import domainModels.SanPham;
 import infrastructures.constant.MauConstant;
+import infrastructures.constant.TrangThaiSanPhamConstanst;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -231,7 +232,7 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
     }
 
     @Override
-    public TpXemChiTietSanPhamCustom checkValidate1(UUID donVi, String namBH, UUID sanPham, String hinhAnh, String giaNhap, String soLuong, String size, MauConstant mau, Long ngayTao) {
+    public TpXemChiTietSanPhamCustom checkValidate1(UUID donVi, String namBH, UUID sanPham, String hinhAnh, String giaNhap, String soLuong, String size, MauConstant mau, Long ngayTao, String trangThai) {
         TpXemChiTietSanPhamCustom sp = new TpXemChiTietSanPhamCustom();
         sp.setGiaNhap(new BigDecimal(Double.parseDouble(giaNhap)));
         sp.setSoLuongTon(Integer.parseInt(soLuong));
@@ -242,6 +243,7 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
         sp.setSanPham(rp.findIDSanPham(sanPham));
         sp.setSize(Integer.parseInt(size));
         sp.setNgayTao(new Date().getTime());
+        sp.setTrangThai(TrangThaiSanPhamConstanst.CHO_XAC_NHAN);
         return sp;
     }
 

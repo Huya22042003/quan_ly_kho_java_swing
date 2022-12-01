@@ -73,6 +73,8 @@ public class ImportRepository {
     public boolean insertChiTietSanPham(ChiTietSanPham sp) {
         try ( Session s = HibernateUtil.getSessionFactory().openSession()) {
             Transaction tran = s.beginTransaction();
+            s.saveOrUpdate(sp.getSanPham());
+            s.saveOrUpdate(sp.getDonVi());
             s.save(sp);
             tran.commit();
             s.close();

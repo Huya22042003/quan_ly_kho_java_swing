@@ -1,6 +1,11 @@
 package cores.bots.repositoris;
 
+import domainModels.ChiTietPhieuXuat;
 import domainModels.PhieuXuat;
+import infrastructures.constant.TrangThaiPhieuConstant;
+import java.util.ArrayDeque;
+import java.util.List;
+import java.util.Queue;
 import javax.persistence.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -15,17 +20,19 @@ public class BotRepository {
 
     public boolean updateTrangThai() {
         Transaction tran = null;
-        try (Session s = HibernateUtil.getSessionFactory().openSession()) {
+        try ( Session s = HibernateUtil.getSessionFactory().openSession()) {
             tran = s.beginTransaction();
-            Query q = s.createNativeQuery("UPDATE [dbo].[PhieuXuat] "
-                    + "   SET [TrangThai] = :trangThai "
-                    + " WHERE [NgayThanhToan] IS NULL AND [NgayTao] <= :ngayHienTai AND [TrangThai] != 1", PhieuXuat.class);
+            Query q = s.createQuery("FROM ChiTietPhieuXuat ct"
+                    + " WHERE ct.idPhieuXuat.ngayThanhToan IS NULL AND ct.idPhieuXuat.ngayTao <= :ngayHienTai AND ct.idPhieuXuat.trangThai != :trangThai");
             q.setParameter("ngayHienTai", DateTimeUtil.convertDateToTimeStampSecond() - 172804492);
-            q.setParameter("trangThai", 1);
-            System.out.println(q.executeUpdate());
-            if(q.executeUpdate() == 0) {
-                return false;
-            }
+            q.setParameter("trangThai", TrangThaiPhieuConstant.DA_HUY);
+            List<ChiTietPhieuXuat> list = q.getResultList();
+            list.parallelStream().forEach(el -> {
+                el.getIdPhieuXuat().setTrangThai(TrangThaiPhieuConstant.DA_HUY);
+                el.getIdChiTietSp().setSoLuongTon(el.getIdChiTietSp().getSoLuongTon() + el.getSoLuong());
+                s.update(el.getIdPhieuXuat());
+                s.update(el.getIdChiTietSp());
+            });
             tran.commit();
             return true;
         } catch (Exception e) {
@@ -34,5 +41,5 @@ public class BotRepository {
             return false;
         }
     }
-    
+
 }
