@@ -95,7 +95,8 @@ public class TpLuongNhapAddChiTietSanPhamNewForm extends javax.swing.JFrame {
                 txtSoLuongNhap.getText(), 
                 txtSize.getText(), 
                 null,
-                new Date().getTime()
+                new Date().getTime(),
+                Converter.trangThaiSanPham(TrangThaiSanPhamConstanst.CHO_XAC_NHAN)
         );
         return sp;
     }

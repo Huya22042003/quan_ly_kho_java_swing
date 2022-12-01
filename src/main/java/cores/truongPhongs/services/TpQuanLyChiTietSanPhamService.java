@@ -49,7 +49,7 @@ public interface TpQuanLyChiTietSanPhamService {
     void loadCombobox(Combobox cbb);
     
     TpXemChiTietSanPhamCustom checkValidate1(UUID donVi, String namBH, UUID sanPham, String hinhAnh, String giaNhap, String soLuong, String size,
-              MauConstant mau, Long ngayTao);
+              MauConstant mau, Long ngayTao, String trangThai);
 
     public List<TpQuanLyDonViCustom> getAllDonVi1();
   
