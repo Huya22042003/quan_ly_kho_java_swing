@@ -3,6 +3,7 @@ package cores.truongPhongs.repositories;
 import cores.truongPhongs.customModels.TpQuanLyChiTietSanPhamCustom;
 import cores.truongPhongs.customModels.TpQuanLyDonViCustom;
 import cores.truongPhongs.customModels.TpQuanLySanPhamCustom;
+import cores.truongPhongs.customModels.TpXemChiTietSanPhamCustom;
 import domainModels.ChiTietSanPham;
 import domainModels.DonVi;
 import domainModels.SanPham;
@@ -227,6 +228,21 @@ public class TpQuanLyChiTietSanPhamRepository {
         return list;
 
     }
+    
+    public List<TpQuanLyDonViCustom> getAllDonVi1() {
+        List<TpQuanLyDonViCustom> list = new ArrayList<>();
+        Session s = HibernateUtil.getSessionFactory().openSession();
+        Query q = s.createQuery("select new cores.truongPhongs.customModels.TpQuanLyDonViCustom ("
+                + "dv.id as id,"
+                + "dv.donViGoc as donViGoc,"
+                + "dv.donViQuyDoi as donViQuyDoi,"
+                + "dv.soLuong as soLuong"
+                + " )from domainModels.DonVi dv");
+        list = q.getResultList();
+        s.close();
+        return list;
+
+    }
 
     public DonVi findIDDonVi(UUID id) {
         Session s = HibernateUtil.getSessionFactory().openSession();
@@ -238,6 +254,19 @@ public class TpQuanLyChiTietSanPhamRepository {
     }
 
     public List<TpQuanLySanPhamCustom> getAllSanPham() {
+        List<TpQuanLySanPhamCustom> list = new ArrayList<>();
+        Session s = HibernateUtil.getSessionFactory().openSession();
+        Query q = s.createQuery("select new cores.truongPhongs.customModels.TpQuanLySanPhamCustom ("
+                + "sp.id as id,"
+                + "sp.ma as ma,"
+                + "sp.ten as ten"
+                + ") from domainModels.SanPham sp");
+        list = q.getResultList();
+        s.close();
+        return list;
+    }
+    
+    public List<TpQuanLySanPhamCustom> getAllSanPham1() {
         List<TpQuanLySanPhamCustom> list = new ArrayList<>();
         Session s = HibernateUtil.getSessionFactory().openSession();
         Query q = s.createQuery("select new cores.truongPhongs.customModels.TpQuanLySanPhamCustom ("

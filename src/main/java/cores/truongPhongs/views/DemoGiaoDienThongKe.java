@@ -61,10 +61,12 @@ public class DemoGiaoDienThongKe extends javax.swing.JFrame {
         panelRound5.setRoundTopLeft(50);
         panelRound5.setRoundTopRight(50);
 
+        textField1.setEditable(false);
         textField1.setBackground(new java.awt.Color(204, 204, 255));
         textField1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         textField1.setLabelText("Số tiền thanh toán phiếu nhập trong một ngày");
 
+        textField7.setEditable(false);
         textField7.setBackground(new java.awt.Color(204, 204, 255));
         textField7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         textField7.setLabelText("Số tiền thanh toán phiếu xuất trong một ngày");
@@ -96,10 +98,12 @@ public class DemoGiaoDienThongKe extends javax.swing.JFrame {
         panelRound6.setRoundTopLeft(50);
         panelRound6.setRoundTopRight(50);
 
+        textField8.setEditable(false);
         textField8.setBackground(new java.awt.Color(204, 204, 255));
         textField8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         textField8.setLabelText("Số sản phẩm bán nhiều nhất trong một ngày");
 
+        textField9.setEditable(false);
         textField9.setBackground(new java.awt.Color(204, 204, 255));
         textField9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         textField9.setLabelText("Số sản phẩm nhập nhiều nhất trong một ngày");
@@ -131,6 +135,7 @@ public class DemoGiaoDienThongKe extends javax.swing.JFrame {
         panelRound8.setRoundTopLeft(50);
         panelRound8.setRoundTopRight(50);
 
+        textField10.setEditable(false);
         textField10.setBackground(new java.awt.Color(204, 204, 255));
         textField10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         textField10.setLabelText("Số đơn hoàn trong một ngày (Nhập)");
@@ -140,10 +145,12 @@ public class DemoGiaoDienThongKe extends javax.swing.JFrame {
             }
         });
 
+        textField11.setEditable(false);
         textField11.setBackground(new java.awt.Color(204, 204, 255));
         textField11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         textField11.setLabelText("Số đơn xuất trong một ngày (Xuất)");
 
+        textField18.setEditable(false);
         textField18.setBackground(new java.awt.Color(204, 204, 255));
         textField18.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         textField18.setLabelText("Tổng sản phẩm trong kho");
@@ -153,6 +160,7 @@ public class DemoGiaoDienThongKe extends javax.swing.JFrame {
             }
         });
 
+        textField19.setEditable(false);
         textField19.setBackground(new java.awt.Color(204, 204, 255));
         textField19.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         textField19.setLabelText("Số phiếu xuất chưa thanh toán");
@@ -254,10 +262,10 @@ public class DemoGiaoDienThongKe extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(47, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(panelRound7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();

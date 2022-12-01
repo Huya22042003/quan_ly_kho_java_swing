@@ -3,6 +3,7 @@ package views.main;
 import cores.logins.custom.NhanVienCustom;
 import cores.logins.service.ServiceImpl.UserServiceImpl;
 import cores.logins.service.UserService;
+import cores.truongPhongs.views.TestAll;
 import java.util.concurrent.ConcurrentHashMap;
 import javax.swing.JOptionPane;
 import utilities.Auth;
@@ -162,7 +163,7 @@ public class LoginView extends javax.swing.JFrame {
                     java.awt.EventQueue.invokeLater(new Runnable() {
                         @Override
                         public void run() {
-//                            new view().setVisible(true);
+                            new TestAll().setVisible(true);
                         }
                     });
                     

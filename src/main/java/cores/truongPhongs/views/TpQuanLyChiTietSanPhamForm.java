@@ -41,7 +41,7 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
         p = new Page();
         initComponents();
         tbChiTietSanPham.setModel(dtm);
-        String[] hearders = {"STT", "Giá Bán", "Giá Nhập", "Sản Phẩm", "Màu", "Size"};
+        String[] hearders = {"STT", "Sản Phẩm", "Màu", "Size", "Năm BH", "Đơn vị", "Giá Bán", "Giá Nhập", "Trạng thái"};
         dtm.setColumnIdentifiers(hearders);
         serviceChiTietSP.loadCombobox(cbMauSac);
         listChiTietSP = serviceChiTietSP.getAll();
@@ -62,8 +62,14 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
 
             dtm.addRow(new Object[]{
                 dtm.getRowCount() + 1,
-                ct.getGiaBan(), ct.getGiaNhap(), ct.getSanPham().getTen(),
-                Converter.trangThaiMauSac(ct.getMau())
+                ct.getSanPham().getTen(),
+                Converter.trangThaiMauSac(ct.getMau()),
+                ct.getSize(),
+                ct.getNamBaoHanh(),
+                ct.getDonVi().getDonViGoc(),
+                ct.getGiaBan() == null ? "Chưa có" : ct.getGiaBan(), 
+                ct.getGiaNhap(), 
+                Converter.trangThaiSanPham(ct.getTrangThai())
             });
         }
     }
@@ -92,9 +98,11 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
         index = 1;
         loadIndex();
     }
+
     private void loadIndex() {
         this.txtIndex.setText(String.valueOf(index) + " / " + (Math.round((sizes / limit) + 0.5)));
     }
+
     public void fillData(int i) {
         TpQuanLyChiTietSanPhamCustom ct = listChiTietSP.get(i);
         txtTenSP.setText(ct.getSanPham().getTen());
@@ -102,8 +110,9 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
         txtDonVi.setText(ct.getDonVi().getDonViGoc());
         txtNamBH.setText(String.valueOf(ct.getNamBaoHanh()));
         txtSoLuongTon.setText(String.valueOf(ct.getSoLuongTon()));
-        txtMau.setText(String.valueOf(ct.getMau()));
+        txtMau.setText(Converter.trangThaiMauSac(ct.getMau()));
         txtSize.setText(String.valueOf(ct.getSize()));
+        txtTrangThai.setText(Converter.trangThaiSanPham(ct.getTrangThai()));
     }
 
     @SuppressWarnings("unchecked")
@@ -121,6 +130,7 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
         txtDonVi = new utilities.palette.TextField();
         txtNamBH = new utilities.palette.TextField();
         txtSize = new utilities.palette.TextField();
+        txtTrangThai = new utilities.palette.TextField();
         panelRound1 = new utilities.palette.PanelRound();
         panelRound6 = new utilities.palette.PanelRound();
         test1 = new javax.swing.JLabel();
@@ -194,6 +204,10 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
         txtSize.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtSize.setLabelText("Size");
 
+        txtTrangThai.setBackground(new java.awt.Color(228, 206, 224));
+        txtTrangThai.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtTrangThai.setLabelText("Trạng thái");
+
         javax.swing.GroupLayout panelRound3Layout = new javax.swing.GroupLayout(panelRound3);
         panelRound3.setLayout(panelRound3Layout);
         panelRound3Layout.setHorizontalGroup(
@@ -212,9 +226,10 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
                             .addComponent(txtSoLuongTon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtDonVi, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtNamBH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtSize, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(txtSize, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtTrangThai, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(panelRound3Layout.createSequentialGroup()
-                        .addGap(101, 101, 101)
+                        .addGap(100, 100, 100)
                         .addComponent(myButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(50, Short.MAX_VALUE))
         );
@@ -237,7 +252,9 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
                 .addComponent(txtMau, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(txtSize, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(70, 70, 70)
+                .addGap(18, 18, 18)
+                .addComponent(txtTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
                 .addComponent(myButton7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -570,7 +587,6 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
         fillData(row);
         rud.ct = listChiTietSP.get(row);
         rud.setVisible(true);
-
         rud.showData();
     }//GEN-LAST:event_tbChiTietSanPhamMouseClicked
 
@@ -588,9 +604,7 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnHienThiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHienThiActionPerformed
-//        listChiTietSP = serviceChiTietSP.getAll();
         clearForm();
-
         showData(listChiTietSP);
     }//GEN-LAST:event_btnHienThiActionPerformed
 
@@ -641,6 +655,7 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
     private utilities.palette.TextField txtSize;
     private utilities.palette.TextField txtSoLuongTon;
     private utilities.palette.TextField txtTenSP;
+    private utilities.palette.TextField txtTrangThai;
     private utilities.palette.UWPButton uWPButton4;
     private utilities.palette.UWPButton uWPButton5;
     // End of variables declaration//GEN-END:variables
