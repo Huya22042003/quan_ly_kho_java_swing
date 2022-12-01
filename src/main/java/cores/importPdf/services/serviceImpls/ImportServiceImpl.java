@@ -17,7 +17,10 @@ import domainModels.DonVi;
 import domainModels.SanPham;
 import infrastructures.constant.MauConstant;
 import infrastructures.constant.TrangThaiSanPhamConstanst;
+import java.util.ArrayDeque;
+import java.util.Queue;
 import java.util.concurrent.ConcurrentHashMap;
+import utilities.DateTimeUtil;
 import utilities.MaTuSinh;
 
 /**
@@ -46,7 +49,7 @@ public class ImportServiceImpl implements ImportService {
 
             PDFTextStripperByArea stripper = new PDFTextStripperByArea();
             stripper.setSortByPosition(true);
-            Rectangle rect1 = new Rectangle(0, 350, 1000, 1000);
+            Rectangle rect1 = new Rectangle(0, 300, 1000, 1000);
             stripper.addRegion("row1column1", rect1);
             PDPage firstPage = document.getPage(0);
             stripper.extractRegions(firstPage);
@@ -76,11 +79,12 @@ public class ImportServiceImpl implements ImportService {
                 sp.setStt(elData[locations.get(0)].trim());
                 sp.setMa(elData[locations.get(1)].trim());
                 sp.setTen(elData[locations.get(2)].trim());
-                sp.setSoLuongTon(Integer.parseInt(elData[locations.get(4)].trim()));
+                sp.setSoLuongTon(Integer.parseInt(elData[locations.get(5)].trim()));
                 sp.setMau(elData[locations.get(3)].trim());
-                sp.setNamBaoHanh(Integer.parseInt(elData[locations.get(5)].trim()));
-                sp.setDonVi(elData[locations.get(6)].trim());
-                sp.setGiaNhap(new BigDecimal(elData[locations.get(7)].trim()));
+                sp.setSize(Integer.parseInt(elData[locations.get(4)].trim()));
+                sp.setNamBaoHanh(Integer.parseInt(elData[locations.get(6)].trim()));
+                sp.setDonVi(elData[locations.get(7)].trim());
+                sp.setGiaNhap(new BigDecimal(elData[locations.get(8)].trim()));
                 list.add(sp);
             }
             return list;
@@ -129,13 +133,13 @@ public class ImportServiceImpl implements ImportService {
     public MessAlert importData(List<SanPhamCustom> listPdf) {
         loadMap();
         MessAlert alert = new MessAlert();
+        Queue que = new ArrayDeque();
         try {
-            listPdf.forEach(el -> {
+            listPdf.parallelStream().forEach(el -> {
                 if (!mapSanPham.containsKey(el.getTen())) {
                     SanPham sp = new SanPham();
                     sp.setMa(MaTuSinh.gen("SP"));
                     sp.setTen(el.getTen());
-                    rp.insertSanPham(sp);
                     mapSanPham.put(sp.getTen(), sp);
                 }
 
@@ -144,7 +148,6 @@ public class ImportServiceImpl implements ImportService {
                     dv.setSoLuong(100);
                     dv.setDonViGoc("Đôi");
                     dv.setDonViQuyDoi(el.getDonVi());
-                    rp.insertDonVi(dv);
                     mapDonVi.put(dv.getDonViQuyDoi(), dv);
                 }
 
@@ -152,20 +155,26 @@ public class ImportServiceImpl implements ImportService {
                 ctsp.setMau(convertMau(el.getMau()));
                 ctsp.setSoLuongTon(el.getSoLuongTon());
                 ctsp.setNamBaoHanh(el.getNamBaoHanh());
+                ctsp.setNgayTao(DateTimeUtil.convertDateToTimeStampSecond());
                 ctsp.setSanPham(mapSanPham.get(el.getTen()));
                 ctsp.setGiaNhap(el.getGiaNhap());
                 ctsp.setDonVi(mapDonVi.get(el.getDonVi()));
                 ctsp.setTrangThai(TrangThaiSanPhamConstanst.CHO_XAC_NHAN);
-                rp.insertChiTietSanPham(ctsp);
+                que.add(ctsp);
                 alert.setStatus(true);
             });
-            
+            if (!que.isEmpty()) {
+                for (Object object : que) {
+                    rp.insertChiTietSanPham((ChiTietSanPham) que.poll());
+                }
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
             alert.setStatus(false);
             alert.setMess("Lỗi hệ thống");
         }
-        
+
         return alert;
     }
 }

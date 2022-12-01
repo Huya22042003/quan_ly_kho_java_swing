@@ -32,6 +32,8 @@ public class SanPhamCustom {
 
     private int namBaoHanh;
 
+    private int size;
+    
     private String mau;
     
     private String donVi;
