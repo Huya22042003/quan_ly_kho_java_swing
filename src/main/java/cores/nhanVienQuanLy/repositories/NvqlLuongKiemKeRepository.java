@@ -5,6 +5,7 @@ import domainModels.PhieuKiemKe;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import utilities.HibernateUtil;
 
 /**
@@ -55,4 +56,20 @@ public class NvqlLuongKiemKeRepository {
         }
         return true;
     }
+     public List<NvqlLuongKiemKeCustom> getListByNgayTao(Long ngayBatDau, Long ngayKetThuc) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+         Query query = session.createQuery("select "
+                + " new cores.nhanVienQuanLy.customModels.NvqlLuongKiemKeCustom("
+                + " m.id,"
+                + " m.ma as maPhieuKiem,"
+                + " m.ngayTao as ngayTao,"
+                + " m.nhanVien as idNV,"
+                + " m.trangThai as trangThai) "
+                + " from domainModels.PhieuKiemKe m WHERE m.ngayTao > :ngayBatDau AND m.ngayTao < :ngayKetThuc  ORDER BY m.ngayTao DESC");
+        query.setParameter("ngayBatDau", ngayBatDau);
+        query.setParameter("ngayKetThuc", ngayKetThuc);
+        List<NvqlLuongKiemKeCustom> list = query.getResultList();
+        return list;
+    }
+ 
 }
