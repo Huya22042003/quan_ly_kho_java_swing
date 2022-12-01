@@ -11,7 +11,6 @@ import javax.swing.table.DefaultTableModel;
 import cores.truongPhongs.services.TpPhieuNhapService;
 import cores.truongPhongs.services.serviceImpls.TpPhieuNhapChiTietServiceImpl;
 import domainModels.NhanVien;
-import domainModels.PhieuNhap;
 import infrastructures.constant.TrangThaiPhieuConstant;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
