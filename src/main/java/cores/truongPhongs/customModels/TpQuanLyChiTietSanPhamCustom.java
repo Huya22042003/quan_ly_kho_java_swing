@@ -40,5 +40,9 @@ public class TpQuanLyChiTietSanPhamCustom {
     private int namBaoHanh;
     
     private TrangThaiSanPhamConstanst trangThai;
+    
+    private int size;
+    
+    private Long ngayTao;
 
 }

@@ -3,10 +3,8 @@ package views.main;
 import cores.nhanVienQuanLy.views.NvqlXemThongTinCaNhanForm;
 import cores.truongPhongs.views.TP_ChucVuForm;
 import cores.truongPhongs.views.TP_KhachHangForm;
-import cores.truongPhongs.views.TP_NamBaoHanhForm;
 import cores.truongPhongs.views.TpDonViView;
 import cores.truongPhongs.views.TpQuanLyChiTietSanPhamForm;
-import cores.truongPhongs.views.TpQuanLySanPhamForm;
 import views.component.Header;
 import views.event.EventMenuSelected;
 import views.event.EventShowPopupMenu;
@@ -22,7 +20,6 @@ import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 import utilities.Auth;
-import viewDemos.DemoCoSoViewPast2;
 import views.component.MenuTruongPhong;
 import views.component.TrangChu;
 
@@ -71,12 +68,7 @@ public class TruongPhong extends javax.swing.JFrame {
                 if (menuIndex == 4) {
                     main.showForm(new TpDonViView());
                 }
-                if (menuIndex == 5) {
-                    main.showForm(new TP_NamBaoHanhForm());
-                }
-                if (menuIndex == 6) {
-                    main.showForm(new DemoCoSoViewPast2());
-                }
+
                 if (menuIndex == 10) {
                     if (subMenuIndex == 2) {
                         Auth.clear();

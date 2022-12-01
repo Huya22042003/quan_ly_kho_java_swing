@@ -39,5 +39,8 @@ public class ChiTietPhieuNhap implements Serializable {
 
     @Column(name = "SoLuong")
     private int soLuong;
+    
+    @Column(name = "MaSanPhamNhaCungCap")
+    private String maSanPhamNhaCungCap;
 
 }

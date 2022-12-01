@@ -33,7 +33,8 @@ public interface TpQuanLyChiTietSanPhamService {
     List<TpQuanLyChiTietSanPhamCustom> findAllByRadio(int rdo,MauConstant tt, String tk);
 
     //TpQuanLyChiTietSanPhamCustom checkValidate(TpQuanLyChiTietSanPhamCustom sp, JLabel erroGiaNhap, JLabel erroGiaBan, JLabel erroSoLuong);
-    TpQuanLyChiTietSanPhamCustom checkValidate(UUID donVi,String namBH, UUID sanPham,String hinhAnh,String giaNhap, String giaBan, String soLuong,JLabel erroHinhAnh,JLabel erroGiaNhap, JLabel erroGiaBan, JLabel erroSoLuong, JLabel erroNamBH ,MauConstant mau);
+    TpQuanLyChiTietSanPhamCustom checkValidate(UUID donVi,String namBH, UUID sanPham,String hinhAnh,String giaNhap, String giaBan, String soLuong, String size
+            ,JLabel erroHinhAnh,JLabel erroGiaNhap, JLabel erroGiaBan, JLabel erroSoLuong, JLabel erroSize, JLabel erroNamBH ,MauConstant mau);
     
     public List<TpQuanLyDonViCustom> getAllDonVi();
     

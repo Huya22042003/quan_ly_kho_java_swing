@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.UUID;
 import javax.swing.JLabel;
 import utilities.Converter;
+import utilities.DateTimeUtil;
 import utilities.palette.Combobox;
 
 /**
@@ -40,6 +41,7 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
         sp.setDonVi(custom.getDonVi());
         sp.setNamBaoHanh(custom.getNamBaoHanh());
         sp.setSanPham(custom.getSanPham());
+        sp.setNgayTao(DateTimeUtil.convertDateToTimeStampSecond());
 
         custom.setId(rp.addCTSanPham(sp).getId());
         return custom;
@@ -56,6 +58,7 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
         sp.setDonVi(custom.getDonVi());
         sp.setNamBaoHanh(custom.getNamBaoHanh());
         sp.setSanPham(custom.getSanPham());
+        sp.setNgayTao(custom.getNgayTao());
         sp.setId(custom.getId());
 
         return rp.updateCTSanPham(sp);
@@ -86,7 +89,8 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
     }
 
     @Override
-    public TpQuanLyChiTietSanPhamCustom checkValidate(UUID donVi, String namBH, UUID sanPham, String hinhAnh, String giaNhap, String giaBan, String soLuong, JLabel erroHinhAnh, JLabel erroGiaNhap, JLabel erroGiaBan, JLabel erroNamBH, JLabel erroSoLuong,MauConstant mau) {
+    public TpQuanLyChiTietSanPhamCustom checkValidate(UUID donVi,String namBH, UUID sanPham,String hinhAnh,String giaNhap, String giaBan, String soLuong, String size
+            ,JLabel erroHinhAnh,JLabel erroGiaNhap, JLabel erroGiaBan, JLabel erroSoLuong, JLabel erroSize, JLabel erroNamBH ,MauConstant mau) {
         boolean check = true;
         if (giaNhap.trim().length() == 0) {
             erroGiaNhap.setText("Giá nhập không được để trống");
@@ -96,6 +100,15 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
             check = false;
         } else {
             erroGiaNhap.setText("");
+        }
+        if (size.trim().length() == 0) {
+            erroGiaNhap.setText("Size không được để trống");
+            check = false;
+        } else if (!size.matches("[0-9]+")) {
+            erroSize.setText("Size không được là chữ");
+            check = false;
+        } else {
+            erroSize.setText("");
         }
         if (giaBan.trim().length() == 0) {
             erroGiaBan.setText("Giá bán không được để trống");
@@ -143,6 +156,7 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
         sp.setNamBaoHanh(Integer.parseInt(namBH));
         sp.setDonVi(rp.findIDDonVi(donVi));
         sp.setSanPham(rp.findIDSanPham(sanPham));
+        sp.setSize(Integer.parseInt(size));
         return sp;
     }
 

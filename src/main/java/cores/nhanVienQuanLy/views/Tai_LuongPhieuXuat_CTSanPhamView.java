@@ -24,6 +24,7 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
 
     private Tai_NvqlLuongPhieuXuatService luongService;
     private List<LuongBanHang_ChiTietSanPhamCustom> listCTSP;
+    public List<Luong_ChiTietPhieuXuatCustom> listCTPX;
     private Tai_LuongPhieuXuat_CTPhieuXuatView ctpxView;
     public PhieuXuat phieuXuat;
     private String duongDan = getClass().getResource("/icons/file.png").getPath();
@@ -40,12 +41,14 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
     private int sizes = 0;
 
     private int index = 1;
+
     public Tai_LuongPhieuXuat_CTSanPhamView() {
         p = new Page();
         initComponents();
         luongService = new Tai_NvqlLuongPhieuXuatServiceImpl();
         listCTSP = luongService.getListCTSanPham();
         ctpxView = new Tai_LuongPhieuXuat_CTPhieuXuatView();
+        listCTPX = luongService.getListCTPhieuXuat();
 //        loadTable();
         loadTable(listCTSP);
     }
@@ -62,7 +65,7 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
                 return;
             }
             LuongBanHang_ChiTietSanPhamCustom ctsp = list.get(i);
-        
+
             Object[] rowData = {
                 dtm.getRowCount() + 1,
                 ctsp.getSanPham().getMa(),
@@ -76,9 +79,11 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
             dtm.addRow(rowData);
         }
     }
+
     private void loadIndex() {
         this.txtIndex.setText(String.valueOf(index) + " / " + (Math.round((sizes / limit) + 0.5)));
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -519,11 +524,32 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
             MsgBox.alert(this, "Số lượng sản phẩm phải lớn hơn hoặc bằng số lượng tồn");
             return;
         }
+        for (Luong_ChiTietPhieuXuatCustom ctpx : luongService.getListCTPhieuXuat()) {
+            if (listCTSP.get(row).getId().equals(ctpx.getIdChiTietSp().getId()) && phieuXuat.getId().equals(ctpx.getIdPhieuXuat().getId())) {
+                ctpx.setSoLuong(ctpx.getSoLuong() + sl);
+                luongService.updateCTPX(ctpx);
+                ctsp.setSoLuongTon(ctsp.getSoLuongTon() - sl);
+                luongService.updateCTSP(ctsp);
+                MsgBox.alert(this, "Bạn đã update lại số lượng của sản phẩm này thành công !");
+                listCTSP.set(row, ctsp);
+                loadTable(listCTSP);
+                if (listCTSP.get(row).getHinhAnh() == null) {
+                    this.btnAnh.setIcon(new ImageIcon(duongDan));
+                } else {
+                    btnAnh.setIcon(new ImageIcon(listCTSP.get(row).getHinhAnh()));
+                }
+                return;
+            }
+        }
         ctsp.setSoLuongTon(ctsp.getSoLuongTon() - sl);
         luongService.updateCTSP(ctsp);
 //        JOptionPane.showMessageDialog(this, "Sửa thành công");
         Luong_ChiTietPhieuXuatCustom ctPhieuXuat = new Luong_ChiTietPhieuXuatCustom();
-        ChiTietSanPham ctsanpham = new ChiTietSanPham(ctsp.getId(), ctsp.getSoLuongTon(), ctsp.getHinhAnh(), ctsp.getGiaNhap(), ctsp.getGiaBan(), ctsp.getNamBaoHanh(), ctsp.getMau(), ctsp.getTrangThai(), ctsp.getSanPham(), ctsp.getDonVi());
+        ChiTietSanPham ctsanpham = new ChiTietSanPham(ctsp.getId(),
+                ctsp.getSoLuongTon(), ctsp.getHinhAnh(),
+                ctsp.getGiaNhap(), ctsp.getGiaBan(),
+                ctsp.getNamBaoHanh(), ctsp.getMau(),
+                ctsp.getTrangThai(), ctsp.getSize(),ctsp.getNgayTao(), ctsp.getSanPham(), ctsp.getDonVi());
         ctPhieuXuat.setIdChiTietSp(ctsanpham);
         ctPhieuXuat.setSoLuong(sl);
         ctPhieuXuat.setIdPhieuXuat(this.phieuXuat);

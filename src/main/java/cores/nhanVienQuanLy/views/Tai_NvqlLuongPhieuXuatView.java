@@ -71,12 +71,11 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
             PhieuXuatCustom el = listPX.get(i);
 
             Date ngayNhan = new Date(el.getNgayTao());
-            Date ngayThanhToan = new Date(el.getNgayThanhToan());
             Object[] rowData = {
                 dtm.getRowCount() + 1,
                 el.getId(),
                 ngayNhan,
-                ngayThanhToan,
+                el.getNgayThanhToan()== null ? "Chưa thanh toán" : new Date(el.getNgayThanhToan()),
                 Converter.TrangThaiPhieuXuat(el.getTrangThai()),
                 el.getNhanVien().getMa(),
                 el.getKhachHang().getMa()

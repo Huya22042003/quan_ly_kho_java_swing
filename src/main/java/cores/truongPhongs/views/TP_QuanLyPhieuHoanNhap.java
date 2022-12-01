@@ -10,6 +10,8 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import utilities.Converter;
+import utilities.DateTimeUtil;
+import utilities.MsgBox;
 import utilities.Page;
 
 /**
@@ -62,7 +64,7 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
             }
             TP_PhieuHoanNhapCustom el = hoanNhapCustoms.get(i);
 //        for (TP_PhieuHoanNhapCustom el : hoanNhapCustoms) {
-        for (TP_PhieuHoanNhapCustom el : hoanNhapCustoms) {
+//        for (TP_PhieuHoanNhapCustom el : hoanNhapCustoms) {
             Date ngayTao = new Date(el.getNgayTao());
             Object[] rowData = {
                 dtm.getRowCount() + 1,
@@ -107,7 +109,7 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
         myButton14 = new utilities.palette.MyButton();
         btnPre = new utilities.palette.UWPButton();
         txtIndex = new javax.swing.JLabel();
-        btnNext = new utilities.palette.UWPButton();
+        btnPre1 = new utilities.palette.UWPButton();
         panelRound2 = new utilities.palette.PanelRound();
         jLabel1 = new javax.swing.JLabel();
         txtMaPhieu = new utilities.palette.TextField();
@@ -272,10 +274,10 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
 
         txtIndex.setText("1/1");
 
-        btnNext.setText("Next");
-        btnNext.addActionListener(new java.awt.event.ActionListener() {
+        btnPre1.setText("Next");
+        btnPre1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNextActionPerformed(evt);
+                btnPre1ActionPerformed(evt);
             }
         });
 
@@ -292,16 +294,14 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
                             .addComponent(panelRound15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(panelRound1Layout.createSequentialGroup()
                         .addGap(13, 13, 13)
-                        .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelRound1Layout.createSequentialGroup()
                         .addGap(234, 234, 234)
                         .addComponent(btnPre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(71, 71, 71)
                         .addComponent(txtIndex)
-                        .addGap(100, 100, 100)
-                        .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(70, 70, 70)
+                        .addComponent(btnPre1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelRound1Layout.setVerticalGroup(
@@ -311,13 +311,13 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
                 .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(147, 147, 147)
                 .addComponent(panelRound15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnPre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtIndex)
-                    .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnPre1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(39, 39, 39))
         );
 
@@ -526,7 +526,7 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTrangThaiActionPerformed
 
     private void btnXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanActionPerformed
-        int row =this.tblPhieuHoanNhap.getSelectedRow();
+        int row = this.tblPhieuHoanNhap.getSelectedRow();
         if (row == -1) {
             return;
         }
@@ -552,7 +552,7 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
         txtTrangThai.setText(Converter.TrangThaiPhieuHoan(item.getTrangThai()));
         if (txtTrangThai.getText().equalsIgnoreCase("Hoàn Thành Công")) {
             btnXacNhan.setEnabled(false);
-        }else{
+        } else {
             btnXacNhan.setEnabled(true);
         }
     }//GEN-LAST:event_tblPhieuHoanNhapMouseClicked
@@ -569,20 +569,20 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
         loadTable();
     }//GEN-LAST:event_btnPreActionPerformed
 
-    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
+    private void btnPre1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPre1ActionPerformed
         index = p.nextIndex(offset, limit, sizes, index);
         offset = p.next(offset, limit, sizes);
         loadIndex();
         loadTable();
-    }//GEN-LAST:event_btnNextActionPerformed
+    }//GEN-LAST:event_btnPre1ActionPerformed
 
     private void loadIndex() {
         this.txtIndex.setText(String.valueOf(index) + " / " + (Math.round((sizes / limit) + 0.5)));
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private utilities.palette.MyButton btnXacNhan;
-    private utilities.palette.UWPButton btnNext;
     private utilities.palette.UWPButton btnPre;
+    private utilities.palette.UWPButton btnPre1;
+    private utilities.palette.MyButton btnXacNhan;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
