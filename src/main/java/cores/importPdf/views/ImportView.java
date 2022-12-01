@@ -40,6 +40,7 @@ public class ImportView extends javax.swing.JFrame {
                 el.getMa(),
                 el.getTen(),
                 el.getMau(),
+                el.getSize(),
                 el.getSoLuongTon(),
                 el.getNamBaoHanh(),
                 el.getDonVi(),
@@ -76,18 +77,18 @@ public class ImportView extends javax.swing.JFrame {
 
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Mã sp", "Tên sp", "Màu sắc", "Số lượng", "Năm bảo hàng", "Đơn vị", "Giá nhập"
+                "STT", "Mã sp", "Tên sp", "Màu sắc", "Size", "Số lượng", "Năm bảo hàng", "Đơn vị", "Giá nhập"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, true, true
+                false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -179,6 +180,10 @@ public class ImportView extends javax.swing.JFrame {
             }
             JOptionPane.showMessageDialog(this,"File Selected :" + file.getName());
             list = service.importList(nameFile);
+            if(list == null) {
+                JOptionPane.showMessageDialog(this, "Lỗi hệ thống");
+                return;
+            }
             System.out.println(list.size());
             loadTable();
         } else {
