@@ -27,7 +27,7 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
     private TpQuanLyChiTietSanPhamU rud;
     private Page p;
 
-    private int limit = 7;
+    private int limit = 2;
 
     private int offset = 0;
 
@@ -567,6 +567,7 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         searchRadio();
+        clearForm();
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnChonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonActionPerformed
@@ -579,10 +580,9 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnHienThiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHienThiActionPerformed
-//        listChiTietSP = serviceChiTietSP.getAll();
-        clearForm();
-
+        listChiTietSP = serviceChiTietSP.getAll();
         showData(listChiTietSP);
+        clearForm();
     }//GEN-LAST:event_btnHienThiActionPerformed
 
     private void uWPButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uWPButton5ActionPerformed

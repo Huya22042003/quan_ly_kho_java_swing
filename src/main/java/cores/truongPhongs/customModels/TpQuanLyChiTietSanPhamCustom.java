@@ -34,18 +34,17 @@ public class TpQuanLyChiTietSanPhamCustom {
 
     private String hinhAnh;
 
-    private BigDecimal giaNhap;
+    private BigDecimal GiaNhap;
 
-    private BigDecimal giaBan;
-    
+    private BigDecimal GiaBan;
+
+    private int namBaoHanh;
+
     private MauConstant mau;
+
+    private TrangThaiSanPhamConstanst trangThai;
 
     private SanPham sanPham;
 
     private DonVi donVi;
-
-    private int namBaoHanh;
-    
-    private TrangThaiSanPhamConstanst trangThai;
-
 }
