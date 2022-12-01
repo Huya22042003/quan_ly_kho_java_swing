@@ -50,7 +50,7 @@ public class TP_PhieuHoanNhapRepository {
                 + " p.ngayThanhToan,"
                 + " p.trangThai, "
                 + " p.phieuNhap"
-                + ") FROM domainModels.PhieuHoanNhap p");
+                + ") FROM domainModels.PhieuHoanNhap p ORDER BY p.ngayTao DESC");
         list = q.getResultList();
         return list;
     }
@@ -148,5 +148,15 @@ public class TP_PhieuHoanNhapRepository {
         list = q.getResultList();
         return list;
     }
-
+    public void updatePhieuHoanNhap(PhieuHoanNhap phn){
+        Session s =HibernateUtil.getSessionFactory().openSession();
+        try {
+            Transaction transaction = s.beginTransaction();
+            s.update(phn);
+            transaction.commit();
+            s.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

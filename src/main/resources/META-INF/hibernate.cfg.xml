@@ -31,14 +31,12 @@
         <!-- Echo all executed SQL to stdout -->
         <property name="show_sql">true</property>
        
-        <mapping class = "domainModels.CoSo"/>
         <mapping class = "domainModels.ChucVu"/>
         <mapping class = "domainModels.NhanVien"/>
         <mapping class = "domainModels.KhachHang"/>
         <mapping class = "domainModels.NhaCungCap"/>
         <mapping class = "domainModels.SanPham"/>
         <mapping class = "domainModels.DonVi"/>
-        <mapping class = "domainModels.NamBaoHanh"/>
         <mapping class = "domainModels.PhieuNhap"/>
         <mapping class = "domainModels.PhieuXuat"/>
         <mapping class = "domainModels.PhieuKiemKe"/>

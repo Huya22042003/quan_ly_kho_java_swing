@@ -16,5 +16,6 @@ public enum MauConstant {
     HONG,
     CAM,
     DEN,
-    TRANG
+    TRANG,
+    KHAC
 }

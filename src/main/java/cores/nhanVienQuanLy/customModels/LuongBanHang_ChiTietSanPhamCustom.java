@@ -25,4 +25,6 @@ public class LuongBanHang_ChiTietSanPhamCustom {
     private TrangThaiSanPhamConstanst trangThai;
     private SanPham sanPham;
     private DonVi donVi;
+    private int size;
+    private Long ngayTao;
 }

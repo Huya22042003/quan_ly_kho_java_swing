@@ -63,7 +63,7 @@ public class TpPhieuNhapServiceImpl implements TpPhieuNhapService {
         pn.setId(p.getId());
         pn.setTrangThai(p.getTrangThai());
         pn.setGhiChu(p.getGhiChu());
-        pn.setNgayThanhToan(p.getNgayThanhToan());
+        pn.setNgayThanhToan(new Date().getTime());
         pn.setNgayTao(p.getNgayTao());
         pn.setNhaCungCap(ncc);
         pn.setNhanVien(nv);
@@ -122,8 +122,8 @@ public class TpPhieuNhapServiceImpl implements TpPhieuNhapService {
     }
 
     @Override
-    public List<TpPhieuNhapCustom> getListByNgayTao(Long ngayTao, Long ngayKetThuc) {
-        return repo.getListByNgayTao(ngayTao, ngayKetThuc);
+    public List<TpPhieuNhapCustom> getListByNgayTao(Long ngayBatDau, Long ngayKetThuc) {
+        return repo.getListByNgayTao(ngayBatDau, ngayKetThuc);
     }
 
     @Override

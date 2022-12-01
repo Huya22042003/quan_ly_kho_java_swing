@@ -9,6 +9,7 @@ import java.util.UUID;
 import javax.swing.table.DefaultTableModel;
 import utilities.Converter;
 import utilities.MsgBox;
+import utilities.Page;
 
 /**
  *
@@ -21,17 +22,39 @@ public class NvqlQuanLyPhieuHoanXuatView extends javax.swing.JPanel {
      */
     private NvqlQuanLyPhieuHoanXuatService phieuHoanXuatService;
     private List<NvqlQuanLyPhieuHoanXuatCustom> listPhieuHoanXuat;
+    //
+    private Page p;
+
+    private int limit = 7;
+
+    private int offset = 0;
+
+    private int sizes = 0;
+
+    private int index = 1;
+
     public NvqlQuanLyPhieuHoanXuatView() {
+        //
+        p = new Page();
         initComponents();
         phieuHoanXuatService = new NvqlQuanLyPhieuHoanXuatServieceImpl();
         listPhieuHoanXuat = phieuHoanXuatService.getList();
         loadTable(listPhieuHoanXuat);
     }
-    
+
     private void loadTable(List<NvqlQuanLyPhieuHoanXuatCustom> ls) {
         DefaultTableModel dtm = (DefaultTableModel) this.tblPhieuHoanXuat.getModel();
         dtm.setRowCount(0);
-        for (NvqlQuanLyPhieuHoanXuatCustom el : listPhieuHoanXuat) {
+        int sum = limit + offset;
+        if (ls.size() <= sum) {
+            sum = ls.size();
+        }
+        for (int i = offset; i < sum; i++) {
+            if (ls.get(i) == null) {
+                return;
+            }
+            NvqlQuanLyPhieuHoanXuatCustom el = ls.get(i);
+//        for (NvqlQuanLyPhieuHoanXuatCustom el : listPhieuHoanXuat) {
             Date ngayTao = new Date(el.getNgayTao());
             Date ngayThanhToan = new Date(el.getNgayThanhToan());
             Object[] rowData = {
@@ -71,6 +94,9 @@ public class NvqlQuanLyPhieuHoanXuatView extends javax.swing.JPanel {
         btnSearch = new utilities.palette.ButtonGradient();
         ngayBatDau = new com.toedter.calendar.JDateChooser();
         ngayKetThuc = new com.toedter.calendar.JDateChooser();
+        btnPre = new utilities.palette.UWPButton();
+        btnNext = new utilities.palette.UWPButton();
+        txtIndex = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btnLoadTable = new utilities.palette.UWPButton();
@@ -132,6 +158,22 @@ public class NvqlQuanLyPhieuHoanXuatView extends javax.swing.JPanel {
             }
         });
 
+        btnPre.setText("Pre");
+        btnPre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPreActionPerformed(evt);
+            }
+        });
+
+        btnNext.setText("Next");
+        btnNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextActionPerformed(evt);
+            }
+        });
+
+        txtIndex.setText("1/1");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -140,25 +182,34 @@ public class NvqlQuanLyPhieuHoanXuatView extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1188, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(rdoNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(rdoNgayThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(72, 72, 72)
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addComponent(ngayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(ngayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(157, 157, 157)
-                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(rdoNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
+                        .addComponent(rdoNgayThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(72, 72, 72)
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(ngayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(ngayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(157, 157, 157)
+                        .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(223, 223, 223)
+                        .addComponent(btnPre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(76, 76, 76)
+                        .addComponent(txtIndex)
+                        .addGap(100, 100, 100)
+                        .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap(26, Short.MAX_VALUE)
@@ -175,8 +226,13 @@ public class NvqlQuanLyPhieuHoanXuatView extends javax.swing.JPanel {
                             .addComponent(jLabel3)
                             .addComponent(ngayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnPre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtIndex))
+                .addGap(41, 41, 41))
         );
 
         jPanel3.setBackground(new java.awt.Color(102, 102, 255));
@@ -328,10 +384,28 @@ public class NvqlQuanLyPhieuHoanXuatView extends javax.swing.JPanel {
         rdoNgayThanhToan.setSelected(false);
     }//GEN-LAST:event_btnClearActionPerformed
 
+    private void btnPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreActionPerformed
+        index = p.prevIndex(offset, limit, index);
+        offset = p.prev(offset, limit);
+        loadIndex();
+        loadTable(listPhieuHoanXuat);
+    }//GEN-LAST:event_btnPreActionPerformed
 
+    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
+        index = p.nextIndex(offset, limit, sizes, index);
+        offset = p.next(offset, limit, sizes);
+        loadIndex();
+        loadTable(listPhieuHoanXuat);
+    }//GEN-LAST:event_btnNextActionPerformed
+
+    private void loadIndex() {
+        this.txtIndex.setText(String.valueOf(index) + " / " + (Math.round((sizes / limit) + 0.5)));
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private utilities.palette.UWPButton btnClear;
     private utilities.palette.UWPButton btnLoadTable;
+    private utilities.palette.UWPButton btnNext;
+    private utilities.palette.UWPButton btnPre;
     private utilities.palette.ButtonGradient btnSearch;
     private utilities.palette.UWPButton btnThem;
     private utilities.palette.UWPButton btnThoat;
@@ -348,5 +422,6 @@ public class NvqlQuanLyPhieuHoanXuatView extends javax.swing.JPanel {
     private utilities.palette.RadioButtonCustom rdoNgayTao;
     private utilities.palette.RadioButtonCustom rdoNgayThanhToan;
     private utilities.palette.TableDark_1 tblPhieuHoanXuat;
+    private javax.swing.JLabel txtIndex;
     // End of variables declaration//GEN-END:variables
 }

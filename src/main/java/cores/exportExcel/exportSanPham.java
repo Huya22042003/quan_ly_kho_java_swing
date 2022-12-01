@@ -1,25 +1,14 @@
 package cores.exportExcel;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.util.Units;
-import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
-import org.apache.poi.xwpf.usermodel.UnderlinePatterns;
-import org.apache.poi.xwpf.usermodel.XWPFDocument;
-import org.apache.poi.xwpf.usermodel.XWPFParagraph;
-import org.apache.poi.xwpf.usermodel.XWPFRun;
-import org.apache.poi.xwpf.usermodel.XWPFTable;
-import org.apache.poi.xwpf.usermodel.XWPFTableRow;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.font.PDFont;
+import org.apache.pdfbox.pdmodel.font.PDType0Font;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 
 /**
  *
@@ -27,171 +16,80 @@ import org.apache.poi.xwpf.usermodel.XWPFTableRow;
  */
 public class exportSanPham {
 
-    public static String output = "rest-with-spring.docx";
+    public static void main(String[] args) throws IOException {
+        //Loading an existing document
+        File file = new File("D:\\Du_an_1\\src\\main\\resources\\testExportPDF.pdf");
+        PDDocument doc = new PDDocument();
+        
+        PDPage page = new PDPage();
+        
+        PDFont font = PDType0Font.load(doc, new File("D:\\Du_an_1\\src\\main\\resources\\font\\vuArial.ttf"));
+        
+        doc.addPage(page);
 
-    private static XWPFDocument document;
+        PDImageXObject pdImage = PDImageXObject.createFromFile("D:\\Du_an_1\\src\\main\\resources\\demo.png", doc);
 
-    public exportSanPham() {
-        document = new XWPFDocument();
-    }
+        PDPageContentStream contents = new PDPageContentStream(doc, page);
+        
+        contents.drawImage(pdImage, 400, 550);
+        
+        
+        contents.beginText();
+        
+        String title = "Sản phẩm A";
+        
+        String text = "This is the sample document and we are adding content to it.";
+        String text1 = "This is the sample document and we are adding content to it.";
+        String text2 = "This is the sample document and we are adding content to it.";
+        String text3 = "This is the sample document and we are adding content to it.";
+        String text4 = "This is the sample document and we are adding content to it.";
+        String text5 = "This is the sample document and we are adding content to it.";
+        String text6 = "This is the sample document and we are adding content to it.";
+        String text7 = "This is the sample document and we are adding content to it.";
+        String text8 = "This is the sample document and we are adding content to it.";
+        String text9 = "This is the sample document and we are adding content to it.";
+        String text0 = "This is the sample document and we are adding content to it.";
+        
+        contents.setFont(font, 30);
+        contents.newLineAtOffset(70, 700);
+        contents.setLeading(30f);
+        contents.showText(title);
+        contents.newLine();
+        
+        contents.setFont(font, 12);
+        contents.setLeading(18f);
+        contents.showText(text);
+        contents.newLine();
+        contents.showText(text1);
+        contents.newLine();
+        contents.showText(text2);
+        contents.newLine();
+        contents.showText(text3);
+        contents.newLine();
+        contents.showText(text4);
+        contents.newLine();
+        contents.showText(text5);
+        contents.newLine();
+        contents.showText(text6);
+        contents.newLine();
+        contents.showText(text7);
+        contents.newLine();
+        contents.showText(text8);
+        contents.newLine();
+        contents.showText(text9);
+        contents.newLine();
+        contents.showText(text0);
+        contents.newLine();
+        contents.endText();
+        contents.close();
 
-    private String path(JFrame frame) {
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        int option = fileChooser.showOpenDialog(frame);
-        if (option == JFileChooser.APPROVE_OPTION) {
-            File file = fileChooser.getSelectedFile();
-            return file.getAbsolutePath();
-        }
-        return null;
-    }
+        System.out.println("Image inserted");
 
-//    private String fileName(String name) {
-//        return name + new Date(DateTimeUtil.convertDateToTimeStampSecond()).toString();
-//    }
-//
-//    private void title(String tieuDe) {
-//        // tạo phu đề
-//        XWPFParagraph title = document.createParagraph();
-//        title.setAlignment(ParagraphAlignment.CENTER);
-//        XWPFRun titleRun = title.createRun();
-//        titleRun.setText(tieuDe);
-//        titleRun.setColor("000000");
-//        titleRun.setBold(true);
-//        titleRun.setFontFamily("Courier");
-//        titleRun.setFontSize(20);
-//    }
-//
-//    private void subTitle(String phuDe) {
-//        // tiêu đề phụ
-//        XWPFParagraph subTitle = document.createParagraph();
-//        XWPFRun subTitleRun = subTitle.createRun();
-//        subTitleRun.setText(phuDe);
-//        subTitleRun.setColor("000000");
-//        subTitleRun.setFontFamily("Courier");
-//        subTitleRun.setFontSize(16);
-//        subTitleRun.setTextPosition(20);
-//        subTitleRun.setUnderline(UnderlinePatterns.DOT_DOT_DASH);
-//    }
-//
-//    private void chonAnh(String phuDe, String tenAnh,JFrame frame) {
-//        try {
-//            // chèn ảnh
-//            XWPFParagraph image = document.createParagraph();
-//            image.setAlignment(ParagraphAlignment.CENTER);
-//            XWPFRun imageRun = image.createRun();
-//            imageRun.setTextPosition(20);
-//
-//            Path imagePath = Paths.get(ClassLoader.getSystemResource(tenAnh).toURI());
-//            imageRun.addPicture(Files.newInputStream(imagePath),
-//                    XWPFDocument.PICTURE_TYPE_PNG, imagePath.getFileName().toString(),
-//                    Units.toEMU(100), Units.toEMU(100));
-//        } catch (Exception ex) {
-//            JOptionPane.showMessageDialog(frame, "Lỗi ảnh");
-//        }
-//    }
-//
-//    private void chonBang(List<ChiTietSanPham> demoTable) {
-//        // chèn bảng
-//        XWPFTable table = document.createTable(1, 9);
-//        XWPFTableRow row1 = table.getRow(0);
-//        row1.getCell(0).setText("STT");
-//        row1.getCell(1).setText("Tên");
-//        row1.getCell(2).setText("Ảnh");
-//        for (int i = 0; i < demoTable.size(); i++) {
-//            ChiTietSanPham ct = demoTable.get(i);
-//            XWPFTableRow row = null;
-//            if (row == null) {
-//                row = table.createRow();
-//                row.getCell(0).setText(String.valueOf(i + 1));
-//                row.getCell(1).setText(ct.getSanPham().getMa());
-//                row.getCell(2).setText(ct.getSanPham().getTen());
-//                row.getCell(3).setText(Converter.trangThaiMauSac(ct.getMau()));
-//                row.getCell(4).setText(ct.getGiaNhap().toString());
-//                row.getCell(5).setText(ct.getGiaBan().toString());
-//                row.getCell(6).setText(String.valueOf(ct.getNamBaoHanh()));
-//                row.getCell(7).setText(String.valueOf(ct.getSoLuongTon()));
-//                row.getCell(8).setText(ct.getDonVi().getDonViQuyDoi());
-//                if (ct.getHinhAnh() != null) {
-//                    try {
-//                        Path imagePath = Paths.get(ClassLoader.getSystemResource("test_acvsad.png").toURI());
-//                        XWPFRun run = row.getCell(2).addParagraph().createRun();
-//                        run.addPicture(Files.newInputStream(imagePath),
-//                                XWPFDocument.PICTURE_TYPE_PNG, imagePath.getFileName().toString(),
-//                                Units.toEMU(100), Units.toEMU(100));
-//                    } catch (Exception ex) {
-//                        JOptionPane.showMessageDialog(frame, "Lỗi ảnh");
-//                    }
-//                }
-//
-//            }
-//        }
-//    }
+        //Saving the document
+        doc.save(file);
 
-//    private void themBang()
-    public static void main(String[] args) throws InvalidFormatException, IOException, URISyntaxException {
-document = new XWPFDocument();
-        // tạo phu đề
-        XWPFParagraph title = document.createParagraph();
-        title.setAlignment(ParagraphAlignment.CENTER);
-        XWPFRun titleRun = title.createRun();
-        titleRun.setText("Sản phẩm");
-        titleRun.setColor("000000");
-        titleRun.setBold(true);
-        titleRun.setFontFamily("Courier");
-        titleRun.setFontSize(20);
+        //Closing the document
+        doc.close();
 
-        // tiêu đề phụ
-        XWPFParagraph subTitle = document.createParagraph();
-        subTitle.setAlignment(ParagraphAlignment.CENTER);
-        XWPFRun subTitleRun = subTitle.createRun();
-        subTitleRun.setText("Sản phẩm aaaaaa");
-        subTitleRun.setColor("000000");
-        subTitleRun.setFontFamily("Courier");
-        subTitleRun.setFontSize(16);
-        subTitleRun.setTextPosition(20);
-        subTitleRun.setUnderline(UnderlinePatterns.DOT_DOT_DASH);
-
-        // chèn ảnh
-        XWPFParagraph image = document.createParagraph();
-        image.setAlignment(ParagraphAlignment.CENTER);
-        XWPFRun imageRun = image.createRun();
-        imageRun.setTextPosition(20);
-
-        Path imagePath = Paths.get(ClassLoader.getSystemResource("test_acvsad.png").toURI());
-        imageRun.addPicture(Files.newInputStream(imagePath),
-                XWPFDocument.PICTURE_TYPE_PNG, imagePath.getFileName().toString(),
-                Units.toEMU(100), Units.toEMU(100));
-
-        // List demo
-        List<String> demoTable = new ArrayList<>();
-        demoTable.add("bdsaknkas");
-        demoTable.add("bdsaknkas");
-        demoTable.add("bdsaknkas");
-
-        // chèn bảng
-        XWPFTable table = document.createTable(1, 3);
-        XWPFTableRow row1 = table.getRow(0);
-        row1.getCell(0).setText("STT");
-        row1.getCell(1).setText("Tên");
-        row1.getCell(2).setText("Ảnh");
-        for (int i = 0; i < demoTable.size(); i++) {
-            XWPFTableRow row = null;
-            if (row == null) {
-                row = table.createRow();
-                row.getCell(0).setText(String.valueOf(i + 1));
-                row.getCell(1).setText(demoTable.get(i));
-                XWPFRun run = row.getCell(2).addParagraph().createRun();
-                run.addPicture(Files.newInputStream(imagePath),
-                        XWPFDocument.PICTURE_TYPE_PNG, imagePath.getFileName().toString(),
-                        Units.toEMU(100), Units.toEMU(100));
-            }
-        }
-
-        // suất file
-        FileOutputStream out = new FileOutputStream(output);
-        document.write(out);
-        out.close();
-        document.close();
     }
 }

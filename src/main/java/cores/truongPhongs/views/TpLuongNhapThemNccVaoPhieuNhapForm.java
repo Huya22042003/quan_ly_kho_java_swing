@@ -7,9 +7,9 @@ package cores.truongPhongs.views;
 import cores.truongPhongs.customModels.NhaCungCapCustom;
 import cores.truongPhongs.services.TpQuanlyNhaCungCapService;
 import cores.truongPhongs.services.serviceImpls.TpQuanlyNhaCungCapServiceImpl;
+import infrastructures.constant.KhachHangConstant;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JColorChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import utilities.Converter;
@@ -34,10 +34,66 @@ public class TpLuongNhapThemNccVaoPhieuNhapForm extends javax.swing.JFrame {
         loadTableNcc(listNcc);
     }
 
+        public List<NhaCungCapCustom> listSearch(int rdo) {
+        // nhập vào 
+        String timKiem = this.txtSearch.getText();
+        List<NhaCungCapCustom> listTimKiem = new ArrayList<>();
+
+        // tìm kiếm theo tên mã vị trí
+        checkCbb(nccService.locKH(this.cbbTrangThai.getSelectedIndex())).forEach(el -> {
+            String search = "";
+            List<String> strings = new ArrayList<>();
+
+            // truyền tham số
+            switch (rdo) {
+                case 0:
+                    search = el.getTen();
+                    break;
+                case 1:
+                    search = el.getEmail();
+                    break;
+                case 2:
+                    search = el.getSdt();
+                    break;
+            }
+            for (int i = 0; i <= search.length(); i++) {
+                String newMa = search.substring(0, i);
+                strings.add(newMa);
+            }
+            // so sánh mảng vừa cắt với phần tử nhập vào
+            for (String e : strings) {
+                if (e.equalsIgnoreCase(timKiem)) {
+                    listTimKiem.add(el);
+                }
+            }
+        });
+
+        return listTimKiem;
+    }
+
+    public List<NhaCungCapCustom> checkCbb(KhachHangConstant cs) {
+        List<NhaCungCapCustom> listTimKiem = new ArrayList<>();
+        listNcc.forEach(el -> {
+            if (el.getTrangThai() == cs) {
+                listTimKiem.add(el);
+            }
+        });
+        return listTimKiem;
+    }
+
+    public void searchRadio() {
+        if (rdoTen.isSelected()) {
+            loadTableNcc(listSearch(0));
+        } else if (rdoEmail.isSelected()) {
+            loadTableNcc(listSearch(1));
+        } else {
+            loadTableNcc(listSearch(2));
+        }
+    }
     private void loadTableNcc(List<NhaCungCapCustom> list) {
         DefaultTableModel dtm = (DefaultTableModel) this.tblNcc.getModel();
         dtm.setRowCount(0);
-        for (NhaCungCapCustom ncc : listNcc) {
+        for (NhaCungCapCustom ncc : list) {
             Object[] rowData = {
                 dtm.getRowCount() + 1,
                 ncc.getMa(),
@@ -45,7 +101,7 @@ public class TpLuongNhapThemNccVaoPhieuNhapForm extends javax.swing.JFrame {
                 ncc.getEmail(),
                 ncc.getSdt(),
                 ncc.getDiaChi(),
-                ncc.getDanhGia(),
+                Converter.trangThaiDanhGia(ncc.getDanhGia()),
                 Converter.trangThaiKhachHang(ncc.getTrangThai())
             };
             dtm.addRow(rowData);
@@ -56,15 +112,16 @@ public class TpLuongNhapThemNccVaoPhieuNhapForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         panelRound1 = new utilities.palette.PanelRound();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblNcc = new utilities.palette.TableDark_1();
         panelRound4 = new utilities.palette.PanelRound();
-        rdoNcc = new utilities.palette.RadioButtonCustom();
-        textFieldAnimation1 = new utilities.palette.SearchCustom.TextFieldAnimation();
-        rdoMa1 = new utilities.palette.RadioButtonCustom();
-        combobox1 = new utilities.palette.Combobox();
-        rdoMa2 = new utilities.palette.RadioButtonCustom();
+        rdoTen = new utilities.palette.RadioButtonCustom();
+        txtSearch = new utilities.palette.SearchCustom.TextFieldAnimation();
+        rdoSdt = new utilities.palette.RadioButtonCustom();
+        cbbTrangThai = new utilities.palette.Combobox();
+        rdoEmail = new utilities.palette.RadioButtonCustom();
         panelRound5 = new utilities.palette.PanelRound();
         jLabel2 = new javax.swing.JLabel();
         panelRound3 = new utilities.palette.PanelRound();
@@ -95,11 +152,11 @@ public class TpLuongNhapThemNccVaoPhieuNhapForm extends javax.swing.JFrame {
 
             },
             new String [] {
-                "STT", "MÃ ", "TÊN", "EMAIL", "SĐT", "ĐỊA CHỈ", "NGÀY SINH", "ĐÁNH GIÁ", "TRẠNG THÁI"
+                "STT", "MÃ ", "TÊN", "EMAIL", "SĐT", "ĐỊA CHỈ", "ĐÁNH GIÁ", "TRẠNG THÁI"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, true
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -119,46 +176,55 @@ public class TpLuongNhapThemNccVaoPhieuNhapForm extends javax.swing.JFrame {
         panelRound4.setRoundTopLeft(50);
         panelRound4.setRoundTopRight(50);
 
-        rdoNcc.setBackground(new java.awt.Color(67, 130, 187));
-        rdoNcc.setForeground(new java.awt.Color(255, 255, 255));
-        rdoNcc.setText("Tên");
-        rdoNcc.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        rdoNcc.addActionListener(new java.awt.event.ActionListener() {
+        rdoTen.setBackground(new java.awt.Color(67, 130, 187));
+        buttonGroup1.add(rdoTen);
+        rdoTen.setForeground(new java.awt.Color(255, 255, 255));
+        rdoTen.setText("Tên");
+        rdoTen.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        rdoTen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdoNccActionPerformed(evt);
+                rdoTenActionPerformed(evt);
             }
         });
 
-        rdoMa1.setBackground(new java.awt.Color(67, 130, 187));
-        rdoMa1.setForeground(new java.awt.Color(255, 255, 255));
-        rdoMa1.setText("SĐT");
-        rdoMa1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        rdoMa1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdoMa1ActionPerformed(evt);
+        txtSearch.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtSearchMouseClicked(evt);
             }
         });
 
-        combobox1.setBackground(new java.awt.Color(67, 130, 187));
-        combobox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Đang làm việc", "Sắp bỏ", "Đã ngừng cung cấp" }));
-        combobox1.setSelectedIndex(-1);
-        combobox1.setToolTipText("Chọn trạng thái nhà cung cấp bạn muốn tìm kiếm");
-        combobox1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        combobox1.setLabeText("Trạng thái");
-        combobox1.setLineColor(new java.awt.Color(145, 200, 249));
-        combobox1.addActionListener(new java.awt.event.ActionListener() {
+        rdoSdt.setBackground(new java.awt.Color(67, 130, 187));
+        buttonGroup1.add(rdoSdt);
+        rdoSdt.setForeground(new java.awt.Color(255, 255, 255));
+        rdoSdt.setText("SĐT");
+        rdoSdt.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        rdoSdt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                combobox1ActionPerformed(evt);
+                rdoSdtActionPerformed(evt);
             }
         });
 
-        rdoMa2.setBackground(new java.awt.Color(67, 130, 187));
-        rdoMa2.setForeground(new java.awt.Color(255, 255, 255));
-        rdoMa2.setText("Email");
-        rdoMa2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        rdoMa2.addActionListener(new java.awt.event.ActionListener() {
+        cbbTrangThai.setBackground(new java.awt.Color(67, 130, 187));
+        cbbTrangThai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Đang làm việc", "Sắp bỏ", "Đã ngừng cung cấp" }));
+        cbbTrangThai.setSelectedIndex(-1);
+        cbbTrangThai.setToolTipText("Chọn trạng thái nhà cung cấp bạn muốn tìm kiếm");
+        cbbTrangThai.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        cbbTrangThai.setLabeText("Trạng thái");
+        cbbTrangThai.setLineColor(new java.awt.Color(145, 200, 249));
+        cbbTrangThai.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdoMa2ActionPerformed(evt);
+                cbbTrangThaiActionPerformed(evt);
+            }
+        });
+
+        rdoEmail.setBackground(new java.awt.Color(67, 130, 187));
+        buttonGroup1.add(rdoEmail);
+        rdoEmail.setForeground(new java.awt.Color(255, 255, 255));
+        rdoEmail.setText("Email");
+        rdoEmail.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        rdoEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoEmailActionPerformed(evt);
             }
         });
 
@@ -167,16 +233,16 @@ public class TpLuongNhapThemNccVaoPhieuNhapForm extends javax.swing.JFrame {
         panelRound4Layout.setHorizontalGroup(
             panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(rdoNcc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(9, Short.MAX_VALUE)
+                .addComponent(rdoTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(rdoMa2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(rdoEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(rdoMa1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(rdoSdt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(combobox1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(textFieldAnimation1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
         );
         panelRound4Layout.setVerticalGroup(
@@ -184,11 +250,11 @@ public class TpLuongNhapThemNccVaoPhieuNhapForm extends javax.swing.JFrame {
             .addGroup(panelRound4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(textFieldAnimation1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(combobox1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(rdoMa1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(rdoMa2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(rdoNcc, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(rdoSdt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(rdoEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(rdoTen, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -392,7 +458,7 @@ public class TpLuongNhapThemNccVaoPhieuNhapForm extends javax.swing.JFrame {
                             .addGroup(panelRound1Layout.createSequentialGroup()
                                 .addComponent(panelRound16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
-                                .addComponent(panelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, 579, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(panelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(6, 6, 6))))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 834, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addComponent(panelRound3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -438,21 +504,22 @@ public class TpLuongNhapThemNccVaoPhieuNhapForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void rdoNccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoNccActionPerformed
+    private void rdoTenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoTenActionPerformed
         //searchRadio();
-    }//GEN-LAST:event_rdoNccActionPerformed
+    }//GEN-LAST:event_rdoTenActionPerformed
 
-    private void rdoMa1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoMa1ActionPerformed
+    private void rdoSdtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoSdtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_rdoMa1ActionPerformed
+    }//GEN-LAST:event_rdoSdtActionPerformed
 
-    private void combobox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combobox1ActionPerformed
+    private void cbbTrangThaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbTrangThaiActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_combobox1ActionPerformed
+        searchRadio();
+    }//GEN-LAST:event_cbbTrangThaiActionPerformed
 
-    private void rdoMa2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoMa2ActionPerformed
+    private void rdoEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoEmailActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_rdoMa2ActionPerformed
+    }//GEN-LAST:event_rdoEmailActionPerformed
 
     private void tblNccMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNccMouseClicked
         int row = this.tblNcc.getSelectedRow();
@@ -480,6 +547,11 @@ public class TpLuongNhapThemNccVaoPhieuNhapForm extends javax.swing.JFrame {
         listNcc = nccService.getList();
         loadTableNcc(listNcc);
     }//GEN-LAST:event_btnHienThi1ActionPerformed
+
+    private void txtSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSearchMouseClicked
+        searchRadio();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSearchMouseClicked
 
     /**
      * @param args the command line arguments
@@ -520,7 +592,8 @@ public class TpLuongNhapThemNccVaoPhieuNhapForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private utilities.palette.MyButton btnHienThi1;
     private utilities.palette.MyButton btnThem1;
-    private utilities.palette.Combobox combobox1;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private utilities.palette.Combobox cbbTrangThai;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -530,17 +603,17 @@ public class TpLuongNhapThemNccVaoPhieuNhapForm extends javax.swing.JFrame {
     private utilities.palette.PanelRound panelRound3;
     private utilities.palette.PanelRound panelRound4;
     private utilities.palette.PanelRound panelRound5;
-    private utilities.palette.RadioButtonCustom rdoMa1;
-    private utilities.palette.RadioButtonCustom rdoMa2;
-    private utilities.palette.RadioButtonCustom rdoNcc;
+    private utilities.palette.RadioButtonCustom rdoEmail;
+    private utilities.palette.RadioButtonCustom rdoSdt;
+    private utilities.palette.RadioButtonCustom rdoTen;
     private utilities.palette.TableDark_1 tblNcc;
-    private utilities.palette.SearchCustom.TextFieldAnimation textFieldAnimation1;
     private utilities.palette.TextField txtDanhGia;
     private utilities.palette.TextField txtDiaChi;
     private utilities.palette.TextField txtEmail;
     private utilities.palette.TextField txtMaKH;
     private utilities.palette.TextField txtNgaySinh;
     private utilities.palette.TextField txtSDT;
+    private utilities.palette.SearchCustom.TextFieldAnimation txtSearch;
     private utilities.palette.TextField txtTenKH;
     private utilities.palette.TextField txtTrangThai;
     // End of variables declaration//GEN-END:variables

@@ -13,6 +13,7 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import utilities.Converter;
 import utilities.MsgBox;
+import utilities.Page;
 
 /**
  *
@@ -25,8 +26,20 @@ public class NvqlLuongHoanXuatView extends javax.swing.JPanel {
     private Tai_LuongHoanXuat_ListPhieuXuat lisPXView;
     private Tai_LuongHoanXuat_ChiTietPXView ctpxView;
     private Tai_LuongHoanXuat_ChiTietPhieuHoanXuatView ctphieuHoanXuatView;
+//
+    private Page p;
+
+    private int limit = 7;
+
+    private int offset = 0;
+
+    private int sizes = 0;
+
+    private int index = 1;
 
     public NvqlLuongHoanXuatView() {
+        //
+        p = new Page();
         initComponents();
         luongHXService = new Tai_LuongHoanXuatServiceImpl();
         lisPXView = new Tai_LuongHoanXuat_ListPhieuXuat();
@@ -49,12 +62,25 @@ public class NvqlLuongHoanXuatView extends javax.swing.JPanel {
         txtTienThua.setText("");
         txtTrangThai.setText("");
         txtLiDo.setText("");
+        sizes = listPHX.size();
+        offset = 0;
+        index = 1;
+        loadIndex();
     }
 
     private void loadTable(List<PhieuHoanXuatCustom> ls) {
         DefaultTableModel dtm = (DefaultTableModel) this.tblPhieuHoanXuat.getModel();
         dtm.setRowCount(0);
-        for (PhieuHoanXuatCustom phx : listPHX) {
+        int sum = limit + offset;
+        if (ls.size() <= sum) {
+            sum = ls.size();
+        }
+        for (int i = offset; i < sum; i++) {
+            if (ls.get(i) == null) {
+                return;
+            }
+            PhieuHoanXuatCustom phx = ls.get(i);
+//        for (PhieuHoanXuatCustom phx : listPHX) {
             Date ngayTao = new Date(phx.getNgayTao());
             Date ngayThanhToan = new Date(phx.getNgayThanhToan());
             Object[] rowData = {
@@ -89,6 +115,9 @@ public class NvqlLuongHoanXuatView extends javax.swing.JPanel {
         btnChiTietSP = new utilities.palette.MyButton();
         btnChiTietSP1 = new utilities.palette.MyButton();
         btnShow = new utilities.palette.MyButton();
+        btnPre = new utilities.palette.UWPButton();
+        btnNext = new utilities.palette.UWPButton();
+        txtIndex = new javax.swing.JLabel();
         panelRound3 = new utilities.palette.PanelRound();
         jLabel1 = new javax.swing.JLabel();
         txtNgayTao = new utilities.palette.TextField();
@@ -262,6 +291,22 @@ public class NvqlLuongHoanXuatView extends javax.swing.JPanel {
 
         btnChiTietSP1.getAccessibleContext().setAccessibleDescription("Xuất phiếu xuất");
 
+        btnPre.setText("Pre");
+        btnPre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPreActionPerformed(evt);
+            }
+        });
+
+        btnNext.setText("Next");
+        btnNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextActionPerformed(evt);
+            }
+        });
+
+        txtIndex.setText("1/1");
+
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
         panelRound1.setLayout(panelRound1Layout);
         panelRound1Layout.setHorizontalGroup(
@@ -275,6 +320,14 @@ public class NvqlLuongHoanXuatView extends javax.swing.JPanel {
                             .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(panelRound15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 319, Short.MAX_VALUE))))
+            .addGroup(panelRound1Layout.createSequentialGroup()
+                .addGap(293, 293, 293)
+                .addComponent(btnPre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51)
+                .addComponent(txtIndex)
+                .addGap(46, 46, 46)
+                .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -283,9 +336,14 @@ public class NvqlLuongHoanXuatView extends javax.swing.JPanel {
                 .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(53, 53, 53)
                 .addComponent(panelRound15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addGap(32, 32, 32)
+                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnPre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtIndex))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         panelRound3.setBackground(new java.awt.Color(228, 206, 224));
@@ -302,6 +360,7 @@ public class NvqlLuongHoanXuatView extends javax.swing.JPanel {
         txtNgayTao.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtNgayTao.setLabelText("Ngày tạo");
 
+        txtMaPhieu.setEditable(false);
         txtMaPhieu.setBackground(new java.awt.Color(228, 206, 224));
         txtMaPhieu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtMaPhieu.setLabelText("Mã phiếu ");
@@ -315,12 +374,14 @@ public class NvqlLuongHoanXuatView extends javax.swing.JPanel {
         textAreaScroll1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         textAreaScroll1.setLabelText("Ghi chú");
 
+        txtGhiChu.setEditable(false);
         txtGhiChu.setBackground(new java.awt.Color(228, 206, 224));
         txtGhiChu.setColumns(20);
         txtGhiChu.setRows(5);
         txtGhiChu.setDisabledTextColor(new java.awt.Color(204, 204, 255));
         textAreaScroll1.setViewportView(txtGhiChu);
 
+        txtTongTienPhaiTraKhach.setEditable(false);
         txtTongTienPhaiTraKhach.setBackground(new java.awt.Color(228, 206, 224));
         txtTongTienPhaiTraKhach.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtTongTienPhaiTraKhach.setLabelText("Tổng tiền phải trả lại khách");
@@ -353,6 +414,7 @@ public class NvqlLuongHoanXuatView extends javax.swing.JPanel {
             }
         });
 
+        txtTrangThai.setEditable(false);
         txtTrangThai.setBackground(new java.awt.Color(228, 206, 224));
         txtTrangThai.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtTrangThai.setLabelText("Trạng thái");
@@ -376,6 +438,7 @@ public class NvqlLuongHoanXuatView extends javax.swing.JPanel {
             }
         });
 
+        txtTienThua.setEditable(false);
         txtTienThua.setBackground(new java.awt.Color(228, 206, 224));
         txtTienThua.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtTienThua.setLabelText("Tiền thừa");
@@ -385,6 +448,7 @@ public class NvqlLuongHoanXuatView extends javax.swing.JPanel {
             }
         });
 
+        txtLiDo.setEditable(false);
         txtLiDo.setBackground(new java.awt.Color(228, 206, 224));
         txtLiDo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtLiDo.setLabelText("Lí do");
@@ -574,7 +638,8 @@ public class NvqlLuongHoanXuatView extends javax.swing.JPanel {
         for (ChiTietPhieuHoanXuatCustom ctphxct : listCTPHX) {
             tien += ctphxct.getIdChiTietSp().getGiaBan().multiply(new BigDecimal(ctphxct.getSoLuong())).doubleValue();
         }
-        txtTongTienPhaiTraKhach.setText(tien + "");
+        int tongTien =(int) tien;
+        txtTongTienPhaiTraKhach.setText(tongTien + "");
         if (txtTrangThai.getText().equalsIgnoreCase("Hoàn Thành Công")) {
             btnThanhToan.setEnabled(false);
         } else {
@@ -638,7 +703,8 @@ public class NvqlLuongHoanXuatView extends javax.swing.JPanel {
         }
 
         double tienThua = tienKhach - Double.valueOf(tienPhaiTra);
-        txtTienThua.setText(tienThua + "");
+        int tongTien = (int)tienThua;
+        txtTienThua.setText(tongTien + "");
     }//GEN-LAST:event_txtNhapTienCaretUpdate
 
     private void btnChiTietSP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChiTietSP1ActionPerformed
@@ -654,12 +720,30 @@ public class NvqlLuongHoanXuatView extends javax.swing.JPanel {
 
     }//GEN-LAST:event_txtLiDoActionPerformed
 
+    private void btnPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreActionPerformed
+        index = p.prevIndex(offset, limit, index);
+        offset = p.prev(offset, limit);
+        loadIndex();
+        loadTable(listPHX);
+    }//GEN-LAST:event_btnPreActionPerformed
 
+    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
+        index = p.nextIndex(offset, limit, sizes, index);
+        offset = p.next(offset, limit, sizes);
+        loadIndex();
+        loadTable(listPHX);
+    }//GEN-LAST:event_btnNextActionPerformed
+
+    private void loadIndex() {
+        this.txtIndex.setText(String.valueOf(index) + " / " + (Math.round((sizes / limit) + 0.5)));
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private utilities.palette.MyButton btnChiTietSP;
     private utilities.palette.MyButton btnChiTietSP1;
     private utilities.palette.MyButton btnCreatPhieuXuat;
     private utilities.palette.MyButton btnCtPhieuXuat;
+    private utilities.palette.UWPButton btnNext;
+    private utilities.palette.UWPButton btnPre;
     private utilities.palette.MyButton btnShow;
     private utilities.palette.MyButton btnThanhToan;
     private javax.swing.ButtonGroup buttonGroup1;
@@ -675,6 +759,7 @@ public class NvqlLuongHoanXuatView extends javax.swing.JPanel {
     private utilities.palette.TextAreaScroll textAreaScroll1;
     private utilities.palette.TextAreaCustom txtGhiChu;
     private utilities.palette.TextField txtIdPhieuXuat;
+    private javax.swing.JLabel txtIndex;
     private utilities.palette.TextField txtKhachHang;
     private utilities.palette.TextField txtLiDo;
     private utilities.palette.TextField txtMaPhieu;

@@ -23,8 +23,9 @@ public interface TpPhieuNhapService {
     TpPhieuNhapCustom findPhieuNhapById(UUID id);
     TrangThaiPhieuConstant loc(int a);
     List<TpPhieuNhapCustom> getListByNgayThanhToan(Long ngayBatDau, Long ngayKetThuc);
-    List<TpPhieuNhapCustom> getListByNgayTao(Long ngayTao, Long ngayKetThuc);
+    List<TpPhieuNhapCustom> getListByNgayTao(Long ngayBatDau, Long ngayKetThuc);
     public NhanVien getNhanVienByMa(String ma);
+
 }
 
     

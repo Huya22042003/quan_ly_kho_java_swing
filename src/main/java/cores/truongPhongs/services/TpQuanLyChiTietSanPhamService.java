@@ -3,6 +3,7 @@ package cores.truongPhongs.services;
 import cores.truongPhongs.customModels.TpQuanLyChiTietSanPhamCustom;
 import cores.truongPhongs.customModels.TpQuanLyDonViCustom;
 import cores.truongPhongs.customModels.TpQuanLySanPhamCustom;
+import cores.truongPhongs.customModels.TpXemChiTietSanPhamCustom;
 import domainModels.DonVi;
 import domainModels.SanPham;
 import infrastructures.constant.MauConstant;
@@ -30,20 +31,28 @@ public interface TpQuanLyChiTietSanPhamService {
 
     TpQuanLyChiTietSanPhamCustom findCTSanPhamGia(BigDecimal gia);
 
-    List<TpQuanLyChiTietSanPhamCustom> findAllByRadio(int rdo,MauConstant tt, String tk);
+    List<TpQuanLyChiTietSanPhamCustom> findAllByRadio(int rdo, MauConstant tt, String tk);
 
-    //TpQuanLyChiTietSanPhamCustom checkValidate(TpQuanLyChiTietSanPhamCustom sp, JLabel erroGiaNhap, JLabel erroGiaBan, JLabel erroSoLuong);
-    TpQuanLyChiTietSanPhamCustom checkValidate(UUID donVi,String namBH, UUID sanPham,String hinhAnh,String giaNhap, String giaBan, String soLuong,JLabel erroHinhAnh,JLabel erroGiaNhap, JLabel erroGiaBan, JLabel erroSoLuong, JLabel erroNamBH ,MauConstant mau);
-    
+    TpQuanLyChiTietSanPhamCustom checkValidate(UUID donVi, String namBH, UUID sanPham, String hinhAnh, String giaNhap, String giaBan, String soLuong, String size,
+             JLabel erroHinhAnh, JLabel erroGiaNhap, JLabel erroGiaBan, JLabel erroSoLuong, JLabel erroSize, JLabel erroNamBH, MauConstant mau);
+
     public List<TpQuanLyDonViCustom> getAllDonVi();
-    
+
     public DonVi findIDDonVi(UUID id);
-    
+
     public List<TpQuanLySanPhamCustom> getAllSanPham();
-    
+
     public SanPham findIDSanPham(UUID id);
-    
+
     MauConstant loc(int a);
-    
+
     void loadCombobox(Combobox cbb);
+    
+    TpXemChiTietSanPhamCustom checkValidate1(UUID donVi, String namBH, UUID sanPham, String hinhAnh, String giaNhap, String soLuong, String size,
+              MauConstant mau, Long ngayTao);
+
+    public List<TpQuanLyDonViCustom> getAllDonVi1();
+  
+    public List<TpQuanLySanPhamCustom> getAllSanPham1();
+
 }

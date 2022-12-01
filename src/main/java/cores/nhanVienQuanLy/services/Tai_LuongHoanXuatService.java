@@ -16,6 +16,7 @@ public interface Tai_LuongHoanXuatService {
     ConcurrentHashMap<UUID, String> getMapPhx();
     void updatePHX(PhieuHoanXuatCustom phxct);
     List<ChiTietPhieuHoanXuatCustom> getListCTphxByID(UUID id);
+    List<ChiTietPhieuHoanXuatCustom> getListCTphx();
     void updateCtPHX(ChiTietPhieuHoanXuatCustom ctphxct);
     void addPhieuHoanXuatTuDong(PhieuXuatCustom pxct, String ghiChu, String liDo);
     void addChiTietPhieuHoanXuat(ChiTietPhieuHoanXuatCustom ctphxct);

@@ -54,6 +54,12 @@ public class ChiTietSanPham implements Serializable {
     
     @Column(name = "TrangThai")
     private TrangThaiSanPhamConstanst trangThai;
+    
+    @Column(name = "Size")
+    private int size;
+    
+    @Column(name = "createDate")
+    private Long ngayTao;
 
     @ManyToOne
     @JoinColumn(name = "IdSanPham")

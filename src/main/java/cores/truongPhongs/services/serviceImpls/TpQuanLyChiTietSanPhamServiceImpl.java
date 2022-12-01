@@ -3,6 +3,7 @@ package cores.truongPhongs.services.serviceImpls;
 import cores.truongPhongs.customModels.TpQuanLyChiTietSanPhamCustom;
 import cores.truongPhongs.customModels.TpQuanLyDonViCustom;
 import cores.truongPhongs.customModels.TpQuanLySanPhamCustom;
+import cores.truongPhongs.customModels.TpXemChiTietSanPhamCustom;
 import cores.truongPhongs.repositories.TpQuanLyChiTietSanPhamRepository;
 import cores.truongPhongs.services.TpQuanLyChiTietSanPhamService;
 import domainModels.ChiTietSanPham;
@@ -10,10 +11,12 @@ import domainModels.DonVi;
 import domainModels.SanPham;
 import infrastructures.constant.MauConstant;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import javax.swing.JLabel;
 import utilities.Converter;
+import utilities.DateTimeUtil;
 import utilities.palette.Combobox;
 
 /**
@@ -40,6 +43,7 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
         sp.setDonVi(custom.getDonVi());
         sp.setNamBaoHanh(custom.getNamBaoHanh());
         sp.setSanPham(custom.getSanPham());
+        sp.setNgayTao(DateTimeUtil.convertDateToTimeStampSecond());
 
         custom.setId(rp.addCTSanPham(sp).getId());
         return custom;
@@ -56,6 +60,7 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
         sp.setDonVi(custom.getDonVi());
         sp.setNamBaoHanh(custom.getNamBaoHanh());
         sp.setSanPham(custom.getSanPham());
+        sp.setNgayTao(custom.getNgayTao());
         sp.setId(custom.getId());
 
         return rp.updateCTSanPham(sp);
@@ -86,7 +91,8 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
     }
 
     @Override
-    public TpQuanLyChiTietSanPhamCustom checkValidate(UUID donVi, String namBH, UUID sanPham, String hinhAnh, String giaNhap, String giaBan, String soLuong, JLabel erroHinhAnh, JLabel erroGiaNhap, JLabel erroGiaBan, JLabel erroNamBH, JLabel erroSoLuong,MauConstant mau) {
+    public TpQuanLyChiTietSanPhamCustom checkValidate(UUID donVi,String namBH, UUID sanPham,String hinhAnh,String giaNhap, String giaBan, String soLuong, String size
+            ,JLabel erroHinhAnh,JLabel erroGiaNhap, JLabel erroGiaBan, JLabel erroSoLuong, JLabel erroSize, JLabel erroNamBH ,MauConstant mau) {
         boolean check = true;
         if (giaNhap.trim().length() == 0) {
             erroGiaNhap.setText("Giá nhập không được để trống");
@@ -96,6 +102,15 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
             check = false;
         } else {
             erroGiaNhap.setText("");
+        }
+        if (size.trim().length() == 0) {
+            erroGiaNhap.setText("Size không được để trống");
+            check = false;
+        } else if (!size.matches("[0-9]+")) {
+            erroSize.setText("Size không được là chữ");
+            check = false;
+        } else {
+            erroSize.setText("");
         }
         if (giaBan.trim().length() == 0) {
             erroGiaBan.setText("Giá bán không được để trống");
@@ -125,12 +140,6 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
             erroNamBH.setText("");
         }
 
-//        if(hinhAnh.trim().length() == 0){
-//            erroHinhAnh.setText("Bạn chưa chọn hình ảnh");
-//            check = false;
-//        } else {
-//            erroHinhAnh.setText("");
-//        }
         if (!check) {
             return null;
         }
@@ -143,6 +152,7 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
         sp.setNamBaoHanh(Integer.parseInt(namBH));
         sp.setDonVi(rp.findIDDonVi(donVi));
         sp.setSanPham(rp.findIDSanPham(sanPham));
+        sp.setSize(Integer.parseInt(size));
         return sp;
     }
 
@@ -208,6 +218,31 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
         cbb.addItem(Converter.trangThaiMauSac(MauConstant.TRANG));
         
         
+    }
+
+    @Override
+    public List<TpQuanLyDonViCustom> getAllDonVi1() {
+        return rp.getAllDonVi1();
+    }
+
+    @Override
+    public List<TpQuanLySanPhamCustom> getAllSanPham1() {
+        return rp.getAllSanPham1();
+    }
+
+    @Override
+    public TpXemChiTietSanPhamCustom checkValidate1(UUID donVi, String namBH, UUID sanPham, String hinhAnh, String giaNhap, String soLuong, String size, MauConstant mau, Long ngayTao) {
+        TpXemChiTietSanPhamCustom sp = new TpXemChiTietSanPhamCustom();
+        sp.setGiaNhap(new BigDecimal(Double.parseDouble(giaNhap)));
+        sp.setSoLuongTon(Integer.parseInt(soLuong));
+        sp.setHinhAnh(hinhAnh);
+        sp.setMau(mau);
+        sp.setNamBaoHanh(Integer.parseInt(namBH));
+        sp.setDonVi(rp.findIDDonVi(donVi));
+        sp.setSanPham(rp.findIDSanPham(sanPham));
+        sp.setSize(Integer.parseInt(size));
+        sp.setNgayTao(new Date().getTime());
+        return sp;
     }
 
 }

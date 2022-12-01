@@ -3,12 +3,16 @@ package cores.truongPhongs.views;
 import cores.truongPhongs.customModels.TP_PhieuHoanNhapCustom;
 import cores.truongPhongs.services.TP_PhieuHoanNhapService;
 import cores.truongPhongs.services.serviceImpls.TP_PhieuHoanNhapServiceImpl;
+import infrastructures.constant.TrangThaiPhieuHoanConstant;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import utilities.Converter;
+import utilities.DateTimeUtil;
+import utilities.MsgBox;
+import utilities.Page;
 
 /**
  *
@@ -22,10 +26,24 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
     private TP_QuanLyPhieuHoanNhap_sp hoanNhap_sp;
     private TP_QuanLyPhieuHoanNhap_ctp ctp;
 
+    //
+    //
+    private Page p;
+
+    private int limit = 7;
+
+    private int offset = 0;
+
+    private int sizes = 0;
+
+    private int index = 1;
+
     public TP_QuanLyPhieuHoanNhap() {
         phieuHoanNhapService = new TP_PhieuHoanNhapServiceImpl();
         tn = new TP_QuanLyPhieuHoanNhap_pn();
         hoanNhapCustoms = new ArrayList<>();
+        //
+        p = new Page();
         initComponents();
         hoanNhapCustoms = phieuHoanNhapService.getListPhieuHoanNhap();
         clearForm();
@@ -35,11 +53,23 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
     private void loadTable() {
         DefaultTableModel dtm = (DefaultTableModel) tblPhieuHoanNhap.getModel();
         dtm.setRowCount(0);
-        for (TP_PhieuHoanNhapCustom el : hoanNhapCustoms) {
+        //
+        int sum = limit + offset;
+        if (hoanNhapCustoms.size() <= sum) {
+            sum = hoanNhapCustoms.size();
+        }
+        for (int i = offset; i < sum; i++) {
+            if (hoanNhapCustoms.get(i) == null) {
+                return;
+            }
+            TP_PhieuHoanNhapCustom el = hoanNhapCustoms.get(i);
+//        for (TP_PhieuHoanNhapCustom el : hoanNhapCustoms) {
+//        for (TP_PhieuHoanNhapCustom el : hoanNhapCustoms) {
+            Date ngayTao = new Date(el.getNgayTao());
             Object[] rowData = {
                 dtm.getRowCount() + 1,
                 el.getId(),
-                el.getNgayTao(),
+                ngayTao,
                 el.getNgayThanhToan() == null ? "Chưa thanh toán" : new Date(el.getNgayThanhToan()).toString(),
                 el.getPhieuNhap().getNhaCungCap().getTen(),
                 el.getPhieuNhap().getNhanVien().getTen(),
@@ -55,8 +85,12 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
         txtLiDo.setText("");
         txtNgayTao.setText("");
         txtNgayThanhToan.setText("");
-        txtTongTien.setText("");
         txtTrangThai.setText("");
+        sizes = hoanNhapCustoms.size();
+        offset = 0;
+        index = 1;
+        loadIndex();
+
     }
 
     @SuppressWarnings("unchecked")
@@ -71,9 +105,11 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
         panelRound15 = new utilities.palette.PanelRound();
         myButton9 = new utilities.palette.MyButton();
         myButton5 = new utilities.palette.MyButton();
-        myButton10 = new utilities.palette.MyButton();
         myButton11 = new utilities.palette.MyButton();
         myButton14 = new utilities.palette.MyButton();
+        btnPre = new utilities.palette.UWPButton();
+        txtIndex = new javax.swing.JLabel();
+        btnPre1 = new utilities.palette.UWPButton();
         panelRound2 = new utilities.palette.PanelRound();
         jLabel1 = new javax.swing.JLabel();
         txtMaPhieu = new utilities.palette.TextField();
@@ -81,11 +117,8 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
         txtTrangThai = new utilities.palette.TextField();
         textAreaScroll1 = new utilities.palette.TextAreaScroll();
         txtGhiChu = new utilities.palette.TextAreaCustom();
-        txtTongTien = new utilities.palette.TextField();
         panelRound16 = new utilities.palette.PanelRound();
-        myButton12 = new utilities.palette.MyButton();
-        myButton6 = new utilities.palette.MyButton();
-        myButton13 = new utilities.palette.MyButton();
+        btnXacNhan = new utilities.palette.MyButton();
         textAreaScroll2 = new utilities.palette.TextAreaScroll();
         txtLiDo = new utilities.palette.TextAreaCustom();
         txtNgayThanhToan = new utilities.palette.TextField();
@@ -158,7 +191,7 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
         panelRound15.setRoundTopRight(50);
 
         myButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/file.png"))); // NOI18N
-        myButton9.setToolTipText("Sản phẩm hoàn");
+        myButton9.setToolTipText("Danh sách những sản phẩm hoàn");
         myButton9.setBorderColor(new java.awt.Color(221, 242, 244));
         myButton9.setColor(new java.awt.Color(221, 242, 244));
         myButton9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -181,18 +214,6 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
             }
         });
 
-        myButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/add-to-basket.png"))); // NOI18N
-        myButton10.setToolTipText("Tìm kiếm");
-        myButton10.setBorderColor(new java.awt.Color(221, 242, 244));
-        myButton10.setColor(new java.awt.Color(221, 242, 244));
-        myButton10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        myButton10.setRadius(50);
-        myButton10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                myButton10ActionPerformed(evt);
-            }
-        });
-
         myButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/add-to-basket.png"))); // NOI18N
         myButton11.setToolTipText("Chọn sản phẩm hoàn");
         myButton11.setBorderColor(new java.awt.Color(221, 242, 244));
@@ -205,7 +226,7 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
             }
         });
 
-        myButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/add-to-basket.png"))); // NOI18N
+        myButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Show.png"))); // NOI18N
         myButton14.setToolTipText("Hiển thị");
         myButton14.setBorderColor(new java.awt.Color(221, 242, 244));
         myButton14.setColor(new java.awt.Color(221, 242, 244));
@@ -228,11 +249,9 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
                 .addComponent(myButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(myButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(myButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(44, 44, 44)
                 .addComponent(myButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelRound15Layout.setVerticalGroup(
             panelRound15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -242,10 +261,25 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
                     .addComponent(myButton11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(myButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(myButton9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(myButton10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(myButton14, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
+
+        btnPre.setText("Pre");
+        btnPre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPreActionPerformed(evt);
+            }
+        });
+
+        txtIndex.setText("1/1");
+
+        btnPre1.setText("Next");
+        btnPre1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPre1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
         panelRound1.setLayout(panelRound1Layout);
@@ -260,8 +294,15 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
                             .addComponent(panelRound15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(panelRound1Layout.createSequentialGroup()
                         .addGap(13, 13, 13)
-                        .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(12, Short.MAX_VALUE))
+                        .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelRound1Layout.createSequentialGroup()
+                        .addGap(234, 234, 234)
+                        .addComponent(btnPre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(71, 71, 71)
+                        .addComponent(txtIndex)
+                        .addGap(70, 70, 70)
+                        .addComponent(btnPre1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,9 +311,14 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
                 .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(147, 147, 147)
                 .addComponent(panelRound15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(95, 95, 95))
+                .addGap(31, 31, 31)
+                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnPre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtIndex)
+                    .addComponent(btnPre1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39))
         );
 
         panelRound2.setBackground(new java.awt.Color(228, 206, 224));
@@ -320,50 +366,22 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
         txtGhiChu.setDisabledTextColor(new java.awt.Color(204, 204, 255));
         textAreaScroll1.setViewportView(txtGhiChu);
 
-        txtTongTien.setEditable(false);
-        txtTongTien.setBackground(new java.awt.Color(228, 206, 224));
-        txtTongTien.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtTongTien.setLabelText("Tổng tiền");
-
         panelRound16.setBackground(new java.awt.Color(67, 130, 187));
         panelRound16.setRoundBottomLeft(50);
         panelRound16.setRoundBottomRight(50);
         panelRound16.setRoundTopLeft(50);
         panelRound16.setRoundTopRight(50);
 
-        myButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/file.png"))); // NOI18N
-        myButton12.setToolTipText("Phiếu nhập chi tiết");
-        myButton12.setBorderColor(new java.awt.Color(221, 242, 244));
-        myButton12.setColor(new java.awt.Color(221, 242, 244));
-        myButton12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        myButton12.setRadius(50);
-        myButton12.addActionListener(new java.awt.event.ActionListener() {
+        btnXacNhan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Upload.png"))); // NOI18N
+        btnXacNhan.setText("XÁC NHẬN");
+        btnXacNhan.setToolTipText("Phiếu nhập chi tiết");
+        btnXacNhan.setBorderColor(new java.awt.Color(221, 242, 244));
+        btnXacNhan.setColor(new java.awt.Color(221, 242, 244));
+        btnXacNhan.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnXacNhan.setRadius(50);
+        btnXacNhan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                myButton12ActionPerformed(evt);
-            }
-        });
-
-        myButton6.setBackground(new java.awt.Color(221, 242, 244));
-        myButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Addd.png"))); // NOI18N
-        myButton6.setToolTipText("Thêm mới phiếu nhập");
-        myButton6.setBorderColor(new java.awt.Color(221, 242, 244));
-        myButton6.setColor(new java.awt.Color(221, 242, 244));
-        myButton6.setRadius(50);
-        myButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                myButton6ActionPerformed(evt);
-            }
-        });
-
-        myButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/add-to-basket.png"))); // NOI18N
-        myButton13.setToolTipText("Thêm sản phẩm muốn nhập");
-        myButton13.setBorderColor(new java.awt.Color(221, 242, 244));
-        myButton13.setColor(new java.awt.Color(221, 242, 244));
-        myButton13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        myButton13.setRadius(50);
-        myButton13.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                myButton13ActionPerformed(evt);
+                btnXacNhanActionPerformed(evt);
             }
         });
 
@@ -371,23 +389,16 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
         panelRound16.setLayout(panelRound16Layout);
         panelRound16Layout.setHorizontalGroup(
             panelRound16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound16Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(myButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(myButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(myButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound16Layout.createSequentialGroup()
+                .addContainerGap(84, Short.MAX_VALUE)
+                .addComponent(btnXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(78, 78, 78))
         );
         panelRound16Layout.setVerticalGroup(
             panelRound16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound16Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelRound16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(myButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
-                    .addComponent(myButton12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(myButton13, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btnXacNhan, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -423,7 +434,6 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
                                 .addComponent(textAreaScroll1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(txtNgayTao, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(txtMaPhieu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtTongTien, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(txtTrangThai, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(txtNgayThanhToan, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(panelRound2Layout.createSequentialGroup()
@@ -444,13 +454,11 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
                 .addComponent(txtNgayThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(txtTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addComponent(textAreaScroll1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(textAreaScroll1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
                 .addComponent(textAreaScroll2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addGap(66, 66, 66)
                 .addComponent(panelRound16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(23, 23, 23))
         );
@@ -494,19 +502,14 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
         tn.setVisible(true);
     }//GEN-LAST:event_myButton5ActionPerformed
 
-    private void myButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton10ActionPerformed
-        this.clearForm();
-        this.loadTable();
-    }//GEN-LAST:event_myButton10ActionPerformed
-
     private void myButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton11ActionPerformed
         int row = this.tblPhieuHoanNhap.getSelectedRow();
         if (row == -1) {
             JOptionPane.showMessageDialog(this, "Bạn phải chọn một dòng", "ERROR !!!", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
-        if(ctp != null && tn != null) {
+
+        if (ctp != null && tn != null) {
             tn.setVisible(false);
             ctp.setVisible(false);
         }
@@ -522,17 +525,17 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTrangThaiActionPerformed
 
-    private void myButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton12ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_myButton12ActionPerformed
-
-    private void myButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_myButton6ActionPerformed
-
-    private void myButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton13ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_myButton13ActionPerformed
+    private void btnXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanActionPerformed
+        int row = this.tblPhieuHoanNhap.getSelectedRow();
+        if (row == -1) {
+            return;
+        }
+        TP_PhieuHoanNhapCustom phn = this.hoanNhapCustoms.get(row);
+        phn.setTrangThai(TrangThaiPhieuHoanConstant.HOAN_THANH_CONG);
+        phn.setNgayThanhToan(DateTimeUtil.convertDateToTimeStampSecond());
+        phieuHoanNhapService.updatePhieuHoanNhap(phn);
+        MsgBox.alert(this, "Bạn đã xác nhận thành công !");
+    }//GEN-LAST:event_btnXacNhanActionPerformed
 
     private void tblPhieuHoanNhapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPhieuHoanNhapMouseClicked
         int row = this.tblPhieuHoanNhap.getSelectedRow();
@@ -546,8 +549,12 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
         txtLiDo.setText(item.getLiDo());
         txtNgayTao.setText(new Date(item.getNgayTao()).toString());
         txtNgayThanhToan.setText(item.getNgayThanhToan() == null ? "Chưa thanh toán" : new Date(item.getNgayThanhToan()).toString());
-        txtTongTien.setText("");
         txtTrangThai.setText(Converter.TrangThaiPhieuHoan(item.getTrangThai()));
+        if (txtTrangThai.getText().equalsIgnoreCase("Hoàn Thành Công")) {
+            btnXacNhan.setEnabled(false);
+        } else {
+            btnXacNhan.setEnabled(true);
+        }
     }//GEN-LAST:event_tblPhieuHoanNhapMouseClicked
 
     private void myButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton14ActionPerformed
@@ -555,18 +562,33 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
         loadTable();
     }//GEN-LAST:event_myButton14ActionPerformed
 
+    private void btnPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreActionPerformed
+        index = p.prevIndex(offset, limit, index);
+        offset = p.prev(offset, limit);
+        loadIndex();
+        loadTable();
+    }//GEN-LAST:event_btnPreActionPerformed
 
+    private void btnPre1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPre1ActionPerformed
+        index = p.nextIndex(offset, limit, sizes, index);
+        offset = p.next(offset, limit, sizes);
+        loadIndex();
+        loadTable();
+    }//GEN-LAST:event_btnPre1ActionPerformed
+
+    private void loadIndex() {
+        this.txtIndex.setText(String.valueOf(index) + " / " + (Math.round((sizes / limit) + 0.5)));
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private utilities.palette.UWPButton btnPre;
+    private utilities.palette.UWPButton btnPre1;
+    private utilities.palette.MyButton btnXacNhan;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private utilities.palette.MyButton myButton10;
     private utilities.palette.MyButton myButton11;
-    private utilities.palette.MyButton myButton12;
-    private utilities.palette.MyButton myButton13;
     private utilities.palette.MyButton myButton14;
     private utilities.palette.MyButton myButton5;
-    private utilities.palette.MyButton myButton6;
     private utilities.palette.MyButton myButton9;
     private utilities.palette.PanelRound panelRound1;
     private utilities.palette.PanelRound panelRound15;
@@ -577,11 +599,11 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
     private utilities.palette.TextAreaScroll textAreaScroll1;
     private utilities.palette.TextAreaScroll textAreaScroll2;
     private utilities.palette.TextAreaCustom txtGhiChu;
+    private javax.swing.JLabel txtIndex;
     private utilities.palette.TextAreaCustom txtLiDo;
     private utilities.palette.TextField txtMaPhieu;
     private utilities.palette.TextField txtNgayTao;
     private utilities.palette.TextField txtNgayThanhToan;
-    private utilities.palette.TextField txtTongTien;
     private utilities.palette.TextField txtTrangThai;
     // End of variables declaration//GEN-END:variables
 }
