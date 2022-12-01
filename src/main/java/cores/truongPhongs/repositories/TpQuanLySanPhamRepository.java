@@ -1,0 +1,155 @@
+package cores.truongPhongs.repositories;
+
+import cores.truongPhongs.customModels.TpQuanLySanPhamCustom;
+import domainModels.SanPham;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+import javax.persistence.NoResultException;
+import javax.persistence.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import utilities.HibernateUtil;
+
+/**
+ *
+ * @author MMC
+ */
+public class TpQuanLySanPhamRepository {
+
+    public List<TpQuanLySanPhamCustom> getAll() {
+        List<TpQuanLySanPhamCustom> list = new ArrayList<>();
+        Session s = HibernateUtil.getSessionFactory().openSession();
+        Query q = s.createQuery("select new cores.truongPhongs.customModels.TpQuanLySanPhamCustom ("
+                + "sp.id as id,"
+                + "sp.ma as ma,"
+                + "sp.ten as ten"
+                + ") from domainModels.SanPham sp");
+        list = q.getResultList();
+        s.close();
+        return list;
+    }
+
+    public SanPham addSanPham(SanPham sp) {
+        Session s = HibernateUtil.getSessionFactory().openSession();
+        try {
+            Transaction tran = null;
+            tran = s.beginTransaction();
+            s.save(sp);
+            tran.commit();
+            s.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            s.close();
+            return null;
+        }
+        return sp;
+    }
+
+    public boolean updateSanPham(SanPham sp) {
+        Transaction tran = null;
+        try ( Session s = HibernateUtil.getSessionFactory().openSession()) {
+            tran = s.beginTransaction();
+            s.update(sp);
+            tran.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            tran.rollback();
+            return false;
+        }
+        return true;
+    }
+
+    public boolean deleteSanPham(UUID id) {
+        Transaction tran = null;
+        try ( Session s = HibernateUtil.getSessionFactory().openSession()) {
+            tran = s.beginTransaction();
+            SanPham cs = s.find(SanPham.class, id);
+            s.delete(cs);
+            tran.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            tran.rollback();
+            return false;
+        }
+        return true;
+    }
+
+    public TpQuanLySanPhamCustom findByMa(String ma) {
+        TpQuanLySanPhamCustom sp = new TpQuanLySanPhamCustom();
+        try ( Session s = HibernateUtil.getSessionFactory().openSession()) {
+            Query q = s.createQuery("select new cores.truongPhongs.customModels.TpQuanLySanPhamCustom ("
+                    + "sp.id as id,"
+                    + "sp.ma as ma,"
+                    + "sp.ten as ten"
+                    + ") from domainModels.SanPham sp WHERE sp.ma = :ma");
+            q.setParameter("ma", ma);
+            sp = (TpQuanLySanPhamCustom) q.getSingleResult();
+        } catch (NoResultException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return sp;
+    }
+
+    // cách tìm kiếm thứ 2
+    public List<TpQuanLySanPhamCustom> findAllByMa(String ma) {
+        List<TpQuanLySanPhamCustom> list = new ArrayList<>();
+        Session s = HibernateUtil.getSessionFactory().openSession();
+        Query q = s.createQuery("select new cores.truongPhongs.customModels.TpQuanLySanPhamCustom ("
+                + "sp.id as id,"
+                + "sp.ma as ma,"
+                + "sp.ten as ten"
+                + ") from domainModels.SanPham sp WHERE sp.ma LIKE CONCAT('%',:ma,'%') ");
+        q.setParameter("ma", ma);
+        list = q.getResultList();
+        s.close();
+        return list;
+    }
+
+    public List<TpQuanLySanPhamCustom> findAllByTen(String ten) {
+        List<TpQuanLySanPhamCustom> list = new ArrayList<>();
+        Session s = HibernateUtil.getSessionFactory().openSession();
+        Query q = s.createQuery("select new cores.truongPhongs.customModels.TpQuanLySanPhamCustom ("
+                + "sp.id as id,"
+                + "sp.ma as ma,"
+                + "sp.ten as ten"
+                + ") from domainModels.SanPham sp WHERE sp.ten LIKE CONCAT('%',:ten,'%') ");
+        q.setParameter("ten", ten);
+        list = q.getResultList();
+        s.close();
+        return list;
+    }
+
+    public SanPham findID(UUID id) {
+        Session s = HibernateUtil.getSessionFactory().openSession();
+        Transaction t = s.beginTransaction();
+        SanPham sp = s.find(SanPham.class, id);
+        t.commit();
+        s.close();
+        return sp;
+    }
+
+    public static List<SanPham> getABC(Long ngayThanhToan) {
+        List<SanPham> list = new ArrayList<>();
+        Session s = HibernateUtil.getSessionFactory().openSession();
+        Query q = s.createNativeQuery("""                                           
+                                      select sp.Id, sp.ma, sp.ten,sum(ctpx.soluong) as SL, px.ngayThanhToan from sanpham sp
+                                      join chiTietSanPham ctsp on ctsp.idSanPham = sp.id
+                                      join chitietPhieuXuat ctpx on ctsp.id = ctpx.IdChiTietSP
+                                      join phieuXuat px  on px.id = ctpx.idphieuXuat
+                                      where px.NgayThanhToan = :ngayThanhToan
+                                      group by sp.id, sp.ma, sp.ten,px.NgayThanhToan
+                                      order by sum(ctpx.soluong) Desc                                           
+                                      """, SanPham.class);
+        q.setParameter("ngayThanhToan", ngayThanhToan);
+        list = q.getResultList();
+        s.close();
+        System.out.println(list.size());
+        return list;
+    }
+    public static void main(String[] args) {
+        getABC(16000L);
+    }
+}
+

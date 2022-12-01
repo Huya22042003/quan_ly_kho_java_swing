@@ -9,9 +9,8 @@
         <property name="connection.driver_class">
             com.microsoft.sqlserver.jdbc.SQLServerDriver
         </property>
-
         <property name="connection.url">
-            jdbc:sqlserver://localhost:1433;databaseName=Du_an_1;encrypt=true;trustServerCertificate=true;
+            jdbc:sqlserver://localhost:1433;databaseName=DU_AN_MOT;encrypt=true;trustServerCertificate=true;
         </property>
 
         <property name="connection.username">sa</property>
@@ -32,16 +31,23 @@
         <!-- Echo all executed SQL to stdout -->
         <property name="show_sql">true</property>
        
-        <mapping class = "domainModel.CoSo"/>
-        <mapping class = "domainModel.LoaiHang"/>
-        <mapping class = "domainModel.KhoHang"/>
-        <mapping class = "domainModel.KhachHang"/>
-        <mapping class = "domainModel.TruongPhong"/>
-        <mapping class = "domainModel.NhanVienGiaoHang"/>
-        <mapping class = "domainModel.NhanVienVanDon"/>
-        <mapping class = "domainModel.DonHang"/>
-        <mapping class = "domainModel.HoaDon"/>
-
+        <mapping class = "domainModels.ChucVu"/>
+        <mapping class = "domainModels.NhanVien"/>
+        <mapping class = "domainModels.KhachHang"/>
+        <mapping class = "domainModels.NhaCungCap"/>
+        <mapping class = "domainModels.SanPham"/>
+        <mapping class = "domainModels.DonVi"/>
+        <mapping class = "domainModels.PhieuNhap"/>
+        <mapping class = "domainModels.PhieuXuat"/>
+        <mapping class = "domainModels.PhieuKiemKe"/>
+        <mapping class = "domainModels.PhieuHoanXuat"/>
+        <mapping class = "domainModels.PhieuHoanNhap"/>
+        <mapping class = "domainModels.ChiTietSanPham"/>
+        <mapping class = "domainModels.ChiTietPhieuNhap"/>
+        <mapping class = "domainModels.ChiTietPhieuXuat"/>
+        <mapping class = "domainModels.ChiTietPhieuKiemKe"/>
+        <mapping class = "domainModels.ChiTietPhieuHoanXuat"/>
+        <mapping class = "domainModels.ChiTietPhieuHoanNhap"/>
         
     </session-factory>
 </hibernate-configuration>
