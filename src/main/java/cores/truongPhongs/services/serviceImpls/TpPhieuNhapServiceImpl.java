@@ -122,8 +122,8 @@ public class TpPhieuNhapServiceImpl implements TpPhieuNhapService {
     }
 
     @Override
-    public List<TpPhieuNhapCustom> getListByNgayTao(Long ngayTao, Long ngayKetThuc) {
-        return repo.getListByNgayTao(ngayTao, ngayKetThuc);
+    public List<TpPhieuNhapCustom> getListByNgayTao(Long ngayBatDau, Long ngayKetThuc) {
+        return repo.getListByNgayTao(ngayBatDau, ngayKetThuc);
     }
 
     @Override

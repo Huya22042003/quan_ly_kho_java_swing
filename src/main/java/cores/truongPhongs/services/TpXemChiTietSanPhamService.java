@@ -1,6 +1,7 @@
 package cores.truongPhongs.services;
 
 import cores.truongPhongs.customModels.TpXemChiTietSanPhamCustom;
+import infrastructures.constant.TrangThaiSanPhamConstanst;
 import java.util.List;
 
 /**
@@ -10,4 +11,5 @@ import java.util.List;
 public interface TpXemChiTietSanPhamService {
     List<TpXemChiTietSanPhamCustom> listCtsp();
     TpXemChiTietSanPhamCustom addCTSanPham(TpXemChiTietSanPhamCustom custom);
+    TrangThaiSanPhamConstanst locTt(int a);
 }
