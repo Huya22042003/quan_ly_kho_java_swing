@@ -5,14 +5,11 @@
 package cores.truongPhongs.views;
 
 import cores.truongPhongs.customModels.NhaCungCapCustom;
-import cores.truongPhongs.customModels.TpPhieuNhapCustom;
 import cores.truongPhongs.services.TpQuanlyNhaCungCapService;
 import cores.truongPhongs.services.serviceImpls.TpQuanlyNhaCungCapServiceImpl;
 import infrastructures.constant.KhachHangConstant;
-import infrastructures.constant.TrangThaiPhieuConstant;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JColorChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import utilities.Converter;
@@ -104,7 +101,7 @@ public class TpLuongNhapThemNccVaoPhieuNhapForm extends javax.swing.JFrame {
                 ncc.getEmail(),
                 ncc.getSdt(),
                 ncc.getDiaChi(),
-                ncc.getDanhGia(),
+                Converter.trangThaiDanhGia(ncc.getDanhGia()),
                 Converter.trangThaiKhachHang(ncc.getTrangThai())
             };
             dtm.addRow(rowData);
@@ -155,11 +152,11 @@ public class TpLuongNhapThemNccVaoPhieuNhapForm extends javax.swing.JFrame {
 
             },
             new String [] {
-                "STT", "MÃ ", "TÊN", "EMAIL", "SĐT", "ĐỊA CHỈ", "NGÀY SINH", "ĐÁNH GIÁ", "TRẠNG THÁI"
+                "STT", "MÃ ", "TÊN", "EMAIL", "SĐT", "ĐỊA CHỈ", "ĐÁNH GIÁ", "TRẠNG THÁI"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, true
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

@@ -123,12 +123,12 @@ public class Migrator {
 
         NhanVien nhanVien2 = new NhanVien();
         nhanVien2.setDiaChi("Hà Nội");
-        nhanVien2.setEmail("abc@fpt.edu.vn");
+        nhanVien2.setEmail("a");
         nhanVien2.setGioiTinh(GioiTinhConstant.NAM);
         nhanVien2.setHinhAnh(null);
-        nhanVien2.setIdChucVu(chucVu2);
+        nhanVien2.setIdChucVu(chucVu);
         nhanVien2.setMa(MaTuSinh.gen("NV"));
-        nhanVien2.setMatKhau("1");
+        nhanVien2.setMatKhau("a");
         nhanVien2.setNgaySinh(DateTimeUtil.convertDateToTimeStampSecond());
         nhanVien2.setSdt("0328843156");
         nhanVien2.setTen("Nguyễn Quốc Huy");

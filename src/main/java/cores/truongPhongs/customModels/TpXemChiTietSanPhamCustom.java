@@ -36,6 +36,8 @@ public class TpXemChiTietSanPhamCustom {
     private int namBaoHanh;
 
     private MauConstant mau;
+    
+    private int size;
 
     private SanPham sanPham;
 
@@ -44,6 +46,8 @@ public class TpXemChiTietSanPhamCustom {
     private TrangThaiSanPhamConstanst trangThai;
     
     private int soLuongTon;
+    
+    private Long ngayTao;
 
     public TpXemChiTietSanPhamCustom(String hinhAnh, BigDecimal GiaNhap, BigDecimal GiaBan, int namBaoHanh, MauConstant mau, SanPham sanPham, DonVi donVi, TrangThaiSanPhamConstanst trangThai, int soLuongTon) {
         this.hinhAnh = hinhAnh;

@@ -4,7 +4,6 @@ import cores.truongPhongs.customModels.TpXemChiTietSanPhamCustom;
 import cores.truongPhongs.repositories.TpXemChiTietSanPhamRepository;
 import cores.truongPhongs.services.TpXemChiTietSanPhamService;
 import domainModels.ChiTietSanPham;
-import domainModels.DonVi;
 import infrastructures.constant.TrangThaiSanPhamConstanst;
 import java.math.BigDecimal;
 import java.util.List;
@@ -35,9 +34,11 @@ public class TpXemChiTietSanPhamImpl implements TpXemChiTietSanPhamService {
         sp.setSoLuongTon(custom.getSoLuongTon());
         sp.setMau(custom.getMau());
         sp.setDonVi(custom.getDonVi());
+        sp.setSize(custom.getSize());
         sp.setTrangThai(custom.getTrangThai());
         sp.setNamBaoHanh(custom.getNamBaoHanh());
         sp.setSanPham(custom.getSanPham());
+        sp.setNgayTao(custom.getNgayTao());
         custom.setId(repo.addCTSanPham(sp).getId());
         return custom;
     }
