@@ -12,4 +12,5 @@ public interface TpPhieuNhapChiTietService {
     public TpPhieuNhapChiTietCustom addPhieuNhap(TpPhieuNhapChiTietCustom pnct);
     List<TpPhieuNhapChiTietCustom> getListCTPhieuNhapByID(UUID idPX);
     public boolean addCTPN(TpPhieuNhapChiTietCustom ctpxct);
+        loc(int a);
 }

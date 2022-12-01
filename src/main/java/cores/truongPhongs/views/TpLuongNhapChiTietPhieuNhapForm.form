@@ -223,15 +223,15 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                      <Component id="rdoNhanVien" min="-2" max="-2" attributes="0"/>
+                      <Component id="rdoMaSp" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="rdoNcc" min="-2" max="-2" attributes="0"/>
+                      <Component id="rdoTenSp" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="rdoMa1" min="-2" max="-2" attributes="0"/>
+                      <Component id="rdoNbh" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="combobox1" min="-2" pref="147" max="-2" attributes="0"/>
+                      <Component id="cbbMauSac" min="-2" pref="147" max="-2" attributes="0"/>
                       <EmptySpace pref="47" max="32767" attributes="0"/>
-                      <Component id="textFieldAnimation1" min="-2" pref="205" max="-2" attributes="0"/>
+                      <Component id="txtSearch" min="-2" pref="205" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -241,11 +241,11 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="combobox1" alignment="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="textFieldAnimation1" alignment="0" pref="43" max="32767" attributes="0"/>
-                          <Component id="rdoNhanVien" alignment="0" max="32767" attributes="0"/>
-                          <Component id="rdoNcc" alignment="1" max="32767" attributes="0"/>
-                          <Component id="rdoMa1" alignment="1" max="32767" attributes="0"/>
+                          <Component id="cbbMauSac" alignment="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="txtSearch" alignment="0" pref="43" max="32767" attributes="0"/>
+                          <Component id="rdoMaSp" alignment="0" max="32767" attributes="0"/>
+                          <Component id="rdoTenSp" alignment="1" max="32767" attributes="0"/>
+                          <Component id="rdoNbh" alignment="1" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -253,7 +253,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="utilities.palette.RadioButtonCustom" name="rdoNhanVien">
+            <Component class="utilities.palette.RadioButtonCustom" name="rdoMaSp">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="bb" green="82" red="43" type="rgb"/>
@@ -267,7 +267,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="utilities.palette.RadioButtonCustom" name="rdoNcc">
+            <Component class="utilities.palette.RadioButtonCustom" name="rdoTenSp">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="bb" green="82" red="43" type="rgb"/>
@@ -281,9 +281,12 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="utilities.palette.SearchCustom.TextFieldAnimation" name="textFieldAnimation1">
+            <Component class="utilities.palette.SearchCustom.TextFieldAnimation" name="txtSearch">
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtSearchMouseClicked"/>
+              </Events>
             </Component>
-            <Component class="utilities.palette.RadioButtonCustom" name="rdoMa1">
+            <Component class="utilities.palette.RadioButtonCustom" name="rdoNbh">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="bb" green="82" red="43" type="rgb"/>
@@ -297,7 +300,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="utilities.palette.Combobox" name="combobox1">
+            <Component class="utilities.palette.Combobox" name="cbbMauSac">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="bb" green="82" red="43" type="rgb"/>
@@ -319,6 +322,9 @@
                   <Color blue="f9" green="c8" red="91" type="rgb"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbbMauSacActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
