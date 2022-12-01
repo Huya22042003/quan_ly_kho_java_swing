@@ -29,14 +29,16 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
     private TpXemChiTietSanPhamService ctspService;
     private List<TpXemChiTietSanPhamCustom> listSp = new ArrayList<>();
     private TpPhieuNhapCustom phieuNhap;
-    private TpLuongNhapAddChiTietSanPhamForm createView;
+    private TpLuongNhapAddChiTietSanPhamOldForm createViewAddSpOld;
+    private TpLuongNhapAddChiTietSanPhamNewForm createViewAddSpNew;
 
     public void setPhieuNhap(TpPhieuNhapCustom phieuNhap) {
         this.phieuNhap = phieuNhap;
     }
 
     public TpLuongNhapChiTietSanPhamForm() {
-        createView = new TpLuongNhapAddChiTietSanPhamForm();
+        createViewAddSpOld = new TpLuongNhapAddChiTietSanPhamOldForm();
+        createViewAddSpNew = new TpLuongNhapAddChiTietSanPhamNewForm();
         initComponents();
         ctspService = new TpXemChiTietSanPhamImpl();
         listSp = ctspService.listCtsp();
@@ -667,10 +669,10 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
 //          TpLuongNhapAddChiTietSanPhamForm add = new TpLuongNhapAddChiTietSanPhamForm();
 //          add.setVisible(true);
         fillData(row);
-        createView.ct = listSp.get(row);
-        createView.setPhieuNhap(phieuNhap);
-        createView.setVisible(true);
-        createView.showData();
+        createViewAddSpOld.ct = listSp.get(row);
+        createViewAddSpOld.setPhieuNhap(phieuNhap);
+        createViewAddSpOld.setVisible(true);
+        createViewAddSpOld.showData();
 
 
     }//GEN-LAST:event_tblCtspMouseClicked
@@ -725,7 +727,8 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnAddNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddNewActionPerformed
-        
+        createViewAddSpNew.setPhieuNhap(phieuNhap);
+        createViewAddSpNew.setVisible(true);
     }//GEN-LAST:event_btnAddNewActionPerformed
 
     private void rdoTenSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoTenSanPhamActionPerformed

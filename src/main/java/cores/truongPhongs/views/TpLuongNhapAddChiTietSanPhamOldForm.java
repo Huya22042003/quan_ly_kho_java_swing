@@ -21,6 +21,7 @@ import java.awt.Toolkit;
 import java.io.File;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JFileChooser;
 import utilities.Converter;
@@ -30,7 +31,7 @@ import utilities.MsgBox;
  *
  * @author MMC
  */
-public class TpLuongNhapAddChiTietSanPhamForm extends javax.swing.JFrame {
+public class TpLuongNhapAddChiTietSanPhamOldForm extends javax.swing.JFrame {
 
     private TpXemChiTietSanPhamService serviceChiTietSP = new TpXemChiTietSanPhamImpl();
     private TpQuanLyChiTietSanPhamService serviceSp = new TpQuanLyChiTietSanPhamServiceImpl();
@@ -47,7 +48,7 @@ public class TpLuongNhapAddChiTietSanPhamForm extends javax.swing.JFrame {
         this.phieuNhap = phieuNhap;
     }
     
-    public TpLuongNhapAddChiTietSanPhamForm() {
+    public TpLuongNhapAddChiTietSanPhamOldForm() {
         initComponents();
         pnctService = new TpPhieuNhapChiTietServiceImpl();
         Toolkit toolkit = getToolkit();
@@ -94,6 +95,7 @@ public class TpLuongNhapAddChiTietSanPhamForm extends javax.swing.JFrame {
         sp.setSanPham(ct.getSanPham());
         sp.setSoLuongTon(Integer.parseInt(txtSoLuongNhap.getText()));
         sp.setTrangThai(ct.getTrangThai().CHO_XAC_NHAN);
+        sp.setNgayTao(new Date().getTime());
         return sp;
     }
 
@@ -397,21 +399,23 @@ public class TpLuongNhapAddChiTietSanPhamForm extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TpLuongNhapAddChiTietSanPhamForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TpLuongNhapAddChiTietSanPhamOldForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TpLuongNhapAddChiTietSanPhamForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TpLuongNhapAddChiTietSanPhamOldForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TpLuongNhapAddChiTietSanPhamForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TpLuongNhapAddChiTietSanPhamOldForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TpLuongNhapAddChiTietSanPhamForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TpLuongNhapAddChiTietSanPhamOldForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TpLuongNhapAddChiTietSanPhamForm().setVisible(true);
+                new TpLuongNhapAddChiTietSanPhamOldForm().setVisible(true);
             }
         });
     }

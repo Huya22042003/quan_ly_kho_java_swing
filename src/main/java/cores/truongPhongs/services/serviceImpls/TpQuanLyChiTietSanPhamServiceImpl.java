@@ -3,6 +3,7 @@ package cores.truongPhongs.services.serviceImpls;
 import cores.truongPhongs.customModels.TpQuanLyChiTietSanPhamCustom;
 import cores.truongPhongs.customModels.TpQuanLyDonViCustom;
 import cores.truongPhongs.customModels.TpQuanLySanPhamCustom;
+import cores.truongPhongs.customModels.TpXemChiTietSanPhamCustom;
 import cores.truongPhongs.repositories.TpQuanLyChiTietSanPhamRepository;
 import cores.truongPhongs.services.TpQuanLyChiTietSanPhamService;
 import domainModels.ChiTietSanPham;
@@ -10,6 +11,7 @@ import domainModels.DonVi;
 import domainModels.SanPham;
 import infrastructures.constant.MauConstant;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import javax.swing.JLabel;
@@ -138,12 +140,6 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
             erroNamBH.setText("");
         }
 
-//        if(hinhAnh.trim().length() == 0){
-//            erroHinhAnh.setText("Bạn chưa chọn hình ảnh");
-//            check = false;
-//        } else {
-//            erroHinhAnh.setText("");
-//        }
         if (!check) {
             return null;
         }
@@ -222,6 +218,31 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
         cbb.addItem(Converter.trangThaiMauSac(MauConstant.TRANG));
         
         
+    }
+
+    @Override
+    public List<TpQuanLyDonViCustom> getAllDonVi1() {
+        return rp.getAllDonVi1();
+    }
+
+    @Override
+    public List<TpQuanLySanPhamCustom> getAllSanPham1() {
+        return rp.getAllSanPham1();
+    }
+
+    @Override
+    public TpXemChiTietSanPhamCustom checkValidate1(UUID donVi, String namBH, UUID sanPham, String hinhAnh, String giaNhap, String soLuong, String size, MauConstant mau, Long ngayTao) {
+        TpXemChiTietSanPhamCustom sp = new TpXemChiTietSanPhamCustom();
+        sp.setGiaNhap(new BigDecimal(Double.parseDouble(giaNhap)));
+        sp.setSoLuongTon(Integer.parseInt(soLuong));
+        sp.setHinhAnh(hinhAnh);
+        sp.setMau(mau);
+        sp.setNamBaoHanh(Integer.parseInt(namBH));
+        sp.setDonVi(rp.findIDDonVi(donVi));
+        sp.setSanPham(rp.findIDSanPham(sanPham));
+        sp.setSize(Integer.parseInt(size));
+        sp.setNgayTao(new Date().getTime());
+        return sp;
     }
 
 }
