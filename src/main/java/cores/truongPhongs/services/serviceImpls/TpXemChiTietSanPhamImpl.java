@@ -35,6 +35,7 @@ public class TpXemChiTietSanPhamImpl implements TpXemChiTietSanPhamService {
         sp.setSoLuongTon(custom.getSoLuongTon());
         sp.setMau(custom.getMau());
         sp.setDonVi(custom.getDonVi());
+        sp.setSize(custom.getSize());
         sp.setTrangThai(custom.getTrangThai());
         sp.setNamBaoHanh(custom.getNamBaoHanh());
         sp.setSanPham(custom.getSanPham());

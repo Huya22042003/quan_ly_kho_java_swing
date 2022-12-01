@@ -27,11 +27,13 @@ public class TpXemChiTietSanPhamRepository {
                 + "ct.GiaBan as giaBan,"
                 + "ct.namBaoHanh as namBaoHanh,"
                 + "ct.mau as mau,"
+                + "ct.size as size,"
                 + "ct.sanPham as sanPham,"
                 + "ct.donVi as donVi,"
                 + "ct.trangThai as trangThai,"
-                + "ct.soLuongTon as soLuongTon"
-                + ") from domainModels.ChiTietSanPham ct");
+                + "ct.soLuongTon as soLuongTon,"
+                + "ct.ngayTao as ngayTao"
+                + ") from domainModels.ChiTietSanPham ct order by ct.ngayTao DESC");
         ct = q.getResultList();
         s.close();
         return ct;
@@ -74,10 +76,12 @@ public class TpXemChiTietSanPhamRepository {
                 + "ct.GiaBan as giaBan,"
                 + "ct.namBaoHanh as namBaoHanh,"
                 + "ct.mau as mau,"
+                + "ct.size as size,"
                 + "ct.sanPham as sanPham,"
                 + "ct.donVi as donVi,"
                 + "ct.trangThai as trangThai,"
-                + "ct.soLuongTon as soLuongTon"
+                + "ct.soLuongTon as soLuongTon,"
+                + "ct.ngayTao as ngayTao"
                 + ") from domainModels.ChiTietSanPham ct WHERE ct.GiaNhap > :giaBatDau AND ct.GiaNhap < :giaKetThuc  ORDER BY ct.GiaNhap DESC");
         query.setParameter("giaBatDau", giaBatDau);
         query.setParameter("giaKetThuc", giaKetThuc);

@@ -47,6 +47,7 @@ public class TpLuongNhapChiTietPhieuNhapForm extends javax.swing.JFrame {
                 dtm.getRowCount() + 1,
                 ctpx.getIdSanPham().getSanPham().getTen(),
                 Converter.trangThaiMauSac(ctpx.getIdSanPham().getMau()),
+                ctpx.getIdSanPham().getSize(),
                 ctpx.getIdSanPham().getDonVi().getDonViGoc(),
                 ctpx.getIdSanPham().getNamBaoHanh(),
                 ctpx.getSoLuong(),
@@ -101,11 +102,11 @@ public class TpLuongNhapChiTietPhieuNhapForm extends javax.swing.JFrame {
 
             },
             new String [] {
-                "STT", "Tên sản phẩm", "Màu", "Đơn vị", "Năm bảo hành", "Số lượng", "Giá nhập"
+                "STT", "Tên sản phẩm", "Màu", "Size", "Đơn vị", "Năm bảo hành", "Số lượng", "Giá nhập"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, true, true
+                false, false, false, true, false, false, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
