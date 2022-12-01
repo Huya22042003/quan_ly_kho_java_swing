@@ -4,7 +4,8 @@
  */
 package cores.truongPhongs.customModels;
 
-import java.util.UUID;
+import domainModels.ChiTietSanPham;
+import domainModels.PhieuNhap;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,6 +21,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class TpPhieuNhapChiTietCustom {
     private int soLuong;
-    private UUID idSanPham;
-    private UUID idPhieuNhap;
+    private ChiTietSanPham idSanPham;
+    private PhieuNhap idPhieuNhap;
 }

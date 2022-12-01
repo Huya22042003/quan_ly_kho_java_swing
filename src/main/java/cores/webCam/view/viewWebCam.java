@@ -3,14 +3,26 @@ package cores.webCam.view;
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamPanel;
 import com.github.sarxos.webcam.WebcamResolution;
+import com.google.zxing.BinaryBitmap;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.MultiFormatReader;
+import com.google.zxing.NotFoundException;
+import com.google.zxing.Result;
+import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
+import com.google.zxing.common.HybridBinarizer;
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import java.awt.FlowLayout;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
-import net.sourceforge.tess4j.Tesseract;
-import net.sourceforge.tess4j.TesseractException;
 
 /**
  *
@@ -56,19 +68,44 @@ public class viewWebCam extends javax.swing.JFrame {
         }
 
     }
+    
+        // Function to read the QR file
+    public static String readQR(String path, String charset,
+                                Map hashMap)
+        throws FileNotFoundException, IOException,
+               NotFoundException
+    {
+        BinaryBitmap binaryBitmap
+            = new BinaryBitmap(new HybridBinarizer(
+                new BufferedImageLuminanceSource(
+                    ImageIO.read(
+                        new FileInputStream(path)))));
+ 
+        Result result
+            = new MultiFormatReader().decode(binaryBitmap);
+ 
+        return result.getText();
+    }
 
-    public void test() throws IOException, TesseractException, InterruptedException {
+    public void test() throws IOException, FileNotFoundException, NotFoundException {
         BufferedImage image = webcam1.getImage();
 //        Thread.sleep(3000);
         File fileImg = new File("D:\\Du_an_1\\src\\main\\resources\\cde.png");
         ImageIO.write(image, "png", fileImg);
 
-        Tesseract instance = new Tesseract();
-        instance.setDatapath("D:\\Du_an_1\\src\\main\\resources\\textImage");
-//        instance.setLanguage("vie");
-        instance.setLanguage("eng");
-        String rs = instance.doOCR(fileImg);
-        JOptionPane.showMessageDialog(this, rs);
+            
+        // The path where the image will get saved
+        String path = "D:\\Du_an_1\\src\\main\\resources\\cde.png";
+
+        // Encoding charset
+        String charset = "UTF-8";
+        
+        Map<EncodeHintType, ErrorCorrectionLevel> hashMap 
+                = new HashMap<>();
+        
+        hashMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
+        
+        System.out.println("aaaaa" + readQR(path, charset, hashMap));
     }
 
     /**
@@ -186,10 +223,8 @@ public class viewWebCam extends javax.swing.JFrame {
             test();
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (TesseractException ex) {
-            ex.printStackTrace();
-        } catch (InterruptedException ex) {
-            ex.printStackTrace();
+        } catch (NotFoundException ex) {
+            Logger.getLogger(viewWebCam.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_buttonGradient1ActionPerformed
 

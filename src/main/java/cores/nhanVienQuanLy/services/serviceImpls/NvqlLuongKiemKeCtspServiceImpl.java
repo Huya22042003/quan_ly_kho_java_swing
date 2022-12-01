@@ -24,7 +24,8 @@ public class NvqlLuongKiemKeCtspServiceImpl implements NvqlLuongKiemKeCtspServic
 
     @Override
     public void updateSoLuong(NvqlLuongKiemKeCtspCustom a) {
-        ChiTietSanPham ctsp = new ChiTietSanPham(a.getId(), 
+        ChiTietSanPham ctsp = new ChiTietSanPham(
+                a.getId(), 
                 a.getSoLuongTon(), 
                 a.getHinhAnh(), 
                 a.getGiaNhap(), 
@@ -32,8 +33,11 @@ public class NvqlLuongKiemKeCtspServiceImpl implements NvqlLuongKiemKeCtspServic
                 a.getNamBaoHanh(), 
                 a.getMau(), 
                 a.getTrangThai(), 
+                a.getSize(),
+                a.getNgayTao(),
                 a.getSanPham(), 
-                a.getDonVi());
+                a.getDonVi()
+        );
         rp.updateSoLuong(ctsp);
     }
 }

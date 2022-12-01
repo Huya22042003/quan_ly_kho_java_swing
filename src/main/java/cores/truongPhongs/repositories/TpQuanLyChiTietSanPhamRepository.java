@@ -3,6 +3,7 @@ package cores.truongPhongs.repositories;
 import cores.truongPhongs.customModels.TpQuanLyChiTietSanPhamCustom;
 import cores.truongPhongs.customModels.TpQuanLyDonViCustom;
 import cores.truongPhongs.customModels.TpQuanLySanPhamCustom;
+import cores.truongPhongs.customModels.TpXemChiTietSanPhamCustom;
 import domainModels.ChiTietSanPham;
 import domainModels.DonVi;
 import domainModels.SanPham;
@@ -36,7 +37,9 @@ public class TpQuanLyChiTietSanPhamRepository {
                 + "ct.sanPham as ten,"
                 + "ct.donVi as donViGoc,"
                 + "ct.namBaoHanh as namBaoHanh,"
-                + "ct.trangThai as trangThai"
+                + "ct.trangThai as trangThai, "
+                + "ct.size as size,"
+                + "ct.ngayTao as ngayTao"
                 + ") from domainModels.ChiTietSanPham ct");
         ct = q.getResultList();
         s.close();
@@ -61,7 +64,7 @@ public class TpQuanLyChiTietSanPhamRepository {
 
     public boolean updateCTSanPham(ChiTietSanPham sp) {
         Transaction tran = null;
-        try (Session s = HibernateUtil.getSessionFactory().openSession()) {
+        try ( Session s = HibernateUtil.getSessionFactory().openSession()) {
             tran = s.beginTransaction();
             s.update(sp);
             tran.commit();
@@ -75,7 +78,7 @@ public class TpQuanLyChiTietSanPhamRepository {
 
     public boolean deleteCTSanPham(UUID id) {
         Transaction tran = null;
-        try (Session s = HibernateUtil.getSessionFactory().openSession()) {
+        try ( Session s = HibernateUtil.getSessionFactory().openSession()) {
             tran = s.beginTransaction();
             ChiTietSanPham cs = s.find(ChiTietSanPham.class, id);
             s.delete(cs);
@@ -90,17 +93,20 @@ public class TpQuanLyChiTietSanPhamRepository {
 
     public TpQuanLyChiTietSanPhamCustom findById(UUID id) {
         TpQuanLyChiTietSanPhamCustom sp = new TpQuanLyChiTietSanPhamCustom();
-        try (Session s = HibernateUtil.getSessionFactory().openSession()) {
+        try ( Session s = HibernateUtil.getSessionFactory().openSession()) {
             Query q = s.createQuery("select new cores.truongPhongs.customModels.TpQuanLyChiTietSanPhamCustom ("
                     + "ct.id as id,"
                     + "ct.soLuongTon as soLuongTon,"
                     + "ct.hinhAnh as hinhAnh,"
                     + "ct.GiaNhap as GiaNhap,"
                     + "ct.GiaBan as GiaBan,"
-                    + "ct.namBaoHanh as namBaoHanh,"
                     + "ct.mau as mau,"
                     + "ct.sanPham as ten,"
-                    + "ct.donVi as donViGoc"
+                    + "ct.donVi as donViGoc,"
+                    + "ct.namBaoHanh as namBaoHanh,"
+                    + "ct.trangThai as trangThai, "
+                    + "ct.size as size,"
+                    + "ct.ngayTao as ngayTao"
                     + ") from domainModels.ChiTietSanPham ct WHERE ct.id = :id");
             q.setParameter("id", id);
             sp = (TpQuanLyChiTietSanPhamCustom) q.getSingleResult();
@@ -113,17 +119,20 @@ public class TpQuanLyChiTietSanPhamRepository {
 
     public TpQuanLyChiTietSanPhamCustom findByGia(BigDecimal gia) {
         TpQuanLyChiTietSanPhamCustom sp = new TpQuanLyChiTietSanPhamCustom();
-        try (Session s = HibernateUtil.getSessionFactory().openSession()) {
+        try ( Session s = HibernateUtil.getSessionFactory().openSession()) {
             Query q = s.createQuery("select new cores.truongPhongs.customModels.TpQuanLyChiTietSanPhamCustom ("
                     + "ct.id as id,"
                     + "ct.soLuongTon as soLuongTon,"
                     + "ct.hinhAnh as hinhAnh,"
                     + "ct.GiaNhap as GiaNhap,"
                     + "ct.GiaBan as GiaBan,"
-                    + "ct.namBaoHanh as namBaoHanh,"
                     + "ct.mau as mau,"
                     + "ct.sanPham as ten,"
-                    + "ct.donVi as donViGoc"
+                    + "ct.donVi as donViGoc,"
+                    + "ct.namBaoHanh as namBaoHanh,"
+                    + "ct.trangThai as trangThai, "
+                    + "ct.size as size,"
+                    + "ct.ngayTao as ngayTao"
                     + ") from domainModels.ChiTietSanPham ct WHERE ct.GiaBan = :GiaBan");
             q.setParameter("GiaBan", gia);
             sp = (TpQuanLyChiTietSanPhamCustom) q.getSingleResult();
@@ -143,10 +152,13 @@ public class TpQuanLyChiTietSanPhamRepository {
                 + "ct.hinhAnh as hinhAnh,"
                 + "ct.GiaNhap as GiaNhap,"
                 + "ct.GiaBan as GiaBan,"
-                + "ct.namBaoHanh as namBaoHanh,"
                 + "ct.mau as mau,"
                 + "ct.sanPham as ten,"
-                + "ct.donVi as donViGoc"
+                + "ct.donVi as donViGoc,"
+                + "ct.namBaoHanh as namBaoHanh,"
+                + "ct.trangThai as trangThai, "
+                + "ct.size as size,"
+                + "ct.ngayTao as ngayTao"
                 + ") from domainModels.ChiTietSanPham ct WHERE ct.GiaNhap LIKE CONCAT('%',:GiaNhap,'%') AND ct.mau = :tt");
         q.setParameter("GiaNhap", giaNhap);
         q.setParameter("tt", tt);
@@ -164,10 +176,13 @@ public class TpQuanLyChiTietSanPhamRepository {
                 + "ct.hinhAnh as hinhAnh,"
                 + "ct.GiaNhap as GiaNhap,"
                 + "ct.GiaBan as GiaBan,"
-                + "ct.namBaoHanh as namBaoHanh,"
                 + "ct.mau as mau,"
                 + "ct.sanPham as ten,"
-                + "ct.donVi as donViGoc"
+                + "ct.donVi as donViGoc,"
+                + "ct.namBaoHanh as namBaoHanh,"
+                + "ct.trangThai as trangThai, "
+                + "ct.size as size,"
+                + "ct.ngayTao as ngayTao"
                 + ") from domainModels.ChiTietSanPham ct WHERE ct.GiaBan LIKE CONCAT('%',:GiaBan,'%') AND ct.mau = :tt ");
         q.setParameter("GiaBan", giaBan);
         q.setParameter("tt", tt);
@@ -185,10 +200,13 @@ public class TpQuanLyChiTietSanPhamRepository {
                 + "ct.hinhAnh as hinhAnh,"
                 + "ct.GiaNhap as GiaNhap,"
                 + "ct.GiaBan as GiaBan,"
-                + "ct.namBaoHanh as namBaoHanh,"
                 + "ct.mau as mau,"
                 + "ct.sanPham as ten,"
-                + "ct.donVi as donViGoc"
+                + "ct.donVi as donViGoc,"
+                + "ct.namBaoHanh as namBaoHanh,"
+                + "ct.trangThai as trangThai, "
+                + "ct.size as size,"
+                + "ct.ngayTao as ngayTao"
                 + ") from domainModels.ChiTietSanPham ct WHERE ct.sanPham.ten LIKE CONCAT('%',:ten,'%') ");
         q.setParameter("ten", ten);
         list = q.getResultList();
@@ -197,6 +215,21 @@ public class TpQuanLyChiTietSanPhamRepository {
     }
 
     public List<TpQuanLyDonViCustom> getAllDonVi() {
+        List<TpQuanLyDonViCustom> list = new ArrayList<>();
+        Session s = HibernateUtil.getSessionFactory().openSession();
+        Query q = s.createQuery("select new cores.truongPhongs.customModels.TpQuanLyDonViCustom ("
+                + "dv.id as id,"
+                + "dv.donViGoc as donViGoc,"
+                + "dv.donViQuyDoi as donViQuyDoi,"
+                + "dv.soLuong as soLuong"
+                + " )from domainModels.DonVi dv");
+        list = q.getResultList();
+        s.close();
+        return list;
+
+    }
+    
+    public List<TpQuanLyDonViCustom> getAllDonVi1() {
         List<TpQuanLyDonViCustom> list = new ArrayList<>();
         Session s = HibernateUtil.getSessionFactory().openSession();
         Query q = s.createQuery("select new cores.truongPhongs.customModels.TpQuanLyDonViCustom ("
@@ -221,6 +254,19 @@ public class TpQuanLyChiTietSanPhamRepository {
     }
 
     public List<TpQuanLySanPhamCustom> getAllSanPham() {
+        List<TpQuanLySanPhamCustom> list = new ArrayList<>();
+        Session s = HibernateUtil.getSessionFactory().openSession();
+        Query q = s.createQuery("select new cores.truongPhongs.customModels.TpQuanLySanPhamCustom ("
+                + "sp.id as id,"
+                + "sp.ma as ma,"
+                + "sp.ten as ten"
+                + ") from domainModels.SanPham sp");
+        list = q.getResultList();
+        s.close();
+        return list;
+    }
+    
+    public List<TpQuanLySanPhamCustom> getAllSanPham1() {
         List<TpQuanLySanPhamCustom> list = new ArrayList<>();
         Session s = HibernateUtil.getSessionFactory().openSession();
         Query q = s.createQuery("select new cores.truongPhongs.customModels.TpQuanLySanPhamCustom ("

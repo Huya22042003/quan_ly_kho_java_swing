@@ -54,8 +54,8 @@ public class TpQuanLyChiTietSanPhamU extends javax.swing.JFrame {
         TpQuanLyChiTietSanPhamCustom sp = serviceChiTietSP.checkValidate(serviceChiTietSP.getAllDonVi().get(cbbDonVi.getSelectedIndex()).getId(),
                 txtNamBH.getText(),
                 serviceChiTietSP.getAllSanPham().get(cbbSanPham.getSelectedIndex()).getId(),
-                lblHinhAnh.getText(), txtGiaNhap.getText(), txtGiaBan.getText(), txtSoLuongTon.getText(),
-                erroHinhAnh, erroGiaNhap, erroGiaBan, erroNamBH, erroSoLuongTon, serviceChiTietSP.loc(this.cbbMauSac.getSelectedIndex()));
+                lblHinhAnh.getText(), txtGiaNhap.getText(), txtGiaBan.getText(), txtSoLuongTon.getText(), txtSize.getText(),
+                erroHinhAnh, erroGiaNhap, erroGiaBan, erroNamBH, erroSoLuongTon, erroSize, serviceChiTietSP.loc(this.cbbMauSac.getSelectedIndex()));
 
         return sp;
     }
@@ -98,6 +98,8 @@ public class TpQuanLyChiTietSanPhamU extends javax.swing.JFrame {
         erroNamBH = new javax.swing.JLabel();
         cbbSanPham = new utilities.palette.Combobox();
         cbbMauSac = new utilities.palette.Combobox();
+        txtSize = new utilities.palette.TextField();
+        erroSize = new javax.swing.JLabel();
         lblHinhAnh = new utilities.palette.lable();
         erroHinhAnh = new javax.swing.JLabel();
         uWPButton1 = new utilities.palette.UWPButton();
@@ -174,6 +176,10 @@ public class TpQuanLyChiTietSanPhamU extends javax.swing.JFrame {
 
         cbbMauSac.setLabeText("Chọn Màu Sắc");
 
+        txtSize.setLabelText("Size");
+
+        erroSize.setForeground(new java.awt.Color(255, 51, 51));
+
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
         panelRound1.setLayout(panelRound1Layout);
         panelRound1Layout.setHorizontalGroup(
@@ -191,7 +197,9 @@ public class TpQuanLyChiTietSanPhamU extends javax.swing.JFrame {
                     .addComponent(erroGiaBan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(erroGiaNhap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cbbSanPham, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cbbDonVi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cbbDonVi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtSize, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(erroSize, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
         panelRound1Layout.setVerticalGroup(
@@ -214,10 +222,14 @@ public class TpQuanLyChiTietSanPhamU extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(erroNamBH, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtSize, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(erroSize, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addComponent(cbbMauSac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(cbbSanPham, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(31, 31, 31)
+                .addGap(18, 18, 18)
+                .addComponent(cbbSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cbbDonVi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31))
         );
@@ -278,7 +290,7 @@ public class TpQuanLyChiTietSanPhamU extends javax.swing.JFrame {
                                     .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(27, 27, 27)
+                        .addGap(37, 37, 37)
                         .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelRound2Layout.createSequentialGroup()
                         .addGap(629, 629, 629)
@@ -293,7 +305,6 @@ public class TpQuanLyChiTietSanPhamU extends javax.swing.JFrame {
                 .addComponent(uWPButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelRound2Layout.createSequentialGroup()
                         .addComponent(lblHinhAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -303,8 +314,11 @@ public class TpQuanLyChiTietSanPhamU extends javax.swing.JFrame {
                         .addGap(42, 42, 42)
                         .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(45, 45, 45)
-                        .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(21, Short.MAX_VALUE))
+                        .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(panelRound2Layout.createSequentialGroup()
+                        .addComponent(panelRound1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(16, 16, 16))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -315,7 +329,9 @@ public class TpQuanLyChiTietSanPhamU extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -352,7 +368,10 @@ public class TpQuanLyChiTietSanPhamU extends javax.swing.JFrame {
                         , check.getSanPham()
                         , check.getDonVi()
                         , check.getNamBaoHanh()
-                        , TrangThaiSanPhamConstanst.DA_MO_BAN);
+                        , TrangThaiSanPhamConstanst.DA_MO_BAN
+                        , check.getSize()
+                        , ct.getNgayTao()
+                );
         
         if (serviceChiTietSP.updateCTSanPham(sp)) {
             MsgBox.alert(this, "Sửa thành công");
@@ -441,6 +460,7 @@ public class TpQuanLyChiTietSanPhamU extends javax.swing.JFrame {
     private javax.swing.JLabel erroGiaNhap;
     private javax.swing.JLabel erroHinhAnh;
     private javax.swing.JLabel erroNamBH;
+    private javax.swing.JLabel erroSize;
     private javax.swing.JLabel erroSoLuongTon;
     private utilities.palette.lable lblHinhAnh;
     private utilities.palette.PanelRound panelRound1;
@@ -450,6 +470,7 @@ public class TpQuanLyChiTietSanPhamU extends javax.swing.JFrame {
     private utilities.palette.TextField txtGiaBan;
     private utilities.palette.TextField txtGiaNhap;
     private utilities.palette.TextField txtNamBH;
+    private utilities.palette.TextField txtSize;
     private utilities.palette.TextField txtSoLuongTon;
     private utilities.palette.UWPButton uWPButton1;
     // End of variables declaration//GEN-END:variables

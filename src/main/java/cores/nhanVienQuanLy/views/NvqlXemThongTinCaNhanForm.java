@@ -247,8 +247,7 @@ public class NvqlXemThongTinCaNhanForm extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnHuyBoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyBoActionPerformed
-        test n = new test();
-        n.setVisible(false);
+
     }//GEN-LAST:event_btnHuyBoActionPerformed
 
     public void clearForm() {

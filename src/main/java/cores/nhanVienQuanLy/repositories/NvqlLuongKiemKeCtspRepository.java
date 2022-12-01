@@ -24,7 +24,9 @@ public class NvqlLuongKiemKeCtspRepository {
                 + " m.donVi as donVi,"
                 + " m.mau as mau,"
                 + " m.namBaoHanh as namBaoHanh,"
-                + " m.GiaBan as giaBan) "
+                + " m.GiaBan as giaBan,"
+                + " m.size as size, "
+                + " m.ngayTao as ngayTao) "
                 + " from domainModels.ChiTietSanPham m ORDER BY m.sanPham.ma DESC");
         List<NvqlLuongKiemKeCtspCustom> list = query.getResultList();
         System.out.println(list.size());

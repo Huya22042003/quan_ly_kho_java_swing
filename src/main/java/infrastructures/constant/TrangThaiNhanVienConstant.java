@@ -8,6 +8,7 @@ package infrastructures.constant;
  *
  * @author QUOC HUY
  */
+
 public enum TrangThaiNhanVienConstant {
     CHUA_HOAT_DONG,
     DANG_HOAT_DONG,

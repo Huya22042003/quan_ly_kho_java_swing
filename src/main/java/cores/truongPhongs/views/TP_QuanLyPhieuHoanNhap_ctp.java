@@ -74,11 +74,6 @@ public class TP_QuanLyPhieuHoanNhap_ctp extends javax.swing.JFrame {
         panelRound3 = new utilities.palette.PanelRound();
         panelRound5 = new utilities.palette.PanelRound();
         jLabel3 = new javax.swing.JLabel();
-        panelRound15 = new utilities.palette.PanelRound();
-        myButton9 = new utilities.palette.MyButton();
-        myButton5 = new utilities.palette.MyButton();
-        myButton10 = new utilities.palette.MyButton();
-        myButton11 = new utilities.palette.MyButton();
         panelRound4 = new utilities.palette.PanelRound();
         btnAnh = new utilities.palette.UWPButton();
 
@@ -169,7 +164,7 @@ public class TP_QuanLyPhieuHoanNhap_ctp extends javax.swing.JFrame {
         panelRound16.setRoundTopLeft(50);
         panelRound16.setRoundTopRight(50);
 
-        myButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Closed door.png"))); // NOI18N
+        myButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Log out.png"))); // NOI18N
         myButton12.setToolTipText("Phiếu nhập chi tiết");
         myButton12.setBorderColor(new java.awt.Color(221, 242, 244));
         myButton12.setColor(new java.awt.Color(221, 242, 244));
@@ -318,96 +313,13 @@ public class TP_QuanLyPhieuHoanNhap_ctp extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        panelRound15.setBackground(new java.awt.Color(67, 130, 187));
-        panelRound15.setRoundBottomLeft(50);
-        panelRound15.setRoundBottomRight(50);
-        panelRound15.setRoundTopLeft(50);
-        panelRound15.setRoundTopRight(50);
-
-        myButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/file.png"))); // NOI18N
-        myButton9.setToolTipText("Phiếu nhập chi tiết");
-        myButton9.setBorderColor(new java.awt.Color(221, 242, 244));
-        myButton9.setColor(new java.awt.Color(221, 242, 244));
-        myButton9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        myButton9.setRadius(50);
-        myButton9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                myButton9ActionPerformed(evt);
-            }
-        });
-
-        myButton5.setBackground(new java.awt.Color(221, 242, 244));
-        myButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Addd.png"))); // NOI18N
-        myButton5.setToolTipText("Thêm mới phiếu nhập");
-        myButton5.setBorderColor(new java.awt.Color(221, 242, 244));
-        myButton5.setColor(new java.awt.Color(221, 242, 244));
-        myButton5.setRadius(50);
-        myButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                myButton5ActionPerformed(evt);
-            }
-        });
-
-        myButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/add-to-basket.png"))); // NOI18N
-        myButton10.setToolTipText("Thêm sản phẩm muốn nhập");
-        myButton10.setBorderColor(new java.awt.Color(221, 242, 244));
-        myButton10.setColor(new java.awt.Color(221, 242, 244));
-        myButton10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        myButton10.setRadius(50);
-        myButton10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                myButton10ActionPerformed(evt);
-            }
-        });
-
-        myButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/add-to-basket.png"))); // NOI18N
-        myButton11.setToolTipText("Thêm sản phẩm muốn nhập");
-        myButton11.setBorderColor(new java.awt.Color(221, 242, 244));
-        myButton11.setColor(new java.awt.Color(221, 242, 244));
-        myButton11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        myButton11.setRadius(50);
-        myButton11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                myButton11ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout panelRound15Layout = new javax.swing.GroupLayout(panelRound15);
-        panelRound15.setLayout(panelRound15Layout);
-        panelRound15Layout.setHorizontalGroup(
-            panelRound15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound15Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(myButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(myButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(myButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
-                .addComponent(myButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
-        );
-        panelRound15Layout.setVerticalGroup(
-            panelRound15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound15Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelRound15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(myButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(myButton9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(myButton10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(myButton11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-
         javax.swing.GroupLayout panelRound3Layout = new javax.swing.GroupLayout(panelRound3);
         panelRound3.setLayout(panelRound3Layout);
         panelRound3Layout.setHorizontalGroup(
             panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound3Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelRound15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(128, Short.MAX_VALUE))
         );
         panelRound3Layout.setVerticalGroup(
@@ -415,9 +327,7 @@ public class TP_QuanLyPhieuHoanNhap_ctp extends javax.swing.JFrame {
             .addGroup(panelRound3Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
-                .addComponent(panelRound15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35))
+                .addContainerGap(187, Short.MAX_VALUE))
         );
 
         panelRound4.setBackground(new java.awt.Color(228, 206, 224));
@@ -550,22 +460,6 @@ public class TP_QuanLyPhieuHoanNhap_ctp extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtGiaNhapActionPerformed
 
-    private void myButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton9ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_myButton9ActionPerformed
-
-    private void myButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_myButton5ActionPerformed
-
-    private void myButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton10ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_myButton10ActionPerformed
-
-    private void myButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton11ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_myButton11ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -607,14 +501,9 @@ public class TP_QuanLyPhieuHoanNhap_ctp extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private utilities.palette.MyButton myButton10;
-    private utilities.palette.MyButton myButton11;
     private utilities.palette.MyButton myButton12;
-    private utilities.palette.MyButton myButton5;
     private utilities.palette.MyButton myButton6;
-    private utilities.palette.MyButton myButton9;
     private utilities.palette.PanelRound panelRound1;
-    private utilities.palette.PanelRound panelRound15;
     private utilities.palette.PanelRound panelRound16;
     private utilities.palette.PanelRound panelRound2;
     private utilities.palette.PanelRound panelRound3;

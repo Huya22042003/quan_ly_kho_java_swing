@@ -32,7 +32,9 @@ public class Tai_NvqlLuongPhieuXuatRepository {
                 + "ctsp.mau as mau,"
                 + "ctsp.trangThai as trangThai,"
                 + "ctsp.sanPham as sanPham,"
-                + "ctsp.donVi as donVi"
+                + "ctsp.donVi as donVi, "
+                + "ctsp.size as size, "
+                + "ctsp.ngayTao as ngayTao"
                 + ")FROM domainModels.ChiTietSanPham ctsp WHERE ctsp.GiaBan > :giaBatDau AND ctsp.GiaBan < :giaKetThuc");
         query.setParameter("giaBatDau", giaBatDau);
         query.setParameter("giaKetThuc", giaKetThuc);
@@ -52,7 +54,9 @@ public class Tai_NvqlLuongPhieuXuatRepository {
                 + "ctsp.mau as mau,"
                 + "ctsp.trangThai as trangThai,"
                 + "ctsp.sanPham as sanPham,"
-                + "ctsp.donVi as donVi"
+                + "ctsp.donVi as donVi, "
+                + "ctsp.size as size, "
+                + "ctsp.ngayTao as ngayTao"
                 + ")FROM domainModels.ChiTietSanPham ctsp WHERE ctsp.trangThai = :trangThai");
         query.setParameter("trangThai", TrangThaiSanPhamConstanst.DA_MO_BAN);
         List<LuongBanHang_ChiTietSanPhamCustom> listCTSP = query.getResultList();
