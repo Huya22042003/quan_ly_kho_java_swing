@@ -6,6 +6,7 @@ import cores.truongPhongs.services.TpXemChiTietSanPhamService;
 import domainModels.ChiTietSanPham;
 import domainModels.DonVi;
 import infrastructures.constant.TrangThaiSanPhamConstanst;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -43,7 +44,7 @@ public class TpXemChiTietSanPhamImpl implements TpXemChiTietSanPhamService {
 
     @Override
     public TrangThaiSanPhamConstanst locTt(int a) {
-               switch (a) {
+        switch (a) {
             case 0:
                 return TrangThaiSanPhamConstanst.CHO_XAC_NHAN;
             case 1:
@@ -53,5 +54,10 @@ public class TpXemChiTietSanPhamImpl implements TpXemChiTietSanPhamService {
         }
 
     }
+
+    @Override
+    public List<TpXemChiTietSanPhamCustom> getListGiaNhap(BigDecimal giaBatDau, BigDecimal giaKetThuc) {
+        return repo.getListByGiaNhap(giaBatDau, giaKetThuc);
+   }
 
 }

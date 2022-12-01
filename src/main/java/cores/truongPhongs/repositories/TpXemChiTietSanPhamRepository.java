@@ -3,6 +3,7 @@ package cores.truongPhongs.repositories;
 import cores.truongPhongs.customModels.TpXemChiTietSanPhamCustom;
 import domainModels.ChiTietSanPham;
 import domainModels.DonVi;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Query;
@@ -63,5 +64,24 @@ public class TpXemChiTietSanPhamRepository {
         q.setParameter("donViGoc", donViGoc);
         DonVi d = (DonVi) q.getResultList();
         return d;
+    }
+     public List<TpXemChiTietSanPhamCustom> getListByGiaNhap(BigDecimal giaBatDau, BigDecimal giaKetThuc) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("select new cores.truongPhongs.customModels.TpXemChiTietSanPhamCustom ("
+                + "ct.id as id,"
+                + "ct.hinhAnh as hinhAnh,"
+                + "ct.GiaNhap as giaNhap,"
+                + "ct.GiaBan as giaBan,"
+                + "ct.namBaoHanh as namBaoHanh,"
+                + "ct.mau as mau,"
+                + "ct.sanPham as sanPham,"
+                + "ct.donVi as donVi,"
+                + "ct.trangThai as trangThai,"
+                + "ct.soLuongTon as soLuongTon"
+                + ") from domainModels.ChiTietSanPham ct WHERE ct.GiaNhap > :giaBatDau AND ct.GiaNhap < :giaKetThuc  ORDER BY ct.GiaNhap DESC");
+        query.setParameter("giaBatDau", giaBatDau);
+        query.setParameter("giaKetThuc", giaKetThuc);
+        List<TpXemChiTietSanPhamCustom> list = query.getResultList();
+        return list;
     }
 }
