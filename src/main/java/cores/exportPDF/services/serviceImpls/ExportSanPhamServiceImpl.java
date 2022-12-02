@@ -9,11 +9,14 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import cores.exportPDF.repositoris.ExportSanPhamRepository;
 import cores.exportPDF.services.ExportSanPhamService;
+import domainModels.ChiTietPhieuXuat;
 import domainModels.ChiTietSanPham;
+import domainModels.PhieuXuat;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -50,7 +53,6 @@ public class ExportSanPhamServiceImpl implements ExportSanPhamService {
         // Create the QR code and save
         // in the specified folder
         // as a jpg file
-
         BitMatrix matrix = new MultiFormatWriter().encode(
                 new String(data.getBytes(charset), charset),
                 BarcodeFormat.QR_CODE, 200, 200);
@@ -75,6 +77,8 @@ public class ExportSanPhamServiceImpl implements ExportSanPhamService {
             PDPage page = new PDPage();
 
             PDFont font = PDType0Font.load(doc, new File("font\\vuArial.ttf"));
+
+            PDFont fontBold = PDType0Font.load(doc, new File("font\\vuArialBold.ttf"));
 
             doc.addPage(page);
 
@@ -103,7 +107,7 @@ public class ExportSanPhamServiceImpl implements ExportSanPhamService {
             String text6 = "Năm bảo hành : " + ctsp.getNamBaoHanh();
             String text7 = "Giá bán : " + ctsp.getGiaBan();
 
-            contents.setFont(font, 30);
+            contents.setFont(fontBold, 30);
             contents.newLineAtOffset(70, 700);
             contents.setLeading(30f);
             contents.showText(title);
@@ -136,10 +140,10 @@ public class ExportSanPhamServiceImpl implements ExportSanPhamService {
             //Closing the document
             doc.close();
             return true;
-        } catch(NullPointerException npe) {
+        } catch (NullPointerException npe) {
             npe.printStackTrace();
             return false;
-        }catch (Exception ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
             return false;
         }
@@ -149,5 +153,131 @@ public class ExportSanPhamServiceImpl implements ExportSanPhamService {
     public ChiTietSanPham findChiTietSanPhamById(UUID idSanPham) {
         return rp.findChiTietSanPham(idSanPham);
     }
-    
+
+    @Override
+    public boolean exportPhieuXuat(String fileName, UUID idPhieu) {
+        try {
+            File file = new File(fileName);
+
+            List<ChiTietPhieuXuat> ctpx = findChiTietPhieuXuat(idPhieu);
+            if (ctpx.isEmpty()) {
+                return false;
+            }
+
+            PhieuXuat px = ctpx.get(0).getIdPhieuXuat();
+
+            //Loading an existing document
+            PDDocument doc = new PDDocument();
+
+            PDPage page = new PDPage();
+
+            PDFont font = PDType0Font.load(doc, new File("font\\vuArial.ttf"));
+
+            PDFont fontBold = PDType0Font.load(doc, new File("font\\vuArialBold.ttf"));
+
+            doc.addPage(page);
+
+            String[][] content = new String[ctpx.size() + 1][5];
+            String[] a = {"Mã SP", "Tên SP", "Số lượng", "Đơn giá", "Thành tiền"};
+            content[0] = a;
+            int index = 0;
+            Double tongTien = 0.0;
+            for (ChiTietPhieuXuat el : ctpx) {
+                index ++;
+                String [] elment = {el.getIdChiTietSp().getSanPham().getMa()
+                        , el.getIdChiTietSp().getSanPham().getTen()
+                        , String.valueOf(el.getSoLuong())
+                        , String.valueOf(el.getIdChiTietSp().getGiaBan()) + "VND"
+                        , String.valueOf(el.getIdChiTietSp().getGiaBan().doubleValue() * el.getSoLuong()) + "VND"
+                };
+                tongTien += el.getIdChiTietSp().getGiaBan().doubleValue() * el.getSoLuong();
+                content[index] = elment;
+            }
+            PDPageContentStream contentStream = new PDPageContentStream(doc, page);
+            
+            final int rows = content.length;
+            final int cols = content[0].length;
+            final float rowHeight = 20f;
+            final float tableWidth = 500;
+            final float tableHeight = rowHeight * rows;
+            final float colWidth = tableWidth / (float) cols;
+            final float cellMargin = 5f;
+
+            float nexty = 500;
+            for (int i = 0; i <= rows; i++) {
+                contentStream.drawLine(100, nexty, 100 + tableWidth, nexty);
+                nexty -= rowHeight;
+            }
+
+            float nextx = 30;
+            for (int i = 0; i <= cols; i++) {
+                contentStream.drawLine(nextx, 500, nextx, 500 - tableHeight);
+                nextx += colWidth;
+            }
+            contentStream.beginText();
+            contentStream.setFont(fontBold, 30);
+            contentStream.newLineAtOffset(70, 700);
+            contentStream.setLeading(30f);
+            contentStream.showText("       Thông tin phiếu xuất");
+            contentStream.newLine();
+
+            contentStream.setFont(font, 16);
+            contentStream.setLeading(25f);
+            contentStream.showText("Mã phiếu: " + px.getId());
+            contentStream.newLine();
+            contentStream.showText("Tên khách hàng: " + px.getKhachHang().getTen());
+            contentStream.newLine();
+            contentStream.showText("Ngày tạo: " + new Date(px.getNgayTao()).toString());
+            contentStream.newLine();
+            contentStream.showText("Ngày thanh toán: " + px.getNgayThanhToan() == null ? "Chưa thanh toán" : new Date(px.getNgayThanhToan()).toString());
+            contentStream.newLine();
+                        
+            contentStream.showText("Tổng tiền: " + String.valueOf(tongTien) + "VND");
+            contentStream.newLine();
+            
+            contentStream.setFont(font, 12);
+            contentStream.endText();
+            float textx = 100 + cellMargin;
+            float texty = 500 - 15;
+            for (int i = 0; i < content.length; i++) {
+                for (int j = 0; j < content[i].length; j++) {
+                    String text = content[i][j];
+                    contentStream.beginText();
+                    contentStream.moveTextPositionByAmount(textx, texty);
+                    contentStream.drawString(text);
+                    contentStream.endText();
+                    textx += colWidth;
+                }
+                texty -= rowHeight;
+                textx = 100 + cellMargin;
+            }
+
+            
+            contentStream.close();
+
+            //Saving the document
+            doc.save(file);
+
+            //Closing the document
+            doc.close();
+            return true;
+        } catch (NullPointerException npe) {
+            npe.printStackTrace();
+            return false;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public PhieuXuat findPhieuXuatById(UUID id) {
+        return rp.findPhieuXuat(id);
+    }
+
+    @Override
+    public List<ChiTietPhieuXuat> findChiTietPhieuXuat(UUID id) {
+        return rp.findChiTietSanPhamByIdPhieuXuat(id);
+    }
+
 }

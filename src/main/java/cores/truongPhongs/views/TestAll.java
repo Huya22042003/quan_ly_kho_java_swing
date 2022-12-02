@@ -4,6 +4,7 @@
  */
 package cores.truongPhongs.views;
 
+import cores.nhanVienQuanLy.views.Tai_NvqlLuongPhieuXuatView;
 import java.awt.FlowLayout;
 
 /**
@@ -17,7 +18,7 @@ public class TestAll extends javax.swing.JFrame {
      */
     public TestAll() {
         initComponents();
-        TpLuongNhapView a = new TpLuongNhapView();
+        Tai_NvqlLuongPhieuXuatView a = new Tai_NvqlLuongPhieuXuatView();
         this.add(a);
         this.setLayout(new FlowLayout());
         this.pack();
