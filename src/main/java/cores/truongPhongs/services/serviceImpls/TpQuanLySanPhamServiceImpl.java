@@ -104,9 +104,6 @@ public class TpQuanLySanPhamServiceImpl implements TpQuanLySanPhamService {
         return rp.findID(id);
     }
 
-    @Override
-    public List<SanPham> getABC(Long ngayThanhToan) {
-        return rp.getABC(ngayThanhToan);
-    }
+  
 
 }

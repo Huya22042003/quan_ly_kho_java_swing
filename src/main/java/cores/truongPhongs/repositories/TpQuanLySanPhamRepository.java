@@ -130,26 +130,6 @@ public class TpQuanLySanPhamRepository {
         return sp;
     }
 
-    public static List<SanPham> getABC(Long ngayThanhToan) {
-        List<SanPham> list = new ArrayList<>();
-        Session s = HibernateUtil.getSessionFactory().openSession();
-        Query q = s.createNativeQuery("""                                           
-                                      select sp.Id, sp.ma, sp.ten,sum(ctpx.soluong) as SL, px.ngayThanhToan from sanpham sp
-                                      join chiTietSanPham ctsp on ctsp.idSanPham = sp.id
-                                      join chitietPhieuXuat ctpx on ctsp.id = ctpx.IdChiTietSP
-                                      join phieuXuat px  on px.id = ctpx.idphieuXuat
-                                      where px.NgayThanhToan = :ngayThanhToan
-                                      group by sp.id, sp.ma, sp.ten,px.NgayThanhToan
-                                      order by sum(ctpx.soluong) Desc                                           
-                                      """, SanPham.class);
-        q.setParameter("ngayThanhToan", ngayThanhToan);
-        list = q.getResultList();
-        s.close();
-        System.out.println(list.size());
-        return list;
-    }
-    public static void main(String[] args) {
-        getABC(16000L);
-    }
+   
 }
 
