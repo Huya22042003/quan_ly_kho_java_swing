@@ -54,6 +54,19 @@ public class TpXemChiTietSanPhamRepository {
         }
         return sp;
     }
+    public ChiTietSanPham updateCTSanPham(ChiTietSanPham sp) {
+        Transaction tran = null;
+        try ( Session s = HibernateUtil.getSessionFactory().openSession()) {
+            tran = s.beginTransaction();
+            s.update(sp);
+            tran.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            tran.rollback();
+            return null;
+        }
+        return sp;
+    }
 
     public DonVi findByTen(String donViGoc) {
         Session s = HibernateUtil.getSessionFactory().openSession();
