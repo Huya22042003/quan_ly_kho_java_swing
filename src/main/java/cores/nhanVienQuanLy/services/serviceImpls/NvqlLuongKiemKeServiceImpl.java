@@ -13,11 +13,11 @@ import java.util.List;
  *
  * @author window
  */
-public class NvqlLuongKiemKeServiceImpl implements NvqlLuongKiemKeService{
-    
+public class NvqlLuongKiemKeServiceImpl implements NvqlLuongKiemKeService {
+
     private NvqlLuongKiemKeRepository rp;
-    
-    public NvqlLuongKiemKeServiceImpl(){
+
+    public NvqlLuongKiemKeServiceImpl() {
         rp = new NvqlLuongKiemKeRepository();
     }
 
@@ -45,5 +45,24 @@ public class NvqlLuongKiemKeServiceImpl implements NvqlLuongKiemKeService{
         p.setTrangThai(phieuKiemKe.getTrangThai());
         return rp.updateTrangThai(p);
     }
-        
+
+    @Override
+    public TrangThaiPhieuKiemConstant loc(int a) {
+        switch (a) {
+            case 0:
+                return TrangThaiPhieuKiemConstant.MOI_TAO;
+            case 1:
+                return TrangThaiPhieuKiemConstant.CHUA_XAC_NHAN;
+            case 2:
+                return TrangThaiPhieuKiemConstant.DA_XAC_NHAN;
+            default:
+                return null;
+        }
+    }
+
+    @Override
+    public List<NvqlLuongKiemKeCustom> getListByNgayTao(Long ngayBatDau, Long ngayKetThuc) {
+        return rp.getListByNgayTao(ngayBatDau, ngayKetThuc);
+    }
+
 }

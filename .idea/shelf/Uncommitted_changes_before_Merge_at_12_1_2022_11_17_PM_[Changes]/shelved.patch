@@ -1,0 +1,19 @@
+Index: src/main/resources/META-INF/hibernate.cfg.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version='1.0' encoding='utf-8'?>\r\n<!DOCTYPE hibernate-configuration PUBLIC\r\n      \"-//Hibernate/Hibernate Configuration DTD 3.0//EN\"\r\n      \"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd\">\r\n\r\n<hibernate-configuration>\r\n    <session-factory>\r\n        <!-- Database connection settings -->\r\n        <property name=\"connection.driver_class\">\r\n            com.microsoft.sqlserver.jdbc.SQLServerDriver\r\n        </property>\r\n        <property name=\"connection.url\">\r\n            jdbc:sqlserver://localhost:1433;databaseName=DU_AN_MOT;encrypt=true;trustServerCertificate=true;\r\n        </property>\r\n\r\n        <property name=\"connection.username\">sa</property>\r\n        <property name=\"connection.password\">123</property>\r\n\r\n        <!-- JDBC connection pool (use the built-in) -->\r\n        <property name=\"connection.pool_size\">1</property>\r\n\r\n        <!-- SQL dialect -->\r\n        <property name=\"dialect\">org.hibernate.dialect.SQLServerDialect</property>\r\n\r\n        <!-- Enable Hibernate's automatic session context management -->\r\n        <property name=\"current_session_context_class\">thread</property>\r\n\r\n        <!-- Disable the second-level cache -->\r\n        <property name=\"cache.provider_class\">org.hibernate.cache.internal.NoCacheProvider</property>\r\n\r\n        <!-- Echo all executed SQL to stdout -->\r\n        <property name=\"show_sql\">true</property>\r\n       \r\n        <mapping class = \"domainModels.CoSo\"/>\r\n        <mapping class = \"domainModels.ChucVu\"/>\r\n        <mapping class = \"domainModels.NhanVien\"/>\r\n        <mapping class = \"domainModels.KhachHang\"/>\r\n        <mapping class = \"domainModels.NhaCungCap\"/>\r\n        <mapping class = \"domainModels.SanPham\"/>\r\n        <mapping class = \"domainModels.DonVi\"/>\r\n        <mapping class = \"domainModels.NamBaoHanh\"/>\r\n        <mapping class = \"domainModels.PhieuNhap\"/>\r\n        <mapping class = \"domainModels.PhieuXuat\"/>\r\n        <mapping class = \"domainModels.PhieuKiemKe\"/>\r\n        <mapping class = \"domainModels.PhieuHoanXuat\"/>\r\n        <mapping class = \"domainModels.PhieuHoanNhap\"/>\r\n        <mapping class = \"domainModels.ChiTietSanPham\"/>\r\n        <mapping class = \"domainModels.ChiTietPhieuNhap\"/>\r\n        <mapping class = \"domainModels.ChiTietPhieuXuat\"/>\r\n        <mapping class = \"domainModels.ChiTietPhieuKiemKe\"/>\r\n        <mapping class = \"domainModels.ChiTietPhieuHoanXuat\"/>\r\n        <mapping class = \"domainModels.ChiTietPhieuHoanNhap\"/>\r\n        \r\n    </session-factory>\r\n</hibernate-configuration>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/resources/META-INF/hibernate.cfg.xml b/src/main/resources/META-INF/hibernate.cfg.xml
+--- a/src/main/resources/META-INF/hibernate.cfg.xml	(revision e4156c4ff66aa8fbc7e49b61d627c72988290779)
++++ b/src/main/resources/META-INF/hibernate.cfg.xml	(date 1669911455637)
+@@ -14,7 +14,7 @@
+         </property>
+ 
+         <property name="connection.username">sa</property>
+-        <property name="connection.password">123</property>
++        <property name="connection.password">123456</property>
+ 
+         <!-- JDBC connection pool (use the built-in) -->
+         <property name="connection.pool_size">1</property>
