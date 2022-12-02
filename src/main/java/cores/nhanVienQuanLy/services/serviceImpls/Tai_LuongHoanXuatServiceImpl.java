@@ -73,7 +73,7 @@ public class Tai_LuongHoanXuatServiceImpl
         phx.setGhiChu(ghiChu);
         phx.setLiDo(liDo);
         phx.setNgayTao(DateTimeUtil.convertDateToTimeStampSecond());
-        phx.setNgayThanhToan(DateTimeUtil.convertDateToTimeStampSecond());
+        phx.setNgayThanhToan(null);
         phx.setPhieuXuat(px);
         phx.setTrangThai(TrangThaiPhieuHoanConstant.CHO_XAC_NHAN);
         

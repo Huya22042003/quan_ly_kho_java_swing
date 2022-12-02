@@ -493,7 +493,7 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
         ctp = new TP_QuanLyPhieuHoanNhap_ctp(this.hoanNhapCustoms.get(row));
         ctp.setVisible(true);
     }//GEN-LAST:event_myButton9ActionPerformed
-
+    
     private void myButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton5ActionPerformed
         if (ctp != null && hoanNhap_sp != null) {
             ctp.setVisible(false);

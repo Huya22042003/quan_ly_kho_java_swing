@@ -78,7 +78,7 @@ public class TP_PhieuHoanNhapRepository {
     public boolean addPhieuHoanNhap(PhieuHoanNhap phn) {
         try ( Session s = HibernateUtil.getSessionFactory().openSession()) {
             Transaction tran = s.beginTransaction();
-            s.save(phn);
+            s.saveOrUpdate(phn);
             tran.commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -92,14 +92,21 @@ public class TP_PhieuHoanNhapRepository {
         try ( Session s = HibernateUtil.getSessionFactory().openSession()) {
             PhieuHoanNhap phn = s.find(PhieuHoanNhap.class, idPhieuHoanNhap);
             ChiTietSanPham ctsp = s.find(ChiTietSanPham.class, sp);
+            ChiTietPhieuHoanNhapId idChiTietPhieuHoan = new ChiTietPhieuHoanNhapId(phn, ctsp);
+            ChiTietPhieuHoanNhap ctphnFind = s.find(ChiTietPhieuHoanNhap.class, idChiTietPhieuHoan);
             Transaction tran = s.beginTransaction();
-            ChiTietPhieuHoanNhap ctphn = new ChiTietPhieuHoanNhap();
-            ctphn.setIdChiTietSp(ctsp);
-            ctphn.setIdPhieuHoanNhap(phn);
-            ctphn.setSoLuong(soLuongHoan);
-            s.save(ctphn);
+            if(ctphnFind != null) {
+                ctphnFind.setSoLuong(ctphnFind.getSoLuong() + soLuongHoan);
+                s.saveOrUpdate(ctphnFind);
+            } else {
+                ChiTietPhieuHoanNhap ctphn = new ChiTietPhieuHoanNhap();
+                ctphn.setIdChiTietSp(ctsp);
+                ctphn.setIdPhieuHoanNhap(phn);
+                ctphn.setSoLuong(soLuongHoan);
+                s.saveOrUpdate(ctphn);
+            }
             ctsp.setSoLuongTon(ctsp.getSoLuongTon() - soLuongHoan);
-            s.update(ctsp);
+            s.saveOrUpdate(ctsp);
             tran.commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -114,12 +121,12 @@ public class TP_PhieuHoanNhapRepository {
             PhieuHoanNhap phn = s.find(PhieuHoanNhap.class, idPhieuHoanNhap);
             ChiTietSanPham ctsp = s.find(ChiTietSanPham.class, sp);
             ctsp.setSoLuongTon(ctsp.getSoLuongTon() + soLuongHoan);
-            s.update(ctsp);            
+            s.saveOrUpdate(ctsp);            
             Transaction tran = s.beginTransaction();
             ChiTietPhieuHoanNhapId chiTietPhieuHoanNhapId = new ChiTietPhieuHoanNhapId(phn, ctsp);
             ChiTietPhieuHoanNhap ctphn = s.find(ChiTietPhieuHoanNhap.class, chiTietPhieuHoanNhapId);
             ctphn.setSoLuong(ctphn.getSoLuong() - soLuongHoan);
-            s.update(ctphn);
+            s.saveOrUpdate(ctphn);
             tran.commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -152,7 +159,7 @@ public class TP_PhieuHoanNhapRepository {
         Session s =HibernateUtil.getSessionFactory().openSession();
         try {
             Transaction transaction = s.beginTransaction();
-            s.update(phn);
+            s.saveOrUpdate(phn);
             transaction.commit();
             s.close();
         } catch (Exception e) {
