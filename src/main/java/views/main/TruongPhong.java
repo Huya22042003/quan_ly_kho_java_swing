@@ -3,7 +3,9 @@ package views.main;
 import cores.nhanVienQuanLy.views.NvqlXemThongTinCaNhanForm;
 import cores.truongPhongs.views.TP_ChucVuForm;
 import cores.truongPhongs.views.TP_KhachHangForm;
+import cores.truongPhongs.views.TP_QuanLyPhieuHoanNhap;
 import cores.truongPhongs.views.TpDonViView;
+import cores.truongPhongs.views.TpLuongNhapView;
 import cores.truongPhongs.views.TpQuanLyChiTietSanPhamForm;
 import cores.truongPhongs.views.TpQuanLyNhanVien;
 import cores.truongPhongs.views.TpThongKeView;
@@ -79,9 +81,17 @@ public class TruongPhong extends javax.swing.JFrame {
                 if (menuIndex == 6) {
                     main.showForm(new TpThongKeView());
                 }
-                 
-
                 if (menuIndex == 7) {
+
+                    if (subMenuIndex == 0) {
+                        main.showForm(new TpLuongNhapView());
+                    }
+                    if (subMenuIndex == 1) {
+                        main.showForm(new TP_QuanLyPhieuHoanNhap());
+                    }
+                }
+
+                if (menuIndex == 8) {
                     if (subMenuIndex == 2) {
                         Auth.clear();
                         frame.setVisible(false);
@@ -138,7 +148,7 @@ public class TruongPhong extends javax.swing.JFrame {
                 frame.setExtendedState(frame.ICONIFIED);
             }
         });
-        
+
         header.openNavBar(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -176,7 +186,7 @@ public class TruongPhong extends javax.swing.JFrame {
 
         //  Start with this form
         main.showForm(new TrangChu());
-    
+
     }
 
     @SuppressWarnings("unchecked")

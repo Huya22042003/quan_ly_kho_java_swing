@@ -629,6 +629,7 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
     }//GEN-LAST:event_myButton7ActionPerformed
 
     private void myButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton8ActionPerformed
+
         int row = this.tbChiTietSanPham.getSelectedRow();
         if (row == -1) {
             JOptionPane.showMessageDialog(this, "Bạn phải chọn một dòng");

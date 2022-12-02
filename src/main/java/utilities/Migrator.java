@@ -109,7 +109,7 @@ public class Migrator {
         
         NhanVien b = new NhanVien();
         b.setDiaChi("Hà Nội");
-        b.setEmail("a");
+        b.setEmail("b");
         b.setGioiTinh(GioiTinhConstant.NAM);
         b.setHinhAnh(null);
         b.setIdChucVu(chucVu1);
