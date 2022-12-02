@@ -1,5 +1,6 @@
 package views.main;
 
+import cores.nhanVienQuanLy.views.NvqlXemThongTinCaNhanForm;
 import views.component.Header;
 import views.component.Menu;
 import views.event.EventMenuSelected;
@@ -15,10 +16,10 @@ import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
-import views.component.TrangChu;
 
 public class Main extends javax.swing.JFrame {
 
+    
     private MigLayout layout;
     private Menu menu;
     private Header header;
@@ -43,11 +44,12 @@ public class Main extends javax.swing.JFrame {
         menu.addEvent(new EventMenuSelected() {
             @Override
             public void menuSelected(int menuIndex, int subMenuIndex) {
+                System.out.println("Menu Index : " + menuIndex + " SubMenu Index " + subMenuIndex);
                 if (menuIndex == 0) {
                     if (subMenuIndex == 0) {
-                        main.showForm(new TrangChu());
+//                        main.showForm(new Form_Home());
                     } else if (subMenuIndex == 1) {
-                        main.showForm(new TrangChu());
+                        main.showForm(new MainForm());
                     }
                 }
             }
@@ -63,14 +65,39 @@ public class Main extends javax.swing.JFrame {
                 popup.setVisible(true);
             }
         });
+        header.addClose(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                System.exit(0);
+            }
+        });
+        header.addSap(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                frame.setExtendedState(frame.ICONIFIED);
+            }
+        });
+        
+        header.openNavBar(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                main.showForm(new NvqlXemThongTinCaNhanForm());
+            }
+        });
         menu.initMenuItem();
-        bg.add(menu, "w 60!, spany 2");    // Span Y 2cell
-        bg.add(header, "h 107!, wrap");
+        bg.add(menu, "w 170!, spany 2");    // Span Y 2cell
+        bg.add(header, "h 100!, wrap");
         bg.add(main, "w 100%, h 100%");
         TimingTarget target = new TimingTargetAdapter() {
             @Override
             public void timingEvent(float fraction) {
-                layout.setComponentConstraints(menu, "w " + 60 + "!, spany2");
+                double width;
+                if (menu.isShowMenu()) {
+                    width = 60 + (170 * (1f - fraction));
+                } else {
+                    width = 60 + (170 * fraction);
+                }
+                layout.setComponentConstraints(menu, "w " + width + "!, spany2");
                 menu.revalidate();
             }
 
@@ -85,33 +112,10 @@ public class Main extends javax.swing.JFrame {
         animator.setResolution(0);
         animator.setDeceleration(0.5f);
         animator.setAcceleration(0.5f);
-        menu.addMenuEvent(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                if (!animator.isRunning()) {
-                    animator.start();
-                }
-                menu.setEnableMenu(false);
-                if (menu.isShowMenu()) {
-                    menu.hideallMenu();
-                }
-            }
-        });
-        header.addClose(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                System.exit(0);
-            }
-        });
-        header.addSap(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                frame.setExtendedState(frame.ICONIFIED);
-            }
-        });
 
         //  Start with this form
         main.showForm(new MainForm());
+    
     }
 
     @SuppressWarnings("unchecked")

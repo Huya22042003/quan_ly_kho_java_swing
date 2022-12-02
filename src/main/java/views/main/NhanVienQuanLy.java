@@ -106,40 +106,6 @@ public class NhanVienQuanLy extends javax.swing.JFrame {
                 popup.setVisible(true);
             }
         });
-        menu.initMenuItem();
-        bg.add(menu, "w 60!, spany 2");    // Span Y 2cell
-        bg.add(header, "h 107!, wrap");
-        bg.add(main, "w 100%, h 100%");
-        TimingTarget target = new TimingTargetAdapter() {
-            @Override
-            public void timingEvent(float fraction) {
-                layout.setComponentConstraints(menu, "w " + 60 + "!, spany2");
-                menu.revalidate();
-            }
-
-            @Override
-            public void end() {
-                menu.setShowMenu(!menu.isShowMenu());
-                menu.setEnableMenu(true);
-            }
-
-        };
-        animator = new Animator(500, target);
-        animator.setResolution(0);
-        animator.setDeceleration(0.5f);
-        animator.setAcceleration(0.5f);
-        menu.addMenuEvent(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                if (!animator.isRunning()) {
-                    animator.start();
-                }
-                menu.setEnableMenu(false);
-                if (menu.isShowMenu()) {
-                    menu.hideallMenu();
-                }
-            }
-        });
         header.addClose(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -159,9 +125,38 @@ public class NhanVienQuanLy extends javax.swing.JFrame {
                 main.showForm(new NvqlXemThongTinCaNhanForm());
             }
         });
+        menu.initMenuItem();
+        bg.add(menu, "w 170!, spany 2");    // Span Y 2cell
+        bg.add(header, "h 100!, wrap");
+        bg.add(main, "w 100%, h 100%");
+        TimingTarget target = new TimingTargetAdapter() {
+            @Override
+            public void timingEvent(float fraction) {
+                double width;
+                if (menu.isShowMenu()) {
+                    width = 60 + (170 * (1f - fraction));
+                } else {
+                    width = 60 + (170 * fraction);
+                }
+                layout.setComponentConstraints(menu, "w " + width + "!, spany2");
+                menu.revalidate();
+            }
+
+            @Override
+            public void end() {
+                menu.setShowMenu(!menu.isShowMenu());
+                menu.setEnableMenu(true);
+            }
+
+        };
+        animator = new Animator(500, target);
+        animator.setResolution(0);
+        animator.setDeceleration(0.5f);
+        animator.setAcceleration(0.5f);
 
         //  Start with this form
         main.showForm(new TrangChu());
+    
     }
 
     @SuppressWarnings("unchecked")
