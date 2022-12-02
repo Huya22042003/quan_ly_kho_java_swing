@@ -34,22 +34,13 @@ public class TpDonViView extends javax.swing.JPanel {
         p = new Page();
         initComponents();
         clearForm();
-        loadTable(getList);
+        loadTable(donViService.phanTrang(getList, offset, limit));
     }
 
     public void loadTable(List<TpDonViCustom> list) {
         DefaultTableModel dtm = (DefaultTableModel) this.tblDonVi.getModel();
         dtm.setRowCount(0);
-        int sum = limit + offset;
-        if (list.size() <= sum) {
-            sum = list.size();
-        }
-        for (int i = offset; i < sum; i++) {
-            if (list.get(i) == null) {
-                return;
-            }
-            TpDonViCustom el = list.get(i);
-        
+        for (TpDonViCustom el : list) {
             Object[] rowData = {
                 dtm.getRowCount() + 1,
                 el.getDonViGoc(),
@@ -58,10 +49,10 @@ public class TpDonViView extends javax.swing.JPanel {
             };
             dtm.addRow(rowData);
         }
-        
     }
+    
     public void fillData(int i){
-        TpDonViCustom ql = getList.get(i);
+        TpDonViCustom ql = donViService.phanTrang(getList, offset, limit).get(i);
         txtDonViGoc.setText(ql.getDonViGoc());
         txtDonViQuyDoi.setText(ql.getDonViQuyDoi());
         txtSoLuong.setText(String.valueOf(ql.getSoLuong()));
@@ -89,9 +80,9 @@ public class TpDonViView extends javax.swing.JPanel {
 
     public void searchRadio() {
         if (rdoDonViGoc.isSelected()) {
-            loadTable(listSearch(0));
+            loadTable(donViService.phanTrang(listSearch(0), offset, limit));
         } else {
-            loadTable(listSearch(1));
+            loadTable(donViService.phanTrang(listSearch(1), offset, limit));
         }
     }
 
@@ -438,7 +429,7 @@ public class TpDonViView extends javax.swing.JPanel {
         int row = this.tblDonVi.getSelectedRow();
         createView.setVisible(false);
         fillData(row);
-        rud.dvc = donViService.findDonViByDonViQuyDoi(tblDonVi.getValueAt(row, 1).toString());
+        rud.dvc = donViService.phanTrang(getList, offset, limit).get(row);
         rud.setVisible(true);
         rud.showData();
     }//GEN-LAST:event_tblDonViMouseClicked
@@ -454,7 +445,7 @@ public class TpDonViView extends javax.swing.JPanel {
 
     private void btnHienThiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHienThiActionPerformed
         getList = donViService.getListDonVi();
-        loadTable(getList);
+        loadTable(donViService.phanTrang(getList, offset, limit));
         clearForm();
     }//GEN-LAST:event_btnHienThiActionPerformed
 
@@ -468,14 +459,14 @@ public class TpDonViView extends javax.swing.JPanel {
         index = p.prevIndex(offset, limit, index);
         offset = p.prev(offset, limit);
         loadIndex();
-        loadTable(getList);
+        loadTable(donViService.phanTrang(getList, offset, limit));
     }//GEN-LAST:event_uWPButton4ActionPerformed
 
     private void uWPButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uWPButton5ActionPerformed
         index = p.nextIndex(offset, limit, sizes, index);
         offset = p.next(offset, limit, sizes);
         loadIndex();
-        loadTable(getList);
+        loadTable(donViService.phanTrang(getList, offset, limit));
     }//GEN-LAST:event_uWPButton5ActionPerformed
 
 
