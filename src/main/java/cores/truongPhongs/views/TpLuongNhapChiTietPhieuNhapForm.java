@@ -8,6 +8,7 @@ import cores.nhanVienQuanLy.services.serviceImpls.Tai_NvqlLuongPhieuXuatServiceI
 import cores.truongPhongs.customModels.NhaCungCapCustom;
 import cores.truongPhongs.customModels.TpPhieuNhapChiTietCustom;
 import cores.truongPhongs.customModels.TpPhieuNhapCustom;
+import cores.truongPhongs.customModels.TpXemChiTietSanPhamCustom;
 import cores.truongPhongs.services.TpPhieuNhapChiTietService;
 import cores.truongPhongs.services.serviceImpls.TpPhieuNhapChiTietServiceImpl;
 import domainModels.ChiTietPhieuXuat;
@@ -34,13 +35,19 @@ public class TpLuongNhapChiTietPhieuNhapForm extends javax.swing.JFrame {
     private TpPhieuNhapCustom phieuNhap;
     private TpPhieuNhapChiTietService phieuNhapChiTietService;
     private List<TpPhieuNhapChiTietCustom> listCtpnCustom = new ArrayList<>();
+<<<<<<< HEAD
+    private List<TpXemChiTietSanPhamCustom> listXem = new ArrayList<>();
+    private TpLuongUpdateChiTietSanPham rud;
+=======
     String duongdananh = getClass().getResource("/icons/FPT_Polytechnic_doc.png").getPath();
 
+>>>>>>> develop
     public void setPhieuNhap(TpPhieuNhapCustom phieuNhap) {
         this.phieuNhap = phieuNhap;
     }
 
     public TpLuongNhapChiTietPhieuNhapForm() {
+        rud = new TpLuongUpdateChiTietSanPham();
         initComponents();
         phieuNhapChiTietService = new TpPhieuNhapChiTietServiceImpl();
     }
@@ -110,6 +117,9 @@ public class TpLuongNhapChiTietPhieuNhapForm extends javax.swing.JFrame {
         return listTimKiem;
     }
 
+    public TpPhieuNhapChiTietCustom mouseClickSanPham(int row) {
+        return listCtpnCustom.get(row);
+    }
     public void searchRadio() {
         if (rdoMaSp.isSelected()) {
             loadTable(listSearch(0));
@@ -174,6 +184,11 @@ public class TpLuongNhapChiTietPhieuNhapForm extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tbCtpn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbCtpnMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tbCtpn);
@@ -542,6 +557,15 @@ public class TpLuongNhapChiTietPhieuNhapForm extends javax.swing.JFrame {
             File ftenanh = f.getSelectedFile();
             duongdananh = ftenanh.getAbsolutePath();
 
+<<<<<<< HEAD
+    private void tbCtpnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbCtpnMouseClicked
+        int row = tbCtpn.getSelectedRow();
+        TpPhieuNhapChiTietCustom tp = mouseClickSanPham(row);
+        rud.setVisible(true);
+        
+    }//GEN-LAST:event_tbCtpnMouseClicked
+
+=======
             lbHinhAnh.setIcon(new javax.swing.ImageIcon(duongdananh));
             System.out.println(duongdananh);
 
@@ -550,6 +574,7 @@ public class TpLuongNhapChiTietPhieuNhapForm extends javax.swing.JFrame {
             System.out.println(duongdananh);
         }
     }//GEN-LAST:event_lbHinhAnhMouseClicked
+>>>>>>> develop
 
     /**
      * @param args the command line arguments

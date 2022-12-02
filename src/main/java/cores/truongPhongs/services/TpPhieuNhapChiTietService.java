@@ -16,6 +16,8 @@ public interface TpPhieuNhapChiTietService {
     List<TpPhieuNhapChiTietCustom> getListCTPhieuNhapByID(UUID idPX);
 
     public boolean addCTPN(TpPhieuNhapChiTietCustom ctpxct);
+    
+    public boolean upDateCTPN(TpPhieuNhapChiTietCustom ctpxct);
 
     MauConstant loc(int a);
 

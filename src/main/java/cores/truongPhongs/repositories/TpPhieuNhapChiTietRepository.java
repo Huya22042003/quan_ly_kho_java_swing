@@ -43,6 +43,21 @@ public class TpPhieuNhapChiTietRepository {
         }
         return pn;
     }
+    public boolean upDatePhieuNhap(ChiTietPhieuNhap pn) {
+        Transaction tran = null;
+        try {
+            Session s = HibernateUtil.getSessionFactory().openSession();
+            tran = s.beginTransaction();
+            s.save(pn);
+            tran.commit();
+            s.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            tran.rollback();
+            return false;
+        }
+        return true;
+    }
 
     public PhieuNhap findPnById(UUID id) {
         Session s = HibernateUtil.getSessionFactory().openSession();
