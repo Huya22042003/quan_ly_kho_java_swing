@@ -11,10 +11,12 @@ import cores.truongPhongs.services.serviceImpls.TpXemChiTietSanPhamImpl;
 import infrastructures.constant.MauConstant;
 import infrastructures.constant.TrangThaiPhieuConstant;
 import infrastructures.constant.TrangThaiSanPhamConstanst;
+import java.io.File;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import utilities.Converter;
@@ -31,6 +33,7 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
     private TpPhieuNhapCustom phieuNhap;
     private TpLuongNhapAddChiTietSanPhamOldForm createViewAddSpOld;
     private TpLuongNhapAddChiTietSanPhamNewForm createViewAddSpNew;
+    String duongdananh = getClass().getResource("/icons/FPT_Polytechnic_doc.png").getPath();
 
     public void setPhieuNhap(TpPhieuNhapCustom phieuNhap) {
         this.phieuNhap = phieuNhap;
@@ -185,7 +188,7 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
         panelRound5 = new utilities.palette.PanelRound();
         jLabel2 = new javax.swing.JLabel();
         panelRound8 = new utilities.palette.PanelRound();
-        myButton8 = new utilities.palette.MyButton();
+        lbHinhAnh = new utilities.palette.MyButton();
         txtMa = new utilities.palette.TextField();
         txtMau = new utilities.palette.TextField();
         txtTenSp = new utilities.palette.TextField();
@@ -338,12 +341,12 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
         panelRound8.setRoundTopLeft(50);
         panelRound8.setRoundTopRight(50);
 
-        myButton8.setBorderColor(new java.awt.Color(221, 242, 244));
-        myButton8.setColor(new java.awt.Color(221, 242, 244));
-        myButton8.setRadius(50);
-        myButton8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                myButton8ActionPerformed(evt);
+        lbHinhAnh.setBorderColor(new java.awt.Color(221, 242, 244));
+        lbHinhAnh.setColor(new java.awt.Color(221, 242, 244));
+        lbHinhAnh.setRadius(50);
+        lbHinhAnh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbHinhAnhMouseClicked(evt);
             }
         });
 
@@ -353,14 +356,14 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
             panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(myButton8, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
+                .addComponent(lbHinhAnh, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
                 .addContainerGap())
         );
         panelRound8Layout.setVerticalGroup(
             panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(myButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbHinhAnh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -596,10 +599,6 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
 
     }//GEN-LAST:event_cbbTrangThaiActionPerformed
 
-    private void myButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_myButton8ActionPerformed
-
     public TpXemChiTietSanPhamCustom mouseClickSanPham(int row) {
         return listSp.get(row);
     }
@@ -631,6 +630,7 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
         txtMau.setText(tblCtsp.getValueAt(row, 6).toString());
         txtNamBH.setText(tblCtsp.getValueAt(row, 7).toString());
         txtTrangThai.setText(tblCtsp.getValueAt(row, 8).toString());
+        
 
         if (phieuNhap.getTrangThai().equals(TrangThaiPhieuConstant.DA_THANH_TOAN)) {
             MsgBox.alert(this, "Phiếu nhập này đã ở trạng thái đã thanh toán nên không thể sửa! ");
@@ -704,6 +704,23 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
         timKiemTheoGia();
     }//GEN-LAST:event_txtSearchMouseClicked
 
+    private void lbHinhAnhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbHinhAnhMouseClicked
+        try {
+            JFileChooser f = new JFileChooser();
+            f.setDialogTitle("Mở file");
+            f.showOpenDialog(null);
+            File ftenanh = f.getSelectedFile();
+            duongdananh = ftenanh.getAbsolutePath();
+
+            lbHinhAnh.setIcon(new javax.swing.ImageIcon(duongdananh));
+            System.out.println(duongdananh);
+
+        } catch (Exception e) {
+            System.out.println("Ban chua chon anh");
+            System.out.println(duongdananh);
+        }
+    }//GEN-LAST:event_lbHinhAnhMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -752,8 +769,8 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private utilities.palette.MyButton lbHinhAnh;
     private utilities.palette.MyButton myButton1;
-    private utilities.palette.MyButton myButton8;
     private utilities.palette.PanelRound panelRound1;
     private utilities.palette.PanelRound panelRound4;
     private utilities.palette.PanelRound panelRound5;
