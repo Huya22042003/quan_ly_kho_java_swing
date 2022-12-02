@@ -87,27 +87,27 @@ public class TpLuongNhapAddChiTietSanPhamOldForm extends javax.swing.JFrame {
 
     public TpXemChiTietSanPhamCustom getFormData() {
         TpXemChiTietSanPhamCustom sp = new TpXemChiTietSanPhamCustom();
-        boolean check = true;
-        String soLuong = txtSoLuongNhap.getText();
-        String giaNhap = txtGiaNhap.getText();
-        if (soLuong.trim().length() == 0) {
-            lblSoLuong.setText("Số lượng tồn không được để trống");
-            check = false;
-        } else if (!soLuong.matches("\\d+")) {
-            lblSoLuong.setText("Số lượng tồn không được là chữ");
-            check = false;
-        } else {
-            lblSoLuong.setText("");
-        }
-        if (giaNhap.trim().length() == 0) {
-            lblGiaNhap.setText("Giá bán không được để trống");
-            check = false;
-        } else if (giaNhap.matches("[A-Z a-z]+")) {
-            lblGiaNhap.setText("Giá bán không được là chữ");
-            check = false;
-        } else {
-            lblGiaNhap.setText("");
-        }
+//        boolean check = true;
+//        String soLuong = txtSoLuongNhap.getText();
+//        String giaNhap = txtGiaNhap.getText();
+//        if (soLuong.trim().length() == 0) {
+//            lblSoLuong.setText("Số lượng tồn không được để trống");
+//            check = false;
+//        } else if (!soLuong.matches("\\d+")) {
+//            lblSoLuong.setText("Số lượng tồn không được là chữ");
+//            check = false;
+//        } else {
+//            lblSoLuong.setText("");
+//        }
+//        if (giaNhap.trim().length() == 0) {
+//            lblGiaNhap.setText("Giá bán không được để trống");
+//            check = false;
+//        } else if (giaNhap.matches("[A-Z a-z]+")) {
+//            lblGiaNhap.setText("Giá bán không được là chữ");
+//            check = false;
+//        } else {
+//            lblGiaNhap.setText("");
+//        }
         
         sp.setDonVi(ct.getDonVi());
         sp.setGiaNhap(BigDecimal.valueOf(Long.parseLong(txtGiaNhap.getText())));
