@@ -9,6 +9,7 @@ import domainModels.ChiTietPhieuHoanXuat;
 import domainModels.PhieuHoanXuat;
 import domainModels.PhieuXuat;
 import infrastructures.constant.TrangThaiPhieuHoanConstant;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -18,8 +19,7 @@ import utilities.DateTimeUtil;
  *
  * @author admin
  */
-public class Tai_LuongHoanXuatServiceImpl
-        implements Tai_LuongHoanXuatService{
+public class Tai_LuongHoanXuatServiceImpl implements Tai_LuongHoanXuatService{
     private Tai_LuongHoanXuat_Repository rp ;
 
     public Tai_LuongHoanXuatServiceImpl() {
@@ -101,6 +101,23 @@ public class Tai_LuongHoanXuatServiceImpl
     @Override
     public List<ChiTietPhieuHoanXuatCustom> getListCTphx() {
         return rp.getListCTphx();
+    }
+
+    @Override
+    public List<PhieuHoanXuatCustom> phanTrang(List<PhieuHoanXuatCustom> list, int offset, int limit) {
+        List<PhieuHoanXuatCustom> listPhanTrang = new ArrayList<>();
+        int sum = limit + offset;
+        if (list.size() <= sum) {
+            sum = list.size();
+        }
+        for (int i = offset; i < sum; i++) {
+            if (list.get(i) == null) {
+                break;
+            }
+            PhieuHoanXuatCustom el = list.get(i);
+            listPhanTrang.add(el);
+        }
+        return listPhanTrang;
     }
     
 }
