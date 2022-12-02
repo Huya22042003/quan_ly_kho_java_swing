@@ -50,7 +50,6 @@ public class ExportSanPhamServiceImpl implements ExportSanPhamService {
         // Create the QR code and save
         // in the specified folder
         // as a jpg file
-        System.out.println("QR Code Generated!!! ");
 
         BitMatrix matrix = new MultiFormatWriter().encode(
                 new String(data.getBytes(charset), charset),
@@ -65,24 +64,24 @@ public class ExportSanPhamServiceImpl implements ExportSanPhamService {
     @Override
     public boolean exportSanPham(String fileName, UUID idSanPham) {
         try {
+            File file = new File(fileName);
             ChiTietSanPham ctsp = findChiTietSanPhamById(idSanPham);
 
             createQR(idSanPham.toString());
 
             //Loading an existing document
-            File file = new File(fileName);
             PDDocument doc = new PDDocument();
 
             PDPage page = new PDPage();
 
-            PDFont font = PDType0Font.load(doc, new File(getClass().getResource("\\font\\vuArial.ttf").toString()));
+            PDFont font = PDType0Font.load(doc, new File("font\\vuArial.ttf"));
 
             doc.addPage(page);
 
             PDImageXObject pdImage = PDImageXObject.createFromFile(partFileQrCode, doc);
 
             File fileQr = new File(partFileQrCode);
-            file.delete();
+            fileQr.delete();
 
             PDPageContentStream contents = new PDPageContentStream(doc, page);
             if (ctsp.getHinhAnh() != null) {
@@ -137,7 +136,11 @@ public class ExportSanPhamServiceImpl implements ExportSanPhamService {
             //Closing the document
             doc.close();
             return true;
-        } catch (Exception ex) {
+        } catch(NullPointerException npe) {
+            npe.printStackTrace();
+            return false;
+        }catch (Exception ex) {
+            ex.printStackTrace();
             return false;
         }
     }
@@ -146,4 +149,5 @@ public class ExportSanPhamServiceImpl implements ExportSanPhamService {
     public ChiTietSanPham findChiTietSanPhamById(UUID idSanPham) {
         return rp.findChiTietSanPham(idSanPham);
     }
+    
 }

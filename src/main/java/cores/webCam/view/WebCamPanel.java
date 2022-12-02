@@ -4,6 +4,31 @@
  */
 package cores.webCam.view;
 
+import com.github.sarxos.webcam.Webcam;
+import com.github.sarxos.webcam.WebcamPanel;
+import com.github.sarxos.webcam.WebcamResolution;
+import com.google.zxing.BinaryBitmap;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.MultiFormatReader;
+import com.google.zxing.NotFoundException;
+import com.google.zxing.Result;
+import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
+import com.google.zxing.common.HybridBinarizer;
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+import static cores.webCam.view.viewWebCam.readQR;
+import java.awt.FlowLayout;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author QUOC HUY
@@ -13,8 +38,77 @@ public class WebCamPanel extends javax.swing.JPanel {
     /**
      * Creates new form WebCamPanel
      */
+    private WebcamPanel jpanl = null;
+    private Webcam webcam1;
+
     public WebCamPanel() {
         initComponents();
+
+        String input = JOptionPane.showInputDialog(this, "Mời bạn chọn cổng (Ví dụ: 0, 1, 2, ... => Cổng mạc định là 0)", "Lựa chọn !!!", JOptionPane.QUESTION_MESSAGE);
+        int cong = 0;
+        try {
+            cong = Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+
+        initWebCame(cong);
+    }
+
+    public void initWebCame(int cong) {
+        try {
+            webcam1 = Webcam.getWebcams().get(cong); // Camera 1
+            webcam1.setViewSize(WebcamResolution.VGA.getSize()); // set size
+            jpanl = new WebcamPanel(webcam1);
+            webcam1.open();
+
+            mainCam.add(jpanl);
+            mainCam.setLayout(new FlowLayout());
+            jpanl.setVisible(true);
+
+        } catch (IndexOutOfBoundsException e) {
+            JOptionPane.showMessageDialog(this, "Cam không có kết nối");
+            e.printStackTrace();
+            this.setVisible(false);
+            webcam1.close();
+        }
+
+    }
+
+    public static String readQR(String path, String charset,
+            Map hashMap)
+            throws FileNotFoundException, IOException,
+            NotFoundException {
+        BinaryBitmap binaryBitmap
+                = new BinaryBitmap(new HybridBinarizer(
+                        new BufferedImageLuminanceSource(
+                                ImageIO.read(
+                                        new FileInputStream(path)))));
+
+        Result result
+                = new MultiFormatReader().decode(binaryBitmap);
+
+        return result.getText();
+    }
+
+    public void test() throws IOException, FileNotFoundException, NotFoundException, InterruptedException {
+        BufferedImage image = webcam1.getImage();
+        Thread.sleep(3000);
+        File fileImg = new File("D:\\Du_an_1\\src\\main\\resources\\cde.png");
+        ImageIO.write(image, "png", fileImg);
+
+        // The path where the image will get saved
+        String path = "D:\\Du_an_1\\src\\main\\resources\\cde.png";
+
+        // Encoding charset
+        String charset = "UTF-8";
+
+        Map<EncodeHintType, ErrorCorrectionLevel> hashMap
+                = new HashMap<>();
+
+        hashMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
+
+        System.out.println(readQR(path, charset, hashMap));
     }
 
     /**
@@ -77,6 +171,26 @@ public class WebCamPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonGradient1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGradient1ActionPerformed
+        try {
+            test();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (NotFoundException ex) {
+            JOptionPane.showMessageDialog(this, "Lỗi hệ thống");
+            ex.printStackTrace();
+            this.setVisible(false);
+            webcam1.close();
+        } catch (InterruptedException ex) {
+            JOptionPane.showMessageDialog(this, "Lỗi hệ thống");
+            ex.printStackTrace();
+            this.setVisible(false);
+            webcam1.close();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Lỗi hệ thống");
+            ex.printStackTrace();
+            this.setVisible(false);
+            webcam1.close();
+        }
 
     }//GEN-LAST:event_buttonGradient1ActionPerformed
 
