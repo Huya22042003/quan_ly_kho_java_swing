@@ -8,7 +8,6 @@ import cores.nhanVienQuanLy.services.serviceImpls.Tai_NvqlLuongPhieuXuatServiceI
 import cores.truongPhongs.customModels.NhaCungCapCustom;
 import cores.truongPhongs.customModels.TpPhieuNhapChiTietCustom;
 import cores.truongPhongs.customModels.TpPhieuNhapCustom;
-import cores.truongPhongs.customModels.TpXemChiTietSanPhamCustom;
 import cores.truongPhongs.services.TpPhieuNhapChiTietService;
 import cores.truongPhongs.services.serviceImpls.TpPhieuNhapChiTietServiceImpl;
 import domainModels.ChiTietPhieuXuat;
@@ -16,11 +15,9 @@ import domainModels.PhieuXuat;
 import infrastructures.constant.KhachHangConstant;
 import infrastructures.constant.MauConstant;
 import infrastructures.constant.TrangThaiPhieuConstant;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import utilities.Converter;
@@ -35,23 +32,16 @@ public class TpLuongNhapChiTietPhieuNhapForm extends javax.swing.JFrame {
     private TpPhieuNhapCustom phieuNhap;
     private TpPhieuNhapChiTietService phieuNhapChiTietService;
     private List<TpPhieuNhapChiTietCustom> listCtpnCustom = new ArrayList<>();
-<<<<<<< HEAD
-    private List<TpXemChiTietSanPhamCustom> listXem = new ArrayList<>();
-    private TpLuongUpdateChiTietSanPham rud;
-=======
-    String duongdananh = getClass().getResource("/icons/FPT_Polytechnic_doc.png").getPath();
 
->>>>>>> develop
     public void setPhieuNhap(TpPhieuNhapCustom phieuNhap) {
         this.phieuNhap = phieuNhap;
     }
 
     public TpLuongNhapChiTietPhieuNhapForm() {
-        rud = new TpLuongUpdateChiTietSanPham();
         initComponents();
         phieuNhapChiTietService = new TpPhieuNhapChiTietServiceImpl();
     }
-
+    
     public void loadTable(List<TpPhieuNhapChiTietCustom> list) {
         DefaultTableModel dtm = (DefaultTableModel) this.tbCtpn.getModel();
         dtm.setRowCount(0);
@@ -70,7 +60,7 @@ public class TpLuongNhapChiTietPhieuNhapForm extends javax.swing.JFrame {
         }
     }
 
-    public List<TpPhieuNhapChiTietCustom> listSearch(int rdo) {
+     public List<TpPhieuNhapChiTietCustom> listSearch(int rdo) {
         // nhập vào 
         String timKiem = this.txtSearch.getText();
         List<TpPhieuNhapChiTietCustom> listTimKiem = new ArrayList<>();
@@ -89,7 +79,7 @@ public class TpLuongNhapChiTietPhieuNhapForm extends javax.swing.JFrame {
                     search = el.getIdSanPham().getSanPham().getTen();
                     break;
                 case 2:
-                    search = String.valueOf(el.getIdSanPham().getNamBaoHanh());
+                    search = String.valueOf(el.getIdSanPham().getNamBaoHanh()) ;
                     break;
             }
             for (int i = 0; i <= search.length(); i++) {
@@ -110,16 +100,13 @@ public class TpLuongNhapChiTietPhieuNhapForm extends javax.swing.JFrame {
     public List<TpPhieuNhapChiTietCustom> checkCbb(MauConstant cs) {
         List<TpPhieuNhapChiTietCustom> listTimKiem = new ArrayList<>();
         listCtpnCustom.forEach(el -> {
-            if (el.getIdSanPham().getMau() == cs) {
+            if (el.getIdSanPham().getMau()== cs) {
                 listTimKiem.add(el);
             }
         });
         return listTimKiem;
     }
 
-    public TpPhieuNhapChiTietCustom mouseClickSanPham(int row) {
-        return listCtpnCustom.get(row);
-    }
     public void searchRadio() {
         if (rdoMaSp.isSelected()) {
             loadTable(listSearch(0));
@@ -129,7 +116,6 @@ public class TpLuongNhapChiTietPhieuNhapForm extends javax.swing.JFrame {
             loadTable(listSearch(2));
         }
     }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -146,7 +132,7 @@ public class TpLuongNhapChiTietPhieuNhapForm extends javax.swing.JFrame {
         panelRound5 = new utilities.palette.PanelRound();
         jLabel2 = new javax.swing.JLabel();
         panelRound8 = new utilities.palette.PanelRound();
-        lbHinhAnh = new utilities.palette.MyButton();
+        myButton8 = new utilities.palette.MyButton();
         panelRound15 = new utilities.palette.PanelRound();
         myButton6 = new utilities.palette.MyButton();
         myButton7 = new utilities.palette.MyButton();
@@ -184,11 +170,6 @@ public class TpLuongNhapChiTietPhieuNhapForm extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
-            }
-        });
-        tbCtpn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbCtpnMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tbCtpn);
@@ -296,13 +277,13 @@ public class TpLuongNhapChiTietPhieuNhapForm extends javax.swing.JFrame {
         panelRound8.setRoundTopLeft(50);
         panelRound8.setRoundTopRight(50);
 
-        lbHinhAnh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/update.png"))); // NOI18N
-        lbHinhAnh.setBorderColor(new java.awt.Color(221, 242, 244));
-        lbHinhAnh.setColor(new java.awt.Color(221, 242, 244));
-        lbHinhAnh.setRadius(50);
-        lbHinhAnh.addMouseListener(new java.awt.event.MouseAdapter() {
+        myButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/update.png"))); // NOI18N
+        myButton8.setBorderColor(new java.awt.Color(221, 242, 244));
+        myButton8.setColor(new java.awt.Color(221, 242, 244));
+        myButton8.setRadius(50);
+        myButton8.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lbHinhAnhMouseClicked(evt);
+                myButton8MouseClicked(evt);
             }
         });
 
@@ -312,14 +293,14 @@ public class TpLuongNhapChiTietPhieuNhapForm extends javax.swing.JFrame {
             panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lbHinhAnh, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
+                .addComponent(myButton8, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
                 .addContainerGap())
         );
         panelRound8Layout.setVerticalGroup(
             panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lbHinhAnh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(myButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -536,7 +517,7 @@ public class TpLuongNhapChiTietPhieuNhapForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnShow18ActionPerformed
 
     private void btnShow19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShow19ActionPerformed
-        this.dispose();
+         this.dispose();
     }//GEN-LAST:event_btnShow19ActionPerformed
 
     private void cbbMauSacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbMauSacActionPerformed
@@ -549,32 +530,10 @@ public class TpLuongNhapChiTietPhieuNhapForm extends javax.swing.JFrame {
         searchRadio();
     }//GEN-LAST:event_txtSearchMouseClicked
 
-    private void lbHinhAnhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbHinhAnhMouseClicked
-        try {
-            JFileChooser f = new JFileChooser();
-            f.setDialogTitle("Mở file");
-            f.showOpenDialog(null);
-            File ftenanh = f.getSelectedFile();
-            duongdananh = ftenanh.getAbsolutePath();
+    private void myButton8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_myButton8MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_myButton8MouseClicked
 
-<<<<<<< HEAD
-    private void tbCtpnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbCtpnMouseClicked
-        int row = tbCtpn.getSelectedRow();
-        TpPhieuNhapChiTietCustom tp = mouseClickSanPham(row);
-        rud.setVisible(true);
-        
-    }//GEN-LAST:event_tbCtpnMouseClicked
-
-=======
-            lbHinhAnh.setIcon(new javax.swing.ImageIcon(duongdananh));
-            System.out.println(duongdananh);
-
-        } catch (Exception e) {
-            System.out.println("Ban chua chon anh");
-            System.out.println(duongdananh);
-        }
-    }//GEN-LAST:event_lbHinhAnhMouseClicked
->>>>>>> develop
 
     /**
      * @param args the command line arguments
@@ -624,9 +583,9 @@ public class TpLuongNhapChiTietPhieuNhapForm extends javax.swing.JFrame {
     private utilities.palette.Combobox cbbMauSac;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private utilities.palette.MyButton lbHinhAnh;
     private utilities.palette.MyButton myButton6;
     private utilities.palette.MyButton myButton7;
+    private utilities.palette.MyButton myButton8;
     private utilities.palette.PanelRound panelRound1;
     private utilities.palette.PanelRound panelRound15;
     private utilities.palette.PanelRound panelRound19;
