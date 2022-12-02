@@ -17,7 +17,7 @@ public class TestAll extends javax.swing.JFrame {
      */
     public TestAll() {
         initComponents();
-        TpLuongNhapView a = new TpLuongNhapView();
+        TpDonViView a = new TpDonViView();
         this.add(a);
         this.setLayout(new FlowLayout());
         this.pack();

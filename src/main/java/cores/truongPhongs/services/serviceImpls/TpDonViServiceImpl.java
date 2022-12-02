@@ -5,6 +5,7 @@ import cores.truongPhongs.repositories.TpDonViRepository;
 import cores.truongPhongs.services.TpDonViService;
 import domainModels.DonVi;
 import infrastructures.constant.ValidateConstant;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import javax.swing.JLabel;
@@ -180,5 +181,22 @@ public class TpDonViServiceImpl implements TpDonViService {
         td.setSoLuong(Integer.parseInt(sl));
 
         return td;
+    }
+
+    @Override
+    public List<TpDonViCustom> phanTrang(List<TpDonViCustom> list, int offset, int limit) {
+        List<TpDonViCustom> listPhanTrang = new ArrayList<>();
+        int sum = limit + offset;
+        if (list.size() <= sum) {
+            sum = list.size();
+        }
+        for (int i = offset; i < sum; i++) {
+            if (list.get(i) == null) {
+                break;
+            }
+            TpDonViCustom el = list.get(i);
+            listPhanTrang.add(el);
+        }
+        return listPhanTrang;
     }
 }

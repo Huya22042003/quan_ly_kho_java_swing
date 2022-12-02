@@ -70,11 +70,11 @@ public class NewMain {
             throws WriterException, IOException,
             NotFoundException {
 
-        // The data that the QR code will contain
+//        // The data that the QR code will contain
 //        String data = "www.geeksforgeeks.org";
 //
 //        // The path where the image will get saved
-//        String path = "D:\\Du_an_1\\src\\main\\resources\\demo.png";
+//        String path = getClass().getResource("\\demo.png").toString();
 //
 //        // Encoding charset
 //        String charset = "UTF-8";
@@ -91,19 +91,19 @@ public class NewMain {
 //        createQR(data, path, charset, hashMap, 200, 200);
 //        System.out.println("QR Code Generated!!! ");
         
-    
-        // The path where the image will get saved
-        String path = "D:\\Du_an_1\\src\\main\\resources\\demo.png";
-
-        // Encoding charset
-        String charset = "UTF-8";
-        
-        Map<EncodeHintType, ErrorCorrectionLevel> hashMap 
-                = new HashMap<>();
-        
-        hashMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
-        
-        System.out.println("aaaaa" + readQR(path, charset, hashMap));
+//    
+//        // The path where the image will get saved
+//        String path = "D:\\Du_an_1\\src\\main\\resources\\demo.png";
+//
+//        // Encoding charset
+//        String charset = "UTF-8";
+//        
+//        Map<EncodeHintType, ErrorCorrectionLevel> hashMap 
+//                = new HashMap<>();
+//        
+//        hashMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
+//        
+//        System.out.println("aaaaa" + readQR(path, charset, hashMap));
         
     }
 

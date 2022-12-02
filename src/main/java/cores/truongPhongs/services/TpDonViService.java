@@ -25,5 +25,7 @@ public interface TpDonViService {
     TpDonViCustom findDonViByDonViQuyDoi(String donViQuyDoi);
 
     List<TpDonViCustom> findAllByRadio(String donViGoc, int rdo);
+    
+    List<TpDonViCustom> phanTrang(List<TpDonViCustom> list, int offset, int limit);
 
 }
