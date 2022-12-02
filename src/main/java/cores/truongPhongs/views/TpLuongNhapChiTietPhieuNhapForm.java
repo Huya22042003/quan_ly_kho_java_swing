@@ -35,13 +35,10 @@ public class TpLuongNhapChiTietPhieuNhapForm extends javax.swing.JFrame {
     private TpPhieuNhapCustom phieuNhap;
     private TpPhieuNhapChiTietService phieuNhapChiTietService;
     private List<TpPhieuNhapChiTietCustom> listCtpnCustom = new ArrayList<>();
-<<<<<<< HEAD
     private List<TpXemChiTietSanPhamCustom> listXem = new ArrayList<>();
     private TpLuongUpdateChiTietSanPham rud;
-=======
     String duongdananh = getClass().getResource("/icons/FPT_Polytechnic_doc.png").getPath();
 
->>>>>>> develop
     public void setPhieuNhap(TpPhieuNhapCustom phieuNhap) {
         this.phieuNhap = phieuNhap;
     }
@@ -549,23 +546,13 @@ public class TpLuongNhapChiTietPhieuNhapForm extends javax.swing.JFrame {
         searchRadio();
     }//GEN-LAST:event_txtSearchMouseClicked
 
-    private void lbHinhAnhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbHinhAnhMouseClicked
+    private void lbHinhAnhMouseClicked(java.awt.event.MouseEvent evt) {                                       
         try {
             JFileChooser f = new JFileChooser();
             f.setDialogTitle("Mở file");
             f.showOpenDialog(null);
             File ftenanh = f.getSelectedFile();
             duongdananh = ftenanh.getAbsolutePath();
-
-<<<<<<< HEAD
-    private void tbCtpnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbCtpnMouseClicked
-        int row = tbCtpn.getSelectedRow();
-        TpPhieuNhapChiTietCustom tp = mouseClickSanPham(row);
-        rud.setVisible(true);
-        
-    }//GEN-LAST:event_tbCtpnMouseClicked
-
-=======
             lbHinhAnh.setIcon(new javax.swing.ImageIcon(duongdananh));
             System.out.println(duongdananh);
 
@@ -573,8 +560,17 @@ public class TpLuongNhapChiTietPhieuNhapForm extends javax.swing.JFrame {
             System.out.println("Ban chua chon anh");
             System.out.println(duongdananh);
         }
-    }//GEN-LAST:event_lbHinhAnhMouseClicked
->>>>>>> develop
+    }
+
+    private void tbCtpnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbCtpnMouseClicked
+        int row = tbCtpn.getSelectedRow();
+        TpPhieuNhapChiTietCustom tp = mouseClickSanPham(row);
+        rud.setVisible(true);
+        
+    }//GEN-LAST:event_tbCtpnMouseClicked
+
+            
+                                      
 
     /**
      * @param args the command line arguments
