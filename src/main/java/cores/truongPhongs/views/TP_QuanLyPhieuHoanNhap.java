@@ -47,24 +47,14 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
         initComponents();
         hoanNhapCustoms = phieuHoanNhapService.getListPhieuHoanNhap();
         clearForm();
-        loadTable();
+        loadTable(phieuHoanNhapService.phanTrang(hoanNhapCustoms, offset, limit));
     }
 
-    private void loadTable() {
+    private void loadTable(List<TP_PhieuHoanNhapCustom> list) {
         DefaultTableModel dtm = (DefaultTableModel) tblPhieuHoanNhap.getModel();
         dtm.setRowCount(0);
-        //
-        int sum = limit + offset;
-        if (hoanNhapCustoms.size() <= sum) {
-            sum = hoanNhapCustoms.size();
-        }
-        for (int i = offset; i < sum; i++) {
-            if (hoanNhapCustoms.get(i) == null) {
-                return;
-            }
-            TP_PhieuHoanNhapCustom el = hoanNhapCustoms.get(i);
-//        for (TP_PhieuHoanNhapCustom el : hoanNhapCustoms) {
-//        for (TP_PhieuHoanNhapCustom el : hoanNhapCustoms) {
+
+        for (TP_PhieuHoanNhapCustom el : list) {
             Date ngayTao = new Date(el.getNgayTao());
             Object[] rowData = {
                 dtm.getRowCount() + 1,
@@ -559,21 +549,21 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
 
     private void myButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton14ActionPerformed
         hoanNhapCustoms = phieuHoanNhapService.getListPhieuHoanNhap();
-        loadTable();
+        loadTable(phieuHoanNhapService.phanTrang(hoanNhapCustoms, offset, limit));
     }//GEN-LAST:event_myButton14ActionPerformed
 
     private void btnPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreActionPerformed
         index = p.prevIndex(offset, limit, index);
         offset = p.prev(offset, limit);
         loadIndex();
-        loadTable();
+        loadTable(phieuHoanNhapService.phanTrang(hoanNhapCustoms, offset, limit));
     }//GEN-LAST:event_btnPreActionPerformed
 
     private void btnPre1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPre1ActionPerformed
         index = p.nextIndex(offset, limit, sizes, index);
         offset = p.next(offset, limit, sizes);
         loadIndex();
-        loadTable();
+        loadTable(phieuHoanNhapService.phanTrang(hoanNhapCustoms, offset, limit));
     }//GEN-LAST:event_btnPre1ActionPerformed
 
     private void loadIndex() {

@@ -9,6 +9,7 @@ import cores.truongPhongs.services.TP_PhieuHoanNhapService;
 import domainModels.PhieuHoanNhap;
 import domainModels.PhieuNhap;
 import infrastructures.constant.TrangThaiPhieuHoanConstant;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import utilities.DateTimeUtil;
@@ -17,14 +18,14 @@ import utilities.DateTimeUtil;
  *
  * @author QUOC HUY
  */
-public class TP_PhieuHoanNhapServiceImpl implements TP_PhieuHoanNhapService{
-    
+public class TP_PhieuHoanNhapServiceImpl implements TP_PhieuHoanNhapService {
+
     private TP_PhieuHoanNhapRepository rp;
 
     public TP_PhieuHoanNhapServiceImpl() {
         rp = new TP_PhieuHoanNhapRepository();
     }
-    
+
     @Override
     public List<TP_PhieuHoanNhapCustom> getListPhieuHoanNhap() {
         return rp.getListPhieuHoanNhap();
@@ -44,7 +45,7 @@ public class TP_PhieuHoanNhapServiceImpl implements TP_PhieuHoanNhapService{
         phn.setNgayTao(DateTimeUtil.convertDateToTimeStampSecond());
         phn.setPhieuNhap(phieuNhap);
         phn.setTrangThai(TrangThaiPhieuHoanConstant.CHO_XAC_NHAN);
-        
+
         return rp.addPhieuHoanNhap(phn);
     }
 
@@ -55,7 +56,7 @@ public class TP_PhieuHoanNhapServiceImpl implements TP_PhieuHoanNhapService{
 
     @Override
     public boolean addSanPhamInPhieuHoan(UUID sp, UUID idPhieuNhapHoan, int soLuongNhap) {
-        return rp.addChiTietPhieuHoanNhap(sp, idPhieuNhapHoan,soLuongNhap);
+        return rp.addChiTietPhieuHoanNhap(sp, idPhieuNhapHoan, soLuongNhap);
     }
 
     @Override
@@ -65,7 +66,7 @@ public class TP_PhieuHoanNhapServiceImpl implements TP_PhieuHoanNhapService{
 
     @Override
     public boolean removeSanPhamInPhieuHoan(UUID sp, UUID idPhieuNhapHoan, int soLuongNhap) {
-       return rp.removeChiTietPhieuHoanNhap(sp, idPhieuNhapHoan,soLuongNhap);
+        return rp.removeChiTietPhieuHoanNhap(sp, idPhieuNhapHoan, soLuongNhap);
     }
 
     @Override
@@ -80,5 +81,22 @@ public class TP_PhieuHoanNhapServiceImpl implements TP_PhieuHoanNhapService{
         phn.setTrangThai(phnct.getTrangThai());
         rp.updatePhieuHoanNhap(phn);
     }
-    
+
+    @Override
+    public List<TP_PhieuHoanNhapCustom> phanTrang(List<TP_PhieuHoanNhapCustom> list, int offset, int limit) {
+        List<TP_PhieuHoanNhapCustom> listPhanTrang = new ArrayList<>();
+        int sum = limit + offset;
+        if (list.size() <= sum) {
+            sum = list.size();
+        }
+        for (int i = offset; i < sum; i++) {
+            if (list.get(i) == null) {
+                break;
+            }
+            TP_PhieuHoanNhapCustom el = list.get(i);
+            listPhanTrang.add(el);
+        }
+        return listPhanTrang;
+    }
+
 }

@@ -39,10 +39,9 @@ public class TpQuanLyNhanVien extends javax.swing.JPanel {
         initComponents();
         getList = nhanVienSevice.getListNhanVien();
         nhanVienSevice.loadComboboxTT(cbbTrangThai);
-        loadTable(getList);
+        loadTable(nhanVienSevice.phanTrang(getList, offset, limit));
         clearForm();
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -490,11 +489,11 @@ public class TpQuanLyNhanVien extends javax.swing.JPanel {
 
     public void searchRadio() {
         if (rdoMa.isSelected()) {
-            loadTable(listSearch(0));
+            loadTable(nhanVienSevice.phanTrang(listSearch(0), offset, limit));
         } else if (rdoTen.isSelected()) {
-            loadTable(listSearch(1));
+            loadTable(nhanVienSevice.phanTrang(listSearch(1), offset, limit));
         } else {
-            loadTable(listSearch(2));
+            loadTable(nhanVienSevice.phanTrang(listSearch(2), offset, limit));
         }
     }
 
@@ -505,26 +504,17 @@ public class TpQuanLyNhanVien extends javax.swing.JPanel {
     public void loadTable(List<TpNhanVienCustom> list) {
         DefaultTableModel dtm = (DefaultTableModel) this.tblQLNV.getModel();
         dtm.setRowCount(0);
-        int sum = limit + offset;
-        if (list.size() <= sum) {
-            sum = list.size();
-        }
-        for (int i = offset; i < sum; i++) {
-            if (list.get(i) == null) {
-                return;
-            }
-            TpNhanVienCustom nv = list.get(i);
-        
+        for (TpNhanVienCustom nv : list) {
             Object[] rowData = {
                 dtm.getRowCount() + 1,
                 nv.getTen(),
                 nv.getMa(),
                 nv.getSdt(),
                 nv.getEmail(),
-//                nv.getMatKhau(),
+                //                nv.getMatKhau(),
                 nv.getNgaySinh() == null ? "" : new Date(nv.getNgaySinh()),
-//                nv.getHinhAnh(),
-//                Converter.trangThaiGioiTinh(nv.getGioiTinh()),
+                //                nv.getHinhAnh(),
+                //                Converter.trangThaiGioiTinh(nv.getGioiTinh()),
                 nv.getDiaChi(),
                 Converter.trangThaiNhanVien(nv.getTrangThai())
             };
@@ -547,7 +537,7 @@ public class TpQuanLyNhanVien extends javax.swing.JPanel {
 
     private void btnHienThiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHienThiActionPerformed
         getList = nhanVienSevice.getListNhanVien();
-        loadTable(getList);
+        loadTable(nhanVienSevice.phanTrang(getList, offset, limit));
         clearForm();
     }//GEN-LAST:event_btnHienThiActionPerformed
 
@@ -557,7 +547,7 @@ public class TpQuanLyNhanVien extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void myButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton7ActionPerformed
- 
+
         txtDiaChi.setText("");
         txtEmail.setText("");
         txtMaNV.setText("");
@@ -568,17 +558,19 @@ public class TpQuanLyNhanVien extends javax.swing.JPanel {
     }//GEN-LAST:event_myButton7ActionPerformed
 
     private void uWPButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uWPButton4ActionPerformed
+         getList = nhanVienSevice.getListNhanVien();
         index = p.prevIndex(offset, limit, index);
         offset = p.prev(offset, limit);
         loadIndex();
-        loadTable(getList);
+        loadTable(nhanVienSevice.phanTrang(getList, offset, limit));
     }//GEN-LAST:event_uWPButton4ActionPerformed
 
     private void uWPButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uWPButton5ActionPerformed
+         getList = nhanVienSevice.getListNhanVien();
         index = p.nextIndex(offset, limit, sizes, index);
         offset = p.next(offset, limit, sizes);
         loadIndex();
-        loadTable(getList);
+        loadTable(nhanVienSevice.phanTrang(getList, offset, limit));
     }//GEN-LAST:event_uWPButton5ActionPerformed
 
 

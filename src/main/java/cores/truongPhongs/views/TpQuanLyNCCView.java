@@ -17,8 +17,8 @@ public class TpQuanLyNCCView extends javax.swing.JPanel {
     private TpQuanlyNhaCungCapService nccService;
     private List<NhaCungCapCustom> getList;
     private TpCreateNCCView creat;
-     private Page p;
-    private int limit = 7;
+    private Page p;
+    private int limit = 2;
 
     private int offset = 0;
 
@@ -31,9 +31,10 @@ public class TpQuanLyNCCView extends javax.swing.JPanel {
         initComponents();
         nccService = new TpQuanlyNhaCungCapServiceImpl();
         getList = new ArrayList<>();
-        clearForm();
+        
 
-//        loadTable(getList);
+        loadTable(nccService.phanTrang(getList, offset, limit));
+        clearForm();
 //        loadTable(list);
     }
 
@@ -46,24 +47,13 @@ public class TpQuanLyNCCView extends javax.swing.JPanel {
     }
 
     private void loadIndex() {
-        this.txtIndex.setText(String.valueOf(index) + " / " + (Math.ceil((sizes / limit) + 0.5)));
+        this.txtIndex.setText(String.valueOf(index) + " / " + (Math.round((sizes / limit) + 0.5)));
     }
-    
 
     private void loadTable(List<NhaCungCapCustom> list) {
         DefaultTableModel dtm = (DefaultTableModel) this.tblNhaCungCap.getModel();
         dtm.setRowCount(0);
-        int sum = limit + offset;
-        if (list.size() <= sum) {
-            sum = list.size();
-        }
-        for (int i = offset; i < sum; i++) {
-            if (list.get(i) == null) {
-                return;
-            }
-
-        NhaCungCapCustom nc = list.get(i);
-        for (NhaCungCapCustom el : getList) {
+        for (NhaCungCapCustom el : list) {
             Object[] rowData = {
                 dtm.getRowCount() + 1,
                 el.getMa(),
@@ -76,10 +66,11 @@ public class TpQuanLyNCCView extends javax.swing.JPanel {
             };
             dtm.addRow(rowData);
         }
-        }
+
     }
-    public void fillData(int i){
-        NhaCungCapCustom ql = getList.get(i);
+
+    public void fillData(int i) {
+        NhaCungCapCustom ql = nccService.phanTrang(getList, offset, limit).get(i);
         txtDanhGia.setText(String.valueOf(ql.getDanhGia()));
         txtDiaChi.setText(ql.getDiaChi());
         txtEmail.setText(ql.getEmail());
@@ -439,14 +430,15 @@ public class TpQuanLyNCCView extends javax.swing.JPanel {
 //        creat.setVisible(false);
         TpRUDNhaCCView rud = new TpRUDNhaCCView();
         fillData(row);
-        rud.ncct = nccService.findNCCByMa(tblNhaCungCap.getValueAt(row, 1).toString());
+//        rud.ncct = nccService.findNCCByMa(tblNhaCungCap.getValueAt(row, 1).toString());
+        rud.ncct = nccService.phanTrang(getList, offset, limit).get(row);
         rud.setVisible(true);
         rud.showData();
     }//GEN-LAST:event_tblNhaCungCapMouseClicked
 
     private void txtSearchTheoMaCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtSearchTheoMaCaretUpdate
         getList = nccService.getListByMa(txtSearchTheoMa.getText());
-        loadTable(getList);
+        loadTable(nccService.phanTrang(getList, offset, limit));
         clearForm();
     }//GEN-LAST:event_txtSearchTheoMaCaretUpdate
 
@@ -457,7 +449,7 @@ public class TpQuanLyNCCView extends javax.swing.JPanel {
 
     private void btnHienThiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHienThiActionPerformed
         getList = nccService.getList();
-        loadTable(getList);
+        loadTable(nccService.phanTrang(getList, offset, limit));
         clearForm();
     }//GEN-LAST:event_btnHienThiActionPerformed
 
@@ -475,14 +467,14 @@ public class TpQuanLyNCCView extends javax.swing.JPanel {
         index = p.prevIndex(offset, limit, index);
         offset = p.prev(offset, limit);
         loadIndex();
-        loadTable(getList);
+        loadTable(nccService.phanTrang(getList, offset, limit));
     }//GEN-LAST:event_uWPButton4ActionPerformed
 
     private void uWPButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uWPButton5ActionPerformed
         index = p.nextIndex(offset, limit, sizes, index);
         offset = p.next(offset, limit, sizes);
         loadIndex();
-        loadTable(getList);
+        loadTable(nccService.phanTrang(getList, offset, limit));
     }//GEN-LAST:event_uWPButton5ActionPerformed
 
 

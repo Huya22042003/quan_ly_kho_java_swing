@@ -19,7 +19,7 @@ public class Tp_ThemNccVaoPhieuNhapView extends javax.swing.JPanel {
     private List<NhaCungCapCustom> listNcc = new ArrayList<>();
     private Page p;
 
-    private int limit = 7;
+    private int limit = 2;
 
     private int offset = 0;
 

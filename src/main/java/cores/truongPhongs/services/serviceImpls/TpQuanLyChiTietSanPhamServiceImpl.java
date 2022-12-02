@@ -12,6 +12,7 @@ import domainModels.SanPham;
 import infrastructures.constant.MauConstant;
 import infrastructures.constant.TrangThaiSanPhamConstanst;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -81,9 +82,9 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
     public List<TpQuanLyChiTietSanPhamCustom> findAllByRadio(int rdo, MauConstant tt, String tk) {
         switch (rdo) {
             case 0:
-                return rp.findAllByGiaNhap(tk,tt);
+                return rp.findAllByGiaNhap(tk, tt);
             case 1:
-                return rp.findAllByGiaBan(tk,tt);
+                return rp.findAllByGiaBan(tk, tt);
             case 2:
                 return rp.findAllByTenSanPham(tk);
             default:
@@ -92,8 +93,8 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
     }
 
     @Override
-    public TpQuanLyChiTietSanPhamCustom checkValidate(UUID donVi,String namBH, UUID sanPham,String hinhAnh,String giaNhap, String giaBan, String soLuong, String size
-            ,JLabel erroHinhAnh,JLabel erroGiaNhap, JLabel erroGiaBan, JLabel erroSoLuong, JLabel erroSize, JLabel erroNamBH ,MauConstant mau) {
+    public TpQuanLyChiTietSanPhamCustom checkValidate(UUID donVi, String namBH, UUID sanPham, String hinhAnh, String giaNhap, String giaBan, String soLuong, String size,
+             JLabel erroHinhAnh, JLabel erroGiaNhap, JLabel erroGiaBan, JLabel erroSoLuong, JLabel erroSize, JLabel erroNamBH, MauConstant mau) {
         boolean check = true;
         if (giaNhap.trim().length() == 0) {
             erroGiaNhap.setText("Giá nhập không được để trống");
@@ -217,8 +218,7 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
         cbb.addItem(Converter.trangThaiMauSac(MauConstant.CAM));
         cbb.addItem(Converter.trangThaiMauSac(MauConstant.DEN));
         cbb.addItem(Converter.trangThaiMauSac(MauConstant.TRANG));
-        
-        
+
     }
 
     @Override
@@ -245,6 +245,23 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
         sp.setNgayTao(new Date().getTime());
         sp.setTrangThai(TrangThaiSanPhamConstanst.CHO_XAC_NHAN);
         return sp;
+    }
+
+    @Override
+    public List<TpQuanLyChiTietSanPhamCustom> phanTrang(List<TpQuanLyChiTietSanPhamCustom> list, int offset, int limit) {
+        List<TpQuanLyChiTietSanPhamCustom> listPhanTrang = new ArrayList<>();
+        int sum = limit + offset;
+        if (list.size() <= sum) {
+            sum = list.size();
+        }
+        for (int i = offset; i < sum; i++) {
+            if (list.get(i) == null) {
+                break;
+            }
+            TpQuanLyChiTietSanPhamCustom el = list.get(i);
+            listPhanTrang.add(el);
+        }
+        return listPhanTrang;
     }
 
 }

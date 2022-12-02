@@ -28,6 +28,6 @@ public interface TpQuanLySanPhamService {
 
     public SanPham findID(UUID id);
 
-  
+    List<TpQuanLySanPhamCustom> phanTrang(List<TpQuanLySanPhamCustom> list, int offset, int limit);
 
 }

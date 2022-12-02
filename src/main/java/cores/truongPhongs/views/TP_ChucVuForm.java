@@ -35,7 +35,7 @@ public class TP_ChucVuForm extends javax.swing.JPanel {
         initComponents();
         getList = chucVuService.getListCV();
 
-        loadTable(getList);
+          loadTable(chucVuService.phanTrang(getList, offset, limit));
         clearForm();
     }
 
@@ -56,33 +56,24 @@ public class TP_ChucVuForm extends javax.swing.JPanel {
     }
 
     public void fillData(int index) {
-        TP_ChucVuCustom ql = getList.get(index);
+        TP_ChucVuCustom ql =  chucVuService.phanTrang(getList, offset, limit).get(index);;
         txtMaCV.setText(ql.getMa());
         txtTenCV.setText(ql.getTen());
     }
 
     public void searchRadio() {
         if (rdoMa.isSelected()) {
-            loadTable(listSearch(0));
+            loadTable(chucVuService.phanTrang(listSearch(0), offset, limit));
         } else {
-            loadTable(listSearch(1));
+            loadTable(chucVuService.phanTrang(listSearch(1), offset, limit));
         }
     }
 
     public void loadTable(List<TP_ChucVuCustom> list) {
         DefaultTableModel dtm = (DefaultTableModel) this.tableAll.getModel();
         dtm.setRowCount(0);
-        //
-        int sum = limit + offset;
-        if (list.size() <= sum) {
-            sum = list.size();
-        }
-        for (int i = offset; i < sum; i++) {
-            if (list.get(i) == null) {
-                return;
-            }
-            TP_ChucVuCustom el = list.get(i);
-//        for (TP_ChucVuCustom el : list) {
+
+        for (TP_ChucVuCustom el : list) {
             Object[] rowData = {
                 dtm.getRowCount() + 1,
                 el.getMa(),
@@ -491,8 +482,8 @@ public class TP_ChucVuForm extends javax.swing.JPanel {
     private void tableAllMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableAllMouseClicked
         int row = this.tableAll.getSelectedRow();
         createChucVu.setVisible(false);
-
-        rud.custom = chucVuService.findChucVuByMa(tableAll.getValueAt(row, 1).toString());
+rud.custom = chucVuService.phanTrang(getList, offset, limit).get(row);
+//        rud.custom = chucVuService.findChucVuByMa(tableAll.getValueAt(row, 1).toString());
         fillData(row);
         rud.setVisible(true);
         rud.showData();
@@ -510,7 +501,8 @@ public class TP_ChucVuForm extends javax.swing.JPanel {
 
     private void btnHienThiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHienThiActionPerformed
         getList = chucVuService.getListCV();
-        loadTable(getList);
+//        loadTable(getList);
+        loadTable(chucVuService.phanTrang(getList, offset, limit));
         clearForm();
     }//GEN-LAST:event_btnHienThiActionPerformed
 
@@ -523,14 +515,16 @@ public class TP_ChucVuForm extends javax.swing.JPanel {
         index = p.prevIndex(offset, limit, index);
         offset = p.prev(offset, limit);
         loadIndex();
-        loadTable(getList);
+//        loadTable(getList);
+        loadTable(chucVuService.phanTrang(getList, offset, limit));
     }//GEN-LAST:event_btnPreActionPerformed
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
         index = p.nextIndex(offset, limit, sizes, index);
         offset = p.next(offset, limit, sizes);
         loadIndex();
-        loadTable(getList);
+//        loadTable(getList);
+        loadTable(chucVuService.phanTrang(getList, offset, limit));
     }//GEN-LAST:event_btnNextActionPerformed
 
     private void loadIndex() {

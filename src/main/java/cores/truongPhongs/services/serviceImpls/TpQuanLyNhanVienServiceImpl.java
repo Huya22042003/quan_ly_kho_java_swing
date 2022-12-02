@@ -14,6 +14,7 @@ import utilities.palette.Combobox;
 import cores.truongPhongs.services.TpQuanLyNhanVienSevice;
 import domainModels.ChucVu;
 import infrastructures.constant.GioiTinhConstant;
+import java.util.ArrayList;
 
 /**
  *
@@ -229,6 +230,23 @@ public class TpQuanLyNhanVienServiceImpl implements TpQuanLyNhanVienSevice {
     @Override
     public ChucVu findIDCV(UUID id) {
         return rp.findIDCV(id);
+    }
+
+    @Override
+    public List<TpNhanVienCustom> phanTrang(List<TpNhanVienCustom> list, int offset, int limit) {
+        List<TpNhanVienCustom> listPhanTrang = new ArrayList<>();
+        int sum = limit + offset;
+        if (list.size() <= sum) {
+            sum = list.size();
+        }
+        for (int i = offset; i < sum; i++) {
+            if (list.get(i) == null) {
+                break;
+            }
+            TpNhanVienCustom el = list.get(i);
+            listPhanTrang.add(el);
+        }
+        return listPhanTrang;
     }
 
 }
