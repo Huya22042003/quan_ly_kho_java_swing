@@ -17,6 +17,7 @@ import java.util.UUID;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import utilities.Converter;
+import utilities.DateTimeUtil;
 import utilities.MsgBox;
 import utilities.Page;
 
@@ -749,17 +750,6 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
 
     private void btnCreatPhieuXuatActionPerformed(ActionEvent evt) {//GEN-FIRST:event_btnCreatPhieuXuatActionPerformed
         chonKhView.setVisible(true);
-//        PhieuXuatCustom pxcs = new PhieuXuatCustom();
-//        pxcs.setId(phieuXuatService.addPhieuXuat(pxcs).getId());
-//        pxcs.setNgayTao(DateTimeUtil.convertDateToTimeStampSecond());
-//        pxcs.setNgayThanhToan(DateTimeUtil.convertDateToTimeStampSecond());
-//        pxcs.setGhiChu("new");
-//        pxcs.setTrangThai(TrangThaiPhieuConstant.CHO_THANH_TOAN);
-//        pxcs.setKhachHang(luongPxService.getKhachHangByMa("KH000004"));
-//        pxcs.setNhanVien(luongPxService.getNhanVienByMa("NV00002"));
-//        phieuXuatService.addPhieuXuat(pxcs);
-//        listPhieuXuat.add(pxcs);
-//        loadTablePhieuXuat(listPhieuXuat);
     }//GEN-LAST:event_btnCreatPhieuXuatActionPerformed
 
     private void txtMaPhieuActionPerformed(ActionEvent evt) {//GEN-FIRST:event_txtMaPhieuActionPerformed
@@ -858,6 +848,7 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
 
         PhieuXuatCustom pxcs = listPhieuXuat.get(row);
         pxcs.setTrangThai(TrangThaiPhieuConstant.DA_THANH_TOAN);
+        pxcs.setNgayThanhToan(DateTimeUtil.convertDateToTimeStampSecond());
         phieuXuatService.updatePhieuXuat(pxcs);
         MsgBox.alert(this, "Bạn đã thanh toán thành công");
         listPhieuXuat.set(row, pxcs);
@@ -903,7 +894,6 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
         if (rdoNgayTao.isSelected() || rdoNgayThanhToan.isSelected()) {
             TimKiemTheoNgay();
         }
-//        listPhieuXuat = phieuXuatService.findByTrangThai();
     }//GEN-LAST:event_buttonGradient1ActionPerformed
 
     private void uWPButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uWPButton5ActionPerformed
@@ -947,12 +937,6 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
         listPhieuXuat = phieuXuatService.findAllByKhAndNV(timKiem, phieuXuatService.loc(cbbTrangThai.getSelectedIndex()), rdo);
         return listPhieuXuat;
     }
-//    public List<PhieuXuatCustom> timTheoID(){
-//        String tk = txtTimKiem.getText();
-//        listPhieuXuat = phieuXuatService.findByMaAndTT(UUID.fromString(tk),phieuXuatService.loc(cbbTrangThai.getSelectedIndex()));
-//        return listPhieuXuat;
-//        
-//    }
 
     public void searchRadio() {
         if (rdoNhanVien.isSelected()) {

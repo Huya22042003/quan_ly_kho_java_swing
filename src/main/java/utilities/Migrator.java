@@ -484,7 +484,7 @@ public class Migrator {
         phx.setGhiChu("Giày hỏng");
         phx.setLiDo("Đứt chỉ");
         phx.setNgayTao(DateTimeUtil.convertDateToTimeStampSecond());
-        phx.setNgayThanhToan(DateTimeUtil.convertDateToTimeStampSecond());
+        phx.setNgayThanhToan(null);
         phx.setPhieuXuat(px);
         phx.setTrangThai(TrangThaiPhieuHoanConstant.CHO_XAC_NHAN);
         session.save(phx);
