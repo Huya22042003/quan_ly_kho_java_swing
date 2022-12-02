@@ -6,7 +6,9 @@ import cores.nhanVienQuanLy.services.NvqlLuongKiemKeCtpkService;
 import cores.nhanVienQuanLy.services.NvqlLuongKiemKeService;
 import cores.nhanVienQuanLy.services.serviceImpls.NvqlLuongKiemKeCtpkServiceImpl;
 import cores.nhanVienQuanLy.services.serviceImpls.NvqlLuongKiemKeServiceImpl;
+import cores.truongPhongs.customModels.TpPhieuNhapCustom;
 import domainModels.NhanVien;
+import infrastructures.constant.TrangThaiPhieuConstant;
 import infrastructures.constant.TrangThaiPhieuKiemConstant;
 import java.util.ArrayList;
 import java.util.Date;
@@ -58,13 +60,87 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
         nhanVien.setSdt(Auth.nhanVien.getSdt());
         nhanVien.setTen(Auth.nhanVien.getTen());
         nhanVien.setTrangThai(Auth.nhanVien.getTrangThai());    
+        rdoMa.setSelected(true);
+        cbbTrangThai.setSelectedIndex(0);
     }
 
+     public List<NvqlLuongKiemKeCustom> listSearch(int rdo) {
+        // nhập vào 
+        String timKiem = this.txtSearch.getText();
+        List<NvqlLuongKiemKeCustom> listTimKiem = new ArrayList<>();
+
+        // tìm kiếm theo tên mã vị trí
+        checkCbb(kiemKeService.loc(this.cbbTrangThai.getSelectedIndex())).forEach(el -> {
+            String search = "";
+            List<String> strings = new ArrayList<>();
+
+            // truyền tham số
+            switch (rdo) {
+                case 0:
+                    search = el.getId().toString();
+                    break;
+
+                case 1:
+                    search = el.getIdNV().getTen();
+                    break;
+              
+            }
+            for (int i = 0; i <= search.length(); i++) {
+                String newMa = search.substring(0, i);
+                strings.add(newMa);
+            }
+            // so sánh mảng vừa cắt với phần tử nhập vào
+            for (String e : strings) {
+                if (e.equalsIgnoreCase(timKiem)) {
+                    listTimKiem.add(el);
+                }
+            }
+        });
+
+        return listTimKiem;
+    }
+
+    public List<NvqlLuongKiemKeCustom> checkCbb(TrangThaiPhieuKiemConstant cs) {
+        List<NvqlLuongKiemKeCustom> listTimKiem = new ArrayList<>();
+        listPhieuKiemKeCustom.forEach(el -> {
+            if (el.getTrangThai()== cs) {
+                listTimKiem.add(el);
+            }
+        });
+        return listTimKiem;
+    }
+
+    public void searchRadio() {
+        if (rdoMa.isSelected()) {
+            fillTablePhieuKiemKe(listSearch(0));
+        } 
+        if (rdoNhanVien.isSelected()) {
+            fillTablePhieuKiemKe(listSearch(1));
+        } 
+    }
+    
+    public void TimKiemTheoNgay() {
+        if (ngayBatDau.getDate() == null) {
+            
+            return;
+        }
+        if (ngayKetThuc.getDate() == null) {
+          
+            return;
+        }
+        
+
+        if (rdoNgayTao.isSelected()) {
+            listPhieuKiemKeCustom = kiemKeService.getListByNgayTao(ngayBatDau.getDate().getTime(), ngayKetThuc.getDate().getTime());
+            fillTablePhieuKiemKe(listPhieuKiemKeCustom);
+        } 
+    }
+    
     public void fillTablePhieuKiemKe(List<NvqlLuongKiemKeCustom> list) {
         DefaultTableModel model = (DefaultTableModel) tbPhieuKiemKe.getModel();
         model.setRowCount(0);
 
-        listPhieuKiemKeCustom.forEach((m) -> {
+        list.forEach((m) -> {
             Date ngayTao = new Date(m.getNgayTao());
             model.addRow(new Object[]{
                 //            Object[] rowData = {
@@ -88,18 +164,18 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         panelRound1 = new utilities.palette.PanelRound();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbPhieuKiemKe = new utilities.palette.TableDark_1();
         panelRound4 = new utilities.palette.PanelRound();
         rdoNhanVien = new utilities.palette.RadioButtonCustom();
-        rdoNcc = new utilities.palette.RadioButtonCustom();
         rdoMa = new utilities.palette.RadioButtonCustom();
-        textFieldAnimation1 = new utilities.palette.SearchCustom.TextFieldAnimation();
+        txtSearch = new utilities.palette.SearchCustom.TextFieldAnimation();
         panelRound5 = new utilities.palette.PanelRound();
         jLabel2 = new javax.swing.JLabel();
         panelRound8 = new utilities.palette.PanelRound();
-        combobox1 = new utilities.palette.Combobox();
+        cbbTrangThai = new utilities.palette.Combobox();
         myButton8 = new utilities.palette.MyButton();
         panelRound15 = new utilities.palette.PanelRound();
         btnChiTietPhieuKiem = new utilities.palette.MyButton();
@@ -150,48 +226,54 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
         panelRound4.setRoundTopRight(50);
 
         rdoNhanVien.setBackground(new java.awt.Color(67, 130, 187));
+        buttonGroup1.add(rdoNhanVien);
         rdoNhanVien.setForeground(new java.awt.Color(255, 255, 255));
         rdoNhanVien.setText("Nhân viên");
         rdoNhanVien.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-
-        rdoNcc.setBackground(new java.awt.Color(67, 130, 187));
-        rdoNcc.setForeground(new java.awt.Color(255, 255, 255));
-        rdoNcc.setText("Nhà cung cấp");
-        rdoNcc.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        rdoNhanVien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoNhanVienActionPerformed(evt);
+            }
+        });
 
         rdoMa.setBackground(new java.awt.Color(67, 130, 187));
+        buttonGroup1.add(rdoMa);
         rdoMa.setForeground(new java.awt.Color(255, 255, 255));
         rdoMa.setText("Mã");
         rdoMa.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        rdoMa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoMaActionPerformed(evt);
+            }
+        });
+
+        txtSearch.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtSearchMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelRound4Layout = new javax.swing.GroupLayout(panelRound4);
         panelRound4.setLayout(panelRound4Layout);
         panelRound4Layout.setHorizontalGroup(
             panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound4Layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addComponent(rdoMa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
                 .addComponent(rdoNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(rdoNcc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(rdoMa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(textFieldAnimation1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
         );
         panelRound4Layout.setVerticalGroup(
             panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound4Layout.createSequentialGroup()
-                .addGroup(panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelRound4Layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addGroup(panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(rdoNcc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(rdoNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(rdoMa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(panelRound4Layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
-                        .addComponent(textFieldAnimation1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(5, 5, 5)
+                .addGroup(panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rdoNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rdoMa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -228,13 +310,18 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
         panelRound8.setRoundTopLeft(50);
         panelRound8.setRoundTopRight(50);
 
-        combobox1.setBackground(new java.awt.Color(67, 130, 187));
-        combobox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Mới tạo", "Chưa xác nhận", "Đã xác nhận" }));
-        combobox1.setSelectedIndex(-1);
-        combobox1.setToolTipText("Chọn trạng thái để tìm kiếm");
-        combobox1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        combobox1.setLabeText("Trạng thái");
-        combobox1.setLineColor(new java.awt.Color(145, 200, 249));
+        cbbTrangThai.setBackground(new java.awt.Color(67, 130, 187));
+        cbbTrangThai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Mới tạo", "Chưa xác nhận", "Đã xác nhận" }));
+        cbbTrangThai.setSelectedIndex(-1);
+        cbbTrangThai.setToolTipText("Chọn trạng thái để tìm kiếm");
+        cbbTrangThai.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        cbbTrangThai.setLabeText("Trạng thái");
+        cbbTrangThai.setLineColor(new java.awt.Color(145, 200, 249));
+        cbbTrangThai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbbTrangThaiActionPerformed(evt);
+            }
+        });
 
         myButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/calendarrrrrr.png"))); // NOI18N
         myButton8.setToolTipText("Chọn khoảng thời gian để tìm kiếm");
@@ -251,7 +338,7 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(myButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(combobox1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16))
         );
         panelRound8Layout.setVerticalGroup(
@@ -261,7 +348,7 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
                 .addGroup(panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelRound8Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(combobox1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cbbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(myButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(11, 11, 11))
         );
@@ -380,7 +467,7 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16)
                 .addComponent(ngayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
         panelRound9Layout.setVerticalGroup(
             panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -656,6 +743,28 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
         MsgBox.alert(this, "Hoàn tất kiểm kê, bảng kiểm kê sẽ được gửi tới cấp trên");
     }//GEN-LAST:event_btnXacNhanActionPerformed
 
+    private void cbbTrangThaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbTrangThaiActionPerformed
+        // TODO add your handling code here:
+        searchRadio();
+        
+    }//GEN-LAST:event_cbbTrangThaiActionPerformed
+
+    private void txtSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSearchMouseClicked
+        // TODO add your handling code here:
+        searchRadio();
+        TimKiemTheoNgay();
+    }//GEN-LAST:event_txtSearchMouseClicked
+
+    private void rdoMaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoMaActionPerformed
+        // TODO add your handling code here:
+        searchRadio();
+    }//GEN-LAST:event_rdoMaActionPerformed
+
+    private void rdoNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoNhanVienActionPerformed
+        // TODO add your handling code here:
+        searchRadio();
+    }//GEN-LAST:event_rdoNhanVienActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private utilities.palette.MyButton btnChiTietPhieuKiem;
@@ -663,7 +772,8 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
     private utilities.palette.MyButton btnTaoPhieu;
     private utilities.palette.MyButton btnThemSPKiem;
     private utilities.palette.MyButton btnXacNhan;
-    private utilities.palette.Combobox combobox1;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private utilities.palette.Combobox cbbTrangThai;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -680,15 +790,14 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
     private utilities.palette.PanelRound panelRound8;
     private utilities.palette.PanelRound panelRound9;
     private utilities.palette.RadioButtonCustom rdoMa;
-    private utilities.palette.RadioButtonCustom rdoNcc;
     private utilities.palette.RadioButtonCustom rdoNgayTao;
     private utilities.palette.RadioButtonCustom rdoNhanVien;
     private utilities.palette.TableDark_1 tbPhieuKiemKe;
     private utilities.palette.TextAreaScroll textAreaScroll1;
-    private utilities.palette.SearchCustom.TextFieldAnimation textFieldAnimation1;
     private utilities.palette.TextAreaCustom txtGhiChu;
     private utilities.palette.TextField txtMaPhieuKiem;
     private utilities.palette.TextField txtNgayTao;
+    private utilities.palette.SearchCustom.TextFieldAnimation txtSearch;
     private utilities.palette.TextField txtTenNhanVien;
     private utilities.palette.TextField txtTrangThai;
     // End of variables declaration//GEN-END:variables
