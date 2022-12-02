@@ -21,7 +21,7 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
     private TpQuanLySanPhamU rud;
     private Page p;
 
-    private int limit = 7;
+    private int limit = 2;
 
     private int offset = 0;
 
@@ -38,22 +38,13 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
         String[] headers = {"STT", "Mã", "Tên"};
         dtm.setColumnIdentifiers(headers);
         listSanPham = serviceSanPham.getAll();
-        showData(listSanPham);
+        showData(serviceSanPham.phanTrang(listSanPham, offset, limit));
     }
 
     public void showData(List<TpQuanLySanPhamCustom> list) {
         dtm.setRowCount(0);
-        int sum = limit + offset;
-        if (list.size() <= sum) {
-            sum = list.size();
-        }
-        for (int i = offset; i < sum; i++) {
-            if (list.get(i) == null) {
-                return;
-            }
 
-            TpQuanLySanPhamCustom sp = list.get(i);
-
+        for (TpQuanLySanPhamCustom sp : list) {
             dtm.addRow(new Object[]{
                 dtm.getRowCount() + 1,
                 sp.getMa(), sp.getTen()
@@ -70,9 +61,9 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
 
     public void searchRadio() {
         if (rdoMa.isSelected()) {
-            showData(listSearch(0));
+            showData(serviceSanPham.phanTrang(listSearch(0), offset, limit));
         } else {
-            showData(listSearch(1));
+            showData(serviceSanPham.phanTrang(listSearch(1), offset, limit));
         }
     }
 
@@ -358,7 +349,8 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
         int row = this.tbSanPham.getSelectedRow();
         createView.setVisible(false);
         rud = new TpQuanLySanPhamU();
-        rud.tp = serviceSanPham.findSanPhamByMa(tbSanPham.getValueAt(row, 1).toString());
+        rud.tp = serviceSanPham.phanTrang(listSanPham, offset, limit).get(row);
+//        rud.tp = serviceSanPham.findSanPhamByMa(tbSanPham.getValueAt(row, 1).toString());
         rud.setVisible(true);
         rud.showData();
     }//GEN-LAST:event_tbSanPhamMouseClicked
@@ -374,7 +366,7 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
 
     private void btnHienThiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHienThiActionPerformed
         listSanPham = serviceSanPham.getAll();
-        showData(listSanPham);
+        showData(serviceSanPham.phanTrang(listSanPham, offset, limit));
         clearForm();
     }//GEN-LAST:event_btnHienThiActionPerformed
 
@@ -387,14 +379,14 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
         index = p.prevIndex(offset, limit, index);
         offset = p.prev(offset, limit);
         loadIndex();
-        showData(listSanPham);
+        showData(serviceSanPham.phanTrang(listSanPham, offset, limit));
     }//GEN-LAST:event_uWPButton4ActionPerformed
 
     private void uWPButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uWPButton5ActionPerformed
         index = p.nextIndex(offset, limit, sizes, index);
         offset = p.next(offset, limit, sizes);
         loadIndex();
-        showData(listSanPham);
+        showData(serviceSanPham.phanTrang(listSanPham, offset, limit));
     }//GEN-LAST:event_uWPButton5ActionPerformed
 
 

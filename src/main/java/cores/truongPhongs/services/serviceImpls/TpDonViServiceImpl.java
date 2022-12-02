@@ -138,26 +138,30 @@ public class TpDonViServiceImpl implements TpDonViService {
         if (DonViGoc.trim().length() == 0) {
             erroDonViGoc.setText("Đơn Vị Gốc không được để trống");
             check = false;
-        } else if (!DonViGoc.matches(ValidateConstant.REGEX_CHU_KHONG_CO_KHOANG_TRANG)) {
-            erroDonViGoc.setText("Đơn Vị Gốc không được có khoảng trắng");
-            check = false;
-        } else if (findDonViByDonViQuyDoi(DonViGoc) != null) {
-            erroDonViGoc.setText("Đơn Vị Gốc Đã Tồn Tại");
-            check = false;
-        } else {
+        }
+//        else if (!DonViGoc.matches(ValidateConstant.REGEX_CHU_KHONG_CO_KHOANG_TRANG)) {
+//            erroDonViGoc.setText("Đơn Vị Gốc không được có khoảng trắng");
+//            check = false;
+//        } else if (findDonViByDonViQuyDoi(DonViGoc) != null) {
+//            erroDonViGoc.setText("Đơn Vị Gốc Đã Tồn Tại");
+//            check = false;
+//        }
+        else {
             erroDonViGoc.setText("");
         }
 
         if (DonViQuyDoi.trim().length() == 0) {
             erroDonViQuyDoi.setText("Đơn Vị Quy Đổi không được để trống");
             check = false;
-        } else if (!DonViQuyDoi.matches(ValidateConstant.REGEX_CHU_KHONG_CO_KHOANG_TRANG)) {
-            erroDonViQuyDoi.setText("Đơn Vị Quy Đổi không được có khoảng trắng");
-            check = false;
-        } else if (findDonViByDonViQuyDoi(DonViQuyDoi) != null) {
-            erroDonViQuyDoi.setText("Đơn Vị Quy Đổi đã tồn tại");
-            check = false;
-        } else {
+        }
+//        else if (!DonViQuyDoi.matches(ValidateConstant.REGEX_CHU_KHONG_CO_KHOANG_TRANG)) {
+//            erroDonViQuyDoi.setText("Đơn Vị Quy Đổi không được có khoảng trắng");
+//            check = false;
+//        } else if (findDonViByDonViQuyDoi(DonViQuyDoi) != null) {
+//            erroDonViQuyDoi.setText("Đơn Vị Quy Đổi đã tồn tại");
+//            check = false;
+//        }
+        else {
             erroDonViQuyDoi.setText("");
         }
 
