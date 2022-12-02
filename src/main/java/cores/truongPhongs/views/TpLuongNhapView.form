@@ -45,7 +45,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="panelRound1" max="32767" attributes="0"/>
-                  <Component id="panelRound3" pref="0" max="32767" attributes="0"/>
+                  <Component id="panelRound3" pref="663" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -71,19 +71,17 @@
                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="jScrollPane1" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="panelRound5" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="panelRound4" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="panelRound9" min="-2" pref="806" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
-                              <Component id="panelRound5" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="panelRound4" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="panelRound9" min="-2" pref="806" max="-2" attributes="0"/>
-                              <Group type="102" attributes="0">
-                                  <Component id="panelRound15" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="panelRound8" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="panelRound15" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="panelRound8" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>

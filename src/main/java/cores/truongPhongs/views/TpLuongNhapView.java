@@ -41,35 +41,35 @@ public class TpLuongNhapView extends javax.swing.JPanel {
 
     public TpLuongNhapView() {
         initComponents();
-        rdoMa.setSelected(true);
-        listPn = new ArrayList<>();
-        phieuNhapService = new TpPhieuNhapServiceImpl();
-        tpncts = new TpPhieuNhapChiTietServiceImpl();
-        listPn = phieuNhapService.getListPn();
-        loadTablePn(listPn);
-        ctspView = new TpLuongNhapChiTietSanPhamForm();
-        ctpnView = new TpLuongNhapChiTietPhieuNhapForm();
-        clearForm();
-        txtSearch.addEvent(new EventTextField() {
-            @Override
-            public void onPressed(EventCallBack call) {
-                //  Test
-                try {
-                    for (int i = 1; i <= 100; i++) {
-
-                        Thread.sleep(5);
-                    }
-                    call.done();
-                } catch (Exception e) {
-                    System.err.println(e);
-                }
-            }
-
-            @Override
-            public void onCancel() {
-
-            }
-        });
+//        rdoMa.setSelected(true);
+//        listPn = new ArrayList<>();
+//        phieuNhapService = new TpPhieuNhapServiceImpl();
+//        tpncts = new TpPhieuNhapChiTietServiceImpl();
+//        listPn = phieuNhapService.getListPn();
+//        loadTablePn(listPn);
+//        ctspView = new TpLuongNhapChiTietSanPhamForm();
+//        ctpnView = new TpLuongNhapChiTietPhieuNhapForm();
+//        clearForm();
+//        txtSearch.addEvent(new EventTextField() {
+//            @Override
+//            public void onPressed(EventCallBack call) {
+//                //  Test
+//                try {
+//                    for (int i = 1; i <= 100; i++) {
+//
+//                        Thread.sleep(5);
+//                    }
+//                    call.done();
+//                } catch (Exception e) {
+//                    System.err.println(e);
+//                }
+//            }
+//
+//            @Override
+//            public void onCancel() {
+//
+//            }
+//        });
     }
 
     public TpLuongNhapView(UUID id) {

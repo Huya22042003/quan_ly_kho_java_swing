@@ -17,7 +17,7 @@ public class DemoGiaoDienThongKe extends javax.swing.JFrame {
     public DemoGiaoDienThongKe() {
         initComponents();
 //        lblSanPhamNhapNhieuNhat.setText();
-lblSoDonHoan.setText(khoService.getSoDonHoan().toString());
+lblSoDonHoan.setText(khoService.getSoDonHoanNhap().toString());
         lblTongSp.setText(khoService.getList().toString());
     }
 
