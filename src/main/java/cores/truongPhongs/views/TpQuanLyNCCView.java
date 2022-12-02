@@ -17,8 +17,8 @@ public class TpQuanLyNCCView extends javax.swing.JPanel {
     private TpQuanlyNhaCungCapService nccService;
     private List<NhaCungCapCustom> getList;
     private TpCreateNCCView creat;
-    private Page p;
-    private int limit = 2;
+     private Page p;
+    private int limit = 7;
 
     private int offset = 0;
 
@@ -31,11 +31,10 @@ public class TpQuanLyNCCView extends javax.swing.JPanel {
         initComponents();
         nccService = new TpQuanlyNhaCungCapServiceImpl();
         getList = new ArrayList<>();
-        
+        getList = nccService.getList();
 
         loadTable(nccService.phanTrang(getList, offset, limit));
         clearForm();
-//        loadTable(list);
     }
 
     private void clearForm() {

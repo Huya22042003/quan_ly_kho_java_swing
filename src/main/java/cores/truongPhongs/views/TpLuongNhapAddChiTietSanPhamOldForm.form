@@ -91,7 +91,7 @@
                       </Group>
                       <Component id="uWPButton1" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="159" max="32767" attributes="0"/>
+                  <EmptySpace pref="199" max="32767" attributes="0"/>
               </Group>
               <Component id="panelRound3" alignment="0" max="32767" attributes="0"/>
           </Group>
@@ -196,7 +196,6 @@
                               <Component id="cbbTrangThai" alignment="1" min="-2" pref="238" max="-2" attributes="0"/>
                               <Component id="txtSize" alignment="0" min="-2" pref="237" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="txtGiaNhap" min="-2" pref="237" max="-2" attributes="0"/>
                           <Component id="txtSoLuongNhap" min="-2" pref="237" max="-2" attributes="0"/>
                           <Component id="txtTenSp" min="-2" pref="237" max="-2" attributes="0"/>
                           <Component id="txtMa" min="-2" pref="237" max="-2" attributes="0"/>
@@ -204,6 +203,11 @@
                               <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                               <Component id="cbbSanPham" min="-2" pref="238" max="-2" attributes="0"/>
                           </Group>
+                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="lblSoLuong" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtGiaNhap" alignment="0" pref="237" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="lblGiaNhap" alignment="0" min="-2" pref="227" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="39" max="32767" attributes="0"/>
                   </Group>
@@ -218,15 +222,19 @@
                       <Component id="txtTenSp" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="txtSoLuongNhap" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                      <Component id="lblSoLuong" min="-2" pref="19" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="txtGiaNhap" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lblGiaNhap" min="-2" pref="17" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="cbbMauSac" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       <Component id="txtSize" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Component id="cbbSanPham" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="61" max="32767" attributes="0"/>
                       <Component id="cbbDonVi" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="cbbTrangThai" min="-2" max="-2" attributes="0"/>
@@ -310,6 +318,10 @@
                 </Property>
                 <Property name="labelText" type="java.lang.String" value="Size"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lblSoLuong">
+            </Component>
+            <Component class="javax.swing.JLabel" name="lblGiaNhap">
             </Component>
           </SubComponents>
         </Container>

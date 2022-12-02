@@ -99,26 +99,18 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
         if (giaNhap.trim().length() == 0) {
             erroGiaNhap.setText("Giá nhập không được để trống");
             check = false;
-        } else if (giaNhap.matches("[A-Z a-z]+")) {
-            erroGiaNhap.setText("Giá nhập không được là chữ");
+        } else if (!giaNhap.matches("^[0-9]+$")) {
+            erroGiaNhap.setText("Giá nhập sai định dạng");
             check = false;
         } else {
             erroGiaNhap.setText("");
         }
-        if (size.trim().length() == 0) {
-            erroGiaNhap.setText("Size không được để trống");
-            check = false;
-        } else if (!size.matches("[0-9]+")) {
-            erroSize.setText("Size không được là chữ");
-            check = false;
-        } else {
-            erroSize.setText("");
-        }
+
         if (giaBan.trim().length() == 0) {
             erroGiaBan.setText("Giá bán không được để trống");
             check = false;
-        } else if (giaBan.matches("[A-Z a-z]+")) {
-            erroGiaBan.setText("Giá bán không được là chữ");
+        } else if (!giaBan.matches("^[0-9]+$")) {
+            erroGiaBan.setText("Giá bán sai định dạng");
             check = false;
         } else {
             erroGiaBan.setText("");
@@ -132,6 +124,7 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
         } else {
             erroSoLuong.setText("");
         }
+
         if (namBH.trim().length() == 0) {
             erroNamBH.setText("Năm bảo hành không được để trống");
             check = false;
@@ -140,6 +133,15 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
             check = false;
         } else {
             erroNamBH.setText("");
+        }
+        if (size.trim().length() == 0) {
+            erroSize.setText("Size không được để trống");
+            check = false;
+        } else if (!size.matches("^[0-9]+$")) {
+            erroSize.setText("Size sai định dạng");
+            check = false;
+        } else {
+            erroSize.setText("");
         }
 
         if (!check) {
@@ -232,7 +234,54 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
     }
 
     @Override
-    public TpXemChiTietSanPhamCustom checkValidate1(UUID donVi, String namBH, UUID sanPham, String hinhAnh, String giaNhap, String soLuong, String size, MauConstant mau, Long ngayTao, String trangThai) {
+    public TpXemChiTietSanPhamCustom checkValidate1(UUID donVi, String namBH, UUID sanPham, String hinhAnh, String giaNhap,
+            String soLuong, String size, MauConstant mau, Long ngayTao, String trangThai, JLabel erroSoLuongNhap,
+            JLabel erroGiaNhap, JLabel erroSize, JLabel erroNamBH) {
+
+        boolean check = true;
+        if (soLuong.trim().length() == 0) {
+            erroSoLuongNhap.setText("Số lượng nhập không được để trống");
+            check = false;
+        } else if (!soLuong.matches("^[0-9]+$")) {
+            erroSoLuongNhap.setText("Số lượng nhập sai định dạng");
+            check = false;
+        } else {
+            erroSoLuongNhap.setText("");
+        }
+
+        if (giaNhap.trim().length() == 0) {
+            erroGiaNhap.setText("Giá nhập không được để trống");
+            check = false;
+        } else if (!giaNhap.matches("^[0-9]+$")) {
+            erroGiaNhap.setText("Giá nhập sai định dạng");
+            check = false;
+        } else {
+            erroGiaNhap.setText("");
+        }
+        if (size.trim().length() == 0) {
+            erroSize.setText("Size không được để trống");
+            check = false;
+        } else if (!size.matches("^[0-9]+$")) {
+            erroSize.setText("Size sai định dạng");
+            check = false;
+        } else {
+            erroSize.setText("");
+        }
+
+        if (namBH.trim().length() == 0) {
+            erroNamBH.setText("Năm bảo hành không được để trống");
+            check = false;
+        } else if (!namBH.matches("\\d+")) {
+            erroNamBH.setText("Năm bảo hành không được là chữ");
+            check = false;
+        } else {
+            erroNamBH.setText("");
+        }
+
+        if (!check) {
+            return null;
+        }
+
         TpXemChiTietSanPhamCustom sp = new TpXemChiTietSanPhamCustom();
         sp.setGiaNhap(new BigDecimal(Double.parseDouble(giaNhap)));
         sp.setSoLuongTon(Integer.parseInt(soLuong));

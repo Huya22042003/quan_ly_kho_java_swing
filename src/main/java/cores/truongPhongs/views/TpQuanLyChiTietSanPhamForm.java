@@ -1,14 +1,20 @@
 package cores.truongPhongs.views;
 
+import cores.exportPDF.services.ExportSanPhamService;
+import cores.exportPDF.services.serviceImpls.ExportSanPhamServiceImpl;
 import cores.truongPhongs.customModels.TpQuanLyChiTietSanPhamCustom;
 import cores.truongPhongs.customModels.TpQuanLyDonViCustom;
 import cores.truongPhongs.customModels.TpQuanLySanPhamCustom;
 import cores.truongPhongs.services.TpQuanLyChiTietSanPhamService;
 import cores.truongPhongs.services.serviceImpls.TpQuanLyChiTietSanPhamServiceImpl;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import utilities.Converter;
+import utilities.DateTimeUtil;
 import utilities.Page;
 
 /**
@@ -35,10 +41,13 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
 
     private int index = 1;
 
+    private ExportSanPhamService esps;
+
     public TpQuanLyChiTietSanPhamForm() {
         createView = new TpQuanLyChiTietSanPhamAdd();
         rud = new TpQuanLyChiTietSanPhamU();
         p = new Page();
+        esps = new ExportSanPhamServiceImpl();
         initComponents();
         tbChiTietSanPham.setModel(dtm);
         String[] hearders = {"STT", "Sản Phẩm", "Màu", "Size", "Năm BH", "Đơn vị", "Giá Bán", "Giá Nhập", "Trạng thái"};
@@ -125,6 +134,7 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
         txtNamBH = new utilities.palette.TextField();
         txtSize = new utilities.palette.TextField();
         txtTrangThai = new utilities.palette.TextField();
+        myButton8 = new utilities.palette.MyButton();
         panelRound1 = new utilities.palette.PanelRound();
         panelRound15 = new utilities.palette.PanelRound();
         btnThem = new utilities.palette.MyButton();
@@ -224,10 +234,7 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
                             .addComponent(txtDonVi, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtNamBH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtSize, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtTrangThai, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(panelRound3Layout.createSequentialGroup()
-                        .addGap(100, 100, 100)
-                        .addComponent(myButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtTrangThai, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
         panelRound3Layout.setVerticalGroup(
@@ -251,8 +258,10 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
                 .addComponent(txtSize, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(txtTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(myButton7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(myButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(myButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -574,6 +583,9 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnHienThiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHienThiActionPerformed
+        listChiTietSP = serviceChiTietSP.getAll();
+
+        showData(listChiTietSP);
         clearForm();
         showData(serviceChiTietSP.phanTrang(listChiTietSP, offset, limit));
     }//GEN-LAST:event_btnHienThiActionPerformed
@@ -598,6 +610,28 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
 
     }//GEN-LAST:event_myButton7ActionPerformed
 
+    private void myButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton8ActionPerformed
+        int row = this.tbChiTietSanPham.getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(this, "Bạn phải chọn một dòng");
+            return;
+        }
+        TpQuanLyChiTietSanPhamCustom ctsp = listChiTietSP.get(row);
+        String fileName = ctsp.getSanPham().getTen() + new Date(DateTimeUtil.convertDateToTimeStampSecond()).toString() + ".pdf";
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        int option = fileChooser.showOpenDialog(this);
+        if (option == JFileChooser.APPROVE_OPTION) {
+            if (esps.exportSanPham(fileChooser.getSelectedFile().getPath()+ "\\" + fileName.replaceAll(":", "_"), ctsp.getId())) {
+                JOptionPane.showMessageDialog(this, "Xuất file thành công");
+            } else {
+                JOptionPane.showMessageDialog(this, "Xuất file thành công");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Folder Selected: ");
+        }
+    }//GEN-LAST:event_myButton8ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private utilities.palette.MyButton btnChon;
@@ -610,6 +644,7 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private utilities.palette.MyButton myButton7;
+    private utilities.palette.MyButton myButton8;
     private utilities.palette.PanelRound panelRound1;
     private utilities.palette.PanelRound panelRound15;
     private utilities.palette.PanelRound panelRound3;
