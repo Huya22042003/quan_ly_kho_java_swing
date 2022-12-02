@@ -34,7 +34,7 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
     }
     private Page p;
 
-    private int limit = 7;
+    private int limit = 5;
 
     private int offset = 0;
 
@@ -50,7 +50,7 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
         ctpxView = new Tai_LuongPhieuXuat_CTPhieuXuatView();
         listCTPX = luongService.getListCTPhieuXuat();
 //        loadTable();
-        loadTable(listCTSP);
+        loadTable(luongService.phanTrang(listCTSP, offset, limit));
     }
 
     public void loadTable(List<LuongBanHang_ChiTietSanPhamCustom> list) {
@@ -118,9 +118,9 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         panelRound4 = new utilities.palette.PanelRound();
         btnAnh = new utilities.palette.UWPButton();
-        uWPButton4 = new utilities.palette.UWPButton();
+        btnPre = new utilities.palette.UWPButton();
         txtIndex = new javax.swing.JLabel();
-        uWPButton5 = new utilities.palette.UWPButton();
+        btnNext = new utilities.palette.UWPButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -399,19 +399,19 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
-        uWPButton4.setText("PREV");
-        uWPButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnPre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/skip-previous-circle-solid-24.png"))); // NOI18N
+        btnPre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                uWPButton4ActionPerformed(evt);
+                btnPreActionPerformed(evt);
             }
         });
 
         txtIndex.setText("1/1");
 
-        uWPButton5.setText("Next");
-        uWPButton5.addActionListener(new java.awt.event.ActionListener() {
+        btnNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/skip-next-circle-solid-24.png"))); // NOI18N
+        btnNext.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                uWPButton5ActionPerformed(evt);
+                btnNextActionPerformed(evt);
             }
         });
 
@@ -437,12 +437,12 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(uWPButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(108, 108, 108)
-                        .addComponent(txtIndex, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(122, 122, 122)
-                        .addComponent(uWPButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(185, 185, 185)))
+                        .addComponent(btnPre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(67, 67, 67)
+                        .addComponent(txtIndex)
+                        .addGap(67, 67, 67)
+                        .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(255, 255, 255)))
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -460,12 +460,13 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(uWPButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtIndex, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(uWPButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(23, 23, 23))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnPre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(txtIndex)))
+                        .addGap(33, 33, 33))
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 2, Short.MAX_VALUE))
         );
@@ -587,7 +588,7 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
 
     private void btnHienThiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHienThiActionPerformed
         listCTSP = luongService.getListCTSanPham();
-        loadTable(listCTSP);
+        loadTable(luongService.phanTrang(listCTSP, offset, limit));
     }//GEN-LAST:event_btnHienThiActionPerformed
 
     private void txtMaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaActionPerformed
@@ -602,19 +603,21 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtGiaBanActionPerformed
 
-    private void uWPButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uWPButton4ActionPerformed
+    private void btnPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreActionPerformed
         index = p.prevIndex(offset, limit, index);
         offset = p.prev(offset, limit);
         loadIndex();
-        loadTable(listCTSP);
-    }//GEN-LAST:event_uWPButton4ActionPerformed
+        //        loadTable(getList);
+        loadTable(luongService.phanTrang(listCTSP, offset, limit));
+    }//GEN-LAST:event_btnPreActionPerformed
 
-    private void uWPButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uWPButton5ActionPerformed
+    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
         index = p.nextIndex(offset, limit, sizes, index);
         offset = p.next(offset, limit, sizes);
         loadIndex();
-        loadTable(listCTSP);
-    }//GEN-LAST:event_uWPButton5ActionPerformed
+        //        loadTable(getList);
+        loadTable(luongService.phanTrang(listCTSP, offset, limit));
+    }//GEN-LAST:event_btnNextActionPerformed
 
     /**
      * @param args the command line arguments
@@ -657,6 +660,8 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private utilities.palette.UWPButton btnAnh;
     private utilities.palette.MyButton btnHienThi;
+    private utilities.palette.UWPButton btnNext;
+    private utilities.palette.UWPButton btnPre;
     private utilities.palette.MyButton btnSearch;
     private javax.swing.JLabel errorSoLuong;
     private javax.swing.JButton jButton1;
@@ -681,7 +686,5 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
     private utilities.palette.TextField txtMau;
     private utilities.palette.TextField txtNamBH;
     private utilities.palette.TextField txtTenSp;
-    private utilities.palette.UWPButton uWPButton4;
-    private utilities.palette.UWPButton uWPButton5;
     // End of variables declaration//GEN-END:variables
 }

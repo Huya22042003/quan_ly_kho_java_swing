@@ -20,5 +20,6 @@ public interface Tai_LuongHoanXuatService {
     void updateCtPHX(ChiTietPhieuHoanXuatCustom ctphxct);
     void addPhieuHoanXuatTuDong(PhieuXuatCustom pxct, String ghiChu, String liDo);
     void addChiTietPhieuHoanXuat(ChiTietPhieuHoanXuatCustom ctphxct);
+    List<PhieuHoanXuatCustom> phanTrang(List<PhieuHoanXuatCustom> list, int offset, int limit);
 //    PhieuHoanXuat getPhxByIdPhieuXuat(UUID id);
 }

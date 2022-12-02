@@ -19,6 +19,7 @@ import utilities.Auth;
 import utilities.Converter;
 import utilities.DateTimeUtil;
 import utilities.MsgBox;
+import utilities.Page;
 
 public class Tai_ChonKhachHangView extends javax.swing.JFrame {
 
@@ -28,9 +29,20 @@ public class Tai_ChonKhachHangView extends javax.swing.JFrame {
     private NVQLQuanLyPhieuXuatService phieuXuatService;
     private Tai_NvqlLuongPhieuXuatService luongPxService;
 
+    private Page p;
+
+    private int limit = 7;
+
+    private int offset = 0;
+
+    private int sizes = 0;
+
+    private int index = 1;
+
     public Tai_ChonKhachHangView() {
         initComponents();
         hangService = new TP_KhachHangServiceImpl();
+        p = new Page();
         luongPxService = new Tai_NvqlLuongPhieuXuatServiceImpl();
         getList = new ArrayList<>();
         createView = new LuongBanHang_CreateKhachHang();
@@ -38,9 +50,12 @@ public class Tai_ChonKhachHangView extends javax.swing.JFrame {
         getList = hangService.getListKH();
         hangService.loadCbbTT(cbbTrangThai);
 
-        loadTable(getList);
+        loadTable(hangService.phanTrang(getList, offset, limit));
         clearForm();
 
+    }
+    private void loadIndex() {
+        this.txtIndex.setText(String.valueOf(index) + " / " + (Math.round((sizes / limit) + 0.5)));
     }
     public void fillData(int i) {
         TP_KhachHangCustom ql = getList.get(i);
@@ -53,6 +68,7 @@ public class Tai_ChonKhachHangView extends javax.swing.JFrame {
         txtNgaySinh.setText(new Date(ql.getNgaySinh()).toString());
         txtTrangThai.setText(String.valueOf(ql.getTrangThai()));
     }
+
     public void clearForm() {
         rdoTen.setSelected(true);
         cbbTrangThai.setSelectedIndex(0);
@@ -95,6 +111,7 @@ public class Tai_ChonKhachHangView extends javax.swing.JFrame {
             dtm.addRow(rowData);
         }
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -116,6 +133,9 @@ public class Tai_ChonKhachHangView extends javax.swing.JFrame {
         rdoDiaChi = new utilities.palette.RadioButtonCustom();
         panelRound17 = new utilities.palette.PanelRound();
         jLabel3 = new javax.swing.JLabel();
+        btnPre = new utilities.palette.UWPButton();
+        txtIndex = new javax.swing.JLabel();
+        btnNext = new utilities.palette.UWPButton();
         panelRound3 = new utilities.palette.PanelRound();
         jLabel1 = new javax.swing.JLabel();
         txtTenKH = new utilities.palette.TextField();
@@ -327,6 +347,22 @@ public class Tai_ChonKhachHangView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        btnPre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/skip-previous-circle-solid-24.png"))); // NOI18N
+        btnPre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPreActionPerformed(evt);
+            }
+        });
+
+        txtIndex.setText("1/1");
+
+        btnNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/skip-next-circle-solid-24.png"))); // NOI18N
+        btnNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
         panelRound1.setLayout(panelRound1Layout);
         panelRound1Layout.setHorizontalGroup(
@@ -344,6 +380,14 @@ public class Tai_ChonKhachHangView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(panelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(29, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnPre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(67, 67, 67)
+                .addComponent(txtIndex)
+                .addGap(67, 67, 67)
+                .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(273, 273, 273))
         );
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -357,8 +401,15 @@ public class Tai_ChonKhachHangView extends javax.swing.JFrame {
                     .addComponent(panelRound16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(panelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(54, 54, 54)
+                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelRound1Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(txtIndex)))
+                .addGap(48, 48, 48))
         );
 
         panelRound3.setBackground(new java.awt.Color(228, 206, 224));
@@ -512,13 +563,13 @@ public class Tai_ChonKhachHangView extends javax.swing.JFrame {
             .addGap(0, 1227, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGap(0, 7, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGap(0, 7, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 717, Short.MAX_VALUE)
+            .addGap(0, 727, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -539,7 +590,7 @@ public class Tai_ChonKhachHangView extends javax.swing.JFrame {
 
     private void btnHienThi1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHienThi1ActionPerformed
         getList = hangService.getListKH();
-        loadTable(getList);
+        loadTable(hangService.phanTrang(getList, offset, limit));
     }//GEN-LAST:event_btnHienThi1ActionPerformed
 
     private void txtSearchTheoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchTheoActionPerformed
@@ -555,7 +606,7 @@ public class Tai_ChonKhachHangView extends javax.swing.JFrame {
         pxcs.setId(phieuXuatService.addPhieuXuat(pxcs).getId());
         pxcs.setNgayTao(DateTimeUtil.convertDateToTimeStampSecond());
         pxcs.setNgayThanhToan(null);
-        pxcs.setGhiChu("Hàng bị lỗi");
+        pxcs.setGhiChu("Xuất luôn");
         pxcs.setTrangThai(TrangThaiPhieuConstant.CHO_THANH_TOAN);
         pxcs.setKhachHang(chon());
         NhanVien nv = new NhanVien();
@@ -578,7 +629,7 @@ public class Tai_ChonKhachHangView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnChonActionPerformed
 
     private void tblKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKhachHangMouseClicked
-                int row = this.tblKhachHang.getSelectedRow();
+        int row = this.tblKhachHang.getSelectedRow();
         if (row == -1) {
             return;
         }
@@ -591,6 +642,20 @@ public class Tai_ChonKhachHangView extends javax.swing.JFrame {
         txtDanhGia.setText(tblKhachHang.getValueAt(row, 7).toString());
         txtTrangThai.setText(tblKhachHang.getValueAt(row, 8).toString());
     }//GEN-LAST:event_tblKhachHangMouseClicked
+
+    private void btnPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreActionPerformed
+        index = p.prevIndex(offset, limit, index);
+        offset = p.prev(offset, limit);
+        loadIndex();
+        loadTable(hangService.phanTrang(getList, offset, limit));
+    }//GEN-LAST:event_btnPreActionPerformed
+
+    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
+        index = p.nextIndex(offset, limit, sizes, index);
+        offset = p.next(offset, limit, sizes);
+        loadIndex();
+        loadTable(hangService.phanTrang(getList, offset, limit));
+    }//GEN-LAST:event_btnNextActionPerformed
     public KhachHang chon() {
         int row = this.tblKhachHang.getSelectedRow();
         if (row == -1) {
@@ -612,6 +677,7 @@ public class Tai_ChonKhachHangView extends javax.swing.JFrame {
         kh.setTrangThai(khct.getTrangThai());
         return kh;
     }
+
     /**
      * @param args the command line arguments
      */
@@ -650,6 +716,8 @@ public class Tai_ChonKhachHangView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private utilities.palette.MyButton btnChon;
     private utilities.palette.MyButton btnHienThi1;
+    private utilities.palette.UWPButton btnNext;
+    private utilities.palette.UWPButton btnPre;
     private utilities.palette.MyButton btnSearch1;
     private utilities.palette.MyButton btnThem1;
     private utilities.palette.Combobox cbbTrangThai;
@@ -671,6 +739,7 @@ public class Tai_ChonKhachHangView extends javax.swing.JFrame {
     private utilities.palette.TextField txtDanhGia;
     private utilities.palette.TextField txtDiaChi;
     private utilities.palette.TextField txtEmail;
+    private javax.swing.JLabel txtIndex;
     private utilities.palette.TextField txtMaKH;
     private utilities.palette.TextField txtNgaySinh;
     private utilities.palette.TextField txtSDT;
