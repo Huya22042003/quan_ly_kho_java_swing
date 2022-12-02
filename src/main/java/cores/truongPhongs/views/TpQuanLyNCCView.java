@@ -46,7 +46,7 @@ public class TpQuanLyNCCView extends javax.swing.JPanel {
     }
 
     private void loadIndex() {
-        this.txtIndex.setText(String.valueOf(index) + " / " + (Math.ceil((sizes / limit) + 0.5)));
+        this.txtIndex.setText(String.valueOf(index) + " / " + (Math.round((sizes / limit) + 0.5)));
     }
     
 
@@ -62,8 +62,8 @@ public class TpQuanLyNCCView extends javax.swing.JPanel {
                 return;
             }
 
-        NhaCungCapCustom nc = list.get(i);
-        for (NhaCungCapCustom el : getList) {
+        NhaCungCapCustom el = list.get(i);
+        
             Object[] rowData = {
                 dtm.getRowCount() + 1,
                 el.getMa(),
@@ -75,7 +75,7 @@ public class TpQuanLyNCCView extends javax.swing.JPanel {
                 el.getTrangThai()
             };
             dtm.addRow(rowData);
-        }
+        
         }
     }
     public void fillData(int i){
