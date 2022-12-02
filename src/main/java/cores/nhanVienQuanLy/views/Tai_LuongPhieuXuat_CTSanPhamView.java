@@ -543,13 +543,12 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
         }
         ctsp.setSoLuongTon(ctsp.getSoLuongTon() - sl);
         luongService.updateCTSP(ctsp);
-//        JOptionPane.showMessageDialog(this, "Sửa thành công");
         Luong_ChiTietPhieuXuatCustom ctPhieuXuat = new Luong_ChiTietPhieuXuatCustom();
         ChiTietSanPham ctsanpham = new ChiTietSanPham(ctsp.getId(),
                 ctsp.getSoLuongTon(), ctsp.getHinhAnh(),
                 ctsp.getGiaNhap(), ctsp.getGiaBan(),
                 ctsp.getNamBaoHanh(), ctsp.getMau(),
-                ctsp.getTrangThai(), ctsp.getSize(),ctsp.getNgayTao(), ctsp.getSanPham(), ctsp.getDonVi());
+                ctsp.getTrangThai(), ctsp.getSize(), ctsp.getNgayTao(), ctsp.getSanPham(), ctsp.getDonVi());
         ctPhieuXuat.setIdChiTietSp(ctsanpham);
         ctPhieuXuat.setSoLuong(sl);
         ctPhieuXuat.setIdPhieuXuat(this.phieuXuat);

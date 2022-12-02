@@ -456,11 +456,11 @@ public class Tai_LuongHoanXuat_ChiTietPhieuHoanXuatView extends javax.swing.JFra
                 ctsp.setSoLuongTon(ctsp.getSoLuongTon() - sl);
                 luongService.updateCTSP(ctsp);
                 System.out.println("đã update số lượng trong ctsp");
+//                  JOptionPane.showMessageDialog(this, "ok");
             }
         }
-        System.out.println("đã update số lượng trong ctsp");
         for (Luong_ChiTietPhieuXuatCustom ctpx : luongService.getListCTPhieuXuat()) {
-            if (listCTPHX.get(row).getIdChiTietSp().getId().equals(ctpx.getIdChiTietSp().getId())) {
+            if (listCTPHX.get(row).getIdChiTietSp().getId().equals(ctpx.getIdChiTietSp().getId()) && phieuHX.getPhieuXuat().getId().equals(ctpx.getIdPhieuXuat().getId())) {
                 ctpx.setSoLuong(ctpx.getSoLuong() + sl);
                 luongService.updateCTPX(ctpx);
                 MsgBox.alert(this, "Đã Update lại số lượng trong phiếu xuất thành công!");

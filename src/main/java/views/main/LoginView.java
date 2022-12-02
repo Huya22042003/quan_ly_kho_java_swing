@@ -3,6 +3,7 @@ package views.main;
 import cores.logins.custom.NhanVienCustom;
 import cores.logins.service.ServiceImpl.UserServiceImpl;
 import cores.logins.service.UserService;
+import cores.nhanVienQuanLy.views.testa;
 import cores.truongPhongs.views.TestAll;
 import java.util.concurrent.ConcurrentHashMap;
 import javax.swing.JOptionPane;
@@ -133,7 +134,7 @@ public class LoginView extends javax.swing.JFrame {
         String email = this.txtEmail.getText();
         if (map.containsKey(email)) {
             if (map.get(email).getMatKhau().equals(txtPassWord.getText())) {
-//                Auth.nhanVien = map.get(email);
+                Auth.nhanVien = map.get(email);
 //                Bot bot = new Bot();
 //                bot.setVisible(true);
                 // check chức vụ
@@ -192,7 +193,7 @@ public class LoginView extends javax.swing.JFrame {
                     java.awt.EventQueue.invokeLater(new Runnable() {
                         @Override
                         public void run() {
-                            new NhanVienQuanLy().setVisible(true);
+                            new testa().setVisible(true);
                         }
                     });
 

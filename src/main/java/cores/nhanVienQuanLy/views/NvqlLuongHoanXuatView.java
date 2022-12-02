@@ -82,12 +82,11 @@ public class NvqlLuongHoanXuatView extends javax.swing.JPanel {
             PhieuHoanXuatCustom phx = ls.get(i);
 //        for (PhieuHoanXuatCustom phx : listPHX) {
             Date ngayTao = new Date(phx.getNgayTao());
-            Date ngayThanhToan = new Date(phx.getNgayThanhToan());
             Object[] rowData = {
                 dtm.getRowCount() + 1,
                 phx.getId(),
                 ngayTao,
-                ngayThanhToan,
+                phx.getNgayThanhToan()== null ? "Chưa thanh toán" :new Date(phx.getNgayThanhToan()), 
                 phx.getGhiChu(),
                 phx.getLiDo(),
                 Converter.TrangThaiPhieuHoan(phx.getTrangThai()),
