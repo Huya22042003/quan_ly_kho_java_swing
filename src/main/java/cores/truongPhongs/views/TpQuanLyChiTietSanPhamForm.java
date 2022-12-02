@@ -53,22 +53,15 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
         String[] hearders = {"STT", "Sản Phẩm", "Màu", "Size", "Năm BH", "Đơn vị", "Giá Bán", "Giá Nhập", "Trạng thái"};
         dtm.setColumnIdentifiers(hearders);
         serviceChiTietSP.loadCombobox(cbMauSac);
-        listChiTietSP = serviceChiTietSP.getAll();
-        showData(listChiTietSP);
+        this.clearForm();
+        showData(serviceChiTietSP.phanTrang(listChiTietSP, offset, limit));
     }
 
     public void showData(List<TpQuanLyChiTietSanPhamCustom> list) {
         dtm.setRowCount(0);
-        int sum = limit + offset;
-        if (list.size() <= sum) {
-            sum = list.size();
-        }
-        for (int i = offset; i < sum; i++) {
-            if (list.get(i) == null) {
-                return;
-            }
-            TpQuanLyChiTietSanPhamCustom ct = list.get(i);
 
+//            TpQuanLyChiTietSanPhamCustom ct = list.get(i);
+        for (TpQuanLyChiTietSanPhamCustom ct : list) {
             dtm.addRow(new Object[]{
                 dtm.getRowCount() + 1,
                 ct.getSanPham().getTen(),
@@ -91,17 +84,17 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
 
     public void searchRadio() {
         if (rdoGiaNhap.isSelected()) {
-            showData(listSearch(0));
+            showData(serviceChiTietSP.phanTrang(listSearch(0), offset, limit));
         } else if (rdoGiaBan.isSelected()) {
-            showData(listSearch(1));
+            showData(serviceChiTietSP.phanTrang(listSearch(1), offset, limit));
         } else {
-            showData(listSearch(2));
+            showData(serviceChiTietSP.phanTrang(listSearch(2), offset, limit));
         }
     }
 
     public void clearForm() {
         rdoGiaNhap.setSelected(true);
-        listChiTietSP = serviceChiTietSP.findAllByRadio(0, serviceChiTietSP.loc(cbMauSac.getSelectedIndex()), "");
+        listChiTietSP = serviceChiTietSP.getAll();
         sizes = listChiTietSP.size();
         offset = 0;
         index = 1;
@@ -113,7 +106,8 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
     }
 
     public void fillData(int i) {
-        TpQuanLyChiTietSanPhamCustom ct = listChiTietSP.get(i);
+//        TpQuanLyChiTietSanPhamCustom ct = listChiTietSP.get(i);
+        TpQuanLyChiTietSanPhamCustom ct = serviceChiTietSP.phanTrang(listChiTietSP, offset, limit).get(i);
         txtTenSP.setText(ct.getSanPham().getTen());
         txtMaSP.setText(ct.getSanPham().getMa());
         txtDonVi.setText(ct.getDonVi().getDonViGoc());
@@ -221,18 +215,6 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
         txtTrangThai.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtTrangThai.setLabelText("Trạng thái");
 
-        myButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Print.png"))); // NOI18N
-        myButton8.setToolTipText("In phiếu ra PDF");
-        myButton8.setBorderColor(new java.awt.Color(221, 242, 244));
-        myButton8.setColor(new java.awt.Color(221, 242, 244));
-        myButton8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        myButton8.setRadius(50);
-        myButton8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                myButton8ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout panelRound3Layout = new javax.swing.GroupLayout(panelRound3);
         panelRound3.setLayout(panelRound3Layout);
         panelRound3Layout.setHorizontalGroup(
@@ -245,10 +227,6 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
                     .addGroup(panelRound3Layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(panelRound3Layout.createSequentialGroup()
-                                .addComponent(myButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(myButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txtTenSP, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
                             .addComponent(txtMaSP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtMau, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -585,7 +563,8 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
         int row = this.tbChiTietSanPham.getSelectedRow();
         createView.setVisible(false);
         fillData(row);
-        rud.ct = listChiTietSP.get(row);
+//        rud.ct = listChiTietSP.get(row);
+        rud.ct = serviceChiTietSP.phanTrang(listChiTietSP, offset, limit).get(row);
         rud.setVisible(true);
         rud.showData();
     }//GEN-LAST:event_tbChiTietSanPhamMouseClicked
@@ -605,23 +584,26 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
 
     private void btnHienThiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHienThiActionPerformed
         listChiTietSP = serviceChiTietSP.getAll();
-        
+
         showData(listChiTietSP);
         clearForm();
+        showData(serviceChiTietSP.phanTrang(listChiTietSP, offset, limit));
     }//GEN-LAST:event_btnHienThiActionPerformed
 
     private void uWPButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uWPButton5ActionPerformed
         index = p.nextIndex(offset, limit, sizes, index);
         offset = p.next(offset, limit, sizes);
         loadIndex();
-        showData(listChiTietSP);
+//        showData(listChiTietSP);
+        showData(serviceChiTietSP.phanTrang(listChiTietSP, offset, limit));
     }//GEN-LAST:event_uWPButton5ActionPerformed
 
     private void uWPButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uWPButton4ActionPerformed
         index = p.prevIndex(offset, limit, index);
         offset = p.prev(offset, limit);
         loadIndex();
-        showData(listChiTietSP);
+//        showData(listChiTietSP);
+        showData(serviceChiTietSP.phanTrang(listChiTietSP, offset, limit));
     }//GEN-LAST:event_uWPButton4ActionPerformed
 
     private void myButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton7ActionPerformed

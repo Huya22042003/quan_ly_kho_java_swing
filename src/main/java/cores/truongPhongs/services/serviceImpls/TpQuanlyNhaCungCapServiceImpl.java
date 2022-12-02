@@ -6,6 +6,7 @@ import cores.truongPhongs.services.TpQuanlyNhaCungCapService;
 import domainModels.NhaCungCap;
 import infrastructures.constant.DanhGiaConstant;
 import infrastructures.constant.KhachHangConstant;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import utilities.palette.Combobox;
@@ -117,4 +118,22 @@ public class TpQuanlyNhaCungCapServiceImpl implements TpQuanlyNhaCungCapService 
     public List<NhaCungCapCustom> getList() {
         return rp.getList();
     }
+
+    @Override
+    public List<NhaCungCapCustom> phanTrang(List<NhaCungCapCustom> list, int offset, int limit) {
+        List<NhaCungCapCustom> listPhanTrang = new ArrayList<>();
+        int sum = limit + offset;
+        if (list.size() <= sum) {
+            sum = list.size();
+        }
+        for (int i = offset; i < sum; i++) {
+            if (list.get(i) == null) {
+                break;
+            }
+            NhaCungCapCustom el = list.get(i);
+            listPhanTrang.add(el);
+        }
+        return listPhanTrang;
+    }
+
 }

@@ -19,7 +19,7 @@ public class TP_KhachHangForm extends javax.swing.JPanel {
 //
     private Page p;
 
-    private int limit = 7;
+    private int limit = 2;
 
     private int offset = 0;
 
@@ -44,7 +44,8 @@ public class TP_KhachHangForm extends javax.swing.JPanel {
     }
 
     public void fillData(int i) {
-        TP_KhachHangCustom ql = getList.get(i);
+//        TP_KhachHangCustom ql = getList.get(i);
+        TP_KhachHangCustom ql = hangService.phanTrang(getList, offset, limit).get(i);
         txtMaKH.setText(ql.getMa());
         txtTenKH.setText(ql.getTen());
         txtSDT.setText(ql.getSdt());
@@ -74,27 +75,22 @@ public class TP_KhachHangForm extends javax.swing.JPanel {
 
     public void searchRadio() {
         if (rdoTen.isSelected()) {
-            loadTable(listSearch(0));
+//            loadTable(listSearch(0));
+            loadTable(hangService.phanTrang(listSearch(0), offset, limit));
         } else if (rdoSDT.isSelected()) {
-            loadTable(listSearch(1));
+            loadTable(hangService.phanTrang(listSearch(1), offset, limit));
+
         } else {
-            loadTable(listSearch(2));
+            loadTable(hangService.phanTrang(listSearch(2), offset, limit));
+
         }
     }
 
     public void loadTable(List<TP_KhachHangCustom> list) {
         DefaultTableModel dtm = (DefaultTableModel) this.tableAll.getModel();
         dtm.setRowCount(0);
-        int sum = limit + offset;
-        if (list.size() <= sum) {
-            sum = list.size();
-        }
-        for (int i = offset; i < sum; i++) {
-            if (list.get(i) == null) {
-                return;
-            }
-            TP_KhachHangCustom el = list.get(i);
-//        for (TP_KhachHangCustom el : list) {
+
+        for (TP_KhachHangCustom el : list) {
             Object[] rowData = {
                 dtm.getRowCount() + 1,
                 el.getMa(),
@@ -547,7 +543,8 @@ public class TP_KhachHangForm extends javax.swing.JPanel {
         int row = this.tableAll.getSelectedRow();
         createView.setVisible(false);
         fillData(row);
-        rud.custom = hangService.findKHByMa(tableAll.getValueAt(row, 1).toString());
+        rud.custom = hangService.phanTrang(getList, offset, limit).get(row);
+//        rud.custom = hangService.findKHByMa(tableAll.getValueAt(row, 1).toString());
         rud.setVisible(true);
         rud.showData();
     }//GEN-LAST:event_tableAllMouseClicked
@@ -564,7 +561,8 @@ public class TP_KhachHangForm extends javax.swing.JPanel {
 
     private void btnHienThi1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHienThi1ActionPerformed
         getList = hangService.getListKH();
-        loadTable(getList);
+        loadTable(hangService.phanTrang(getList, offset, limit));
+
         clearForm();
     }//GEN-LAST:event_btnHienThi1ActionPerformed
 
@@ -583,14 +581,14 @@ public class TP_KhachHangForm extends javax.swing.JPanel {
         index = p.prevIndex(offset, limit, index);
         offset = p.prev(offset, limit);
         loadIndex();
-        loadTable(getList);
+        loadTable(hangService.phanTrang(getList, offset, limit));
     }//GEN-LAST:event_btnPreActionPerformed
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
         index = p.nextIndex(offset, limit, sizes, index);
         offset = p.next(offset, limit, sizes);
         loadIndex();
-        loadTable(getList);
+        loadTable(hangService.phanTrang(getList, offset, limit));
     }//GEN-LAST:event_btnNextActionPerformed
 
     private void loadIndex() {

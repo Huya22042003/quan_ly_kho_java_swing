@@ -41,7 +41,8 @@ public class TpPhieuNhapView extends javax.swing.JPanel {
         phieuNhapService = new TpPhieuNhapServiceImpl();
 //        getListPhieuNhap = new ArrayList<>();
         getListPhieuNhap = phieuNhapService.getListPn();
-        this.loadTable(getListPhieuNhap);
+//        this.loadTable(getListPhieuNhap);
+        this.loadTable(phieuNhapService.phanTrang(getListPhieuNhap, offset, limit));
         this.loadCbbTrangThai();
 //        clearForm();
     }
@@ -109,11 +110,11 @@ public class TpPhieuNhapView extends javax.swing.JPanel {
 
     public void searchRadio() {
         if (rdoMa.isSelected()) {
-            loadTable(listSearch(0));
+           loadTable(phieuNhapService.phanTrang(listSearch(0), offset, limit));
         } else if (rdoNcc.isSelected()) {
-            loadTable(listSearch(1));
+           loadTable(phieuNhapService.phanTrang(listSearch(1), offset, limit));
         } else {
-            loadTable(listSearch(2));
+          loadTable(phieuNhapService.phanTrang(listSearch(2), offset, limit));
         }
     }
 
@@ -136,18 +137,11 @@ public class TpPhieuNhapView extends javax.swing.JPanel {
     public void loadTable(List<TpPhieuNhapCustom> list) {
         DefaultTableModel dtm = (DefaultTableModel) this.tblPhieuNhap.getModel();
         dtm.setRowCount(0);
-        int sum = limit + offset;
-        if (list.size() <= sum) {
-            sum = list.size();
-        }
-        for (int i = offset; i < sum; i++) {
-            if (list.get(i) == null) {
-                return;
-            }
 
-            TpPhieuNhapCustom el = list.get(i);
+
+//            TpPhieuNhapCustom el = list.get(i);
             
-
+for (TpPhieuNhapCustom el : list) {
                 Object[] rowData = {
                     dtm.getRowCount() + 1,
                     el.getId(),
@@ -548,7 +542,7 @@ public class TpPhieuNhapView extends javax.swing.JPanel {
 
     private void tblPhieuNhapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPhieuNhapMouseClicked
         int row = this.tblPhieuNhap.getSelectedRow();
-        NvqlRUDPhieuNhapView rud = new NvqlRUDPhieuNhapView(phieuNhapService.findPhieuNhapById((UUID) tblPhieuNhap.getValueAt(row, 1)));
+        NvqlRUDPhieuNhapView rud = new NvqlRUDPhieuNhapView(phieuNhapService.phanTrang(getListPhieuNhap, offset, limit).get(row));
 
         rud.setVisible(true);
     }//GEN-LAST:event_tblPhieuNhapMouseClicked
@@ -578,14 +572,14 @@ public class TpPhieuNhapView extends javax.swing.JPanel {
         index = p.prevIndex(offset, limit, index);
         offset = p.prev(offset, limit);
         loadIndex();
-        loadTable(getListPhieuNhap);
+        loadTable(phieuNhapService.phanTrang(getListPhieuNhap, offset, limit));
     }//GEN-LAST:event_uWPButton4ActionPerformed
 
     private void uWPButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uWPButton5ActionPerformed
         index = p.nextIndex(offset, limit, sizes, index);
         offset = p.next(offset, limit, sizes);
         loadIndex();
-        loadTable(getListPhieuNhap);
+        loadTable(phieuNhapService.phanTrang(getListPhieuNhap, offset, limit));
     }//GEN-LAST:event_uWPButton5ActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
@@ -594,7 +588,7 @@ public class TpPhieuNhapView extends javax.swing.JPanel {
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnHienThiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHienThiActionPerformed
-        
+        loadTable(phieuNhapService.phanTrang(getListPhieuNhap, offset, limit));
         clearForm();
     }//GEN-LAST:event_btnHienThiActionPerformed
 

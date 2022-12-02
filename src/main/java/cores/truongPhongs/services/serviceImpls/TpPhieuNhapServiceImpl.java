@@ -14,6 +14,7 @@ import java.util.UUID;
 import javax.swing.JLabel;
 import utilities.DateTimeUtil;
 import cores.truongPhongs.services.TpPhieuNhapService;
+import java.util.ArrayList;
 import utilities.Auth;
 
 /**
@@ -129,6 +130,23 @@ public class TpPhieuNhapServiceImpl implements TpPhieuNhapService {
     @Override
     public NhanVien getNhanVienByMa(String ma) {
         return repo.getNhanVienByMa(ma);
+    }
+
+    @Override
+    public List<TpPhieuNhapCustom> phanTrang(List<TpPhieuNhapCustom> list, int offset, int limit) {
+        List<TpPhieuNhapCustom> listPhanTrang = new ArrayList<>();
+        int sum = limit + offset;
+        if (list.size() <= sum) {
+            sum = list.size();
+        }
+        for (int i = offset; i < sum; i++) {
+            if (list.get(i) == null) {
+                break;
+            }
+            TpPhieuNhapCustom el = list.get(i);
+            listPhanTrang.add(el);
+        }
+        return listPhanTrang;
     }
 
 }

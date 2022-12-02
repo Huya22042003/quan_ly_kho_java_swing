@@ -36,4 +36,7 @@ public interface TP_KhachHangService {
     TP_KhachHangCustom findKHByMa(String ma);
 
     List<TP_KhachHangCustom> findAllByRadio(String tk, KhachHangConstant tt, int rdo);
+
+    List<TP_KhachHangCustom> phanTrang(List<TP_KhachHangCustom> list, int offset, int limit);
+
 }
