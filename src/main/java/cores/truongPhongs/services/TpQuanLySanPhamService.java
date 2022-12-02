@@ -28,6 +28,6 @@ public interface TpQuanLySanPhamService {
 
     public SanPham findID(UUID id);
 
-    public List<SanPham> getABC(Long ngayThanhToan);
+  
 
 }
