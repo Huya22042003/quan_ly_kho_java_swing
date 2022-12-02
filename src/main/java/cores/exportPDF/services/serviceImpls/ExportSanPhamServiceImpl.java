@@ -209,7 +209,7 @@ public class ExportSanPhamServiceImpl implements ExportSanPhamService {
                 nexty -= rowHeight;
             }
 
-            float nextx = 30;
+            float nextx = 100;
             for (int i = 0; i <= cols; i++) {
                 contentStream.drawLine(nextx, 500, nextx, 500 - tableHeight);
                 nextx += colWidth;
