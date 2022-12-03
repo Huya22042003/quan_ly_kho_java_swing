@@ -604,6 +604,11 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
                 txtTienKhachDuaCaretUpdate(evt);
             }
         });
+        txtTienKhachDua.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTienKhachDuaKeyReleased(evt);
+            }
+        });
 
         txtTienThua.setEditable(false);
         txtTienThua.setBackground(new java.awt.Color(228, 206, 224));
@@ -787,10 +792,12 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
         int tongTien = (int) tien;
 
         txtTienPhaitra.setText(tongTien + "");
-        if (txtTrangThai.getText().equalsIgnoreCase("Đã Thanh Toán")) {
-            btnThanhToan.setEnabled(false);
-        } else {
+        if (px.getTrangThai() == TrangThaiPhieuConstant.CHO_THANH_TOAN && tongTien != 0) {
             btnThanhToan.setEnabled(true);
+            txtTienKhachDua.setEditable(true);
+        } else {
+            btnThanhToan.setEnabled(false);
+            txtTienKhachDua.setEditable(false);
         }
 
     }//GEN-LAST:event_tblPhieuXuatMouseClicked
@@ -841,6 +848,9 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
         String tienKhachDua = txtTienKhachDua.getText();
         String tienPhaiTra = txtTienPhaitra.getText();
         double tienKhach = 0;
+        if(tienKhachDua.trim().length() == 0) {
+            return;
+        }
         try {
             tienKhach = Double.parseDouble(tienKhachDua);
             if (tienKhach <= 0) {
@@ -906,6 +916,10 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
         //        loadTable(getList);
         loadTablePhieuXuat(phieuXuatService.phanTrang(listPhieuXuat, offset, limit));
     }//GEN-LAST:event_btnNextActionPerformed
+
+    private void txtTienKhachDuaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTienKhachDuaKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTienKhachDuaKeyReleased
 
 
     public void TimKiemTheoNgay() {
