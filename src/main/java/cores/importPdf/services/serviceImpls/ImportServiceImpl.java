@@ -18,6 +18,9 @@ import domainModels.SanPham;
 import infrastructures.constant.MauConstant;
 import infrastructures.constant.TrangThaiSanPhamConstanst;
 import java.util.ArrayDeque;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -133,7 +136,7 @@ public class ImportServiceImpl implements ImportService {
     public MessAlert importData(List<SanPhamCustom> listPdf, UUID idPhieuNhap) {
         loadMap();
         MessAlert alert = new MessAlert();
-        Queue que = new ArrayDeque();
+        Queue<ChiTietSanPhamCustom> que = new LinkedList<>();
         try {
             listPdf.parallelStream().forEach(el -> {
                 if (!mapSanPham.containsKey(el.getTen())) {
@@ -166,10 +169,10 @@ public class ImportServiceImpl implements ImportService {
                 que.add(ctsp);
                 alert.setStatus(true);
             });
-            if (!que.isEmpty()) {
-                for (Object object : que) {
-                    rp.insertChiTietSanPham((ChiTietSanPhamCustom) que.poll());
-                }
+            Iterator<ChiTietSanPhamCustom> iterator = que.iterator();
+            while (iterator.hasNext()) {
+                ChiTietSanPhamCustom element = iterator.next();
+                rp.insertChiTietSanPham(element);
             }
 
         } catch (Exception e) {
