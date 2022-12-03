@@ -18,7 +18,7 @@ public class testKiemKeView extends javax.swing.JFrame {
      */
     public testKiemKeView() {
         initComponents();
-          NvqlKiemKeView a = new NvqlKiemKeView();
+          Tai_NvqlLuongPhieuXuatView a = new Tai_NvqlLuongPhieuXuatView();
         this.add(a);
         this.setLayout(new FlowLayout());
         this.pack();

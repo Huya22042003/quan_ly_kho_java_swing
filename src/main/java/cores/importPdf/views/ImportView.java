@@ -12,6 +12,7 @@ import javax.swing.table.DefaultTableModel;
 import cores.importPdf.services.ImportService;
 import infrastructures.constant.MauConstant;
 import java.math.BigDecimal;
+import java.util.UUID;
 import utilities.Converter;
 import utilities.MsgBox;
 
@@ -27,6 +28,12 @@ public class ImportView extends javax.swing.JFrame {
     private List<SanPhamCustom> list;
 
     private ImportService service;
+    
+    private UUID idPhieuNhap;
+    
+    public void setIdPhieuNhap(UUID idPhieuNhap) {
+        this.idPhieuNhap = idPhieuNhap;
+    }
 
     public ImportView() {
         service = new ImportServiceImpl();
@@ -399,7 +406,7 @@ public class ImportView extends javax.swing.JFrame {
             return;
         }
         System.out.println(list.size());
-        MessAlert mess = service.importData(list);
+        MessAlert mess = service.importData(list, idPhieuNhap);
         if (mess.isStatus()) {
             JOptionPane.showMessageDialog(this, "Import thành công", "Yeahhh !!!", JOptionPane.INFORMATION_MESSAGE);
         } else {
