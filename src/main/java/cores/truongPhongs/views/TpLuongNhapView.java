@@ -39,6 +39,7 @@ public class TpLuongNhapView extends javax.swing.JPanel {
     private TpLuongNhapChiTietSanPhamForm ctspView;
     private TpLuongNhapChiTietPhieuNhapForm ctpnView;
     private TpPhieuNhapChiTietService tpncts;
+    private List<TpPhieuNhapChiTietCustom> listCtpn = new ArrayList<>();
 
     public TpLuongNhapView() {
         initComponents();
@@ -922,6 +923,11 @@ public class TpLuongNhapView extends javax.swing.JPanel {
             MsgBox.alert(this, "Bạn phải chọn 1 phiếu nhập");
             return;
         }
+        listCtpn = tpncts.getListCTPhieuNhapByID(listPn.get(row).getId());
+        if(listCtpn.size() == 0){
+            MsgBox.alert(this, "Bạn phải thêm sản phẩm trước khi thanh toán");
+            return;
+        }
         if (listPn.get(row).getTrangThai() == TrangThaiPhieuConstant.DA_THANH_TOAN) {
             MsgBox.alert(this, "Phiếu nhập này đã thanh toán. Vui lòng thanh toán phiếu nhập khác");
             return;
@@ -929,20 +935,6 @@ public class TpLuongNhapView extends javax.swing.JPanel {
         String tienKhachDua = txtTienKhachDua.getText();
         String tienPhaiTra = txtTienPhaiTra.getText();
         double tienKhach = 0;
-//        try {
-//            tienKhach = Double.parseDouble(tienKhachDua);
-//            if (tienKhach <= 0) {
-//                MsgBox.alert(this, "Phải nhập tiền là kiểu số nguyên dương");
-//                return;
-//            }
-//        } catch (NumberFormatException e) {
-//            MsgBox.alert(this, "Phải nhập tiền là kiểu số");
-//            return;
-//        }
-//        if (tienKhach < Double.valueOf(tienPhaiTra)) {
-//            MsgBox.alert(this, "Phải nhập tiền lớn hơn tiền phải trả");
-//            return;
-//        }
 
         TpPhieuNhapCustom pxcs = listPn.get(row);
         pxcs.setTrangThai(TrangThaiPhieuConstant.DA_THANH_TOAN);

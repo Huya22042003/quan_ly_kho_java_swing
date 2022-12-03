@@ -1,28 +1,14 @@
 package cores.truongPhongs.views;
 
-import cores.nhanVienQuanLy.views.*;
-import cores.nhanVienQuanLy.customModels.LuongBanHang_ChiTietSanPhamCustom;
-import cores.nhanVienQuanLy.customModels.Luong_ChiTietPhieuXuatCustom;
-import cores.nhanVienQuanLy.services.Tai_NvqlLuongPhieuXuatService;
-import cores.nhanVienQuanLy.services.serviceImpls.Tai_NvqlLuongPhieuXuatServiceImpl;
-import cores.truongPhongs.customModels.NhaCungCapCustom;
 import cores.truongPhongs.customModels.TpPhieuNhapChiTietCustom;
 import cores.truongPhongs.customModels.TpPhieuNhapCustom;
 import cores.truongPhongs.services.TpPhieuNhapChiTietService;
 import cores.truongPhongs.services.serviceImpls.TpPhieuNhapChiTietServiceImpl;
-import domainModels.ChiTietPhieuXuat;
-import domainModels.PhieuXuat;
-import infrastructures.constant.KhachHangConstant;
 import infrastructures.constant.MauConstant;
-import infrastructures.constant.TrangThaiPhieuConstant;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import utilities.Converter;
-import utilities.MsgBox;
-
 /**
  *
  * @author admin
