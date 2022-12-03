@@ -4,16 +4,17 @@
  */
 package cores.truongPhongs.services.serviceImpls;
 
+import cores.truongPhongs.customModels.TpThongKeSpCustom;
 import cores.truongPhongs.customModels.TpTongSoSanPhamTrongKhoCustom;
 import cores.truongPhongs.repositories.TpThongKeRepository;
-import cores.truongPhongs.services.TpTongSoSanPhamTrongKhoService;
 import java.util.List;
+import cores.truongPhongs.services.TpThongKeService;
 
 /**
  *
  * @author Acer
  */
-public class TpTongSoSanPhamTrongKhoServiceImpl implements TpTongSoSanPhamTrongKhoService{
+public class TpTongSoSanPhamTrongKhoServiceImpl implements TpThongKeService{
     TpThongKeRepository repo ;
 
     public TpTongSoSanPhamTrongKhoServiceImpl() {
@@ -45,6 +46,26 @@ public class TpTongSoSanPhamTrongKhoServiceImpl implements TpTongSoSanPhamTrongK
     @Override
     public List<TpTongSoSanPhamTrongKhoCustom> getSoSanPhamDaXuat() {
         return repo.getSoSanPhamDaXuat();
+    }
+
+    @Override
+    public List<TpThongKeSpCustom> getListSp() {
+        return repo.getListSanPham();
+    }
+
+    @Override
+    public List<TpThongKeSpCustom> getListByNgayThanhToan(Long ngayBatDau, Long ngayKetThuc) {
+        return repo.getListByNgayThanhToan(ngayBatDau, ngayKetThuc);
+    }
+
+    @Override
+    public List<TpTongSoSanPhamTrongKhoCustom> getSoLuongSpHoanNhap() {
+        return repo.getSoLuongSpHoanNhap();
+    }
+
+    @Override
+    public List<TpTongSoSanPhamTrongKhoCustom> getSoLuongSpHoanXuat() {
+        return repo.getSoDonHoanXuat();
     }
     
 }

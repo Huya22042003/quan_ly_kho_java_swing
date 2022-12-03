@@ -1,5 +1,6 @@
 package cores.importPdf.services.serviceImpls;
 
+import cores.importPdf.customModels.ChiTietSanPhamCustom;
 import cores.importPdf.customModels.MessAlert;
 import cores.importPdf.customModels.SanPhamCustom;
 import cores.importPdf.repositories.ImportRepository;
@@ -12,13 +13,13 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.text.PDFTextStripperByArea;
 import cores.importPdf.services.ImportService;
-import domainModels.ChiTietSanPham;
 import domainModels.DonVi;
 import domainModels.SanPham;
 import infrastructures.constant.MauConstant;
 import infrastructures.constant.TrangThaiSanPhamConstanst;
 import java.util.ArrayDeque;
 import java.util.Queue;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import utilities.DateTimeUtil;
 import utilities.MaTuSinh;
@@ -71,7 +72,6 @@ public class ImportServiceImpl implements ImportService {
                         continue;
                     }
                     locations.add(j);
-                    System.out.println(string1.trim() + " - " + j);
                 }
 
                 Integer get = locations.get(1);
@@ -110,19 +110,19 @@ public class ImportServiceImpl implements ImportService {
 
     private MauConstant convertMau(String mau) {
         switch (mau.toLowerCase()) {
-            case "Vàng":
+            case "vàng":
                 return MauConstant.VANG;
-            case "Xanh":
+            case "xanh":
                 return MauConstant.XANH_LA;
-            case "Đỏ":
+            case "đỏ":
                 return MauConstant.DO;
-            case "Hồng":
+            case "hồng":
                 return MauConstant.HONG;
-            case "Cam":
+            case "cam":
                 return MauConstant.CAM;
-            case "Đen":
+            case "đen":
                 return MauConstant.DEN;
-            case "Trắng":
+            case "trắng":
                 return MauConstant.TRANG;
             default:
                 return MauConstant.KHAC;
@@ -130,7 +130,7 @@ public class ImportServiceImpl implements ImportService {
     }
 
     @Override
-    public MessAlert importData(List<SanPhamCustom> listPdf) {
+    public MessAlert importData(List<SanPhamCustom> listPdf, UUID idPhieuNhap) {
         loadMap();
         MessAlert alert = new MessAlert();
         Queue que = new ArrayDeque();
@@ -151,7 +151,7 @@ public class ImportServiceImpl implements ImportService {
                     mapDonVi.put(dv.getDonViQuyDoi(), dv);
                 }
 
-                ChiTietSanPham ctsp = new ChiTietSanPham();
+                ChiTietSanPhamCustom ctsp = new ChiTietSanPhamCustom();
                 ctsp.setMau(convertMau(el.getMau()));
                 ctsp.setSoLuongTon(el.getSoLuongTon());
                 ctsp.setNamBaoHanh(el.getNamBaoHanh());
@@ -160,12 +160,15 @@ public class ImportServiceImpl implements ImportService {
                 ctsp.setGiaNhap(el.getGiaNhap());
                 ctsp.setDonVi(mapDonVi.get(el.getDonVi()));
                 ctsp.setTrangThai(TrangThaiSanPhamConstanst.CHO_XAC_NHAN);
+                ctsp.setMaSpNcc(el.getMa());
+                ctsp.setIdPhieuNhap(idPhieuNhap);
+                ctsp.setSize(el.getSize());
                 que.add(ctsp);
                 alert.setStatus(true);
             });
             if (!que.isEmpty()) {
                 for (Object object : que) {
-                    rp.insertChiTietSanPham((ChiTietSanPham) que.poll());
+                    rp.insertChiTietSanPham((ChiTietSanPhamCustom) que.poll());
                 }
             }
 

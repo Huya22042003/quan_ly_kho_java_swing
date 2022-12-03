@@ -1,13 +1,20 @@
 package cores.importPdf.repositories;
 
+import cores.importPdf.customModels.ChiTietSanPhamCustom;
+import domainModels.ChiTietPhieuHoanNhap;
+import domainModels.ChiTietPhieuNhap;
 import domainModels.ChiTietSanPham;
 import domainModels.DonVi;
+import domainModels.PhieuNhap;
 import domainModels.SanPham;
+import infrastructures.constant.TrangThaiSanPhamConstanst;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import javax.persistence.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import utilities.DateTimeUtil;
 import utilities.HibernateUtil;
 
 /**
@@ -44,38 +51,27 @@ public class ImportRepository {
         return sp;
     }
 
-    public boolean insertDonVi(DonVi dv) {
-        try ( Session s = HibernateUtil.getSessionFactory().openSession()) {
-            Transaction tran = s.beginTransaction();
-            s.save(dv);
-            tran.commit();
-            s.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
-    }
-
-    public boolean insertSanPham(SanPham sp) {
-        try ( Session s = HibernateUtil.getSessionFactory().openSession()) {
-            Transaction tran = s.beginTransaction();
-            s.save(sp);
-            tran.commit();
-            s.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
-    }
-
-    public boolean insertChiTietSanPham(ChiTietSanPham sp) {
+    public boolean insertChiTietSanPham(ChiTietSanPhamCustom sp) {
         try ( Session s = HibernateUtil.getSessionFactory().openSession()) {
             Transaction tran = s.beginTransaction();
             s.saveOrUpdate(sp.getSanPham());
             s.saveOrUpdate(sp.getDonVi());
-            s.save(sp);
+            ChiTietSanPham ctsp = new ChiTietSanPham();
+            ctsp.setMau(sp.getMau());
+            ctsp.setSoLuongTon(sp.getSoLuongTon());
+            ctsp.setNamBaoHanh(sp.getNamBaoHanh());
+            ctsp.setNgayTao(DateTimeUtil.convertDateToTimeStampSecond());
+            ctsp.setSanPham(sp.getSanPham());
+            ctsp.setGiaNhap(sp.getGiaNhap());
+            ctsp.setDonVi(sp.getDonVi());
+            ctsp.setSize(sp.getSize());
+            ctsp.setTrangThai(TrangThaiSanPhamConstanst.CHO_XAC_NHAN);
+            s.save(ctsp);
+
+            PhieuNhap pn = s.find(PhieuNhap.class, sp.getIdPhieuNhap());
+            
+            ChiTietPhieuNhap ctpn = new ChiTietPhieuNhap(pn, ctsp, sp.getSoLuongTon(), sp.getMaSpNcc());
+            s.save(ctpn);
             tran.commit();
             s.close();
         } catch (Exception e) {
