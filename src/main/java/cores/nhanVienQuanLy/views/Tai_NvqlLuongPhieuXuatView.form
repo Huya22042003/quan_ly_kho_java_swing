@@ -33,15 +33,22 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
               <Component id="panelRound1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="panelRound3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="panelRound1" min="-2" max="-2" attributes="0"/>
-          <Component id="panelRound3" min="-2" pref="680" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
+              <Component id="panelRound3" min="-2" pref="680" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="panelRound1" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -63,29 +70,35 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
-                      <Component id="panelRound9" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="panelRound5" max="32767" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                          <Component id="panelRound5" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="panelRound4" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="panelRound15" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="panelRound8" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
+                              <Component id="panelRound9" alignment="0" pref="0" max="32767" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="panelRound15" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="panelRound8" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
               </Group>
-              <Group type="102" alignment="1" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="293" max="-2" attributes="0"/>
+                  <Component id="btnPre" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
+                  <Component id="txtIndex" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
+                  <Component id="btnNext" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="uWPButton4" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="108" max="-2" attributes="0"/>
-                  <Component id="txtIndex" min="-2" pref="72" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="122" max="-2" attributes="0"/>
-                  <Component id="uWPButton5" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="220" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -93,28 +106,34 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="panelRound15" min="-2" max="-2" attributes="0"/>
                       <Component id="panelRound8" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace pref="54" max="32767" attributes="0"/>
                   <Component id="panelRound9" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="panelRound4" min="-2" max="-2" attributes="0"/>
-                      <Component id="panelRound5" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="panelRound4" max="32767" attributes="0"/>
+                      <Component id="panelRound5" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="261" max="-2" attributes="0"/>
-                  <EmptySpace pref="41" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                           <Component id="uWPButton4" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
                           <Component id="txtIndex" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
+                  <EmptySpace pref="47" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="btnNext" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnPre" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                          <Component id="txtIndex" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="uWPButton5" alignment="0" min="-2" pref="49" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -130,28 +149,16 @@
             <Component class="utilities.palette.TableDark_1" name="tblPhieuXuat">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="7" rowCount="0">
+                  <Table columnCount="5" rowCount="0">
                     <Column editable="true" title="STT" type="java.lang.Object"/>
                     <Column editable="true" title="M&#xe3; phi&#x1ebf;u" type="java.lang.Object"/>
                     <Column editable="true" title="Ng&#xe0;y t&#x1ea1;o" type="java.lang.Object"/>
                     <Column editable="true" title="Ng&#xe0;y thanh to&#xe1;n" type="java.lang.Object"/>
                     <Column editable="true" title="Tr&#x1ea1;ng th&#xe1;i" type="java.lang.Object"/>
-                    <Column editable="true" title="Nh&#xe2;n vi&#xea;n" type="java.lang.Object"/>
-                    <Column editable="true" title="Kh&#xe1;ch H&#xe0;ng" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                      <Title/>
-                      <Editor/>
-                      <Renderer/>
-                    </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                      <Title/>
-                      <Editor/>
-                      <Renderer/>
-                    </Column>
                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                       <Title/>
                       <Editor/>
@@ -204,7 +211,7 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace pref="27" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="rdoNhanVien" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="rdoKhachHang" min="-2" max="-2" attributes="0"/>
@@ -223,9 +230,9 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="buttonGradient1" alignment="1" pref="47" max="32767" attributes="0"/>
+                          <Component id="buttonGradient1" alignment="1" max="32767" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="1" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="txtTimKiem" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="rdoMa" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -337,18 +344,18 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel2" pref="47" max="32767" attributes="0"/>
+                      <Component id="jLabel2" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -383,7 +390,7 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="83" max="32767" attributes="0"/>
+                      <EmptySpace pref="54" max="32767" attributes="0"/>
                       <Component id="cbbTrangThai" min="-2" pref="201" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   </Group>
@@ -394,7 +401,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="cbbTrangThai" min="-2" pref="38" max="-2" attributes="0"/>
-                      <EmptySpace pref="13" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -437,17 +444,17 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnCreatPhieuXuat" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                      <Component id="btnCtPhieuXuat" min="-2" pref="65" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnChiTietSP" min="-2" pref="65" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnChiTietSP1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="153" max="32767" attributes="0"/>
-                      <Component id="btnShow" min="-2" pref="100" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace pref="24" max="32767" attributes="0"/>
+                      <Component id="btnCreatPhieuXuat" min="-2" pref="81" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="btnCtPhieuXuat" min="-2" pref="81" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="btnChiTietSP" min="-2" pref="92" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="btnChiTietSP1" min="-2" pref="87" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="btnShow" min="-2" pref="94" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -534,7 +541,7 @@
             <Component class="utilities.palette.MyButton" name="btnChiTietSP1">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/icons/bill.png"/>
+                  <Image iconType="3" name="/icons/Print.png"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="In bill phi&#x1ebf;u xu&#x1ea5;t"/>
                 <Property name="borderColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -557,9 +564,6 @@
             </Component>
             <Component class="utilities.palette.MyButton" name="btnShow">
               <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="0" green="ff" red="ff" type="rgb"/>
-                </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/icons/Show.png"/>
                 </Property>
@@ -674,12 +678,14 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="utilities.palette.UWPButton" name="uWPButton5">
+        <Component class="utilities.palette.UWPButton" name="btnPre">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Next"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/icons/skip-previous-circle-solid-24.png"/>
+            </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="uWPButton5ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPreActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="txtIndex">
@@ -687,12 +693,14 @@
             <Property name="text" type="java.lang.String" value="1/1"/>
           </Properties>
         </Component>
-        <Component class="utilities.palette.UWPButton" name="uWPButton4">
+        <Component class="utilities.palette.UWPButton" name="btnNext">
           <Properties>
-            <Property name="text" type="java.lang.String" value="PREV"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/icons/skip-next-circle-solid-24.png"/>
+            </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="uWPButton4ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNextActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
@@ -712,38 +720,41 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="txtMaKhachHang" alignment="0" max="32767" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="txtMaPhieu" alignment="0" pref="281" max="32767" attributes="0"/>
-                              <Component id="txtNgayThanhToan" alignment="0" pref="281" max="32767" attributes="0"/>
-                              <Component id="txtTrangThai" alignment="0" pref="281" max="32767" attributes="0"/>
-                              <Component id="textAreaScroll1" alignment="0" min="-2" pref="274" max="-2" attributes="0"/>
-                              <Component id="txtTienKhachDua" alignment="0" pref="281" max="32767" attributes="0"/>
-                              <Component id="txtTienPhaitra" alignment="0" max="32767" attributes="0"/>
-                          </Group>
-                          <EmptySpace pref="24" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txtNgayTao" min="-2" pref="281" max="-2" attributes="0"/>
-                              <Component id="txtTienThua" alignment="0" min="-2" pref="281" max="-2" attributes="0"/>
-                              <Component id="txtMaNhanVien" alignment="0" min="-2" pref="281" max="-2" attributes="0"/>
+                              <Component id="txtNgayTao" alignment="0" min="-2" pref="211" max="-2" attributes="0"/>
+                              <Component id="txtMaNhanVien" alignment="0" min="-2" pref="211" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="txtTienThua" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtMaPhieu" alignment="0" min="-2" pref="211" max="-2" attributes="0"/>
+                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="txtMaKhachHang" alignment="0" pref="211" max="32767" attributes="0"/>
+                                  <Component id="txtNgayThanhToan" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                              <Component id="txtTrangThai" alignment="0" min="-2" pref="211" max="-2" attributes="0"/>
+                              <Component id="txtTienPhaitra" alignment="0" max="32767" attributes="0"/>
+                              <Component id="textAreaScroll1" alignment="0" pref="214" max="32767" attributes="0"/>
+                              <Component id="txtTienKhachDua" alignment="0" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace pref="35" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
+              </Group>
+              <Group type="102" attributes="0">
+                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                  <Component id="btnThanhToan" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="btnThanhToan" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
+                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -758,7 +769,7 @@
                   <Component id="txtNgayTao" min="-2" pref="46" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="txtNgayThanhToan" min="-2" pref="46" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="txtMaKhachHang" min="-2" pref="46" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="txtMaNhanVien" min="-2" pref="46" max="-2" attributes="0"/>
@@ -785,7 +796,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="24" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Th&#xf4;ng tin phi&#x1ebf;u xu&#x1ea5;t"/>
+            <Property name="text" type="java.lang.String" value="Th&#xf4;ng tin phi&#x1ebf;u"/>
           </Properties>
         </Component>
         <Component class="utilities.palette.TextField" name="txtNgayTao">
@@ -942,7 +953,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="1"/>
             </Property>
-            <Property name="labelText" type="java.lang.String" value="M&#xe3; Kh&#xe1;ch H&#xe0;ng"/>
+            <Property name="labelText" type="java.lang.String" value="Kh&#xe1;ch H&#xe0;ng"/>
           </Properties>
         </Component>
         <Component class="utilities.palette.TextField" name="txtMaNhanVien">
@@ -954,7 +965,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="1"/>
             </Property>
-            <Property name="labelText" type="java.lang.String" value="M&#xe3; Nh&#xe2;n Vi&#xea;n"/>
+            <Property name="labelText" type="java.lang.String" value="Nh&#xe2;n Vi&#xea;n"/>
           </Properties>
         </Component>
       </SubComponents>

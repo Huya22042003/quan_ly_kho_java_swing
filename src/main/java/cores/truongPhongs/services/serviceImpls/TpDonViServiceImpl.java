@@ -5,6 +5,7 @@ import cores.truongPhongs.repositories.TpDonViRepository;
 import cores.truongPhongs.services.TpDonViService;
 import domainModels.DonVi;
 import infrastructures.constant.ValidateConstant;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import javax.swing.JLabel;
@@ -137,26 +138,30 @@ public class TpDonViServiceImpl implements TpDonViService {
         if (DonViGoc.trim().length() == 0) {
             erroDonViGoc.setText("Đơn Vị Gốc không được để trống");
             check = false;
-        } else if (!DonViGoc.matches(ValidateConstant.REGEX_CHU_KHONG_CO_KHOANG_TRANG)) {
-            erroDonViGoc.setText("Đơn Vị Gốc không được có khoảng trắng");
-            check = false;
-        } else if (findDonViByDonViQuyDoi(DonViGoc) != null) {
-            erroDonViGoc.setText("Đơn Vị Gốc Đã Tồn Tại");
-            check = false;
-        } else {
+        }
+//        else if (!DonViGoc.matches(ValidateConstant.REGEX_CHU_KHONG_CO_KHOANG_TRANG)) {
+//            erroDonViGoc.setText("Đơn Vị Gốc không được có khoảng trắng");
+//            check = false;
+//        } else if (findDonViByDonViQuyDoi(DonViGoc) != null) {
+//            erroDonViGoc.setText("Đơn Vị Gốc Đã Tồn Tại");
+//            check = false;
+//        }
+        else {
             erroDonViGoc.setText("");
         }
 
         if (DonViQuyDoi.trim().length() == 0) {
             erroDonViQuyDoi.setText("Đơn Vị Quy Đổi không được để trống");
             check = false;
-        } else if (!DonViQuyDoi.matches(ValidateConstant.REGEX_CHU_KHONG_CO_KHOANG_TRANG)) {
-            erroDonViQuyDoi.setText("Đơn Vị Quy Đổi không được có khoảng trắng");
-            check = false;
-        } else if (findDonViByDonViQuyDoi(DonViQuyDoi) != null) {
-            erroDonViQuyDoi.setText("Đơn Vị Quy Đổi đã tồn tại");
-            check = false;
-        } else {
+        }
+//        else if (!DonViQuyDoi.matches(ValidateConstant.REGEX_CHU_KHONG_CO_KHOANG_TRANG)) {
+//            erroDonViQuyDoi.setText("Đơn Vị Quy Đổi không được có khoảng trắng");
+//            check = false;
+//        } else if (findDonViByDonViQuyDoi(DonViQuyDoi) != null) {
+//            erroDonViQuyDoi.setText("Đơn Vị Quy Đổi đã tồn tại");
+//            check = false;
+//        }
+        else {
             erroDonViQuyDoi.setText("");
         }
 
@@ -180,5 +185,22 @@ public class TpDonViServiceImpl implements TpDonViService {
         td.setSoLuong(Integer.parseInt(sl));
 
         return td;
+    }
+
+    @Override
+    public List<TpDonViCustom> phanTrang(List<TpDonViCustom> list, int offset, int limit) {
+        List<TpDonViCustom> listPhanTrang = new ArrayList<>();
+        int sum = limit + offset;
+        if (list.size() <= sum) {
+            sum = list.size();
+        }
+        for (int i = offset; i < sum; i++) {
+            if (list.get(i) == null) {
+                break;
+            }
+            TpDonViCustom el = list.get(i);
+            listPhanTrang.add(el);
+        }
+        return listPhanTrang;
     }
 }

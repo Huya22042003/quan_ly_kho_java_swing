@@ -65,32 +65,6 @@ public class NVQLQuanLyPhieuXuatServiceImpl implements NVQLQuanLyPhieuXuatServic
     public boolean deletePhieuXuat(UUID id) {
         return rp.deletePhieuXuat(id);
     }
-
-//    public PhieuXuatCustom checkValidate(PhieuXuatCustom pncs, JLabel errNgayTao, JLabel errGhiChu, JLabel errNgayNhan) {
-//        boolean check = true;
-//        if (pncs.getNgayTao() == null) {
-//            errNgayTao.setText("Ngày tạo không được để trống");
-//            check = false;
-//        } else {
-//            errNgayTao.setText("");
-//        }
-//        if (pncs.getGhiChu().trim().length() == 0) {
-//            errGhiChu.setText("Ghi chú không được để trống");
-//            check = false;
-//        } else {
-//            errGhiChu.setText("");
-//        }
-//        if (pncs.getNgayNhan() == null) {
-//            errNgayNhan.setText("Ngày nhận không được để trống");
-//            check = false;
-//        } else {
-//            errNgayNhan.setText("");
-//        }
-//        if (!check) {
-//            return null;
-//        }
-//        return pncs;
-//    }
     @Override
     public List<PhieuXuatCustom> getList() {
         return rp.getList();
@@ -188,7 +162,6 @@ public class NVQLQuanLyPhieuXuatServiceImpl implements NVQLQuanLyPhieuXuatServic
 //    public List<PhieuXuatCustom> findByMaAndTT(UUID id, TrangThaiPhieuConstant tt) {
 //        return rp.findAllByIdPhieu(id, tt);
 //    }
-
     @Override
     public List<PhieuXuatCustom> findByMa(UUID id) {
         return rp.findAllByIdPhieu(id);
@@ -197,6 +170,23 @@ public class NVQLQuanLyPhieuXuatServiceImpl implements NVQLQuanLyPhieuXuatServic
     @Override
     public List<PhieuXuatCustom> getListDaThanhToan() {
         return rp.getListDaThanhToan();
+    }
+
+    @Override
+    public List<PhieuXuatCustom> phanTrang(List<PhieuXuatCustom> list, int offset, int limit) {
+        List<PhieuXuatCustom> listPhanTrang = new ArrayList<>();
+        int sum = limit + offset;
+        if (list.size() <= sum) {
+            sum = list.size();
+        }
+        for (int i = offset; i < sum; i++) {
+            if (list.get(i) == null) {
+                break;
+            }
+            PhieuXuatCustom el = list.get(i);
+            listPhanTrang.add(el);
+        }
+        return listPhanTrang;
     }
 
 }

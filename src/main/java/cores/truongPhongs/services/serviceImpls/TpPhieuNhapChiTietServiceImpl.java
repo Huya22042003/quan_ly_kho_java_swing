@@ -70,6 +70,16 @@ public class TpPhieuNhapChiTietServiceImpl implements TpPhieuNhapChiTietService{
                 return null;
         }
     }
+
+    @Override
+    public boolean upDateCTPN(TpPhieuNhapChiTietCustom ctpxct) {
+        ChiTietPhieuNhap ct = new ChiTietPhieuNhap();
+        ct.setIdChiTietSp(ctpxct.getIdSanPham());
+        ct.setIdPhieuNhap(ctpxct.getIdPhieuNhap());
+        ct.setSoLuong(ctpxct.getSoLuong());
+        
+        return repo.upDatePhieuNhap(ct);
+    }
     
     
 }

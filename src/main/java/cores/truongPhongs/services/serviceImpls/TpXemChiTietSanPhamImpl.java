@@ -1,5 +1,6 @@
 package cores.truongPhongs.services.serviceImpls;
 
+import cores.truongPhongs.customModels.TpQuanLyChiTietSanPhamCustom;
 import cores.truongPhongs.customModels.TpXemChiTietSanPhamCustom;
 import cores.truongPhongs.repositories.TpXemChiTietSanPhamRepository;
 import cores.truongPhongs.services.TpXemChiTietSanPhamService;
@@ -60,5 +61,25 @@ public class TpXemChiTietSanPhamImpl implements TpXemChiTietSanPhamService {
     public List<TpXemChiTietSanPhamCustom> getListGiaNhap(BigDecimal giaBatDau, BigDecimal giaKetThuc) {
         return repo.getListByGiaNhap(giaBatDau, giaKetThuc);
    }
+
+    @Override
+    public TpXemChiTietSanPhamCustom updateCTSanPham(TpXemChiTietSanPhamCustom custom) {
+        ChiTietSanPham sp = new ChiTietSanPham();
+        sp.setGiaBan(custom.getGiaBan());
+        sp.setGiaNhap(custom.getGiaNhap());
+        sp.setHinhAnh(custom.getHinhAnh());
+        sp.setSoLuongTon(custom.getSoLuongTon());
+        sp.setMau(custom.getMau());
+        sp.setDonVi(custom.getDonVi());
+        sp.setSize(custom.getSize());
+        sp.setTrangThai(custom.getTrangThai());
+        sp.setNamBaoHanh(custom.getNamBaoHanh());
+        sp.setSanPham(custom.getSanPham());
+        sp.setNgayTao(custom.getNgayTao());
+        custom.setId(repo.updateCTSanPham(sp).getId());
+        
+        return custom;
+
+    }
 
 }

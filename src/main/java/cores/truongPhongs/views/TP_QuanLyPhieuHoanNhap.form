@@ -23,17 +23,24 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="panelRound1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="panelRound2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="panelRound1" max="32767" attributes="0"/>
-          <Component id="panelRound2" alignment="0" max="32767" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="panelRound2" max="32767" attributes="0"/>
+                  <Component id="panelRound1" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -55,26 +62,23 @@
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jScrollPane1" pref="831" max="32767" attributes="0"/>
-                              <Component id="panelRound15" max="32767" attributes="0"/>
-                          </Group>
+                          <EmptySpace min="-2" pref="273" max="-2" attributes="0"/>
+                          <Component id="btnPre" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
+                          <Component id="txtIndex" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
+                          <Component id="btnPre1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-                          <Component id="panelRound5" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="234" max="-2" attributes="0"/>
-                          <Component id="btnPre" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
-                          <Component id="txtIndex" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
-                          <Component id="btnPre1" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="panelRound15" min="-2" max="-2" attributes="0"/>
+                              <Component id="jScrollPane1" alignment="0" min="-2" pref="767" max="-2" attributes="0"/>
+                              <Component id="panelRound5" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="23" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -83,15 +87,15 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                   <Component id="panelRound5" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="147" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
                   <Component id="panelRound15" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="43" max="32767" attributes="0"/>
-                  <Component id="jScrollPane1" min="-2" pref="262" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnPre" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtIndex" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnPre1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                  <Component id="jScrollPane1" pref="0" max="32767" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="btnPre" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtIndex" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnPre1" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
               </Group>
@@ -183,18 +187,15 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="31" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLabel3" pref="49" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="jLabel3" alignment="1" pref="49" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -233,9 +234,9 @@
                       <Component id="myButton9" min="-2" pref="100" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="myButton11" min="-2" pref="100" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                      <EmptySpace pref="137" max="32767" attributes="0"/>
                       <Component id="myButton14" min="-2" pref="87" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -343,7 +344,9 @@
         </Container>
         <Component class="utilities.palette.UWPButton" name="btnPre">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Pre"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/icons/skip-previous-circle-solid-24.png"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPreActionPerformed"/>
@@ -356,7 +359,9 @@
         </Component>
         <Component class="utilities.palette.UWPButton" name="btnPre1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Next"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/icons/skip-next-circle-solid-24.png"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPre1ActionPerformed"/>
@@ -367,7 +372,7 @@
     <Container class="utilities.palette.PanelRound" name="panelRound2">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="e0" green="ce" red="e4" type="rgb"/>
+          <Color blue="cc" green="cc" red="0" type="rgb"/>
         </Property>
         <Property name="roundBottomLeft" type="int" value="50"/>
         <Property name="roundBottomRight" type="int" value="50"/>
@@ -382,16 +387,14 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="textAreaScroll2" min="-2" pref="274" max="-2" attributes="0"/>
-                              <Component id="panelRound16" min="-2" max="-2" attributes="0"/>
-                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="textAreaScroll1" alignment="0" min="-2" pref="274" max="-2" attributes="0"/>
-                                  <Component id="txtNgayTao" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txtMaPhieu" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="txtTrangThai" alignment="0" min="-2" pref="281" max="-2" attributes="0"/>
-                                  <Component id="txtNgayThanhToan" alignment="0" max="32767" attributes="0"/>
-                              </Group>
+                              <Component id="textAreaScroll1" alignment="0" min="-2" pref="274" max="-2" attributes="0"/>
+                              <Component id="txtNgayTao" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtMaPhieu" alignment="1" max="32767" attributes="0"/>
+                              <Component id="txtTrangThai" alignment="0" pref="281" max="32767" attributes="0"/>
+                              <Component id="txtNgayThanhToan" alignment="0" max="32767" attributes="0"/>
+                              <Component id="panelRound16" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -399,7 +402,7 @@
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="13" max="32767" attributes="0"/>
+                  <EmptySpace pref="29" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -420,9 +423,9 @@
                   <Component id="textAreaScroll1" min="-2" pref="90" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                   <Component id="textAreaScroll2" min="-2" pref="90" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
                   <Component id="panelRound16" max="32767" attributes="0"/>
-                  <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -521,7 +524,7 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="84" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="btnXacNhan" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
                   </Group>
@@ -531,7 +534,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnXacNhan" pref="49" max="32767" attributes="0"/>
+                      <Component id="btnXacNhan" pref="32" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>

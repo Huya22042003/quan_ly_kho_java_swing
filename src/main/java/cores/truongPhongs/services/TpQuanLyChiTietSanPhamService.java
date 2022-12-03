@@ -34,7 +34,7 @@ public interface TpQuanLyChiTietSanPhamService {
     List<TpQuanLyChiTietSanPhamCustom> findAllByRadio(int rdo, MauConstant tt, String tk);
 
     TpQuanLyChiTietSanPhamCustom checkValidate(UUID donVi, String namBH, UUID sanPham, String hinhAnh, String giaNhap, String giaBan, String soLuong, String size,
-             JLabel erroHinhAnh, JLabel erroGiaNhap, JLabel erroGiaBan, JLabel erroSoLuong, JLabel erroSize, JLabel erroNamBH, MauConstant mau);
+                                               JLabel erroHinhAnh, JLabel erroGiaNhap, JLabel erroGiaBan, JLabel erroSoLuong, JLabel erroSize, JLabel erroNamBH, MauConstant mau);
 
     public List<TpQuanLyDonViCustom> getAllDonVi();
 
@@ -47,12 +47,14 @@ public interface TpQuanLyChiTietSanPhamService {
     MauConstant loc(int a);
 
     void loadCombobox(Combobox cbb);
-    
+
     TpXemChiTietSanPhamCustom checkValidate1(UUID donVi, String namBH, UUID sanPham, String hinhAnh, String giaNhap, String soLuong, String size,
-              MauConstant mau, Long ngayTao, String trangThai);
+              MauConstant mau, Long ngayTao, String trangThai, JLabel erroSoLuongNhap, JLabel erroGiaNhap, JLabel erroSize, JLabel erroNamBH);
 
     public List<TpQuanLyDonViCustom> getAllDonVi1();
-  
+
     public List<TpQuanLySanPhamCustom> getAllSanPham1();
+
+    List<TpQuanLyChiTietSanPhamCustom> phanTrang(List<TpQuanLyChiTietSanPhamCustom> list, int offset, int limit);
 
 }

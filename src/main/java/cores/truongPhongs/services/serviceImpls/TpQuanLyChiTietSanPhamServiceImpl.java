@@ -12,6 +12,7 @@ import domainModels.SanPham;
 import infrastructures.constant.MauConstant;
 import infrastructures.constant.TrangThaiSanPhamConstanst;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -81,9 +82,9 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
     public List<TpQuanLyChiTietSanPhamCustom> findAllByRadio(int rdo, MauConstant tt, String tk) {
         switch (rdo) {
             case 0:
-                return rp.findAllByGiaNhap(tk,tt);
+                return rp.findAllByGiaNhap(tk, tt);
             case 1:
-                return rp.findAllByGiaBan(tk,tt);
+                return rp.findAllByGiaBan(tk, tt);
             case 2:
                 return rp.findAllByTenSanPham(tk);
             default:
@@ -92,32 +93,24 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
     }
 
     @Override
-    public TpQuanLyChiTietSanPhamCustom checkValidate(UUID donVi,String namBH, UUID sanPham,String hinhAnh,String giaNhap, String giaBan, String soLuong, String size
-            ,JLabel erroHinhAnh,JLabel erroGiaNhap, JLabel erroGiaBan, JLabel erroSoLuong, JLabel erroSize, JLabel erroNamBH ,MauConstant mau) {
+    public TpQuanLyChiTietSanPhamCustom checkValidate(UUID donVi, String namBH, UUID sanPham, String hinhAnh, String giaNhap, String giaBan, String soLuong, String size,
+             JLabel erroHinhAnh, JLabel erroGiaNhap, JLabel erroGiaBan, JLabel erroSoLuong, JLabel erroSize, JLabel erroNamBH, MauConstant mau) {
         boolean check = true;
         if (giaNhap.trim().length() == 0) {
             erroGiaNhap.setText("Giá nhập không được để trống");
             check = false;
-        } else if (giaNhap.matches("[A-Z a-z]+")) {
-            erroGiaNhap.setText("Giá nhập không được là chữ");
+        } else if (!giaNhap.matches("^[0-9]+$")) {
+            erroGiaNhap.setText("Giá nhập sai định dạng");
             check = false;
         } else {
             erroGiaNhap.setText("");
         }
-        if (size.trim().length() == 0) {
-            erroGiaNhap.setText("Size không được để trống");
-            check = false;
-        } else if (!size.matches("[0-9]+")) {
-            erroSize.setText("Size không được là chữ");
-            check = false;
-        } else {
-            erroSize.setText("");
-        }
+
         if (giaBan.trim().length() == 0) {
             erroGiaBan.setText("Giá bán không được để trống");
             check = false;
-        } else if (giaBan.matches("[A-Z a-z]+")) {
-            erroGiaBan.setText("Giá bán không được là chữ");
+        } else if (!giaBan.matches("^[0-9]+$")) {
+            erroGiaBan.setText("Giá bán sai định dạng");
             check = false;
         } else {
             erroGiaBan.setText("");
@@ -131,6 +124,7 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
         } else {
             erroSoLuong.setText("");
         }
+
         if (namBH.trim().length() == 0) {
             erroNamBH.setText("Năm bảo hành không được để trống");
             check = false;
@@ -139,6 +133,15 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
             check = false;
         } else {
             erroNamBH.setText("");
+        }
+        if (size.trim().length() == 0) {
+            erroSize.setText("Size không được để trống");
+            check = false;
+        } else if (!size.matches("^[0-9]+$")) {
+            erroSize.setText("Size sai định dạng");
+            check = false;
+        } else {
+            erroSize.setText("");
         }
 
         if (!check) {
@@ -217,8 +220,7 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
         cbb.addItem(Converter.trangThaiMauSac(MauConstant.CAM));
         cbb.addItem(Converter.trangThaiMauSac(MauConstant.DEN));
         cbb.addItem(Converter.trangThaiMauSac(MauConstant.TRANG));
-        
-        
+
     }
 
     @Override
@@ -232,7 +234,54 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
     }
 
     @Override
-    public TpXemChiTietSanPhamCustom checkValidate1(UUID donVi, String namBH, UUID sanPham, String hinhAnh, String giaNhap, String soLuong, String size, MauConstant mau, Long ngayTao, String trangThai) {
+    public TpXemChiTietSanPhamCustom checkValidate1(UUID donVi, String namBH, UUID sanPham, String hinhAnh, String giaNhap,
+            String soLuong, String size, MauConstant mau, Long ngayTao, String trangThai, JLabel erroSoLuongNhap,
+            JLabel erroGiaNhap, JLabel erroSize, JLabel erroNamBH) {
+
+        boolean check = true;
+        if (soLuong.trim().length() == 0) {
+            erroSoLuongNhap.setText("Số lượng nhập không được để trống");
+            check = false;
+        } else if (!soLuong.matches("^[0-9]+$")) {
+            erroSoLuongNhap.setText("Số lượng nhập sai định dạng");
+            check = false;
+        } else {
+            erroSoLuongNhap.setText("");
+        }
+
+        if (giaNhap.trim().length() == 0) {
+            erroGiaNhap.setText("Giá nhập không được để trống");
+            check = false;
+        } else if (!giaNhap.matches("^[0-9]+$")) {
+            erroGiaNhap.setText("Giá nhập sai định dạng");
+            check = false;
+        } else {
+            erroGiaNhap.setText("");
+        }
+        if (size.trim().length() == 0) {
+            erroSize.setText("Size không được để trống");
+            check = false;
+        } else if (!size.matches("^[0-9]+$")) {
+            erroSize.setText("Size sai định dạng");
+            check = false;
+        } else {
+            erroSize.setText("");
+        }
+
+        if (namBH.trim().length() == 0) {
+            erroNamBH.setText("Năm bảo hành không được để trống");
+            check = false;
+        } else if (!namBH.matches("\\d+")) {
+            erroNamBH.setText("Năm bảo hành không được là chữ");
+            check = false;
+        } else {
+            erroNamBH.setText("");
+        }
+
+        if (!check) {
+            return null;
+        }
+
         TpXemChiTietSanPhamCustom sp = new TpXemChiTietSanPhamCustom();
         sp.setGiaNhap(new BigDecimal(Double.parseDouble(giaNhap)));
         sp.setSoLuongTon(Integer.parseInt(soLuong));
@@ -245,6 +294,23 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
         sp.setNgayTao(new Date().getTime());
         sp.setTrangThai(TrangThaiSanPhamConstanst.CHO_XAC_NHAN);
         return sp;
+    }
+
+    @Override
+    public List<TpQuanLyChiTietSanPhamCustom> phanTrang(List<TpQuanLyChiTietSanPhamCustom> list, int offset, int limit) {
+        List<TpQuanLyChiTietSanPhamCustom> listPhanTrang = new ArrayList<>();
+        int sum = limit + offset;
+        if (list.size() <= sum) {
+            sum = list.size();
+        }
+        for (int i = offset; i < sum; i++) {
+            if (list.get(i) == null) {
+                break;
+            }
+            TpQuanLyChiTietSanPhamCustom el = list.get(i);
+            listPhanTrang.add(el);
+        }
+        return listPhanTrang;
     }
 
 }

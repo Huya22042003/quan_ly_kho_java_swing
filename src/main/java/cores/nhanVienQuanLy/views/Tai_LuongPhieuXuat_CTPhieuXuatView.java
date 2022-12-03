@@ -455,10 +455,6 @@ public class Tai_LuongPhieuXuat_CTPhieuXuatView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Bạn phải nhập là kiểu số");
             return;
         }
-//        if (sl > listCTPX.get(row).getSoLuong()) {
-//            JOptionPane.showMessageDialog(this, "Bạn phải nhập số lượng nhỏ hơn số lượng ban đầu");
-//            return;
-//        }
         Luong_ChiTietPhieuXuatCustom ctPhieuXuat = listCTPX.get(row);
         for (LuongBanHang_ChiTietSanPhamCustom ctsp : luongService.getListCTSanPham()) {
             if (listCTPX.get(row).getIdChiTietSp().getId().equals(ctsp.getId())) {

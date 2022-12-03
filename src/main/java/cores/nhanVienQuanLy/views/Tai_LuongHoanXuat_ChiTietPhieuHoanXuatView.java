@@ -29,7 +29,7 @@ public class Tai_LuongHoanXuat_ChiTietPhieuHoanXuatView extends javax.swing.JFra
     }
     private Page p;
 
-    private int limit = 7;
+    private int limit = 3;
 
     private int offset = 0;
 
@@ -456,11 +456,11 @@ public class Tai_LuongHoanXuat_ChiTietPhieuHoanXuatView extends javax.swing.JFra
                 ctsp.setSoLuongTon(ctsp.getSoLuongTon() - sl);
                 luongService.updateCTSP(ctsp);
                 System.out.println("đã update số lượng trong ctsp");
+//                  JOptionPane.showMessageDialog(this, "ok");
             }
         }
-        System.out.println("đã update số lượng trong ctsp");
         for (Luong_ChiTietPhieuXuatCustom ctpx : luongService.getListCTPhieuXuat()) {
-            if (listCTPHX.get(row).getIdChiTietSp().getId().equals(ctpx.getIdChiTietSp().getId())) {
+            if (listCTPHX.get(row).getIdChiTietSp().getId().equals(ctpx.getIdChiTietSp().getId()) && phieuHX.getPhieuXuat().getId().equals(ctpx.getIdPhieuXuat().getId())) {
                 ctpx.setSoLuong(ctpx.getSoLuong() + sl);
                 luongService.updateCTPX(ctpx);
                 MsgBox.alert(this, "Đã Update lại số lượng trong phiếu xuất thành công!");
@@ -483,10 +483,12 @@ public class Tai_LuongHoanXuat_ChiTietPhieuHoanXuatView extends javax.swing.JFra
     private void btnShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowActionPerformed
         listCTPHX = luongHXService.getListCTphxByID(this.phieuHX.getId());
         loadTable(listCTPHX);
+        clearForm();
     }//GEN-LAST:event_btnShowActionPerformed
 
     private void btnShow1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShow1ActionPerformed
         this.dispose();
+        
     }//GEN-LAST:event_btnShow1ActionPerformed
 
     private void txtMaPhieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaPhieuActionPerformed

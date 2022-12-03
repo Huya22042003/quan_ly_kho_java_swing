@@ -21,7 +21,7 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
     private TpQuanLySanPhamU rud;
     private Page p;
 
-    private int limit = 7;
+    private int limit = 2;
 
     private int offset = 0;
 
@@ -38,22 +38,13 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
         String[] headers = {"STT", "Mã", "Tên"};
         dtm.setColumnIdentifiers(headers);
         listSanPham = serviceSanPham.getAll();
-        showData(listSanPham);
+        showData(serviceSanPham.phanTrang(listSanPham, offset, limit));
     }
 
     public void showData(List<TpQuanLySanPhamCustom> list) {
         dtm.setRowCount(0);
-        int sum = limit + offset;
-        if (list.size() <= sum) {
-            sum = list.size();
-        }
-        for (int i = offset; i < sum; i++) {
-            if (list.get(i) == null) {
-                return;
-            }
 
-            TpQuanLySanPhamCustom sp = list.get(i);
-
+        for (TpQuanLySanPhamCustom sp : list) {
             dtm.addRow(new Object[]{
                 dtm.getRowCount() + 1,
                 sp.getMa(), sp.getTen()
@@ -70,9 +61,9 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
 
     public void searchRadio() {
         if (rdoMa.isSelected()) {
-            showData(listSearch(0));
+            showData(serviceSanPham.phanTrang(listSearch(0), offset, limit));
         } else {
-            showData(listSearch(1));
+            showData(serviceSanPham.phanTrang(listSearch(1), offset, limit));
         }
     }
 
@@ -108,7 +99,6 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
         rdoMa = new utilities.palette.RadioButtonCustom();
         panelRound15 = new utilities.palette.PanelRound();
         jLabel2 = new javax.swing.JLabel();
-        btnChon1 = new utilities.palette.MyButton();
         uWPButton4 = new utilities.palette.UWPButton();
         txtIndex = new javax.swing.JLabel();
         uWPButton5 = new utilities.palette.UWPButton();
@@ -291,19 +281,7 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
                 .addGap(0, 3, Short.MAX_VALUE))
         );
 
-        btnChon1.setBackground(new java.awt.Color(221, 242, 244));
-        btnChon1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Buddy.png"))); // NOI18N
-        btnChon1.setToolTipText("Chọn");
-        btnChon1.setBorderColor(new java.awt.Color(221, 242, 244));
-        btnChon1.setColor(new java.awt.Color(221, 242, 244));
-        btnChon1.setRadius(50);
-        btnChon1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnChon1ActionPerformed(evt);
-            }
-        });
-
-        uWPButton4.setText("PREV");
+        uWPButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/skip-previous-circle-solid-24.png"))); // NOI18N
         uWPButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 uWPButton4ActionPerformed(evt);
@@ -312,7 +290,7 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
 
         txtIndex.setText("1/1");
 
-        uWPButton5.setText("Next");
+        uWPButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/skip-next-circle-solid-24.png"))); // NOI18N
         uWPButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 uWPButton5ActionPerformed(evt);
@@ -324,47 +302,46 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(54, 54, 54)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1091, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGap(34, 34, 34)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1091, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(panelRound15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnChon1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(panelRound16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(39, 39, 39)
-                        .addComponent(panelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(55, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(uWPButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(108, 108, 108)
-                .addComponent(txtIndex, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(122, 122, 122)
-                .addComponent(uWPButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(386, 386, 386))
+                                .addComponent(panelRound16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(47, 47, 47)
+                                .addComponent(panelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(panelRound15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(343, 343, 343)
+                        .addComponent(uWPButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(141, 141, 141)
+                        .addComponent(txtIndex, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(127, 127, 127)
+                        .addComponent(uWPButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(panelRound15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnChon1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
+                .addGap(33, 33, 33)
+                .addComponent(panelRound15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(panelRound16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(panelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(59, 59, 59)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55)
+                .addGap(43, 43, 43)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtIndex, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(uWPButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(uWPButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtIndex, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(uWPButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(uWPButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(45, 45, 45))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -372,7 +349,8 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
         int row = this.tbSanPham.getSelectedRow();
         createView.setVisible(false);
         rud = new TpQuanLySanPhamU();
-        rud.tp = serviceSanPham.findSanPhamByMa(tbSanPham.getValueAt(row, 1).toString());
+        rud.tp = serviceSanPham.phanTrang(listSanPham, offset, limit).get(row);
+//        rud.tp = serviceSanPham.findSanPhamByMa(tbSanPham.getValueAt(row, 1).toString());
         rud.setVisible(true);
         rud.showData();
     }//GEN-LAST:event_tbSanPhamMouseClicked
@@ -388,7 +366,7 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
 
     private void btnHienThiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHienThiActionPerformed
         listSanPham = serviceSanPham.getAll();
-        showData(listSanPham);
+        showData(serviceSanPham.phanTrang(listSanPham, offset, limit));
         clearForm();
     }//GEN-LAST:event_btnHienThiActionPerformed
 
@@ -397,28 +375,23 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
         rud.setVisible(false);
     }//GEN-LAST:event_btnThemActionPerformed
 
-    private void btnChon1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChon1ActionPerformed
-
-    }//GEN-LAST:event_btnChon1ActionPerformed
-
     private void uWPButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uWPButton4ActionPerformed
         index = p.prevIndex(offset, limit, index);
         offset = p.prev(offset, limit);
         loadIndex();
-        showData(listSanPham);
+        showData(serviceSanPham.phanTrang(listSanPham, offset, limit));
     }//GEN-LAST:event_uWPButton4ActionPerformed
 
     private void uWPButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uWPButton5ActionPerformed
         index = p.nextIndex(offset, limit, sizes, index);
         offset = p.next(offset, limit, sizes);
         loadIndex();
-        showData(listSanPham);
+        showData(serviceSanPham.phanTrang(listSanPham, offset, limit));
     }//GEN-LAST:event_uWPButton5ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private utilities.palette.MyButton btnChon;
-    private utilities.palette.MyButton btnChon1;
     private utilities.palette.MyButton btnHienThi;
     private utilities.palette.MyButton btnSearch1;
     private utilities.palette.MyButton btnThem;

@@ -10,7 +10,6 @@ import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import net.miginfocom.swing.MigLayout;
 import views.event.EventMenu;
@@ -27,10 +26,6 @@ import views.swing.scrollbar.ScrollBarCustom;
  */
 public class MenuNhanVienQuanLy extends javax.swing.JPanel {
 
-    /**
-     * Creates new form MenuNhanVienQuanLy
-     */
-     
     public boolean isShowMenu() {
         return showMenu;
     }
@@ -55,7 +50,7 @@ public class MenuNhanVienQuanLy extends javax.swing.JPanel {
     private EventMenuSelected event;
     private EventShowPopupMenu eventShowPopup;
     private boolean enableMenu = true;
-    private boolean showMenu = false;
+    private boolean showMenu = true;
 
     public MenuNhanVienQuanLy() {
         initComponents();
@@ -68,8 +63,10 @@ public class MenuNhanVienQuanLy extends javax.swing.JPanel {
     }
 
     public void initMenuItem() {
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/1.png")), "Dashboard"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/2.png")), "Charts"));
+        
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/3.png")), "Trang chủ"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/1.png")), "Luồng xuất"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/2.png")), "Luồng hoàn xuất"));
         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/3.png")), "Report"));
         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/4.png")), "Message", "Sender", "Inbox", "User"));
         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/5.png")), "Staff", "Sender", "Inbox", "User"));
@@ -113,10 +110,6 @@ public class MenuNhanVienQuanLy extends javax.swing.JPanel {
             }
         }
     }
-    
-    public void addMenuEvent(ActionListener event) {
-        cmdMenu.addActionListener(event);
-    }
 
     @Override
     protected void paintComponent(Graphics grphcs) {
@@ -154,7 +147,7 @@ public class MenuNhanVienQuanLy extends javax.swing.JPanel {
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 609, Short.MAX_VALUE)
+            .addGap(0, 698, Short.MAX_VALUE)
         );
 
         sp.setViewportView(panel);
@@ -172,12 +165,10 @@ public class MenuNhanVienQuanLy extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(sp, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(cmdMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(122, Short.MAX_VALUE))
+            .addComponent(sp, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,7 +176,7 @@ public class MenuNhanVienQuanLy extends javax.swing.JPanel {
                 .addGap(21, 21, 21)
                 .addComponent(cmdMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42)
-                .addComponent(sp, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(sp, javax.swing.GroupLayout.PREFERRED_SIZE, 698, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

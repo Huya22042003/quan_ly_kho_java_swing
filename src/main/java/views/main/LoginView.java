@@ -133,7 +133,7 @@ public class LoginView extends javax.swing.JFrame {
         String email = this.txtEmail.getText();
         if (map.containsKey(email)) {
             if (map.get(email).getMatKhau().equals(txtPassWord.getText())) {
-//                Auth.nhanVien = map.get(email);
+                Auth.nhanVien = map.get(email);
 //                Bot bot = new Bot();
 //                bot.setVisible(true);
                 // check chức vụ
@@ -163,7 +163,7 @@ public class LoginView extends javax.swing.JFrame {
                     java.awt.EventQueue.invokeLater(new Runnable() {
                         @Override
                         public void run() {
-                            new TestAll().setVisible(true);
+                            new TruongPhong().setVisible(true);
                         }
                     });
                     

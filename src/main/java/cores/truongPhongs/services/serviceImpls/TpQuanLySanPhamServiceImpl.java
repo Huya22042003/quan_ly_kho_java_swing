@@ -5,6 +5,7 @@ import cores.truongPhongs.repositories.TpQuanLySanPhamRepository;
 import cores.truongPhongs.services.TpQuanLySanPhamService;
 import domainModels.SanPham;
 import infrastructures.constant.ValidateConstant;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import javax.swing.JLabel;
@@ -105,8 +106,20 @@ public class TpQuanLySanPhamServiceImpl implements TpQuanLySanPhamService {
     }
 
     @Override
-    public List<SanPham> getABC(Long ngayThanhToan) {
-        return rp.getABC(ngayThanhToan);
+    public List<TpQuanLySanPhamCustom> phanTrang(List<TpQuanLySanPhamCustom> list, int offset, int limit) {
+        List<TpQuanLySanPhamCustom> listPhanTrang = new ArrayList<>();
+        int sum = limit + offset;
+        if (list.size() <= sum) {
+            sum = list.size();
+        }
+        for (int i = offset; i < sum; i++) {
+            if (list.get(i) == null) {
+                break;
+            }
+            TpQuanLySanPhamCustom el = list.get(i);
+            listPhanTrang.add(el);
+        }
+        return listPhanTrang;
     }
 
 }

@@ -93,6 +93,34 @@ public class Migrator {
         dv2.setSoLuong(1000);
         session.save(dv2);
         
+        NhanVien a = new NhanVien();
+        a.setDiaChi("Hà Nội");
+        a.setEmail("a");
+        a.setGioiTinh(GioiTinhConstant.NAM);
+        a.setHinhAnh(null);
+        a.setIdChucVu(chucVu);
+        a.setMa(MaTuSinh.gen("NV"));
+        a.setMatKhau("1");
+        a.setNgaySinh(DateTimeUtil.convertDateToTimeStampSecond());
+        a.setSdt("0328843156");
+        a.setTen("Nguyễn Quốc Huy");
+        a.setTrangThai(TrangThaiNhanVienConstant.DANG_HOAT_DONG);
+        session.save(a);
+        
+        NhanVien b = new NhanVien();
+        b.setDiaChi("Hà Nội");
+        b.setEmail("b");
+        b.setGioiTinh(GioiTinhConstant.NAM);
+        b.setHinhAnh(null);
+        b.setIdChucVu(chucVu1);
+        b.setMa(MaTuSinh.gen("NV"));
+        b.setMatKhau("1");
+        b.setNgaySinh(DateTimeUtil.convertDateToTimeStampSecond());
+        b.setSdt("0328843156");
+        b.setTen("Nguyễn Quốc Huy");
+        b.setTrangThai(TrangThaiNhanVienConstant.DANG_HOAT_DONG);
+        session.save(b);
+        
         NhanVien nhanVien = new NhanVien();
         nhanVien.setDiaChi("Hà Nội");
         nhanVien.setEmail("huynqph26782@fpt.edu.vn");
@@ -484,7 +512,7 @@ public class Migrator {
         phx.setGhiChu("Giày hỏng");
         phx.setLiDo("Đứt chỉ");
         phx.setNgayTao(DateTimeUtil.convertDateToTimeStampSecond());
-        phx.setNgayThanhToan(DateTimeUtil.convertDateToTimeStampSecond());
+        phx.setNgayThanhToan(null);
         phx.setPhieuXuat(px);
         phx.setTrangThai(TrangThaiPhieuHoanConstant.CHO_XAC_NHAN);
         session.save(phx);

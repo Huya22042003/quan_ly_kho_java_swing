@@ -14,6 +14,7 @@ import utilities.Converter;
 import utilities.palette.Combobox;
 
 import cores.truongPhongs.repositories.TP_KhachHangRepository;
+import java.util.ArrayList;
 
 public class TP_KhachHangServiceImpl implements TP_KhachHangService {
 
@@ -235,5 +236,22 @@ public class TP_KhachHangServiceImpl implements TP_KhachHangService {
         cbb.addItem(Converter.trangThaiDanhGia(DanhGiaConstant.BAT_ON));
         cbb.addItem(Converter.trangThaiDanhGia(DanhGiaConstant.TAM_ON));
         cbb.addItem(Converter.trangThaiDanhGia(DanhGiaConstant.XAU));
+    }
+
+    @Override
+    public List<TP_KhachHangCustom> phanTrang(List<TP_KhachHangCustom> list, int offset, int limit) {
+        List<TP_KhachHangCustom> listPhanTrang = new ArrayList<>();
+        int sum = limit + offset;
+        if (list.size() <= sum) {
+            sum = list.size();
+        }
+        for (int i = offset; i < sum; i++) {
+            if (list.get(i) == null) {
+                break;
+            }
+            TP_KhachHangCustom el = list.get(i);
+            listPhanTrang.add(el);
+        }
+        return listPhanTrang;
     }
 }

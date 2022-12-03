@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import utilities.Converter;
 import utilities.MsgBox;
 
@@ -86,6 +87,28 @@ public class TpLuongNhapAddChiTietSanPhamOldForm extends javax.swing.JFrame {
 
     public TpXemChiTietSanPhamCustom getFormData() {
         TpXemChiTietSanPhamCustom sp = new TpXemChiTietSanPhamCustom();
+//        boolean check = true;
+//        String soLuong = txtSoLuongNhap.getText();
+//        String giaNhap = txtGiaNhap.getText();
+//        if (soLuong.trim().length() == 0) {
+//            lblSoLuong.setText("Số lượng tồn không được để trống");
+//            check = false;
+//        } else if (!soLuong.matches("\\d+")) {
+//            lblSoLuong.setText("Số lượng tồn không được là chữ");
+//            check = false;
+//        } else {
+//            lblSoLuong.setText("");
+//        }
+//        if (giaNhap.trim().length() == 0) {
+//            lblGiaNhap.setText("Giá bán không được để trống");
+//            check = false;
+//        } else if (giaNhap.matches("[A-Z a-z]+")) {
+//            lblGiaNhap.setText("Giá bán không được là chữ");
+//            check = false;
+//        } else {
+//            lblGiaNhap.setText("");
+//        }
+        
         sp.setDonVi(ct.getDonVi());
         sp.setGiaNhap(BigDecimal.valueOf(Long.parseLong(txtGiaNhap.getText())));
         sp.setHinhAnh(ct.getHinhAnh());
@@ -93,6 +116,7 @@ public class TpLuongNhapAddChiTietSanPhamOldForm extends javax.swing.JFrame {
         sp.setSize(ct.getSize());
         sp.setNamBaoHanh(ct.getNamBaoHanh());
         sp.setSanPham(ct.getSanPham());
+        sp.setHinhAnh(duongdananh);
         sp.setSoLuongTon(Integer.parseInt(txtSoLuongNhap.getText()));
         sp.setTrangThai(ct.getTrangThai().CHO_XAC_NHAN);
         sp.setNgayTao(new Date().getTime());
@@ -129,6 +153,8 @@ public class TpLuongNhapAddChiTietSanPhamOldForm extends javax.swing.JFrame {
         cbbDonVi = new utilities.palette.Combobox();
         cbbTrangThai = new utilities.palette.Combobox();
         txtSize = new utilities.palette.TextField();
+        lblSoLuong = new javax.swing.JLabel();
+        lblGiaNhap = new javax.swing.JLabel();
         uWPButton1 = new utilities.palette.UWPButton();
         erroHinhAnh = new javax.swing.JLabel();
 
@@ -237,13 +263,16 @@ public class TpLuongNhapAddChiTietSanPhamOldForm extends javax.swing.JFrame {
                         .addComponent(cbbMauSac, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(cbbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtSize, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtGiaNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtSoLuongNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTenSp, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtMa, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelRound3Layout.createSequentialGroup()
                         .addGap(1, 1, 1)
-                        .addComponent(cbbSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cbbSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(lblSoLuong, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtGiaNhap, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE))
+                    .addComponent(lblGiaNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
         panelRound3Layout.setVerticalGroup(
@@ -255,15 +284,19 @@ public class TpLuongNhapAddChiTietSanPhamOldForm extends javax.swing.JFrame {
                 .addComponent(txtTenSp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(txtSoLuongNhap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(8, 8, 8)
+                .addComponent(lblSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtGiaNhap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblGiaNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbbMauSac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(txtSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(cbbSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                 .addComponent(cbbDonVi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(cbbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -318,7 +351,7 @@ public class TpLuongNhapAddChiTietSanPhamOldForm extends javax.swing.JFrame {
                         .addGap(38, 38, 38)
                         .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(uWPButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(159, Short.MAX_VALUE))
+                .addContainerGap(199, Short.MAX_VALUE))
             .addComponent(panelRound3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -428,7 +461,9 @@ public class TpLuongNhapAddChiTietSanPhamOldForm extends javax.swing.JFrame {
     private utilities.palette.Combobox cbbSanPham;
     private utilities.palette.Combobox cbbTrangThai;
     private javax.swing.JLabel erroHinhAnh;
+    private javax.swing.JLabel lblGiaNhap;
     private utilities.palette.lable lblHinhAnh;
+    private javax.swing.JLabel lblSoLuong;
     private utilities.palette.PanelRound panelRound1;
     private utilities.palette.PanelRound panelRound2;
     private utilities.palette.PanelRound panelRound3;

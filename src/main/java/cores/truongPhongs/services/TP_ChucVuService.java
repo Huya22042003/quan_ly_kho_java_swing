@@ -21,4 +21,6 @@ public interface TP_ChucVuService {
 
     List<TP_ChucVuCustom> findAllByRadio(String tk, int rdo);
 
+    List<TP_ChucVuCustom> phanTrang(List<TP_ChucVuCustom> list, int offset, int limit);
+
 }
