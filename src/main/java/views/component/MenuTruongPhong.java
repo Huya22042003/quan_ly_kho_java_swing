@@ -55,7 +55,7 @@ public class MenuTruongPhong extends javax.swing.JPanel {
     private EventMenuSelected event;
     private EventShowPopupMenu eventShowPopup;
     private boolean enableMenu = true;
-    private boolean showMenu = false;
+    private boolean showMenu = true;
 
     public MenuTruongPhong() {
         initComponents();
@@ -112,10 +112,6 @@ public class MenuTruongPhong extends javax.swing.JPanel {
                 item.setOpen(false);
             }
         }
-    }
-    
-    public void addMenuEvent(ActionListener event) {
-        cmdMenu.addActionListener(event);
     }
     
     @Override

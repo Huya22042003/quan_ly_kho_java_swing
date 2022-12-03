@@ -957,7 +957,16 @@ public class TpLuongNhapView extends javax.swing.JPanel {
     }//GEN-LAST:event_ngayBatDauInputMethodTextChanged
 
     private void btnPhieuNhapChiTiet1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPhieuNhapChiTiet1ActionPerformed
+        int row = tblPhieuNhap.getSelectedRow();
+        
+        if(row == -1) {
+            JOptionPane.showMessageDialog(this, "Bạn phải chọn một dòng", "ERROR !!!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        TpPhieuNhapCustom pxcs = listPn.get(row);
         ImportView im = new ImportView();
+        im.setIdPhieuNhap(pxcs.getId());
         im.setVisible(true);
     }//GEN-LAST:event_btnPhieuNhapChiTiet1ActionPerformed
 
