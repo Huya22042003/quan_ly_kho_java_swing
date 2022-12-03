@@ -17,7 +17,7 @@ public interface TpXemChiTietSanPhamService {
     TpXemChiTietSanPhamCustom addCTSanPham(TpXemChiTietSanPhamCustom custom);
     
     TpXemChiTietSanPhamCustom updateCTSanPham(TpXemChiTietSanPhamCustom custom);
-
+    void updateCTSP(TpXemChiTietSanPhamCustom custom);
     TrangThaiSanPhamConstanst locTt(int a);
 
     List<TpXemChiTietSanPhamCustom> getListGiaNhap(BigDecimal giaBatDau, BigDecimal giaKetThuc);
