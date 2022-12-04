@@ -17,7 +17,8 @@ import utilities.HibernateUtil;
  * @author asus
  */
 public class ThongKe_SanPham_Repository {
-     public static List<ThongKe_SanPham_Custom> getABC(Long ngaybd , Long ngaykt) {
+
+    public static List<ThongKe_SanPham_Custom> getABC(Long ngaybd, Long ngaykt) {
         List<ThongKe_SanPham_Custom> list = new ArrayList<>();
         Session s = HibernateUtil.getSessionFactory().openSession();
         Query q = s.createNativeQuery("""                                           
@@ -36,8 +37,8 @@ public class ThongKe_SanPham_Repository {
         System.out.println(list.size());
         return list;
     }
-     
-     public static List<ThongKe_SanPham_Custom> getXYZ(Long ngaybd , Long ngaykt) {
+
+    public static List<ThongKe_SanPham_Custom> getXYZ(Long ngaybd, Long ngaykt) {
         List<ThongKe_SanPham_Custom> list = new ArrayList<>();
         Session s = HibernateUtil.getSessionFactory().openSession();
         Query q = s.createNativeQuery("""                                           
@@ -55,8 +56,5 @@ public class ThongKe_SanPham_Repository {
         s.close();
         System.out.println(list.size());
         return list;
-    }
-    public static void main(String[] args) {
-        getXYZ(0L, 1999999999999999L);
     }
 }
