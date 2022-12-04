@@ -3,6 +3,7 @@ package views.main;
 import cores.logins.custom.NhanVienCustom;
 import cores.logins.service.ServiceImpl.UserServiceImpl;
 import cores.logins.service.UserService;
+import cores.nhanVienQuanLy.views.testKiemKeView;
 import cores.truongPhongs.views.TestAll;
 import java.util.concurrent.ConcurrentHashMap;
 import javax.swing.JOptionPane;
@@ -100,7 +101,6 @@ public class LoginView extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 400, 200, 50));
-        btnLogin.getAccessibleContext().setAccessibleName("LOGIN");
 
         jCheckBoxCustom1.setBackground(new java.awt.Color(0, 0, 0));
         jCheckBoxCustom1.setForeground(new java.awt.Color(255, 255, 255));
@@ -112,7 +112,11 @@ public class LoginView extends javax.swing.JFrame {
         btnForgot.setForeground(new java.awt.Color(255, 255, 255));
         btnForgot.setText("Forgot Password ?");
         btnForgot.setBorder(null);
-        btnForgot.setOpaque(true);
+        btnForgot.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnForgotActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnForgot, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 350, 140, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -207,6 +211,10 @@ public class LoginView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Tài khoản không có trong bộ nhớ", "ERROR !!!", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void btnForgotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnForgotActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnForgotActionPerformed
 
     /**
      * @param args the command line arguments

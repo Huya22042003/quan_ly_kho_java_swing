@@ -1,6 +1,7 @@
 package views.main;
 
 import cores.nhanVienQuanLy.views.NVQLQuanLyPhieuXuatView;
+import cores.nhanVienQuanLy.views.NvqlKiemKeView;
 import cores.nhanVienQuanLy.views.NvqlLuongHoanXuatView;
 import cores.truongPhongs.views.TpPhieuNhapView;
 import cores.nhanVienQuanLy.views.NvqlXemThongTinCaNhanForm;
@@ -62,6 +63,10 @@ public class NhanVienQuanLy extends javax.swing.JFrame {
                 if (menuIndex == 2) {
                     main.showForm(new NvqlLuongHoanXuatView());
                 }
+                if (menuIndex == 3) {
+                    main.showForm(new NvqlKiemKeView());
+                }
+                
 
                 if (menuIndex == 7) {
                     if (subMenuIndex == 2) {

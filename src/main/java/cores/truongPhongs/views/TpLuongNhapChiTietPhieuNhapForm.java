@@ -1,11 +1,5 @@
 package cores.truongPhongs.views;
 
-import cores.nhanVienQuanLy.views.*;
-import cores.nhanVienQuanLy.customModels.LuongBanHang_ChiTietSanPhamCustom;
-import cores.nhanVienQuanLy.customModels.Luong_ChiTietPhieuXuatCustom;
-import cores.nhanVienQuanLy.services.Tai_NvqlLuongPhieuXuatService;
-import cores.nhanVienQuanLy.services.serviceImpls.Tai_NvqlLuongPhieuXuatServiceImpl;
-import cores.truongPhongs.customModels.NhaCungCapCustom;
 import cores.truongPhongs.customModels.TpPhieuNhapChiTietCustom;
 import cores.truongPhongs.customModels.TpPhieuNhapCustom;
 import cores.truongPhongs.customModels.TpXemChiTietSanPhamCustom;
@@ -13,19 +7,14 @@ import cores.truongPhongs.services.TpPhieuNhapChiTietService;
 import cores.truongPhongs.services.TpXemChiTietSanPhamService;
 import cores.truongPhongs.services.serviceImpls.TpPhieuNhapChiTietServiceImpl;
 import cores.truongPhongs.services.serviceImpls.TpXemChiTietSanPhamImpl;
-import domainModels.ChiTietPhieuXuat;
-import domainModels.PhieuXuat;
-import infrastructures.constant.KhachHangConstant;
 import infrastructures.constant.MauConstant;
 import infrastructures.constant.TrangThaiPhieuConstant;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import utilities.Converter;
 import utilities.MsgBox;
-
 /**
  *
  * @author admin
@@ -580,6 +569,7 @@ public class TpLuongNhapChiTietPhieuNhapForm extends javax.swing.JFrame {
         MsgBox.alert(this, "Bạn đã update số lượng thành công");
         loadTable(listCtpnCustom);
     }//GEN-LAST:event_tbCtpnMouseClicked
+
 
     /**
      * @param args the command line arguments
