@@ -156,7 +156,7 @@ public class TP_KhachHangServiceImpl implements TP_KhachHangService {
         if (kh.getMatKhau().trim().length() == 0) {
             erroMatKhau.setText("Mật khẩu không được để trống");
             check = false;
-        } else if (!kh.getMatKhau().trim().matches("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,15})")) {
+        } else if (!kh.getMatKhau().trim().matches("^[A-Z a-z 0-9]+$")) {
             erroMatKhau.setText("Mật khẩu sai định dạng");
             check = false;
 

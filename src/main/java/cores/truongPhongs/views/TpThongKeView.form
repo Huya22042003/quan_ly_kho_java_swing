@@ -31,9 +31,8 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="materialTabbed1" min="-2" pref="616" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
+              <Component id="materialTabbed1" min="-2" pref="616" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -75,7 +74,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="panelRound1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="14" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -84,7 +83,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="panelRound1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -115,13 +114,13 @@
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="panelRound8" max="32767" attributes="0"/>
                               <Component id="panelRound6" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="16" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -144,23 +143,20 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="panelRound15" max="32767" attributes="0"/>
+                                  <Component id="panelRound15" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                           <Component id="panelRound11" max="32767" attributes="0"/>
                                           <Component id="panelRound5" max="32767" attributes="0"/>
                                       </Group>
-                                      <EmptySpace pref="46" max="32767" attributes="0"/>
+                                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="panelRound9" min="-2" max="-2" attributes="0"/>
-                                          <Group type="102" attributes="0">
-                                              <Component id="panelRound10" max="32767" attributes="0"/>
-                                              <EmptySpace min="8" pref="8" max="-2" attributes="0"/>
-                                          </Group>
+                                          <Component id="panelRound9" max="32767" attributes="0"/>
+                                          <Component id="panelRound10" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -268,7 +264,7 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="1" attributes="0">
                                       <Component id="lblSoSpDaBan" max="32767" attributes="0"/>
-                                      <Component id="jLabel3" pref="269" max="32767" attributes="0"/>
+                                      <Component id="jLabel3" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
@@ -331,7 +327,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jLabel14" max="32767" attributes="0"/>
+                                  <Component id="jLabel14" pref="453" max="32767" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
                               <Component id="lblTongSp" alignment="0" max="32767" attributes="0"/>
@@ -396,9 +392,8 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="lblSoSpHoanXuat" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jLabel5" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jLabel5" alignment="0" pref="205" max="32767" attributes="0"/>
                                   </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -461,9 +456,8 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="lblSoSpHoanNhap" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jLabel7" alignment="0" pref="279" max="32767" attributes="0"/>
+                                      <Component id="jLabel7" alignment="0" pref="212" max="32767" attributes="0"/>
                                   </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -572,9 +566,9 @@
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jScrollPane2" min="-2" pref="260" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                               <Component id="panelRound17" max="32767" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -708,7 +702,7 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="lblTongDoanhThuTheoNgay" pref="46" max="32767" attributes="0"/>
+                                  <Component id="lblTongDoanhThuTheoNgay" max="32767" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -718,13 +712,13 @@
                         <Component class="javax.swing.JLabel" name="jLabel4">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                              <Font name="Segoe UI" size="14" style="1"/>
+                              <Font name="Segoe UI" size="18" style="1"/>
                             </Property>
                             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="ff" green="ff" red="ff" type="rgb"/>
                             </Property>
                             <Property name="horizontalAlignment" type="int" value="0"/>
-                            <Property name="text" type="java.lang.String" value="T&#x1ed5;ng doanh thu theo ng&#xe0;y"/>
+                            <Property name="text" type="java.lang.String" value="T&#x1ed5;ng doanh thu "/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JLabel" name="lblTongDoanhThuTheoNgay">
@@ -774,13 +768,13 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="txtSearch1" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                                      <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                                           <Component id="rdoMaHD" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="rdoMaNv" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="rdoTenNv" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
+                                      <Component id="txtSearch1" min="-2" pref="33" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="32767" attributes="0"/>
                               </Group>
@@ -888,7 +882,7 @@
                           <Component id="chartPie1" min="-2" max="-2" attributes="0"/>
                           <Component id="chartLine1" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="595" max="32767" attributes="0"/>
+                      <EmptySpace pref="434" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -897,7 +891,7 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="chartLine1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="33" max="32767" attributes="0"/>
+                      <EmptySpace pref="39" max="32767" attributes="0"/>
                       <Component id="chartPie1" min="-2" pref="307" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   </Group>

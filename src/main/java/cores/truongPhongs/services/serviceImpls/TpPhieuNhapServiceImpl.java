@@ -149,4 +149,9 @@ public class TpPhieuNhapServiceImpl implements TpPhieuNhapService {
         return listPhanTrang;
     }
 
+    @Override
+    public List<TpPhieuNhapCustom> getListPnById(String ghiChu) {
+        return repo.getListPnById(ghiChu);
+    }
+
 }
