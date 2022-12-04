@@ -75,7 +75,7 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
                 m.getMa(),
                 m.getTen(),
                 m.getSoLuongTon(),
-                m.getDonVi(),
+                m.getDonVi().getDonViGoc(),
                 Converter.trangThaiMauSac(m.getMau()),
                 m.getNamBaoHanh(),
                 m.getGiaBan() == null ? "Chưa có" : formatter.format(m.getGiaBan())
