@@ -42,11 +42,14 @@ public class ChiTietSanPhamRepository {
         return list;
     }
     
-    public boolean addChiTietPhieuXuat(UUID idPhieuXuat, ChiTietSanPham ctsp, int sl) {
+    public boolean addChiTietPhieuXuat(UUID idPhieuXuat, UUID idCtsp, int sl) {
         Transaction tran = null;
         try (Session s = HibernateUtil.getSessionFactory().openSession()) {
             tran = s.beginTransaction();
             PhieuXuat px = s.find(PhieuXuat.class, idPhieuXuat);
+            ChiTietSanPham ctsp = s.find(ChiTietSanPham.class, idCtsp);
+            ctsp.setSoLuongTon(ctsp.getSoLuongTon() - sl);
+            s.update(ctsp);
             ChiTietPhieuXuat ctpx = new ChiTietPhieuXuat(px, ctsp, sl);
             s.save(ctpx);
             tran.commit();

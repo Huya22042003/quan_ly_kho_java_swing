@@ -30,5 +30,10 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService{
         });
         return ctsp;
     }
+
+    @Override
+    public boolean addChiTietPhieuXuat(UUID idPhieuXuat, UUID idChiTietSanPham, int soLuong) {
+        return rp.addChiTietPhieuXuat(idPhieuXuat, idChiTietSanPham, soLuong);
+    }
     
 }
