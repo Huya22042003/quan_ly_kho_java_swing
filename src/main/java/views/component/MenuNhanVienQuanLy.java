@@ -65,13 +65,10 @@ public class MenuNhanVienQuanLy extends javax.swing.JPanel {
     public void initMenuItem() {
         
         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/3.png")), "Trang chủ"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/1.png")), "Luồng xuất"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/2.png")), "Luồng hoàn xuất"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/3.png")), "Report"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/4.png")), "Message", "Sender", "Inbox", "User"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/5.png")), "Staff", "Sender", "Inbox", "User"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/6.png")), "Student", "Menu 001", "Menu 002", "Menu 003"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/7.png")), "Library", "Menu 001", "Menu 002", "Menu 003"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/1.png")), "Phiếu xuất"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/2.png")), "Phiếu hoàn xuất"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/3.png")), "Kiểm kê"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/4.png")), "Sản phẩm"));
         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/Gear.png")), "Cài đặt", "Thay đổi thông tin", "Hỗ trợ", "Đăng xuất"));
     
     }

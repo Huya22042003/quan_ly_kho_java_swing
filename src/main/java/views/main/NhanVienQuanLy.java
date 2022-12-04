@@ -1,10 +1,10 @@
 package views.main;
 
-import cores.nhanVienQuanLy.views.NVQLQuanLyPhieuXuatView;
+import cores.nhanVienQuanLy.views.NvqlKiemKeView;
 import cores.nhanVienQuanLy.views.NvqlLuongHoanXuatView;
-import cores.truongPhongs.views.TpPhieuNhapView;
 import cores.nhanVienQuanLy.views.NvqlXemThongTinCaNhanForm;
 import cores.nhanVienQuanLy.views.Tai_NvqlLuongPhieuXuatView;
+import cores.truongPhongs.views.TpQuanLyChiTietSanPhamForm;
 import views.component.Header;
 import views.event.EventMenuSelected;
 import views.event.EventShowPopupMenu;
@@ -62,6 +62,13 @@ public class NhanVienQuanLy extends javax.swing.JFrame {
                 if (menuIndex == 2) {
                     main.showForm(new NvqlLuongHoanXuatView());
                 }
+                if (menuIndex == 3) {
+                    main.showForm(new NvqlKiemKeView());
+                }
+                if (menuIndex == 4) {
+                    main.showForm(new TpQuanLyChiTietSanPhamForm());
+                }
+                
 
                 if (menuIndex == 7) {
                     if (subMenuIndex == 2) {
@@ -121,12 +128,12 @@ public class NhanVienQuanLy extends javax.swing.JFrame {
             }
         });
         
-        header.openNavBar(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                main.showForm(new NvqlXemThongTinCaNhanForm());
-            }
-        });
+//        header.openNavBar(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent ae) {
+//                main.showForm(new NvqlXemThongTinCaNhanForm());
+//            }
+//        });
         menu.initMenuItem();
         bg.add(menu, "w 170!, spany 2");    // Span Y 2cell
         bg.add(header, "h 100!, wrap");

@@ -23,6 +23,11 @@ public class NvqlXemThongTinCaNhanServiceImpl implements NvqlXemThongTinCaNhanSe
     public List<NvqlXemThongTinCaNhanCustom> getAll() {
         return nvghXemThongTinCaNhanRepository.getAll();
     }
+    
+    @Override
+    public NvqlXemThongTinCaNhanCustom getMatKhauByEmail(String email) {
+        return nvghXemThongTinCaNhanRepository.getMatKhauByEmail(email);
+    }
 
     @Override
     public void doiMatKhau(NhanVienCustom nvc) {

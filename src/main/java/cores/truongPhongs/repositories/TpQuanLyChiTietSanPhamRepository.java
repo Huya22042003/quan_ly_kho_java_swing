@@ -76,21 +76,6 @@ public class TpQuanLyChiTietSanPhamRepository {
         return true;
     }
 
-    public boolean deleteCTSanPham(UUID id) {
-        Transaction tran = null;
-        try ( Session s = HibernateUtil.getSessionFactory().openSession()) {
-            tran = s.beginTransaction();
-            ChiTietSanPham cs = s.find(ChiTietSanPham.class, id);
-            s.delete(cs);
-            tran.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            tran.rollback();
-            return false;
-        }
-        return true;
-    }
-
     public TpQuanLyChiTietSanPhamCustom findById(UUID id) {
         TpQuanLyChiTietSanPhamCustom sp = new TpQuanLyChiTietSanPhamCustom();
         try ( Session s = HibernateUtil.getSessionFactory().openSession()) {

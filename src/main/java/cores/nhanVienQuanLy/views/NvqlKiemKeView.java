@@ -6,9 +6,7 @@ import cores.nhanVienQuanLy.services.NvqlLuongKiemKeCtpkService;
 import cores.nhanVienQuanLy.services.NvqlLuongKiemKeService;
 import cores.nhanVienQuanLy.services.serviceImpls.NvqlLuongKiemKeCtpkServiceImpl;
 import cores.nhanVienQuanLy.services.serviceImpls.NvqlLuongKiemKeServiceImpl;
-import cores.truongPhongs.customModels.TpPhieuNhapCustom;
 import domainModels.NhanVien;
-import infrastructures.constant.TrangThaiPhieuConstant;
 import infrastructures.constant.TrangThaiPhieuKiemConstant;
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,7 +17,6 @@ import utilities.Auth;
 import utilities.Converter;
 import utilities.MaTuSinh;
 import utilities.MsgBox;
-import utilities.Page;
 
 /**
  *
@@ -36,17 +33,17 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
     private NhanVien nhanVien;
     private NvqlKiemKeCtpkView ctpkView;
     private NvqlKiemKeCtspView ctspView;
-//    private List<NvqlLuongKiemKeCtpkCustom> list 
-
+    private List<NvqlLuongKiemKeCtpkCustom> listCtpkCustom = new ArrayList<>();
     public NvqlKiemKeView() {
 
         initComponents();
         kiemKeService = new NvqlLuongKiemKeServiceImpl();
         ctpkService = new NvqlLuongKiemKeCtpkServiceImpl();
+        
         ctpkView = new NvqlKiemKeCtpkView();
         ctspView = new NvqlKiemKeCtspView();
         listPhieuKiemKeCustom = kiemKeService.getAll();
-        fillTablePhieuKiemKe(listPhieuKiemKeCustom);
+        hienThi();
         nhanVien = new NhanVien();
         nhanVien.setId(Auth.nhanVien.getId());
         nhanVien.setMa(Auth.nhanVien.getMa());
@@ -59,12 +56,12 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
         nhanVien.setNgaySinh(Auth.nhanVien.getNgaySinh());
         nhanVien.setSdt(Auth.nhanVien.getSdt());
         nhanVien.setTen(Auth.nhanVien.getTen());
-        nhanVien.setTrangThai(Auth.nhanVien.getTrangThai());    
+        nhanVien.setTrangThai(Auth.nhanVien.getTrangThai());
         rdoMa.setSelected(true);
         cbbTrangThai.setSelectedIndex(0);
     }
 
-     public List<NvqlLuongKiemKeCustom> listSearch(int rdo) {
+    public List<NvqlLuongKiemKeCustom> listSearch(int rdo) {
         // nhập vào 
         String timKiem = this.txtSearch.getText();
         List<NvqlLuongKiemKeCustom> listTimKiem = new ArrayList<>();
@@ -83,7 +80,7 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
                 case 1:
                     search = el.getIdNV().getTen();
                     break;
-              
+
             }
             for (int i = 0; i <= search.length(); i++) {
                 String newMa = search.substring(0, i);
@@ -103,7 +100,7 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
     public List<NvqlLuongKiemKeCustom> checkCbb(TrangThaiPhieuKiemConstant cs) {
         List<NvqlLuongKiemKeCustom> listTimKiem = new ArrayList<>();
         listPhieuKiemKeCustom.forEach(el -> {
-            if (el.getTrangThai()== cs) {
+            if (el.getTrangThai() == cs) {
                 listTimKiem.add(el);
             }
         });
@@ -113,29 +110,28 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
     public void searchRadio() {
         if (rdoMa.isSelected()) {
             fillTablePhieuKiemKe(listSearch(0));
-        } 
+        }
         if (rdoNhanVien.isSelected()) {
             fillTablePhieuKiemKe(listSearch(1));
-        } 
+        }
     }
-    
+
     public void TimKiemTheoNgay() {
         if (ngayBatDau.getDate() == null) {
-            
+
             return;
         }
         if (ngayKetThuc.getDate() == null) {
-          
+
             return;
         }
-        
 
         if (rdoNgayTao.isSelected()) {
             listPhieuKiemKeCustom = kiemKeService.getListByNgayTao(ngayBatDau.getDate().getTime(), ngayKetThuc.getDate().getTime());
             fillTablePhieuKiemKe(listPhieuKiemKeCustom);
-        } 
+        }
     }
-    
+
     public void fillTablePhieuKiemKe(List<NvqlLuongKiemKeCustom> list) {
         DefaultTableModel model = (DefaultTableModel) tbPhieuKiemKe.getModel();
         model.setRowCount(0);
@@ -143,7 +139,6 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
         list.forEach((m) -> {
             Date ngayTao = new Date(m.getNgayTao());
             model.addRow(new Object[]{
-                //            Object[] rowData = {
                 model.getRowCount() + 1,
                 m.getMaPhieuKiem(),
                 ngayTao,
@@ -334,12 +329,12 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
         panelRound8.setLayout(panelRound8Layout);
         panelRound8Layout.setHorizontalGroup(
             panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound8Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(panelRound8Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
                 .addComponent(myButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(cbbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelRound8Layout.setVerticalGroup(
             panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -457,7 +452,7 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
         panelRound9Layout.setHorizontalGroup(
             panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound9Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addContainerGap()
                 .addComponent(rdoNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -467,7 +462,7 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16)
                 .addComponent(ngayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         panelRound9Layout.setVerticalGroup(
             panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -581,21 +576,21 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
+                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(panelRound1Layout.createSequentialGroup()
                         .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(panelRound4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(panelRound1Layout.createSequentialGroup()
                         .addComponent(panelRound15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(panelRound9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panelRound8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(panelRound8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelRound3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -676,7 +671,6 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
         }
         NvqlKiemKeCtspView create = new NvqlKiemKeCtspView();
         create.PhieuKiemKe(chon());
-        System.out.println(tbPhieuKiemKe.getValueAt(tbPhieuKiemKe.getSelectedRow(), 1).toString());
         create.setVisible(true);
     }//GEN-LAST:event_btnThemSPKiemActionPerformed
 
@@ -705,11 +699,7 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
         txtTenNhanVien.setText(tbPhieuKiemKe.getValueAt(s, 3).toString());
         txtTrangThai.setText(tbPhieuKiemKe.getValueAt(s, 4).toString());
         NvqlLuongKiemKeCustom kiemKeCustom = mouseClickPhieuKiem(s);
-        System.out.println(kiemKeCustom.getId());
         List<NvqlLuongKiemKeCtpkCustom> listCtpk = ctpkService.getAll(listPhieuKiemKeCustom.get(s).getId());
-//        for (NvqlLuongKiemKeCtpkCustom a : listCtpk) {
-//            
-//        }
 
     }//GEN-LAST:event_tbPhieuKiemKeMouseClicked
 
@@ -731,6 +721,11 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
             MsgBox.alert(this, "Bạn phải chọn 1 phiếu kiểm kê");
             return;
         }
+        listCtpkCustom = ctpkService.getAll(listPhieuKiemKeCustom.get(row).getId());
+        if(listCtpkCustom.size() == 0){
+            MsgBox.alert(this, "Bạn phải thêm sản phẩm trước khi xác nhận");
+            return;
+        }
         if (listPhieuKiemKeCustom.get(row).getTrangThai() == TrangThaiPhieuKiemConstant.DA_XAC_NHAN) {
             MsgBox.alert(this, "Phiếu kiểm kê đã hoàn tất. Vui lòng mời bạn thanh toán phiếu xuất khác");
             return;
@@ -746,7 +741,7 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
     private void cbbTrangThaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbTrangThaiActionPerformed
         // TODO add your handling code here:
         searchRadio();
-        
+
     }//GEN-LAST:event_cbbTrangThaiActionPerformed
 
     private void txtSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSearchMouseClicked
