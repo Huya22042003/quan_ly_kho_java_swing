@@ -7,6 +7,7 @@ import cores.truongPhongs.customModels.TpXemChiTietSanPhamCustom;
 import domainModels.DonVi;
 import domainModels.SanPham;
 import infrastructures.constant.MauConstant;
+import infrastructures.constant.TrangThaiSanPhamConstanst;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
@@ -25,8 +26,6 @@ public interface TpQuanLyChiTietSanPhamService {
 
     boolean updateCTSanPham(TpQuanLyChiTietSanPhamCustom custom);
 
-    boolean deleteCTSanPham(UUID id);
-
     TpQuanLyChiTietSanPhamCustom findCTSanPhamById(UUID id);
 
     TpQuanLyChiTietSanPhamCustom findCTSanPhamGia(BigDecimal gia);
@@ -34,7 +33,7 @@ public interface TpQuanLyChiTietSanPhamService {
     List<TpQuanLyChiTietSanPhamCustom> findAllByRadio(int rdo, MauConstant tt, String tk);
 
     TpQuanLyChiTietSanPhamCustom checkValidate(UUID donVi, String namBH, UUID sanPham, String hinhAnh, String giaNhap, String giaBan, String soLuong, String size,
-                                               JLabel erroHinhAnh, JLabel erroGiaNhap, JLabel erroGiaBan, JLabel erroSoLuong, JLabel erroSize, JLabel erroNamBH, MauConstant mau);
+                                               int trangThai, JLabel erroHinhAnh, JLabel erroGiaNhap, JLabel erroGiaBan, JLabel erroSoLuong, JLabel erroSize, JLabel erroNamBH, MauConstant mau);
 
     public List<TpQuanLyDonViCustom> getAllDonVi();
 
@@ -57,4 +56,5 @@ public interface TpQuanLyChiTietSanPhamService {
 
     List<TpQuanLyChiTietSanPhamCustom> phanTrang(List<TpQuanLyChiTietSanPhamCustom> list, int offset, int limit);
 
+    public TrangThaiSanPhamConstanst tt(int item);
 }
