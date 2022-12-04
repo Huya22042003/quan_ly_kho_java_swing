@@ -54,9 +54,10 @@ public class TpXemChiTietSanPhamRepository {
         }
         return sp;
     }
+
     public ChiTietSanPham updateCTSanPham(ChiTietSanPham sp) {
         Transaction tran = null;
-        try ( Session s = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session s = HibernateUtil.getSessionFactory().openSession()) {
             tran = s.beginTransaction();
             s.update(sp);
             tran.commit();
@@ -66,6 +67,17 @@ public class TpXemChiTietSanPhamRepository {
             return null;
         }
         return sp;
+    }
+
+    public void updateCTSP(ChiTietSanPham sp) {
+        Session s = HibernateUtil.getSessionFactory().openSession();    
+        try{
+            Transaction tran = s.beginTransaction();
+            s.update(sp);
+            tran.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public DonVi findByTen(String donViGoc) {
@@ -80,7 +92,8 @@ public class TpXemChiTietSanPhamRepository {
         DonVi d = (DonVi) q.getResultList();
         return d;
     }
-     public List<TpXemChiTietSanPhamCustom> getListByGiaNhap(BigDecimal giaBatDau, BigDecimal giaKetThuc) {
+
+    public List<TpXemChiTietSanPhamCustom> getListByGiaNhap(BigDecimal giaBatDau, BigDecimal giaKetThuc) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery("select new cores.truongPhongs.customModels.TpXemChiTietSanPhamCustom ("
                 + "ct.id as id,"

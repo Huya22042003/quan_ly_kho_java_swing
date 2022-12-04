@@ -2,12 +2,14 @@ package cores.nhanVienQuanLy.services.serviceImpls;
 
 import cores.nhanVienQuanLy.customModels.LuongBanHang_ChiTietSanPhamCustom;
 import cores.nhanVienQuanLy.customModels.Luong_ChiTietPhieuXuatCustom;
+import cores.nhanVienQuanLy.customModels.PhieuXuatCustom;
 import cores.nhanVienQuanLy.repositories.Tai_NvqlLuongPhieuXuatRepository;
 import cores.nhanVienQuanLy.services.Tai_NvqlLuongPhieuXuatService;
 import domainModels.ChiTietPhieuXuat;
 import domainModels.ChiTietSanPham;
 import domainModels.NhanVien;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -27,7 +29,6 @@ public class Tai_NvqlLuongPhieuXuatServiceImpl implements Tai_NvqlLuongPhieuXuat
     public List<LuongBanHang_ChiTietSanPhamCustom> getListCTSanPhamBanHang(BigDecimal giaBatDau, BigDecimal giaKetThuc) {
         return rp.getListCTSanPhamBanHang(giaBatDau, giaKetThuc);
     }
-
 
     @Override
     public List<Luong_ChiTietPhieuXuatCustom> getListCTPhieuXuatByID(UUID idPX) {
@@ -81,6 +82,23 @@ public class Tai_NvqlLuongPhieuXuatServiceImpl implements Tai_NvqlLuongPhieuXuat
     @Override
     public NhanVien getNhanVienByMa(String ma) {
         return rp.getNhanVienByMa(ma);
+    }
+
+    @Override
+    public List<LuongBanHang_ChiTietSanPhamCustom> phanTrang(List<LuongBanHang_ChiTietSanPhamCustom> list, int offset, int limit) {
+        List<LuongBanHang_ChiTietSanPhamCustom> listPhanTrang = new ArrayList<>();
+        int sum = limit + offset;
+        if (list.size() <= sum) {
+            sum = list.size();
+        }
+        for (int i = offset; i < sum; i++) {
+            if (list.get(i) == null) {
+                break;
+            }
+            LuongBanHang_ChiTietSanPhamCustom el = list.get(i);
+            listPhanTrang.add(el);
+        }
+        return listPhanTrang;
     }
 
 }

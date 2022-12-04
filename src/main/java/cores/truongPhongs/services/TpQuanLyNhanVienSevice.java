@@ -43,4 +43,7 @@ public interface TpQuanLyNhanVienSevice {
     public ChucVu findIDCV(UUID id);
 
     List<TpNhanVienCustom> findAllByRadio(String ten, TrangThaiNhanVienConstant tt, int rdo);
+
+    List<TpNhanVienCustom> phanTrang(List<TpNhanVienCustom> list, int offset, int limit);
+
 }

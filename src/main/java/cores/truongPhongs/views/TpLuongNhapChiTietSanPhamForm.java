@@ -66,6 +66,7 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
                 sp.getSanPham().getTen(),
                 sp.getSoLuongTon(),
                 sp.getGiaNhap(),
+                sp.getGiaBan() == null ? "Chưa có giá bán" : sp.getGiaBan(),
                 sp.getDonVi().getDonViGoc(),
                 Converter.trangThaiMauSac(sp.getMau()),
                 sp.getSize(),
@@ -220,11 +221,11 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
 
             },
             new String [] {
-                "STT", "Mã sản phẩm", "Tên sản phẩm", "Số lượng tồn", "Giá nhập", "Đơn vị", "Màu", "Size", "Năm bảo hành", "Trạng thái"
+                "STT", "Mã sản phẩm", "Tên sản phẩm", "Số lượng tồn", "Giá nhập", "Giá bắn", "Đơn vị", "Màu", "Size", "Năm bảo hành", "Trạng thái"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -237,6 +238,9 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(tblCtsp);
+        if (tblCtsp.getColumnModel().getColumnCount() > 0) {
+            tblCtsp.getColumnModel().getColumn(5).setResizable(false);
+        }
 
         panelRound4.setBackground(new java.awt.Color(67, 130, 187));
         panelRound4.setRoundBottomLeft(50);
@@ -620,6 +624,7 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
         if (row == -1) {
             return;
         }
+
         TpXemChiTietSanPhamCustom tpXemChiTietSanPhamCustom = mouseClickSanPham(row);
 
         txtMa.setText(tblCtsp.getValueAt(row, 1).toString());
@@ -630,37 +635,40 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
         txtMau.setText(tblCtsp.getValueAt(row, 6).toString());
         txtNamBH.setText(tblCtsp.getValueAt(row, 7).toString());
         txtTrangThai.setText(tblCtsp.getValueAt(row, 8).toString());
-        
 
-        if (phieuNhap.getTrangThai().equals(TrangThaiPhieuConstant.DA_THANH_TOAN)) {
-            MsgBox.alert(this, "Phiếu nhập này đã ở trạng thái đã thanh toán nên không thể sửa! ");
-            return;
+        if (tpXemChiTietSanPhamCustom.getTrangThai().equals(TrangThaiSanPhamConstanst.CHO_XAC_NHAN)) {
+                String suaSL = JOptionPane.showInputDialog("Bạn muốn nhập giá bán là bao nhiêu ?");
+                int sl = 0;
+                try {
+                    sl = Integer.parseInt(suaSL);
+                    if (sl <= 0) {
+                        JOptionPane.showMessageDialog(this, "Bạn phải nhập lớn hơn 0");
+                        return;
+                    }
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(this, "Bạn phải nhập là kiểu số");
+                    return;
+                }
+                BigDecimal ab = new BigDecimal(sl);
+                tpXemChiTietSanPhamCustom.setGiaBan(ab);
+                tpXemChiTietSanPhamCustom.setTrangThai(TrangThaiSanPhamConstanst.DA_MO_BAN);
+                ctspService.updateCTSP(tpXemChiTietSanPhamCustom);
+                listSp.set(row, tpXemChiTietSanPhamCustom);
+                MsgBox.alert(this, "Bạn đã update sản phẩm thành công");
+            }else {
+            fillData(row);
+            createViewAddSpOld.ct = listSp.get(row);
+            createViewAddSpOld.setPhieuNhap(phieuNhap);
+            createViewAddSpOld.setVisible(true);
+            createViewAddSpOld.showData();
         }
-//        String suaSL = JOptionPane.showInputDialog("Bạn muốn nhập số lượng bao nhiêu ?");
-//        int sl = 0;
-//        try {
-//            sl = Integer.parseInt(suaSL);
-//            if (sl <= 0) {
-//                JOptionPane.showMessageDialog(this, "Bạn phải nhập lớn hơn 0");
-//                return;
-//            }
-//        } catch (NumberFormatException e) {
-//            JOptionPane.showMessageDialog(this, "Bạn phải nhập là kiểu số");
-//            return;
-//        }
+
 //        String suaĐG = JOptionPane.showInputDialog("Bạn muốn đơn giá bao nhiêu ?");
 //
 //        JOptionPane.showMessageDialog(this, suaĐG + suaSL);
-
 //        TpXemChiTietSanPhamCustom ctsp = listSp.get(row);
 //          TpLuongNhapAddChiTietSanPhamForm add = new TpLuongNhapAddChiTietSanPhamForm();
 //          add.setVisible(true);
-        fillData(row);
-        createViewAddSpOld.ct = listSp.get(row);
-        createViewAddSpOld.setPhieuNhap(phieuNhap);
-        createViewAddSpOld.setVisible(true);
-        createViewAddSpOld.showData();
-
 
     }//GEN-LAST:event_tblCtspMouseClicked
 

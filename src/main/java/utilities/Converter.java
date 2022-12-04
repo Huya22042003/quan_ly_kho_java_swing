@@ -273,7 +273,8 @@ public class Converter {
                 trangThai = "Trắng";
                 break;
             default:
-                throw new AssertionError();
+                trangThai = "Khác";
+                break;
         }
 
         return trangThai;

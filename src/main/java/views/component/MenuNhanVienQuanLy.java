@@ -10,7 +10,6 @@ import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import net.miginfocom.swing.MigLayout;
 import views.event.EventMenu;
@@ -64,8 +63,10 @@ public class MenuNhanVienQuanLy extends javax.swing.JPanel {
     }
 
     public void initMenuItem() {
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/1.png")), "Dashboard"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/2.png")), "Charts"));
+        
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/3.png")), "Trang chủ"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/1.png")), "Luồng xuất"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/2.png")), "Luồng hoàn xuất"));
         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/3.png")), "Report"));
         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/4.png")), "Message", "Sender", "Inbox", "User"));
         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/5.png")), "Staff", "Sender", "Inbox", "User"));

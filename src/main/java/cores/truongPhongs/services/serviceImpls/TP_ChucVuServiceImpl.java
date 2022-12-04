@@ -4,6 +4,7 @@ import cores.truongPhongs.customModels.TP_ChucVuCustom;
 import cores.truongPhongs.repositories.TP_ChucVuRepository;
 import cores.truongPhongs.services.TP_ChucVuService;
 import domainModels.ChucVu;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import javax.swing.JLabel;
@@ -91,6 +92,23 @@ public class TP_ChucVuServiceImpl implements TP_ChucVuService {
             default:
                 return null;
         }
+    }
+
+    @Override
+    public List<TP_ChucVuCustom> phanTrang(List<TP_ChucVuCustom> list, int offset, int limit) {
+        List<TP_ChucVuCustom> listPhanTrang = new ArrayList<>();
+        int sum = limit + offset;
+        if (list.size() <= sum) {
+            sum = list.size();
+        }
+        for (int i = offset; i < sum; i++) {
+            if (list.get(i) == null) {
+                break;
+            }
+            TP_ChucVuCustom el = list.get(i);
+            listPhanTrang.add(el);
+        }
+        return listPhanTrang;
     }
 
 }

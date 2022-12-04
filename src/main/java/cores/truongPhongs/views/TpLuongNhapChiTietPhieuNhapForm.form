@@ -60,22 +60,20 @@
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
                               <Group type="103" alignment="1" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="textField12" min="-2" pref="181" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                      <Component id="textField11" min="-2" pref="181" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="textField13" min="-2" pref="181" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                                      <Component id="txtNamBH" min="-2" pref="181" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
+                                      <Component id="txtGiaNhap" min="-2" pref="181" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="167" max="-2" attributes="0"/>
                                       <Component id="panelRound15" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="textField1" min="-2" pref="181" max="-2" attributes="0"/>
+                                      <Component id="txtMaPhieu" min="-2" pref="181" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="textField9" min="-2" pref="181" max="-2" attributes="0"/>
+                                      <Component id="txtTenSP" min="-2" pref="181" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                      <Component id="textField8" min="-2" pref="181" max="-2" attributes="0"/>
+                                      <Component id="txtMau" min="-2" pref="181" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="textField10" min="-2" pref="181" max="-2" attributes="0"/>
+                                      <Component id="txtDonVi" min="-2" pref="181" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Component id="panelRound4" alignment="1" min="-2" max="-2" attributes="0"/>
@@ -104,17 +102,16 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="textField1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="textField9" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="textField8" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="textField10" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtMaPhieu" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtTenSP" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtMau" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtDonVi" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                                  <Component id="textField13" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="textField11" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="textField12" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtGiaNhap" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtNamBH" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Component id="panelRound15" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -488,8 +485,9 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="utilities.palette.TextField" name="textField1">
+        <Component class="utilities.palette.TextField" name="txtMaPhieu">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="f4" green="f2" red="dd" type="rgb"/>
             </Property>
@@ -500,8 +498,9 @@
             <Property name="labelText" type="java.lang.String" value="M&#xe3; phi&#x1ebf;u"/>
           </Properties>
         </Component>
-        <Component class="utilities.palette.TextField" name="textField8">
+        <Component class="utilities.palette.TextField" name="txtMau">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="f4" green="f2" red="dd" type="rgb"/>
             </Property>
@@ -512,8 +511,9 @@
             <Property name="labelText" type="java.lang.String" value="M&#xe0;u"/>
           </Properties>
         </Component>
-        <Component class="utilities.palette.TextField" name="textField9">
+        <Component class="utilities.palette.TextField" name="txtTenSP">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="f4" green="f2" red="dd" type="rgb"/>
             </Property>
@@ -524,8 +524,9 @@
             <Property name="labelText" type="java.lang.String" value="T&#xea;n s&#x1ea3;n ph&#x1ea9;m"/>
           </Properties>
         </Component>
-        <Component class="utilities.palette.TextField" name="textField10">
+        <Component class="utilities.palette.TextField" name="txtDonVi">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="f4" green="f2" red="dd" type="rgb"/>
             </Property>
@@ -536,20 +537,9 @@
             <Property name="labelText" type="java.lang.String" value="&#x110;&#x1a1;n v&#x1ecb;"/>
           </Properties>
         </Component>
-        <Component class="utilities.palette.TextField" name="textField11">
+        <Component class="utilities.palette.TextField" name="txtNamBH">
           <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="f4" green="f2" red="dd" type="rgb"/>
-            </Property>
-            <Property name="toolTipText" type="java.lang.String" value=""/>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="12" style="1"/>
-            </Property>
-            <Property name="labelText" type="java.lang.String" value="S&#x1ed1; l&#x1b0;&#x1ee3;ng"/>
-          </Properties>
-        </Component>
-        <Component class="utilities.palette.TextField" name="textField12">
-          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="f4" green="f2" red="dd" type="rgb"/>
             </Property>
@@ -560,8 +550,9 @@
             <Property name="labelText" type="java.lang.String" value="N&#x103;m b&#x1ea3;o h&#xe0;nh"/>
           </Properties>
         </Component>
-        <Component class="utilities.palette.TextField" name="textField13">
+        <Component class="utilities.palette.TextField" name="txtGiaNhap">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="f4" green="f2" red="dd" type="rgb"/>
             </Property>

@@ -3,8 +3,12 @@ package views.main;
 import cores.nhanVienQuanLy.views.NvqlXemThongTinCaNhanForm;
 import cores.truongPhongs.views.TP_ChucVuForm;
 import cores.truongPhongs.views.TP_KhachHangForm;
+import cores.truongPhongs.views.TP_QuanLyPhieuHoanNhap;
 import cores.truongPhongs.views.TpDonViView;
+import cores.truongPhongs.views.TpLuongNhapView;
 import cores.truongPhongs.views.TpQuanLyChiTietSanPhamForm;
+import cores.truongPhongs.views.TpQuanLyNhanVien;
+import cores.truongPhongs.views.TpThongKeView;
 import views.component.Header;
 import views.event.EventMenuSelected;
 import views.event.EventShowPopupMenu;
@@ -66,10 +70,28 @@ public class TruongPhong extends javax.swing.JFrame {
                     main.showForm(new TpQuanLyChiTietSanPhamForm());
                 }
                 if (menuIndex == 4) {
+                    main.showForm(new TpQuanLyNhanVien());
+                }
+                if (menuIndex == 5) {
                     main.showForm(new TpDonViView());
                 }
+                if (menuIndex == 5) {
+                    main.showForm(new TpDonViView());
+                }
+                if (menuIndex == 6) {
+                    main.showForm(new TpThongKeView());
+                }
+                if (menuIndex == 7) {
 
-                if (menuIndex == 10) {
+                    if (subMenuIndex == 0) {
+                        main.showForm(new TpLuongNhapView());
+                    }
+                    if (subMenuIndex == 1) {
+                        main.showForm(new TP_QuanLyPhieuHoanNhap());
+                    }
+                }
+
+                if (menuIndex == 8) {
                     if (subMenuIndex == 2) {
                         Auth.clear();
                         frame.setVisible(false);
@@ -81,13 +103,13 @@ public class TruongPhong extends javax.swing.JFrame {
                                 }
                             }
                         } catch (ClassNotFoundException ex) {
-                            java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                            ex.printStackTrace();
                         } catch (InstantiationException ex) {
-                            java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                            ex.printStackTrace();
                         } catch (IllegalAccessException ex) {
-                            java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                            ex.printStackTrace();
                         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-                            java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                            ex.printStackTrace();
                         }
                         //</editor-fold>
                         //</editor-fold>
@@ -126,7 +148,7 @@ public class TruongPhong extends javax.swing.JFrame {
                 frame.setExtendedState(frame.ICONIFIED);
             }
         });
-        
+
         header.openNavBar(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -164,7 +186,7 @@ public class TruongPhong extends javax.swing.JFrame {
 
         //  Start with this form
         main.showForm(new TrangChu());
-    
+
     }
 
     @SuppressWarnings("unchecked")
