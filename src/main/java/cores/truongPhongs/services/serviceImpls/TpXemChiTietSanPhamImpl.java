@@ -60,7 +60,7 @@ public class TpXemChiTietSanPhamImpl implements TpXemChiTietSanPhamService {
     @Override
     public List<TpXemChiTietSanPhamCustom> getListGiaNhap(BigDecimal giaBatDau, BigDecimal giaKetThuc) {
         return repo.getListByGiaNhap(giaBatDau, giaKetThuc);
-   }
+    }
 
     @Override
     public TpXemChiTietSanPhamCustom updateCTSanPham(TpXemChiTietSanPhamCustom custom) {
@@ -77,9 +77,27 @@ public class TpXemChiTietSanPhamImpl implements TpXemChiTietSanPhamService {
         sp.setSanPham(custom.getSanPham());
         sp.setNgayTao(custom.getNgayTao());
         custom.setId(repo.updateCTSanPham(sp).getId());
-        
+
         return custom;
 
+    }
+
+    @Override
+    public void updateCTSP(TpXemChiTietSanPhamCustom custom) {
+        ChiTietSanPham sp = new ChiTietSanPham();
+        sp.setGiaBan(custom.getGiaBan());
+        sp.setGiaNhap(custom.getGiaNhap());
+        sp.setHinhAnh(custom.getHinhAnh());
+        sp.setSoLuongTon(custom.getSoLuongTon());
+        sp.setMau(custom.getMau());
+        sp.setDonVi(custom.getDonVi());
+        sp.setSize(custom.getSize());
+        sp.setTrangThai(custom.getTrangThai());
+        sp.setNamBaoHanh(custom.getNamBaoHanh());
+        sp.setSanPham(custom.getSanPham());
+        sp.setNgayTao(custom.getNgayTao());
+        sp.setId(custom.getId());
+        repo.updateCTSP(sp);
     }
 
 }
