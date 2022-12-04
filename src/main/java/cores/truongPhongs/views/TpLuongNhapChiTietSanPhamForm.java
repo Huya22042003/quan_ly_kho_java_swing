@@ -46,6 +46,7 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
         listSp = ctspService.listCtsp();
         loadTableNcc(listSp);
         rdoMaSanPham.setSelected(true);
+        cbbTrangThai.setSelectedIndex(0);
     }
 
     public TpLuongNhapChiTietSanPhamForm(UUID id) {

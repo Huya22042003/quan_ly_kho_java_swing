@@ -32,6 +32,7 @@ public class TpLuongNhapThemNccVaoPhieuNhapForm extends javax.swing.JFrame {
         createView = new TpCreateNCCView();
         listNcc = nccService.getList();
         loadTableNcc(listNcc);
+        cbbTrangThai.setSelectedIndex(0);
     }
 
         public List<NhaCungCapCustom> listSearch(int rdo) {

@@ -74,8 +74,9 @@ public class TpQuanlyNhaCungCapServiceImpl implements TpQuanlyNhaCungCapService 
     public void loadComboxTrangThai(Combobox cbbTrangThai) {
         cbbTrangThai.removeAll();
         cbbTrangThai.addItem(KhachHangConstant.DANG_LAM_VIEC);
-        cbbTrangThai.addItem(KhachHangConstant.SAP_BO);
         cbbTrangThai.addItem(KhachHangConstant.DA_NGUNG_CUNG_CAP);
+        cbbTrangThai.addItem(KhachHangConstant.SAP_BO);
+
     }
 
     @Override
@@ -100,9 +101,9 @@ public class TpQuanlyNhaCungCapServiceImpl implements TpQuanlyNhaCungCapService 
             case 0:
                 return KhachHangConstant.DANG_LAM_VIEC;
             case 1:
-                return KhachHangConstant.DA_NGUNG_CUNG_CAP;
-            case 2:
                 return KhachHangConstant.SAP_BO;
+            case 2:
+                return KhachHangConstant.DA_NGUNG_CUNG_CAP;
             default:
                 return null;
         }

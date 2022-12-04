@@ -38,6 +38,7 @@ public class TpLuongNhapChiTietPhieuNhapForm extends javax.swing.JFrame {
         phieuNhapChiTietService = new TpPhieuNhapChiTietServiceImpl();
         ctspService = new TpXemChiTietSanPhamImpl();
         listSp = ctspService.listCtsp();
+        loadCbb();
     }
 
     public void loadTable(List<TpPhieuNhapChiTietCustom> list) {
@@ -56,6 +57,18 @@ public class TpLuongNhapChiTietPhieuNhapForm extends javax.swing.JFrame {
             };
             dtm.addRow(rowData);
         }
+    }
+
+    public void loadCbb() {
+        cbbMauSac.addItem(Converter.trangThaiMauSac(MauConstant.VANG));
+        cbbMauSac.addItem(Converter.trangThaiMauSac(MauConstant.XANH_LA));
+        cbbMauSac.addItem(Converter.trangThaiMauSac(MauConstant.DO));
+        cbbMauSac.addItem(Converter.trangThaiMauSac(MauConstant.XANH_DUONG));
+        cbbMauSac.addItem(Converter.trangThaiMauSac(MauConstant.HONG));
+        cbbMauSac.addItem(Converter.trangThaiMauSac(MauConstant.CAM));
+        cbbMauSac.addItem(Converter.trangThaiMauSac(MauConstant.DEN));
+        cbbMauSac.addItem(Converter.trangThaiMauSac(MauConstant.TRANG));
+
     }
 
     public List<TpPhieuNhapChiTietCustom> listSearch(int rdo) {
@@ -125,6 +138,7 @@ public class TpLuongNhapChiTietPhieuNhapForm extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtGia = new javax.swing.JTextField();
         buttonGradient1 = new utilities.palette.ButtonGradient();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         panelRound1 = new utilities.palette.PanelRound();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbCtpn = new utilities.palette.TableDark_1();
@@ -241,11 +255,13 @@ public class TpLuongNhapChiTietPhieuNhapForm extends javax.swing.JFrame {
         panelRound4.setRoundTopRight(50);
 
         rdoMaSp.setBackground(new java.awt.Color(67, 130, 187));
+        buttonGroup1.add(rdoMaSp);
         rdoMaSp.setForeground(new java.awt.Color(255, 255, 255));
         rdoMaSp.setText("Mã sản phẩm");
         rdoMaSp.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
         rdoTenSp.setBackground(new java.awt.Color(67, 130, 187));
+        buttonGroup1.add(rdoTenSp);
         rdoTenSp.setForeground(new java.awt.Color(255, 255, 255));
         rdoTenSp.setText("Tên sản phẩm");
         rdoTenSp.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -257,12 +273,12 @@ public class TpLuongNhapChiTietPhieuNhapForm extends javax.swing.JFrame {
         });
 
         rdoNbh.setBackground(new java.awt.Color(67, 130, 187));
+        buttonGroup1.add(rdoNbh);
         rdoNbh.setForeground(new java.awt.Color(255, 255, 255));
         rdoNbh.setText("Năm bảo hành");
         rdoNbh.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
         cbbMauSac.setBackground(new java.awt.Color(67, 130, 187));
-        cbbMauSac.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Blue", "Red", "Pig" }));
         cbbMauSac.setSelectedIndex(-1);
         cbbMauSac.setToolTipText("Chọn màu sắc sản phẩm muốn tìm kiếm");
         cbbMauSac.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -696,9 +712,9 @@ public class TpLuongNhapChiTietPhieuNhapForm extends javax.swing.JFrame {
     private javax.swing.JDialog UpdateCtsp;
     private utilities.palette.MyButton btnShow18;
     private utilities.palette.MyButton btnShow19;
+    private javax.swing.ButtonGroup buttonGroup1;
     private utilities.palette.ButtonGradient buttonGradient1;
     private utilities.palette.Combobox cbbMauSac;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
