@@ -7,14 +7,14 @@ import cores.truongPhongs.services.TpPhieuNhapChiTietService;
 import cores.truongPhongs.services.TpXemChiTietSanPhamService;
 import cores.truongPhongs.services.serviceImpls.TpPhieuNhapChiTietServiceImpl;
 import cores.truongPhongs.services.serviceImpls.TpXemChiTietSanPhamImpl;
-import domainModels.ChiTietPhieuXuat;
-import domainModels.PhieuXuat;
-import infrastructures.constant.KhachHangConstant;
 import infrastructures.constant.MauConstant;
+import infrastructures.constant.TrangThaiPhieuConstant;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import utilities.Converter;
+import utilities.MsgBox;
 /**
  *
  * @author admin

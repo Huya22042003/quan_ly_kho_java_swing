@@ -34,7 +34,7 @@ public class NvqlLuongKiemKeCtpkRepository {
         Session s = HibernateUtil.getSessionFactory().openSession();
         try {
             Transaction trans = s.beginTransaction();
-            s.save(ctpx);
+            s.saveOrUpdate(ctpx);
             trans.commit();
             s.close();
         } catch (Exception e) {
