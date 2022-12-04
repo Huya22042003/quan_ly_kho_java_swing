@@ -2,22 +2,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package cores.truongPhongs.views;
+package cores.webCam.view;
 
+import cores.truongPhongs.views.TpQuanLyChiTietSanPhamForm;
 import java.awt.FlowLayout;
 
 /**
  *
- * @author MMC
+ * @author QUOC HUY
  */
-public class TestAll extends javax.swing.JFrame {
+public class test extends javax.swing.JDialog {
 
     /**
-     * Creates new form TestAll
+     * Creates new form test
      */
-    public TestAll() {
+    public test() {
         initComponents();
-        TpLuongNhapView a = new TpLuongNhapView();
+        WebCamPanel a = new WebCamPanel();
         this.add(a);
         this.setLayout(new FlowLayout());
         this.pack();
@@ -66,20 +67,20 @@ public class TestAll extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TestAll.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(test.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TestAll.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(test.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TestAll.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(test.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TestAll.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(test.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TestAll().setVisible(true);
+                new test().setVisible(true);
             }
         });
     }

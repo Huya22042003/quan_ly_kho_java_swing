@@ -204,9 +204,6 @@
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbCtpnMouseClicked"/>
-              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -421,9 +418,6 @@
                 </Property>
                 <Property name="radius" type="int" value="50"/>
               </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lbHinhAnhMouseClicked"/>
-              </Events>
             </Component>
           </SubComponents>
         </Container>

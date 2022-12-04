@@ -440,18 +440,23 @@ public class Tai_LuongHoanXuat_ChiTietPXView extends javax.swing.JFrame {
                 } else {
                     btnAnh.setIcon(new ImageIcon(ctPhieuXuat.getIdChiTietSp().getHinhAnh()));
                 }
+                for (LuongBanHang_ChiTietSanPhamCustom ctspct : luongService.getListCTSanPham()) {
+                    if (listCTPX.get(row).getIdChiTietSp().getId().equals(ctspct.getId())) {
+                        ctspct.setSoLuongTon(ctspct.getSoLuongTon() + sl);
+                        luongService.updateCTSP(ctspct);
+                    }
+                }
                 return;
             }
         }
 
-        for (LuongBanHang_ChiTietSanPhamCustom ctsp : luongService.getListCTSanPham()) {
-            if (listCTPX.get(row).getIdChiTietSp().getId().equals(ctsp.getId())) {
-                ctsp.setSoLuongTon(ctsp.getSoLuongTon() + sl);
-                luongService.updateCTSP(ctsp);
-                System.out.println("update lại số lượng trong chi tiết sản phẩm");
+        for (LuongBanHang_ChiTietSanPhamCustom ctspct : luongService.getListCTSanPham()) {
+            if (listCTPX.get(row).getIdChiTietSp().getId().equals(ctspct.getId())) {
+                ctspct.setSoLuongTon(ctspct.getSoLuongTon() + sl);
+                luongService.updateCTSP(ctspct);
             }
         }
-        System.out.println(ctPhieuXuat.getSoLuong() - sl);
+//        System.out.println(ctPhieuXuat.getSoLuong() - sl);
         ctPhieuXuat.setSoLuong(ctPhieuXuat.getSoLuong() - sl);
         luongService.updateCTPX(ctPhieuXuat);
 //        MsgBox.alert(this, "Update số lượng thành công");

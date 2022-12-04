@@ -296,7 +296,7 @@ public class TP_QuanLyPhieuHoanNhap_sp extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("SẢN PHẨM ĐƯỢC HOÀN");
+        jLabel3.setText("DANH SÁCH SẢN PHẨM TRONG PHIẾU NHẬP");
 
         javax.swing.GroupLayout panelRound5Layout = new javax.swing.GroupLayout(panelRound5);
         panelRound5.setLayout(panelRound5Layout);
@@ -437,17 +437,19 @@ public class TP_QuanLyPhieuHoanNhap_sp extends javax.swing.JFrame {
                 this.errorSoLuong.setText("Số lượng nhập phải nhỏ hơn số lượng tồn");
                 return;
             }
-            if (hoanNhapService.addSanPhamInPhieuHoan(listSP.get(row).getId(), idPhieuHoanNhap.getId(), sl)) {
-                System.out.println(sl);
-                JOptionPane.showMessageDialog(this, "Thêm thành công", "Thành CÔng !!!", JOptionPane.INFORMATION_MESSAGE);
-                this.setVisible(false);
-            } else {
-                JOptionPane.showMessageDialog(this, "Thêm thất bại", "ERROR !!!", JOptionPane.ERROR_MESSAGE);
-            }
+
         } catch (NumberFormatException e) {
             e.printStackTrace();
             this.errorSoLuong.setText("Số lượng phải nhập đúng định dạng số");
             return;
+        }
+        
+        if (hoanNhapService.addSanPhamInPhieuHoan(listSP.get(row).getId(), idPhieuHoanNhap.getId(), sl)) {
+            System.out.println(sl);
+            JOptionPane.showMessageDialog(this, "Thêm thành công", "Thành CÔng !!!", JOptionPane.INFORMATION_MESSAGE);
+            this.setVisible(false);
+        } else {
+            JOptionPane.showMessageDialog(this, "Thêm thất bại", "ERROR !!!", JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_myButton6ActionPerformed

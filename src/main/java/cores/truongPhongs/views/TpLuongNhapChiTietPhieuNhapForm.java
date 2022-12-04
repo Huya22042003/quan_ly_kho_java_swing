@@ -35,20 +35,21 @@ public class TpLuongNhapChiTietPhieuNhapForm extends javax.swing.JFrame {
     private TpPhieuNhapCustom phieuNhap;
     private TpPhieuNhapChiTietService phieuNhapChiTietService;
     private List<TpPhieuNhapChiTietCustom> listCtpnCustom = new ArrayList<>();
+
     private List<TpXemChiTietSanPhamCustom> listXem = new ArrayList<>();
     private TpLuongUpdateChiTietSanPham rud;
     String duongdananh = getClass().getResource("/icons/FPT_Polytechnic_doc.png").getPath();
+
 
     public void setPhieuNhap(TpPhieuNhapCustom phieuNhap) {
         this.phieuNhap = phieuNhap;
     }
 
     public TpLuongNhapChiTietPhieuNhapForm() {
-        rud = new TpLuongUpdateChiTietSanPham();
         initComponents();
         phieuNhapChiTietService = new TpPhieuNhapChiTietServiceImpl();
     }
-
+    
     public void loadTable(List<TpPhieuNhapChiTietCustom> list) {
         DefaultTableModel dtm = (DefaultTableModel) this.tbCtpn.getModel();
         dtm.setRowCount(0);
@@ -67,7 +68,7 @@ public class TpLuongNhapChiTietPhieuNhapForm extends javax.swing.JFrame {
         }
     }
 
-    public List<TpPhieuNhapChiTietCustom> listSearch(int rdo) {
+     public List<TpPhieuNhapChiTietCustom> listSearch(int rdo) {
         // nhập vào 
         String timKiem = this.txtSearch.getText();
         List<TpPhieuNhapChiTietCustom> listTimKiem = new ArrayList<>();
@@ -86,7 +87,7 @@ public class TpLuongNhapChiTietPhieuNhapForm extends javax.swing.JFrame {
                     search = el.getIdSanPham().getSanPham().getTen();
                     break;
                 case 2:
-                    search = String.valueOf(el.getIdSanPham().getNamBaoHanh());
+                    search = String.valueOf(el.getIdSanPham().getNamBaoHanh()) ;
                     break;
             }
             for (int i = 0; i <= search.length(); i++) {
@@ -107,16 +108,13 @@ public class TpLuongNhapChiTietPhieuNhapForm extends javax.swing.JFrame {
     public List<TpPhieuNhapChiTietCustom> checkCbb(MauConstant cs) {
         List<TpPhieuNhapChiTietCustom> listTimKiem = new ArrayList<>();
         listCtpnCustom.forEach(el -> {
-            if (el.getIdSanPham().getMau() == cs) {
+            if (el.getIdSanPham().getMau()== cs) {
                 listTimKiem.add(el);
             }
         });
         return listTimKiem;
     }
 
-    public TpPhieuNhapChiTietCustom mouseClickSanPham(int row) {
-        return listCtpnCustom.get(row);
-    }
     public void searchRadio() {
         if (rdoMaSp.isSelected()) {
             loadTable(listSearch(0));
@@ -126,7 +124,6 @@ public class TpLuongNhapChiTietPhieuNhapForm extends javax.swing.JFrame {
             loadTable(listSearch(2));
         }
     }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -181,11 +178,6 @@ public class TpLuongNhapChiTietPhieuNhapForm extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
-            }
-        });
-        tbCtpn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbCtpnMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tbCtpn);
@@ -297,11 +289,6 @@ public class TpLuongNhapChiTietPhieuNhapForm extends javax.swing.JFrame {
         lbHinhAnh.setBorderColor(new java.awt.Color(221, 242, 244));
         lbHinhAnh.setColor(new java.awt.Color(221, 242, 244));
         lbHinhAnh.setRadius(50);
-        lbHinhAnh.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lbHinhAnhMouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout panelRound8Layout = new javax.swing.GroupLayout(panelRound8);
         panelRound8.setLayout(panelRound8Layout);
@@ -533,7 +520,7 @@ public class TpLuongNhapChiTietPhieuNhapForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnShow18ActionPerformed
 
     private void btnShow19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShow19ActionPerformed
-        this.dispose();
+         this.dispose();
     }//GEN-LAST:event_btnShow19ActionPerformed
 
     private void cbbMauSacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbMauSacActionPerformed
@@ -545,6 +532,7 @@ public class TpLuongNhapChiTietPhieuNhapForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         searchRadio();
     }//GEN-LAST:event_txtSearchMouseClicked
+
 
     private void lbHinhAnhMouseClicked(java.awt.event.MouseEvent evt) {                                       
         try {
@@ -562,15 +550,21 @@ public class TpLuongNhapChiTietPhieuNhapForm extends javax.swing.JFrame {
         }
     }
 
-    private void tbCtpnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbCtpnMouseClicked
-        int row = tbCtpn.getSelectedRow();
-        TpPhieuNhapChiTietCustom tp = mouseClickSanPham(row);
-        rud.setVisible(true);
+    private void tbCtpnMouseClicked(java.awt.event.MouseEvent evt) {                                    
+//        int row = tbCtpn.getSelectedRow();
+//        TpPhieuNhapChiTietCustom tp = mouseClickSanPham(row);
+//        rud.setVisible(true);
         
-    }//GEN-LAST:event_tbCtpnMouseClicked
+    }                                   
 
             
                                       
+
+    private void myButton8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_myButton8MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_myButton8MouseClicked
+
+
 
     /**
      * @param args the command line arguments
