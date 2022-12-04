@@ -3,9 +3,29 @@ package views.main;
 import cores.logins.custom.NhanVienCustom;
 import cores.logins.service.ServiceImpl.UserServiceImpl;
 import cores.logins.service.UserService;
-import cores.nhanVienQuanLy.views.testKiemKeView;
-import cores.truongPhongs.views.TestAll;
+import cores.nhanVienQuanLy.customModels.NvqlXemThongTinCaNhanCustom;
+import cores.nhanVienQuanLy.services.NvqlXemThongTinCaNhanService;
+import cores.nhanVienQuanLy.services.serviceImpls.NvqlXemThongTinCaNhanServiceImpl;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
 import utilities.Auth;
 
@@ -21,18 +41,36 @@ public class LoginView extends javax.swing.JFrame {
     private UserService service;
 
     private ConcurrentHashMap<String, NhanVienCustom> map;
+    private NvqlXemThongTinCaNhanService khXemThongTinCaNhanService = new NvqlXemThongTinCaNhanServiceImpl();
+    private List<NvqlXemThongTinCaNhanCustom> listNvql = new ArrayList<>();
+    private String filename = "rememberMe.txt";
 
     public LoginView() {
         service = new UserServiceImpl();
         map = new ConcurrentHashMap<>();
         initComponents();
         setLocationRelativeTo(null);
+        File f = new File(filename);
+        try {
+            FileInputStream fis = new FileInputStream(f);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            String[] hehe = (String[]) ois.readObject();
+            txtEmail.setText(hehe[0]);
+            txtPassWord.setText(hehe[1]);
+            fis.close();
+            ois.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(LoginView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(LoginView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LoginView.class.getName()).log(Level.SEVERE, null, ex);
+        }
         txtEmail.setOpaque(false);
         txtPassWord.setOpaque(false);
         btnLogin.setOpaque(false);
         btnForgot.setOpaque(false);
         map = service.mapUserKeyEmail();
-        System.out.println(map.containsKey("a"));
         Auth.clear();
     }
 
@@ -51,7 +89,7 @@ public class LoginView extends javax.swing.JFrame {
         txtPassWord = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         btnLogin = new utilities.palette.UWPButton();
-        jCheckBoxCustom1 = new utilities.palette.JCheckBoxCustom();
+        chkRemember = new utilities.palette.JCheckBoxCustom();
         btnForgot = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -102,11 +140,11 @@ public class LoginView extends javax.swing.JFrame {
         });
         jPanel1.add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 400, 200, 50));
 
-        jCheckBoxCustom1.setBackground(new java.awt.Color(0, 0, 0));
-        jCheckBoxCustom1.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBoxCustom1.setText("Remember me ?");
-        jCheckBoxCustom1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jPanel1.add(jCheckBoxCustom1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 350, -1, -1));
+        chkRemember.setBackground(new java.awt.Color(0, 0, 0));
+        chkRemember.setForeground(new java.awt.Color(255, 255, 255));
+        chkRemember.setText("Remember me ?");
+        chkRemember.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jPanel1.add(chkRemember, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 350, -1, -1));
 
         btnForgot.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnForgot.setForeground(new java.awt.Color(255, 255, 255));
@@ -134,6 +172,33 @@ public class LoginView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        String[] U_P = {
+            this.txtEmail.getText(),
+            this.txtPassWord.getText()
+        };
+
+        String[] U_P_N = {
+            "",
+            ""
+        };
+
+        File f = new File(filename);
+        try {
+            FileOutputStream fos = new FileOutputStream(f);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            if (this.chkRemember.isSelected()) {
+                oos.writeObject(U_P);
+            } else {
+                oos.writeObject(U_P_N);
+            }
+            oos.close();
+        } catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(this, "Không truy xuất được File");
+            ex.printStackTrace();
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Lỗi vào ra");
+            ex.printStackTrace();
+        }
         String email = this.txtEmail.getText();
         if (map.containsKey(email)) {
             if (map.get(email).getMatKhau().equals(txtPassWord.getText())) {
@@ -169,7 +234,7 @@ public class LoginView extends javax.swing.JFrame {
                             new TruongPhong().setVisible(true);
                         }
                     });
-                    
+
                 } else if (Auth.nhanVien.getChucVu().getMa().equalsIgnoreCase("CV0002")) {
                     this.setVisible(false);
                     JOptionPane.showMessageDialog(this, "Thành công", "Welcome", JOptionPane.PLAIN_MESSAGE);
@@ -212,7 +277,45 @@ public class LoginView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnForgotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnForgotActionPerformed
-        // TODO add your handling code here:
+        if (txtEmail.getText().equalsIgnoreCase("")) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập vào email của bạn!", "ERROR !!!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        NvqlXemThongTinCaNhanCustom kh = new NvqlXemThongTinCaNhanCustom();
+        kh = khXemThongTinCaNhanService.getMatKhauByEmail(txtEmail.getText());
+        if (kh == null) {
+            JOptionPane.showMessageDialog(this, "Email không tồn tại trong hệ thống!", "ERROR !!!", JOptionPane.ERROR_MESSAGE);
+            return;
+        } else {
+            String ToEmail = txtEmail.getText();
+            String FromEmail = "haipxph26772@fpt.edu.vn";
+            String Pass = "79802003hai";
+            Properties prop = new Properties();
+            prop.put("mail.smtp.host", "smtp.gmail.com");
+            prop.put("mail.smtp.port", "587");
+            prop.put("mail.smtp.auth", "true");
+            prop.put("mail.smtp.starttls.enable", "true"); //TLS
+
+            Session session = Session.getInstance(prop, new javax.mail.Authenticator() {
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(FromEmail, Pass);
+                }
+            });
+            try {
+                Message message = new MimeMessage(session);
+                message.setFrom(new InternetAddress(FromEmail));
+                message.addRecipient(Message.RecipientType.TO,
+                        new InternetAddress(ToEmail)
+                );
+                message.setText("Your password is: " + kh.getMatKhau() + ", Please don't be stupid!!");
+                Transport.send(message);
+                JOptionPane.showMessageDialog(this, "Mật khẩu của bạn đã được gửi về mail, vui lòng check mail của bạn!");
+                System.out.println("Done success");
+            } catch (MessagingException e) {
+                e.printStackTrace();
+            }
+        }
+
     }//GEN-LAST:event_btnForgotActionPerformed
 
     /**
@@ -254,7 +357,7 @@ public class LoginView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnForgot;
     private utilities.palette.UWPButton btnLogin;
-    private utilities.palette.JCheckBoxCustom jCheckBoxCustom1;
+    private utilities.palette.JCheckBoxCustom chkRemember;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -151,7 +151,7 @@ public class TpLuongNhapChiTietPhieuNhapForm extends javax.swing.JFrame {
         btnShow18 = new utilities.palette.MyButton();
         btnShow19 = new utilities.palette.MyButton();
 
-        UpdateCtsp.setSize(new java.awt.Dimension(400, 300));
+        UpdateCtsp.setSize(new java.awt.Dimension(400, 138));
 
         jLabel1.setText("Số lượng bạn muốn thay đổi");
 

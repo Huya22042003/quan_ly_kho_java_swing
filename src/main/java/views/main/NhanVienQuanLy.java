@@ -128,12 +128,12 @@ public class NhanVienQuanLy extends javax.swing.JFrame {
             }
         });
         
-        header.openNavBar(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                main.showForm(new NvqlXemThongTinCaNhanForm());
-            }
-        });
+//        header.openNavBar(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent ae) {
+//                main.showForm(new NvqlXemThongTinCaNhanForm());
+//            }
+//        });
         menu.initMenuItem();
         bg.add(menu, "w 170!, spany 2");    // Span Y 2cell
         bg.add(header, "h 100!, wrap");

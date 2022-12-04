@@ -27,11 +27,39 @@ public class NvqlXemThongTinCaNhanRepository {
                 + " m.gioiTinh as gioiTinh,"
                 + " m.diaChi as diaChi"
                 + " )"
-                + " from domainModels.NhanVien m where m.id = 'C63B9A29-B6B5-CA47-A92F-38354C216504' ");
+                + " from domainModels.NhanVien m");
 //        query.setParameter("id", id);
         List<NvqlXemThongTinCaNhanCustom> list = query.getResultList();
         session.close();
         return list;
+    }
+    
+    public NvqlXemThongTinCaNhanCustom getMatKhauByEmail(String email) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        javax.persistence.Query query = session.createQuery("select "
+                + " new cores.nhanVienQuanLy.customModels.NvqlXemThongTinCaNhanCustom("
+                + " m.id,"
+                + " m.ma as ma,"
+                + " m.ten as ten,"
+                + " m.sdt as sdt,"
+                + " m.email as email,"
+                + " m.matKhau as matKhau,"
+                + " m.ngaySinh as ngaySinh,"
+                + " m.gioiTinh as gioiTinh,"
+                + " m.diaChi as diaChi"
+                + " )"
+                + " from domainModels.NhanVien m where m.email = :email");
+        query.setParameter("email", email);
+        NvqlXemThongTinCaNhanCustom kh = null;
+        try {
+            kh = (NvqlXemThongTinCaNhanCustom) query.getSingleResult();
+        } catch (Exception e) {
+        }
+        session.close();
+        if (kh == null) {
+            return null;
+        }
+        return kh;
     }
 
     public NvqlXemThongTinCaNhanCustom findByMatKhau(String matKhau) {
@@ -48,7 +76,7 @@ public class NvqlXemThongTinCaNhanRepository {
                 + " m.gioiTinh as gioiTinh,"
                 + " m.diaChi as diaChi"
                 + " )"
-                + " from domainModels.NhanVien m where m.id = 'C63B9A29-B6B5-CA47-A92F-38354C216504' AND m.matKhau = :matKhau ");
+                + " from domainModels.NhanVien m where m.matKhau = :matKhau ");
         query.setParameter("matKhau", matKhau);
         NvqlXemThongTinCaNhanCustom kh = null;
         try {
