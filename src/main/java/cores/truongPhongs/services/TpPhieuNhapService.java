@@ -14,7 +14,7 @@ import javax.swing.JLabel;
  * @author Acer
  */
 public interface TpPhieuNhapService {
-    
+     List<TpPhieuNhapCustom> getListPnById(String ghiChu);
     List<TpPhieuNhapCustom> getListPn();
     TpPhieuNhapCustom addPn(TpPhieuNhapCustom p);
     boolean updatePn(TpPhieuNhapCustom p);
