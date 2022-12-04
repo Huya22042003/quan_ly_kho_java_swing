@@ -1,11 +1,10 @@
 package views.main;
 
-import cores.nhanVienQuanLy.views.NVQLQuanLyPhieuXuatView;
 import cores.nhanVienQuanLy.views.NvqlKiemKeView;
 import cores.nhanVienQuanLy.views.NvqlLuongHoanXuatView;
-import cores.truongPhongs.views.TpPhieuNhapView;
 import cores.nhanVienQuanLy.views.NvqlXemThongTinCaNhanForm;
 import cores.nhanVienQuanLy.views.Tai_NvqlLuongPhieuXuatView;
+import cores.truongPhongs.views.TpQuanLyChiTietSanPhamForm;
 import views.component.Header;
 import views.event.EventMenuSelected;
 import views.event.EventShowPopupMenu;
@@ -65,6 +64,9 @@ public class NhanVienQuanLy extends javax.swing.JFrame {
                 }
                 if (menuIndex == 3) {
                     main.showForm(new NvqlKiemKeView());
+                }
+                if (menuIndex == 4) {
+                    main.showForm(new TpQuanLyChiTietSanPhamForm());
                 }
                 
 
