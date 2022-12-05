@@ -39,6 +39,7 @@ public class TpLuongNhapView extends javax.swing.JPanel {
     private TpLuongNhapChiTietSanPhamForm ctspView;
     private TpLuongNhapChiTietPhieuNhapForm ctpnView;
     private TpPhieuNhapChiTietService tpncts;
+    private List<TpPhieuNhapChiTietCustom> listCtpn = new ArrayList<>();
 
     public TpLuongNhapView() {
         initComponents();
@@ -71,6 +72,7 @@ public class TpLuongNhapView extends javax.swing.JPanel {
 
             }
         });
+        cbbTrangThai.setSelectedIndex(0);
     }
 
     public TpLuongNhapView(UUID id) {
@@ -148,6 +150,12 @@ public class TpLuongNhapView extends javax.swing.JPanel {
         return listTimKiem;
     }
 
+//    public void findPnById(){
+//        if(rdoMa.isSelected()){
+//             List<TpPhieuNhapCustom> list =    phieuNhapService.getListPnById((txtSearch.getText()));
+//             loadTablePn(list);
+//        }
+//    }
     public void searchRadio() {
         if (rdoMa.isSelected()) {
             loadTablePn(listSearch(0));
@@ -787,7 +795,8 @@ public class TpLuongNhapView extends javax.swing.JPanel {
         // TODO add your handling code here:
         TimKiemTheoNgay();
         searchRadio();
-        
+
+
     }//GEN-LAST:event_txtSearchMouseClicked
 
     private void tblPhieuNhapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPhieuNhapMouseClicked
@@ -823,7 +832,7 @@ public class TpLuongNhapView extends javax.swing.JPanel {
 
     }//GEN-LAST:event_tblPhieuNhapMouseClicked
 
-        private void clearForm() {
+    private void clearForm() {
         txtGhiChu.setText("");
         txtMaPhieu.setText("");
         txtNgayTao.setText("");
@@ -845,25 +854,24 @@ public class TpLuongNhapView extends javax.swing.JPanel {
     }//GEN-LAST:event_btnShowActionPerformed
     public void TimKiemTheoNgay() {
         if (ngayBatDau.getDate() == null) {
-            
+
             return;
         }
         if (ngayKetThuc.getDate() == null) {
-          
+
             return;
         }
-        
 
         if (rdoNgayTao.isSelected()) {
             listPn = phieuNhapService.getListByNgayTao(ngayBatDau.getDate().getTime(), ngayKetThuc.getDate().getTime());
             loadTablePn(listPn);
         } else {
-              listPn = phieuNhapService.getListByNgayThanhToan(ngayBatDau.getDate().getTime(), ngayKetThuc.getDate().getTime());
+            listPn = phieuNhapService.getListByNgayThanhToan(ngayBatDau.getDate().getTime(), ngayKetThuc.getDate().getTime());
             loadTablePn(listPn);
         }
     }
-    
-    
+
+
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
         clearForm();
         int row = this.tblPhieuNhap.getSelectedRow();
@@ -871,11 +879,16 @@ public class TpLuongNhapView extends javax.swing.JPanel {
             MsgBox.alert(this, "Bạn phải chọn 1 phiếu nhập");
             return;
         }
+        listCtpn = tpncts.getListCTPhieuNhapByID(listPn.get(row).getId());
+        if(listCtpn.size() == 0){
+            MsgBox.alert(this, "Bạn phải thêm sản phẩm trước khi thanh toán");
+            return;
+        }
         if (listPn.get(row).getTrangThai() == TrangThaiPhieuConstant.DA_THANH_TOAN) {
             MsgBox.alert(this, "Phiếu nhập này đã thanh toán. Vui lòng thanh toán phiếu nhập khác");
             return;
         }
-        
+
         TpPhieuNhapCustom pxcs = listPn.get(row);
         pxcs.setTrangThai(TrangThaiPhieuConstant.DA_THANH_TOAN);
         phieuNhapService.updatePn(pxcs);
@@ -898,12 +911,12 @@ public class TpLuongNhapView extends javax.swing.JPanel {
 
     private void btnPhieuNhapChiTiet1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPhieuNhapChiTiet1ActionPerformed
         int row = tblPhieuNhap.getSelectedRow();
-        
-        if(row == -1) {
+
+        if (row == -1) {
             JOptionPane.showMessageDialog(this, "Bạn phải chọn một dòng", "ERROR !!!", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
         TpPhieuNhapCustom pxcs = listPn.get(row);
         ImportView im = new ImportView();
         im.setIdPhieuNhap(pxcs.getId());

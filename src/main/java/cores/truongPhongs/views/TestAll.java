@@ -4,6 +4,7 @@
  */
 package cores.truongPhongs.views;
 
+import cores.nhanVienQuanLy.views.Tai_NvqlLuongPhieuXuatView;
 import java.awt.FlowLayout;
 
 /**
@@ -17,7 +18,7 @@ public class TestAll extends javax.swing.JFrame {
      */
     public TestAll() {
         initComponents();
-        TpLuongNhapView a = new TpLuongNhapView();
+        TpQuanLyChiTietSanPhamForm a = new TpQuanLyChiTietSanPhamForm();
         this.add(a);
         this.setLayout(new FlowLayout());
         this.pack();
@@ -75,6 +76,8 @@ public class TestAll extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(TestAll.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        
+        
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {

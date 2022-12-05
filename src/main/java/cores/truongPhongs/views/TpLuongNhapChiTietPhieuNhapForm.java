@@ -1,11 +1,5 @@
 package cores.truongPhongs.views;
 
-import cores.nhanVienQuanLy.views.*;
-import cores.nhanVienQuanLy.customModels.LuongBanHang_ChiTietSanPhamCustom;
-import cores.nhanVienQuanLy.customModels.Luong_ChiTietPhieuXuatCustom;
-import cores.nhanVienQuanLy.services.Tai_NvqlLuongPhieuXuatService;
-import cores.nhanVienQuanLy.services.serviceImpls.Tai_NvqlLuongPhieuXuatServiceImpl;
-import cores.truongPhongs.customModels.NhaCungCapCustom;
 import cores.truongPhongs.customModels.TpPhieuNhapChiTietCustom;
 import cores.truongPhongs.customModels.TpPhieuNhapCustom;
 import cores.truongPhongs.customModels.TpXemChiTietSanPhamCustom;
@@ -13,16 +7,11 @@ import cores.truongPhongs.services.TpPhieuNhapChiTietService;
 import cores.truongPhongs.services.TpXemChiTietSanPhamService;
 import cores.truongPhongs.services.serviceImpls.TpPhieuNhapChiTietServiceImpl;
 import cores.truongPhongs.services.serviceImpls.TpXemChiTietSanPhamImpl;
-import domainModels.ChiTietPhieuXuat;
-import domainModels.PhieuXuat;
-import infrastructures.constant.KhachHangConstant;
 import infrastructures.constant.MauConstant;
 import infrastructures.constant.TrangThaiPhieuConstant;
-import java.io.File;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import utilities.Converter;
@@ -39,11 +28,6 @@ public class TpLuongNhapChiTietPhieuNhapForm extends javax.swing.JFrame {
     private List<TpXemChiTietSanPhamCustom> listSp;
     private TpPhieuNhapChiTietService phieuNhapChiTietService;
     private List<TpPhieuNhapChiTietCustom> listCtpnCustom = new ArrayList<>();
-
-    private List<TpXemChiTietSanPhamCustom> listXem = new ArrayList<>();
-    private TpLuongUpdateChiTietSanPham rud;
-    String duongdananh = getClass().getResource("/icons/FPT_Polytechnic_doc.png").getPath();
-
 
     public void setPhieuNhap(TpPhieuNhapCustom phieuNhap) {
         this.phieuNhap = phieuNhap;
@@ -67,7 +51,7 @@ public class TpLuongNhapChiTietPhieuNhapForm extends javax.swing.JFrame {
                 ctpx.getIdSanPham().getSize(),
                 ctpx.getIdSanPham().getDonVi().getDonViGoc(),
                 ctpx.getIdSanPham().getNamBaoHanh(),
-                ctpx.getSoLuong(),
+                ctpx.getIdSanPham().getSoLuongTon(),
                 ctpx.getIdSanPham().getGiaNhap()
             };
             dtm.addRow(rowData);
@@ -135,6 +119,12 @@ public class TpLuongNhapChiTietPhieuNhapForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        UpdateCtsp = new javax.swing.JDialog();
+        jLabel1 = new javax.swing.JLabel();
+        txtSoLuong = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        txtGia = new javax.swing.JTextField();
+        buttonGradient1 = new utilities.palette.ButtonGradient();
         panelRound1 = new utilities.palette.PanelRound();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbCtpn = new utilities.palette.TableDark_1();
@@ -161,6 +151,57 @@ public class TpLuongNhapChiTietPhieuNhapForm extends javax.swing.JFrame {
         btnShow18 = new utilities.palette.MyButton();
         btnShow19 = new utilities.palette.MyButton();
 
+        UpdateCtsp.setSize(new java.awt.Dimension(400, 300));
+
+        jLabel1.setText("Số lượng bạn muốn thay đổi");
+
+        jLabel3.setText("Giá nhập bạn muốn thay đổi");
+
+        buttonGradient1.setText("XÁC NHẬN");
+        buttonGradient1.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
+        buttonGradient1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonGradient1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout UpdateCtspLayout = new javax.swing.GroupLayout(UpdateCtsp.getContentPane());
+        UpdateCtsp.getContentPane().setLayout(UpdateCtspLayout);
+        UpdateCtspLayout.setHorizontalGroup(
+            UpdateCtspLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(UpdateCtspLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(UpdateCtspLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(UpdateCtspLayout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
+                        .addComponent(txtSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(UpdateCtspLayout.createSequentialGroup()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
+                        .addComponent(txtGia, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(63, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, UpdateCtspLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(buttonGradient1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        UpdateCtspLayout.setVerticalGroup(
+            UpdateCtspLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(UpdateCtspLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(UpdateCtspLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(UpdateCtspLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
+                .addComponent(buttonGradient1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 204, 204));
 
@@ -184,6 +225,11 @@ public class TpLuongNhapChiTietPhieuNhapForm extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tbCtpn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbCtpnMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tbCtpn);
@@ -537,39 +583,10 @@ public class TpLuongNhapChiTietPhieuNhapForm extends javax.swing.JFrame {
         searchRadio();
     }//GEN-LAST:event_txtSearchMouseClicked
 
-
-    private void lbHinhAnhMouseClicked(java.awt.event.MouseEvent evt) {                                       
-        try {
-            JFileChooser f = new JFileChooser();
-            f.setDialogTitle("Mở file");
-            f.showOpenDialog(null);
-            File ftenanh = f.getSelectedFile();
-            duongdananh = ftenanh.getAbsolutePath();
-            lbHinhAnh.setIcon(new javax.swing.ImageIcon(duongdananh));
-            System.out.println(duongdananh);
-
-        } catch (Exception e) {
-            System.out.println("Ban chua chon anh");
-            System.out.println(duongdananh);
-        }
-    }
-
-    private void tbCtpnMouseClicked(java.awt.event.MouseEvent evt) {                                    
-//        int row = tbCtpn.getSelectedRow();
-//        TpPhieuNhapChiTietCustom tp = mouseClickSanPham(row);
-//        rud.setVisible(true);
-        
-    }                                   
-
-            
-                                      
-
     private void myButton8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_myButton8MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_myButton8MouseClicked
 
-<<<<<<< HEAD
-=======
     private void tbCtpnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbCtpnMouseClicked
         int row = this.tbCtpn.getSelectedRow();
         if (row == -1) {
@@ -582,36 +599,56 @@ public class TpLuongNhapChiTietPhieuNhapForm extends javax.swing.JFrame {
         txtDonVi.setText(ctpn.getIdSanPham().getDonVi().getDonViQuyDoi());
         txtNamBH.setText(String.valueOf(ctpn.getIdSanPham().getNamBaoHanh()));
         txtGiaNhap.setText(String.valueOf(ctpn.getIdSanPham().getGiaNhap()));
->>>>>>> develop
 
         if (phieuNhap.getTrangThai().equals(TrangThaiPhieuConstant.DA_THANH_TOAN)) {
             MsgBox.alert(this, "Phiếu nhập này đã ở trạng thái đã thanh toán nên không thể sửa số lượng! ");
             return;
         }
-        String suaSL = JOptionPane.showInputDialog("Bạn muốn sửa số lượng thành bao nhiêu ?");
-        int sl = 0;
+        UpdateCtsp.setVisible(true);
+
+    }//GEN-LAST:event_tbCtpnMouseClicked
+
+    private void buttonGradient1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGradient1ActionPerformed
+        if (txtSoLuong.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Số lượng không được để trống");
+            return;
+        }
+        if (txtGia.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Giá bán không được để trống");
+            return;
+        }
         try {
-            sl = Integer.parseInt(suaSL);
-            if (sl <= 0) {
-                JOptionPane.showMessageDialog(this, "Bạn phải nhập lớn hơn 0");
+            int a = Integer.parseInt(txtSoLuong.getText());
+            Double b = Double.parseDouble(txtGia.getText());
+            if (a <= 0) {
+                JOptionPane.showMessageDialog(this, "Bạn phải nhập số lượng lớn hơn 0");
+                return;
+            }
+            if (b <= 0) {
+                JOptionPane.showMessageDialog(this, "Bạn phải nhập giá bán lớn hơn 0");
                 return;
             }
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Bạn phải nhập là kiểu số");
             return;
         }
+        int row = this.tbCtpn.getSelectedRow();
+
+        TpPhieuNhapChiTietCustom ctpn = listCtpnCustom.get(row);
         for (TpXemChiTietSanPhamCustom ctsp : ctspService.listCtsp()) {
             if (ctpn.getIdSanPham().getId().equals(ctsp.getId())) {
-                ctsp.setSoLuongTon(sl);
+                ctsp.setSoLuongTon(Integer.parseInt(txtSoLuong.getText()));
+                ctsp.setGiaNhap(BigDecimal.valueOf(Double.parseDouble(txtGia.getText())));
                 ctspService.updateCTSP(ctsp);
             }
         }
-        ctpn.setSoLuong(sl);
+        ctpn.setSoLuong(Integer.parseInt(txtSoLuong.getText()));
         phieuNhapChiTietService.upDatePN(ctpn);
         listCtpnCustom.set(row, ctpn);
-        MsgBox.alert(this, "Bạn đã update số lượng thành công");
+        MsgBox.alert(this, "Bạn đã update số lượng và đơn giá thành công");
         loadTable(listCtpnCustom);
-    }//GEN-LAST:event_tbCtpnMouseClicked
+        UpdateCtsp.dispose();
+    }//GEN-LAST:event_buttonGradient1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -656,10 +693,14 @@ public class TpLuongNhapChiTietPhieuNhapForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDialog UpdateCtsp;
     private utilities.palette.MyButton btnShow18;
     private utilities.palette.MyButton btnShow19;
+    private utilities.palette.ButtonGradient buttonGradient1;
     private utilities.palette.Combobox cbbMauSac;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private utilities.palette.MyButton lbHinhAnh;
     private utilities.palette.MyButton myButton6;
@@ -675,11 +716,13 @@ public class TpLuongNhapChiTietPhieuNhapForm extends javax.swing.JFrame {
     private utilities.palette.RadioButtonCustom rdoTenSp;
     private utilities.palette.TableDark_1 tbCtpn;
     private utilities.palette.TextField txtDonVi;
+    private javax.swing.JTextField txtGia;
     private utilities.palette.TextField txtGiaNhap;
     private utilities.palette.TextField txtMaPhieu;
     private utilities.palette.TextField txtMau;
     private utilities.palette.TextField txtNamBH;
     private utilities.palette.SearchCustom.TextFieldAnimation txtSearch;
+    private javax.swing.JTextField txtSoLuong;
     private utilities.palette.TextField txtTenSP;
     // End of variables declaration//GEN-END:variables
 }

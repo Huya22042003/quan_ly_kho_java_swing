@@ -46,7 +46,8 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
         sp.setNamBaoHanh(custom.getNamBaoHanh());
         sp.setSanPham(custom.getSanPham());
         sp.setNgayTao(DateTimeUtil.convertDateToTimeStampSecond());
-
+        sp.setTrangThai(custom.getTrangThai());
+        sp.setSize(custom.getSize());
         custom.setId(rp.addCTSanPham(sp).getId());
         return custom;
     }
@@ -63,14 +64,11 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
         sp.setNamBaoHanh(custom.getNamBaoHanh());
         sp.setSanPham(custom.getSanPham());
         sp.setNgayTao(custom.getNgayTao());
+        sp.setTrangThai(custom.getTrangThai());
+        sp.setSize(custom.getSize());
         sp.setId(custom.getId());
 
         return rp.updateCTSanPham(sp);
-    }
-
-    @Override
-    public boolean deleteCTSanPham(UUID id) {
-        return rp.deleteCTSanPham(id);
     }
 
     @Override
@@ -94,7 +92,7 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
 
     @Override
     public TpQuanLyChiTietSanPhamCustom checkValidate(UUID donVi, String namBH, UUID sanPham, String hinhAnh, String giaNhap, String giaBan, String soLuong, String size,
-             JLabel erroHinhAnh, JLabel erroGiaNhap, JLabel erroGiaBan, JLabel erroSoLuong, JLabel erroSize, JLabel erroNamBH, MauConstant mau) {
+            int tt, JLabel erroHinhAnh, JLabel erroGiaNhap, JLabel erroGiaBan, JLabel erroSoLuong, JLabel erroSize, JLabel erroNamBH, MauConstant mau) {
         boolean check = true;
         if (giaNhap.trim().length() == 0) {
             erroGiaNhap.setText("Giá nhập không được để trống");
@@ -154,9 +152,10 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
         sp.setHinhAnh(hinhAnh);
         sp.setMau(mau);
         sp.setNamBaoHanh(Integer.parseInt(namBH));
-        sp.setDonVi(rp.findIDDonVi(donVi));
-        sp.setSanPham(rp.findIDSanPham(sanPham));
+        sp.setDonVi(findIDDonVi(donVi));
+        sp.setSanPham(findIDSanPham(sanPham));
         sp.setSize(Integer.parseInt(size));
+        sp.setTrangThai(tt(tt));
         return sp;
     }
 
@@ -311,6 +310,20 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
             listPhanTrang.add(el);
         }
         return listPhanTrang;
+    }
+
+    @Override
+    public TrangThaiSanPhamConstanst tt(int item) {
+        switch (item) {
+            case 0:
+                return TrangThaiSanPhamConstanst.DA_MO_BAN;
+            case 1:
+                return TrangThaiSanPhamConstanst.CHO_XAC_NHAN;
+            case 2:
+                return TrangThaiSanPhamConstanst.DUNG_BAN;
+            default:
+                throw new AssertionError();
+        }
     }
 
 }

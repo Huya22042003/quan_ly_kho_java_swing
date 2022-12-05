@@ -15,7 +15,6 @@ import infrastructures.constant.TrangThaiPhieuConstant;
 import infrastructures.constant.TrangThaiNhanVienConstant;
 import infrastructures.constant.TrangThaiPhieuKiemConstant;
 import infrastructures.constant.TrangThaiPhieuHoanConstant;
-import infrastructures.constant.TrangThaiPhieuNhapConstant;
 import infrastructures.constant.TrangThaiSanPhamConstanst;
 
 /**
@@ -289,13 +288,17 @@ public class Converter {
             case DA_MO_BAN:
                 trangThai = "Đã mở bán";
                 break;
+            case DUNG_BAN:
+                trangThai = "Dừng bán";
+                break;
             default:
                 throw new AssertionError();
         }
 
         return trangThai;
     }
-     public static String trangThaiPhieuNhap(TrangThaiPhieuConstant th) {
+
+    public static String trangThaiPhieuNhap(TrangThaiPhieuConstant th) {
         String trangThai = "";
         switch (th) {
             case CHO_THANH_TOAN:

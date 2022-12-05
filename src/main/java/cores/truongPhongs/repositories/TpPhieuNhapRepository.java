@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import utilities.HibernateUtil;
 import domainModels.PhieuNhap;
 import java.util.UUID;
+import net.bytebuddy.asm.Advice;
 import org.hibernate.Transaction;
 
 /**
@@ -123,6 +124,7 @@ public class TpPhieuNhapRepository {
         query.setParameter("ngayKetThuc", ngayKetThuc);
         List<TpPhieuNhapCustom> list = query.getResultList();
         return list;
+        
     }
 
     public NhanVien getNhanVienByMa(String ma) {
@@ -132,4 +134,25 @@ public class TpPhieuNhapRepository {
         NhanVien nv = (NhanVien) query.getSingleResult();
         return nv;
     }
+     public List<TpPhieuNhapCustom> getListPnById(String id) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("Select new  cores.truongPhongs.customModels.TpPhieuNhapCustom ( "
+                + "p.id as id,"
+                + "p.ghiChu as ghiChu,"
+                + "p.ngayThanhToan as ngayThanhToan,"
+                + "p.ngayTao as ngayTao,"
+                + "p.trangThai as trangThai,"
+                + "p.nhanVien.id as idNhanVien,"
+                + "p.nhanVien.ten as tenNhanVien,"
+                + "p.nhaCungCap.id as idNcc,"
+                + "p.nhaCungCap.ten as tenNcc) "
+                + "from domainModels.PhieuNhap p WHERE p.id like CONCAT('%',:id,'%')");
+       query.setParameter("id", id);
+        List<TpPhieuNhapCustom> list = query.getResultList();
+        return list;
+        
+    }
+
+   
+    
 }
