@@ -8,9 +8,11 @@ import domainModels.ChiTietSanPham;
 import domainModels.PhieuXuat;
 import infrastructures.constant.TrangThaiPhieuConstant;
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.CANCEL_OPTION;
 import javax.swing.table.DefaultTableModel;
 import utilities.Converter;
 import utilities.MsgBox;
@@ -65,14 +67,14 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
                 return;
             }
             LuongBanHang_ChiTietSanPhamCustom ctsp = list.get(i);
-
+            DecimalFormat formatter = new DecimalFormat("###,###,##0 VNĐ");
             Object[] rowData = {
                 dtm.getRowCount() + 1,
                 ctsp.getSanPham().getMa(),
                 ctsp.getSanPham().getTen(),
-                ctsp.getSoLuongTon(),
-                ctsp.getGiaNhap(),
-                ctsp.getGiaBan(),
+                ctsp.getSoLuongTon() == 0 ? "Hết hàng" : ctsp.getSoLuongTon(),
+                formatter.format(ctsp.getGiaNhap()),
+                formatter.format(ctsp.getGiaBan()),
                 Converter.trangThaiMauSac(ctsp.getMau()),
                 ctsp.getNamBaoHanh() //                ctsp.getNamBaoHanh().getTen()
             };
@@ -111,7 +113,6 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
         panelRound6 = new utilities.palette.PanelRound();
         jButton1 = new javax.swing.JButton();
         btnHienThi = new utilities.palette.MyButton();
-        myButton1 = new utilities.palette.MyButton();
         btnSearch = new utilities.palette.MyButton();
         txtGiaFrom = new utilities.palette.TextField();
         txtGiaTo = new utilities.palette.TextField();
@@ -315,13 +316,6 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
             }
         });
 
-        myButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/delete_2.png"))); // NOI18N
-        myButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                myButton1ActionPerformed(evt);
-            }
-        });
-
         btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Search.png"))); // NOI18N
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -351,19 +345,15 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btnHienThi, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(myButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(116, 116, 116))
         );
         panelRound6Layout.setVerticalGroup(
             panelRound6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound6Layout.createSequentialGroup()
                 .addContainerGap(14, Short.MAX_VALUE)
                 .addGroup(panelRound6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(panelRound6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(myButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnHienThi, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnHienThi, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panelRound6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtGiaFrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -509,6 +499,9 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
             return;
         }
         String input = JOptionPane.showInputDialog("Bạn mua muốn bao nhiêu ?");
+        if (input.equalsIgnoreCase("")) {
+            return;
+        }
         int sl = 0;
         try {
             sl = Integer.parseInt(input);
@@ -574,13 +567,6 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
         listCTSP = luongService.getListCTSanPhamBanHang(new BigDecimal(txtGiaFrom.getText()), new BigDecimal(txtGiaTo.getText()));
         loadTable(listCTSP);
     }//GEN-LAST:event_btnSearchActionPerformed
-
-    private void myButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton1ActionPerformed
-        txtGiaFrom.setText("");
-        txtGiaTo.setText("");
-        listCTSP = luongService.getListCTSanPham();
-        loadTable(listCTSP);
-    }//GEN-LAST:event_myButton1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
@@ -671,7 +657,6 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private utilities.palette.MyButton myButton1;
     private utilities.palette.PanelRound panelRound2;
     private utilities.palette.PanelRound panelRound4;
     private utilities.palette.PanelRound panelRound5;
