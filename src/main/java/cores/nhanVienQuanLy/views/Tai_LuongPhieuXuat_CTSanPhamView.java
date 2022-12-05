@@ -50,6 +50,7 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
         ctpxView = new Tai_LuongPhieuXuat_CTPhieuXuatView();
         listCTPX = luongService.getListCTPhieuXuat();
 //        loadTable();
+        sizes = listCTSP.size();
         loadTable(luongService.phanTrang(listCTSP, offset, limit));
     }
 

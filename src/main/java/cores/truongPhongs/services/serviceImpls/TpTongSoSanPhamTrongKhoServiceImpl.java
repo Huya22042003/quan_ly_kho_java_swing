@@ -9,18 +9,20 @@ import cores.truongPhongs.customModels.TpTongSoSanPhamTrongKhoCustom;
 import cores.truongPhongs.repositories.TpThongKeRepository;
 import java.util.List;
 import cores.truongPhongs.services.TpThongKeService;
+import java.util.ArrayList;
 
 /**
  *
  * @author Acer
  */
-public class TpTongSoSanPhamTrongKhoServiceImpl implements TpThongKeService{
-    TpThongKeRepository repo ;
+public class TpTongSoSanPhamTrongKhoServiceImpl implements TpThongKeService {
+
+    TpThongKeRepository repo;
 
     public TpTongSoSanPhamTrongKhoServiceImpl() {
         repo = new TpThongKeRepository();
     }
-    
+
     @Override
     public List<TpTongSoSanPhamTrongKhoCustom> getList() {
         return repo.getSoLuongSpTon();
@@ -35,8 +37,6 @@ public class TpTongSoSanPhamTrongKhoServiceImpl implements TpThongKeService{
     public List<TpTongSoSanPhamTrongKhoCustom> getSoSanPhamDaNhap() {
         return repo.getSoSanPhamDaNhap();
     }
-
-    
 
     @Override
     public List<TpTongSoSanPhamTrongKhoCustom> getSoDonHoanXuat() {
@@ -67,5 +67,22 @@ public class TpTongSoSanPhamTrongKhoServiceImpl implements TpThongKeService{
     public List<TpTongSoSanPhamTrongKhoCustom> getSoLuongSpHoanXuat() {
         return repo.getSoDonHoanXuat();
     }
-    
+
+    @Override
+    public List<TpThongKeSpCustom> phanTrang(List<TpThongKeSpCustom> list, int offset, int limit) {
+        List<TpThongKeSpCustom> listPhanTrang = new ArrayList<>();
+        int sum = limit + offset;
+        if (list.size() <= sum) {
+            sum = list.size();
+        }
+        for (int i = offset; i < sum; i++) {
+            if (list.get(i) == null) {
+                break;
+            }
+            TpThongKeSpCustom el = list.get(i);
+            listPhanTrang.add(el);
+        }
+        return listPhanTrang;
+    }
+
 }

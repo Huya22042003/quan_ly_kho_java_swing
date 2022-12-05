@@ -7,6 +7,7 @@ import cores.truongPhongs.services.TpXemChiTietSanPhamService;
 import domainModels.ChiTietSanPham;
 import infrastructures.constant.TrangThaiSanPhamConstanst;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -98,6 +99,23 @@ public class TpXemChiTietSanPhamImpl implements TpXemChiTietSanPhamService {
         sp.setNgayTao(custom.getNgayTao());
         sp.setId(custom.getId());
         repo.updateCTSP(sp);
+    }
+
+    @Override
+    public List<TpXemChiTietSanPhamCustom> phanTrang(List<TpXemChiTietSanPhamCustom> list, int offset, int limit) {
+        List<TpXemChiTietSanPhamCustom> listPhanTrang = new ArrayList<>();
+        int sum = limit + offset;
+        if (list.size() <= sum) {
+            sum = list.size();
+        }
+        for (int i = offset; i < sum; i++) {
+            if (list.get(i) == null) {
+                break;
+            }
+            TpXemChiTietSanPhamCustom el = list.get(i);
+            listPhanTrang.add(el);
+        }
+        return listPhanTrang;
     }
 
 }

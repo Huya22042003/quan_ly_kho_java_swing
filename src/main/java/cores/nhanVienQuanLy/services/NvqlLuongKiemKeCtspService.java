@@ -11,4 +11,5 @@ public interface NvqlLuongKiemKeCtspService {
     public List<NvqlLuongKiemKeCtspCustom> getAll();
     
     public void updateSoLuong(NvqlLuongKiemKeCtspCustom nvqlLuongKiemKeCtpkService);
+    public List<NvqlLuongKiemKeCtspCustom> phanTrang(List<NvqlLuongKiemKeCtspCustom> list, int offset, int limit);
 }

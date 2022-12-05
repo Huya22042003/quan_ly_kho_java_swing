@@ -57,8 +57,8 @@ public class Tai_LuongPhieuXuat_CTPhieuXuatView extends javax.swing.JFrame {
         for (Luong_ChiTietPhieuXuatCustom ctpx : listCTPX) {
             Object[] rowData = {
                 dtm.getRowCount() + 1,
-                ctpx.getIdPhieuXuat().getId(),
-                ctpx.getIdChiTietSp().getId(),
+                ctpx.getIdChiTietSp().getSanPham().getMa(),
+                ctpx.getIdChiTietSp().getSanPham().getTen(),
                 ctpx.getSoLuong(),
                 ctpx.getIdChiTietSp().getGiaBan(),
                 ctpx.getIdChiTietSp().getNamBaoHanh(),
@@ -88,7 +88,7 @@ public class Tai_LuongPhieuXuat_CTPhieuXuatView extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         panelRound3 = new utilities.palette.PanelRound();
         jLabel2 = new javax.swing.JLabel();
-        txtIDSP = new utilities.palette.TextField();
+        txtTenSP = new utilities.palette.TextField();
         txtMaPhieu = new utilities.palette.TextField();
         txtGiaBan = new utilities.palette.TextField();
         txtNamBH = new utilities.palette.TextField();
@@ -104,11 +104,11 @@ public class Tai_LuongPhieuXuat_CTPhieuXuatView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "STT", "Mã Phiếu xuất", "ID Sản Phẩm", "Số lượng", "Giá Bán", "Năm Bảo hành", "Màu"
+                "STT", "Mã Sản Phẩm", "Tên Sản Phẩm", "Số lượng", "Giá Bán", "Năm Bảo hành", "Màu"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true, true, true
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -281,15 +281,15 @@ public class Tai_LuongPhieuXuat_CTPhieuXuatView extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         jLabel2.setText("Thông tin phiếu xuất chi tiết");
 
-        txtIDSP.setEditable(false);
-        txtIDSP.setBackground(new java.awt.Color(228, 206, 224));
-        txtIDSP.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtIDSP.setLabelText("ID Sản phẩm");
+        txtTenSP.setEditable(false);
+        txtTenSP.setBackground(new java.awt.Color(228, 206, 224));
+        txtTenSP.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtTenSP.setLabelText("Tên Sản phẩm");
 
         txtMaPhieu.setEditable(false);
         txtMaPhieu.setBackground(new java.awt.Color(228, 206, 224));
         txtMaPhieu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtMaPhieu.setLabelText("Mã phiếu ");
+        txtMaPhieu.setLabelText("Mã Sản Phẩm");
         txtMaPhieu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtMaPhieuActionPerformed(evt);
@@ -336,7 +336,7 @@ public class Tai_LuongPhieuXuat_CTPhieuXuatView extends javax.swing.JFrame {
                             .addComponent(txtNamBH, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtMau, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtGiaBan, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtIDSP, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtTenSP, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtMaPhieu, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
@@ -348,7 +348,7 @@ public class Tai_LuongPhieuXuat_CTPhieuXuatView extends javax.swing.JFrame {
                 .addGap(35, 35, 35)
                 .addComponent(txtMaPhieu, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
-                .addComponent(txtIDSP, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtTenSP, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(53, 53, 53)
                 .addComponent(txtGiaBan, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(55, 55, 55)
@@ -435,7 +435,7 @@ public class Tai_LuongPhieuXuat_CTPhieuXuatView extends javax.swing.JFrame {
             return;
         }
         txtMaPhieu.setText(tblCTPhieuXuat.getValueAt(row, 1).toString());
-        txtIDSP.setText(tblCTPhieuXuat.getValueAt(row, 2).toString());
+        txtTenSP.setText(tblCTPhieuXuat.getValueAt(row, 2).toString());
         txtGiaBan.setText(tblCTPhieuXuat.getValueAt(row, 4).toString());
         txtNamBH.setText(tblCTPhieuXuat.getValueAt(row, 5).toString());
         txtMau.setText(tblCTPhieuXuat.getValueAt(row, 6).toString());
@@ -552,9 +552,9 @@ public class Tai_LuongPhieuXuat_CTPhieuXuatView extends javax.swing.JFrame {
     private utilities.palette.PanelRound panelRound8;
     private utilities.palette.TableDark_1 tblCTPhieuXuat;
     private utilities.palette.TextField txtGiaBan;
-    private utilities.palette.TextField txtIDSP;
     private utilities.palette.TextField txtMaPhieu;
     private utilities.palette.TextField txtMau;
     private utilities.palette.TextField txtNamBH;
+    private utilities.palette.TextField txtTenSP;
     // End of variables declaration//GEN-END:variables
 }
