@@ -28,7 +28,7 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
      */
     NvqlLuongKiemKeCtspCustom ctspct = new NvqlLuongKiemKeCtspCustom();
     private List<NvqlLuongKiemKeCtspCustom> listChiTietSanPham = new ArrayList<>();
-    private DecimalFormat formatter = new DecimalFormat("###,###,##0");
+    private DecimalFormat formatter = new DecimalFormat("###,###,##0 VNĐ");
     private NvqlLuongKiemKeCtspService ctspService;
     private NvqlLuongKiemKeCustom phieu;
     private NvqlKiemKeCtpkView ctpkView;
@@ -42,10 +42,10 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
 
     private int index = 1;
 
-    public void PhieuKiemKe(NvqlLuongKiemKeCustom phieu){
+    public void PhieuKiemKe(NvqlLuongKiemKeCustom phieu) {
         this.phieu = phieu;
     }
-    
+
     public NvqlKiemKeCtspView() {
         p = new Page();
         initComponents();
@@ -69,7 +69,7 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
             }
 
             NvqlLuongKiemKeCtspCustom m = list.get(i);
-        
+
             Object[] row = new Object[]{
                 model.getRowCount() + 1,
                 m.getMa(),
@@ -83,15 +83,18 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
             model.addRow(row);
         }
     }
+
     private void loadIndex() {
         this.txtIndex.setText(String.valueOf(index) + " / " + (Math.round((sizes / limit) + 0.5)));
     }
+
     private void clearForm() {
         sizes = listChiTietSanPham.size();
         offset = 0;
         index = 1;
         loadIndex();
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -112,7 +115,6 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
         panelRound6 = new utilities.palette.PanelRound();
         jButton1 = new javax.swing.JButton();
         btnHienThi = new utilities.palette.MyButton();
-        myButton1 = new utilities.palette.MyButton();
         btnSearch = new utilities.palette.MyButton();
         txtGiaFrom = new utilities.palette.TextField();
         txtGiaTo = new utilities.palette.TextField();
@@ -122,7 +124,7 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
         txtMa = new utilities.palette.TextField();
         txtTenSp = new utilities.palette.TextField();
         txtMau = new utilities.palette.TextField();
-        txtGiaNhap = new utilities.palette.TextField();
+        txtSoLuong = new utilities.palette.TextField();
         errorSoLuong = new javax.swing.JLabel();
         txtGiaBan = new utilities.palette.TextField();
         txtNamBH = new utilities.palette.TextField();
@@ -243,14 +245,6 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
             }
         });
 
-        myButton1.setBackground(new java.awt.Color(255, 255, 102));
-        myButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/delete_2.png"))); // NOI18N
-        myButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                myButton1ActionPerformed(evt);
-            }
-        });
-
         btnSearch.setBackground(new java.awt.Color(255, 255, 102));
         btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Search.png"))); // NOI18N
         btnSearch.setToolTipText("Tìm kiếm");
@@ -281,18 +275,15 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
                 .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnHienThi, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(myButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(31, 31, 31)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51))
+                .addGap(142, 142, 142))
         );
         panelRound6Layout.setVerticalGroup(
             panelRound6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound6Layout.createSequentialGroup()
                 .addContainerGap(14, Short.MAX_VALUE)
                 .addGroup(panelRound6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(myButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnHienThi, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panelRound6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -327,10 +318,10 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
         txtMau.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtMau.setLabelText("Màu sắc");
 
-        txtGiaNhap.setEditable(false);
-        txtGiaNhap.setBackground(new java.awt.Color(228, 206, 224));
-        txtGiaNhap.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtGiaNhap.setLabelText("Giá nhập");
+        txtSoLuong.setEditable(false);
+        txtSoLuong.setBackground(new java.awt.Color(228, 206, 224));
+        txtSoLuong.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtSoLuong.setLabelText("Số lượng");
 
         errorSoLuong.setForeground(new java.awt.Color(255, 0, 0));
 
@@ -357,7 +348,7 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
                                 .addComponent(txtTenSp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
                                 .addComponent(txtMa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(txtMau, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(txtGiaNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(errorSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtGiaBan, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtNamBH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -376,7 +367,7 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
                 .addGap(36, 36, 36)
                 .addComponent(txtTenSp, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
-                .addComponent(txtGiaNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44)
                 .addComponent(txtGiaBan, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(43, 43, 43)
@@ -519,11 +510,21 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
     }
     private void tbSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSanPhamMouseClicked
         int rowSp = this.tbSanPham.getSelectedRow();
+        txtMa.setText(tbSanPham.getValueAt(rowSp, 1).toString());
+        txtTenSp.setText(tbSanPham.getValueAt(rowSp, 2).toString());
+        txtSoLuong.setText(tbSanPham.getValueAt(rowSp, 3).toString());
+        txtGiaBan.setText(tbSanPham.getValueAt(rowSp, 7).toString());
+        txtMau.setText(tbSanPham.getValueAt(rowSp, 5).toString());
+        txtNamBH.setText(tbSanPham.getValueAt(rowSp, 6).toString());
+        
         if (rowSp > -1) {
             NvqlLuongKiemKeCtspCustom nvqlLuongKiemKeCtspCustom = mouseClickSanPham(rowSp);
 
             String input = JOptionPane.showInputDialog("Vui lòng nhập số lượng sản phẩm thực tồn trong kho.");
             int a = 0;
+            if (input.equalsIgnoreCase("")) {
+                return;
+            }
             try {
                 a = Integer.parseInt(input);
                 if (a > 1000000000) {
@@ -538,7 +539,7 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
             haha.setId(phieu.getId());
             ChiTietSanPham hihi = new ChiTietSanPham();
             hihi.setId(nvqlLuongKiemKeCtspCustom.getId());
-            
+
             NvqlLuongKiemKeCtpkCustom ct = new NvqlLuongKiemKeCtpkCustom(
                     nvqlLuongKiemKeCtspCustom.getMa(),
                     nvqlLuongKiemKeCtspCustom.getTen(),
@@ -549,7 +550,7 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
             );
             nvqlLuongKiemKeCtspCustom.setSoLuongTon(a);
             ctspService.updateSoLuong(nvqlLuongKiemKeCtspCustom);
-            
+
             ctpkService.addCTPK(ct);
             ctpkView.listCtpk.add(ct);
             JOptionPane.showMessageDialog(this, "Update thành công số lượng tồn trong kho");
@@ -564,10 +565,6 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
     private void btnHienThiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHienThiActionPerformed
         clearForm();
     }//GEN-LAST:event_btnHienThiActionPerformed
-
-    private void myButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton1ActionPerformed
-
-    }//GEN-LAST:event_myButton1ActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         clearForm();
@@ -643,7 +640,6 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private utilities.palette.MyButton myButton1;
     private utilities.palette.PanelRound panelRound2;
     private utilities.palette.PanelRound panelRound4;
     private utilities.palette.PanelRound panelRound6;
@@ -651,12 +647,12 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
     private javax.swing.JLabel test;
     private utilities.palette.TextField txtGiaBan;
     private utilities.palette.TextField txtGiaFrom;
-    private utilities.palette.TextField txtGiaNhap;
     private utilities.palette.TextField txtGiaTo;
     private javax.swing.JLabel txtIndex;
     private utilities.palette.TextField txtMa;
     private utilities.palette.TextField txtMau;
     private utilities.palette.TextField txtNamBH;
+    private utilities.palette.TextField txtSoLuong;
     private utilities.palette.TextField txtTenSp;
     private utilities.palette.UWPButton uWPButton4;
     private utilities.palette.UWPButton uWPButton5;
