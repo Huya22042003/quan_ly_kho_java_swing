@@ -8,8 +8,6 @@ import cores.Chart.model.ModelChartLine;
 import cores.Chart.model.ModelChartPie;
 import cores.Chart.service.LineService;
 import cores.Chart.service.PieService;
-import cores.Chart.service.serviceImpl.LineServiceImp;
-import cores.Chart.service.serviceImpl.PieServiceImp;
 import cores.truongPhongs.customModels.TpThongKeSpCustom;
 import cores.truongPhongs.services.serviceImpls.TpTongSoSanPhamTrongKhoServiceImpl;
 import java.util.ArrayList;
@@ -37,22 +35,17 @@ public class TpThongKeView extends javax.swing.JPanel {
 
     private TpThongKeService khoService = new TpTongSoSanPhamTrongKhoServiceImpl();
     private List<TpThongKeSpCustom> listSp = new ArrayList<>();
+    
 
     public TpThongKeView() {
         initComponents();
         listSp = khoService.getListSp();
 
-        lblTongSp.setText(khoService.getList().toString());
-        lblSoSpDaBan.setText(khoService.getSoSanPhamDaXuat().toString());
-        lblSoSpChuaBan.setText(khoService.getSoSanPhamDaNhap().toString());
-        lblSoSpHoanNhap.setText(khoService.getSoLuongSpHoanNhap().toString());
-        lblSoSpHoanXuat.setText(khoService.getSoLuongSpHoanXuat().toString());
-        servicePie = new PieServiceImp();
-        listPie = servicePie.getSoLuongSpTonNhieuNhat();
-        chartPie1.setModel(listPie);
-        serviceLine = new LineServiceImp();
-        listLine = serviceLine.getSanPhamBanNhieuNhat();
-        chartLine1.setModel(listLine);
+        lblTongSp.setText(khoService.getList().get(0).toString());
+        lblSoSpDaBan.setText(khoService.getSoSanPhamDaXuat().get(0).toString());
+        lblSoSpChuaBan.setText(khoService.getSoSanPhamDaNhap().get(0).toString());
+        lblSoSpHoanNhap.setText(khoService.getSoLuongSpHoanNhap().get(0).toString());
+        lblSoSpHoanXuat.setText(khoService.getSoLuongSpHoanXuat().get(0).toString());
 
         loadTableHD(listSp);
 
@@ -193,9 +186,6 @@ public class TpThongKeView extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         ngayKetThuc = new com.toedter.calendar.JDateChooser();
         jLabel8 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        chartLine1 = new cores.Chart.view.ChartLine();
-        chartPie1 = new cores.Chart.view.ChartPie();
 
         materialTabbed1.setBackground(new java.awt.Color(255, 255, 255));
         materialTabbed1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -682,30 +672,6 @@ public class TpThongKeView extends javax.swing.JPanel {
 
         materialTabbed1.addTab("Thống kê sản phẩm", panelRound7);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(chartPie1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(chartLine1, javax.swing.GroupLayout.PREFERRED_SIZE, 1038, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 174, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(chartLine1, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(chartPie1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        materialTabbed1.addTab("Biểu đồ thống kê", jPanel1);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -746,8 +712,6 @@ public class TpThongKeView extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
-    private cores.Chart.view.ChartLine chartLine1;
-    private cores.Chart.view.ChartPie chartPie1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel17;
@@ -757,7 +721,6 @@ public class TpThongKeView extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblSoSpChuaBan;
     private javax.swing.JLabel lblSoSpDaBan;

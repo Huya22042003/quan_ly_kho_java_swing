@@ -26,7 +26,7 @@ public class LineRepository {
         Session session = HibernateUtil.getSessionFactory().openSession();
         List<ModelChartLine> listModel = new ArrayList<>();
         List<Object[]> list = session.createNativeQuery("""
-            select c.ten, sum(a.SoLuong * b.GiaBan) from chitietphieuxuat a 
+            select top 5 c.ten, sum(a.SoLuong * b.GiaBan) from chitietphieuxuat a 
             join ChiTietSanPham b on a.idchitietsp = b.id
             join sanpham c on b.idsanpham = c.id
             group by c.ten

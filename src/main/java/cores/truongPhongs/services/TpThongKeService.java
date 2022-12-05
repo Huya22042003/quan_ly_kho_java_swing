@@ -14,16 +14,16 @@ import java.util.List;
  */
 public interface TpThongKeService {
 
-    public List<TpTongSoSanPhamTrongKhoCustom> getList();
+    public List<Integer> getList();
 
-    public List<TpTongSoSanPhamTrongKhoCustom> getSoDonHoanNhap();
+    public List<Integer> getSoDonHoanNhap();
 
-    public List<TpTongSoSanPhamTrongKhoCustom> getSoDonHoanXuat();
+    public List<Integer> getSoDonHoanXuat();
 
-    public List<TpTongSoSanPhamTrongKhoCustom> getSoSanPhamDaNhap();
+    public List<Integer> getSoSanPhamDaNhap();
      List<TpThongKeSpCustom> getListByNgayThanhToan(Long ngayBatDau, Long ngayKetThuc);
-    public List<TpTongSoSanPhamTrongKhoCustom> getSoSanPhamDaXuat();
+    public List<Integer> getSoSanPhamDaXuat();
     public List<TpThongKeSpCustom> getListSp();
-    public List<TpTongSoSanPhamTrongKhoCustom> getSoLuongSpHoanNhap();
-    public List<TpTongSoSanPhamTrongKhoCustom> getSoLuongSpHoanXuat();
+    public List<Integer> getSoLuongSpHoanNhap();
+    public List<Integer> getSoLuongSpHoanXuat();
 }

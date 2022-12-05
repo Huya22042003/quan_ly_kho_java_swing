@@ -22,29 +22,29 @@ public class TpTongSoSanPhamTrongKhoServiceImpl implements TpThongKeService{
     }
     
     @Override
-    public List<TpTongSoSanPhamTrongKhoCustom> getList() {
+    public List<Integer> getList() {
         return repo.getSoLuongSpTon();
     }
 
     @Override
-    public List<TpTongSoSanPhamTrongKhoCustom> getSoDonHoanNhap() {
+    public List<Integer> getSoDonHoanNhap() {
         return repo.getSoDonHoanNhap();
     }
 
     @Override
-    public List<TpTongSoSanPhamTrongKhoCustom> getSoSanPhamDaNhap() {
+    public List<Integer> getSoSanPhamDaNhap() {
         return repo.getSoSanPhamDaNhap();
     }
 
     
 
     @Override
-    public List<TpTongSoSanPhamTrongKhoCustom> getSoDonHoanXuat() {
+    public List<Integer> getSoDonHoanXuat() {
         return repo.getSoDonHoanXuat();
     }
 
     @Override
-    public List<TpTongSoSanPhamTrongKhoCustom> getSoSanPhamDaXuat() {
+    public List<Integer> getSoSanPhamDaXuat() {
         return repo.getSoSanPhamDaXuat();
     }
 
@@ -59,12 +59,12 @@ public class TpTongSoSanPhamTrongKhoServiceImpl implements TpThongKeService{
     }
 
     @Override
-    public List<TpTongSoSanPhamTrongKhoCustom> getSoLuongSpHoanNhap() {
+    public List<Integer> getSoLuongSpHoanNhap() {
         return repo.getSoLuongSpHoanNhap();
     }
 
     @Override
-    public List<TpTongSoSanPhamTrongKhoCustom> getSoLuongSpHoanXuat() {
+    public List<Integer> getSoLuongSpHoanXuat() {
         return repo.getSoDonHoanXuat();
     }
     

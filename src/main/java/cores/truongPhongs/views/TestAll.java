@@ -18,7 +18,7 @@ public class TestAll extends javax.swing.JFrame {
      */
     public TestAll() {
         initComponents();
-        TpQuanLyChiTietSanPhamForm a = new TpQuanLyChiTietSanPhamForm();
+        TPThongKeBieuDo a = new TPThongKeBieuDo();
         this.add(a);
         this.setLayout(new FlowLayout());
         this.pack();
