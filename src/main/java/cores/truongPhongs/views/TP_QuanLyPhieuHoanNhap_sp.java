@@ -40,7 +40,7 @@ public class TP_QuanLyPhieuHoanNhap_sp extends javax.swing.JFrame {
                 dtm.getRowCount() + 1,
                 el.getSanPham().getMa(),
                 el.getSanPham().getTen(),
-                el.getMau(),
+                Converter.trangThaiMauSac(el.getMau()),
                 el.getSoLuongTon(),
                 el.getGiaNhap()
             };

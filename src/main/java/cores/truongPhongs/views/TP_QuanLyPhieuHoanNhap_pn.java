@@ -4,6 +4,7 @@ import cores.truongPhongs.customModels.TP_HoanNhap_PhieuNhapCustom;
 import cores.truongPhongs.customModels.TP_PhieuHoanNhapCustom;
 import cores.truongPhongs.services.TP_PhieuHoanNhapService;
 import cores.truongPhongs.services.serviceImpls.TP_PhieuHoanNhapServiceImpl;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -33,11 +34,13 @@ public class TP_QuanLyPhieuHoanNhap_pn extends javax.swing.JFrame {
     private void loadTable() {
         DefaultTableModel dtm = (DefaultTableModel) tblPhieuNhap.getModel();
         dtm.setRowCount(0);
+        String pattern = "yyyy-MM-dd HH:mm:ss";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         for (TP_HoanNhap_PhieuNhapCustom el : listPhieuNhap) {
+            Date ngayTao = new Date(el.getNgayTao());
             Object[] rowData = {
                 dtm.getRowCount() + 1,
-                el.getId(),
-                new Date(el.getNgayTao()),
+                el.getNgayTao() == null ? "không có" : simpleDateFormat.format(ngayTao),
                 el.getNhaCungCap().getTen(),
                 el.getNhanVien().getTen(),
                 Converter.TrangThaiPhieuXuat(el.getTrangThai())
@@ -63,7 +66,6 @@ public class TP_QuanLyPhieuHoanNhap_pn extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         panelRound2 = new utilities.palette.PanelRound();
         jLabel1 = new javax.swing.JLabel();
-        txtMaPhieu = new utilities.palette.TextField();
         txtNgayTao = new utilities.palette.TextField();
         txtTrangThai = new utilities.palette.TextField();
         textAreaScroll1 = new utilities.palette.TextAreaScroll();
@@ -71,10 +73,8 @@ public class TP_QuanLyPhieuHoanNhap_pn extends javax.swing.JFrame {
         panelRound16 = new utilities.palette.PanelRound();
         myButton6 = new utilities.palette.MyButton();
         myButton10 = new utilities.palette.MyButton();
-        textAreaScroll2 = new utilities.palette.TextAreaScroll();
-        txtLiDo = new utilities.palette.TextAreaCustom();
-        txtTrangThai1 = new utilities.palette.TextField();
-        txtTrangThai2 = new utilities.palette.TextField();
+        txtNhanVien = new utilities.palette.TextField();
+        txtNhaCC = new utilities.palette.TextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -93,11 +93,11 @@ public class TP_QuanLyPhieuHoanNhap_pn extends javax.swing.JFrame {
 
             },
             new String [] {
-                "STT", "Mã phiếu", "Ngày tạo", "Nhà cung cấp", "Nhân viên", "Trạng thái"
+                "STT", "Ngày tạo", "Nhà cung cấp", "Nhân viên", "Trạng thái"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true, false, false, true
+                false, true, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -169,16 +169,6 @@ public class TP_QuanLyPhieuHoanNhap_pn extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setText("Thông tin phiếu nhập");
-
-        txtMaPhieu.setEditable(false);
-        txtMaPhieu.setBackground(new java.awt.Color(228, 206, 224));
-        txtMaPhieu.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtMaPhieu.setLabelText("Mã phiếu ");
-        txtMaPhieu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMaPhieuActionPerformed(evt);
-            }
-        });
 
         txtNgayTao.setEditable(false);
         txtNgayTao.setBackground(new java.awt.Color(228, 206, 224));
@@ -256,34 +246,23 @@ public class TP_QuanLyPhieuHoanNhap_pn extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        textAreaScroll2.setBackground(new java.awt.Color(153, 204, 255));
-        textAreaScroll2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        textAreaScroll2.setLabelText("Lý do");
-
-        txtLiDo.setBackground(new java.awt.Color(228, 206, 224));
-        txtLiDo.setColumns(20);
-        txtLiDo.setRows(5);
-        txtLiDo.setWrapStyleWord(false);
-        txtLiDo.setDisabledTextColor(new java.awt.Color(204, 204, 255));
-        textAreaScroll2.setViewportView(txtLiDo);
-
-        txtTrangThai1.setEditable(false);
-        txtTrangThai1.setBackground(new java.awt.Color(228, 206, 224));
-        txtTrangThai1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtTrangThai1.setLabelText("Nhân viên");
-        txtTrangThai1.addActionListener(new java.awt.event.ActionListener() {
+        txtNhanVien.setEditable(false);
+        txtNhanVien.setBackground(new java.awt.Color(228, 206, 224));
+        txtNhanVien.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtNhanVien.setLabelText("Nhân viên");
+        txtNhanVien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTrangThai1ActionPerformed(evt);
+                txtNhanVienActionPerformed(evt);
             }
         });
 
-        txtTrangThai2.setEditable(false);
-        txtTrangThai2.setBackground(new java.awt.Color(228, 206, 224));
-        txtTrangThai2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtTrangThai2.setLabelText("Nhà cung cấp");
-        txtTrangThai2.addActionListener(new java.awt.event.ActionListener() {
+        txtNhaCC.setEditable(false);
+        txtNhaCC.setBackground(new java.awt.Color(228, 206, 224));
+        txtNhaCC.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtNhaCC.setLabelText("Nhà cung cấp");
+        txtNhaCC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTrangThai2ActionPerformed(evt);
+                txtNhaCCActionPerformed(evt);
             }
         });
 
@@ -296,14 +275,12 @@ public class TP_QuanLyPhieuHoanNhap_pn extends javax.swing.JFrame {
                     .addGroup(panelRound2Layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(textAreaScroll2, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(textAreaScroll1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(txtNgayTao, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtMaPhieu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(txtTrangThai, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtTrangThai1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTrangThai2, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNhaCC, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(panelRound16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(panelRound2Layout.createSequentialGroup()
                         .addGap(45, 45, 45)
@@ -315,21 +292,17 @@ public class TP_QuanLyPhieuHoanNhap_pn extends javax.swing.JFrame {
             .addGroup(panelRound2Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(txtMaPhieu, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(28, 28, 28)
                 .addComponent(txtNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(35, 35, 35)
                 .addComponent(txtTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(txtTrangThai2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(txtTrangThai1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addGap(28, 28, 28)
+                .addComponent(txtNhaCC, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(txtNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
                 .addComponent(textAreaScroll1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(textAreaScroll2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(126, 126, 126)
                 .addComponent(panelRound16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(22, 22, 22))
         );
@@ -379,20 +352,19 @@ public class TP_QuanLyPhieuHoanNhap_pn extends javax.swing.JFrame {
         if (row == -1) {
             return;
         }
-
+        String pattern = "yyyy-MM-dd HH:mm:ss";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         TP_HoanNhap_PhieuNhapCustom item = this.listPhieuNhap.get(row);
-        txtMaPhieu.setText(item.getId().toString());
-        txtNgayTao.setText(new Date(item.getNgayTao()).toString());
+        Date ngayTao = new Date(item.getNgayTao());
+        txtNgayTao.setText(item.getNgayTao() == null ? "không có" : simpleDateFormat.format(ngayTao));
+        txtNhaCC.setText(item.getNhaCungCap().getTen());
+        txtNhanVien.setText(item.getNhanVien().getTen());
         txtTrangThai.setText(Converter.TrangThaiPhieuXuat(item.getTrangThai()));
     }//GEN-LAST:event_tblPhieuNhapMouseClicked
 
     private void myButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton10ActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_myButton10ActionPerformed
-
-    private void txtMaPhieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaPhieuActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtMaPhieuActionPerformed
 
     private void txtTrangThaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTrangThaiActionPerformed
         // TODO add your handling code here:
@@ -411,7 +383,7 @@ public class TP_QuanLyPhieuHoanNhap_pn extends javax.swing.JFrame {
             }
         }
         TP_HoanNhap_PhieuNhapCustom pn = this.listPhieuNhap.get(row);
-        if (hoanNhapService.addPhieuNhap(pn, txtGhiChu.getText(), txtLiDo.getText())) {
+        if (hoanNhapService.addPhieuNhap(pn, txtGhiChu.getText(),"")) {
             JOptionPane.showMessageDialog(this, "Thêm thành công", "Thành công !!!", JOptionPane.INFORMATION_MESSAGE);
             this.setVisible(false);
         } else {
@@ -421,13 +393,13 @@ public class TP_QuanLyPhieuHoanNhap_pn extends javax.swing.JFrame {
 
     }//GEN-LAST:event_myButton6ActionPerformed
 
-    private void txtTrangThai1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTrangThai1ActionPerformed
+    private void txtNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNhanVienActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtTrangThai1ActionPerformed
+    }//GEN-LAST:event_txtNhanVienActionPerformed
 
-    private void txtTrangThai2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTrangThai2ActionPerformed
+    private void txtNhaCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNhaCCActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtTrangThai2ActionPerformed
+    }//GEN-LAST:event_txtNhaCCActionPerformed
 
     /**
      * @param args the command line arguments
@@ -477,13 +449,10 @@ public class TP_QuanLyPhieuHoanNhap_pn extends javax.swing.JFrame {
     private utilities.palette.PanelRound panelRound5;
     private utilities.palette.TableDark_1 tblPhieuNhap;
     private utilities.palette.TextAreaScroll textAreaScroll1;
-    private utilities.palette.TextAreaScroll textAreaScroll2;
     private utilities.palette.TextAreaCustom txtGhiChu;
-    private utilities.palette.TextAreaCustom txtLiDo;
-    private utilities.palette.TextField txtMaPhieu;
     private utilities.palette.TextField txtNgayTao;
+    private utilities.palette.TextField txtNhaCC;
+    private utilities.palette.TextField txtNhanVien;
     private utilities.palette.TextField txtTrangThai;
-    private utilities.palette.TextField txtTrangThai1;
-    private utilities.palette.TextField txtTrangThai2;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,6 +4,8 @@ import cores.truongPhongs.customModels.TP_PhieuHoanNhapCustom;
 import cores.truongPhongs.services.TP_PhieuHoanNhapService;
 import cores.truongPhongs.services.serviceImpls.TP_PhieuHoanNhapServiceImpl;
 import infrastructures.constant.TrangThaiPhieuHoanConstant;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -54,18 +56,17 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
     private void loadTable(List<TP_PhieuHoanNhapCustom> list) {
         DefaultTableModel dtm = (DefaultTableModel) tblPhieuHoanNhap.getModel();
         dtm.setRowCount(0);
-
+        String pattern = "yyyy-MM-dd HH:mm:ss";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         for (TP_PhieuHoanNhapCustom el : list) {
             Date ngayTao = new Date(el.getNgayTao());
             Object[] rowData = {
                 dtm.getRowCount() + 1,
-                el.getId(),
-                ngayTao,
-                el.getNgayThanhToan() == null ? "Chưa thanh toán" : new Date(el.getNgayThanhToan()).toString(),
+                el.getNgayTao() == null ? "không có" : simpleDateFormat.format(ngayTao),
+                el.getNgayThanhToan() == null ? "Chưa thanh toán" : simpleDateFormat.format(ngayTao),
                 el.getPhieuNhap().getNhaCungCap().getTen(),
                 el.getPhieuNhap().getNhanVien().getTen(),
-                Converter.TrangThaiPhieuHoan(el.getTrangThai())
-            };
+                Converter.TrangThaiPhieuHoan(el.getTrangThai()),};
             dtm.addRow(rowData);
         }
     }
@@ -128,11 +129,11 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
 
             },
             new String [] {
-                "STT", "Mã phiếu", "Ngày tạo", "Ngày thanh toán", "Nhà cung cấp", "Nhân viên", "Trạng thái"
+                "STT", "Ngày tạo", "Ngày thanh toán", "Nhà cung cấp", "Nhân viên", "Trạng thái"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true, false, false, false, true
+                false, true, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -145,9 +146,6 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(tblPhieuHoanNhap);
-        if (tblPhieuHoanNhap.getColumnModel().getColumnCount() > 0) {
-            tblPhieuHoanNhap.getColumnModel().getColumn(3).setHeaderValue("Ngày thanh toán");
-        }
 
         panelRound5.setBackground(new java.awt.Color(67, 130, 187));
         panelRound5.setRoundBottomLeft(50);
@@ -486,7 +484,7 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
         ctp = new TP_QuanLyPhieuHoanNhap_ctp(this.hoanNhapCustoms.get(row));
         ctp.setVisible(true);
     }//GEN-LAST:event_myButton9ActionPerformed
-    
+
     private void myButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton5ActionPerformed
         if (ctp != null && hoanNhap_sp != null) {
             ctp.setVisible(false);
@@ -535,13 +533,15 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
         if (row == -1) {
             return;
         }
-
+        String pattern = "yyyy-MM-dd HH:mm:ss";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         TP_PhieuHoanNhapCustom item = this.hoanNhapCustoms.get(row);
+        Date ngayTao = new Date(item.getNgayTao());
         txtMaPhieu.setText(item.getId().toString());
         txtGhiChu.setText(item.getGhiChu());
         txtLiDo.setText(item.getLiDo());
-        txtNgayTao.setText(new Date(item.getNgayTao()).toString());
-        txtNgayThanhToan.setText(item.getNgayThanhToan() == null ? "Chưa thanh toán" : new Date(item.getNgayThanhToan()).toString());
+        txtNgayTao.setText(item.getNgayTao() == null ? "không có" : simpleDateFormat.format(ngayTao));
+        txtNgayThanhToan.setText(item.getNgayThanhToan() == null ? "Chưa thanh toán" : simpleDateFormat.format(ngayTao));
         txtTrangThai.setText(Converter.TrangThaiPhieuHoan(item.getTrangThai()));
         if (txtTrangThai.getText().equalsIgnoreCase("Hoàn Thành Công")) {
             btnXacNhan.setEnabled(false);
