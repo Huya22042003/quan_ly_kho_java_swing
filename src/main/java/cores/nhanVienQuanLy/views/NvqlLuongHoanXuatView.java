@@ -8,6 +8,7 @@ import domainModels.PhieuHoanXuat;
 import infrastructures.constant.TrangThaiPhieuHoanConstant;
 import java.awt.event.ActionEvent;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -26,6 +27,7 @@ public class NvqlLuongHoanXuatView extends javax.swing.JPanel {
     private Tai_LuongHoanXuat_ListPhieuXuat lisPXView;
     private Tai_LuongHoanXuat_ChiTietPXView ctpxView;
     private Tai_LuongHoanXuat_ChiTietPhieuHoanXuatView ctphieuHoanXuatView;
+    
 //
     private Page p;
 
@@ -53,7 +55,6 @@ public class NvqlLuongHoanXuatView extends javax.swing.JPanel {
     private void clearForm() {
         txtGhiChu.setText("");
         txtKhachHang.setText("");
-        txtMaPhieu.setText("");
         txtNgayTao.setText("");
         txtNgayThanhToan.setText("");
         txtNhapTien.setText("");
@@ -70,6 +71,8 @@ public class NvqlLuongHoanXuatView extends javax.swing.JPanel {
     private void loadTable(List<PhieuHoanXuatCustom> ls) {
         DefaultTableModel dtm = (DefaultTableModel) this.tblPhieuHoanXuat.getModel();
         dtm.setRowCount(0);
+        String pattern = "yyyy-MM-dd HH:mm:ss";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         int sum = limit + offset;
         if (ls.size() <= sum) {
             sum = ls.size();
@@ -83,9 +86,8 @@ public class NvqlLuongHoanXuatView extends javax.swing.JPanel {
             Date ngayTao = new Date(phx.getNgayTao());
             Object[] rowData = {
                 dtm.getRowCount() + 1,
-                phx.getId(),
-                ngayTao,
-                phx.getNgayThanhToan()== null ? "Chưa thanh toán" :new Date(phx.getNgayThanhToan()), 
+                phx.getNgayTao() == null ? "không có" : simpleDateFormat.format(ngayTao),
+                phx.getNgayThanhToan() == null ? "Chưa thanh toán" : simpleDateFormat.format(ngayTao),
                 phx.getGhiChu(),
                 phx.getLiDo(),
                 Converter.TrangThaiPhieuHoan(phx.getTrangThai()),
@@ -119,7 +121,6 @@ public class NvqlLuongHoanXuatView extends javax.swing.JPanel {
         panelRound3 = new utilities.palette.PanelRound();
         jLabel1 = new javax.swing.JLabel();
         txtNgayTao = new utilities.palette.TextField();
-        txtMaPhieu = new utilities.palette.TextField();
         textAreaScroll1 = new utilities.palette.TextAreaScroll();
         txtGhiChu = new utilities.palette.TextAreaCustom();
         txtTongTienPhaiTraKhach = new utilities.palette.TextField();
@@ -145,11 +146,11 @@ public class NvqlLuongHoanXuatView extends javax.swing.JPanel {
 
             },
             new String [] {
-                "STT", "Mã Phiếu Hoàn", "Ngày tạo", "Ngày thanh toán", "Ghi chú", "Lí do", "Trạng thái", "ID Phiếu Xuât", "Mã KH"
+                "STT", "Ngày tạo", "Ngày thanh toán", "Ghi chú", "Lí do", "Trạng thái", "ID Phiếu Xuât", "Mã KH"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -361,16 +362,6 @@ public class NvqlLuongHoanXuatView extends javax.swing.JPanel {
         txtNgayTao.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtNgayTao.setLabelText("Ngày tạo");
 
-        txtMaPhieu.setEditable(false);
-        txtMaPhieu.setBackground(new java.awt.Color(228, 206, 224));
-        txtMaPhieu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtMaPhieu.setLabelText("Mã phiếu ");
-        txtMaPhieu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMaPhieuActionPerformed(evt);
-            }
-        });
-
         textAreaScroll1.setBackground(new java.awt.Color(153, 204, 255));
         textAreaScroll1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         textAreaScroll1.setLabelText("Ghi chú");
@@ -463,9 +454,6 @@ public class NvqlLuongHoanXuatView extends javax.swing.JPanel {
                 .addComponent(txtTienThua, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(panelRound3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(txtMaPhieu, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(panelRound3Layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(txtNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(panelRound3Layout.createSequentialGroup()
                 .addContainerGap()
@@ -499,9 +487,7 @@ public class NvqlLuongHoanXuatView extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(2, 2, 2)
-                .addComponent(txtMaPhieu, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(55, 55, 55)
                 .addComponent(txtNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNgayThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -521,7 +507,7 @@ public class NvqlLuongHoanXuatView extends javax.swing.JPanel {
                 .addComponent(txtTienThua, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -550,10 +536,6 @@ public class NvqlLuongHoanXuatView extends javax.swing.JPanel {
         }
         lisPXView.setVisible(true);
     }//GEN-LAST:event_btnCreatPhieuXuatActionPerformed
-
-    private void txtMaPhieuActionPerformed(ActionEvent evt) {//GEN-FIRST:event_txtMaPhieuActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtMaPhieuActionPerformed
     public PhieuHoanXuat chon() {
         int row = this.tblPhieuHoanXuat.getSelectedRow();
         if (row == -1) {
@@ -605,18 +587,19 @@ public class NvqlLuongHoanXuatView extends javax.swing.JPanel {
         if (row == -1) {
             return;
         }
-        String maPhieu = this.tblPhieuHoanXuat.getValueAt(row, 1).toString();
-        String ngayTao = this.tblPhieuHoanXuat.getValueAt(row, 2).toString();
-        String ngayThanhToan = this.tblPhieuHoanXuat.getValueAt(row, 3).toString();
-//        String ghiChu = tblPhieuHoanXuat.getValueAt(row, 4).toString();
-        String liDo = tblPhieuHoanXuat.getValueAt(row, 5).toString();
-        String trangThai = this.tblPhieuHoanXuat.getValueAt(row, 6).toString();
-        String idPhieuXuat = this.tblPhieuHoanXuat.getValueAt(row, 7).toString();
-        String khachHang = this.tblPhieuHoanXuat.getValueAt(row, 8).toString();
-
-        txtMaPhieu.setText(maPhieu);
-        txtNgayTao.setText(ngayTao);
-        txtNgayThanhToan.setText(ngayThanhToan);
+        String ngayTao = this.tblPhieuHoanXuat.getValueAt(row, 1).toString();
+        String ngayThanhToan = this.tblPhieuHoanXuat.getValueAt(row, 2).toString();
+//        String ghiChu = tblPhieuHoanXuat.getValueAt(row, 3).toString();
+        String liDo = tblPhieuHoanXuat.getValueAt(row, 4).toString();
+        String trangThai = this.tblPhieuHoanXuat.getValueAt(row, 5).toString();
+        String idPhieuXuat = this.tblPhieuHoanXuat.getValueAt(row, 6).toString();
+        String khachHang = this.tblPhieuHoanXuat.getValueAt(row, 7).toString();
+        PhieuHoanXuatCustom item = this.listPHX.get(row);
+        String pattern = "yyyy-MM-dd HH:mm:ss";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        Date ngayTaos = new Date(item.getNgayTao());
+        txtNgayTao.setText(simpleDateFormat.format(ngayTaos));
+        txtNgayThanhToan.setText(item.getNgayThanhToan() == null ? "chưa thanh toán" : simpleDateFormat.format(ngayTaos));
 //        txtIdPhieuXuat.setText(idPhieuXuat);
         txtKhachHang.setText(khachHang);
         txtLiDo.setText(liDo);
@@ -627,7 +610,7 @@ public class NvqlLuongHoanXuatView extends javax.swing.JPanel {
         for (ChiTietPhieuHoanXuatCustom ctphxct : listCTPHX) {
             tien += ctphxct.getIdChiTietSp().getGiaBan().multiply(new BigDecimal(ctphxct.getSoLuong())).doubleValue();
         }
-        int tongTien =(int) tien;
+        int tongTien = (int) tien;
         txtTongTienPhaiTraKhach.setText(tongTien + "");
         if (txtTrangThai.getText().equalsIgnoreCase("Hoàn Thành Công")) {
             btnThanhToan.setEnabled(false);
@@ -692,7 +675,7 @@ public class NvqlLuongHoanXuatView extends javax.swing.JPanel {
         }
 
         double tienThua = tienKhach - Double.valueOf(tienPhaiTra);
-        int tongTien = (int)tienThua;
+        int tongTien = (int) tienThua;
         txtTienThua.setText(tongTien + "");
     }//GEN-LAST:event_txtNhapTienCaretUpdate
 
@@ -750,7 +733,6 @@ public class NvqlLuongHoanXuatView extends javax.swing.JPanel {
     private javax.swing.JLabel txtIndex;
     private utilities.palette.TextField txtKhachHang;
     private utilities.palette.TextField txtLiDo;
-    private utilities.palette.TextField txtMaPhieu;
     private utilities.palette.TextField txtNgayTao;
     private utilities.palette.TextField txtNgayThanhToan;
     private utilities.palette.TextField txtNhapTien;
