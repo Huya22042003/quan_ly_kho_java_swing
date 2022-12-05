@@ -47,6 +47,7 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
         initComponents();
         hoanNhapCustoms = phieuHoanNhapService.getListPhieuHoanNhap();
         clearForm();
+        sizes = hoanNhapCustoms.size();
         loadTable(phieuHoanNhapService.phanTrang(hoanNhapCustoms, offset, limit));
     }
 
@@ -278,9 +279,9 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
                     .addGroup(panelRound1Layout.createSequentialGroup()
                         .addGap(273, 273, 273)
                         .addComponent(btnPre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(81, 81, 81)
+                        .addGap(77, 77, 77)
                         .addComponent(txtIndex)
-                        .addGap(81, 81, 81)
+                        .addGap(85, 85, 85)
                         .addComponent(btnPre1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelRound1Layout.createSequentialGroup()
                         .addGap(13, 13, 13)
@@ -298,12 +299,14 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
                 .addGap(51, 51, 51)
                 .addComponent(panelRound15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnPre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtIndex)
-                    .addComponent(btnPre1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnPre1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelRound1Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(txtIndex)))
                 .addGap(39, 39, 39))
         );
 

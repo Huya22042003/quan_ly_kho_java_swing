@@ -6,6 +6,7 @@ import cores.nhanVienQuanLy.services.NvqlLuongKiemKeService;
 import domainModels.NhanVien;
 import domainModels.PhieuKiemKe;
 import infrastructures.constant.TrangThaiPhieuKiemConstant;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -63,6 +64,23 @@ public class NvqlLuongKiemKeServiceImpl implements NvqlLuongKiemKeService {
     @Override
     public List<NvqlLuongKiemKeCustom> getListByNgayTao(Long ngayBatDau, Long ngayKetThuc) {
         return rp.getListByNgayTao(ngayBatDau, ngayKetThuc);
+    }
+
+    @Override
+    public List<NvqlLuongKiemKeCustom> phanTrang(List<NvqlLuongKiemKeCustom> list, int offset, int limit) {
+        List<NvqlLuongKiemKeCustom> listPhanTrang = new ArrayList<>();
+        int sum = limit + offset;
+        if (list.size() <= sum) {
+            sum = list.size();
+        }
+        for (int i = offset; i < sum; i++) {
+            if (list.get(i) == null) {
+                break;
+            }
+            NvqlLuongKiemKeCustom el = list.get(i);
+            listPhanTrang.add(el);
+        }
+        return listPhanTrang;
     }
 
 }
