@@ -1339,9 +1339,9 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
     private void buttonGradient1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGradient1ActionPerformed
         searchRadio();
 
-        if (rdoMa.isSelected()) {
-            listPhieuXuat = phieuXuatService.findByMa(UUID.fromString(txtTimKiem.getText()));
-        }
+//        if (rdoMa.isSelected()) {
+//            listPhieuXuat = phieuXuatService.findByMa(UUID.fromString(txtTimKiem.getText()));
+//        }
         loadTablePhieuXuat(listPhieuXuat);
         if (rdoNgayTao.isSelected() || rdoNgayThanhToan.isSelected()) {
             TimKiemTheoNgay();
@@ -1485,8 +1485,10 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
             loadTablePhieuXuat(getListByTT(0));
         } else if (rdoKhachHang.isSelected()) {
             loadTablePhieuXuat(getListByTT(1));
-        } else {
+        } else if(rdoMa.isSelected()){
             loadTablePhieuXuat(getListByTT(2));
+        }else {
+            loadTablePhieuXuat(getListByTT(3));
         }
     }
 
