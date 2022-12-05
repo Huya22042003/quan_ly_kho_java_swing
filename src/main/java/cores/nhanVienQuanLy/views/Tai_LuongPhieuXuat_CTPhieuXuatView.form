@@ -103,6 +103,8 @@
                     <Column editable="false" title="STT" type="java.lang.Object"/>
                     <Column editable="false" title="M&#xe3; S&#x1ea3;n Ph&#x1ea9;m" type="java.lang.Object"/>
                     <Column editable="false" title="T&#xea;n S&#x1ea3;n Ph&#x1ea9;m" type="java.lang.Object"/>
+                    <Column editable="false" title="M&#xe3; Phi&#x1ebf;u xu&#x1ea5;t" type="java.lang.Object"/>
+                    <Column editable="false" title="S&#x1ea3;n Ph&#x1ea9;m" type="java.lang.Object"/>
                     <Column editable="false" title="S&#x1ed1; l&#x1b0;&#x1ee3;ng" type="java.lang.Object"/>
                     <Column editable="false" title="Gi&#xe1; B&#xe1;n" type="java.lang.Object"/>
                     <Column editable="false" title="N&#x103;m B&#x1ea3;o h&#xe0;nh" type="java.lang.Object"/>
@@ -504,6 +506,7 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="14" style="1"/>
                     </Property>
+                    <Property name="labelText" type="java.lang.String" value="S&#x1ea3;n ph&#x1ea9;m"/>
                     <Property name="labelText" type="java.lang.String" value="T&#xea;n S&#x1ea3;n ph&#x1ea9;m"/>
                   </Properties>
                 </Component>

@@ -63,29 +63,31 @@ public class NvqlKiemKeCtpkView extends javax.swing.JFrame {
             }
 
             NvqlLuongKiemKeCtpkCustom m = list.get(i);
-            
-                Object[] row = new Object[]{
-                    model.getRowCount() + 1,
-                    m.getMa(),
-                    m.getTen(),
-                    m.getSoLuongTon(),
-                    m.getSoLuongThucTon(),
-                    m.getChenhLech()
-                };
-                model.addRow(row);
-            }
-        
+
+            Object[] row = new Object[]{
+                model.getRowCount() + 1,
+                m.getMa(),
+                m.getTen(),
+                m.getSoLuongTon(),
+                m.getSoLuongThucTon(),
+                m.getChenhLech()
+            };
+            model.addRow(row);
+        }
+
     }
-    
+
     private void clearForm() {
         sizes = listCtpk.size();
         offset = 0;
         index = 1;
         loadIndex();
     }
+
     private void loadIndex() {
         this.txtIndex.setText(String.valueOf(index) + " / " + (Math.round((sizes / limit) + 0.5)));
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -110,11 +112,11 @@ public class NvqlKiemKeCtpkView extends javax.swing.JFrame {
         btnShow1 = new utilities.palette.MyButton();
         panelRound3 = new utilities.palette.PanelRound();
         jLabel2 = new javax.swing.JLabel();
-        txtIDSP = new utilities.palette.TextField();
-        txtMaPhieu = new utilities.palette.TextField();
-        txtGiaBan = new utilities.palette.TextField();
-        txtNamBH = new utilities.palette.TextField();
-        txtMau = new utilities.palette.TextField();
+        txtTen = new utilities.palette.TextField();
+        txtMaSp = new utilities.palette.TextField();
+        txtSlTon = new utilities.palette.TextField();
+        txtSlThuc = new utilities.palette.TextField();
+        txtSlChenh = new utilities.palette.TextField();
         btnAnh = new utilities.palette.UWPButton();
         btnPre = new utilities.palette.UWPButton();
         txtIndex = new javax.swing.JLabel();
@@ -268,28 +270,28 @@ public class NvqlKiemKeCtpkView extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         jLabel2.setText("Thông tin phiếu kiểm chi tiết");
 
-        txtIDSP.setEditable(false);
-        txtIDSP.setBackground(new java.awt.Color(228, 206, 224));
-        txtIDSP.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtIDSP.setLabelText("ID Sản phẩm");
+        txtTen.setEditable(false);
+        txtTen.setBackground(new java.awt.Color(228, 206, 224));
+        txtTen.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtTen.setLabelText("Tên sản phẩm");
 
-        txtMaPhieu.setBackground(new java.awt.Color(228, 206, 224));
-        txtMaPhieu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtMaPhieu.setLabelText("Mã phiếu ");
+        txtMaSp.setBackground(new java.awt.Color(228, 206, 224));
+        txtMaSp.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtMaSp.setLabelText("Mã sản phẩm");
 
-        txtGiaBan.setEditable(false);
-        txtGiaBan.setBackground(new java.awt.Color(228, 206, 224));
-        txtGiaBan.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtGiaBan.setLabelText("Giá Bán");
+        txtSlTon.setEditable(false);
+        txtSlTon.setBackground(new java.awt.Color(228, 206, 224));
+        txtSlTon.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtSlTon.setLabelText("Số lượng tồn");
 
-        txtNamBH.setEditable(false);
-        txtNamBH.setBackground(new java.awt.Color(228, 206, 224));
-        txtNamBH.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtNamBH.setLabelText("Năm Bảo Hành");
+        txtSlThuc.setEditable(false);
+        txtSlThuc.setBackground(new java.awt.Color(228, 206, 224));
+        txtSlThuc.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtSlThuc.setLabelText("Số lượng thực tồn");
 
-        txtMau.setBackground(new java.awt.Color(228, 206, 224));
-        txtMau.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtMau.setLabelText("Màu");
+        txtSlChenh.setBackground(new java.awt.Color(228, 206, 224));
+        txtSlChenh.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtSlChenh.setLabelText("Số lượng chênh lệch");
 
         javax.swing.GroupLayout panelRound3Layout = new javax.swing.GroupLayout(panelRound3);
         panelRound3.setLayout(panelRound3Layout);
@@ -303,11 +305,11 @@ public class NvqlKiemKeCtpkView extends javax.swing.JFrame {
                     .addGroup(panelRound3Layout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNamBH, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtMau, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtGiaBan, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtIDSP, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtMaPhieu, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtSlThuc, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtSlChenh, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtSlTon, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMaSp, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelRound3Layout.setVerticalGroup(
@@ -316,15 +318,15 @@ public class NvqlKiemKeCtpkView extends javax.swing.JFrame {
                 .addContainerGap(43, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
-                .addComponent(txtMaPhieu, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtMaSp, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
-                .addComponent(txtIDSP, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(53, 53, 53)
-                .addComponent(txtGiaBan, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtSlTon, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(55, 55, 55)
-                .addComponent(txtNamBH, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtSlThuc, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
-                .addComponent(txtMau, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtSlChenh, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(55, 55, 55))
         );
 
@@ -444,7 +446,12 @@ public class NvqlKiemKeCtpkView extends javax.swing.JFrame {
         return listChiTietSanPham.get(row);
     }
     private void tbPhieuKiemChiTietMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPhieuKiemChiTietMouseClicked
-        // TODO add your handling code here:
+        int s = tbPhieuKiemChiTiet.getSelectedRow();
+        txtMaSp.setText(tbPhieuKiemChiTiet.getValueAt(s, 1).toString());
+        txtTen.setText(tbPhieuKiemChiTiet.getValueAt(s, 2).toString());
+        txtSlTon.setText(tbPhieuKiemChiTiet.getValueAt(s, 3).toString());
+        txtSlThuc.setText(tbPhieuKiemChiTiet.getValueAt(s, 4).toString());
+        txtSlChenh.setText(tbPhieuKiemChiTiet.getValueAt(s, 5).toString());
     }//GEN-LAST:event_tbPhieuKiemChiTietMouseClicked
 
     private void btnShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowActionPerformed
@@ -519,11 +526,11 @@ public class NvqlKiemKeCtpkView extends javax.swing.JFrame {
     private utilities.palette.PanelRound panelRound8;
     private utilities.palette.TableDark_1 tbPhieuKiemChiTiet;
     private javax.swing.JLabel test;
-    private utilities.palette.TextField txtGiaBan;
-    private utilities.palette.TextField txtIDSP;
     private javax.swing.JLabel txtIndex;
-    private utilities.palette.TextField txtMaPhieu;
-    private utilities.palette.TextField txtMau;
-    private utilities.palette.TextField txtNamBH;
+    private utilities.palette.TextField txtMaSp;
+    private utilities.palette.TextField txtSlChenh;
+    private utilities.palette.TextField txtSlThuc;
+    private utilities.palette.TextField txtSlTon;
+    private utilities.palette.TextField txtTen;
     // End of variables declaration//GEN-END:variables
 }
