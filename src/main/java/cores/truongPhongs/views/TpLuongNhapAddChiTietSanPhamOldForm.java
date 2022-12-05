@@ -110,16 +110,50 @@ public class TpLuongNhapAddChiTietSanPhamOldForm extends javax.swing.JFrame {
 //        }
         
         sp.setDonVi(ct.getDonVi());
-        sp.setGiaNhap(BigDecimal.valueOf(Long.parseLong(txtGiaNhap.getText())));
+        
         sp.setHinhAnh(ct.getHinhAnh());
         sp.setMau(ct.getMau());
         sp.setSize(ct.getSize());
         sp.setNamBaoHanh(ct.getNamBaoHanh());
         sp.setSanPham(ct.getSanPham());
         sp.setHinhAnh(duongdananh);
+        if(txtSoLuongNhap.getText().trim().length() == 0){
+            lblSoLuong.setText("Bạn chưa nhập số lượng!");
+            return null;
+        }
+        if(txtGiaNhap.getText().trim().length() == 0 ){
+            lblGiaNhap.setText("Bạn chưa nhập giá nhập!");
+            return null;
+        }
+        int sl;
+        BigDecimal gia;
+        try {
+            sl = Integer.parseInt(txtSoLuongNhap.getText());
+            if(sl <=0 ){
+                JOptionPane.showMessageDialog(this, "Số lượng nhập không được nhỏ hơn 0!");
+                return null;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Số lượng nhập phải là kiểu số!");
+            e.printStackTrace();
+            return null;
+        }
+         try {
+            gia = BigDecimal.valueOf(Long.parseLong(txtGiaNhap.getText()));
+            if(gia.compareTo(new BigDecimal(0)) < 0 ){
+                JOptionPane.showMessageDialog(this, "Giá nhập không được nhỏ hơn 0!");
+                return null;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Giá nhập phải là kiểu số!");
+            e.printStackTrace();
+            return null;
+        }
+        sp.setGiaNhap(BigDecimal.valueOf(Long.parseLong(txtGiaNhap.getText())));
         sp.setSoLuongTon(Integer.parseInt(txtSoLuongNhap.getText()));
         sp.setTrangThai(ct.getTrangThai().CHO_XAC_NHAN);
         sp.setNgayTao(new Date().getTime());
+        
         return sp;
     }
 
@@ -250,6 +284,10 @@ public class TpLuongNhapAddChiTietSanPhamOldForm extends javax.swing.JFrame {
         txtSize.setEditable(false);
         txtSize.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         txtSize.setLabelText("Size");
+
+        lblSoLuong.setForeground(new java.awt.Color(255, 0, 51));
+
+        lblGiaNhap.setForeground(new java.awt.Color(255, 0, 0));
 
         javax.swing.GroupLayout panelRound3Layout = new javax.swing.GroupLayout(panelRound3);
         panelRound3.setLayout(panelRound3Layout);
