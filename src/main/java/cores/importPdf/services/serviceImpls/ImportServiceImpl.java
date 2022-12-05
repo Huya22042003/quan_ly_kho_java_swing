@@ -20,6 +20,7 @@ import infrastructures.constant.TrangThaiSanPhamConstanst;
 import java.util.ArrayDeque;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.UUID;
@@ -136,7 +137,7 @@ public class ImportServiceImpl implements ImportService {
     public MessAlert importData(List<SanPhamCustom> listPdf, UUID idPhieuNhap) {
         loadMap();
         MessAlert alert = new MessAlert();
-        Queue<ChiTietSanPhamCustom> que = new LinkedList<>();
+        ConcurrentHashMap<String,ChiTietSanPhamCustom> que = new ConcurrentHashMap<>();
         try {
             listPdf.parallelStream().forEach(el -> {
                 if (!mapSanPham.containsKey(el.getTen())) {
@@ -166,13 +167,12 @@ public class ImportServiceImpl implements ImportService {
                 ctsp.setMaSpNcc(el.getMa());
                 ctsp.setIdPhieuNhap(idPhieuNhap);
                 ctsp.setSize(el.getSize());
-                que.add(ctsp);
+                que.put("a", ctsp);
                 alert.setStatus(true);
             });
-            Iterator<ChiTietSanPhamCustom> iterator = que.iterator();
-            while (iterator.hasNext()) {
-                ChiTietSanPhamCustom element = iterator.next();
-                rp.insertChiTietSanPham(element);
+            for (Map.Entry<String, ChiTietSanPhamCustom> entry : que.entrySet()) {
+                ChiTietSanPhamCustom el = entry.getValue();
+                rp.insertChiTietSanPham(el);
             }
 
         } catch (Exception e) {

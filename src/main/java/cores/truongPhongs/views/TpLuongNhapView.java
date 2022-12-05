@@ -42,13 +42,13 @@ public class TpLuongNhapView extends javax.swing.JPanel {
     private TpPhieuNhapChiTietService tpncts;
     private List<TpPhieuNhapChiTietCustom> listCtpn = new ArrayList<>();
     private Page p;
-    
+
     private int limit = 7;
-    
+
     private int offset = 0;
-    
+
     private int sizes = 0;
-    
+
     private int index = 1;
 
     public TpLuongNhapView() {
@@ -57,9 +57,7 @@ public class TpLuongNhapView extends javax.swing.JPanel {
         listPn = new ArrayList<>();
         phieuNhapService = new TpPhieuNhapServiceImpl();
         tpncts = new TpPhieuNhapChiTietServiceImpl();
-        listPn = phieuNhapService.getListPn();
-        p = new Page();
-        loadTablePn(phieuNhapService.phanTrang(listPn, offset, limit));
+
 //        loadTablePn(listPn);
         ctspView = new TpLuongNhapChiTietSanPhamForm();
         ctpnView = new TpLuongNhapChiTietPhieuNhapForm();
@@ -70,7 +68,7 @@ public class TpLuongNhapView extends javax.swing.JPanel {
                 //  Test
                 try {
                     for (int i = 1; i <= 100; i++) {
-                        
+
                         Thread.sleep(5);
                     }
                     call.done();
@@ -78,15 +76,18 @@ public class TpLuongNhapView extends javax.swing.JPanel {
                     System.err.println(e);
                 }
             }
-            
+
             @Override
             public void onCancel() {
-                
+
             }
         });
         cbbTrangThai.setSelectedIndex(0);
+        listPn = phieuNhapService.getListPn();
+        p = new Page();
+        loadTablePn(phieuNhapService.phanTrang(listPn, offset, limit));
     }
-    
+
     public TpLuongNhapView(UUID id) {
         initComponents();
         p = new Page();
@@ -111,11 +112,11 @@ public class TpLuongNhapView extends javax.swing.JPanel {
         phieuNhap.setNgayTao(new Date().getTime());
         phieuNhapService.addPn(phieuNhap);
         listPn = new ArrayList<>();
-        listPn = phieuNhapService.getListPn(); 
+        listPn = phieuNhapService.getListPn();
         sizes = listPn.size();
         loadTablePn(phieuNhapService.phanTrang(listPn, offset, limit));
     }
-    
+
     public List<TpPhieuNhapCustom> listSearch(int rdo) {
         // nhập vào 
         String timKiem = this.txtSearch.getText();
@@ -131,7 +132,7 @@ public class TpLuongNhapView extends javax.swing.JPanel {
                 case 0:
                     search = el.getId().toString();
                     break;
-                
+
                 case 1:
                     search = el.getTenNcc();
                     break;
@@ -150,10 +151,10 @@ public class TpLuongNhapView extends javax.swing.JPanel {
                 }
             }
         });
-        
+
         return listTimKiem;
     }
-    
+
     public List<TpPhieuNhapCustom> checkCbb(TrangThaiPhieuConstant cs) {
         List<TpPhieuNhapCustom> listTimKiem = new ArrayList<>();
         listPn.forEach(el -> {
@@ -179,7 +180,7 @@ public class TpLuongNhapView extends javax.swing.JPanel {
             loadTablePn(listSearch(2));
         }
     }
-    
+
     private void loadTablePn(List<TpPhieuNhapCustom> list) {
         DefaultTableModel dtm = (DefaultTableModel) this.tblPhieuNhap.getModel();
         String pattern = "yyyy-MM-dd HH:mm:ss";
@@ -198,7 +199,7 @@ public class TpLuongNhapView extends javax.swing.JPanel {
             dtm.addRow(rowData);
         }
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -805,7 +806,7 @@ public class TpLuongNhapView extends javax.swing.JPanel {
         chonStpn.setPhieuNhap(chon());
         chonStpn.setVisible(true);
     }//GEN-LAST:event_btnPhieuNhapChiTietActionPerformed
-    
+
     public TpPhieuNhapCustom chon() {
         int row = this.tblPhieuNhap.getSelectedRow();
         if (row == -1) {
@@ -845,7 +846,7 @@ public class TpLuongNhapView extends javax.swing.JPanel {
         // TODO add your handling code here:
         TimKiemTheoNgay();
         searchRadio();
-        
+
 
     }//GEN-LAST:event_txtSearchMouseClicked
 
@@ -860,14 +861,14 @@ public class TpLuongNhapView extends javax.swing.JPanel {
         String nhaCungCap = this.tblPhieuNhap.getValueAt(row, 4).toString();
         String nhanVien = this.tblPhieuNhap.getValueAt(row, 5).toString();
         String trangThai = this.tblPhieuNhap.getValueAt(row, 6).toString();
-        
+
         txtMaPhieu.setText(maPhieu);
         txtNgayTao.setText(ngayTao);
         txtTrangThai.setText(trangThai);
         txtNhanVien.setText(nhanVien);
         txtNhaCungCap.setText(nhaCungCap);
         txtGhiChu.setText("new");
-        
+
         double tien = 0;
         List<TpPhieuNhapChiTietCustom> listCTPX = tpncts.getListCTPhieuNhapByID(listPn.get(row).getId());
         for (TpPhieuNhapChiTietCustom ctpx : listCTPX) {
@@ -881,7 +882,7 @@ public class TpLuongNhapView extends javax.swing.JPanel {
         }
 
     }//GEN-LAST:event_tblPhieuNhapMouseClicked
-    
+
     private void clearForm() {
         txtGhiChu.setText("");
         txtMaPhieu.setText("");
@@ -900,20 +901,20 @@ public class TpLuongNhapView extends javax.swing.JPanel {
     }
     private void btnShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowActionPerformed
         listPn = phieuNhapService.getListPn();
-        
+
         loadTablePn(phieuNhapService.phanTrang(listPn, offset, limit));
         clearForm();
     }//GEN-LAST:event_btnShowActionPerformed
     public void TimKiemTheoNgay() {
         if (ngayBatDau.getDate() == null) {
-            
+
             return;
         }
         if (ngayKetThuc.getDate() == null) {
-            
+
             return;
         }
-        
+
         if (rdoNgayTao.isSelected()) {
             listPn = phieuNhapService.getListByNgayTao(ngayBatDau.getDate().getTime(), ngayKetThuc.getDate().getTime());
             loadTablePn(listPn);
@@ -922,7 +923,7 @@ public class TpLuongNhapView extends javax.swing.JPanel {
             loadTablePn(listPn);
         }
     }
-    
+
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
         clearForm();
@@ -940,7 +941,7 @@ public class TpLuongNhapView extends javax.swing.JPanel {
             MsgBox.alert(this, "Phiếu nhập này đã thanh toán. Vui lòng thanh toán phiếu nhập khác");
             return;
         }
-        
+
         TpPhieuNhapCustom pxcs = listPn.get(row);
         pxcs.setTrangThai(TrangThaiPhieuConstant.DA_THANH_TOAN);
         phieuNhapService.updatePn(pxcs);
@@ -963,12 +964,12 @@ public class TpLuongNhapView extends javax.swing.JPanel {
 
     private void btnPhieuNhapChiTiet1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPhieuNhapChiTiet1ActionPerformed
         int row = tblPhieuNhap.getSelectedRow();
-        
+
         if (row == -1) {
             JOptionPane.showMessageDialog(this, "Bạn phải chọn một dòng", "ERROR !!!", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
         TpPhieuNhapCustom pxcs = listPn.get(row);
         ImportView im = new ImportView();
         im.setIdPhieuNhap(pxcs.getId());
