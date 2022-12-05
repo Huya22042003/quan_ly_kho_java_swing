@@ -14,4 +14,5 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public interface ChiTietSanPhamService {
     ConcurrentHashMap<UUID, ChiTietSanPhamCustom> getMapChiTietSanPham();
+    boolean addChiTietPhieuXuat(UUID idPhieuXuat, UUID idChiTietSanPham, int soLuong);
 }
