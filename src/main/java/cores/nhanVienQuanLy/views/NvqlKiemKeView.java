@@ -8,6 +8,7 @@ import cores.nhanVienQuanLy.services.serviceImpls.NvqlLuongKiemKeCtpkServiceImpl
 import cores.nhanVienQuanLy.services.serviceImpls.NvqlLuongKiemKeServiceImpl;
 import domainModels.NhanVien;
 import infrastructures.constant.TrangThaiPhieuKiemConstant;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -34,12 +35,15 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
     private NvqlKiemKeCtpkView ctpkView;
     private NvqlKiemKeCtspView ctspView;
     private List<NvqlLuongKiemKeCtpkCustom> listCtpkCustom = new ArrayList<>();
+    String pattern = "yyyy-MM-dd HH:mm:ss";
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+
     public NvqlKiemKeView() {
 
         initComponents();
         kiemKeService = new NvqlLuongKiemKeServiceImpl();
         ctpkService = new NvqlLuongKiemKeCtpkServiceImpl();
-        
+
         ctpkView = new NvqlKiemKeCtpkView();
         ctspView = new NvqlKiemKeCtspView();
         listPhieuKiemKeCustom = kiemKeService.getAll();
@@ -141,7 +145,7 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
             model.addRow(new Object[]{
                 model.getRowCount() + 1,
                 m.getMaPhieuKiem(),
-                ngayTao,
+                simpleDateFormat.format(ngayTao),
                 m.getIdNV().getTen(),
                 Converter.TrangThaiPhieuKiem(m.getTrangThai())
             });
@@ -459,24 +463,27 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(ngayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16)
+                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(ngayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addGap(18, 18, 18))
         );
         panelRound9Layout.setVerticalGroup(
             panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound9Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addGroup(panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ngayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3)
-                        .addComponent(rdoNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jLabel4)
-                        .addComponent(ngayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(23, Short.MAX_VALUE))
+                        .addComponent(ngayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelRound9Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ngayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel3)
+                                .addComponent(rdoNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         panelRound3.setBackground(new java.awt.Color(228, 206, 224));
@@ -486,7 +493,7 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
         panelRound3.setRoundTopRight(50);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setText("Thông tin phiếu kiểm kê");
+        jLabel1.setText("Thông tin phiếu");
 
         txtNgayTao.setEditable(false);
         txtNgayTao.setBackground(new java.awt.Color(228, 206, 224));
@@ -499,12 +506,13 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
 
         textAreaScroll1.setBackground(new java.awt.Color(153, 204, 255));
         textAreaScroll1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        textAreaScroll1.setLabelText("Ghi chú");
+        textAreaScroll1.setLabelText("Lí do");
 
         txtGhiChu.setBackground(new java.awt.Color(228, 206, 224));
         txtGhiChu.setColumns(20);
         txtGhiChu.setRows(5);
         txtGhiChu.setDisabledTextColor(new java.awt.Color(204, 204, 255));
+        txtGhiChu.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         textAreaScroll1.setViewportView(txtGhiChu);
 
         btnXacNhan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/credit-card.png"))); // NOI18N
@@ -540,14 +548,15 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
                         .addComponent(btnXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelRound3Layout.createSequentialGroup()
                         .addGap(24, 24, 24)
-                        .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(textAreaScroll1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtNgayTao, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
-                                .addComponent(txtMaPhieuKiem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtTenNhanVien, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtTrangThai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                        .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(textAreaScroll1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNgayTao, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
+                            .addComponent(txtMaPhieuKiem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtTenNhanVien, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtTrangThai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelRound3Layout.createSequentialGroup()
+                                .addGap(45, 45, 45)
+                                .addComponent(jLabel1)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelRound3Layout.setVerticalGroup(
@@ -694,8 +703,9 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
     }
     private void tbPhieuKiemKeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPhieuKiemKeMouseClicked
         int s = tbPhieuKiemKe.getSelectedRow();
+        String ngayTao = tbPhieuKiemKe.getValueAt(s, 2).toString();
         txtMaPhieuKiem.setText(tbPhieuKiemKe.getValueAt(s, 1).toString());
-        txtNgayTao.setText(tbPhieuKiemKe.getValueAt(s, 2).toString());
+        txtNgayTao.setText(ngayTao);
         txtTenNhanVien.setText(tbPhieuKiemKe.getValueAt(s, 3).toString());
         txtTrangThai.setText(tbPhieuKiemKe.getValueAt(s, 4).toString());
         NvqlLuongKiemKeCustom kiemKeCustom = mouseClickPhieuKiem(s);
@@ -722,8 +732,12 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
             return;
         }
         listCtpkCustom = ctpkService.getAll(listPhieuKiemKeCustom.get(row).getId());
-        if(listCtpkCustom.size() == 0){
+        if (listCtpkCustom.size() == 0) {
             MsgBox.alert(this, "Bạn phải thêm sản phẩm trước khi xác nhận");
+            return;
+        }
+        if (txtGhiChu.getText().equalsIgnoreCase("")) {
+            MsgBox.alert(this, "Ghi chú bắt buộc phải có!!");
             return;
         }
         if (listPhieuKiemKeCustom.get(row).getTrangThai() == TrangThaiPhieuKiemConstant.DA_XAC_NHAN) {
