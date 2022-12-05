@@ -43,6 +43,7 @@ public class Tai_LuongHoanXuat_ListPhieuXuat extends javax.swing.JFrame {
         listPhieuXuat = phieuXuatService.getListDaThanhToan();
         luongHXService = new Tai_LuongHoanXuatServiceImpl();
         map = luongHXService.getMapPhx();
+        sizes = listPhieuXuat.size();
         loadTablePhieuXuat(phieuXuatService.phanTrang(listPhieuXuat, offset, limit));
         clearForm();
     }

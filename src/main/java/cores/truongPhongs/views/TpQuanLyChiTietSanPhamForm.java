@@ -359,6 +359,7 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
         );
 
         lblHinhAnh.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lblHinhAnh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Address book.png"))); // NOI18N
         lblHinhAnh.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblHinhAnhMouseClicked(evt);
@@ -430,23 +431,24 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
             panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panelRound6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(panelRound2Layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addComponent(lblHinhAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(erroHinhAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addComponent(myButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(75, 75, 75)
-                .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(panelRound2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(uWPButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelRound7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelRound2Layout.createSequentialGroup()
+                        .addComponent(lblHinhAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14)
+                        .addComponent(erroHinhAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addComponent(myButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(75, 75, 75)
+                        .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(panelRound2Layout.createSequentialGroup()
+                        .addComponent(panelRound7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout jFrameUpdateLayout = new javax.swing.GroupLayout(jFrameUpdate.getContentPane());
@@ -1063,7 +1065,7 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
         TpQuanLyChiTietSanPhamCustom sp = serviceChiTietSP.checkValidate(serviceChiTietSP.getAllDonVi().get(cbbDonVi.getSelectedIndex()).getId(),
                 txtNamBH1.getText(),
                 listChiTietSP.get(tbChiTietSanPham.getSelectedRow()).getSanPham().getId(),
-                lblHinhAnh.getText(), txtGiaNhap.getText(), txtGiaBan.getText(), txtSoLuongTon1.getText(), txtSize1.getText(),this.cbbTrangThai.getSelectedIndex(),
+                duongdananh, txtGiaNhap.getText(), txtGiaBan.getText(), txtSoLuongTon1.getText(), txtSize1.getText(),this.cbbTrangThai.getSelectedIndex(),
                 erroHinhAnh, erroGiaNhap, erroGiaBan, erroSoLuongTon, erroSize, erroNamBH, serviceChiTietSP.loc(this.cbbMauSac.getSelectedIndex()));
         return sp;
     }
@@ -1072,8 +1074,8 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
         TpQuanLyChiTietSanPhamCustom sp = serviceChiTietSP.checkValidate(listDonVi.get(cbbDonViCreate.getSelectedIndex()).getId(),
                 txtNamBaoHanhCreate.getText(),
                 listSanPham.get(cbbSanPhamCreate.getSelectedIndex()).getId(),
-                lblHinhAnhC.getText(), txtGiaNhapCreate.getText(), txtGiaBanCreate.getText(), txtSoLuongTonCreate.getText(), txtSizeCreate.getText(), this.cbbTrangThaiCreate.getSelectedIndex(),
-                erroHinhAnh, erroGiaNhapC, erroGiaBanC, erroNamBaoHanhC, erroSoLuongTonC, erroSizeC, serviceChiTietSP.loc(this.cbbMauSacCreate.getSelectedIndex()));
+                duongdananh, txtGiaNhapCreate.getText(), txtGiaBanCreate.getText(), txtSoLuongTonCreate.getText(), txtSizeCreate.getText(), this.cbbTrangThaiCreate.getSelectedIndex(),
+                erroHinhAnh, erroGiaNhapC, erroGiaBanC, erroSoLuongTonC,erroSizeC, erroNamBaoHanhC , serviceChiTietSP.loc(this.cbbMauSacCreate.getSelectedIndex()));
         return sp;
     }
 

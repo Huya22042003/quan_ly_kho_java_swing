@@ -48,6 +48,7 @@ public class NvqlLuongHoanXuatView extends javax.swing.JPanel {
         ctpxView = new Tai_LuongHoanXuat_ChiTietPXView();
         ctphieuHoanXuatView = new Tai_LuongHoanXuat_ChiTietPhieuHoanXuatView();
         listPHX = luongHXService.getListPHX();
+        sizes= listPHX.size();
         loadTable(luongHXService.phanTrang(listPHX, offset, limit));
         clearForm();
     }
