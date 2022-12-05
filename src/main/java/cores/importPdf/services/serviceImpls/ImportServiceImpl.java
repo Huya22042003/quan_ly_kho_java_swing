@@ -167,7 +167,7 @@ public class ImportServiceImpl implements ImportService {
                 ctsp.setMaSpNcc(el.getMa());
                 ctsp.setIdPhieuNhap(idPhieuNhap);
                 ctsp.setSize(el.getSize());
-                que.put("a", ctsp);
+                que.put(el.getStt(), ctsp);
                 alert.setStatus(true);
             });
             for (Map.Entry<String, ChiTietSanPhamCustom> entry : que.entrySet()) {
