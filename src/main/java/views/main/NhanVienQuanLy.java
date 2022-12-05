@@ -57,20 +57,20 @@ public class NhanVienQuanLy extends javax.swing.JFrame {
                     main.showForm(new TrangChu());
                 }
                 if (menuIndex == 1) {
-                    main.showForm(new Tai_NvqlLuongPhieuXuatView());
+                    if(subMenuIndex == 0) {
+                        main.showForm(new Tai_NvqlLuongPhieuXuatView());
+                    }
+                    if(subMenuIndex == 1) {
+                        main.showForm(new NvqlLuongHoanXuatView());
+                    }
                 }
                 if (menuIndex == 2) {
-                    main.showForm(new NvqlLuongHoanXuatView());
-                }
-                if (menuIndex == 3) {
                     main.showForm(new NvqlKiemKeView());
                 }
-                if (menuIndex == 4) {
+                if (menuIndex == 3) {
                     main.showForm(new TpQuanLyChiTietSanPhamForm());
                 }
-                
-
-                if (menuIndex == 7) {
+                if (menuIndex == 4) {
                     if (subMenuIndex == 2) {
                         Auth.clear();
                         frame.setVisible(false);

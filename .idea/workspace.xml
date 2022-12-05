@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9cd04b6b-e87e-4a06-9898-e455e77edb4c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/cores/truongPhongs/services/serviceImpls/TpQuanLyChiTietSanPhamServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cores/truongPhongs/services/serviceImpls/TpQuanLyChiTietSanPhamServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cores/truongPhongs/views/TestAll.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cores/truongPhongs/views/TestAll.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cores/truongPhongs/views/TpQuanLyChiTietSanPhamForm.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cores/truongPhongs/views/TpQuanLyChiTietSanPhamForm.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cores/truongPhongs/views/TpQuanLyChiTietSanPhamForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cores/truongPhongs/views/TpQuanLyChiTietSanPhamForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cores/truongPhongs/views/TpQuanLyChiTietSanPhamU.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cores/truongPhongs/views/TpQuanLyChiTietSanPhamU.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cores/truongPhongs/views/TpQuanLyChiTietSanPhamU.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cores/truongPhongs/views/TpQuanLyChiTietSanPhamU.java" afterDir="false" />
-    </list>
+    <list default="true" id="9cd04b6b-e87e-4a06-9898-e455e77edb4c" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

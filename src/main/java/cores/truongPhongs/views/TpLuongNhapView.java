@@ -14,6 +14,7 @@ import cores.truongPhongs.services.serviceImpls.TpPhieuNhapChiTietServiceImpl;
 import domainModels.NhanVien;
 import infrastructures.constant.TrangThaiPhieuConstant;
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
@@ -42,6 +43,8 @@ public class TpLuongNhapView extends javax.swing.JPanel {
     private TpPhieuNhapChiTietService tpncts;
     private List<TpPhieuNhapChiTietCustom> listCtpn = new ArrayList<>();
     private Page p;
+    
+    private DecimalFormat formatter = new DecimalFormat("###,###,##0 VNĐ");
 
     private int limit = 7;
 
@@ -874,7 +877,7 @@ public class TpLuongNhapView extends javax.swing.JPanel {
         for (TpPhieuNhapChiTietCustom ctpx : listCTPX) {
             tien += ctpx.getIdSanPham().getGiaNhap().multiply(new BigDecimal(ctpx.getSoLuong())).doubleValue();
         }
-        txtTienPhaiTra.setText(tien + "");
+        txtTienPhaiTra.setText(formatter.format(tien));
         if (txtTrangThai.getText().equalsIgnoreCase("Đã Thanh Toán")) {
             btnThanhToan.setEnabled(false);
         } else {

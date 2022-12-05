@@ -21,6 +21,7 @@ public class Bot extends javax.swing.JFrame {
 
     public Bot() {
         initComponents();
+        this.setLocationRelativeTo(null);
         botService = new BotServiceImlp();
 
         Thread clockThread = new Thread(() -> {
