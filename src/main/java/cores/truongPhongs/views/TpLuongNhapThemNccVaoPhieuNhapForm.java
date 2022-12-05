@@ -13,6 +13,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import utilities.Converter;
+import utilities.Page;
 
 /**
  *
@@ -26,12 +27,22 @@ public class TpLuongNhapThemNccVaoPhieuNhapForm extends javax.swing.JFrame {
     private TpQuanlyNhaCungCapService nccService = new TpQuanlyNhaCungCapServiceImpl();
     private List<NhaCungCapCustom> listNcc = new ArrayList<>();
     private TpCreateNCCView createView;
+        private Page p;
 
+    private int limit = 7;
+
+    private int offset = 0;
+
+    private int sizes = 0;
+
+    private int index = 1;
     public TpLuongNhapThemNccVaoPhieuNhapForm() {
         initComponents();
         createView = new TpCreateNCCView();
         listNcc = nccService.getList();
-        loadTableNcc(listNcc);
+        p = new Page();
+        sizes  = listNcc.size();
+        loadTableNcc(nccService.phanTrang(listNcc, offset, limit));
         cbbTrangThai.setSelectedIndex(0);
     }
 
@@ -128,6 +139,9 @@ public class TpLuongNhapThemNccVaoPhieuNhapForm extends javax.swing.JFrame {
         panelRound16 = new utilities.palette.PanelRound();
         btnThem1 = new utilities.palette.MyButton();
         btnHienThi1 = new utilities.palette.MyButton();
+        btnPre = new utilities.palette.UWPButton();
+        txtIndex = new javax.swing.JLabel();
+        btnPre1 = new utilities.palette.UWPButton();
         panelRound3 = new utilities.palette.PanelRound();
         jLabel1 = new javax.swing.JLabel();
         txtTenNcc = new utilities.palette.TextField();
@@ -333,6 +347,22 @@ public class TpLuongNhapThemNccVaoPhieuNhapForm extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        btnPre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/skip-previous-circle-solid-24.png"))); // NOI18N
+        btnPre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPreActionPerformed(evt);
+            }
+        });
+
+        txtIndex.setText("1/1");
+
+        btnPre1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/skip-next-circle-solid-24.png"))); // NOI18N
+        btnPre1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPre1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
         panelRound1.setLayout(panelRound1Layout);
         panelRound1Layout.setHorizontalGroup(
@@ -348,6 +378,14 @@ public class TpLuongNhapThemNccVaoPhieuNhapForm extends javax.swing.JFrame {
                             .addComponent(panelRound16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(panelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(50, 50, 50))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnPre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(77, 77, 77)
+                .addComponent(txtIndex)
+                .addGap(85, 85, 85)
+                .addComponent(btnPre1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(206, 206, 206))
         );
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -360,7 +398,16 @@ public class TpLuongNhapThemNccVaoPhieuNhapForm extends javax.swing.JFrame {
                 .addComponent(panelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(118, Short.MAX_VALUE))
+
+                .addGap(37, 37, 37)
+                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnPre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPre1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelRound1Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(txtIndex)))
+                .addContainerGap(47, Short.MAX_VALUE))
+
         );
 
         panelRound3.setBackground(new java.awt.Color(228, 206, 224));
@@ -545,7 +592,8 @@ public class TpLuongNhapThemNccVaoPhieuNhapForm extends javax.swing.JFrame {
 
     private void btnHienThi1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHienThi1ActionPerformed
         listNcc = nccService.getList();
-        loadTableNcc(listNcc);
+        sizes = listNcc.size();
+        loadTableNcc(nccService.phanTrang(listNcc, offset, limit));
     }//GEN-LAST:event_btnHienThi1ActionPerformed
 
     private void txtSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSearchMouseClicked
@@ -561,9 +609,23 @@ public class TpLuongNhapThemNccVaoPhieuNhapForm extends javax.swing.JFrame {
         //searchRadio();
     }//GEN-LAST:event_rdoTenActionPerformed
 
-    private void txtTrangThaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTrangThaiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTrangThaiActionPerformed
+
+    private void btnPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreActionPerformed
+        index = p.prevIndex(offset, limit, index);
+        offset = p.prev(offset, limit);
+        loadIndex();
+        loadTableNcc(nccService.phanTrang(listNcc, offset, limit));
+    }//GEN-LAST:event_btnPreActionPerformed
+
+    private void btnPre1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPre1ActionPerformed
+        index = p.nextIndex(offset, limit, sizes, index);
+        offset = p.next(offset, limit, sizes);
+        loadIndex();
+        loadTableNcc(nccService.phanTrang(listNcc, offset, limit));
+    }//GEN-LAST:event_btnPre1ActionPerformed
+    private void loadIndex() {
+        this.txtIndex.setText(String.valueOf(index) + " / " + (Math.round((sizes / limit) + 0.5)));
+    }
 
     /**
      * @param args the command line arguments
@@ -603,6 +665,8 @@ public class TpLuongNhapThemNccVaoPhieuNhapForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private utilities.palette.MyButton btnHienThi1;
+    private utilities.palette.UWPButton btnPre;
+    private utilities.palette.UWPButton btnPre1;
     private utilities.palette.MyButton btnThem1;
     private javax.swing.ButtonGroup buttonGroup1;
     private utilities.palette.Combobox cbbTrangThai;
@@ -622,7 +686,11 @@ public class TpLuongNhapThemNccVaoPhieuNhapForm extends javax.swing.JFrame {
     private utilities.palette.TextField txtDanhGia;
     private utilities.palette.TextField txtDiaChi;
     private utilities.palette.TextField txtEmail;
-    private utilities.palette.TextField txtMaNcc;
+
+    private javax.swing.JLabel txtIndex;
+    private utilities.palette.TextField txtMaKH;
+    private utilities.palette.TextField txtNgaySinh;
+
     private utilities.palette.TextField txtSDT;
     private utilities.palette.SearchCustom.TextFieldAnimation txtSearch;
     private utilities.palette.TextField txtTenNcc;

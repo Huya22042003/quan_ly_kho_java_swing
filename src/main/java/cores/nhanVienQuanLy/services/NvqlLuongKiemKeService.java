@@ -14,4 +14,5 @@ public interface NvqlLuongKiemKeService {
     boolean UpdateTrangThai(NvqlLuongKiemKeCustom phieuKiemKe);
     TrangThaiPhieuKiemConstant loc(int a);
      List<NvqlLuongKiemKeCustom> getListByNgayTao(Long ngayBatDau, Long ngayKetThuc);
+     List<NvqlLuongKiemKeCustom> phanTrang(List<NvqlLuongKiemKeCustom> list, int offset, int limit);
 }

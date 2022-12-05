@@ -9,6 +9,7 @@ import cores.nhanVienQuanLy.services.serviceImpls.Tai_LuongHoanXuatServiceImpl;
 import cores.nhanVienQuanLy.services.serviceImpls.Tai_NvqlLuongPhieuXuatServiceImpl;
 import domainModels.ChiTietSanPham;
 import domainModels.PhieuHoanXuat;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -30,7 +31,7 @@ public class Tai_LuongHoanXuat_ChiTietPXView extends javax.swing.JFrame {
     public PhieuHoanXuat phieuHoanXuat;
     private List<ChiTietPhieuHoanXuatCustom> listCTPHX;
     private String duongDan = getClass().getResource("/icons/file.png").getPath();
-
+    private DecimalFormat formatter = new DecimalFormat("###,###,##0 VNĐ");
     public void setPhieuXuat(PhieuHoanXuat phieuXuat) {
         this.phieuHoanXuat = phieuXuat;
     }
@@ -50,12 +51,12 @@ public class Tai_LuongHoanXuat_ChiTietPXView extends javax.swing.JFrame {
         for (Luong_ChiTietPhieuXuatCustom ctpx : listCTPX) {
             Object[] rowData = {
                 dtm.getRowCount() + 1,
-                ctpx.getIdPhieuXuat().getId(),
                 ctpx.getIdChiTietSp().getSanPham().getTen(),
                 ctpx.getSoLuong(),
                 ctpx.getIdChiTietSp().getGiaBan(),
                 Converter.trangThaiMauSac(ctpx.getIdChiTietSp().getMau()),
-                ctpx.getIdChiTietSp().getNamBaoHanh()
+                ctpx.getIdChiTietSp().getNamBaoHanh(),
+                ctpx.getIdChiTietSp().getGiaBan() == null ? "Chưa có" : formatter.format(ctpx.getIdChiTietSp().getGiaBan())
             };
             dtm.addRow(rowData);
         }
@@ -78,7 +79,6 @@ public class Tai_LuongHoanXuat_ChiTietPXView extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         panelRound2 = new utilities.palette.PanelRound();
         jLabel3 = new javax.swing.JLabel();
-        txtMa = new utilities.palette.TextField();
         txtTenSp = new utilities.palette.TextField();
         txtMau = new utilities.palette.TextField();
         errorSoLuong = new javax.swing.JLabel();
@@ -99,11 +99,11 @@ public class Tai_LuongHoanXuat_ChiTietPXView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "STT", "Mã phiếu xuất", "Tên sản phẩm", "Số lượng", "Giá bán", "Màu", "Năm bảo hành"
+                "STT", "Tên sản phẩm", "Số lượng", "Giá bán", "Màu", "Năm bảo hành"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -155,16 +155,6 @@ public class Tai_LuongHoanXuat_ChiTietPXView extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel3.setText("Thông tin sản phẩm");
 
-        txtMa.setEditable(false);
-        txtMa.setBackground(new java.awt.Color(228, 206, 224));
-        txtMa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtMa.setLabelText("Mã Phiếu Xuất");
-        txtMa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMaActionPerformed(evt);
-            }
-        });
-
         txtTenSp.setEditable(false);
         txtTenSp.setBackground(new java.awt.Color(228, 206, 224));
         txtTenSp.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -203,11 +193,10 @@ public class Tai_LuongHoanXuat_ChiTietPXView extends javax.swing.JFrame {
                         .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(txtTenSp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
-                                .addComponent(txtMa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtMau, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(txtMau, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtNamBH, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(errorSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtGiaBan, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNamBH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(txtGiaBan, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(panelRound2Layout.createSequentialGroup()
                         .addGap(45, 45, 45)
                         .addComponent(jLabel3)))
@@ -218,17 +207,15 @@ public class Tai_LuongHoanXuat_ChiTietPXView extends javax.swing.JFrame {
             .addGroup(panelRound2Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
-                .addComponent(txtMa, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
+                .addGap(44, 44, 44)
                 .addComponent(txtTenSp, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(57, 57, 57)
+                .addGap(31, 31, 31)
                 .addComponent(txtGiaBan, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 65, 65)
+                .addGap(41, 41, 41)
                 .addComponent(txtMau, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(61, 61, 61)
+                .addGap(49, 49, 49)
                 .addComponent(txtNamBH, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
+                .addGap(186, 186, 186)
                 .addComponent(errorSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(39, Short.MAX_VALUE))
         );
@@ -395,11 +382,10 @@ public class Tai_LuongHoanXuat_ChiTietPXView extends javax.swing.JFrame {
             MsgBox.alert(this, "Bạn phải chọn 1 dòng trên table");
             return;
         }
-        txtMa.setText(tblCTPhieuXuat.getValueAt(row, 1).toString());
-        txtTenSp.setText(tblCTPhieuXuat.getValueAt(row, 2).toString());
-        txtGiaBan.setText(tblCTPhieuXuat.getValueAt(row, 4).toString());
-        txtMau.setText(tblCTPhieuXuat.getValueAt(row, 5).toString());
-        txtNamBH.setText(tblCTPhieuXuat.getValueAt(row, 6).toString());
+        txtTenSp.setText(tblCTPhieuXuat.getValueAt(row, 1).toString());
+        txtGiaBan.setText(tblCTPhieuXuat.getValueAt(row, 3).toString());
+        txtMau.setText(tblCTPhieuXuat.getValueAt(row, 4).toString());
+        txtNamBH.setText(tblCTPhieuXuat.getValueAt(row, 5).toString());
 
         int namBH = listCTPX.get(row).getIdChiTietSp().getNamBaoHanh();
         if ((DateTimeUtil.convertDateToTimeStampSecond() - listCTPX.get(row).getIdPhieuXuat().getNgayThanhToan()) > 31536010484L * namBH) {
@@ -481,10 +467,6 @@ public class Tai_LuongHoanXuat_ChiTietPXView extends javax.swing.JFrame {
 
     }//GEN-LAST:event_tblCTPhieuXuatMouseClicked
 
-    private void txtMaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtMaActionPerformed
-
     private void txtGiaBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGiaBanActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtGiaBanActionPerformed
@@ -564,7 +546,6 @@ public class Tai_LuongHoanXuat_ChiTietPXView extends javax.swing.JFrame {
     private utilities.palette.PanelRound panelRound6;
     private utilities.palette.TableDark_1 tblCTPhieuXuat;
     private utilities.palette.TextField txtGiaBan;
-    private utilities.palette.TextField txtMa;
     private utilities.palette.TextField txtMau;
     private utilities.palette.TextField txtNamBH;
     private utilities.palette.TextField txtTenSp;

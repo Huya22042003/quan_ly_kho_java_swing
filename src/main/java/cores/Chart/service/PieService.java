@@ -5,6 +5,7 @@
 package cores.Chart.service;
 
 import cores.Chart.model.ModelChartPie;
+import cores.Chart.model.ModelChartPie1;
 import java.util.List;
 
 /**
@@ -13,4 +14,5 @@ import java.util.List;
  */
 public interface PieService {
     List<ModelChartPie> getSoLuongSpTonNhieuNhat();
+    List<ModelChartPie1> getSanPhamKhachHangMuaNhieuNhat();
 }

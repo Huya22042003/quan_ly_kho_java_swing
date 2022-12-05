@@ -87,6 +87,9 @@ public class TpLuongNhapAddChiTietSanPhamOldForm extends javax.swing.JFrame {
 
     public TpXemChiTietSanPhamCustom getFormData() {
         TpXemChiTietSanPhamCustom sp = new TpXemChiTietSanPhamCustom();
+
+        
+
 //        boolean check = true;
 //        String soLuong = txtSoLuongNhap.getText();
 //        String giaNhap = txtGiaNhap.getText();
@@ -108,6 +111,7 @@ public class TpLuongNhapAddChiTietSanPhamOldForm extends javax.swing.JFrame {
 //        } else {
 //            lblGiaNhap.setText("");
 //        }
+
         
         sp.setDonVi(ct.getDonVi());
         

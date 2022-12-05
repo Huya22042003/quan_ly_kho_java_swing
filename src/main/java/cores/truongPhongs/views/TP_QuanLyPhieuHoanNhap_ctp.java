@@ -4,6 +4,8 @@ import cores.truongPhongs.customModels.TP_HoanNhap_ctpCusTom;
 import cores.truongPhongs.customModels.TP_PhieuHoanNhapCustom;
 import cores.truongPhongs.services.TP_PhieuHoanNhapService;
 import cores.truongPhongs.services.serviceImpls.TP_PhieuHoanNhapServiceImpl;
+import infrastructures.constant.MauConstant;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -21,7 +23,7 @@ public class TP_QuanLyPhieuHoanNhap_ctp extends javax.swing.JFrame {
     private List<TP_HoanNhap_ctpCusTom> listSP;
     private TP_PhieuHoanNhapCustom idPhieuHoanNhap;
     private String duongDan = getClass().getResource("/icons/file.png").getPath();
-
+    private DecimalFormat formatter = new DecimalFormat("###,###,##0 VNĐ");
     public TP_QuanLyPhieuHoanNhap_ctp(TP_PhieuHoanNhapCustom idPhieuNhap) {
         this.idPhieuHoanNhap = idPhieuNhap;
         hoanNhapService = new TP_PhieuHoanNhapServiceImpl();
@@ -40,9 +42,10 @@ public class TP_QuanLyPhieuHoanNhap_ctp extends javax.swing.JFrame {
                 dtm.getRowCount() + 1,
                 el.getSanPham().getMa(),
                 el.getSanPham().getTen(),
-                el.getMau(),
+                Converter.trangThaiMauSac(el.getMau()),
                 el.getSoLuongHoan(),
-                el.getGiaNhap()
+                el.getGiaNhap()== null ? "Chưa có" : formatter.format(el.getGiaNhap())
+                    
             };
             dtm.addRow(rowData);
         }
@@ -396,6 +399,7 @@ public class TP_QuanLyPhieuHoanNhap_ctp extends javax.swing.JFrame {
         txtTenSp.setText(item.getSanPham().getTen());
         txtMau.setText(Converter.trangThaiMauSac(item.getMau()));
         txtSoLuongNhap.setText(String.valueOf(item.getSoLuongHoan()));
+        txtGiaNhap.setText(String.valueOf(item.getGiaNhap()));
         if (item.getHinhAnh() == null) {
             this.btnAnh.setIcon(new ImageIcon(duongDan));
         } else {

@@ -21,6 +21,7 @@ import javax.swing.JOptionPane;
 import utilities.Auth;
 import utilities.Converter;
 import utilities.MsgBox;
+import utilities.Page;
 import utilities.palette.SearchCustom.EventCallBack;
 import utilities.palette.SearchCustom.EventTextField;
 
@@ -40,6 +41,15 @@ public class TpLuongNhapView extends javax.swing.JPanel {
     private TpLuongNhapChiTietPhieuNhapForm ctpnView;
     private TpPhieuNhapChiTietService tpncts;
     private List<TpPhieuNhapChiTietCustom> listCtpn = new ArrayList<>();
+    private Page p;
+
+    private int limit = 7;
+
+    private int offset = 0;
+
+    private int sizes = 0;
+
+    private int index = 1;
 
     public TpLuongNhapView() {
         initComponents();
@@ -47,8 +57,8 @@ public class TpLuongNhapView extends javax.swing.JPanel {
         listPn = new ArrayList<>();
         phieuNhapService = new TpPhieuNhapServiceImpl();
         tpncts = new TpPhieuNhapChiTietServiceImpl();
-        listPn = phieuNhapService.getListPn();
-        loadTablePn(listPn);
+
+//        loadTablePn(listPn);
         ctspView = new TpLuongNhapChiTietSanPhamForm();
         ctpnView = new TpLuongNhapChiTietPhieuNhapForm();
         clearForm();
@@ -73,10 +83,14 @@ public class TpLuongNhapView extends javax.swing.JPanel {
             }
         });
         cbbTrangThai.setSelectedIndex(0);
+        listPn = phieuNhapService.getListPn();
+        p = new Page();
+        loadTablePn(phieuNhapService.phanTrang(listPn, offset, limit));
     }
 
     public TpLuongNhapView(UUID id) {
         initComponents();
+        p = new Page();
         nhanVien = new NhanVien();
         nhanVien.setId(Auth.nhanVien.getId());
         nhanVien.setMa(Auth.nhanVien.getMa());
@@ -99,7 +113,8 @@ public class TpLuongNhapView extends javax.swing.JPanel {
         phieuNhapService.addPn(phieuNhap);
         listPn = new ArrayList<>();
         listPn = phieuNhapService.getListPn();
-        loadTablePn(listPn);
+        sizes = listPn.size();
+        loadTablePn(phieuNhapService.phanTrang(listPn, offset, limit));
     }
 
     public List<TpPhieuNhapCustom> listSearch(int rdo) {
@@ -217,6 +232,9 @@ public class TpLuongNhapView extends javax.swing.JPanel {
         btnThemSpVaoPhieu = new utilities.palette.MyButton();
         btnShow = new utilities.palette.MyButton();
         btnPhieuNhapChiTiet1 = new utilities.palette.MyButton();
+        btnPre = new utilities.palette.UWPButton();
+        txtIndex = new javax.swing.JLabel();
+        btnNext = new utilities.palette.UWPButton();
         panelRound3 = new utilities.palette.PanelRound();
         jLabel1 = new javax.swing.JLabel();
         txtNgayTao = new utilities.palette.TextField();
@@ -435,15 +453,15 @@ public class TpLuongNhapView extends javax.swing.JPanel {
                 .addComponent(rdoNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(60, 60, 60)
                 .addComponent(rdoNgayThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(72, 72, 72)
+                .addGap(42, 42, 42)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(ngayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(ngayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(ngayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(105, 105, 105))
+                .addGap(129, 129, 129))
         );
         panelRound9Layout.setVerticalGroup(
             panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -451,15 +469,20 @@ public class TpLuongNhapView extends javax.swing.JPanel {
                 .addGap(17, 17, 17)
                 .addGroup(panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(rdoNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(rdoNgayThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(ngayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(ngayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(16, Short.MAX_VALUE))
+                        .addGroup(panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(rdoNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(rdoNgayThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelRound9Layout.createSequentialGroup()
+                                .addGap(5, 5, 5)
+                                .addComponent(ngayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(panelRound9Layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addGroup(panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(ngayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         panelRound15.setBackground(new java.awt.Color(67, 130, 187));
@@ -516,19 +539,33 @@ public class TpLuongNhapView extends javax.swing.JPanel {
             }
         });
 
+        btnPhieuNhapChiTiet1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Upload.png"))); // NOI18N
+        btnPhieuNhapChiTiet1.setToolTipText("Import sản phẩm");
+        btnPhieuNhapChiTiet1.setBorderColor(new java.awt.Color(221, 242, 244));
+        btnPhieuNhapChiTiet1.setColor(new java.awt.Color(221, 242, 244));
+        btnPhieuNhapChiTiet1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnPhieuNhapChiTiet1.setRadius(50);
+        btnPhieuNhapChiTiet1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPhieuNhapChiTiet1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelRound15Layout = new javax.swing.GroupLayout(panelRound15);
         panelRound15.setLayout(panelRound15Layout);
         panelRound15Layout.setHorizontalGroup(
             panelRound15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound15Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addContainerGap()
+                .addComponent(btnPhieuNhapChiTiet1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnThemPhieuNhapMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnPhieuNhapChiTiet, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnThemSpVaoPhieu, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnPhieuNhapChiTiet, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnThemSpVaoPhieu, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54)
-                .addComponent(btnShow, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnShow, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelRound15Layout.setVerticalGroup(
@@ -539,19 +576,24 @@ public class TpLuongNhapView extends javax.swing.JPanel {
                     .addComponent(btnPhieuNhapChiTiet, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnThemPhieuNhapMoi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnThemSpVaoPhieu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnShow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnShow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnPhieuNhapChiTiet1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
-        btnPhieuNhapChiTiet1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/file.png"))); // NOI18N
-        btnPhieuNhapChiTiet1.setToolTipText("Phiếu nhập chi tiết");
-        btnPhieuNhapChiTiet1.setBorderColor(new java.awt.Color(221, 242, 244));
-        btnPhieuNhapChiTiet1.setColor(new java.awt.Color(221, 242, 244));
-        btnPhieuNhapChiTiet1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnPhieuNhapChiTiet1.setRadius(50);
-        btnPhieuNhapChiTiet1.addActionListener(new java.awt.event.ActionListener() {
+        btnPre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/skip-previous-circle-solid-24.png"))); // NOI18N
+        btnPre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPhieuNhapChiTiet1ActionPerformed(evt);
+                btnPreActionPerformed(evt);
+            }
+        });
+
+        txtIndex.setText("1/1");
+
+        btnNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/skip-next-circle-solid-24.png"))); // NOI18N
+        btnNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextActionPerformed(evt);
             }
         });
 
@@ -576,8 +618,12 @@ public class TpLuongNhapView extends javax.swing.JPanel {
                                     .addGap(18, 18, 18)
                                     .addComponent(panelRound8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addGap(87, 87, 87)
-                        .addComponent(btnPhieuNhapChiTiet1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(311, 311, 311)
+                        .addComponent(btnPre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(67, 67, 67)
+                        .addComponent(txtIndex)
+                        .addGap(67, 67, 67)
+                        .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelRound1Layout.setVerticalGroup(
@@ -595,8 +641,13 @@ public class TpLuongNhapView extends javax.swing.JPanel {
                     .addComponent(panelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
-                .addComponent(btnPhieuNhapChiTiet1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelRound1Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(txtIndex)))
                 .addGap(38, 38, 38))
         );
 
@@ -846,10 +897,12 @@ public class TpLuongNhapView extends javax.swing.JPanel {
         ngayKetThuc.setDate(null);
         rdoNgayTao.setSelected(false);
         rdoNgayThanhToan.setSelected(false);
+        sizes = listPn.size();
     }
     private void btnShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowActionPerformed
         listPn = phieuNhapService.getListPn();
-        loadTablePn(listPn);
+
+        loadTablePn(phieuNhapService.phanTrang(listPn, offset, limit));
         clearForm();
     }//GEN-LAST:event_btnShowActionPerformed
     public void TimKiemTheoNgay() {
@@ -880,7 +933,7 @@ public class TpLuongNhapView extends javax.swing.JPanel {
             return;
         }
         listCtpn = tpncts.getListCTPhieuNhapByID(listPn.get(row).getId());
-        if(listCtpn.size() == 0){
+        if (listCtpn.size() == 0) {
             MsgBox.alert(this, "Bạn phải thêm sản phẩm trước khi thanh toán");
             return;
         }
@@ -923,11 +976,32 @@ public class TpLuongNhapView extends javax.swing.JPanel {
         im.setVisible(true);
     }//GEN-LAST:event_btnPhieuNhapChiTiet1ActionPerformed
 
+    private void btnPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreActionPerformed
+        index = p.prevIndex(offset, limit, index);
+        offset = p.prev(offset, limit);
+        loadIndex();
+        //        loadTable(getList);
+        loadTablePn(phieuNhapService.phanTrang(listPn, offset, limit));
+    }//GEN-LAST:event_btnPreActionPerformed
+
+    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
+        index = p.nextIndex(offset, limit, sizes, index);
+        offset = p.next(offset, limit, sizes);
+        loadIndex();
+        //        loadTable(getList);
+        listPn = phieuNhapService.getListPn();
+        loadTablePn(phieuNhapService.phanTrang(listPn, offset, limit));
+    }//GEN-LAST:event_btnNextActionPerformed
+    private void loadIndex() {
+        this.txtIndex.setText(String.valueOf(index) + " / " + (Math.round((sizes / limit) + 0.5)));
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private utilities.palette.MyButton btnKhoangTime;
+    private utilities.palette.UWPButton btnNext;
     private utilities.palette.MyButton btnPhieuNhapChiTiet;
     private utilities.palette.MyButton btnPhieuNhapChiTiet1;
+    private utilities.palette.UWPButton btnPre;
     private utilities.palette.MyButton btnShow;
     private utilities.palette.MyButton btnThanhToan;
     private utilities.palette.MyButton btnThemPhieuNhapMoi;
@@ -957,6 +1031,7 @@ public class TpLuongNhapView extends javax.swing.JPanel {
     private utilities.palette.TableDark_1 tblPhieuNhap;
     private utilities.palette.TextAreaScroll textAreaScroll1;
     private utilities.palette.TextAreaCustom txtGhiChu;
+    private javax.swing.JLabel txtIndex;
     private utilities.palette.TextField txtMaPhieu;
     private utilities.palette.TextField txtNgayTao;
     private utilities.palette.TextField txtNhaCungCap;

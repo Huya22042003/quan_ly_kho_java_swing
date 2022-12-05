@@ -31,57 +31,57 @@ public class TpThongKeRepository {
         return listSP;
     }
 
-    public List<TpTongSoSanPhamTrongKhoCustom> getSoLuongSpTon() {
+    public List<Integer> getSoLuongSpTon() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createNativeQuery(" Select SUM(SoLuongTon)\n"
                 + "  from ChiTietSanPham");
-        List<TpTongSoSanPhamTrongKhoCustom> list = query.getResultList();
+        List<Integer> list = query.getResultList();
         return list;
     }
 
-    public List<TpTongSoSanPhamTrongKhoCustom> getSoLuongSpHoanNhap() {
+    public List<Integer> getSoLuongSpHoanNhap() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createNativeQuery("SELECT sum(Soluong)\n"
                 + "     \n"
                 + "  FROM [DU_AN_MOT].[dbo].[ChiTietPhieuHoanNhap]");
-        List<TpTongSoSanPhamTrongKhoCustom> list = query.getResultList();
+        List<Integer> list = query.getResultList();
         return list;
     }
 
-    public List<TpTongSoSanPhamTrongKhoCustom> getSoLuongSpHoanXuat() {
+    public List<Integer> getSoLuongSpHoanXuat() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createNativeQuery("SELECT sum(Soluong)\n"
                 + "     \n"
                 + "  FROM [DU_AN_MOT].[dbo].[ChiTietPhieuHoanXuat]");
-        List<TpTongSoSanPhamTrongKhoCustom> list = query.getResultList();
+        List<Integer> list = query.getResultList();
         return list;
     }
 
-    public List<TpTongSoSanPhamTrongKhoCustom> getSoDonHoanNhap() {
+    public List<Integer> getSoDonHoanNhap() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createNativeQuery("  select  count(Id) from PhieuHoanNhap");
-        List<TpTongSoSanPhamTrongKhoCustom> list = query.getResultList();
+        List<Integer> list = query.getResultList();
         return list;
     }
 
-    public List<TpTongSoSanPhamTrongKhoCustom> getSoDonHoanXuat() {
+    public List<Integer> getSoDonHoanXuat() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createNativeQuery("  select  count(Id) from PhieuHoanXuat");
-        List<TpTongSoSanPhamTrongKhoCustom> list = query.getResultList();
+        List<Integer> list = query.getResultList();
         return list;
     }
 
-    public List<TpTongSoSanPhamTrongKhoCustom> getSoSanPhamDaNhap() {
+    public List<Integer> getSoSanPhamDaNhap() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createNativeQuery("   select sum(Soluong) from ChiTietPhieuNhap");
-        List<TpTongSoSanPhamTrongKhoCustom> list = query.getResultList();
+        List<Integer> list = query.getResultList();
         return list;
     }
 
-    public List<TpTongSoSanPhamTrongKhoCustom> getSoSanPhamDaXuat() {
+    public List<Integer> getSoSanPhamDaXuat() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createNativeQuery("   select sum(Soluong) from ChiTietPhieuXuat");
-        List<TpTongSoSanPhamTrongKhoCustom> list = query.getResultList();
+        List<Integer> list = query.getResultList();
         return list;
     }
 

@@ -5,6 +5,7 @@
 package cores.Chart.repository;
 
 import cores.Chart.model.ModelChartPie;
+import cores.Chart.model.ModelChartPie1;
 import domainModels.ChiTietSanPham;
 import java.awt.Color;
 import java.util.ArrayList;
@@ -40,4 +41,25 @@ public class PieRepository {
         return listModel;
     }
 
+    public static List<ModelChartPie1> getSanPhamKhachHangMuaNhieuNhat() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        List<ModelChartPie1> listModel = new ArrayList<>();
+        List<Object[]> list = session.createNativeQuery("""
+            select b.Ten, SUM(c.SoLuong) as soluong from ChiTietSanPham a 
+            join SanPham b on a.IdSanPham = b.Id
+            join ChiTietPhieuXuat c on a.Id = c.IdChiTietSP
+            group by b.Ten
+            order by SUM(c.SoLuong) desc
+            """).list();
+        list.stream().forEach(el -> {
+            String name = (String) el[0];
+            int teamId = (int) el[1];
+            Random rand = new Random();
+            float r = rand.nextFloat();
+            float g = rand.nextFloat();
+            float b = rand.nextFloat();
+            listModel.add(new ModelChartPie1(name, teamId, new Color(r, g, b)));
+        });
+        return listModel;
+    }
 }

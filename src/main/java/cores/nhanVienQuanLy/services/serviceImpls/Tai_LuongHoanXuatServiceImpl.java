@@ -119,5 +119,22 @@ public class Tai_LuongHoanXuatServiceImpl implements Tai_LuongHoanXuatService{
         }
         return listPhanTrang;
     }
+
+    @Override
+    public List<ChiTietPhieuHoanXuatCustom> phanTrangCT(List<ChiTietPhieuHoanXuatCustom> list, int offset, int limit) {
+        List<ChiTietPhieuHoanXuatCustom> listPhanTrang = new ArrayList<>();
+        int sum = limit + offset;
+        if (list.size() <= sum) {
+            sum = list.size();
+        }
+        for (int i = offset; i < sum; i++) {
+            if (list.get(i) == null) {
+                break;
+            }
+            ChiTietPhieuHoanXuatCustom el = list.get(i);
+            listPhanTrang.add(el);
+        }
+        return listPhanTrang;
+    }
     
 }
