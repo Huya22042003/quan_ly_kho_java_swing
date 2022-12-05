@@ -22,4 +22,6 @@ public interface TpXemChiTietSanPhamService {
     TrangThaiSanPhamConstanst locTt(int a);
 
     List<TpXemChiTietSanPhamCustom> getListGiaNhap(BigDecimal giaBatDau, BigDecimal giaKetThuc);
+
+    List<TpXemChiTietSanPhamCustom> phanTrang(List<TpXemChiTietSanPhamCustom> list, int offset, int limit);
 }

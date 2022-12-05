@@ -7,6 +7,7 @@ import cores.nhanVienQuanLy.services.serviceImpls.Tai_NvqlLuongPhieuXuatServiceI
 import domainModels.ChiTietPhieuXuat;
 import domainModels.PhieuXuat;
 import infrastructures.constant.TrangThaiPhieuConstant;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -54,13 +55,15 @@ public class Tai_LuongPhieuXuat_CTPhieuXuatView extends javax.swing.JFrame {
     public void loadTable(List<Luong_ChiTietPhieuXuatCustom> list) {
         DefaultTableModel dtm = (DefaultTableModel) this.tblCTPhieuXuat.getModel();
         dtm.setRowCount(0);
+        DecimalFormat formatter = new DecimalFormat("###,###,##0 VNĐ");
         for (Luong_ChiTietPhieuXuatCustom ctpx : listCTPX) {
+           
             Object[] rowData = {
                 dtm.getRowCount() + 1,
                 ctpx.getIdPhieuXuat().getId(),
-                ctpx.getIdChiTietSp().getId(),
-                ctpx.getSoLuong(),
-                ctpx.getIdChiTietSp().getGiaBan(),
+                ctpx.getIdChiTietSp().getSanPham().getTen(),
+                ctpx.getSoLuong() == 0 ? "Hết hàng" : ctpx.getSoLuong(),
+                formatter.format(ctpx.getIdChiTietSp().getGiaBan()),
                 ctpx.getIdChiTietSp().getNamBaoHanh(),
                 Converter.trangThaiMauSac(ctpx.getIdChiTietSp().getMau())
             };
@@ -104,7 +107,7 @@ public class Tai_LuongPhieuXuat_CTPhieuXuatView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "STT", "Mã Phiếu xuất", "ID Sản Phẩm", "Số lượng", "Giá Bán", "Năm Bảo hành", "Màu"
+                "STT", "Mã Phiếu xuất", "Sản Phẩm", "Số lượng", "Giá Bán", "Năm Bảo hành", "Màu"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -284,7 +287,7 @@ public class Tai_LuongPhieuXuat_CTPhieuXuatView extends javax.swing.JFrame {
         txtIDSP.setEditable(false);
         txtIDSP.setBackground(new java.awt.Color(228, 206, 224));
         txtIDSP.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtIDSP.setLabelText("ID Sản phẩm");
+        txtIDSP.setLabelText("Sản phẩm");
 
         txtMaPhieu.setEditable(false);
         txtMaPhieu.setBackground(new java.awt.Color(228, 206, 224));
@@ -444,6 +447,9 @@ public class Tai_LuongPhieuXuat_CTPhieuXuatView extends javax.swing.JFrame {
             return;
         }
         String suaSL = JOptionPane.showInputDialog("Bạn muốn sửa số lượng thành bao nhiêu ?");
+        if (suaSL.trim().length() == 0) {
+            return;
+        }
         int sl = 0;
         try {
             sl = Integer.parseInt(suaSL);

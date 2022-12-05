@@ -34,5 +34,4 @@ public interface TpQuanlyNhaCungCapService {
     NhaCungCapCustom findNCCByMa(String ma);
 
     List<NhaCungCapCustom> phanTrang(List<NhaCungCapCustom> list, int offset, int limit);
-
 }

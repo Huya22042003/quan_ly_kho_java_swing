@@ -21,9 +21,16 @@ public interface TpThongKeService {
     public List<Integer> getSoDonHoanXuat();
 
     public List<Integer> getSoSanPhamDaNhap();
-     List<TpThongKeSpCustom> getListByNgayThanhToan(Long ngayBatDau, Long ngayKetThuc);
+
+    List<TpThongKeSpCustom> getListByNgayThanhToan(Long ngayBatDau, Long ngayKetThuc);
+
     public List<Integer> getSoSanPhamDaXuat();
+
     public List<TpThongKeSpCustom> getListSp();
+
     public List<Integer> getSoLuongSpHoanNhap();
+
     public List<Integer> getSoLuongSpHoanXuat();
+
+    List<TpThongKeSpCustom> phanTrang(List<TpThongKeSpCustom> list, int offset, int limit);
 }

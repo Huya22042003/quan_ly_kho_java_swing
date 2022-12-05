@@ -2,23 +2,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package cores.nhanVienQuanLy.views;
+package cores.webCam.view;
 
-import cores.truongPhongs.views.TpLuongNhapView;
+import cores.truongPhongs.views.TpQuanLyChiTietSanPhamForm;
 import java.awt.FlowLayout;
 
 /**
  *
- * @author Acer
+ * @author QUOC HUY
  */
-public class testKiemKeView extends javax.swing.JFrame {
+public class test extends javax.swing.JDialog {
 
     /**
-     * Creates new form testKiemKeView
+     * Creates new form test
      */
-    public testKiemKeView() {
+    public test() {
         initComponents();
-          NvqlKiemKeView a = new NvqlKiemKeView();
+        WebCamPanel a = new WebCamPanel();
         this.add(a);
         this.setLayout(new FlowLayout());
         this.pack();
@@ -67,20 +67,20 @@ public class testKiemKeView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(testKiemKeView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(test.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(testKiemKeView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(test.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(testKiemKeView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(test.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(testKiemKeView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(test.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new testKiemKeView().setVisible(true);
+                new test().setVisible(true);
             }
         });
     }

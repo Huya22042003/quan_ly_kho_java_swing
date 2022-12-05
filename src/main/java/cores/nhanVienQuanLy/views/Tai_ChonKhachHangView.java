@@ -11,6 +11,7 @@ import cores.truongPhongs.services.serviceImpls.TP_KhachHangServiceImpl;
 import domainModels.KhachHang;
 import domainModels.NhanVien;
 import infrastructures.constant.TrangThaiPhieuConstant;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -94,6 +95,9 @@ public class Tai_ChonKhachHangView extends javax.swing.JFrame {
     public void loadTable(List<TP_KhachHangCustom> list) {
         DefaultTableModel dtm = (DefaultTableModel) this.tblKhachHang.getModel();
         dtm.setRowCount(0);
+        String pattern = "yyyy-MM-dd";
+     
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         for (TP_KhachHangCustom el : list) {
             Object[] rowData = {
                 dtm.getRowCount() + 1,
@@ -103,7 +107,7 @@ public class Tai_ChonKhachHangView extends javax.swing.JFrame {
                 el.getEmail(),
                 el.getDiaChi(),
                 //                el.getMatKhau(),
-                el.getNgaySinh() == null ? "" : new Date(el.getNgaySinh()),
+                el.getNgaySinh() == null ? "" : simpleDateFormat.format(el.getNgaySinh()),
                 Converter.trangThaiDanhGia(el.getDanhGia()),
                 //                Converter.trangThaiGioiTinh(el.getGioiTinh()),
                 Converter.trangThaiKhachHang(el.getTrangThai()), //                el.getHinhAnh()

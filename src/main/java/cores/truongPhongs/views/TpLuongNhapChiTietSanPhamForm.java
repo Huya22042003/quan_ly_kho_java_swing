@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import utilities.Converter;
 import utilities.MsgBox;
+import utilities.Page;
 
 /**
  *
@@ -33,6 +34,15 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
     private TpLuongNhapAddChiTietSanPhamOldForm createViewAddSpOld;
     private TpLuongNhapAddChiTietSanPhamNewForm createViewAddSpNew;
     String duongdananh = getClass().getResource("/icons/FPT_Polytechnic_doc.png").getPath();
+    private Page p;
+
+    private int limit = 7;
+
+    private int offset = 0;
+
+    private int sizes = 0;
+
+    private int index = 1;
 
     public void setPhieuNhap(TpPhieuNhapCustom phieuNhap) {
         this.phieuNhap = phieuNhap;
@@ -44,7 +54,9 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
         initComponents();
         ctspService = new TpXemChiTietSanPhamImpl();
         listSp = ctspService.listCtsp();
-        loadTableNcc(listSp);
+        p = new Page();
+        sizes = listSp.size();
+        loadTableNcc(ctspService.phanTrang(listSp, offset, limit));
         rdoMaSanPham.setSelected(true);
         cbbTrangThai.setSelectedIndex(0);
     }
@@ -53,7 +65,9 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
         initComponents();
         ctspService = new TpXemChiTietSanPhamImpl();
         listSp = ctspService.listCtsp();
-        loadTableNcc(listSp);
+        p = new Page();
+        sizes = listSp.size();
+        loadTableNcc(ctspService.phanTrang(listSp, offset, limit));
     }
 
     private void loadTableNcc(List<TpXemChiTietSanPhamCustom> list) {
@@ -206,6 +220,9 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
         txtGiaTo = new utilities.palette.TextField();
         jLabel3 = new javax.swing.JLabel();
         btnAddNew = new utilities.palette.MyButton();
+        btnPre = new utilities.palette.UWPButton();
+        txtIndex = new javax.swing.JLabel();
+        btnNext = new utilities.palette.UWPButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -506,6 +523,22 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        btnPre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/skip-previous-circle-solid-24.png"))); // NOI18N
+        btnPre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPreActionPerformed(evt);
+            }
+        });
+
+        txtIndex.setText("1/1");
+
+        btnNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/skip-next-circle-solid-24.png"))); // NOI18N
+        btnNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
         panelRound1.setLayout(panelRound1Layout);
         panelRound1Layout.setHorizontalGroup(
@@ -540,6 +573,14 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
                             .addComponent(txtDonVi, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane1))
                 .addGap(32, 32, 32))
+            .addGroup(panelRound1Layout.createSequentialGroup()
+                .addGap(440, 440, 440)
+                .addComponent(btnPre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(67, 67, 67)
+                .addComponent(txtIndex)
+                .addGap(67, 67, 67)
+                .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -570,7 +611,14 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
                 .addComponent(panelRound6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(72, 72, 72))
+                .addGap(18, 18, 18)
+                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelRound1Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(txtIndex)))
+                .addGap(15, 15, 15))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -646,7 +694,7 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
 
     private void btnHienThi1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHienThi1ActionPerformed
         listSp = ctspService.listCtsp();
-        loadTableNcc(listSp);
+        loadTableNcc(ctspService.phanTrang(listSp, offset, limit));
     }//GEN-LAST:event_btnHienThi1ActionPerformed
 
     private void myButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton1ActionPerformed
@@ -697,6 +745,24 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_lbHinhAnhMouseClicked
 
+    private void btnPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreActionPerformed
+        index = p.prevIndex(offset, limit, index);
+        offset = p.prev(offset, limit);
+        loadIndex();
+        //        loadTable(getList);
+        loadTableNcc(ctspService.phanTrang(listSp, offset, limit));
+    }//GEN-LAST:event_btnPreActionPerformed
+
+    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
+        index = p.nextIndex(offset, limit, sizes, index);
+        offset = p.next(offset, limit, sizes);
+        loadIndex();
+        //        loadTable(getList);
+        loadTableNcc(ctspService.phanTrang(listSp, offset, limit));
+    }//GEN-LAST:event_btnNextActionPerformed
+    private void loadIndex() {
+        this.txtIndex.setText(String.valueOf(index) + " / " + (Math.round((sizes / limit) + 0.5)));
+    }
     /**
      * @param args the command line arguments
      */
@@ -738,6 +804,8 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private utilities.palette.MyButton btnAddNew;
     private utilities.palette.MyButton btnHienThi1;
+    private utilities.palette.UWPButton btnNext;
+    private utilities.palette.UWPButton btnPre;
     private utilities.palette.MyButton btnSearch;
     private javax.swing.ButtonGroup buttonGroup1;
     private utilities.palette.Combobox cbbTrangThai;
@@ -759,6 +827,7 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
     private utilities.palette.TextField txtGiaFrom;
     private utilities.palette.TextField txtGiaNhap;
     private utilities.palette.TextField txtGiaTo;
+    private javax.swing.JLabel txtIndex;
     private utilities.palette.TextField txtMa;
     private utilities.palette.TextField txtMau;
     private utilities.palette.TextField txtNamBH;
