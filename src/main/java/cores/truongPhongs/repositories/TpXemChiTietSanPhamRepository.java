@@ -3,6 +3,7 @@ package cores.truongPhongs.repositories;
 import cores.truongPhongs.customModels.TpXemChiTietSanPhamCustom;
 import domainModels.ChiTietSanPham;
 import domainModels.DonVi;
+import infrastructures.constant.TrangThaiSanPhamConstanst;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -113,5 +114,51 @@ public class TpXemChiTietSanPhamRepository {
         query.setParameter("giaKetThuc", giaKetThuc);
         List<TpXemChiTietSanPhamCustom> list = query.getResultList();
         return list;
+    }
+      public List<TpXemChiTietSanPhamCustom> getListByMaSp(String maSp, TrangThaiSanPhamConstanst  tt) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("select new cores.truongPhongs.customModels.TpXemChiTietSanPhamCustom ("
+                + "ct.id as id,"
+                + "ct.hinhAnh as hinhAnh,"
+                + "ct.GiaNhap as giaNhap,"
+                + "ct.GiaBan as giaBan,"
+                + "ct.namBaoHanh as namBaoHanh,"
+                + "ct.mau as mau,"
+                + "ct.size as size,"
+                + "ct.sanPham as sanPham,"
+                + "ct.donVi as donVi,"
+                + "ct.trangThai as trangThai,"
+                + "ct.soLuongTon as soLuongTon,"
+                + "ct.ngayTao as ngayTao"
+                + ") from domainModels.ChiTietSanPham ct WHERE ct.sanPham.ma like CONCAT('%',:maSp,'%') and ct.trangThai = :tt "
+                + "order by ct.ngayTao DESC" );
+       query.setParameter("maSp", maSp);
+       query.setParameter("tt", tt);
+        List<TpXemChiTietSanPhamCustom> list = query.getResultList();
+        return list;
+        
+    }
+       public List<TpXemChiTietSanPhamCustom> getListByTenSp(String tenSp, TrangThaiSanPhamConstanst  tt) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("select new cores.truongPhongs.customModels.TpXemChiTietSanPhamCustom ("
+                + "ct.id as id,"
+                + "ct.hinhAnh as hinhAnh,"
+                + "ct.GiaNhap as giaNhap,"
+                + "ct.GiaBan as giaBan,"
+                + "ct.namBaoHanh as namBaoHanh,"
+                + "ct.mau as mau,"
+                + "ct.size as size,"
+                + "ct.sanPham as sanPham,"
+                + "ct.donVi as donVi,"
+                + "ct.trangThai as trangThai,"
+                + "ct.soLuongTon as soLuongTon,"
+                + "ct.ngayTao as ngayTao"
+                + ") from domainModels.ChiTietSanPham ct WHERE ct.sanPham.ten like CONCAT('%',:tenSp,'%') and ct.trangThai = :tt "
+                + "order by ct.ngayTao DESC" );
+       query.setParameter("tenSp", tenSp);
+       query.setParameter("tt", tt);
+        List<TpXemChiTietSanPhamCustom> list = query.getResultList();
+        return list;
+        
     }
 }

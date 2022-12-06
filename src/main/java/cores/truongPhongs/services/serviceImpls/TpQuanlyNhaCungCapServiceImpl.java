@@ -101,9 +101,9 @@ public class TpQuanlyNhaCungCapServiceImpl implements TpQuanlyNhaCungCapService 
             case 0:
                 return KhachHangConstant.DANG_LAM_VIEC;
             case 1:
-                return KhachHangConstant.SAP_BO;
-            case 2:
                 return KhachHangConstant.DA_NGUNG_CUNG_CAP;
+            case 2:
+                return KhachHangConstant.SAP_BO;
             default:
                 return null;
         }
@@ -135,6 +135,22 @@ public class TpQuanlyNhaCungCapServiceImpl implements TpQuanlyNhaCungCapService 
             listPhanTrang.add(el);
         }
         return listPhanTrang;
+    }
+
+    @Override
+    public List<NhaCungCapCustom> findAllByKhAndNV(String ma, KhachHangConstant tt, int rdo) {
+        switch (rdo) {
+            case 0:
+                return rp.getListByMaa(ma, tt);
+            case 1:
+                return rp.getListByTenn(ma, tt);
+            case 2:
+                return rp.getListByEmaill(ma, tt);
+            case 3:
+                return rp.getListBySdtt(ma, tt);
+            default:
+                return rp.getListByMaa("", tt);
+        }
     }
 
 }

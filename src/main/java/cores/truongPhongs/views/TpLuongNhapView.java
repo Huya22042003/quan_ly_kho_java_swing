@@ -135,13 +135,12 @@ public class TpLuongNhapView extends javax.swing.JPanel {
                 case 0:
                     search = el.getId().toString();
                     break;
-
-                case 1:
-                    search = el.getTenNcc();
-                    break;
-                case 2:
-                    search = el.getTenNhanVien();
-                    break;
+//                case 1:
+//                    search = el.getTenNcc();
+//                    break;
+//                case 2:
+//                    search = el.getTenNhanVien();
+//                    break;
             }
             for (int i = 0; i <= search.length(); i++) {
                 String newMa = search.substring(0, i);
@@ -178,11 +177,11 @@ public class TpLuongNhapView extends javax.swing.JPanel {
         if (rdoMa.isSelected()) {
             loadTablePn(listSearch(0));
         }
-        else if (rdoNcc.isSelected()) {
-            loadTablePn(listSearch(1));
-        } else {
-            loadTablePn(listSearch(2));
-        }
+//        else if (rdoNcc.isSelected()) {
+//            loadTablePn(listSearch(1));
+//        } else {
+//            loadTablePn(listSearch(2));
+//        }
     }
     
     private void loadTablePn(List<TpPhieuNhapCustom> list) {
@@ -794,6 +793,7 @@ public class TpLuongNhapView extends javax.swing.JPanel {
         // TODO add your handling code here:
         listSearch(this.cbbTrangThai.getSelectedIndex());
         searchRadio();
+        searchhRadio();
     }//GEN-LAST:event_cbbTrangThaiActionPerformed
 
     private void btnThemPhieuNhapMoiActionPerformed(ActionEvent evt) {//GEN-FIRST:event_btnThemPhieuNhapMoiActionPerformed
@@ -846,23 +846,24 @@ public class TpLuongNhapView extends javax.swing.JPanel {
         chonSp.setVisible(true);
     }//GEN-LAST:event_btnThemSpVaoPhieuActionPerformed
         
-    private void searchByTenNvAndNcc(){
-        
-        if(rdoNhanVien.isSelected()){
-            List<TpPhieuNhapCustom> listPn = phieuNhapService.getListPnByTenNv(txtSearch.getText().toString());
-            loadTablePn(listPn);
-        
-        }
-        if(rdoNcc.isSelected()){
-              List<TpPhieuNhapCustom> listPn = phieuNhapService.getListPnByTenNcc(txtSearch.getText().toString());
-              loadTablePn(listPn);
-             
-        }
+     public List<TpPhieuNhapCustom> getListByTT(int rdo) {
+        String timKiem = this.txtSearch.getText();
+        listPn = phieuNhapService.findAllByKhAndNV(timKiem, phieuNhapService.loc(cbbTrangThai.getSelectedIndex()), rdo);
+        return listPn;
+    }
+
+    public void searchhRadio() {
+        if (rdoNcc.isSelected()) {
+            loadTablePn(getListByTT(0));
+        } 
+        if (rdoNhanVien.isSelected()) {
+            loadTablePn(getListByTT(1));
+        } 
     }
     private void txtSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSearchMouseClicked
         // TODO add your handling code here:
         
-        searchByTenNvAndNcc();
+        searchhRadio();
         searchRadio();
         TimKiemTheoNgay();
 

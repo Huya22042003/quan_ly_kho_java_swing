@@ -25,8 +25,7 @@ public interface TpPhieuNhapService {
     List<TpPhieuNhapCustom> getListByNgayThanhToan(Long ngayBatDau, Long ngayKetThuc);
     List<TpPhieuNhapCustom> getListByNgayTao(Long ngayBatDau, Long ngayKetThuc);
     public NhanVien getNhanVienByMa(String ma);
-    List<TpPhieuNhapCustom> getListPnByTenNv(String ten);
-    List<TpPhieuNhapCustom> getListPnByTenNcc(String ten);
+     List<TpPhieuNhapCustom> findAllByKhAndNV(String ma, TrangThaiPhieuConstant tt, int rdo);
     List<TpPhieuNhapCustom> phanTrang(List<TpPhieuNhapCustom> list, int offset, int limit);
 
 }
