@@ -863,9 +863,8 @@ public class TpLuongNhapView extends javax.swing.JPanel {
         // TODO add your handling code here:
         
         searchByTenNvAndNcc();
-        TimKiemTheoNgay();
         searchRadio();
-        
+        TimKiemTheoNgay();
 
     }//GEN-LAST:event_txtSearchMouseClicked
 
