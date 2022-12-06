@@ -59,4 +59,23 @@ public class NvqlLuongKiemKeCtspServiceImpl implements NvqlLuongKiemKeCtspServic
         }
         return listPhanTrang;
     }
+
+    @Override
+    public void updateTrangThaiSp(NvqlLuongKiemKeCtspCustom a) {
+        ChiTietSanPham ctsp = new ChiTietSanPham(
+                a.getId(),
+                a.getSoLuongTon(),
+                a.getHinhAnh(),
+                a.getGiaNhap(),
+                a.getGiaBan(),
+                a.getNamBaoHanh(),
+                a.getMau(),
+                a.getTrangThai(),
+                a.getSize(),
+                a.getNgayTao(),
+                a.getSanPham(),
+                a.getDonVi()
+        );
+        rp.updateTrangThaiSp(ctsp);
+    }
 }

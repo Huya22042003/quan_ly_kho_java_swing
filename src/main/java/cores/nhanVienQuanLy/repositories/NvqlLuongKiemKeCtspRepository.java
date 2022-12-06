@@ -2,6 +2,7 @@ package cores.nhanVienQuanLy.repositories;
 
 import cores.nhanVienQuanLy.customModels.NvqlLuongKiemKeCtspCustom;
 import domainModels.ChiTietSanPham;
+import infrastructures.constant.TrangThaiSanPhamConstanst;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -29,7 +30,6 @@ public class NvqlLuongKiemKeCtspRepository {
                 + " m.ngayTao as ngayTao) "
                 + " from domainModels.ChiTietSanPham m ORDER BY m.sanPham.ma DESC");
         List<NvqlLuongKiemKeCtspCustom> list = query.getResultList();
-        System.out.println(list.size());
         session.close();
         return list;
     }
@@ -40,6 +40,21 @@ public class NvqlLuongKiemKeCtspRepository {
             Transaction trans = s.beginTransaction();
             ChiTietSanPham c = s.find(ChiTietSanPham.class, nvqlLuongKiemKeCtspCustom.getId());
             c.setSoLuongTon(nvqlLuongKiemKeCtspCustom.getSoLuongTon());
+            c.setTrangThai(TrangThaiSanPhamConstanst.CHO_XAC_NHAN);
+            s.update(c);
+            trans.commit();
+            s.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            s.close();
+        }
+    }
+    public void updateTrangThaiSp(ChiTietSanPham nvqlLuongKiemKeCtspCustom) {
+        Session s = HibernateUtil.getSessionFactory().openSession();
+        try {
+            Transaction trans = s.beginTransaction();
+            ChiTietSanPham c = s.find(ChiTietSanPham.class, nvqlLuongKiemKeCtspCustom.getId());
+            c.setTrangThai(TrangThaiSanPhamConstanst.DA_MO_BAN);
             s.update(c);
             trans.commit();
             s.close();
