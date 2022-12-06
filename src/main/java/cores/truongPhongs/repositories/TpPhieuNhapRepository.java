@@ -152,6 +152,42 @@ public class TpPhieuNhapRepository {
         return list;
         
     }
+      public List<TpPhieuNhapCustom> getListByTenNv(String tenNhanVien) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("Select new  cores.truongPhongs.customModels.TpPhieuNhapCustom ( "
+                + "p.id as id,"
+                + "p.ghiChu as ghiChu,"
+                + "p.ngayThanhToan as ngayThanhToan,"
+                + "p.ngayTao as ngayTao,"
+                + "p.trangThai as trangThai,"
+                + "p.nhanVien.id as idNhanVien,"
+                + "p.nhanVien.ten as tenNhanVien,"
+                + "p.nhaCungCap.id as idNcc,"
+                + "p.nhaCungCap.ten as tenNcc) "
+                + "from domainModels.PhieuNhap p WHERE p.nhanVien.ten like CONCAT('%',:tenNhanVien,'%')");
+       query.setParameter("tenNhanVien", tenNhanVien);
+        List<TpPhieuNhapCustom> list = query.getResultList();
+        return list;
+        
+    }
+       public List<TpPhieuNhapCustom> getListByTenNcc(String tenNcc) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("Select new  cores.truongPhongs.customModels.TpPhieuNhapCustom ( "
+                + "p.id as id,"
+                + "p.ghiChu as ghiChu,"
+                + "p.ngayThanhToan as ngayThanhToan,"
+                + "p.ngayTao as ngayTao,"
+                + "p.trangThai as trangThai,"
+                + "p.nhanVien.id as idNhanVien,"
+                + "p.nhanVien.ten as tenNhanVien,"
+                + "p.nhaCungCap.id as idNcc,"
+                + "p.nhaCungCap.ten as tenNcc) "
+                + "from domainModels.PhieuNhap p WHERE p.nhaCungCap.ten like CONCAT('%',:tenNcc,'%')");
+       query.setParameter("tenNcc", tenNcc);
+        List<TpPhieuNhapCustom> list = query.getResultList();
+        return list;
+        
+    }
 
    
     

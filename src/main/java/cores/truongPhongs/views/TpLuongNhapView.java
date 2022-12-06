@@ -177,13 +177,14 @@ public class TpLuongNhapView extends javax.swing.JPanel {
     public void searchRadio() {
         if (rdoMa.isSelected()) {
             loadTablePn(listSearch(0));
-        } else if (rdoNcc.isSelected()) {
-            loadTablePn(listSearch(1));
-        } else {
-            loadTablePn(listSearch(2));
         }
+//        else if (rdoNcc.isSelected()) {
+//            loadTablePn(listSearch(1));
+//        } else {
+//            loadTablePn(listSearch(2));
+//        }
     }
-
+    
     private void loadTablePn(List<TpPhieuNhapCustom> list) {
         DefaultTableModel dtm = (DefaultTableModel) this.tblPhieuNhap.getModel();
         String pattern = "yyyy-MM-dd HH:mm:ss";
@@ -844,12 +845,26 @@ public class TpLuongNhapView extends javax.swing.JPanel {
         chonSp.setPhieuNhap(chon());
         chonSp.setVisible(true);
     }//GEN-LAST:event_btnThemSpVaoPhieuActionPerformed
-
+        
+    private void searchByTenNvAndNcc(){
+        
+        if(rdoNhanVien.isSelected()){
+            List<TpPhieuNhapCustom> listPn = phieuNhapService.getListPnByTenNv(txtSearch.getText().toString());
+            loadTablePn(listPn);
+        
+        }
+        if(rdoNcc.isSelected()){
+              List<TpPhieuNhapCustom> listPn = phieuNhapService.getListPnByTenNcc(txtSearch.getText().toString());
+              loadTablePn(listPn);
+             
+        }
+    }
     private void txtSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSearchMouseClicked
         // TODO add your handling code here:
-        TimKiemTheoNgay();
+        
+        searchByTenNvAndNcc();
         searchRadio();
-
+        TimKiemTheoNgay();
 
     }//GEN-LAST:event_txtSearchMouseClicked
 
@@ -921,9 +936,11 @@ public class TpLuongNhapView extends javax.swing.JPanel {
         if (rdoNgayTao.isSelected()) {
             listPn = phieuNhapService.getListByNgayTao(ngayBatDau.getDate().getTime(), ngayKetThuc.getDate().getTime());
             loadTablePn(listPn);
+            searchRadio();
         } else {
             listPn = phieuNhapService.getListByNgayThanhToan(ngayBatDau.getDate().getTime(), ngayKetThuc.getDate().getTime());
             loadTablePn(listPn);
+            searchRadio();
         }
     }
 
