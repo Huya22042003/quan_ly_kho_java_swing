@@ -178,11 +178,11 @@ public class TpLuongNhapView extends javax.swing.JPanel {
         if (rdoMa.isSelected()) {
             loadTablePn(listSearch(0));
         }
-//        else if (rdoNcc.isSelected()) {
-//            loadTablePn(listSearch(1));
-//        } else {
-//            loadTablePn(listSearch(2));
-//        }
+        else if (rdoNcc.isSelected()) {
+            loadTablePn(listSearch(1));
+        } else {
+            loadTablePn(listSearch(2));
+        }
     }
     
     private void loadTablePn(List<TpPhieuNhapCustom> list) {
@@ -863,8 +863,9 @@ public class TpLuongNhapView extends javax.swing.JPanel {
         // TODO add your handling code here:
         
         searchByTenNvAndNcc();
-        searchRadio();
         TimKiemTheoNgay();
+        searchRadio();
+        
 
     }//GEN-LAST:event_txtSearchMouseClicked
 
