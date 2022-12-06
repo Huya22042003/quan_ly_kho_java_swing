@@ -93,7 +93,15 @@ public class Tai_LuongHoanXuat_ListPhieuXuat extends javax.swing.JFrame {
             new String [] {
                 "STT", "Ngày tạo", "Ngày thanh toán", "Trạng thái", "Nhân viên", "Khách Hàng"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblPhieuXuat.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblPhieuXuatMouseClicked(evt);
