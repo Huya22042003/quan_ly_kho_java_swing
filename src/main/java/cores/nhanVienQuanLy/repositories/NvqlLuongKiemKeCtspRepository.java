@@ -28,7 +28,10 @@ public class NvqlLuongKiemKeCtspRepository {
                 + " m.GiaBan as giaBan,"
                 + " m.size as size, "
                 + " m.ngayTao as ngayTao) "
-                + " from domainModels.ChiTietSanPham m ORDER BY m.sanPham.ma DESC");
+                + " from domainModels.ChiTietSanPham m "
+                + " WHERE m.trangThai = :trangThai "
+                + " ORDER BY m.sanPham.ma DESC");
+        query.setParameter("trangThai", TrangThaiSanPhamConstanst.DA_MO_BAN);
         List<NvqlLuongKiemKeCtspCustom> list = query.getResultList();
         session.close();
         return list;
