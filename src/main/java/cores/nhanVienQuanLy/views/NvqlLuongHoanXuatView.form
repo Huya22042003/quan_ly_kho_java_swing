@@ -255,9 +255,7 @@
                       <Component id="btnCtPhieuXuat" min="-2" pref="92" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="btnChiTietSP" min="-2" pref="95" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="btnChiTietSP1" min="-2" pref="96" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="135" max="-2" attributes="0"/>
                       <Component id="btnShow" min="-2" pref="100" max="-2" attributes="0"/>
                       <EmptySpace pref="52" max="32767" attributes="0"/>
                   </Group>
@@ -269,7 +267,6 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="btnShow" max="32767" attributes="0"/>
-                          <Component id="btnChiTietSP1" max="32767" attributes="0"/>
                           <Component id="btnChiTietSP" max="32767" attributes="0"/>
                           <Component id="btnCreatPhieuXuat" max="32767" attributes="0"/>
                           <Component id="btnCtPhieuXuat" alignment="0" max="32767" attributes="0"/>
@@ -341,30 +338,6 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnChiTietSPActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="utilities.palette.MyButton" name="btnChiTietSP1">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/icons/bill.png"/>
-                </Property>
-                <Property name="toolTipText" type="java.lang.String" value="In bill phi&#x1ebf;u ho&#xe0;n xu&#x1ea5;t"/>
-                <Property name="borderColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="f4" green="f2" red="dd" type="rgb"/>
-                </Property>
-                <Property name="color" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="f4" green="f2" red="dd" type="rgb"/>
-                </Property>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="14" style="1"/>
-                </Property>
-                <Property name="radius" type="int" value="50"/>
-              </Properties>
-              <AccessibilityProperties>
-                <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value="Xu&#x1ea5;t phi&#x1ebf;u xu&#x1ea5;t"/>
-              </AccessibilityProperties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnChiTietSP1ActionPerformed"/>
               </Events>
             </Component>
             <Component class="utilities.palette.MyButton" name="btnShow">

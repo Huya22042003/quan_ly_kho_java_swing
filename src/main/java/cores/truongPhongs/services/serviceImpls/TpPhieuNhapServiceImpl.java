@@ -154,4 +154,14 @@ public class TpPhieuNhapServiceImpl implements TpPhieuNhapService {
         return repo.getListPnById(ghiChu);
     }
 
+    @Override
+    public List<TpPhieuNhapCustom> getListPnByTenNv(String ten) {
+        return repo.getListByTenNv(ten);
+    }
+
+    @Override
+    public List<TpPhieuNhapCustom> getListPnByTenNcc(String ten) {
+        return repo.getListByTenNcc(ten);
+    }
+
 }

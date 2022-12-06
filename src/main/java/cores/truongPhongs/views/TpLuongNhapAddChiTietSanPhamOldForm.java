@@ -111,17 +111,57 @@ public class TpLuongNhapAddChiTietSanPhamOldForm extends javax.swing.JFrame {
 //        } else {
 //            lblGiaNhap.setText("");
 //        }
-
         
+        boolean check = true;
+           if(txtGiaNhap.getText().trim().length() == 0){
+            lblGiaNhap.setText("Giá nhập không được để trống!");
+            check = false;
+        }
+        if(txtSoLuongNhap.getText().trim().length() == 0){
+            lblSoLuong.setText("Số lượng không được để trống!");
+            check = false;
+        }
+        if(check == false){
+            return null;
+        }
+        int sl = 0;
+        try {
+           sl = Integer.parseInt(txtSoLuongNhap.getText());
+           if(sl <= 0 ){
+               lblSoLuong.setText("Số lượng phải lớn hơn 0!");
+               check = false;
+           }
+        } catch (Exception e) {
+            e.printStackTrace();
+            lblSoLuong.setText("Bạn phải nhập số lượng là số!");
+             check = false;
+        } 
+     
+        BigDecimal gia = null;
+        try {
+           gia = BigDecimal.valueOf(Long.parseLong(txtGiaNhap.getText()));
+           if(gia.compareTo(new BigDecimal(0)) <= 0 ){
+               lblGiaNhap.setText("Giá nhập phải lớn hơn 0!");
+               check = false;
+           }
+        } catch (Exception e) {
+            e.printStackTrace();
+            lblGiaNhap.setText("Bạn phải nhập giá nhập là số!");
+             check = false;
+        } 
+        if(check == false){
+            return null;
+        }
+        sp.setSoLuongTon(sl);
+        sp.setGiaNhap(gia);
         sp.setDonVi(ct.getDonVi());
-        sp.setGiaNhap(BigDecimal.valueOf(Long.parseLong(txtGiaNhap.getText())));
         sp.setHinhAnh(ct.getHinhAnh());
         sp.setMau(ct.getMau());
         sp.setSize(ct.getSize());
         sp.setNamBaoHanh(ct.getNamBaoHanh());
         sp.setSanPham(ct.getSanPham());
         sp.setHinhAnh(duongdananh);
-        sp.setSoLuongTon(Integer.parseInt(txtSoLuongNhap.getText()));
+       
         sp.setTrangThai(ct.getTrangThai().CHO_XAC_NHAN);
         sp.setNgayTao(new Date().getTime());
         return sp;
@@ -254,6 +294,10 @@ public class TpLuongNhapAddChiTietSanPhamOldForm extends javax.swing.JFrame {
         txtSize.setEditable(false);
         txtSize.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         txtSize.setLabelText("Size");
+
+        lblSoLuong.setForeground(new java.awt.Color(255, 0, 51));
+
+        lblGiaNhap.setForeground(new java.awt.Color(255, 0, 51));
 
         javax.swing.GroupLayout panelRound3Layout = new javax.swing.GroupLayout(panelRound3);
         panelRound3.setLayout(panelRound3Layout);
