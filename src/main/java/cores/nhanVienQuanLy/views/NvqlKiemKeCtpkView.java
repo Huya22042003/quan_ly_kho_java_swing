@@ -9,6 +9,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import utilities.Converter;
 import utilities.Page;
 
 /**
@@ -70,7 +71,8 @@ public class NvqlKiemKeCtpkView extends javax.swing.JFrame {
                 m.getTen(),
                 m.getSoLuongTon(),
                 m.getSoLuongThucTon(),
-                m.getChenhLech()
+                m.getChenhLech(),
+                Converter.trangThaiSanPham(m.getIdChiTietSanPham().getTrangThai())
             };
             model.addRow(row);
         }
@@ -192,11 +194,11 @@ public class NvqlKiemKeCtpkView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "STT", "Mã SP", "Tên SP", "Số lượng tồn", "Số lượng thực tồn", "Lệch"
+                "STT", "Mã SP", "Tên SP", "Số lượng tồn", "Số lượng thực tồn", "Lệch", "Trạng thái SP"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, true
+                false, false, false, false, false, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
