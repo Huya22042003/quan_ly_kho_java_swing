@@ -10,6 +10,7 @@ import cores.truongPhongs.services.serviceImpls.TpXemChiTietSanPhamImpl;
 import infrastructures.constant.MauConstant;
 import infrastructures.constant.TrangThaiPhieuConstant;
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -41,6 +42,7 @@ public class TpLuongNhapChiTietPhieuNhapForm extends javax.swing.JFrame {
     }
 
     public void loadTable(List<TpPhieuNhapChiTietCustom> list) {
+        DecimalFormat formatter = new DecimalFormat("###,###,##0 VNĐ");
         DefaultTableModel dtm = (DefaultTableModel) this.tbCtpn.getModel();
         dtm.setRowCount(0);
         for (TpPhieuNhapChiTietCustom ctpx : list) {
@@ -52,7 +54,7 @@ public class TpLuongNhapChiTietPhieuNhapForm extends javax.swing.JFrame {
                 ctpx.getIdSanPham().getDonVi().getDonViGoc(),
                 ctpx.getIdSanPham().getNamBaoHanh(),
                 ctpx.getIdSanPham().getSoLuongTon(),
-                ctpx.getIdSanPham().getGiaNhap()
+                formatter.format(ctpx.getIdSanPham().getGiaNhap())
             };
             dtm.addRow(rowData);
         }
