@@ -9,10 +9,16 @@ import java.util.List;
  * @author window
  */
 public interface NvqlLuongKiemKeService {
+
     public List<NvqlLuongKiemKeCustom> getAll();
+
     void Insert(NvqlLuongKiemKeCustom phieuKiemKe);
+
     boolean UpdateTrangThai(NvqlLuongKiemKeCustom phieuKiemKe);
+
     TrangThaiPhieuKiemConstant loc(int a);
-     List<NvqlLuongKiemKeCustom> getListByNgayTao(Long ngayBatDau, Long ngayKetThuc);
-     List<NvqlLuongKiemKeCustom> phanTrang(List<NvqlLuongKiemKeCustom> list, int offset, int limit);
+
+    List<NvqlLuongKiemKeCustom> getListByNgayTao(Long ngayBatDau, Long ngayKetThuc);
+
+    List<NvqlLuongKiemKeCustom> phanTrang(List<NvqlLuongKiemKeCustom> list, int offset, int limit);
 }

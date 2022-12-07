@@ -97,7 +97,7 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
         if (giaNhap.trim().length() == 0) {
             erroGiaNhap.setText("Giá nhập không được để trống");
             check = false;
-        } else if (!giaNhap.matches("^[0-9]+$")) {
+        } else if (!giaNhap.trim().matches("^[0-9]+$")) {
             erroGiaNhap.setText("Giá nhập sai định dạng");
             check = false;
         } else {
@@ -107,7 +107,7 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
         if (giaBan.trim().length() == 0) {
             erroGiaBan.setText("Giá bán không được để trống");
             check = false;
-        } else if (!giaBan.matches("^[0-9]+$")) {
+        } else if (!giaBan.trim().matches("^[0-9]+$")) {
             erroGiaBan.setText("Giá bán sai định dạng");
             check = false;
         } else {
@@ -116,8 +116,8 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
         if (soLuong.trim().length() == 0) {
             erroSoLuong.setText("Số lượng tồn không được để trống");
             check = false;
-        } else if (!soLuong.matches("\\d+")) {
-            erroSoLuong.setText("Số lượng tồn không được là chữ");
+        } else if (!soLuong.trim().matches("^[0-9]+$")) {
+            erroSoLuong.setText("Số lượng tồn sai định dạng");
             check = false;
         } else {
             erroSoLuong.setText("");
@@ -126,8 +126,8 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
         if (namBH.trim().length() == 0) {
             erroNamBH.setText("Năm bảo hành không được để trống");
             check = false;
-        } else if (!namBH.matches("\\d+")) {
-            erroNamBH.setText("Năm bảo hành không được là chữ");
+        } else if (!namBH.trim().matches("^[0-9]+$")) {
+            erroNamBH.setText("Năm bảo hành sai định dạng");
             check = false;
         } else {
             erroNamBH.setText("");
@@ -135,7 +135,7 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
         if (size.trim().length() == 0) {
             erroSize.setText("Size không được để trống");
             check = false;
-        } else if (!size.matches("^[0-9]+$")) {
+        } else if (!size.trim().matches("^[0-9]+$")) {
             erroSize.setText("Size sai định dạng");
             check = false;
         } else {
