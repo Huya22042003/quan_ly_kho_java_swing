@@ -2,6 +2,7 @@ package cores.truongPhongs.repositories;
 
 import cores.truongPhongs.customModels.TpQuanLySanPhamCustom;
 import domainModels.SanPham;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -17,15 +18,24 @@ import utilities.HibernateUtil;
  */
 public class TpQuanLySanPhamRepository {
 
-    public List<TpQuanLySanPhamCustom> getAll() {
-        List<TpQuanLySanPhamCustom> list = new ArrayList<>();
+    public List<TpQuanLySanPhamCustom> getAll(String ten) {
         Session s = HibernateUtil.getSessionFactory().openSession();
-        Query q = s.createQuery("select new cores.truongPhongs.customModels.TpQuanLySanPhamCustom ("
-                + "sp.id as id,"
-                + "sp.ma as ma,"
-                + "sp.ten as ten"
-                + ") from domainModels.SanPham sp");
-        list = q.getResultList();
+        Query query = s.createNativeQuery("""
+                                                  SELECT sp.id, sp.Ma, sp.Ten,
+                                                  MAX(ctsp.GiaBan) as giaBanMax, MIN(ctsp.GiaBan) as giaBanMin,
+                                                  MAX(ctsp.GiaNhap) as giaNhapMax, MIN(ctsp.GiaNhap) as giaNhapMin,
+                                                  SUM(ctsp.SoLuongTon) as soLuongTon
+                                                  FROM SanPham sp join ChiTietSanPham ctsp
+                                                  ON sp.Id = ctsp.IdSanPham
+                                                  WHERE sp.Ten LIKE CONCAT('%',:ten,'%') OR sp.Ma LIKE CONCAT('%',:ten,'%')
+                                                  GROUP BY sp.Id, sp.Ma, sp.Ten
+                                                  """);
+        query.setParameter("ten", ten);
+        List<Object[]> listQuery = query.getResultList();
+        List<TpQuanLySanPhamCustom> list = new ArrayList<>();
+        listQuery.stream().forEach(el -> {
+            list.add(new TpQuanLySanPhamCustom(UUID.fromString((String) el[0]), (String) el[1], (String) el[2], (BigDecimal) el[3], (BigDecimal) el[4], (BigDecimal) el[5], (BigDecimal) el[6], (int) el[7]));
+        });
         s.close();
         return list;
     }
@@ -121,15 +131,4 @@ public class TpQuanLySanPhamRepository {
         return list;
     }
 
-    public SanPham findID(UUID id) {
-        Session s = HibernateUtil.getSessionFactory().openSession();
-        Transaction t = s.beginTransaction();
-        SanPham sp = s.find(SanPham.class, id);
-        t.commit();
-        s.close();
-        return sp;
-    }
-
-   
 }
-

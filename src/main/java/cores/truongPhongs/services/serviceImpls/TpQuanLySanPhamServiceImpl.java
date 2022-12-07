@@ -1,6 +1,7 @@
 package cores.truongPhongs.services.serviceImpls;
 
 import cores.truongPhongs.customModels.TpQuanLySanPhamCustom;
+import cores.truongPhongs.customModels.TpThemSanPhamCustom;
 import cores.truongPhongs.repositories.TpQuanLySanPhamRepository;
 import cores.truongPhongs.services.TpQuanLySanPhamService;
 import domainModels.SanPham;
@@ -19,8 +20,8 @@ public class TpQuanLySanPhamServiceImpl implements TpQuanLySanPhamService {
     private TpQuanLySanPhamRepository rp = new TpQuanLySanPhamRepository();
 
     @Override
-    public List<TpQuanLySanPhamCustom> getAll() {
-        return rp.getAll();
+    public List<TpQuanLySanPhamCustom> getAll(String ten) {
+        return rp.getAll(ten);
     }
 
     @Override
@@ -33,7 +34,7 @@ public class TpQuanLySanPhamServiceImpl implements TpQuanLySanPhamService {
     }
 
     @Override
-    public boolean updateSanPham(TpQuanLySanPhamCustom custom) {
+    public boolean updateSanPham(TpThemSanPhamCustom custom) {
         SanPham sp = new SanPham();
         sp.setMa(custom.getMa());
         sp.setTen(custom.getTen());
@@ -50,18 +51,6 @@ public class TpQuanLySanPhamServiceImpl implements TpQuanLySanPhamService {
     public TpQuanLySanPhamCustom findSanPhamByMa(String ma) {
         return rp.findByMa(ma);
     }
-
-    @Override
-    public List<TpQuanLySanPhamCustom> findAllByRadio(String ten, int rdo) {
-        switch (rdo) {
-            case 0:
-                return rp.findAllByMa(ten);
-            case 1:
-                return rp.findAllByTen(ten);
-            default:
-                return null;
-        }
-    } //
 
     @Override
     public TpQuanLySanPhamCustom checkValidate(TpQuanLySanPhamCustom sp, JLabel erroMa, JLabel erroTen) {
@@ -101,11 +90,6 @@ public class TpQuanLySanPhamServiceImpl implements TpQuanLySanPhamService {
         }
 
         return sp;
-    }
-
-    @Override
-    public SanPham findID(UUID id) {
-        return rp.findID(id);
     }
 
     @Override
