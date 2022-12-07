@@ -454,7 +454,7 @@ public class TP_QuanLyPhieuHoanNhap_ctp extends javax.swing.JFrame {
                 this.errorSoLuong.setText("Số lượng phải là số nguyên dương");
                 return;
             }
-            if (listSP.get(this.tblSanPham.getSelectedRow()).getSoLuongTon() < sl) {
+            if (listSP.get(this.tblSanPham.getSelectedRow()).getSoLuongHoan() < sl) {
                 this.errorSoLuong.setText("Số lượng nhận lai phải nhỏ hơn số lượng hoàn");
                 return;
             }
