@@ -31,6 +31,8 @@ public interface TpThongKeService {
     public List<Integer> getSoLuongSpHoanNhap();
 
     public List<Integer> getSoLuongSpHoanXuat();
-
+    
     List<TpThongKeSpCustom> phanTrang(List<TpThongKeSpCustom> list, int offset, int limit);
+    
+      List<TpThongKeSpCustom> findAllByKhAndNV(String ma,int rdo);
 }

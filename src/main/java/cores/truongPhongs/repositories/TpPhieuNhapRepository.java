@@ -7,6 +7,7 @@ import javax.persistence.Query;
 import org.hibernate.Session;
 import utilities.HibernateUtil;
 import domainModels.PhieuNhap;
+import infrastructures.constant.TrangThaiPhieuConstant;
 import java.util.UUID;
 import net.bytebuddy.asm.Advice;
 import org.hibernate.Transaction;
@@ -152,7 +153,7 @@ public class TpPhieuNhapRepository {
         return list;
         
     }
-      public List<TpPhieuNhapCustom> getListByTenNv(String tenNhanVien) {
+      public List<TpPhieuNhapCustom> getListByTenNv(String tenNhanVien,TrangThaiPhieuConstant tt) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery("Select new  cores.truongPhongs.customModels.TpPhieuNhapCustom ( "
                 + "p.id as id,"
@@ -164,13 +165,15 @@ public class TpPhieuNhapRepository {
                 + "p.nhanVien.ten as tenNhanVien,"
                 + "p.nhaCungCap.id as idNcc,"
                 + "p.nhaCungCap.ten as tenNcc) "
-                + "from domainModels.PhieuNhap p WHERE p.nhanVien.ten like CONCAT('%',:tenNhanVien,'%')");
+                + "from domainModels.PhieuNhap p WHERE p.nhanVien.ten like CONCAT('%',:tenNhanVien,'%') and p.trangThai = :tt "
+                + "order by  p.ngayTao DESC");
        query.setParameter("tenNhanVien", tenNhanVien);
+       query.setParameter("tt", tt);
         List<TpPhieuNhapCustom> list = query.getResultList();
         return list;
         
     }
-       public List<TpPhieuNhapCustom> getListByTenNcc(String tenNcc) {
+       public List<TpPhieuNhapCustom> getListByTenNcc(String tenNcc, TrangThaiPhieuConstant tt) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery("Select new  cores.truongPhongs.customModels.TpPhieuNhapCustom ( "
                 + "p.id as id,"
@@ -182,12 +185,17 @@ public class TpPhieuNhapRepository {
                 + "p.nhanVien.ten as tenNhanVien,"
                 + "p.nhaCungCap.id as idNcc,"
                 + "p.nhaCungCap.ten as tenNcc) "
-                + "from domainModels.PhieuNhap p WHERE p.nhaCungCap.ten like CONCAT('%',:tenNcc,'%')");
+                + "from domainModels.PhieuNhap p WHERE p.nhaCungCap.ten like CONCAT('%',:tenNcc,'%') and p.trangThai = :tt "
+                + "order by p.ngayTao DESC" );
        query.setParameter("tenNcc", tenNcc);
+       query.setParameter("tt", tt);
         List<TpPhieuNhapCustom> list = query.getResultList();
         return list;
         
     }
+ 
+
+    
 
    
     

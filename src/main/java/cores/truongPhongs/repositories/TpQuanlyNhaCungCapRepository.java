@@ -2,6 +2,7 @@ package cores.truongPhongs.repositories;
 
 import cores.truongPhongs.customModels.NhaCungCapCustom;
 import domainModels.NhaCungCap;
+import infrastructures.constant.KhachHangConstant;
 import java.util.List;
 import java.util.UUID;
 import javax.persistence.NoResultException;
@@ -119,5 +120,76 @@ public class TpQuanlyNhaCungCapRepository {
         }
         return nccs;
     }
-
+    public List<NhaCungCapCustom> getListByMaa(String ma, KhachHangConstant  tt) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("SELECT new cores.truongPhongs.customModels.NhaCungCapCustom("
+                + "ncc.id as id,"
+                + "ncc.ma as ma,"
+                + "ncc.ten as ten,"
+                + "ncc.diaChi as diaChi,"
+                + "ncc.email as email,"
+                + "ncc.sdt as sdt,"
+                + "ncc.danhGia as danhGia,"
+                + "ncc.trangThai as trangThai"
+                + ") FROM domainModels.NhaCungCap ncc WHERE ncc.ma like CONCAT ('%',:ma,'%') and ncc.trangThai = :tt "
+                + "order by ncc.ma DESC" );
+       query.setParameter("ma", ma);
+       query.setParameter("tt", tt);
+        List<NhaCungCapCustom> list = query.getResultList();
+        return list;
+    }
+      public List<NhaCungCapCustom> getListByTenn(String ten, KhachHangConstant  tt) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("SELECT new cores.truongPhongs.customModels.NhaCungCapCustom("
+                + "ncc.id as id,"
+                + "ncc.ma as ma,"
+                + "ncc.ten as ten,"
+                + "ncc.diaChi as diaChi,"
+                + "ncc.email as email,"
+                + "ncc.sdt as sdt,"
+                + "ncc.danhGia as danhGia,"
+                + "ncc.trangThai as trangThai"
+                + ") FROM domainModels.NhaCungCap ncc WHERE ncc.ten like CONCAT ('%',:ten,'%') and ncc.trangThai = :tt "
+                + "order by ncc.ma DESC" );
+       query.setParameter("ten", ten);
+       query.setParameter("tt", tt);
+        List<NhaCungCapCustom> list = query.getResultList();
+        return list;
+    }
+        public List<NhaCungCapCustom> getListByEmaill(String ma, KhachHangConstant  tt) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("SELECT new cores.truongPhongs.customModels.NhaCungCapCustom("
+                + "ncc.id as id,"
+                + "ncc.ma as ma,"
+                + "ncc.ten as ten,"
+                + "ncc.diaChi as diaChi,"
+                + "ncc.email as email,"
+                + "ncc.sdt as sdt,"
+                + "ncc.danhGia as danhGia,"
+                + "ncc.trangThai as trangThai"
+                + ") FROM domainModels.NhaCungCap ncc WHERE ncc.email like CONCAT ('%',:ma,'%') and ncc.trangThai = :tt "
+                + "order by ncc.ma DESC" );
+       query.setParameter("ma", ma);
+       query.setParameter("tt", tt);
+        List<NhaCungCapCustom> list = query.getResultList();
+        return list;
+    }
+          public List<NhaCungCapCustom> getListBySdtt(String ma, KhachHangConstant  tt) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("SELECT new cores.truongPhongs.customModels.NhaCungCapCustom("
+                + "ncc.id as id,"
+                + "ncc.ma as ma,"
+                + "ncc.ten as ten,"
+                + "ncc.diaChi as diaChi,"
+                + "ncc.email as email,"
+                + "ncc.sdt as sdt,"
+                + "ncc.danhGia as danhGia,"
+                + "ncc.trangThai as trangThai"
+                + ") FROM domainModels.NhaCungCap ncc WHERE ncc.sdt like CONCAT ('%',:ma,'%') and ncc.trangThai = :tt "
+                + "order by ncc.ma DESC" );
+       query.setParameter("ma", ma);
+       query.setParameter("tt", tt);
+        List<NhaCungCapCustom> list = query.getResultList();
+        return list;
+    }
 }

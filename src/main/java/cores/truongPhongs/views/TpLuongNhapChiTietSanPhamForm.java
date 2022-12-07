@@ -123,7 +123,7 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
                 sp.getSanPham().getMa(),
                 sp.getSanPham().getTen(),
                 sp.getSoLuongTon(),
-              formatter.format(sp.getGiaNhap()),
+                formatter.format(sp.getGiaNhap()),
                 sp.getDonVi().getDonViGoc(),
                 Converter.trangThaiMauSac(sp.getMau()),
                 sp.getSize(),
@@ -189,14 +189,14 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
         return listTimKiem;
     }
 
-    public void searchRadio() {
-        if (rdoMaSanPham.isSelected()) {
-            loadTableNcc(listSearch(0));
-        }
-        if (rdoTenSanPham.isSelected()) {
-            loadTableNcc(listSearch(1));
-        }
-    }
+//    public void searchRadio() {
+//        if (rdoMaSanPham.isSelected()) {
+//            loadTableNcc(listSearch(0));
+//        }
+//        if (rdoTenSanPham.isSelected()) {
+//            loadTableNcc(listSearch(1));
+//        }
+//    }
 
     public void timKiemTheoGia() {
         if (txtGiaFrom.getText().trim().length() == 0) {
@@ -676,7 +676,7 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
 
     private void cbbTrangThaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbTrangThaiActionPerformed
         // TODO add your handling code here:
-        searchRadio();
+        loadTableNcc(checkCbb(ctspService.locTt(cbbTrangThai.getSelectedIndex()))) ;
 
     }//GEN-LAST:event_cbbTrangThaiActionPerformed
 
@@ -737,9 +737,10 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
 //        }
 //        listCTSP = luongService.getListCTSanPhamBanHang(new BigDecimal(txtGiaFrom.getText()), new BigDecimal(txtGiaTo.getText()));
 //        loadTable(listCTSP);
-        searchRadio();
+//        searchRadio();
+        searchhRadio();
         timKiemTheoGia();
-        
+
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnAddNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddNewActionPerformed
@@ -751,10 +752,27 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_rdoTenSanPhamActionPerformed
 
+    public List<TpXemChiTietSanPhamCustom> getListByTT(int rdo) {
+        String timKiem = this.txtSearch.getText();
+        listSp = ctspService.findAllByKhAndNV(timKiem, ctspService.locTt(cbbTrangThai.getSelectedIndex()), rdo);
+        return listSp;
+    }
+
+    public void searchhRadio() {
+        if (rdoMaSanPham.isSelected()) {
+            loadTableNcc(getListByTT(0));
+        }
+        if (rdoTenSanPham.isSelected()) {
+            loadTableNcc(getListByTT(1));
+        }
+    }
     private void txtSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSearchMouseClicked
         // TODO add your handling code here:
-        searchRadio();
-        timKiemTheoGia();
+//        searchRadio();
+//        timKiemTheoGia();
+        searchhRadio();
+        
+
     }//GEN-LAST:event_txtSearchMouseClicked
 
     private void lbHinhAnhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbHinhAnhMouseClicked
