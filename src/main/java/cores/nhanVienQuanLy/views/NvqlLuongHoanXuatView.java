@@ -114,7 +114,6 @@ public class NvqlLuongHoanXuatView extends javax.swing.JPanel {
         btnCtPhieuXuat = new utilities.palette.MyButton();
         btnCreatPhieuXuat = new utilities.palette.MyButton();
         btnChiTietSP = new utilities.palette.MyButton();
-        btnChiTietSP1 = new utilities.palette.MyButton();
         btnShow = new utilities.palette.MyButton();
         btnPre = new utilities.palette.UWPButton();
         txtIndex = new javax.swing.JLabel();
@@ -234,18 +233,6 @@ public class NvqlLuongHoanXuatView extends javax.swing.JPanel {
             }
         });
 
-        btnChiTietSP1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/bill.png"))); // NOI18N
-        btnChiTietSP1.setToolTipText("In bill phiếu hoàn xuất");
-        btnChiTietSP1.setBorderColor(new java.awt.Color(221, 242, 244));
-        btnChiTietSP1.setColor(new java.awt.Color(221, 242, 244));
-        btnChiTietSP1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnChiTietSP1.setRadius(50);
-        btnChiTietSP1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnChiTietSP1ActionPerformed(evt);
-            }
-        });
-
         btnShow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Show.png"))); // NOI18N
         btnShow.setToolTipText("Hiện thị danh sách phiếu hoàn xuất");
         btnShow.setBorderColor(new java.awt.Color(221, 242, 244));
@@ -269,9 +256,7 @@ public class NvqlLuongHoanXuatView extends javax.swing.JPanel {
                 .addComponent(btnCtPhieuXuat, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnChiTietSP, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnChiTietSP1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addGap(135, 135, 135)
                 .addComponent(btnShow, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(52, Short.MAX_VALUE))
         );
@@ -281,14 +266,11 @@ public class NvqlLuongHoanXuatView extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(panelRound15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnShow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnChiTietSP1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnChiTietSP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnCreatPhieuXuat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnCtPhieuXuat, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
-
-        btnChiTietSP1.getAccessibleContext().setAccessibleDescription("Xuất phiếu xuất");
 
         btnPre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/skip-previous-circle-solid-24.png"))); // NOI18N
         btnPre.addActionListener(new java.awt.event.ActionListener() {
@@ -680,10 +662,6 @@ public class NvqlLuongHoanXuatView extends javax.swing.JPanel {
         txtTienThua.setText(tongTien + "");
     }//GEN-LAST:event_txtNhapTienCaretUpdate
 
-    private void btnChiTietSP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChiTietSP1ActionPerformed
-
-    }//GEN-LAST:event_btnChiTietSP1ActionPerformed
-
     private void btnShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowActionPerformed
         listPHX = luongHXService.getListPHX();
         loadTable(luongHXService.phanTrang(listPHX, offset, limit));
@@ -712,7 +690,6 @@ public class NvqlLuongHoanXuatView extends javax.swing.JPanel {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private utilities.palette.MyButton btnChiTietSP;
-    private utilities.palette.MyButton btnChiTietSP1;
     private utilities.palette.MyButton btnCreatPhieuXuat;
     private utilities.palette.MyButton btnCtPhieuXuat;
     private utilities.palette.UWPButton btnNext;

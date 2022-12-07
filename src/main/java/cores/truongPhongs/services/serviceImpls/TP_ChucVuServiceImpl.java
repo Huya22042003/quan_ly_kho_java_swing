@@ -69,7 +69,7 @@ public class TP_ChucVuServiceImpl implements TP_ChucVuService {
         if (cv.getTen().trim().length() == 0) {
             erroTen.setText("Tên không được để trống");
             check = false;
-        } else if (cv.getTen().trim().matches("\\d+")) {
+        } else if (cv.getTen().trim().matches("[A-Z a-z]+")) {
             erroTen.setText("Tên phải là kiểu chữ");
             check = false;
         } else {

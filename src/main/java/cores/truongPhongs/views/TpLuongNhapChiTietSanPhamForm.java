@@ -12,6 +12,7 @@ import infrastructures.constant.MauConstant;
 import infrastructures.constant.TrangThaiSanPhamConstanst;
 import java.io.File;
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -21,6 +22,8 @@ import javax.swing.table.DefaultTableModel;
 import utilities.Converter;
 import utilities.MsgBox;
 import utilities.Page;
+import utilities.palette.SearchCustom.EventCallBack;
+import utilities.palette.SearchCustom.EventTextField;
 
 /**
  *
@@ -59,6 +62,26 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
         loadTableNcc(ctspService.phanTrang(listSp, offset, limit));
         rdoMaSanPham.setSelected(true);
         cbbTrangThai.setSelectedIndex(0);
+        txtSearch.addEvent(new EventTextField() {
+            @Override
+            public void onPressed(EventCallBack call) {
+                //  Test
+                try {
+                    for (int i = 1; i <= 100; i++) {
+
+                        Thread.sleep(5);
+                    }
+                    call.done();
+                } catch (Exception e) {
+                    System.err.println(e);
+                }
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+        });
     }
 
     public TpLuongNhapChiTietSanPhamForm(UUID id) {
@@ -68,9 +91,30 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
         p = new Page();
         sizes = listSp.size();
         loadTableNcc(ctspService.phanTrang(listSp, offset, limit));
+        txtSearch.addEvent(new EventTextField() {
+            @Override
+            public void onPressed(EventCallBack call) {
+                //  Test
+                try {
+                    for (int i = 1; i <= 100; i++) {
+
+                        Thread.sleep(5);
+                    }
+                    call.done();
+                } catch (Exception e) {
+                    System.err.println(e);
+                }
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+        });
     }
 
     private void loadTableNcc(List<TpXemChiTietSanPhamCustom> list) {
+        DecimalFormat formatter = new DecimalFormat("###,###,##0 VNĐ");
         DefaultTableModel dtm = (DefaultTableModel) this.tblCtsp.getModel();
         dtm.setRowCount(0);
         for (TpXemChiTietSanPhamCustom sp : list) {
@@ -79,7 +123,7 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
                 sp.getSanPham().getMa(),
                 sp.getSanPham().getTen(),
                 sp.getSoLuongTon(),
-                sp.getGiaNhap(),
+                formatter.format(sp.getGiaNhap()),
                 sp.getDonVi().getDonViGoc(),
                 Converter.trangThaiMauSac(sp.getMau()),
                 sp.getSize(),
@@ -145,14 +189,14 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
         return listTimKiem;
     }
 
-    public void searchRadio() {
-        if (rdoMaSanPham.isSelected()) {
-            loadTableNcc(listSearch(0));
-        }
-        if (rdoTenSanPham.isSelected()) {
-            loadTableNcc(listSearch(1));
-        }
-    }
+//    public void searchRadio() {
+//        if (rdoMaSanPham.isSelected()) {
+//            loadTableNcc(listSearch(0));
+//        }
+//        if (rdoTenSanPham.isSelected()) {
+//            loadTableNcc(listSearch(1));
+//        }
+//    }
 
     public void timKiemTheoGia() {
         if (txtGiaFrom.getText().trim().length() == 0) {
@@ -214,7 +258,6 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
         panelRound6 = new utilities.palette.PanelRound();
         jButton2 = new javax.swing.JButton();
         btnHienThi1 = new utilities.palette.MyButton();
-        myButton1 = new utilities.palette.MyButton();
         btnSearch = new utilities.palette.MyButton();
         txtGiaFrom = new utilities.palette.TextField();
         txtGiaTo = new utilities.palette.TextField();
@@ -454,13 +497,6 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
             }
         });
 
-        myButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/delete_2.png"))); // NOI18N
-        myButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                myButton1ActionPerformed(evt);
-            }
-        });
-
         btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Search.png"))); // NOI18N
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -497,9 +533,7 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
                 .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnHienThi1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(myButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnAddNew, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -512,7 +546,6 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
                 .addGroup(panelRound6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAddNew, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelRound6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(myButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnHienThi1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(panelRound6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -643,7 +676,7 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
 
     private void cbbTrangThaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbTrangThaiActionPerformed
         // TODO add your handling code here:
-        searchRadio();
+        loadTableNcc(checkCbb(ctspService.locTt(cbbTrangThai.getSelectedIndex()))) ;
 
     }//GEN-LAST:event_cbbTrangThaiActionPerformed
 
@@ -697,13 +730,6 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
         loadTableNcc(ctspService.phanTrang(listSp, offset, limit));
     }//GEN-LAST:event_btnHienThi1ActionPerformed
 
-    private void myButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton1ActionPerformed
-//        txtGiaFrom.setText("");
-//        txtGiaTo.setText("");
-//        listCTSP = luongService.getListCTSanPham();
-//        loadTable(listCTSP);
-    }//GEN-LAST:event_myButton1ActionPerformed
-
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
 //        if (txtGiaFrom.getText().trim().length() == 0 || txtGiaTo.getText().trim().length() == 0) {
 //            MsgBox.alert(this, "Bạn phải nhập khoảng giá tìm kiếm");
@@ -711,6 +737,10 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
 //        }
 //        listCTSP = luongService.getListCTSanPhamBanHang(new BigDecimal(txtGiaFrom.getText()), new BigDecimal(txtGiaTo.getText()));
 //        loadTable(listCTSP);
+//        searchRadio();
+        searchhRadio();
+        timKiemTheoGia();
+
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnAddNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddNewActionPerformed
@@ -722,10 +752,27 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_rdoTenSanPhamActionPerformed
 
+    public List<TpXemChiTietSanPhamCustom> getListByTT(int rdo) {
+        String timKiem = this.txtSearch.getText();
+        listSp = ctspService.findAllByKhAndNV(timKiem, ctspService.locTt(cbbTrangThai.getSelectedIndex()), rdo);
+        return listSp;
+    }
+
+    public void searchhRadio() {
+        if (rdoMaSanPham.isSelected()) {
+            loadTableNcc(getListByTT(0));
+        }
+        if (rdoTenSanPham.isSelected()) {
+            loadTableNcc(getListByTT(1));
+        }
+    }
     private void txtSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSearchMouseClicked
         // TODO add your handling code here:
-        searchRadio();
-        timKiemTheoGia();
+//        searchRadio();
+//        timKiemTheoGia();
+        searchhRadio();
+        
+
     }//GEN-LAST:event_txtSearchMouseClicked
 
     private void lbHinhAnhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbHinhAnhMouseClicked
@@ -763,6 +810,7 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
     private void loadIndex() {
         this.txtIndex.setText(String.valueOf(index) + " / " + (Math.round((sizes / limit) + 0.5)));
     }
+
     /**
      * @param args the command line arguments
      */
@@ -814,7 +862,6 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private utilities.palette.MyButton lbHinhAnh;
-    private utilities.palette.MyButton myButton1;
     private utilities.palette.PanelRound panelRound1;
     private utilities.palette.PanelRound panelRound4;
     private utilities.palette.PanelRound panelRound5;

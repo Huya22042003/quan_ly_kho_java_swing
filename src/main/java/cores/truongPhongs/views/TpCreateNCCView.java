@@ -278,6 +278,16 @@ public class TpCreateNCCView extends javax.swing.JFrame {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         NhaCungCapCustom ncc = this.getFormData();
+        for (NhaCungCapCustom check : nccService.getList()) {
+            if(check.getEmail().equalsIgnoreCase(ncc.getEmail())){
+                erroEmail.setText("Email này đã tồn tại!");
+                return;
+            }
+            if(check.getSdt().equalsIgnoreCase(ncc.getSdt())){
+                errSdt.setText("Số điện thoại này đã tồn tại!");
+                return;
+            }
+        }
         if (ncc == null) {
             return;
         }
@@ -333,7 +343,7 @@ public class TpCreateNCCView extends javax.swing.JFrame {
             errSdt.setText("");
         }
         
-        String regex = "^[A-Za-z0-9+_.-]+@fpt.edu.vn$";
+        String regex = "^[A-Za-z0-9]+[A-Za-z0-9]*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)$";
         if (!txtEmail.getText().matches(regex)) {
             erroEmail.setText("Email khong đúng định dạng");
             check =false;

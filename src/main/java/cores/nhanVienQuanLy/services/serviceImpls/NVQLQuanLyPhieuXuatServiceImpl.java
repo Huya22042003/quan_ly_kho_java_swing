@@ -153,6 +153,8 @@ public class NVQLQuanLyPhieuXuatServiceImpl implements NVQLQuanLyPhieuXuatServic
                 return rp.findAllByIdNhanVien(ma, tt);
             case 1:
                 return rp.findAllByIdKhachHang(ma, tt);
+            case 2:
+                return rp.findAllByIdPhieu(ma, tt);
             default:
                 return rp.findAllByIdKhachHang("", tt);
         }
@@ -162,10 +164,10 @@ public class NVQLQuanLyPhieuXuatServiceImpl implements NVQLQuanLyPhieuXuatServic
 //    public List<PhieuXuatCustom> findByMaAndTT(UUID id, TrangThaiPhieuConstant tt) {
 //        return rp.findAllByIdPhieu(id, tt);
 //    }
-    @Override
-    public List<PhieuXuatCustom> findByMa(UUID id) {
-        return rp.findAllByIdPhieu(id);
-    }
+//    @Override
+//    public List<PhieuXuatCustom> findByMa(UUID id) {
+//        return rp.findAllByIdPhieu(id);
+//    }
 
     @Override
     public List<PhieuXuatCustom> getListDaThanhToan() {

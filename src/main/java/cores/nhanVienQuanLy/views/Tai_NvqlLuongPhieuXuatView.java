@@ -33,6 +33,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -64,6 +65,7 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
     private ExportSanPhamService esps;
     private ChiTietSanPhamService serviceCam;
     private ConcurrentHashMap<UUID, ChiTietSanPhamCustom> map;
+    private DecimalFormat formatter = new DecimalFormat("###,###,##0 VNĐ");
 
     private WebcamPanel jpanl = null;
     private Webcam webcam1;
@@ -111,7 +113,10 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
                 el.getId(),
                 simpleDateFormat.format(ngayNhan),
                 el.getNgayThanhToan() == null ? "Chưa thanh toán" : simpleDateFormat.format(el.getNgayThanhToan()),
-                Converter.TrangThaiPhieuXuat(el.getTrangThai()),};
+                Converter.TrangThaiPhieuXuat(el.getTrangThai()),
+                el.getNhanVien().getTen(),
+                el.getKhachHang().getTen()
+            };
             dtm.addRow(rowData);
         }
     }
@@ -482,7 +487,7 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
 
             },
             new String [] {
-                "STT", "Mã phiếu", "Ngày tạo", "Ngày thanh toán", "Trạng thái"
+                "STT", "Mã phiếu", "Ngày tạo", "Ngày thanh toán", "Trạng thái", "Nhân viên", "Khách hàng"
             }
         ));
         tblPhieuXuat.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -862,7 +867,7 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
         panelRound3Layout.setHorizontalGroup(
             panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound3Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
+                .addGap(35, 35, 35)
                 .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelRound3Layout.createSequentialGroup()
                         .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -879,7 +884,7 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
                             .addComponent(txtTienPhaitra, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(textAreaScroll1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
                             .addComponent(txtTienKhachDua, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap(51, Short.MAX_VALUE))))
+                        .addContainerGap(27, Short.MAX_VALUE))))
             .addGroup(panelRound3Layout.createSequentialGroup()
                 .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelRound3Layout.createSequentialGroup()
@@ -1002,7 +1007,7 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
                                 .addGap(6, 6, 6)
                                 .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(panelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, 623, Short.MAX_VALUE))
+                                .addComponent(panelRound4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(panelRound1Layout.createSequentialGroup()
                                 .addComponent(panelRound15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -1018,7 +1023,7 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(panelRound1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(panelRound10, javax.swing.GroupLayout.PREFERRED_SIZE, 865, Short.MAX_VALUE)
+                        .addComponent(panelRound10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(panelRound3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -1311,7 +1316,7 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
 
         double tienThua = tienKhach - Double.valueOf(tienPhaiTra);
         int tien = (int) tienThua;
-        txtTienThua.setText(tien + "");
+        txtTienThua.setText(formatter.format(tien) + "");
     }//GEN-LAST:event_txtTienKhachDuaCaretUpdate
 
     private void btnChiTietSP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChiTietSP1ActionPerformed
@@ -1339,9 +1344,9 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
     private void buttonGradient1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGradient1ActionPerformed
         searchRadio();
 
-        if (rdoMa.isSelected()) {
-            listPhieuXuat = phieuXuatService.findByMa(UUID.fromString(txtTimKiem.getText()));
-        }
+//        if (rdoMa.isSelected()) {
+//            listPhieuXuat = phieuXuatService.findByMa(UUID.fromString(txtTimKiem.getText()));
+//        }
         loadTablePhieuXuat(listPhieuXuat);
         if (rdoNgayTao.isSelected() || rdoNgayThanhToan.isSelected()) {
             TimKiemTheoNgay();
@@ -1485,8 +1490,10 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
             loadTablePhieuXuat(getListByTT(0));
         } else if (rdoKhachHang.isSelected()) {
             loadTablePhieuXuat(getListByTT(1));
-        } else {
+        } else if(rdoMa.isSelected()){
             loadTablePhieuXuat(getListByTT(2));
+        }else {
+            loadTablePhieuXuat(getListByTT(3));
         }
     }
 

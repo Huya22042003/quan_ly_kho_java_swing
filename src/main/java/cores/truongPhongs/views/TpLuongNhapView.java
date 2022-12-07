@@ -135,13 +135,12 @@ public class TpLuongNhapView extends javax.swing.JPanel {
                 case 0:
                     search = el.getId().toString();
                     break;
-
-                case 1:
-                    search = el.getTenNcc();
-                    break;
-                case 2:
-                    search = el.getTenNhanVien();
-                    break;
+//                case 1:
+//                    search = el.getTenNcc();
+//                    break;
+//                case 2:
+//                    search = el.getTenNhanVien();
+//                    break;
             }
             for (int i = 0; i <= search.length(); i++) {
                 String newMa = search.substring(0, i);
@@ -177,13 +176,14 @@ public class TpLuongNhapView extends javax.swing.JPanel {
     public void searchRadio() {
         if (rdoMa.isSelected()) {
             loadTablePn(listSearch(0));
-        } else if (rdoNcc.isSelected()) {
-            loadTablePn(listSearch(1));
-        } else {
-            loadTablePn(listSearch(2));
         }
+//        else if (rdoNcc.isSelected()) {
+//            loadTablePn(listSearch(1));
+//        } else {
+//            loadTablePn(listSearch(2));
+//        }
     }
-
+    
     private void loadTablePn(List<TpPhieuNhapCustom> list) {
         DefaultTableModel dtm = (DefaultTableModel) this.tblPhieuNhap.getModel();
         String pattern = "yyyy-MM-dd HH:mm:ss";
@@ -793,6 +793,7 @@ public class TpLuongNhapView extends javax.swing.JPanel {
         // TODO add your handling code here:
         listSearch(this.cbbTrangThai.getSelectedIndex());
         searchRadio();
+        searchhRadio();
     }//GEN-LAST:event_cbbTrangThaiActionPerformed
 
     private void btnThemPhieuNhapMoiActionPerformed(ActionEvent evt) {//GEN-FIRST:event_btnThemPhieuNhapMoiActionPerformed
@@ -844,12 +845,27 @@ public class TpLuongNhapView extends javax.swing.JPanel {
         chonSp.setPhieuNhap(chon());
         chonSp.setVisible(true);
     }//GEN-LAST:event_btnThemSpVaoPhieuActionPerformed
+        
+     public List<TpPhieuNhapCustom> getListByTT(int rdo) {
+        String timKiem = this.txtSearch.getText();
+        listPn = phieuNhapService.findAllByKhAndNV(timKiem, phieuNhapService.loc(cbbTrangThai.getSelectedIndex()), rdo);
+        return listPn;
+    }
 
+    public void searchhRadio() {
+        if (rdoNcc.isSelected()) {
+            loadTablePn(getListByTT(0));
+        } 
+        if (rdoNhanVien.isSelected()) {
+            loadTablePn(getListByTT(1));
+        } 
+    }
     private void txtSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSearchMouseClicked
         // TODO add your handling code here:
-        TimKiemTheoNgay();
+        
+        searchhRadio();
         searchRadio();
-
+        TimKiemTheoNgay();
 
     }//GEN-LAST:event_txtSearchMouseClicked
 
@@ -921,9 +937,11 @@ public class TpLuongNhapView extends javax.swing.JPanel {
         if (rdoNgayTao.isSelected()) {
             listPn = phieuNhapService.getListByNgayTao(ngayBatDau.getDate().getTime(), ngayKetThuc.getDate().getTime());
             loadTablePn(listPn);
+            searchRadio();
         } else {
             listPn = phieuNhapService.getListByNgayThanhToan(ngayBatDau.getDate().getTime(), ngayKetThuc.getDate().getTime());
             loadTablePn(listPn);
+            searchRadio();
         }
     }
 

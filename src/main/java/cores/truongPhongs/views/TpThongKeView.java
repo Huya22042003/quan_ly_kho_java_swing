@@ -136,12 +136,12 @@ public class TpThongKeView extends javax.swing.JPanel {
         if (rdoMaHD.isSelected()) {
             loadTableHD(listSearch1(0));
         }
-        if (rdoMaNv.isSelected()) {
-            loadTableHD(listSearch1(1));
-        }
-        if (rdoTenNv.isSelected()) {
-            loadTableHD(listSearch1(2));
-        }
+//        if (rdoMaNv.isSelected()) {
+//            loadTableHD(listSearch1(1));
+//        }
+//        if (rdoTenNv.isSelected()) {
+//            loadTableHD(listSearch1(2));
+//        }
     }
 
     @SuppressWarnings("unchecked")
@@ -697,8 +697,24 @@ public class TpThongKeView extends javax.swing.JPanel {
         listSp = khoService.getListByNgayThanhToan(ngayBatDau.getDate().getTime(), ngayKetThuc.getDate().getTime());
         loadTableHD(listSp);
     }
+    public List<TpThongKeSpCustom> getListByTT(int rdo) {
+        String timKiem = this.txtSearch1.getText();
+        listSp=  khoService.findAllByKhAndNV(timKiem,  rdo);
+        return listSp;
+    }
+
+    public void searchhRadio() {
+        
+     if (rdoMaNv.isSelected()) {
+            loadTableHD(getListByTT(0));
+        }
+     if(rdoTenNv.isSelected()){
+            loadTableHD(getListByTT(1));
+        }
+    }
     private void txtSearch1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSearch1MouseClicked
         searchRadio1();
+        searchhRadio();
         searchTheoNgay();
 
     }//GEN-LAST:event_txtSearch1MouseClicked

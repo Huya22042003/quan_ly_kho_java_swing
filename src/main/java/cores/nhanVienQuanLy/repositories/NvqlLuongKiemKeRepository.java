@@ -41,12 +41,20 @@ public class NvqlLuongKiemKeRepository {
             t.rollback(); //hoàn lại kết quả
         }
     }
-    public boolean updateTrangThai(PhieuKiemKe phieuKiemKe){
+public boolean updateTrangThai(PhieuKiemKe phieuKiemKe){
         Session s = HibernateUtil.getSessionFactory().openSession();
         try {
-            Transaction transaction = null;
-            transaction = s.beginTransaction();
+            Transaction transaction = s.beginTransaction();
             s.update(phieuKiemKe);
+            Query q = s.createNativeQuery("""
+                                          UPDATE chitietsanpham
+                                          SET TrangThai = :trangThai 
+                                          WHERE Id IN 
+                                          (SELECT IdChiTietSP FROM chitietphieukiemke WHERE idphieukiemke = :idPhieuKiem)
+                                          """);
+            q.setParameter("trangThai", 1);
+            q.setParameter("idPhieuKiem", phieuKiemKe.getId());
+            q.executeUpdate();
             transaction.commit();
             s.close();
         } catch (Exception e) {

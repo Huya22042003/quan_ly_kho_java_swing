@@ -107,6 +107,31 @@ public class TP_KhachHangRepository {
         }
         return csc;
     }
+    public TP_KhachHangCustom findByEmail(String email) {
+        TP_KhachHangCustom csc = new TP_KhachHangCustom();
+        try ( Session s = HibernateUtil.getSessionFactory().openSession()) {
+            Query q = s.createQuery("SELECT new cores.truongPhongs.customModels.TP_KhachHangCustom ("
+                    + "k.id as id, "
+                    + "k.ma as ma, "
+                    + "k.ten as ten,"
+                    + "k.sdt as sdt,"
+                    + "k.email as email,"
+                    + "k.matKhau as matKhau,"
+                    + "k.ngaySinh as ngaySinh,"
+                    + "k.hinhAnh as hinhAnh,"
+                    + "k.gioiTinh as gioiTinh,"
+                    + "k.diaChi as diaChi,"
+                    + "k.danhGia as danhGia,"
+                    + "k.trangThai as trangThai"
+                    + ") FROM domainModels.KhachHang k WHERE k.email = :email");
+            q.setParameter("email", email);
+            csc = (TP_KhachHangCustom) q.getSingleResult();
+        } catch (NoResultException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return csc;
+    }
 
     // cách tìm kiếm thứ 2
     public List<TP_KhachHangCustom> findAllByTen(String ten, KhachHangConstant tt) {
@@ -180,4 +205,5 @@ public class TP_KhachHangRepository {
         s.close();
         return list;
     }
+    
 }

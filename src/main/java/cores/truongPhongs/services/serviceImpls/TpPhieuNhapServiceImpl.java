@@ -154,4 +154,18 @@ public class TpPhieuNhapServiceImpl implements TpPhieuNhapService {
         return repo.getListPnById(ghiChu);
     }
 
+   
+
+    @Override
+    public List<TpPhieuNhapCustom> findAllByKhAndNV(String ma, TrangThaiPhieuConstant tt, int rdo) {
+            switch (rdo) {
+            case 0:
+                return repo.getListByTenNcc(ma, tt);
+            case 1:
+                return repo.getListByTenNv(ma, tt);
+            default:
+                return repo.getListByTenNv("", tt);
+        }
+    }
+
 }

@@ -9,6 +9,7 @@ import cores.nhanVienQuanLy.services.serviceImpls.NvqlLuongKiemKeCtpkServiceImpl
 import cores.nhanVienQuanLy.services.serviceImpls.NvqlLuongKiemKeCtspServiceImpl;
 import domainModels.ChiTietSanPham;
 import domainModels.PhieuKiemKe;
+import infrastructures.constant.TrangThaiSanPhamConstanst;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +46,7 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
     public void PhieuKiemKe(NvqlLuongKiemKeCustom phieu) {
         this.phieu = phieu;
     }
-
+    
     public NvqlKiemKeCtspView() {
         p = new Page();
         initComponents();
@@ -512,6 +513,15 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
     public NvqlLuongKiemKeCtspCustom mouseClickSanPham(int row) {
         return listChiTietSanPham.get(row);
     }
+    public NvqlLuongKiemKeCtspCustom chon(){
+        int rowSp = this.tbSanPham.getSelectedRow();
+        if(rowSp == -1){
+            return null;
+        }
+        NvqlLuongKiemKeCtspCustom nvqlLuongKiemKeCtspCustom = new NvqlLuongKiemKeCtspCustom();
+        nvqlLuongKiemKeCtspCustom.setId(listChiTietSanPham.get(rowSp).getId());
+        return nvqlLuongKiemKeCtspCustom;
+    }
     private void tbSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSanPhamMouseClicked
         int rowSp = this.tbSanPham.getSelectedRow();
         txtMa.setText(tbSanPham.getValueAt(rowSp, 1).toString());
@@ -553,6 +563,7 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
                     hihi
             );
             nvqlLuongKiemKeCtspCustom.setSoLuongTon(a);
+            nvqlLuongKiemKeCtspCustom.setTrangThai(TrangThaiSanPhamConstanst.CHO_XAC_NHAN);
             ctspService.updateSoLuong(nvqlLuongKiemKeCtspCustom);
 
             ctpkService.addCTPK(ct);

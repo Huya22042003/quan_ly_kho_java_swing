@@ -98,4 +98,31 @@ public class TpThongKeRepository {
         return list;
     }
 
+    public List<TpThongKeSpCustom> getListByMaNv(String ma) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("Select new cores.truongPhongs.customModels.TpThongKeSpCustom( "
+                + "m.idPhieuXuat as idPhieuXuat,"
+                + "m.idChiTietSp as idCtsp,"
+                + "m.soLuong as soLuong "
+                + ") from domainModels.ChiTietPhieuXuat m WHERE m.idPhieuXuat.nhanVien.ma like CONCAT ('%',:ma,'%') "
+                + "order by m.soLuong DESC");
+        query.setParameter("ma", ma);
+
+        List<TpThongKeSpCustom> list = query.getResultList();
+        return list;
+    }
+
+    public List<TpThongKeSpCustom> getListByTenNv(String ma) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("Select new cores.truongPhongs.customModels.TpThongKeSpCustom( "
+                + "m.idPhieuXuat as idPhieuXuat,"
+                + "m.idChiTietSp as idCtsp,"
+                + "m.soLuong as soLuong "
+                + ") from domainModels.ChiTietPhieuXuat m WHERE m.idPhieuXuat.nhanVien.ten like CONCAT ('%',:ma,'%') "
+                + "order by m.soLuong DESC");
+        query.setParameter("ma", ma);
+
+        List<TpThongKeSpCustom> list = query.getResultList();
+        return list;
+    }
 }
