@@ -15,6 +15,7 @@ import utilities.palette.Combobox;
 
 import cores.truongPhongs.repositories.TP_KhachHangRepository;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class TP_KhachHangServiceImpl implements TP_KhachHangService {
 
@@ -137,6 +138,9 @@ public class TP_KhachHangServiceImpl implements TP_KhachHangService {
         if (kh.getEmail().trim().length() == 0) {
             erroEmail.setText("Email không được để trống");
             check = false;
+        } else if (findByEmail(kh.getEmail().trim()) != null) {
+            erroEmail.setText("Email trùng");
+            check = false;
         } else if (!kh.getEmail().trim().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
             erroEmail.setText("Email sai định dạng");
             check = false;
@@ -146,9 +150,6 @@ public class TP_KhachHangServiceImpl implements TP_KhachHangService {
 
         if (kh.getDiaChi().trim().length() == 0) {
             erroDiaChi.setText("Địa chỉ không được để trống");
-            check = false;
-        } else if (!kh.getDiaChi().trim().matches("^[A-Z a-z 0-9]+$")) {
-            erroDiaChi.setText("Địa chỉ sai định dạng");
             check = false;
         } else {
             erroDiaChi.setText("");
@@ -166,6 +167,9 @@ public class TP_KhachHangServiceImpl implements TP_KhachHangService {
 
         if (kh.getNgaySinh() == null) {
             erroNgaySinh.setText("Bạn phải chọn ngày sinh");
+            check = false;
+        } else if (kh.getNgaySinh() > new Date().getTime() ) {
+            erroNgaySinh.setText("Ngày sinh quá hiện tại ");
             check = false;
         } else {
             erroNgaySinh.setText("");
@@ -253,5 +257,10 @@ public class TP_KhachHangServiceImpl implements TP_KhachHangService {
             listPhanTrang.add(el);
         }
         return listPhanTrang;
+    }
+
+    @Override
+    public TP_KhachHangCustom findByEmail(String email) {
+        return rp.findByEmail(email);
     }
 }
