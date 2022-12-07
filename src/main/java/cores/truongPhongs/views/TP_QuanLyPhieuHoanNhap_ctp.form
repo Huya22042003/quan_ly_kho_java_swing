@@ -67,18 +67,18 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="831" max="-2" attributes="0"/>
-                  <EmptySpace pref="24" max="32767" attributes="0"/>
+                  <EmptySpace pref="19" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="102" max="32767" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="262" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
+                  <EmptySpace pref="99" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -172,10 +172,10 @@
                               <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                                   <Component id="txtTenSp" alignment="0" max="32767" attributes="0"/>
                                   <Component id="txtMa" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="txtSoLuongNhap" alignment="0" min="-2" pref="281" max="-2" attributes="0"/>
+                                  <Component id="txtSoLuongHoan" alignment="0" min="-2" pref="281" max="-2" attributes="0"/>
                                   <Component id="txtMau" alignment="0" max="32767" attributes="0"/>
                               </Group>
-                              <Component id="txtSoLuongHoan" alignment="0" min="-2" pref="281" max="-2" attributes="0"/>
+                              <Component id="txtSoLuongNhanLai" alignment="0" min="-2" pref="281" max="-2" attributes="0"/>
                               <Component id="txtGiaNhap" alignment="0" min="-2" pref="281" max="-2" attributes="0"/>
                               <Component id="errorSoLuong" alignment="0" min="-2" pref="272" max="-2" attributes="0"/>
                           </Group>
@@ -201,11 +201,11 @@
                   <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                   <Component id="txtMau" min="-2" pref="46" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                  <Component id="txtSoLuongNhap" min="-2" pref="46" max="-2" attributes="0"/>
+                  <Component id="txtSoLuongHoan" min="-2" pref="46" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                   <Component id="txtGiaNhap" min="-2" pref="46" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="txtSoLuongHoan" min="-2" pref="46" max="-2" attributes="0"/>
+                  <Component id="txtSoLuongNhanLai" min="-2" pref="46" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="errorSoLuong" min="-2" pref="28" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
@@ -251,7 +251,7 @@
             <Property name="labelText" type="java.lang.String" value="T&#xea;n SP"/>
           </Properties>
         </Component>
-        <Component class="utilities.palette.TextField" name="txtSoLuongNhap">
+        <Component class="utilities.palette.TextField" name="txtSoLuongHoan">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -263,7 +263,7 @@
             <Property name="labelText" type="java.lang.String" value="S&#x1ed1; l&#x1b0;&#x1ee3;ng ho&#xe0;n"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtSoLuongNhapActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtSoLuongHoanActionPerformed"/>
           </Events>
         </Component>
         <Container class="utilities.palette.PanelRound" name="panelRound16">
@@ -359,7 +359,7 @@
             <Property name="labelText" type="java.lang.String" value="M&#xe0;u s&#x1eaf;c"/>
           </Properties>
         </Component>
-        <Component class="utilities.palette.TextField" name="txtSoLuongHoan">
+        <Component class="utilities.palette.TextField" name="txtSoLuongNhanLai">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="e0" green="ce" red="e4" type="rgb"/>
@@ -370,7 +370,7 @@
             <Property name="labelText" type="java.lang.String" value="S&#x1ed1; l&#x1b0;&#x1ee3;ng nh&#x1ead;n l&#x1ea1;i"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtSoLuongHoanActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtSoLuongNhanLaiActionPerformed"/>
           </Events>
         </Component>
         <Component class="utilities.palette.TextField" name="txtGiaNhap">
