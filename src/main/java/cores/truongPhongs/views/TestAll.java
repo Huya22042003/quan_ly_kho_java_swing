@@ -6,6 +6,8 @@ package cores.truongPhongs.views;
 
 import cores.nhanVienQuanLy.views.Tai_NvqlLuongPhieuXuatView;
 import java.awt.FlowLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 /**
  *
@@ -18,7 +20,34 @@ public class TestAll extends javax.swing.JFrame {
      */
     public TestAll() {
         initComponents();
-        TPThongKeBieuDo a = new TPThongKeBieuDo();
+        TpQuanLySanPhamForm a = new TpQuanLySanPhamForm();
+        a.addMouseClickTable(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                a.getRowTable();
+                System.out.println("Nhấm vào bảng chi tiết sản phẩm và lấy ra một dòng bằng cách này nhé ");
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                return;
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                return;
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                return;
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                return;
+            }
+        });
         this.add(a);
         this.setLayout(new FlowLayout());
         this.pack();
