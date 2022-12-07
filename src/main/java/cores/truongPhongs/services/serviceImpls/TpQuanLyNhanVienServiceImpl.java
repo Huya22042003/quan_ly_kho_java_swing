@@ -157,7 +157,7 @@ public class TpQuanLyNhanVienServiceImpl implements TpQuanLyNhanVienSevice {
         if (nv.getTen().trim().length() == 0) {
             erroTen.setText("Tên không được để trống");
             check = false;
-        } else if (!nv.getTen().trim().matches("[A-Z a-z]+")) {
+        } else if (!nv.getTen().trim().matches("^[AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬBCDĐEÈẺẼÉẸÊỀỂỄẾỆFGHIÌỈĨÍỊJKLMNOÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢPQRSTUÙỦŨÚỤƯỪỬỮỨỰVWXYỲỶỸÝỴZ][aàảãáạăằẳẵắặâầẩẫấậbcdđeèẻẽéẹêềểễếệfghiìỉĩíịjklmnoòỏõóọôồổỗốộơờởỡớợpqrstuùủũúụưừửữứựvwxyỳỷỹýỵz]+ [AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬBCDĐEÈẺẼÉẸÊỀỂỄẾỆFGHIÌỈĨÍỊJKLMNOÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢPQRSTUÙỦŨÚỤƯỪỬỮỨỰVWXYỲỶỸÝỴZ][aàảãáạăằẳẵắặâầẩẫấậbcdđeèẻẽéẹêềểễếệfghiìỉĩíịjklmnoòỏõóọôồổỗốộơờởỡớợpqrstuùủũúụưừửữứựvwxyỳỷỹýỵz]+(?: [AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬBCDĐEÈẺẼÉẸÊỀỂỄẾỆFGHIÌỈĨÍỊJKLMNOÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢPQRSTUÙỦŨÚỤƯỪỬỮỨỰVWXYỲỶỸÝỴZ][aàảãáạăằẳẵắặâầẩẫấậbcdđeèẻẽéẹêềểễếệfghiìỉĩíịjklmnoòỏõóọôồổỗốộơờởỡớợpqrstuùủũúụưừửữứựvwxyỳỷỹýỵz]*)*")) {
             erroTen.setText("Tên phải là kiểu chữ");
             check = false;
         } else {
@@ -195,10 +195,12 @@ public class TpQuanLyNhanVienServiceImpl implements TpQuanLyNhanVienSevice {
         if (nv.getDiaChi().trim().length() == 0) {
             erroDiaChi.setText("Địa chỉ không được để trống");
             check = false;
-        } else if (!nv.getDiaChi().trim().matches("^[A-Z a-z 0-9]+$")) {
-            erroDiaChi.setText("Địa chỉ sai định dạng");
-            check = false;
-        } else {
+        } 
+//        else if (!nv.getDiaChi().trim().matches("^[A-Z a-z 0-9]+$")) {
+//            erroDiaChi.setText("Địa chỉ sai định dạng");
+//            check = false;
+//        }
+        else {
             erroDiaChi.setText("");
         }
 
