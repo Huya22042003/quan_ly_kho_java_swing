@@ -171,7 +171,8 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
                 m.getMaPhieuKiem(),
                 simpleDateFormat.format(ngayTao),
                 m.getIdNV().getTen(),
-                Converter.TrangThaiPhieuKiem(m.getTrangThai())
+                Converter.TrangThaiPhieuKiem(m.getTrangThai()),
+                m.getGhiChu() == null ? "Nothing" : m.getGhiChu()
             });
 
         });
@@ -235,7 +236,7 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
 
             },
             new String [] {
-                "STT", "Mã phiếu kiểm", "Ngày tạo", "Tên nhân viên", "Trạng thái"
+                "STT", "Mã phiếu kiểm", "Ngày tạo", "Tên nhân viên", "Trạng thái", "Lí do"
             }
         ));
         tbPhieuKiemKe.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -709,6 +710,10 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Bạn cần chọn 1 phiếu kiểm");
             return;
         }
+//        if (tbPhieuKiemKe.getValueAt(s, 4).toString().equals("Đã xác nhận")) {
+//            JOptionPane.showMessageDialog(this, "Bạn phải chọn một phiếu kiểm chưa xác nhận!");
+//            return;
+//        }
         ctpkView.PhieuKiemKe(chon());
         ctpkView.setVisible(true);
     }//GEN-LAST:event_btnChiTietPhieuKiemActionPerformed
@@ -735,6 +740,10 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
         int s = tbPhieuKiemKe.getSelectedRow();
         if (s == -1) {
             JOptionPane.showMessageDialog(this, "Bạn cần chọn 1 phiếu kiểm");
+            return;
+        }
+        if (tbPhieuKiemKe.getValueAt(s, 4).toString().equals("Đã xác nhận")) {
+            JOptionPane.showMessageDialog(this, "Bạn phải chọn một phiếu kiểm chưa xác nhận!");
             return;
         }
         NvqlKiemKeCtspView create = new NvqlKiemKeCtspView();
@@ -767,6 +776,7 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
         txtNgayTao.setText(ngayTao);
         txtTenNhanVien.setText(tbPhieuKiemKe.getValueAt(s, 3).toString());
         txtTrangThai.setText(tbPhieuKiemKe.getValueAt(s, 4).toString());
+        txtGhiChu.setText(tbPhieuKiemKe.getValueAt(s, 5).toString());
         NvqlLuongKiemKeCustom kiemKeCustom = mouseClickPhieuKiem(s);
         List<NvqlLuongKiemKeCtpkCustom> listCtpk = ctpkService.getAll(listPhieuKiemKeCustom.get(s).getId());
 
@@ -797,7 +807,7 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
             return;
         }
         if (txtGhiChu.getText().equalsIgnoreCase("")) {
-            MsgBox.alert(this, "Ghi chú bắt buộc phải có!!");
+            MsgBox.alert(this, "Lí do bắt buộc phải có!!");
             return;
         }
         if (listPhieuKiemKeCustom.get(row).getTrangThai() == TrangThaiPhieuKiemConstant.DA_XAC_NHAN) {
@@ -806,6 +816,7 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
         }
         NvqlLuongKiemKeCustom a = listPhieuKiemKeCustom.get(row);
         a.setTrangThai(TrangThaiPhieuKiemConstant.DA_XAC_NHAN);
+        a.setGhiChu(txtGhiChu.getText());
         kiemKeService.UpdateTrangThai(a);
         listPhieuKiemKeCustom.set(row, a);
         hienThi();

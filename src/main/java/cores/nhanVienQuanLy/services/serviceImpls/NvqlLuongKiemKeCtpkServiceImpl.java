@@ -48,4 +48,19 @@ public class NvqlLuongKiemKeCtpkServiceImpl implements NvqlLuongKiemKeCtpkServic
         return listPhanTrang;
     }
 
+    @Override
+    public void updateCTPKK(NvqlLuongKiemKeCtpkCustom ctpkCustom) {
+        ChiTietPhieuKiemKe ctpkk = new ChiTietPhieuKiemKe();
+        ctpkk.setIdPhieuKiemKe(ctpkCustom.getIdPhieuKiem());
+        ctpkk.setIdChiTietSp(ctpkCustom.getIdChiTietSanPham());
+        ctpkk.setSoLuongTon(ctpkCustom.getSoLuongTon());
+        ctpkk.setSoLuongThucTon(ctpkCustom.getSoLuongThucTon());
+        rp.updateCTPKK(ctpkk);
+    }
+
+    @Override
+    public boolean updateSoLuongTon(UUID ctsp, int soLuong) {
+        return rp.updateSoLuongTon(ctsp, soLuong);
+    }
+
 }

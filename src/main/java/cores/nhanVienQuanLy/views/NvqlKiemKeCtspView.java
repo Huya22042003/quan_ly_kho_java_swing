@@ -46,32 +46,20 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
     public void PhieuKiemKe(NvqlLuongKiemKeCustom phieu) {
         this.phieu = phieu;
     }
-    
+
     public NvqlKiemKeCtspView() {
         p = new Page();
         initComponents();
         ctpkView = new NvqlKiemKeCtpkView();
         ctspService = new NvqlLuongKiemKeCtspServiceImpl();
         ctpkService = new NvqlLuongKiemKeCtpkServiceImpl();
-        listChiTietSanPham = ctspService.getAll();
-        sizes = listChiTietSanPham.size();
-        fillTableSanPham(ctspService.phanTrang(listChiTietSanPham, offset, limit));
+        clearForm();
     }
 
     public void fillTableSanPham(List<NvqlLuongKiemKeCtspCustom> list) {
         DefaultTableModel model = (DefaultTableModel) tbSanPham.getModel();
         model.setRowCount(0);
-        int sum = limit + offset;
-        if (list.size() <= sum) {
-            sum = list.size();
-        }
-        for (int i = offset; i < sum; i++) {
-            if (list.get(i) == null) {
-                return;
-            }
-
-            NvqlLuongKiemKeCtspCustom m = list.get(i);
-
+        for (NvqlLuongKiemKeCtspCustom m : list) {
             Object[] row = new Object[]{
                 model.getRowCount() + 1,
                 m.getMa(),
@@ -91,12 +79,14 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
     }
 
     private void clearForm() {
-        sizes = listChiTietSanPham.size();
+
         offset = 0;
         index = 1;
-        loadIndex();
+
         listChiTietSanPham = ctspService.getAll();
+        sizes = listChiTietSanPham.size();
         fillTableSanPham(ctspService.phanTrang(listChiTietSanPham, offset, limit));
+        loadIndex();
     }
 
     /**
@@ -513,9 +503,10 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
     public NvqlLuongKiemKeCtspCustom mouseClickSanPham(int row) {
         return listChiTietSanPham.get(row);
     }
-    public NvqlLuongKiemKeCtspCustom chon(){
+
+    public NvqlLuongKiemKeCtspCustom chon() {
         int rowSp = this.tbSanPham.getSelectedRow();
-        if(rowSp == -1){
+        if (rowSp == -1) {
             return null;
         }
         NvqlLuongKiemKeCtspCustom nvqlLuongKiemKeCtspCustom = new NvqlLuongKiemKeCtspCustom();
@@ -530,7 +521,7 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
         txtGiaBan.setText(tbSanPham.getValueAt(rowSp, 7).toString());
         txtMau.setText(tbSanPham.getValueAt(rowSp, 5).toString());
         txtNamBH.setText(tbSanPham.getValueAt(rowSp, 6).toString());
-        
+
         if (rowSp > -1) {
             NvqlLuongKiemKeCtspCustom nvqlLuongKiemKeCtspCustom = mouseClickSanPham(rowSp);
 
