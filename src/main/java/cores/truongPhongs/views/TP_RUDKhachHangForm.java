@@ -67,7 +67,12 @@ public class TP_RUDKhachHangForm extends javax.swing.JFrame {
         csc.setDiaChi(txtDicChi.getText());
         csc.setHinhAnh(duongdananh);
         csc.setMatKhau(txtMatKhau.getText());
-        csc.setNgaySinh(txtDate.getDate().getTime());
+        try {
+            csc.setNgaySinh(txtDate.getDate().getTime());
+        } catch (Exception e) {
+            e.printStackTrace();
+            csc.setNgaySinh(null);
+        }
         csc.setTrangThai(hangService.loc(this.cbbTrangThai.getSelectedIndex()));
         csc.setDanhGia(hangService.loc1(this.cbbDanhGia.getSelectedIndex()));
         csc.setGioiTinh(hangService.loc2(this.cbbGioiTinh.getSelectedIndex()));
@@ -373,7 +378,7 @@ public class TP_RUDKhachHangForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        TP_KhachHangCustom check = hangService.checkValidate(getFormData(), erroMa, erroTen, erroSDT, erroEmail, erroDiaChi, erroMatKhau, erroNgaySinh);
+        TP_KhachHangCustom check = hangService.checkValidate1(getFormData(), erroMa, erroTen, erroSDT, erroEmail, erroDiaChi, erroMatKhau, erroNgaySinh);
         if (check == null) {
             return;
         }

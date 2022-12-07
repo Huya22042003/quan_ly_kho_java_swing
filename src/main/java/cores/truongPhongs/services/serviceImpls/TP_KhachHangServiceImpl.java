@@ -118,8 +118,8 @@ public class TP_KhachHangServiceImpl implements TP_KhachHangService {
         if (kh.getTen().trim().length() == 0) {
             erroTen.setText("Tên không được để trống");
             check = false;
-        } else if (!kh.getTen().trim().matches("[A-Z a-z]+")) {
-            erroTen.setText("Tên phải là kiểu chữ");
+        } else if (!kh.getTen().trim().matches("^[AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬBCDĐEÈẺẼÉẸÊỀỂỄẾỆFGHIÌỈĨÍỊJKLMNOÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢPQRSTUÙỦŨÚỤƯỪỬỮỨỰVWXYỲỶỸÝỴZ][aàảãáạăằẳẵắặâầẩẫấậbcdđeèẻẽéẹêềểễếệfghiìỉĩíịjklmnoòỏõóọôồổỗốộơờởỡớợpqrstuùủũúụưừửữứựvwxyỳỷỹýỵz]+ [AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬBCDĐEÈẺẼÉẸÊỀỂỄẾỆFGHIÌỈĨÍỊJKLMNOÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢPQRSTUÙỦŨÚỤƯỪỬỮỨỰVWXYỲỶỸÝỴZ][aàảãáạăằẳẵắặâầẩẫấậbcdđeèẻẽéẹêềểễếệfghiìỉĩíịjklmnoòỏõóọôồổỗốộơờởỡớợpqrstuùủũúụưừửữứựvwxyỳỷỹýỵz]+(?: [AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬBCDĐEÈẺẼÉẸÊỀỂỄẾỆFGHIÌỈĨÍỊJKLMNOÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢPQRSTUÙỦŨÚỤƯỪỬỮỨỰVWXYỲỶỸÝỴZ][aàảãáạăằẳẵắặâầẩẫấậbcdđeèẻẽéẹêềểễếệfghiìỉĩíịjklmnoòỏõóọôồổỗốộơờởỡớợpqrstuùủũúụưừửữứựvwxyỳỷỹýỵz]*)*")) {
+            erroTen.setText("Tên sai định dạng");
             check = false;
         } else {
             erroTen.setText("");
@@ -262,5 +262,89 @@ public class TP_KhachHangServiceImpl implements TP_KhachHangService {
     @Override
     public TP_KhachHangCustom findByEmail(String email) {
         return rp.findByEmail(email);
+    }
+    @Override
+    public TP_KhachHangCustom checkValidate1(TP_KhachHangCustom kh, JLabel erroMa, JLabel erroTen, JLabel erroSDT, JLabel erroEmail, JLabel erroDiaChi, JLabel erroMatKhau, JLabel erroNgaySinh) {
+        boolean check = true;
+
+        if (kh.getMa() != null) {
+            if (kh.getMa().trim().length() == 0) {
+                erroMa.setText("Mã không được để trống");
+                check = false;
+
+            } else if (!kh.getMa().trim().matches(kh.getMa().toUpperCase())) {
+                erroMa.setText("Mã phải viết hoa");
+                check = false;
+            } else if (findKHByMa(kh.getMa().trim()) != null) {
+                erroMa.setText("Mã đã tồn tại");
+                check = false;
+            } else {
+                erroMa.setText("");
+            }
+        }
+
+        if (kh.getTen().trim().length() == 0) {
+            erroTen.setText("Tên không được để trống");
+            check = false;
+        } else if (!kh.getTen().trim().matches("^[AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬBCDĐEÈẺẼÉẸÊỀỂỄẾỆFGHIÌỈĨÍỊJKLMNOÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢPQRSTUÙỦŨÚỤƯỪỬỮỨỰVWXYỲỶỸÝỴZ][aàảãáạăằẳẵắặâầẩẫấậbcdđeèẻẽéẹêềểễếệfghiìỉĩíịjklmnoòỏõóọôồổỗốộơờởỡớợpqrstuùủũúụưừửữứựvwxyỳỷỹýỵz]+ [AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬBCDĐEÈẺẼÉẸÊỀỂỄẾỆFGHIÌỈĨÍỊJKLMNOÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢPQRSTUÙỦŨÚỤƯỪỬỮỨỰVWXYỲỶỸÝỴZ][aàảãáạăằẳẵắặâầẩẫấậbcdđeèẻẽéẹêềểễếệfghiìỉĩíịjklmnoòỏõóọôồổỗốộơờởỡớợpqrstuùủũúụưừửữứựvwxyỳỷỹýỵz]+(?: [AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬBCDĐEÈẺẼÉẸÊỀỂỄẾỆFGHIÌỈĨÍỊJKLMNOÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢPQRSTUÙỦŨÚỤƯỪỬỮỨỰVWXYỲỶỸÝỴZ][aàảãáạăằẳẵắặâầẩẫấậbcdđeèẻẽéẹêềểễếệfghiìỉĩíịjklmnoòỏõóọôồổỗốộơờởỡớợpqrstuùủũúụưừửữứựvwxyỳỷỹýỵz]*)*")) {
+            erroTen.setText("Tên sai định dạng");
+            check = false;
+        } else {
+            erroTen.setText("");
+        }
+
+        if (kh.getSdt().trim().length() == 0) {
+            erroSDT.setText("Số điện thoại không được để trống");
+            check = false;
+        } else if (!kh.getSdt().trim().matches(ValidateConstant.REGEX_PHONE_NUMBER)) {
+            erroSDT.setText("SĐT sai định dạng");
+            check = false;
+        } else {
+            erroSDT.setText("");
+        }
+
+        if (kh.getEmail().trim().length() == 0) {
+            erroEmail.setText("Email không được để trống");
+            check = false;
+        } else if (!kh.getEmail().trim().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
+            erroEmail.setText("Email sai định dạng");
+            check = false;
+        } else {
+            erroEmail.setText("");
+        }
+
+        if (kh.getDiaChi().trim().length() == 0) {
+            erroDiaChi.setText("Địa chỉ không được để trống");
+            check = false;
+        } else {
+            erroDiaChi.setText("");
+        }
+        if (kh.getMatKhau().trim().length() == 0) {
+            erroMatKhau.setText("Mật khẩu không được để trống");
+            check = false;
+        } else if (!kh.getMatKhau().trim().matches("^[A-Z a-z 0-9]+$")) {
+            erroMatKhau.setText("Mật khẩu sai định dạng");
+            check = false;
+
+        } else {
+            erroMatKhau.setText("");
+        }
+
+        if (kh.getNgaySinh() == null) {
+            erroNgaySinh.setText("Bạn phải chọn ngày sinh");
+            check = false;
+        } else if (kh.getNgaySinh() > new Date().getTime() ) {
+            erroNgaySinh.setText("Ngày sinh quá hiện tại ");
+            check = false;
+        } else {
+            erroNgaySinh.setText("");
+        }
+
+        if (!check) {
+            return null;
+        }
+
+        return kh;
+
     }
 }
