@@ -57,4 +57,8 @@ public interface TpQuanLyChiTietSanPhamService {
     List<TpQuanLyChiTietSanPhamCustom> phanTrang(List<TpQuanLyChiTietSanPhamCustom> list, int offset, int limit);
 
     public TrangThaiSanPhamConstanst tt(int item);
+    
+    List<TpQuanLyChiTietSanPhamCustom> getListGiaNhap(BigDecimal giaBatDau, BigDecimal giaKetThuc);
+    
+    List<TpQuanLyChiTietSanPhamCustom> getListGiaBan(BigDecimal giaBatDau, BigDecimal giaKetThuc);
 }

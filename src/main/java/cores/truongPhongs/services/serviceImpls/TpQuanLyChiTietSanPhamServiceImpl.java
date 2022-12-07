@@ -80,10 +80,6 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
     public List<TpQuanLyChiTietSanPhamCustom> findAllByRadio(int rdo, MauConstant tt, String tk) {
         switch (rdo) {
             case 0:
-                return rp.findAllByGiaNhap(tk, tt);
-            case 1:
-                return rp.findAllByGiaBan(tk, tt);
-            case 2:
                 return rp.findAllByTenSanPham(tk);
             default:
                 return null;
@@ -324,6 +320,16 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
             default:
                 throw new AssertionError();
         }
+    }
+
+    @Override
+    public List<TpQuanLyChiTietSanPhamCustom> getListGiaNhap(BigDecimal giaBatDau, BigDecimal giaKetThuc) {
+        return rp.findAllByGiaNhap(giaBatDau, giaKetThuc);
+    }
+
+    @Override
+    public List<TpQuanLyChiTietSanPhamCustom> getListGiaBan(BigDecimal giaBatDau, BigDecimal giaKetThuc) {
+        return rp.findAllByGiaBan(giaBatDau, giaKetThuc);
     }
 
 }

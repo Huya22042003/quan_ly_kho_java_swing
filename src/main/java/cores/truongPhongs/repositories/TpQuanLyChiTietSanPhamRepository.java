@@ -151,6 +151,53 @@ public class TpQuanLyChiTietSanPhamRepository {
         s.close();
         return list;
     }
+    public List<TpQuanLyChiTietSanPhamCustom> findAllByGiaNhap(BigDecimal giaBatDau, BigDecimal giaKetThuc) {
+        List<TpQuanLyChiTietSanPhamCustom> list = new ArrayList<>();
+        Session s = HibernateUtil.getSessionFactory().openSession();
+        Query q = s.createQuery("select new cores.truongPhongs.customModels.TpQuanLyChiTietSanPhamCustom ("
+                + "ct.id as id,"
+                + "ct.soLuongTon as soLuongTon,"
+                + "ct.hinhAnh as hinhAnh,"
+                + "ct.GiaNhap as GiaNhap,"
+                + "ct.GiaBan as GiaBan,"
+                + "ct.mau as mau,"
+                + "ct.sanPham as ten,"
+                + "ct.donVi as donViGoc,"
+                + "ct.namBaoHanh as namBaoHanh,"
+                + "ct.trangThai as trangThai, "
+                + "ct.size as size,"
+                + "ct.ngayTao as ngayTao"
+                + ") from domainModels.ChiTietSanPham ct WHERE ct.GiaNhap > :giaBatDau AND ct.GiaNhap < :giaKetThuc  ORDER BY ct.GiaNhap DESC");
+        q.setParameter("giaBatDau", giaBatDau);
+        q.setParameter("giaKetThuc", giaKetThuc);
+        list = q.getResultList();
+        s.close();
+        return list;
+    }
+    public List<TpQuanLyChiTietSanPhamCustom> findAllByGiaBan(BigDecimal giaBatDau, BigDecimal giaKetThuc) {
+        List<TpQuanLyChiTietSanPhamCustom> list = new ArrayList<>();
+        Session s = HibernateUtil.getSessionFactory().openSession();
+        Query q = s.createQuery("select new cores.truongPhongs.customModels.TpQuanLyChiTietSanPhamCustom ("
+                + "ct.id as id,"
+                + "ct.soLuongTon as soLuongTon,"
+                + "ct.hinhAnh as hinhAnh,"
+                + "ct.GiaNhap as GiaNhap,"
+                + "ct.GiaBan as GiaBan,"
+                + "ct.mau as mau,"
+                + "ct.sanPham as ten,"
+                + "ct.donVi as donViGoc,"
+                + "ct.namBaoHanh as namBaoHanh,"
+                + "ct.trangThai as trangThai, "
+                + "ct.size as size,"
+                + "ct.ngayTao as ngayTao"
+                + ") from domainModels.ChiTietSanPham ct WHERE ct.GiaBan > :giaBatDau AND ct.GiaBan < :giaKetThuc  ORDER BY ct.GiaBan DESC");
+        q.setParameter("giaBatDau", giaBatDau);
+        q.setParameter("giaKetThuc", giaKetThuc);
+        list = q.getResultList();
+        s.close();
+        return list;
+    }
+    
 
     public List<TpQuanLyChiTietSanPhamCustom> findAllByGiaBan(String giaBan, MauConstant tt) {
         List<TpQuanLyChiTietSanPhamCustom> list = new ArrayList<>();
