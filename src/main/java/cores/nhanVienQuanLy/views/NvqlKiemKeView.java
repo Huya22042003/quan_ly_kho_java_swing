@@ -1,10 +1,13 @@
 package cores.nhanVienQuanLy.views;
 
 import cores.nhanVienQuanLy.customModels.NvqlLuongKiemKeCtpkCustom;
+import cores.nhanVienQuanLy.customModels.NvqlLuongKiemKeCtspCustom;
 import cores.nhanVienQuanLy.customModels.NvqlLuongKiemKeCustom;
 import cores.nhanVienQuanLy.services.NvqlLuongKiemKeCtpkService;
+import cores.nhanVienQuanLy.services.NvqlLuongKiemKeCtspService;
 import cores.nhanVienQuanLy.services.NvqlLuongKiemKeService;
 import cores.nhanVienQuanLy.services.serviceImpls.NvqlLuongKiemKeCtpkServiceImpl;
+import cores.nhanVienQuanLy.services.serviceImpls.NvqlLuongKiemKeCtspServiceImpl;
 import cores.nhanVienQuanLy.services.serviceImpls.NvqlLuongKiemKeServiceImpl;
 import domainModels.NhanVien;
 import infrastructures.constant.TrangThaiPhieuKiemConstant;
@@ -36,7 +39,13 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
     private NvqlKiemKeCtpkView ctpkView;
     private NvqlKiemKeCtspView ctspView;
     private List<NvqlLuongKiemKeCtpkCustom> listCtpkCustom = new ArrayList<>();
+    private NvqlLuongKiemKeCtspService ctspService;
     private Page p;
+    private NvqlLuongKiemKeCtspCustom ctspct;
+    
+    public void SanPham(NvqlLuongKiemKeCtspCustom ctspct){
+        this.ctspct = ctspct;
+    }
 
     private int limit = 7;
 
@@ -54,6 +63,7 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
         initComponents();
         kiemKeService = new NvqlLuongKiemKeServiceImpl();
         ctpkService = new NvqlLuongKiemKeCtpkServiceImpl();
+        ctspService = new NvqlLuongKiemKeCtspServiceImpl();
         p = new Page();
 
         ctpkView = new NvqlKiemKeCtpkView();
