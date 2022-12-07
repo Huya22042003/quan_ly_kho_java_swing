@@ -22,7 +22,8 @@ public class NvqlLuongKiemKeRepository {
                 + " m.ma as maPhieuKiem,"
                 + " m.ngayTao as ngayTao,"
                 + " m.nhanVien as idNV,"
-                + " m.trangThai as trangThai) "
+                + " m.trangThai as trangThai,"
+                + " m.ghiChu as ghiChu) "
                 + " from domainModels.PhieuKiemKe m ORDER BY m.ngayTao DESC");
         List<NvqlLuongKiemKeCustom> list = query.getResultList();
         session.close();
@@ -41,16 +42,17 @@ public class NvqlLuongKiemKeRepository {
             t.rollback(); //hoàn lại kết quả
         }
     }
-public boolean updateTrangThai(PhieuKiemKe phieuKiemKe){
+
+    public boolean updateTrangThai(PhieuKiemKe phieuKiemKe) {
         Session s = HibernateUtil.getSessionFactory().openSession();
         try {
             Transaction transaction = s.beginTransaction();
             s.update(phieuKiemKe);
             Query q = s.createNativeQuery("""
-                                          UPDATE chitietsanpham
-                                          SET TrangThai = :trangThai 
-                                          WHERE Id IN 
-                                          (SELECT IdChiTietSP FROM chitietphieukiemke WHERE idphieukiemke = :idPhieuKiem)
+            UPDATE chitietsanpham
+            SET TrangThai = :trangThai 
+            WHERE Id IN 
+            (SELECT IdChiTietSP FROM chitietphieukiemke WHERE idphieukiemke = :idPhieuKiem)
                                           """);
             q.setParameter("trangThai", 1);
             q.setParameter("idPhieuKiem", phieuKiemKe.getId());
@@ -64,9 +66,10 @@ public boolean updateTrangThai(PhieuKiemKe phieuKiemKe){
         }
         return true;
     }
-     public List<NvqlLuongKiemKeCustom> getListByNgayTao(Long ngayBatDau, Long ngayKetThuc) {
+
+    public List<NvqlLuongKiemKeCustom> getListByNgayTao(Long ngayBatDau, Long ngayKetThuc) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-         Query query = session.createQuery("select "
+        Query query = session.createQuery("select "
                 + " new cores.nhanVienQuanLy.customModels.NvqlLuongKiemKeCustom("
                 + " m.id,"
                 + " m.ma as maPhieuKiem,"
@@ -79,5 +82,5 @@ public boolean updateTrangThai(PhieuKiemKe phieuKiemKe){
         List<NvqlLuongKiemKeCustom> list = query.getResultList();
         return list;
     }
- 
+
 }

@@ -4,12 +4,16 @@ import cores.nhanVienQuanLy.customModels.NvqlLuongKiemKeCtpkCustom;
 import cores.nhanVienQuanLy.customModels.NvqlLuongKiemKeCtspCustom;
 import cores.nhanVienQuanLy.customModels.NvqlLuongKiemKeCustom;
 import cores.nhanVienQuanLy.services.NvqlLuongKiemKeCtpkService;
+import cores.nhanVienQuanLy.services.NvqlLuongKiemKeCtspService;
 import cores.nhanVienQuanLy.services.serviceImpls.NvqlLuongKiemKeCtpkServiceImpl;
+import cores.nhanVienQuanLy.services.serviceImpls.NvqlLuongKiemKeCtspServiceImpl;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import utilities.Converter;
+import utilities.MsgBox;
 import utilities.Page;
 
 /**
@@ -28,12 +32,10 @@ public class NvqlKiemKeCtpkView extends javax.swing.JFrame {
     private NvqlLuongKiemKeCustom phieuKiemKe;
     public NvqlLuongKiemKeCtpkCustom ctpkk;
     private Page p;
+    private NvqlLuongKiemKeCtspService ctspService;
     private int limit = 7;
-
     private int offset = 0;
-
     private int sizes = 0;
-
     private int index = 1;
 
     public void PhieuKiemKe(NvqlLuongKiemKeCustom phieuKiemKe) {
@@ -44,6 +46,7 @@ public class NvqlKiemKeCtpkView extends javax.swing.JFrame {
         p = new Page();
         initComponents();
         ctpkService = new NvqlLuongKiemKeCtpkServiceImpl();
+        ctspService = new NvqlLuongKiemKeCtspServiceImpl();
         listCtpk = new ArrayList<>();
         ctpkk = new NvqlLuongKiemKeCtpkCustom();
         sizes = listCtpk.size();
@@ -454,12 +457,35 @@ public class NvqlKiemKeCtpkView extends javax.swing.JFrame {
         txtSlTon.setText(tbPhieuKiemChiTiet.getValueAt(s, 3).toString());
         txtSlThuc.setText(tbPhieuKiemChiTiet.getValueAt(s, 4).toString());
         txtSlChenh.setText(tbPhieuKiemChiTiet.getValueAt(s, 5).toString());
+        String suaSL = JOptionPane.showInputDialog("bạn muốn sửa số lượng thực tồn là bao nhiêu?");
+        if (suaSL.trim().length() == 0) {
+            return;
+        }
+        int sl = 0;
+        try {
+            sl = Integer.parseInt(suaSL);
+            if (sl <= 0) {
+                JOptionPane.showMessageDialog(this, "Bạn phải nhập số lượng lớn hơn 0");
+                return;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Bạn phải nhập là kiểu số");
+            return;
+        }
+        NvqlLuongKiemKeCtpkCustom ctPhieuKiem = listCtpk.get(s);
+        ctpkService.updateSoLuongTon(ctPhieuKiem.getIdChiTietSanPham().getId(), sl);
+        
+        ctPhieuKiem.setSoLuongThucTon(sl);
+        ctpkService.updateCTPKK(ctPhieuKiem);
+        MsgBox.alert(this, "Update số lượng thực tồn thành công");
+        listCtpk.set(s, ctPhieuKiem);
+        fillTablePhieuKiemChiTiet(listCtpk);
+
     }//GEN-LAST:event_tbPhieuKiemChiTietMouseClicked
 
     private void btnShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowActionPerformed
         listCtpk = ctpkService.getAll(phieuKiemKe.getId());
         fillTablePhieuKiemChiTiet(listCtpk);
-        System.out.println(listCtpk.size());
         clearForm();
     }//GEN-LAST:event_btnShowActionPerformed
 
@@ -471,7 +497,6 @@ public class NvqlKiemKeCtpkView extends javax.swing.JFrame {
         index = p.prevIndex(offset, limit, index);
         offset = p.prev(offset, limit);
         loadIndex();
-        //        loadTable(getList);
         fillTablePhieuKiemChiTiet(ctpkService.phanTrang(listCtpk, offset, limit));
     }//GEN-LAST:event_btnPreActionPerformed
 
@@ -479,7 +504,6 @@ public class NvqlKiemKeCtpkView extends javax.swing.JFrame {
         index = p.nextIndex(offset, limit, sizes, index);
         offset = p.next(offset, limit, sizes);
         loadIndex();
-        //        loadTable(getList);
         fillTablePhieuKiemChiTiet(ctpkService.phanTrang(listCtpk, offset, limit));
     }//GEN-LAST:event_btnNextActionPerformed
 
