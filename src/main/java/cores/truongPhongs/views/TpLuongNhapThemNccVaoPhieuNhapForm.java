@@ -69,42 +69,42 @@ public class TpLuongNhapThemNccVaoPhieuNhapForm extends javax.swing.JFrame {
         });
     }
 
-    public List<NhaCungCapCustom> listSearch(int rdo) {
-        // nhập vào 
-        String timKiem = this.txtSearch.getText();
-        List<NhaCungCapCustom> listTimKiem = new ArrayList<>();
-
-        // tìm kiếm theo tên mã vị trí
-        checkCbb(nccService.locKH(this.cbbTrangThai.getSelectedIndex())).forEach(el -> {
-            String search = "";
-            List<String> strings = new ArrayList<>();
-
-            // truyền tham số
-            switch (rdo) {
-                case 0:
-                    search = el.getTen();
-                    break;
-                case 1:
-                    search = el.getEmail();
-                    break;
-                case 2:
-                    search = el.getSdt();
-                    break;
-            }
-            for (int i = 0; i <= search.length(); i++) {
-                String newMa = search.substring(0, i);
-                strings.add(newMa);
-            }
-            // so sánh mảng vừa cắt với phần tử nhập vào
-            for (String e : strings) {
-                if (e.equalsIgnoreCase(timKiem)) {
-                    listTimKiem.add(el);
-                }
-            }
-        });
-
-        return listTimKiem;
-    }
+//    public List<NhaCungCapCustom> listSearch(int rdo) {
+//        // nhập vào 
+//        String timKiem = this.txtSearch.getText();
+//        List<NhaCungCapCustom> listTimKiem = new ArrayList<>();
+//
+//        // tìm kiếm theo tên mã vị trí
+//        checkCbb(nccService.locKH(this.cbbTrangThai.getSelectedIndex())).forEach(el -> {
+//            String search = "";
+//            List<String> strings = new ArrayList<>();
+//
+//            // truyền tham số
+////            switch (rdo) {
+////                case 0:
+////                    search = el.getTen();
+////                    break;
+////                case 1:
+////                    search = el.getEmail();
+////                    break;
+////                case 2:
+////                    search = el.getSdt();
+////                    break;
+////            }
+//            for (int i = 0; i <= search.length(); i++) {
+//                String newMa = search.substring(0, i);
+//                strings.add(newMa);
+//            }
+//            // so sánh mảng vừa cắt với phần tử nhập vào
+//            for (String e : strings) {
+//                if (e.equalsIgnoreCase(timKiem)) {
+//                    listTimKiem.add(el);
+//                }
+//            }
+//        });
+//
+//        return listTimKiem;
+//    }
 
     public List<NhaCungCapCustom> checkCbb(KhachHangConstant cs) {
         List<NhaCungCapCustom> listTimKiem = new ArrayList<>();
@@ -116,15 +116,15 @@ public class TpLuongNhapThemNccVaoPhieuNhapForm extends javax.swing.JFrame {
         return listTimKiem;
     }
 
-    public void searchRadio() {
-        if (rdoTen.isSelected()) {
-            loadTableNcc(listSearch(0));
-        } else if (rdoEmail.isSelected()) {
-            loadTableNcc(listSearch(1));
-        } else {
-            loadTableNcc(listSearch(2));
-        }
-    }
+//    public void searchRadio() {
+//        if (rdoTen.isSelected()) {
+//            loadTableNcc(listSearch(0));
+//        } else if (rdoEmail.isSelected()) {
+//            loadTableNcc(listSearch(1));
+//        } else {
+//            loadTableNcc(listSearch(2));
+//        }
+//    }
 
     private void loadTableNcc(List<NhaCungCapCustom> list) {
         DefaultTableModel dtm = (DefaultTableModel) this.tblNcc.getModel();
@@ -158,6 +158,7 @@ public class TpLuongNhapThemNccVaoPhieuNhapForm extends javax.swing.JFrame {
         rdoSdt = new utilities.palette.RadioButtonCustom();
         cbbTrangThai = new utilities.palette.Combobox();
         rdoEmail = new utilities.palette.RadioButtonCustom();
+        rdoMa = new utilities.palette.RadioButtonCustom();
         panelRound5 = new utilities.palette.PanelRound();
         jLabel2 = new javax.swing.JLabel();
         panelRound16 = new utilities.palette.PanelRound();
@@ -218,7 +219,6 @@ public class TpLuongNhapThemNccVaoPhieuNhapForm extends javax.swing.JFrame {
         rdoTen.setBackground(new java.awt.Color(67, 130, 187));
         buttonGroup1.add(rdoTen);
         rdoTen.setForeground(new java.awt.Color(255, 255, 255));
-        rdoTen.setSelected(true);
         rdoTen.setText("Tên");
         rdoTen.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         rdoTen.addActionListener(new java.awt.event.ActionListener() {
@@ -245,7 +245,7 @@ public class TpLuongNhapThemNccVaoPhieuNhapForm extends javax.swing.JFrame {
         });
 
         cbbTrangThai.setBackground(new java.awt.Color(67, 130, 187));
-        cbbTrangThai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Đang làm việc", "Sắp bỏ", "Đã ngừng cung cấp" }));
+        cbbTrangThai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Đang làm việc", "Đã ngừng cung cấp", "Sắp bỏ" }));
         cbbTrangThai.setSelectedIndex(-1);
         cbbTrangThai.setToolTipText("Chọn trạng thái nhà cung cấp bạn muốn tìm kiếm");
         cbbTrangThai.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -268,14 +268,28 @@ public class TpLuongNhapThemNccVaoPhieuNhapForm extends javax.swing.JFrame {
             }
         });
 
+        rdoMa.setBackground(new java.awt.Color(67, 130, 187));
+        buttonGroup1.add(rdoMa);
+        rdoMa.setForeground(new java.awt.Color(255, 255, 255));
+        rdoMa.setSelected(true);
+        rdoMa.setText("Mã");
+        rdoMa.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        rdoMa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoMaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelRound4Layout = new javax.swing.GroupLayout(panelRound4);
         panelRound4.setLayout(panelRound4Layout);
         panelRound4Layout.setHorizontalGroup(
             panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound4Layout.createSequentialGroup()
-                .addContainerGap(65, Short.MAX_VALUE)
+                .addContainerGap(10, Short.MAX_VALUE)
+                .addComponent(rdoMa, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
                 .addComponent(rdoTen, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(rdoEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(rdoSdt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -294,7 +308,8 @@ public class TpLuongNhapThemNccVaoPhieuNhapForm extends javax.swing.JFrame {
                     .addComponent(cbbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(rdoSdt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(rdoEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(rdoTen, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(rdoMa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(rdoTen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -575,7 +590,8 @@ public class TpLuongNhapThemNccVaoPhieuNhapForm extends javax.swing.JFrame {
 
     private void cbbTrangThaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbTrangThaiActionPerformed
         // TODO add your handling code here:
-        searchRadio();
+//        loadTableNcc(checkCbb(nccService.locKH(cbbTrangThai.getSelectedIndex())));
+        searchhRadio();
     }//GEN-LAST:event_cbbTrangThaiActionPerformed
 
     private void rdoEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoEmailActionPerformed
@@ -617,8 +633,26 @@ public class TpLuongNhapThemNccVaoPhieuNhapForm extends javax.swing.JFrame {
         loadTableNcc(nccService.phanTrang(listNcc, offset, limit));
     }//GEN-LAST:event_btnHienThi1ActionPerformed
 
+     public List<NhaCungCapCustom> getListByTT(int rdo) {
+        String timKiem = this.txtSearch.getText();
+        listNcc=  nccService.findAllByKhAndNV(timKiem, nccService.locKH(cbbTrangThai.getSelectedIndex()), rdo);
+        return listNcc;
+    }
+
+    public void searchhRadio() {
+        if (rdoMa.isSelected()) {
+            loadTableNcc(getListByTT(0));
+        }
+       else if (rdoTen.isSelected()) {
+            loadTableNcc(getListByTT(1));
+        }else if(rdoEmail.isSelected()){
+            loadTableNcc(getListByTT(2));
+        }else{
+            loadTableNcc(getListByTT(3));
+        }
+    }
     private void txtSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSearchMouseClicked
-        searchRadio();
+        searchhRadio();
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSearchMouseClicked
 
@@ -643,6 +677,10 @@ public class TpLuongNhapThemNccVaoPhieuNhapForm extends javax.swing.JFrame {
         loadIndex();
         loadTableNcc(nccService.phanTrang(listNcc, offset, limit));
     }//GEN-LAST:event_btnPre1ActionPerformed
+
+    private void rdoMaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoMaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rdoMaActionPerformed
     private void loadIndex() {
         this.txtIndex.setText(String.valueOf(index) + " / " + (Math.round((sizes / limit) + 0.5)));
     }
@@ -700,6 +738,7 @@ public class TpLuongNhapThemNccVaoPhieuNhapForm extends javax.swing.JFrame {
     private utilities.palette.PanelRound panelRound4;
     private utilities.palette.PanelRound panelRound5;
     private utilities.palette.RadioButtonCustom rdoEmail;
+    private utilities.palette.RadioButtonCustom rdoMa;
     private utilities.palette.RadioButtonCustom rdoSdt;
     private utilities.palette.RadioButtonCustom rdoTen;
     private utilities.palette.TableDark_1 tblNcc;

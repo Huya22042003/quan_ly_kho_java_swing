@@ -85,4 +85,17 @@ public class TpTongSoSanPhamTrongKhoServiceImpl implements TpThongKeService {
         return listPhanTrang;
     }
 
+    @Override
+    public List<TpThongKeSpCustom> findAllByKhAndNV(String ma, int rdo) {
+        switch (rdo) {
+            case 0:
+             return repo.getListByMaNv(ma);
+               
+            case 1:
+               return repo.getListByTenNv(ma);
+            default:
+               return  repo.getListByTenNv("");
+        
+    }
+    }
 }

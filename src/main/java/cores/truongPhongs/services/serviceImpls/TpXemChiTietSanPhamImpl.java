@@ -118,4 +118,16 @@ public class TpXemChiTietSanPhamImpl implements TpXemChiTietSanPhamService {
         return listPhanTrang;
     }
 
+    @Override
+    public List<TpXemChiTietSanPhamCustom> findAllByKhAndNV(String ma, TrangThaiSanPhamConstanst tt, int rdo) {
+                    switch (rdo) {
+            case 0:
+                return repo.getListByMaSp(ma, tt);
+            case 1:
+                return repo.getListByTenSp(ma, tt);
+            default:
+                return repo.getListByTenSp("", tt);
+        }
+    }
+
 }

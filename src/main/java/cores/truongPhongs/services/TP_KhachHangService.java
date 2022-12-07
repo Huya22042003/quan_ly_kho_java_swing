@@ -38,5 +38,7 @@ public interface TP_KhachHangService {
     List<TP_KhachHangCustom> findAllByRadio(String tk, KhachHangConstant tt, int rdo);
 
     List<TP_KhachHangCustom> phanTrang(List<TP_KhachHangCustom> list, int offset, int limit);
+    
+    TP_KhachHangCustom findByEmail(String email);
 
 }
