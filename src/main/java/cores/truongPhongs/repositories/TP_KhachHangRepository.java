@@ -107,7 +107,7 @@ public class TP_KhachHangRepository {
         }
         return csc;
     }
-    public TP_KhachHangCustom findByEmail(String email) {
+    public TP_KhachHangCustom findByEmail(String email, UUID id) {
         TP_KhachHangCustom csc = new TP_KhachHangCustom();
         try ( Session s = HibernateUtil.getSessionFactory().openSession()) {
             Query q = s.createQuery("SELECT new cores.truongPhongs.customModels.TP_KhachHangCustom ("
@@ -123,8 +123,9 @@ public class TP_KhachHangRepository {
                     + "k.diaChi as diaChi,"
                     + "k.danhGia as danhGia,"
                     + "k.trangThai as trangThai"
-                    + ") FROM domainModels.KhachHang k WHERE k.email = :email");
+                    + ") FROM domainModels.KhachHang k WHERE k.email = :email and k.id not like :id ");
             q.setParameter("email", email);
+            q.setParameter("id", id);
             csc = (TP_KhachHangCustom) q.getSingleResult();
         } catch (NoResultException e) {
             e.printStackTrace();

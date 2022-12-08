@@ -39,8 +39,7 @@ public interface TP_KhachHangService {
 
     List<TP_KhachHangCustom> phanTrang(List<TP_KhachHangCustom> list, int offset, int limit);
     
-    TP_KhachHangCustom findByEmail(String email);
+    TP_KhachHangCustom findByEmail(String email, UUID id);
 
-    TP_KhachHangCustom checkValidate1(TP_KhachHangCustom kh, JLabel erroMa, JLabel erroTen, JLabel erroSDT, JLabel erroEmail, JLabel erroDiaChi, JLabel erroMatKhau, JLabel erroNgaySinh);
 
 }
