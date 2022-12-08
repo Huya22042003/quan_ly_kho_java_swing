@@ -730,7 +730,7 @@ public class Migrator {
         session.save(pn);
 
         PhieuNhap pn1 = new PhieuNhap();
-        pn.setMaPhieu(MaTuSinh.gen("PX"));
+        pn1.setMaPhieu(MaTuSinh.gen("PX"));
         pn1.setGhiChu("Giày đẹp");
         pn1.setNgayTao(DateTimeUtil.convertDateToTimeStampSecond());
         pn1.setNgayThanhToan(DateTimeUtil.convertDateToTimeStampSecond());
@@ -740,7 +740,7 @@ public class Migrator {
         session.save(pn1);
 
         PhieuNhap pn2 = new PhieuNhap();
-        pn.setMaPhieu(MaTuSinh.gen("PX"));
+        pn2.setMaPhieu(MaTuSinh.gen("PX"));
         pn2.setGhiChu("Giày đẹp");
         pn2.setNgayTao(DateTimeUtil.convertDateToTimeStampSecond());
         pn2.setNhaCungCap(ncc2);
@@ -808,7 +808,7 @@ public class Migrator {
         session.save(px);
 
         PhieuXuat px1 = new PhieuXuat();
-        px.setMaPhieu(MaTuSinh.gen("PX"));
+        px1.setMaPhieu(MaTuSinh.gen("PX"));
         px1.setGhiChu("xuất gấp");
         px1.setKhachHang(kh2);
         px1.setNgayTao(DateTimeUtil.convertDateToTimeStampSecond());
@@ -818,7 +818,7 @@ public class Migrator {
         session.save(px1);
 
         PhieuXuat px2 = new PhieuXuat();
-        px.setMaPhieu(MaTuSinh.gen("PX"));
+        px2.setMaPhieu(MaTuSinh.gen("PX"));
         px2.setGhiChu("xuất gấp");
         px2.setKhachHang(kh2);
         px2.setNgayTao(DateTimeUtil.convertDateToTimeStampSecond());
@@ -828,7 +828,7 @@ public class Migrator {
         session.save(px2);
 
         PhieuXuat px3 = new PhieuXuat();
-        px.setMaPhieu(MaTuSinh.gen("PX"));
+        px3.setMaPhieu(MaTuSinh.gen("PX"));
         px3.setGhiChu("xuất gấp");
         px3.setKhachHang(kh2);
         px3.setNgayTao(DateTimeUtil.convertDateToTimeStampSecond());
@@ -838,7 +838,7 @@ public class Migrator {
         session.save(px3);
 
         PhieuXuat px4 = new PhieuXuat();
-        px.setMaPhieu(MaTuSinh.gen("PX"));
+        px4.setMaPhieu(MaTuSinh.gen("PX"));
         px4.setGhiChu("xuất gấp");
         px4.setKhachHang(kh2);
         px4.setNgayTao(DateTimeUtil.convertDateToTimeStampSecond());
@@ -848,7 +848,7 @@ public class Migrator {
         session.save(px4);
 
         PhieuXuat px5 = new PhieuXuat();
-        px.setMaPhieu(MaTuSinh.gen("PX"));
+        px5.setMaPhieu(MaTuSinh.gen("PX"));
         px5.setGhiChu("xuất gấp");
         px5.setKhachHang(kh2);
         px5.setNgayTao(DateTimeUtil.convertDateToTimeStampSecond());
