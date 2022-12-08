@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.UUID;
 import javax.swing.JLabel;
 import utilities.Converter;
-import utilities.DateTimeUtil;
 import utilities.palette.Combobox;
 
 /**
@@ -30,43 +29,43 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
     private TpQuanLyChiTietSanPhamRepository rp = new TpQuanLyChiTietSanPhamRepository();
 
     @Override
-    public List<TpQuanLyChiTietSanPhamCustom> getAll() {
-        return rp.getAll();
+    public List<TpQuanLyChiTietSanPhamCustom> getAll(UUID idSp) {
+        return rp.getAll(idSp);
     }
 
     @Override
     public TpQuanLyChiTietSanPhamCustom addCTSanPham(TpQuanLyChiTietSanPhamCustom custom) {
         ChiTietSanPham sp = new ChiTietSanPham();
-        sp.setGiaBan(custom.getGiaBan());
-        sp.setGiaNhap(custom.getGiaNhap());
-        sp.setHinhAnh(custom.getHinhAnh());
-        sp.setSoLuongTon(custom.getSoLuongTon());
-        sp.setMau(custom.getMau());
-        sp.setDonVi(custom.getDonVi());
-        sp.setNamBaoHanh(custom.getNamBaoHanh());
-        sp.setSanPham(custom.getSanPham());
-        sp.setNgayTao(DateTimeUtil.convertDateToTimeStampSecond());
-        sp.setTrangThai(custom.getTrangThai());
-        sp.setSize(custom.getSize());
-        custom.setId(rp.addCTSanPham(sp).getId());
+//        sp.setGiaBan(custom.getGiaBan());
+//        sp.setGiaNhap(custom.getGiaNhap());
+//        sp.setHinhAnh(custom.getHinhAnh());
+//        sp.setSoLuongTon(custom.getSoLuongTon());
+//        sp.setMau(custom.getMau());
+//        sp.setDonVi(custom.getDonVi());
+//        sp.setNamBaoHanh(custom.getNamBaoHanh());
+//        sp.setSanPham(custom.getSanPham());
+//        sp.setNgayTao(DateTimeUtil.convertDateToTimeStampSecond());
+//        sp.setTrangThai(custom.getTrangThai());
+//        sp.setSize(custom.getSize());
+//        custom.setId(rp.addCTSanPham(sp).getId());
         return custom;
     }
 
     @Override
     public boolean updateCTSanPham(TpQuanLyChiTietSanPhamCustom custom) {
         ChiTietSanPham sp = new ChiTietSanPham();
-        sp.setGiaBan(custom.getGiaBan());
-        sp.setGiaNhap(custom.getGiaNhap());
-        sp.setHinhAnh(custom.getHinhAnh());
-        sp.setSoLuongTon(custom.getSoLuongTon());
-        sp.setMau(custom.getMau());
-        sp.setDonVi(custom.getDonVi());
-        sp.setNamBaoHanh(custom.getNamBaoHanh());
-        sp.setSanPham(custom.getSanPham());
-        sp.setNgayTao(custom.getNgayTao());
-        sp.setTrangThai(custom.getTrangThai());
-        sp.setSize(custom.getSize());
-        sp.setId(custom.getId());
+//        sp.setGiaBan(custom.getGiaBan());
+//        sp.setGiaNhap(custom.getGiaNhap());
+//        sp.setHinhAnh(custom.getHinhAnh());
+//        sp.setSoLuongTon(custom.getSoLuongTon());
+//        sp.setMau(custom.getMau());
+//        sp.setDonVi(custom.getDonVi());
+//        sp.setNamBaoHanh(custom.getNamBaoHanh());
+//        sp.setSanPham(custom.getSanPham());
+//        sp.setNgayTao(custom.getNgayTao());
+//        sp.setTrangThai(custom.getTrangThai());
+//        sp.setSize(custom.getSize());
+//        sp.setId(custom.getId());
 
         return rp.updateCTSanPham(sp);
     }
@@ -146,16 +145,16 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
             return null;
         }
         TpQuanLyChiTietSanPhamCustom sp = new TpQuanLyChiTietSanPhamCustom();
-        sp.setGiaBan(new BigDecimal(Double.parseDouble(giaBan)));
-        sp.setGiaNhap(new BigDecimal(Double.parseDouble(giaNhap)));
-        sp.setSoLuongTon(Integer.parseInt(soLuong));
-        sp.setHinhAnh(hinhAnh);
-        sp.setMau(mau);
-        sp.setNamBaoHanh(Integer.parseInt(namBH));
-        sp.setDonVi(findIDDonVi(donVi));
-        sp.setSanPham(findIDSanPham(sanPham));
-        sp.setSize(Integer.parseInt(size));
-        sp.setTrangThai(tt(tt));
+//        sp.setGiaBan(new BigDecimal(Double.parseDouble(giaBan)));
+//        sp.setGiaNhap(new BigDecimal(Double.parseDouble(giaNhap)));
+//        sp.setSoLuongTon(Integer.parseInt(soLuong));
+//        sp.setHinhAnh(hinhAnh);
+//        sp.setMau(mau);
+//        sp.setNamBaoHanh(Integer.parseInt(namBH));
+//        sp.setDonVi(findIDDonVi(donVi));
+//        sp.setSanPham(findIDSanPham(sanPham));
+//        sp.setSize(Integer.parseInt(size));
+//        sp.setTrangThai(tt(tt));
         return sp;
     }
 

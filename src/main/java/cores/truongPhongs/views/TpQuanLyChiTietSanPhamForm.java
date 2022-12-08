@@ -9,15 +9,16 @@ import cores.truongPhongs.services.TpQuanLyChiTietSanPhamService;
 import cores.truongPhongs.services.serviceImpls.TpQuanLyChiTietSanPhamServiceImpl;
 import infrastructures.constant.TrangThaiSanPhamConstanst;
 import java.io.File;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import utilities.Converter;
 import utilities.DateTimeUtil;
-import utilities.MsgBox;
 import utilities.Page;
 
 /**
@@ -46,26 +47,40 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
     private int index = 1;
 
     private ExportSanPhamService esps;
+    
+    private DecimalFormat formatter = new DecimalFormat("###,###,##0");
+    
+    private UUID idSp;
 
-    public TpQuanLyChiTietSanPhamForm() {
+    public TpQuanLyChiTietSanPhamForm(UUID idSp) {
+        this.idSp = idSp;
+        System.out.println(idSp);
         p = new Page();
         esps = new ExportSanPhamServiceImpl();
         initComponents();
         tbChiTietSanPham.setModel(dtm);
-        String[] hearders = {"STT", "Sản Phẩm", "Màu", "Size", "Năm BH", "Đơn Vị", "Số Lượng", "Giá Bán", "Giá Nhập", "Trạng Thái"};
+        String[] hearders = {"STT", "SL", "Giá Nhập", "Giá Bán", "Màu", "ĐV", "Năm BH", "Trạng thái", "Size", "Tên NCC", "Mã SP NCC"};
         dtm.setColumnIdentifiers(hearders);
-        this.clearForm();
-        showData(serviceChiTietSP.phanTrang(listChiTietSP, offset, limit));
+        this.clearFormCtsp();
+        showDataCtsp(serviceChiTietSP.phanTrang(listChiTietSP, offset, limit));
         serviceChiTietSP.loadCombobox(cbbMauSac);
         serviceChiTietSP.loadCombobox(cbbMauSacCreate);
         serviceChiTietSP.loadCombobox(cbMauSac);
         loadList();
         loadCBB();
     }
+    
+    public TpQuanLyChiTietSanPhamCustom getRowTable() {
+        int row = this.tbChiTietSanPham.getSelectedRow();
+        if(row == -1) {
+            JOptionPane.showMessageDialog(this, "Bạn phải chọn một dòng");
+            return null;
+        }
+        return serviceChiTietSP.phanTrang(listChiTietSP, offset, limit).get(row);
+    }
 
     public void loadList() {
         listDonVi = serviceChiTietSP.getAllDonVi();
-        listSanPham = serviceChiTietSP.getAllSanPham();
     }
 
     public void loadCBB() {
@@ -92,22 +107,23 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
 
     }
 
-    public void showData(List<TpQuanLyChiTietSanPhamCustom> list) {
+    public void showDataCtsp(List<TpQuanLyChiTietSanPhamCustom> list) {
         dtm.setRowCount(0);
 
 //            TpQuanLyChiTietSanPhamCustom ct = list.get(i);
         for (TpQuanLyChiTietSanPhamCustom ct : list) {
             dtm.addRow(new Object[]{
                 dtm.getRowCount() + 1,
-                ct.getSanPham().getTen(),
-                Converter.trangThaiMauSac(ct.getMau()),
-                ct.getSize(),
+                formatter.format(ct.getSoLuongTon()) + "Đôi",
+                ct.getGiaNhap() == null ? "Chưa có" : formatter.format(ct.getGiaNhap()) + "VNĐ",
+                ct.getGiaBan() == null ? "Chưa có" : formatter.format(ct.getGiaBan())+ "VNĐ",
+                Converter.trangThaiMauSac(ct.convertMau()),
+                ct.getDoViQuyDoi(),
                 ct.getNamBaoHanh(),
-                ct.getDonVi().getDonViGoc(),
-                ct.getSoLuongTon(),
-                ct.getGiaBan() == null ? "Chưa có" : ct.getGiaBan(),
-                ct.getGiaNhap(),
-                Converter.trangThaiSanPham(ct.getTrangThai())
+                Converter.trangThaiSanPham(ct.convertTrangThai()),
+                ct.getSize(),
+                ct.getTenNcc(),
+                ct.getMaSpNcc()
             });
         }
     }
@@ -120,41 +136,41 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
 
     public void searchRadio() {
         if (rdoGiaNhap.isSelected()) {
-            showData(serviceChiTietSP.phanTrang(listSearch(0), offset, limit));
+            showDataCtsp(serviceChiTietSP.phanTrang(listSearch(0), offset, limit));
         } else if (rdoGiaBan.isSelected()) {
-            showData(serviceChiTietSP.phanTrang(listSearch(1), offset, limit));
+            showDataCtsp(serviceChiTietSP.phanTrang(listSearch(1), offset, limit));
         } else {
-            showData(serviceChiTietSP.phanTrang(listSearch(2), offset, limit));
+            showDataCtsp(serviceChiTietSP.phanTrang(listSearch(2), offset, limit));
         }
     }
 
-    public void clearForm() {
+    public void clearFormCtsp() {
         rdoGiaNhap.setSelected(true);
-        listChiTietSP = serviceChiTietSP.getAll();
+        listChiTietSP = serviceChiTietSP.getAll(idSp);
         sizes = listChiTietSP.size();
         offset = 0;
         index = 1;
-        loadIndex();
+        loadIndexCtsp();
     }
 
-    private void loadIndex() {
+    private void loadIndexCtsp() {
         this.txtIndex.setText(String.valueOf(index) + " / " + (Math.round((sizes / limit) + 0.5)));
     }
 
-    public void fillData(int i) {
-//        TpQuanLyChiTietSanPhamCustom ct = listChiTietSP.get(i);
-        TpQuanLyChiTietSanPhamCustom ct = serviceChiTietSP.phanTrang(listChiTietSP, offset, limit).get(i);
-
-        this.txtGiaNhap.setText(String.valueOf(ct.getGiaNhap()));
-        this.txtGiaBan.setText(ct.getGiaBan() == null ? "Chưa có giá bán" : String.valueOf(ct.getGiaBan()));
-        this.txtSoLuongTon1.setText(String.valueOf(ct.getSoLuongTon()));
-        this.txtNamBH1.setText(String.valueOf(ct.getNamBaoHanh()));
-        this.lblHinhAnh.setIcon(new javax.swing.ImageIcon(ct.getHinhAnh()));
-        this.txtSize1.setText(String.valueOf(ct.getSize()));
-        this.cbbMauSac.setSelectedItem(Converter.trangThaiMauSac(ct.getMau()));
-        cbbDonVi.setSelectedItem(ct.getDonVi().getDonViGoc());
-        cbbTrangThai.setSelectedItem(Converter.trangThaiSanPham(ct.getTrangThai()));
-    }
+//    public void fillData(int i) {
+////        TpQuanLyChiTietSanPhamCustom ct = listChiTietSP.get(i);
+//        TpQuanLyChiTietSanPhamCustom ct = serviceChiTietSP.phanTrang(listChiTietSP, offset, limit).get(i);
+//
+//        this.txtGiaNhap.setText(String.valueOf(ct.getGiaNhap()));
+//        this.txtGiaBan.setText(ct.getGiaBan() == null ? "Chưa có giá bán" : String.valueOf(ct.getGiaBan()));
+//        this.txtSoLuongTon1.setText(String.valueOf(ct.getSoLuongTon()));
+//        this.txtNamBH1.setText(String.valueOf(ct.getNamBaoHanh()));
+//        this.lblHinhAnh.setIcon(new javax.swing.ImageIcon(ct.getHinhAnh()));
+//        this.txtSize1.setText(String.valueOf(ct.getSize()));
+//        this.cbbMauSac.setSelectedItem(Converter.trangThaiMauSac(ct.getMau()));
+//        cbbDonVi.setSelectedItem(ct.getDonVi().getDonViGoc());
+//        cbbTrangThai.setSelectedItem(Converter.trangThaiSanPham(ct.getTrangThai()));
+//    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -974,7 +990,7 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
     private void tbChiTietSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbChiTietSanPhamMouseClicked
         int row = this.tbChiTietSanPham.getSelectedRow();
         jFrameCreate.setVisible(false);
-        fillData(row);
+//        fillData(row);
 //        rud.ct = listChiTietSP.get(row);
         this.jFrameUpdate.setVisible(true);
 //        rud.ct = serviceChiTietSP.phanTrang(listChiTietSP, offset, limit).get(row);
@@ -992,26 +1008,24 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnHienThiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHienThiActionPerformed
-        listChiTietSP = serviceChiTietSP.getAll();
-
-        clearForm();
-        showData(serviceChiTietSP.phanTrang(listChiTietSP, offset, limit));
+        clearFormCtsp();
+        showDataCtsp(serviceChiTietSP.phanTrang(listChiTietSP, offset, limit));
     }//GEN-LAST:event_btnHienThiActionPerformed
 
     private void uWPButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uWPButton5ActionPerformed
         index = p.nextIndex(offset, limit, sizes, index);
         offset = p.next(offset, limit, sizes);
-        loadIndex();
+        loadIndexCtsp();
 //        showData(listChiTietSP);
-        showData(serviceChiTietSP.phanTrang(listChiTietSP, offset, limit));
+        showDataCtsp(serviceChiTietSP.phanTrang(listChiTietSP, offset, limit));
     }//GEN-LAST:event_uWPButton5ActionPerformed
 
     private void uWPButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uWPButton4ActionPerformed
         index = p.prevIndex(offset, limit, index);
         offset = p.prev(offset, limit);
-        loadIndex();
+        loadIndexCtsp();
 //        showData(listChiTietSP);
-        showData(serviceChiTietSP.phanTrang(listChiTietSP, offset, limit));
+        showDataCtsp(serviceChiTietSP.phanTrang(listChiTietSP, offset, limit));
     }//GEN-LAST:event_uWPButton4ActionPerformed
 
     private void myButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton7ActionPerformed
@@ -1026,7 +1040,7 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
             return;
         }
         TpQuanLyChiTietSanPhamCustom ctsp = listChiTietSP.get(row);
-        String fileName = ctsp.getSanPham().getTen() + new Date(DateTimeUtil.convertDateToTimeStampSecond()).toString() + ".pdf";
+        String fileName = new Date(DateTimeUtil.convertDateToTimeStampSecond()).toString() + ".pdf";
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         int option = fileChooser.showOpenDialog(this);
@@ -1041,55 +1055,55 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_myButton8ActionPerformed
 
-    public TpQuanLyChiTietSanPhamCustom getFormDataUpdate() {
-        TpQuanLyChiTietSanPhamCustom sp = serviceChiTietSP.checkValidate(serviceChiTietSP.getAllDonVi().get(cbbDonVi.getSelectedIndex()).getId(),
-                txtNamBH1.getText(),
-                listChiTietSP.get(tbChiTietSanPham.getSelectedRow()).getSanPham().getId(),
-                duongdananh, txtGiaNhap.getText(), txtGiaBan.getText(), txtSoLuongTon1.getText(), txtSize1.getText(),this.cbbTrangThai.getSelectedIndex(),
-                erroHinhAnh, erroGiaNhap, erroGiaBan, erroSoLuongTon, erroSize, erroNamBH, serviceChiTietSP.loc(this.cbbMauSac.getSelectedIndex()));
-        return sp;
-    }
+//    public TpQuanLyChiTietSanPhamCustom getFormDataUpdate() {
+//        TpQuanLyChiTietSanPhamCustom sp = serviceChiTietSP.checkValidate(serviceChiTietSP.getAllDonVi().get(cbbDonVi.getSelectedIndex()).getId(),
+//                txtNamBH1.getText(),
+//                listChiTietSP.get(tbChiTietSanPham.getSelectedRow()).getSanPham().getId(),
+//                duongdananh, txtGiaNhap.getText(), txtGiaBan.getText(), txtSoLuongTon1.getText(), txtSize1.getText(),this.cbbTrangThai.getSelectedIndex(),
+//                erroHinhAnh, erroGiaNhap, erroGiaBan, erroSoLuongTon, erroSize, erroNamBH, serviceChiTietSP.loc(this.cbbMauSac.getSelectedIndex()));
+//        return sp;
+//    }
     
-    public TpQuanLyChiTietSanPhamCustom getFormDataCreate() {
-        TpQuanLyChiTietSanPhamCustom sp = serviceChiTietSP.checkValidate(listDonVi.get(cbbDonViCreate.getSelectedIndex()).getId(),
-                txtNamBaoHanhCreate.getText(),
-                listSanPham.get(cbbSanPhamCreate.getSelectedIndex()).getId(),
-                duongdananh, txtGiaNhapCreate.getText(), txtGiaBanCreate.getText(), txtSoLuongTonCreate.getText(), txtSizeCreate.getText(), this.cbbTrangThaiCreate.getSelectedIndex(),
-                erroHinhAnh, erroGiaNhapC, erroGiaBanC, erroSoLuongTonC,erroSizeC, erroNamBaoHanhC , serviceChiTietSP.loc(this.cbbMauSacCreate.getSelectedIndex()));
-        return sp;
-    }
+//    public TpQuanLyChiTietSanPhamCustom getFormDataCreate() {
+//        TpQuanLyChiTietSanPhamCustom sp = serviceChiTietSP.checkValidate(listDonVi.get(cbbDonViCreate.getSelectedIndex()).getId(),
+//                txtNamBaoHanhCreate.getText(),
+//                listSanPham.get(cbbSanPhamCreate.getSelectedIndex()).getId(),
+//                duongdananh, txtGiaNhapCreate.getText(), txtGiaBanCreate.getText(), txtSoLuongTonCreate.getText(), txtSizeCreate.getText(), this.cbbTrangThaiCreate.getSelectedIndex(),
+//                erroHinhAnh, erroGiaNhapC, erroGiaBanC, erroSoLuongTonC,erroSizeC, erroNamBaoHanhC , serviceChiTietSP.loc(this.cbbMauSacCreate.getSelectedIndex()));
+//        return sp;
+//    }
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        TpQuanLyChiTietSanPhamCustom check = getFormDataUpdate();
-        if (check == null) {
-            return;
-        }
-
-        TpQuanLyChiTietSanPhamCustom ctCtspList = listChiTietSP.get(this.tbChiTietSanPham.getSelectedRow());
-        TpQuanLyChiTietSanPhamCustom sp
-                = new TpQuanLyChiTietSanPhamCustom(ctCtspList.getId(), check.getSoLuongTon(),
-                        check.getHinhAnh(),
-                        check.getGiaBan(),
-                        check.getGiaNhap(),
-                        check.getMau(),
-                        check.getSanPham(),
-                        check.getDonVi(),
-                        check.getNamBaoHanh(),
-                        check.getTrangThai(),
-                        check.getSize(),
-                        ctCtspList.getNgayTao()
-                );
-
-        if (serviceChiTietSP.updateCTSanPham(sp)) {
-            MsgBox.alert(this, "Sửa thành công");
-            jFrameUpdate.setVisible(false);
-            listChiTietSP = serviceChiTietSP.getAll();
-            showData(serviceChiTietSP.phanTrang(listChiTietSP, offset, limit));
-            clearForm();
-        } else {
-            MsgBox.alert(this, "Sửa thất bại");
-            jFrameUpdate.setVisible(true);
-        }
+//        TpQuanLyChiTietSanPhamCustom check = getFormDataUpdate();
+//        if (check == null) {
+//            return;
+//        }
+//
+//        TpQuanLyChiTietSanPhamCustom ctCtspList = listChiTietSP.get(this.tbChiTietSanPham.getSelectedRow());
+//        TpQuanLyChiTietSanPhamCustom sp
+//                = new TpQuanLyChiTietSanPhamCustom(ctCtspList.getId(), check.getSoLuongTon(),
+//                        check.getHinhAnh(),
+//                        check.getGiaBan(),
+//                        check.getGiaNhap(),
+//                        check.getMau(),
+//                        check.getSanPham(),
+//                        check.getDonVi(),
+//                        check.getNamBaoHanh(),
+//                        check.getTrangThai(),
+//                        check.getSize(),
+//                        ctCtspList.getNgayTao()
+//                );
+//
+//        if (serviceChiTietSP.updateCTSanPham(sp)) {
+//            MsgBox.alert(this, "Sửa thành công");
+//            jFrameUpdate.setVisible(false);
+//            listChiTietSP = serviceChiTietSP.getAll();
+//            showData(serviceChiTietSP.phanTrang(listChiTietSP, offset, limit));
+//            clearForm();
+//        } else {
+//            MsgBox.alert(this, "Sửa thất bại");
+//            jFrameUpdate.setVisible(true);
+//        }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void lblHinhAnhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHinhAnhMouseClicked
@@ -1118,20 +1132,20 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCloseActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        TpQuanLyChiTietSanPhamCustom check = getFormDataCreate();
-        if (check == null) {
-            return;
-        }
-
-        if (serviceChiTietSP.addCTSanPham(check) == null) {
-            MsgBox.alert(this, "Thêm thất bại");
-        } else {
-            MsgBox.alert(this, "Thêm thành công");
-            jFrameCreate.setVisible(false);
-            listChiTietSP = serviceChiTietSP.getAll();
-            showData(serviceChiTietSP.phanTrang(listChiTietSP, offset, limit));
-            clearForm();
-        }
+//        TpQuanLyChiTietSanPhamCustom check = getFormDataCreate();
+//        if (check == null) {
+//            return;
+//        }
+//
+//        if (serviceChiTietSP.addCTSanPham(check) == null) {
+//            MsgBox.alert(this, "Thêm thất bại");
+//        } else {
+//            MsgBox.alert(this, "Thêm thành công");
+//            jFrameCreate.setVisible(false);
+//            listChiTietSP = serviceChiTietSP.getAll();
+//            showData(serviceChiTietSP.phanTrang(listChiTietSP, offset, limit));
+//            clearForm();
+//        }
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnClose1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClose1ActionPerformed

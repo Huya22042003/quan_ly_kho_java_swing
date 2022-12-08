@@ -41,4 +41,6 @@ public interface TP_KhachHangService {
     
     TP_KhachHangCustom findByEmail(String email);
 
+    TP_KhachHangCustom checkValidate1(TP_KhachHangCustom kh, JLabel erroMa, JLabel erroTen, JLabel erroSDT, JLabel erroEmail, JLabel erroDiaChi, JLabel erroMatKhau, JLabel erroNgaySinh);
+
 }
