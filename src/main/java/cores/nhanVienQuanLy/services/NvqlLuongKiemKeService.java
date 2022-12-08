@@ -21,4 +21,6 @@ public interface NvqlLuongKiemKeService {
     List<NvqlLuongKiemKeCustom> getListByNgayTao(Long ngayBatDau, Long ngayKetThuc);
 
     List<NvqlLuongKiemKeCustom> phanTrang(List<NvqlLuongKiemKeCustom> list, int offset, int limit);
+    
+    List<NvqlLuongKiemKeCustom> findAllByKhAndNV(String ma, TrangThaiPhieuKiemConstant tt, int rdo);
 }
