@@ -281,7 +281,7 @@ public class Migrator {
         session.save(sanPham8);
 
         SanPham sanPham9 = new SanPham();
-        sanPham5.setMa(MaTuSinh.gen("SP"));
+        sanPham9.setMa(MaTuSinh.gen("SP"));
         sanPham9.setTen("Giày đi mưa");
         session.save(sanPham9);
 
@@ -352,7 +352,7 @@ public class Migrator {
         ctsp.setNgayTao(DateTimeUtil.convertDateToTimeStampSecond());
         ctsp.setSanPham(sanPham);
         ctsp.setSize(38);
-        ctsp.setSoLuongTon(50);
+        ctsp.setSoLuongTon(510);
         ctsp.setTrangThai(TrangThaiSanPhamConstanst.DA_MO_BAN);
         session.save(ctsp);
 
@@ -372,50 +372,50 @@ public class Migrator {
 
         ChiTietSanPham ctsp2 = new ChiTietSanPham();
         ctsp2.setDonVi(dv1);
-        ctsp2.setGiaBan(new BigDecimal(10000));
-        ctsp2.setGiaNhap(new BigDecimal(8000));
+        ctsp2.setGiaBan(new BigDecimal(140000));
+        ctsp2.setGiaNhap(new BigDecimal(70000));
         ctsp2.setHinhAnh(null);
         ctsp2.setMau(MauConstant.HONG);
         ctsp2.setNamBaoHanh(1);
         ctsp2.setNgayTao(DateTimeUtil.convertDateToTimeStampSecond());
         ctsp2.setSanPham(sanPham2);
         ctsp2.setSize(40);
-        ctsp2.setSoLuongTon(100);
+        ctsp2.setSoLuongTon(80);
         ctsp2.setTrangThai(TrangThaiSanPhamConstanst.DA_MO_BAN);
         session.save(ctsp2);
 
         ChiTietSanPham ctsp3 = new ChiTietSanPham();
         ctsp3.setDonVi(dv1);
-        ctsp3.setGiaBan(new BigDecimal(10000));
-        ctsp3.setGiaNhap(new BigDecimal(8000));
+        ctsp3.setGiaBan(new BigDecimal(500000));
+        ctsp3.setGiaNhap(new BigDecimal(300000));
         ctsp3.setHinhAnh(null);
         ctsp3.setMau(MauConstant.TRANG);
         ctsp3.setNamBaoHanh(1);
         ctsp3.setNgayTao(DateTimeUtil.convertDateToTimeStampSecond());
         ctsp3.setSanPham(sanPham3);
         ctsp3.setSize(41);
-        ctsp3.setSoLuongTon(100);
+        ctsp3.setSoLuongTon(600);
         ctsp3.setTrangThai(TrangThaiSanPhamConstanst.DA_MO_BAN);
         session.save(ctsp3);
 
         ChiTietSanPham ctsp4 = new ChiTietSanPham();
         ctsp4.setDonVi(dv1);
-        ctsp4.setGiaBan(new BigDecimal(10000));
-        ctsp4.setGiaNhap(new BigDecimal(8000));
+        ctsp4.setGiaBan(new BigDecimal(700000));
+        ctsp4.setGiaNhap(new BigDecimal(650000));
         ctsp4.setHinhAnh(null);
         ctsp4.setMau(MauConstant.XANH_DUONG);
         ctsp4.setNamBaoHanh(1);
         ctsp4.setNgayTao(DateTimeUtil.convertDateToTimeStampSecond());
         ctsp4.setSanPham(sanPham4);
         ctsp4.setSize(42);
-        ctsp4.setSoLuongTon(200);
+        ctsp4.setSoLuongTon(180);
         ctsp4.setTrangThai(TrangThaiSanPhamConstanst.DA_MO_BAN);
         session.save(ctsp4);
 
         ChiTietSanPham ctsp5 = new ChiTietSanPham();
         ctsp5.setDonVi(dv1);
-        ctsp5.setGiaBan(new BigDecimal(10000));
-        ctsp5.setGiaNhap(new BigDecimal(8000));
+        ctsp5.setGiaBan(new BigDecimal(70000));
+        ctsp5.setGiaNhap(new BigDecimal(50000));
         ctsp5.setHinhAnh(null);
         ctsp5.setMau(MauConstant.TRANG);
         ctsp5.setNamBaoHanh(1);
@@ -428,43 +428,43 @@ public class Migrator {
 
         ChiTietSanPham ctsp6 = new ChiTietSanPham();
         ctsp6.setDonVi(dv1);
-        ctsp6.setGiaBan(new BigDecimal(10000));
-        ctsp6.setGiaNhap(new BigDecimal(8000));
+        ctsp6.setGiaBan(new BigDecimal(180000));
+        ctsp6.setGiaNhap(new BigDecimal(150000));
         ctsp6.setHinhAnh(null);
         ctsp6.setMau(MauConstant.KHAC);
         ctsp6.setNamBaoHanh(1);
         ctsp6.setNgayTao(DateTimeUtil.convertDateToTimeStampSecond());
         ctsp6.setSanPham(sanPham6);
         ctsp6.setSize(42);
-        ctsp6.setSoLuongTon(200);
+        ctsp6.setSoLuongTon(260);
         ctsp6.setTrangThai(TrangThaiSanPhamConstanst.DA_MO_BAN);
         session.save(ctsp6);
 
         ChiTietSanPham ctsp7 = new ChiTietSanPham();
         ctsp7.setDonVi(dv1);
-        ctsp7.setGiaBan(new BigDecimal(10000));
-        ctsp7.setGiaNhap(new BigDecimal(8000));
+        ctsp7.setGiaBan(new BigDecimal(250000));
+        ctsp7.setGiaNhap(new BigDecimal(200000));
         ctsp7.setHinhAnh(null);
         ctsp7.setMau(MauConstant.CAM);
         ctsp7.setNamBaoHanh(1);
         ctsp7.setNgayTao(DateTimeUtil.convertDateToTimeStampSecond());
         ctsp7.setSanPham(sanPham7);
         ctsp7.setSize(38);
-        ctsp7.setSoLuongTon(500);
+        ctsp7.setSoLuongTon(340);
         ctsp7.setTrangThai(TrangThaiSanPhamConstanst.DA_MO_BAN);
         session.save(ctsp7);
 
         ChiTietSanPham ctsp8 = new ChiTietSanPham();
         ctsp8.setDonVi(dv1);
-        ctsp8.setGiaBan(new BigDecimal(10000));
-        ctsp8.setGiaNhap(new BigDecimal(8000));
+        ctsp8.setGiaBan(new BigDecimal(650000));
+        ctsp8.setGiaNhap(new BigDecimal(490000));
         ctsp8.setHinhAnh(null);
         ctsp8.setMau(MauConstant.DO);
         ctsp8.setNamBaoHanh(1);
         ctsp8.setNgayTao(DateTimeUtil.convertDateToTimeStampSecond());
         ctsp8.setSanPham(sanPham7);
         ctsp8.setSize(39);
-        ctsp8.setSoLuongTon(500);
+        ctsp8.setSoLuongTon(160);
         ctsp8.setTrangThai(TrangThaiSanPhamConstanst.DA_MO_BAN);
         session.save(ctsp8);
 
@@ -478,125 +478,125 @@ public class Migrator {
         ctsp9.setNgayTao(DateTimeUtil.convertDateToTimeStampSecond());
         ctsp9.setSanPham(sanPham9);
         ctsp9.setSize(40);
-        ctsp9.setSoLuongTon(500);
+        ctsp9.setSoLuongTon(234);
         ctsp9.setTrangThai(TrangThaiSanPhamConstanst.DA_MO_BAN);
         session.save(ctsp9);
 
         ChiTietSanPham ctsp10 = new ChiTietSanPham();
         ctsp10.setDonVi(dv1);
-        ctsp10.setGiaBan(new BigDecimal(10000));
-        ctsp10.setGiaNhap(new BigDecimal(8000));
+        ctsp10.setGiaBan(new BigDecimal(130000));
+        ctsp10.setGiaNhap(new BigDecimal(90000));
         ctsp10.setHinhAnh(null);
         ctsp10.setMau(MauConstant.HONG);
         ctsp10.setNamBaoHanh(1);
         ctsp10.setNgayTao(DateTimeUtil.convertDateToTimeStampSecond());
         ctsp10.setSanPham(sanPham10);
         ctsp10.setSize(42);
-        ctsp10.setSoLuongTon(500);
+        ctsp10.setSoLuongTon(123);
         ctsp10.setTrangThai(TrangThaiSanPhamConstanst.DA_MO_BAN);
         session.save(ctsp10);
 
         ChiTietSanPham ctsp11 = new ChiTietSanPham();
         ctsp11.setDonVi(dv1);
-        ctsp11.setGiaBan(new BigDecimal(10000));
-        ctsp11.setGiaNhap(new BigDecimal(8000));
+        ctsp11.setGiaBan(new BigDecimal(160000));
+        ctsp11.setGiaNhap(new BigDecimal(120000));
         ctsp11.setHinhAnh(null);
         ctsp11.setMau(MauConstant.XANH_DUONG);
         ctsp11.setNamBaoHanh(1);
         ctsp11.setNgayTao(DateTimeUtil.convertDateToTimeStampSecond());
         ctsp11.setSanPham(sanPham11);
         ctsp11.setSize(43);
-        ctsp11.setSoLuongTon(500);
+        ctsp11.setSoLuongTon(456);
         ctsp11.setTrangThai(TrangThaiSanPhamConstanst.DA_MO_BAN);
         session.save(ctsp11);
 
         ChiTietSanPham ctsp12 = new ChiTietSanPham();
         ctsp12.setDonVi(dv1);
-        ctsp12.setGiaBan(new BigDecimal(10000));
-        ctsp12.setGiaNhap(new BigDecimal(8000));
+        ctsp12.setGiaBan(new BigDecimal(80000));
+        ctsp12.setGiaNhap(new BigDecimal(60000));
         ctsp12.setHinhAnh(null);
         ctsp12.setMau(MauConstant.XANH_DUONG);
         ctsp12.setNamBaoHanh(1);
         ctsp12.setNgayTao(DateTimeUtil.convertDateToTimeStampSecond());
         ctsp12.setSanPham(sanPham12);
         ctsp12.setSize(41);
-        ctsp12.setSoLuongTon(500);
+        ctsp12.setSoLuongTon(654);
         ctsp12.setTrangThai(TrangThaiSanPhamConstanst.DA_MO_BAN);
         session.save(ctsp12);
 
         ChiTietSanPham ctsp13 = new ChiTietSanPham();
         ctsp13.setDonVi(dv1);
-        ctsp13.setGiaBan(new BigDecimal(10000));
-        ctsp13.setGiaNhap(new BigDecimal(8000));
+        ctsp13.setGiaBan(new BigDecimal(150000));
+        ctsp13.setGiaNhap(new BigDecimal(80000));
         ctsp13.setHinhAnh(null);
         ctsp13.setMau(MauConstant.VANG);
         ctsp13.setNamBaoHanh(1);
         ctsp13.setNgayTao(DateTimeUtil.convertDateToTimeStampSecond());
         ctsp13.setSanPham(sanPham13);
         ctsp13.setSize(38);
-        ctsp13.setSoLuongTon(500);
+        ctsp13.setSoLuongTon(380);
         ctsp13.setTrangThai(TrangThaiSanPhamConstanst.DA_MO_BAN);
         session.save(ctsp13);
 
         ChiTietSanPham ctsp14 = new ChiTietSanPham();
         ctsp14.setDonVi(dv1);
-        ctsp14.setGiaBan(new BigDecimal(10000));
-        ctsp14.setGiaNhap(new BigDecimal(8000));
+        ctsp14.setGiaBan(new BigDecimal(180000));
+        ctsp14.setGiaNhap(new BigDecimal(150000));
         ctsp14.setHinhAnh(null);
         ctsp14.setMau(MauConstant.KHAC);
         ctsp14.setNamBaoHanh(1);
         ctsp14.setNgayTao(DateTimeUtil.convertDateToTimeStampSecond());
         ctsp14.setSanPham(sanPham14);
         ctsp14.setSize(38);
-        ctsp14.setSoLuongTon(500);
+        ctsp14.setSoLuongTon(560);
         ctsp14.setTrangThai(TrangThaiSanPhamConstanst.DA_MO_BAN);
         session.save(ctsp14);
 
         ChiTietSanPham ctsp15 = new ChiTietSanPham();
         ctsp15.setDonVi(dv1);
-        ctsp15.setGiaBan(new BigDecimal(10000));
-        ctsp15.setGiaNhap(new BigDecimal(8000));
+        ctsp15.setGiaBan(new BigDecimal(170000));
+        ctsp15.setGiaNhap(new BigDecimal(150000));
         ctsp15.setHinhAnh(null);
         ctsp15.setMau(MauConstant.TRANG);
         ctsp15.setNamBaoHanh(1);
         ctsp15.setSanPham(sanPham15);
         ctsp15.setSize(41);
-        ctsp15.setSoLuongTon(500);
+        ctsp15.setSoLuongTon(260);
         ctsp15.setTrangThai(TrangThaiSanPhamConstanst.CHO_XAC_NHAN);
         session.save(ctsp12);
 
         ChiTietSanPham ctsp16 = new ChiTietSanPham();
         ctsp16.setDonVi(dv1);
-        ctsp16.setGiaBan(new BigDecimal(10000));
-        ctsp16.setGiaNhap(new BigDecimal(8000));
+        ctsp16.setGiaBan(new BigDecimal(180000));
+        ctsp16.setGiaNhap(new BigDecimal(130000));
         ctsp16.setHinhAnh(null);
         ctsp16.setMau(MauConstant.HONG);
         ctsp16.setNamBaoHanh(1);
         ctsp16.setNgayTao(DateTimeUtil.convertDateToTimeStampSecond());
         ctsp16.setSanPham(sanPham16);
         ctsp16.setSize(41);
-        ctsp16.setSoLuongTon(500);
+        ctsp16.setSoLuongTon(700);
         ctsp16.setTrangThai(TrangThaiSanPhamConstanst.DA_MO_BAN);
         session.save(ctsp16);
 
         ChiTietSanPham ctsp17 = new ChiTietSanPham();
         ctsp17.setDonVi(dv1);
-        ctsp17.setGiaBan(new BigDecimal(10000));
-        ctsp17.setGiaNhap(new BigDecimal(8000));
+        ctsp17.setGiaBan(new BigDecimal(100000));
+        ctsp17.setGiaNhap(new BigDecimal(80000));
         ctsp17.setHinhAnh(null);
         ctsp17.setMau(MauConstant.DO);
         ctsp17.setNamBaoHanh(1);
         ctsp17.setNgayTao(DateTimeUtil.convertDateToTimeStampSecond());
         ctsp17.setSanPham(sanPham17);
         ctsp17.setSize(41);
-        ctsp17.setSoLuongTon(500);
+        ctsp17.setSoLuongTon(150);
         ctsp17.setTrangThai(TrangThaiSanPhamConstanst.DA_MO_BAN);
         session.save(ctsp17);
 
         ChiTietSanPham ctsp18 = new ChiTietSanPham();
         ctsp18.setDonVi(dv1);
-        ctsp18.setGiaBan(new BigDecimal(10000));
-        ctsp18.setGiaNhap(new BigDecimal(8000));
+        ctsp18.setGiaBan(new BigDecimal(110000));
+        ctsp18.setGiaNhap(new BigDecimal(9000));
         ctsp18.setHinhAnh(null);
         ctsp18.setMau(MauConstant.VANG);
         ctsp18.setNamBaoHanh(18);
@@ -609,8 +609,8 @@ public class Migrator {
 
         ChiTietSanPham ctsp19 = new ChiTietSanPham();
         ctsp19.setDonVi(dv1);
-        ctsp19.setGiaBan(new BigDecimal(10000));
-        ctsp19.setGiaNhap(new BigDecimal(8000));
+        ctsp19.setGiaBan(new BigDecimal(200000));
+        ctsp19.setGiaNhap(new BigDecimal(80000));
         ctsp19.setHinhAnh(null);
         ctsp19.setMau(MauConstant.DEN);
         ctsp19.setNamBaoHanh(1);
@@ -623,8 +623,8 @@ public class Migrator {
 
         ChiTietSanPham ctsp20 = new ChiTietSanPham();
         ctsp20.setDonVi(dv1);
-        ctsp20.setGiaBan(new BigDecimal(20000));
-        ctsp20.setGiaNhap(new BigDecimal(18000));
+        ctsp20.setGiaBan(new BigDecimal(600000));
+        ctsp20.setGiaNhap(new BigDecimal(550000));
         ctsp20.setHinhAnh(null);
         ctsp20.setMau(MauConstant.CAM);
         ctsp20.setNamBaoHanh(1);
@@ -637,8 +637,8 @@ public class Migrator {
 
         ChiTietSanPham ctsp21 = new ChiTietSanPham();
         ctsp21.setDonVi(dv1);
-        ctsp21.setGiaBan(new BigDecimal(10000));
-        ctsp21.setGiaNhap(new BigDecimal(8000));
+        ctsp21.setGiaBan(new BigDecimal(130000));
+        ctsp21.setGiaNhap(new BigDecimal(90000));
         ctsp21.setHinhAnh(null);
         ctsp21.setMau(MauConstant.XANH_DUONG);
         ctsp21.setNamBaoHanh(1);
@@ -651,8 +651,8 @@ public class Migrator {
 
         ChiTietSanPham ctsp22 = new ChiTietSanPham();
         ctsp22.setDonVi(dv1);
-        ctsp22.setGiaBan(new BigDecimal(10000));
-        ctsp22.setGiaNhap(new BigDecimal(8000));
+        ctsp22.setGiaBan(new BigDecimal(120000));
+        ctsp22.setGiaNhap(new BigDecimal(100000));
         ctsp22.setHinhAnh(null);
         ctsp22.setMau(MauConstant.XANH_LA);
         ctsp22.setNamBaoHanh(1);
@@ -665,8 +665,8 @@ public class Migrator {
 
         ChiTietSanPham ctsp23 = new ChiTietSanPham();
         ctsp23.setDonVi(dv1);
-        ctsp23.setGiaBan(new BigDecimal(10000));
-        ctsp23.setGiaNhap(new BigDecimal(8000));
+        ctsp23.setGiaBan(new BigDecimal(100000));
+        ctsp23.setGiaNhap(new BigDecimal(80000));
         ctsp23.setHinhAnh(null);
         ctsp23.setMau(MauConstant.TRANG);
         ctsp23.setNamBaoHanh(1);
@@ -679,8 +679,8 @@ public class Migrator {
 
         ChiTietSanPham ctsp24 = new ChiTietSanPham();
         ctsp24.setDonVi(dv1);
-        ctsp24.setGiaBan(new BigDecimal(10000));
-        ctsp24.setGiaNhap(new BigDecimal(8000));
+        ctsp24.setGiaBan(new BigDecimal(350000));
+        ctsp24.setGiaNhap(new BigDecimal(300000));
         ctsp24.setHinhAnh(null);
         ctsp24.setMau(MauConstant.HONG);
         ctsp24.setNamBaoHanh(1);
@@ -693,8 +693,8 @@ public class Migrator {
 
         ChiTietSanPham ctsp25 = new ChiTietSanPham();
         ctsp25.setDonVi(dv1);
-        ctsp25.setGiaBan(new BigDecimal(10000));
-        ctsp25.setGiaNhap(new BigDecimal(8000));
+        ctsp25.setGiaBan(new BigDecimal(600000));
+        ctsp25.setGiaNhap(new BigDecimal(550000));
         ctsp25.setHinhAnh(null);
         ctsp25.setMau(MauConstant.DO);
         ctsp25.setNamBaoHanh(2);
@@ -707,8 +707,8 @@ public class Migrator {
 
         ChiTietSanPham ctsp26 = new ChiTietSanPham();
         ctsp26.setDonVi(dv1);
-        ctsp26.setGiaBan(new BigDecimal(10000));
-        ctsp26.setGiaNhap(new BigDecimal(8000));
+        ctsp26.setGiaBan(new BigDecimal(700000));
+        ctsp26.setGiaNhap(new BigDecimal(550000));
         ctsp26.setHinhAnh(null);
         ctsp26.setMau(MauConstant.CAM);
         ctsp26.setNamBaoHanh(1);
