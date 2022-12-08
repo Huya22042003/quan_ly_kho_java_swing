@@ -27,7 +27,7 @@ public class NvqlLuongKiemKeCtpkServiceImpl implements NvqlLuongKiemKeCtpkServic
 
     @Override
     public void addCTPK(NvqlLuongKiemKeCtpkCustom b) {
-        ChiTietPhieuKiemKe a = new ChiTietPhieuKiemKe(b.getIdPhieuKiem(), b.getIdChiTietSanPham(), b.getSoLuongTon(), b.getSoLuongThucTon());
+        ChiTietPhieuKiemKe a = new ChiTietPhieuKiemKe(b.getIdPhieuKiem(), b.getIdChiTietSanPham(), b.getSoLuongTon(), b.getSoLuongThucTon(), b.getLiDo());
         rp.addCTPK(a);
     }
 
