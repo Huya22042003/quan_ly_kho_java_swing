@@ -20,6 +20,8 @@ import lombok.Setter;
 public class TP_HoanNhap_PhieuNhapCustom {
 
     private UUID id;
+    
+    private String maPhieu;
 
     private Long ngayTao;
 
