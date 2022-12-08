@@ -2,6 +2,7 @@ package cores.nhanVienQuanLy.repositories;
 
 import cores.nhanVienQuanLy.customModels.NvqlLuongKiemKeCustom;
 import domainModels.PhieuKiemKe;
+import infrastructures.constant.TrangThaiPhieuKiemConstant;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -75,12 +76,49 @@ public class NvqlLuongKiemKeRepository {
                 + " m.ma as maPhieuKiem,"
                 + " m.ngayTao as ngayTao,"
                 + " m.nhanVien as idNV,"
-                + " m.trangThai as trangThai) "
+                + " m.trangThai as trangThai,"
+                + " m.ghiChu as ghiChu) "
                 + " from domainModels.PhieuKiemKe m WHERE m.ngayTao > :ngayBatDau AND m.ngayTao < :ngayKetThuc  ORDER BY m.ngayTao DESC");
         query.setParameter("ngayBatDau", ngayBatDau);
         query.setParameter("ngayKetThuc", ngayKetThuc);
         List<NvqlLuongKiemKeCustom> list = query.getResultList();
         return list;
+    }
+      public List<NvqlLuongKiemKeCustom> getListByMa(String ma, TrangThaiPhieuKiemConstant tt) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("select "
+                + " new cores.nhanVienQuanLy.customModels.NvqlLuongKiemKeCustom("
+                + " m.id,"
+                + " m.ma as maPhieuKiem,"
+                + " m.ngayTao as ngayTao,"
+                + " m.nhanVien as idNV,"
+                + " m.trangThai as trangThai,"
+                + " m.ghiChu as ghiChu) "
+                + " from domainModels.PhieuKiemKe m WHERE m.ma like CONCAT('%',:ma,'%') and m.trangThai = :tt "
+                + "order by m.ngayTao DESC" );
+       query.setParameter("ma", ma);
+       query.setParameter("tt", tt);
+        List<NvqlLuongKiemKeCustom> list = query.getResultList();
+        return list;
+        
+    }
+         public List<NvqlLuongKiemKeCustom> getListByTenNv(String ma, TrangThaiPhieuKiemConstant tt) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("select "
+                + " new cores.nhanVienQuanLy.customModels.NvqlLuongKiemKeCustom("
+                + " m.id,"
+                + " m.ma as maPhieuKiem,"
+                + " m.ngayTao as ngayTao,"
+                + " m.nhanVien as idNV,"
+                + " m.trangThai as trangThai, "
+                + " m.ghiChu as ghiChu) "
+                + " from domainModels.PhieuKiemKe m WHERE m.nhanVien.ten like CONCAT('%',:ma,'%') and m.trangThai = :tt "
+                + "order by m.ngayTao DESC" );
+       query.setParameter("ma", ma);
+       query.setParameter("tt", tt);
+        List<NvqlLuongKiemKeCustom> list = query.getResultList();
+        return list;
+        
     }
 
 }

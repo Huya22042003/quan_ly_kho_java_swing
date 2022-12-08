@@ -69,7 +69,8 @@ public class Tai_LuongHoanXuat_Repository {
         Query query = session.createQuery("SELECT new cores.nhanVienQuanLy.customModels.ChiTietPhieuHoanXuatCustom("
                 + "ctphx.idPhieuHoanXuat as idPhieuHoanXuat,"
                 + "ctphx.idChiTietSp as idChiTietSp,"
-                + "ctphx.soLuong as soLuong"
+                + "ctphx.soLuong as soLuong,"
+                + "ctphx.liDo as liDo"
                 + ") FROM domainModels.ChiTietPhieuHoanXuat ctphx WHERE ctphx.idPhieuHoanXuat.id = :id");
         query.setParameter("id", id);
         List<ChiTietPhieuHoanXuatCustom> list = query.getResultList();
@@ -81,7 +82,8 @@ public class Tai_LuongHoanXuat_Repository {
         Query query = session.createQuery("SELECT new cores.nhanVienQuanLy.customModels.ChiTietPhieuHoanXuatCustom("
                 + "ctphx.idPhieuHoanXuat as idPhieuHoanXuat,"
                 + "ctphx.idChiTietSp as idChiTietSp,"
-                + "ctphx.soLuong as soLuong"
+                + "ctphx.soLuong as soLuong,"
+                + "ctphx.liDo as liDo"
                 + ") FROM domainModels.ChiTietPhieuHoanXuat ctphx");
         List<ChiTietPhieuHoanXuatCustom> list = query.getResultList();
         return list;
