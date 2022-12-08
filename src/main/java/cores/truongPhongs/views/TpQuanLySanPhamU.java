@@ -1,6 +1,7 @@
 package cores.truongPhongs.views;
 
 import cores.truongPhongs.customModels.TpQuanLySanPhamCustom;
+import cores.truongPhongs.customModels.TpThemSanPhamCustom;
 import cores.truongPhongs.services.TpQuanLySanPhamService;
 import cores.truongPhongs.services.serviceImpls.TpQuanLySanPhamServiceImpl;
 import java.awt.Dimension;
@@ -221,7 +222,7 @@ public class TpQuanLySanPhamU extends javax.swing.JFrame {
         if (check == null) {
             return;
         }
-        TpQuanLySanPhamCustom sp = new TpQuanLySanPhamCustom(tp.getId(), tp.getMa(), check.getTen());
+        TpThemSanPhamCustom sp = new TpThemSanPhamCustom(tp.getId(), tp.getMa(), check.getTen());
 
         if (serviceSP.updateSanPham(sp)) {
             MsgBox.alert(this, "Sửa thành công");
