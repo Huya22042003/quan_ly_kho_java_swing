@@ -46,7 +46,9 @@ public class TP_QuanLyPhieuHoanNhap_ctp extends javax.swing.JFrame {
                 el.getSanPham().getTen(),
                 Converter.trangThaiMauSac(el.getMau()),
                 el.getSoLuongHoan(),
-                el.getGiaNhap() == null ? "Chưa có" : formatter.format(el.getGiaNhap())
+                el.getGiaNhap() == null ? "Chưa có" : formatter.format(el.getGiaNhap()),
+                el.getLyDo()
+                
 
             };
             dtm.addRow(rowData);
@@ -75,10 +77,10 @@ public class TP_QuanLyPhieuHoanNhap_ctp extends javax.swing.JFrame {
         myButton6 = new utilities.palette.MyButton();
         txtMau = new utilities.palette.TextField();
         txtGiaNhap = new utilities.palette.TextField();
-        errorSoLuong = new javax.swing.JLabel();
         txtSoLuongNhanLai = new utilities.palette.TextField();
         textAreaScroll1 = new utilities.palette.TextAreaScroll();
-        txtGhiChu = new utilities.palette.TextAreaCustom();
+        txtLyDo = new utilities.palette.TextAreaCustom();
+        errorSoLuong = new javax.swing.JLabel();
         panelRound3 = new utilities.palette.PanelRound();
         panelRound5 = new utilities.palette.PanelRound();
         jLabel3 = new javax.swing.JLabel();
@@ -232,8 +234,6 @@ public class TP_QuanLyPhieuHoanNhap_ctp extends javax.swing.JFrame {
             }
         });
 
-        errorSoLuong.setForeground(new java.awt.Color(255, 0, 0));
-
         txtSoLuongNhanLai.setBackground(new java.awt.Color(228, 206, 224));
         txtSoLuongNhanLai.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtSoLuongNhanLai.setLabelText("Số lượng nhận lại");
@@ -247,11 +247,14 @@ public class TP_QuanLyPhieuHoanNhap_ctp extends javax.swing.JFrame {
         textAreaScroll1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         textAreaScroll1.setLabelText("Lý do");
 
-        txtGhiChu.setBackground(new java.awt.Color(228, 206, 224));
-        txtGhiChu.setColumns(20);
-        txtGhiChu.setRows(5);
-        txtGhiChu.setDisabledTextColor(new java.awt.Color(204, 204, 255));
-        textAreaScroll1.setViewportView(txtGhiChu);
+        txtLyDo.setEditable(false);
+        txtLyDo.setBackground(new java.awt.Color(228, 206, 224));
+        txtLyDo.setColumns(20);
+        txtLyDo.setRows(5);
+        txtLyDo.setDisabledTextColor(new java.awt.Color(204, 204, 255));
+        textAreaScroll1.setViewportView(txtLyDo);
+
+        errorSoLuong.setForeground(new java.awt.Color(255, 0, 0));
 
         javax.swing.GroupLayout panelRound2Layout = new javax.swing.GroupLayout(panelRound2);
         panelRound2.setLayout(panelRound2Layout);
@@ -268,17 +271,15 @@ public class TP_QuanLyPhieuHoanNhap_ctp extends javax.swing.JFrame {
                                 .addComponent(txtSoLuongHoan, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(txtMau, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(txtGiaNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(panelRound2Layout.createSequentialGroup()
-                                .addGap(272, 272, 272)
-                                .addComponent(errorSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(panelRound16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(errorSoLuong, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(textAreaScroll1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
-                                .addComponent(txtSoLuongNhanLai, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(panelRound16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtSoLuongNhanLai, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(panelRound2Layout.createSequentialGroup()
                         .addGap(45, 45, 45)
                         .addComponent(jLabel1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
         panelRound2Layout.setVerticalGroup(
             panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -297,11 +298,11 @@ public class TP_QuanLyPhieuHoanNhap_ctp extends javax.swing.JFrame {
                 .addComponent(txtGiaNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtSoLuongNhanLai, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(textAreaScroll1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(errorSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(errorSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(textAreaScroll1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(panelRound16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(62, 62, 62))
         );
@@ -392,7 +393,7 @@ public class TP_QuanLyPhieuHoanNhap_ctp extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(panelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -421,6 +422,7 @@ public class TP_QuanLyPhieuHoanNhap_ctp extends javax.swing.JFrame {
         txtMau.setText(Converter.trangThaiMauSac(item.getMau()));
         txtSoLuongHoan.setText(String.valueOf(item.getSoLuongHoan()));
         txtGiaNhap.setText(String.valueOf(item.getGiaNhap()));
+        txtLyDo.setText(String.valueOf(item.getLyDo()));
         if (item.getHinhAnh() == null) {
             this.btnAnh.setIcon(new ImageIcon(duongDan));
         } else {
@@ -548,8 +550,8 @@ public class TP_QuanLyPhieuHoanNhap_ctp extends javax.swing.JFrame {
     private utilities.palette.PanelRound panelRound5;
     private utilities.palette.TableDark_1 tblSanPham;
     private utilities.palette.TextAreaScroll textAreaScroll1;
-    private utilities.palette.TextAreaCustom txtGhiChu;
     private utilities.palette.TextField txtGiaNhap;
+    private utilities.palette.TextAreaCustom txtLyDo;
     private utilities.palette.TextField txtMa;
     private utilities.palette.TextField txtMau;
     private utilities.palette.TextField txtSoLuongHoan;

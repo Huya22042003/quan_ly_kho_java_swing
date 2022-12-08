@@ -73,7 +73,7 @@ public class TP_QuanLyPhieuHoanNhap_sp extends javax.swing.JFrame {
         txtGiaNhap = new utilities.palette.TextField();
         errorSoLuong = new javax.swing.JLabel();
         textAreaScroll1 = new utilities.palette.TextAreaScroll();
-        txtGhiChu = new utilities.palette.TextAreaCustom();
+        txtLyDo = new utilities.palette.TextAreaCustom();
         panelRound3 = new utilities.palette.PanelRound();
         panelRound5 = new utilities.palette.PanelRound();
         jLabel3 = new javax.swing.JLabel();
@@ -243,11 +243,11 @@ public class TP_QuanLyPhieuHoanNhap_sp extends javax.swing.JFrame {
         textAreaScroll1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         textAreaScroll1.setLabelText("Lý do");
 
-        txtGhiChu.setBackground(new java.awt.Color(228, 206, 224));
-        txtGhiChu.setColumns(20);
-        txtGhiChu.setRows(5);
-        txtGhiChu.setDisabledTextColor(new java.awt.Color(204, 204, 255));
-        textAreaScroll1.setViewportView(txtGhiChu);
+        txtLyDo.setBackground(new java.awt.Color(228, 206, 224));
+        txtLyDo.setColumns(20);
+        txtLyDo.setRows(5);
+        txtLyDo.setDisabledTextColor(new java.awt.Color(204, 204, 255));
+        textAreaScroll1.setViewportView(txtLyDo);
 
         javax.swing.GroupLayout panelRound2Layout = new javax.swing.GroupLayout(panelRound2);
         panelRound2.setLayout(panelRound2Layout);
@@ -456,6 +456,10 @@ public class TP_QuanLyPhieuHoanNhap_sp extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Bạn phải chọn một phiếu", "ERROR !!!", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        if (this.txtLyDo.getText().trim().length() == 0) {
+            JOptionPane.showMessageDialog(this, "Bạn phải lý do để hoàn sản phẩm này!", "ERROR !!!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         if (this.txtSoLuongHoan.getText().trim().length() == 0) {
             JOptionPane.showMessageDialog(this, "Bạn phải nhập số lượng hoàn!", "ERROR !!!", JOptionPane.ERROR_MESSAGE);
             return;
@@ -478,7 +482,7 @@ public class TP_QuanLyPhieuHoanNhap_sp extends javax.swing.JFrame {
             return;
         }
 
-        if (hoanNhapService.addSanPhamInPhieuHoan(listSP.get(row).getId(), idPhieuHoanNhap.getId(), sl)) {
+        if (hoanNhapService.addSanPhamInPhieuHoan(listSP.get(row).getId(), idPhieuHoanNhap.getId(), sl,txtLyDo.getText())) {
             System.out.println(sl);
             this.errorSoLuong.setText("");
             JOptionPane.showMessageDialog(this, "Thêm thành công", "Thành CÔng !!!", JOptionPane.INFORMATION_MESSAGE);
@@ -549,8 +553,8 @@ public class TP_QuanLyPhieuHoanNhap_sp extends javax.swing.JFrame {
     private utilities.palette.PanelRound panelRound5;
     private utilities.palette.TableDark_1 tblSanPham;
     private utilities.palette.TextAreaScroll textAreaScroll1;
-    private utilities.palette.TextAreaCustom txtGhiChu;
     private utilities.palette.TextField txtGiaNhap;
+    private utilities.palette.TextAreaCustom txtLyDo;
     private utilities.palette.TextField txtMa;
     private utilities.palette.TextField txtMau;
     private utilities.palette.TextField txtSoLuongHoan;

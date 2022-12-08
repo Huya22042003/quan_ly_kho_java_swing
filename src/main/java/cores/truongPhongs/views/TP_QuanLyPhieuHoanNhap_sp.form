@@ -439,7 +439,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="utilities.palette.TextAreaCustom" name="txtGhiChu">
+            <Component class="utilities.palette.TextAreaCustom" name="txtLyDo">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="e0" green="ce" red="e4" type="rgb"/>

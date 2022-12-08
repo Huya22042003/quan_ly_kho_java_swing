@@ -55,8 +55,8 @@ public class TP_PhieuHoanNhapServiceImpl implements TP_PhieuHoanNhapService {
     }
 
     @Override
-    public boolean addSanPhamInPhieuHoan(UUID sp, UUID idPhieuNhapHoan, int soLuongNhap) {
-        return rp.addChiTietPhieuHoanNhap(sp, idPhieuNhapHoan, soLuongNhap);
+    public boolean addSanPhamInPhieuHoan(UUID sp, UUID idPhieuNhapHoan, int soLuongNhap,String lyDo) {
+        return rp.addChiTietPhieuHoanNhap(sp, idPhieuNhapHoan, soLuongNhap, lyDo);
     }
 
     @Override
