@@ -18,7 +18,12 @@ public class test extends javax.swing.JDialog {
      */
     public test() {
         initComponents();
+<<<<<<< HEAD:src/main/java/cores/webCam/view/test.java
         WebCamPanel a = new WebCamPanel();
+=======
+
+        TpDonViView a = new TpDonViView();
+>>>>>>> 885dba5c2390c3b3e9d110c93da559ce0624d51a:src/main/java/cores/truongPhongs/views/view.java
         this.add(a);
         this.setLayout(new FlowLayout());
         this.pack();

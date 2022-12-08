@@ -1,13 +1,22 @@
+<<<<<<< HEAD:src/main/java/cores/truongPhongs/views/NvqlRUDPhieuNhapView.java
 package cores.truongPhongs.views;
+=======
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
+package cores.nhanVienQuanLy.views;
+>>>>>>> 885dba5c2390c3b3e9d110c93da559ce0624d51a:src/main/java/cores/nhanVienQuanLy/views/NvqlRUDPhieuNhapView.java
 
 import cores.nhanVienQuanLy.customModels.NvqlGetTenNccCustom;
 import cores.nhanVienQuanLy.customModels.NvqlGetTenNhanVienCustom;
-import cores.truongPhongs.customModels.TpPhieuNhapCustom;
+import cores.nhanVienQuanLy.customModels.NvqlQuanLyPhieuNhapCustom;
 import cores.nhanVienQuanLy.services.NvqlGetTenNccService;
 import cores.nhanVienQuanLy.services.NvqlGetTenNvService;
+import cores.nhanVienQuanLy.services.NvqlQuanLyPhieuNhapService;
 import cores.nhanVienQuanLy.services.serviceImpls.NvqlGetTenNccServiceImpl;
 import cores.nhanVienQuanLy.services.serviceImpls.NvqlGetTenNvServiceImpl;
-import cores.truongPhongs.services.serviceImpls.TpPhieuNhapServiceImpl;
+import cores.nhanVienQuanLy.services.serviceImpls.NvqlQuanLyPhieuNhapServiceImpl;
 import infrastructures.constant.TrangThaiPhieuConstant;
 
 import java.awt.Dimension;
@@ -17,7 +26,6 @@ import java.util.Date;
 import java.util.List;
 import utilities.Converter;
 import utilities.MsgBox;
-import cores.truongPhongs.services.TpPhieuNhapService;
 
 /**
  *
@@ -32,12 +40,12 @@ public class NvqlRUDPhieuNhapView extends javax.swing.JFrame {
     private NvqlGetTenNvService tenNvService;
     private List<NvqlGetTenNccCustom> listNcc = new ArrayList<>();
     private List<NvqlGetTenNhanVienCustom> listNv = new ArrayList<>();
-    TpPhieuNhapCustom pnc = new TpPhieuNhapCustom();
-    private TpPhieuNhapService phieuNhapService;
+    NvqlQuanLyPhieuNhapCustom pnc = new NvqlQuanLyPhieuNhapCustom();
+    private NvqlQuanLyPhieuNhapService phieuNhapService;
 
     public NvqlRUDPhieuNhapView() {
         initComponents();
-        phieuNhapService = new TpPhieuNhapServiceImpl();
+        phieuNhapService = new NvqlQuanLyPhieuNhapServiceImpl();
         tenNccService = new NvqlGetTenNccServiceImpl();
         tenNvService = new NvqlGetTenNvServiceImpl();
         listNcc = tenNccService.getList();
@@ -50,10 +58,10 @@ public class NvqlRUDPhieuNhapView extends javax.swing.JFrame {
         setLocation(size.width / 2 - getWidth() / 2, size.height / 2 - getHeight() / 2);
     }
 
-    public NvqlRUDPhieuNhapView(TpPhieuNhapCustom pn) {
+    public NvqlRUDPhieuNhapView(NvqlQuanLyPhieuNhapCustom pn) {
         initComponents();
         pnc = pn;
-        phieuNhapService = new TpPhieuNhapServiceImpl();
+        phieuNhapService = new NvqlQuanLyPhieuNhapServiceImpl();
         tenNccService = new NvqlGetTenNccServiceImpl();
         tenNvService = new NvqlGetTenNvServiceImpl();
         listNcc = tenNccService.getList();
@@ -343,6 +351,7 @@ public class NvqlRUDPhieuNhapView extends javax.swing.JFrame {
     }//GEN-LAST:event_cbbNhanVienActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+<<<<<<< HEAD:src/main/java/cores/truongPhongs/views/NvqlRUDPhieuNhapView.java
 //        TpPhieuNhapCustom check = this.getFormData();
 //        if (check == null) {
 //            return;
@@ -357,6 +366,22 @@ public class NvqlRUDPhieuNhapView extends javax.swing.JFrame {
 //            this.setVisible(true);
 //        }
 //
+=======
+        NvqlQuanLyPhieuNhapCustom check = this.getFormData();
+        if (check == null) {
+            return;
+        }
+        check.setId(pnc.getId());
+
+        if (phieuNhapService.updatePn(check)) {
+            MsgBox.alert(this, "Sửa thành công");
+            this.setVisible(false);
+        } else {
+            MsgBox.alert(this, "Sửa thất bại");
+            this.setVisible(true);
+        }
+
+>>>>>>> 885dba5c2390c3b3e9d110c93da559ce0624d51a:src/main/java/cores/nhanVienQuanLy/views/NvqlRUDPhieuNhapView.java
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
@@ -369,6 +394,7 @@ public class NvqlRUDPhieuNhapView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
+<<<<<<< HEAD:src/main/java/cores/truongPhongs/views/NvqlRUDPhieuNhapView.java
 //    public TpPhieuNhapCustom getFormData() {
 //
 //        String ghiChu = txtGhiChu.getText();
@@ -381,6 +407,20 @@ public class NvqlRUDPhieuNhapView extends javax.swing.JFrame {
 //
 //        return pn;
 //    }
+=======
+    public NvqlQuanLyPhieuNhapCustom getFormData() {
+
+        String ghiChu = txtGhiChu.getText();
+        Date ngayNhap = dateNgayNhan.getDate();
+        Date ngayTao = dateNgayTao.getDate();
+        NvqlQuanLyPhieuNhapCustom pn = phieuNhapService.checkValidate(ghiChu, ngayNhap, ngayTao, errNgayNhan, errNgayTao, errGhiChu);
+        pn.setIdNcc(listNcc.get(cbbNhaCungCap.getSelectedIndex()).getId());
+        pn.setIdNhanVien(listNv.get(cbbNhanVien.getSelectedIndex()).getId());
+        pn.setTrangThai(phieuNhapService.loc(cbbTrangThai.getSelectedIndex()));
+
+        return pn;
+    }
+>>>>>>> 885dba5c2390c3b3e9d110c93da559ce0624d51a:src/main/java/cores/nhanVienQuanLy/views/NvqlRUDPhieuNhapView.java
 //    
 
     /**

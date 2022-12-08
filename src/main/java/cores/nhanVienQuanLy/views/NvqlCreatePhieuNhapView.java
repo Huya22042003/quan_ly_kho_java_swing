@@ -1,13 +1,22 @@
+<<<<<<< HEAD:src/main/java/cores/truongPhongs/views/NvqlCreatePhieuNhapView.java
 package cores.truongPhongs.views;
+=======
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
+package cores.nhanVienQuanLy.views;
+>>>>>>> 885dba5c2390c3b3e9d110c93da559ce0624d51a:src/main/java/cores/nhanVienQuanLy/views/NvqlCreatePhieuNhapView.java
 
 import cores.nhanVienQuanLy.customModels.NvqlGetTenNccCustom;
 import cores.nhanVienQuanLy.customModels.NvqlGetTenNhanVienCustom;
-import cores.truongPhongs.customModels.TpPhieuNhapCustom;
+import cores.nhanVienQuanLy.customModels.NvqlQuanLyPhieuNhapCustom;
 import cores.nhanVienQuanLy.services.NvqlGetTenNccService;
 import cores.nhanVienQuanLy.services.NvqlGetTenNvService;
+import cores.nhanVienQuanLy.services.NvqlQuanLyPhieuNhapService;
 import cores.nhanVienQuanLy.services.serviceImpls.NvqlGetTenNccServiceImpl;
 import cores.nhanVienQuanLy.services.serviceImpls.NvqlGetTenNvServiceImpl;
-import cores.truongPhongs.services.serviceImpls.TpPhieuNhapServiceImpl;
+import cores.nhanVienQuanLy.services.serviceImpls.NvqlQuanLyPhieuNhapServiceImpl;
 import infrastructures.constant.TrangThaiPhieuConstant;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -17,7 +26,6 @@ import java.util.List;
 import utilities.Converter;
 import utilities.DateTimeUtil;
 import utilities.MsgBox;
-import cores.truongPhongs.services.TpPhieuNhapService;
 
 /**
  *
@@ -30,7 +38,7 @@ public class NvqlCreatePhieuNhapView extends javax.swing.JFrame {
      */
     private NvqlGetTenNccService tenNccService;
     private NvqlGetTenNvService tenNvService;
-    private TpPhieuNhapService phieuNhapService;
+    private NvqlQuanLyPhieuNhapService phieuNhapService;
     private List<NvqlGetTenNccCustom> listNcc = new ArrayList<>();
     private List<NvqlGetTenNhanVienCustom> listNv = new ArrayList<>();
 
@@ -38,7 +46,7 @@ public class NvqlCreatePhieuNhapView extends javax.swing.JFrame {
         initComponents();
         tenNccService = new NvqlGetTenNccServiceImpl();
         tenNvService = new NvqlGetTenNvServiceImpl();
-        phieuNhapService = new TpPhieuNhapServiceImpl();
+        phieuNhapService = new NvqlQuanLyPhieuNhapServiceImpl();
         listNcc = tenNccService.getList();
         listNv = tenNvService.getList();
         this.loadCbbNcc();
@@ -269,6 +277,7 @@ public class NvqlCreatePhieuNhapView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+<<<<<<< HEAD:src/main/java/cores/truongPhongs/views/NvqlCreatePhieuNhapView.java
 //        TpPhieuNhapCustom check = this.getFormData();
 //        if (check == null) {
 //            return;
@@ -281,6 +290,20 @@ public class NvqlCreatePhieuNhapView extends javax.swing.JFrame {
 //            MsgBox.alert(this, "Thêm thành công");
 //            this.setVisible(false);
 //        }
+=======
+        NvqlQuanLyPhieuNhapCustom check = this.getFormData();
+        if (check == null) {
+            return;
+        }
+
+        if (phieuNhapService.addPn(check) == null) {
+            MsgBox.alert(this, "Thêm thất bại");
+            this.setVisible(true);
+        } else {
+            MsgBox.alert(this, "Thêm thành công");
+            this.setVisible(false);
+        }
+>>>>>>> 885dba5c2390c3b3e9d110c93da559ce0624d51a:src/main/java/cores/nhanVienQuanLy/views/NvqlCreatePhieuNhapView.java
 
     }//GEN-LAST:event_btnSaveActionPerformed
     int xx, xy;
@@ -299,6 +322,7 @@ public class NvqlCreatePhieuNhapView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbbNhanVienActionPerformed
 
+<<<<<<< HEAD:src/main/java/cores/truongPhongs/views/NvqlCreatePhieuNhapView.java
 //    public TpPhieuNhapCustom getFormData() {
 //
 //        String ghiChu = txtGhiChu.getText();
@@ -311,6 +335,20 @@ public class NvqlCreatePhieuNhapView extends javax.swing.JFrame {
 //
 //        return pn;
 //    }
+=======
+    public NvqlQuanLyPhieuNhapCustom getFormData() {
+
+        String ghiChu = txtGhiChu.getText();
+        Date ngayNhap = dateNgayNhan.getDate();
+        Date ngayTao = new Date(DateTimeUtil.convertDateToTimeStampSecond());
+        NvqlQuanLyPhieuNhapCustom pn = phieuNhapService.checkValidate(ghiChu, ngayNhap, ngayTao, errNgayNhan, errNgayTao, errGhiChu);
+        pn.setIdNcc(listNcc.get(cbbNhaCungCap.getSelectedIndex()).getId());
+        pn.setIdNhanVien(listNv.get(cbbNhanVien.getSelectedIndex()).getId());
+        pn.setTrangThai(phieuNhapService.loc(cbbTrangThai.getSelectedIndex()));
+
+        return pn;
+    }
+>>>>>>> 885dba5c2390c3b3e9d110c93da559ce0624d51a:src/main/java/cores/nhanVienQuanLy/views/NvqlCreatePhieuNhapView.java
 
     /**
      * @param args the command line arguments

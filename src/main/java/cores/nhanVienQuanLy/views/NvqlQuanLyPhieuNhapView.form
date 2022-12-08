@@ -107,6 +107,7 @@
                           <Component id="panelRound16" min="-2" max="-2" attributes="0"/>
                           <Component id="panelRound7" min="-2" max="-2" attributes="0"/>
                       </Group>
+<<<<<<< HEAD:src/main/java/cores/truongPhongs/views/TpPhieuNhapView.form
                       <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                       <Component id="panelRound6" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
@@ -118,6 +119,11 @@
                           <Component id="uWPButton4" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+=======
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" pref="412" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+>>>>>>> 885dba5c2390c3b3e9d110c93da559ce0624d51a:src/main/java/cores/nhanVienQuanLy/views/NvqlQuanLyPhieuNhapView.form
                   </Group>
               </Group>
             </DimensionLayout>

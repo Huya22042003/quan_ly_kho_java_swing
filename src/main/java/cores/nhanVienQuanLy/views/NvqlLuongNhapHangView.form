@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+<<<<<<< HEAD:src/main/java/cores/truongPhongs/views/TpLuongNhapView.form
   <NonVisualComponents>
     <Component class="javax.swing.ButtonGroup" name="buttonGroup1">
     </Component>
     <Component class="javax.swing.ButtonGroup" name="buttonGroup2">
     </Component>
   </NonVisualComponents>
+=======
+>>>>>>> 885dba5c2390c3b3e9d110c93da559ce0624d51a:src/main/java/cores/nhanVienQuanLy/views/NvqlLuongNhapHangView.form
   <Properties>
     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
       <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -99,6 +102,11 @@
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="myButton6" min="-2" pref="92" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="174" max="-2" attributes="0"/>
+              </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -127,7 +135,15 @@
                           <Component id="txtIndex" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+<<<<<<< HEAD:src/main/java/cores/truongPhongs/views/TpLuongNhapView.form
                   <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+=======
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="jScrollPane1" min="-2" pref="315" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="myButton6" min="-2" pref="39" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+>>>>>>> 885dba5c2390c3b3e9d110c93da559ce0624d51a:src/main/java/cores/nhanVienQuanLy/views/NvqlLuongNhapHangView.form
               </Group>
           </Group>
         </DimensionLayout>
@@ -140,17 +156,17 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="utilities.palette.TableDark_1" name="tblPhieuNhap">
+            <Component class="utilities.palette.TableDark_1" name="tableDark_11">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="7" rowCount="0">
-                    <Column editable="false" title="STT" type="java.lang.Object"/>
-                    <Column editable="false" title="M&#xe3; phi&#x1ebf;u" type="java.lang.Object"/>
-                    <Column editable="false" title="Ng&#xe0;y t&#x1ea1;o" type="java.lang.Object"/>
-                    <Column editable="false" title="Ng&#xe0;y thanh to&#xe1;n" type="java.lang.Object"/>
-                    <Column editable="false" title="Nh&#xe0; cung c&#x1ea5;p" type="java.lang.Object"/>
-                    <Column editable="false" title="Nh&#xe2;n vi&#xea;n" type="java.lang.Object"/>
-                    <Column editable="false" title="Tr&#x1ea1;ng th&#xe1;i" type="java.lang.Object"/>
+                    <Column editable="true" title="STT" type="java.lang.Object"/>
+                    <Column editable="true" title="M&#xe3; phi&#x1ebf;u" type="java.lang.Object"/>
+                    <Column editable="true" title="Ng&#xe0;y t&#x1ea1;o" type="java.lang.Object"/>
+                    <Column editable="true" title="Ng&#xe0;y thanh to&#xe1;n" type="java.lang.Object"/>
+                    <Column editable="true" title="Nh&#xe0; cung c&#x1ea5;p" type="java.lang.Object"/>
+                    <Column editable="true" title="Nh&#xe2;n vi&#xea;n" type="java.lang.Object"/>
+                    <Column editable="true" title="Tr&#x1ea1;ng th&#xe1;i" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -196,9 +212,6 @@
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblPhieuNhapMouseClicked"/>
-              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -217,20 +230,30 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
+<<<<<<< HEAD:src/main/java/cores/truongPhongs/views/TpLuongNhapView.form
                       <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                       <Component id="rdoMa" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="rdoNcc" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                       <Component id="rdoNhanVien" min="-2" max="-2" attributes="0"/>
+=======
+                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                      <Component id="rdoNhanVien" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="rdoNcc" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="rdoMa" min="-2" max="-2" attributes="0"/>
+>>>>>>> 885dba5c2390c3b3e9d110c93da559ce0624d51a:src/main/java/cores/nhanVienQuanLy/views/NvqlLuongNhapHangView.form
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="txtSearch" min="-2" pref="212" max="-2" attributes="0"/>
+                      <Component id="textFieldAnimation1" min="-2" pref="212" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< HEAD:src/main/java/cores/truongPhongs/views/TpLuongNhapView.form
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -238,6 +261,22 @@
                           <Component id="rdoNcc" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="rdoNhanVien" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtSearch" alignment="3" min="-2" max="-2" attributes="0"/>
+=======
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="rdoNcc" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="rdoNhanVien" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="rdoMa" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="5" pref="5" max="-2" attributes="0"/>
+                              <Component id="textFieldAnimation1" min="-2" max="-2" attributes="0"/>
+                          </Group>
+>>>>>>> 885dba5c2390c3b3e9d110c93da559ce0624d51a:src/main/java/cores/nhanVienQuanLy/views/NvqlLuongNhapHangView.form
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -245,6 +284,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
+<<<<<<< HEAD:src/main/java/cores/truongPhongs/views/TpLuongNhapView.form
             <Component class="utilities.palette.RadioButtonCustom" name="rdoMa">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -279,13 +319,12 @@
                 </Property>
               </Properties>
             </Component>
+=======
+>>>>>>> 885dba5c2390c3b3e9d110c93da559ce0624d51a:src/main/java/cores/nhanVienQuanLy/views/NvqlLuongNhapHangView.form
             <Component class="utilities.palette.RadioButtonCustom" name="rdoNhanVien">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="bb" green="82" red="43" type="rgb"/>
-                </Property>
-                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                  <ComponentRef name="buttonGroup1"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -296,10 +335,45 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="utilities.palette.SearchCustom.TextFieldAnimation" name="txtSearch">
+            <Component class="utilities.palette.RadioButtonCustom" name="rdoNcc">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="bb" green="82" red="43" type="rgb"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Nh&#xe0; cung c&#x1ea5;p"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="1"/>
+                </Property>
+              </Properties>
               <Events>
+<<<<<<< HEAD:src/main/java/cores/truongPhongs/views/TpLuongNhapView.form
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtSearchMouseClicked"/>
+=======
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdoNccActionPerformed"/>
+>>>>>>> 885dba5c2390c3b3e9d110c93da559ce0624d51a:src/main/java/cores/nhanVienQuanLy/views/NvqlLuongNhapHangView.form
               </Events>
+            </Component>
+            <Component class="utilities.palette.RadioButtonCustom" name="rdoMa">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="bb" green="82" red="43" type="rgb"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="M&#xe3;"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="1"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdoMaActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="utilities.palette.SearchCustom.TextFieldAnimation" name="textFieldAnimation1">
             </Component>
           </SubComponents>
         </Container>
@@ -363,11 +437,19 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
+<<<<<<< HEAD:src/main/java/cores/truongPhongs/views/TpLuongNhapView.form
                       <EmptySpace pref="21" max="32767" attributes="0"/>
                       <Component id="btnKhoangTime" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="cbbTrangThai" min="-2" pref="201" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+=======
+                      <EmptySpace pref="23" max="32767" attributes="0"/>
+                      <Component id="myButton8" min="-2" pref="100" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="combobox1" min="-2" pref="201" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+>>>>>>> 885dba5c2390c3b3e9d110c93da559ce0624d51a:src/main/java/cores/nhanVienQuanLy/views/NvqlLuongNhapHangView.form
                   </Group>
               </Group>
             </DimensionLayout>
@@ -375,6 +457,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
+<<<<<<< HEAD:src/main/java/cores/truongPhongs/views/TpLuongNhapView.form
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="btnKhoangTime" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
@@ -383,21 +466,37 @@
                           </Group>
                       </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
+=======
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="combobox1" min="-2" pref="38" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="myButton8" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+>>>>>>> 885dba5c2390c3b3e9d110c93da559ce0624d51a:src/main/java/cores/nhanVienQuanLy/views/NvqlLuongNhapHangView.form
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="utilities.palette.Combobox" name="cbbTrangThai">
+            <Component class="utilities.palette.Combobox" name="combobox1">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="bb" green="82" red="43" type="rgb"/>
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+<<<<<<< HEAD:src/main/java/cores/truongPhongs/views/TpLuongNhapView.form
                   <StringArray count="3">
                     <StringItem index="0" value="Ch&#x1edd; thanh to&#xe1;n"/>
                     <StringItem index="1" value="&#x110;&#xe3; h&#x1ee7;y"/>
                     <StringItem index="2" value="&#x110;&#xe3; thanh to&#xe1;n"/>
+=======
+                  <StringArray count="2">
+                    <StringItem index="0" value="deadae"/>
+                    <StringItem index="1" value="edde"/>
+>>>>>>> 885dba5c2390c3b3e9d110c93da559ce0624d51a:src/main/java/cores/nhanVienQuanLy/views/NvqlLuongNhapHangView.form
                   </StringArray>
                 </Property>
                 <Property name="selectedIndex" type="int" value="-1"/>
@@ -411,10 +510,10 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbbTrangThaiActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="combobox1ActionPerformed"/>
               </Events>
             </Component>
-            <Component class="utilities.palette.MyButton" name="btnKhoangTime">
+            <Component class="utilities.palette.MyButton" name="myButton8">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/icons/calendarrrrrr.png"/>
@@ -432,7 +531,7 @@
                 <Property name="radius" type="int" value="50"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnKhoangTimeActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="myButton8ActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
@@ -557,6 +656,7 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
+<<<<<<< HEAD:src/main/java/cores/truongPhongs/views/TpLuongNhapView.form
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnPhieuNhapChiTiet1" min="-2" pref="96" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -568,6 +668,15 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnShow" min="-2" pref="85" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
+=======
+                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                      <Component id="myButton5" min="-2" pref="100" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="myButton9" min="-2" pref="100" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="myButton10" min="-2" pref="100" max="-2" attributes="0"/>
+                      <EmptySpace pref="22" max="32767" attributes="0"/>
+>>>>>>> 885dba5c2390c3b3e9d110c93da559ce0624d51a:src/main/java/cores/nhanVienQuanLy/views/NvqlLuongNhapHangView.form
                   </Group>
               </Group>
             </DimensionLayout>
@@ -575,12 +684,19 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
+<<<<<<< HEAD:src/main/java/cores/truongPhongs/views/TpLuongNhapView.form
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="btnPhieuNhapChiTiet" max="32767" attributes="0"/>
                           <Component id="btnThemPhieuNhapMoi" max="32767" attributes="0"/>
                           <Component id="btnThemSpVaoPhieu" alignment="0" max="32767" attributes="0"/>
                           <Component id="btnShow" alignment="0" max="32767" attributes="0"/>
                           <Component id="btnPhieuNhapChiTiet1" max="32767" attributes="0"/>
+=======
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="myButton5" pref="43" max="32767" attributes="0"/>
+                          <Component id="myButton9" alignment="0" max="32767" attributes="0"/>
+                          <Component id="myButton10" alignment="0" max="32767" attributes="0"/>
+>>>>>>> 885dba5c2390c3b3e9d110c93da559ce0624d51a:src/main/java/cores/nhanVienQuanLy/views/NvqlLuongNhapHangView.form
                       </Group>
                       <EmptySpace pref="16" max="32767" attributes="0"/>
                   </Group>
@@ -588,7 +704,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="utilities.palette.MyButton" name="btnPhieuNhapChiTiet">
+            <Component class="utilities.palette.MyButton" name="myButton9">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/icons/file.png"/>
@@ -606,10 +722,10 @@
                 <Property name="radius" type="int" value="50"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPhieuNhapChiTietActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="myButton9ActionPerformed"/>
               </Events>
             </Component>
-            <Component class="utilities.palette.MyButton" name="btnThemPhieuNhapMoi">
+            <Component class="utilities.palette.MyButton" name="myButton5">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="f4" green="f2" red="dd" type="rgb"/>
@@ -627,10 +743,10 @@
                 <Property name="radius" type="int" value="50"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThemPhieuNhapMoiActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="myButton5ActionPerformed"/>
               </Events>
             </Component>
-            <Component class="utilities.palette.MyButton" name="btnThemSpVaoPhieu">
+            <Component class="utilities.palette.MyButton" name="myButton10">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/icons/add-to-basket.png"/>
@@ -648,7 +764,7 @@
                 <Property name="radius" type="int" value="50"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThemSpVaoPhieuActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="myButton10ActionPerformed"/>
               </Events>
             </Component>
             <Component class="utilities.palette.MyButton" name="btnShow">
@@ -695,6 +811,7 @@
             </Component>
           </SubComponents>
         </Container>
+<<<<<<< HEAD:src/main/java/cores/truongPhongs/views/TpLuongNhapView.form
         <Component class="utilities.palette.UWPButton" name="btnPre">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -719,6 +836,21 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNextActionPerformed"/>
           </Events>
+=======
+        <Component class="utilities.palette.MyButton" name="myButton6">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/icons/update.png"/>
+            </Property>
+            <Property name="borderColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="f4" green="f2" red="dd" type="rgb"/>
+            </Property>
+            <Property name="color" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="f4" green="f2" red="dd" type="rgb"/>
+            </Property>
+            <Property name="radius" type="int" value="50"/>
+          </Properties>
+>>>>>>> 885dba5c2390c3b3e9d110c93da559ce0624d51a:src/main/java/cores/nhanVienQuanLy/views/NvqlLuongNhapHangView.form
         </Component>
       </SubComponents>
     </Container>
@@ -743,6 +875,7 @@
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       </Group>
+<<<<<<< HEAD:src/main/java/cores/truongPhongs/views/TpLuongNhapView.form
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="btnThanhToan" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
@@ -761,6 +894,18 @@
                               <Component id="txtNhanVien" alignment="0" max="32767" attributes="0"/>
                               <Component id="txtTrangThai" alignment="0" max="32767" attributes="0"/>
                               <Component id="textAreaScroll1" alignment="0" pref="274" max="32767" attributes="0"/>
+=======
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="textAreaScroll1" alignment="0" min="-2" pref="274" max="-2" attributes="0"/>
+                              <Component id="textField3" alignment="0" pref="281" max="32767" attributes="0"/>
+                              <Component id="textField4" alignment="1" max="32767" attributes="0"/>
+                              <Component id="textField5" alignment="0" max="32767" attributes="0"/>
+                              <Component id="textField6" alignment="0" max="32767" attributes="0"/>
+                              <Component id="textField7" alignment="0" max="32767" attributes="0"/>
+                              <Component id="textField8" alignment="1" max="32767" attributes="0"/>
+>>>>>>> 885dba5c2390c3b3e9d110c93da559ce0624d51a:src/main/java/cores/nhanVienQuanLy/views/NvqlLuongNhapHangView.form
                           </Group>
                       </Group>
                   </Group>
@@ -773,6 +918,7 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" pref="35" max="-2" attributes="0"/>
+<<<<<<< HEAD:src/main/java/cores/truongPhongs/views/TpLuongNhapView.form
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="txtMaPhieu" min="-2" pref="46" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
@@ -790,6 +936,25 @@
                   <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                   <Component id="btnThanhToan" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+=======
+                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                  <Component id="textField4" min="-2" pref="46" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="textField3" min="-2" pref="46" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="textField6" min="-2" pref="46" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="textField7" min="-2" pref="46" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="textField8" min="-2" pref="46" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                  <Component id="textAreaScroll1" min="-2" pref="90" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="textField5" min="-2" pref="46" max="-2" attributes="0"/>
+                  <EmptySpace pref="42" max="32767" attributes="0"/>
+                  <Component id="myButton7" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+>>>>>>> 885dba5c2390c3b3e9d110c93da559ce0624d51a:src/main/java/cores/nhanVienQuanLy/views/NvqlLuongNhapHangView.form
               </Group>
           </Group>
         </DimensionLayout>
@@ -803,7 +968,7 @@
             <Property name="text" type="java.lang.String" value="Th&#xf4;ng tin phi&#x1ebf;u nh&#x1ead;p"/>
           </Properties>
         </Component>
-        <Component class="utilities.palette.TextField" name="txtNgayTao">
+        <Component class="utilities.palette.TextField" name="textField3">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -815,7 +980,7 @@
             <Property name="labelText" type="java.lang.String" value="Ng&#xe0;y t&#x1ea1;o"/>
           </Properties>
         </Component>
-        <Component class="utilities.palette.TextField" name="txtMaPhieu">
+        <Component class="utilities.palette.TextField" name="textField4">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -826,6 +991,12 @@
             </Property>
             <Property name="labelText" type="java.lang.String" value="M&#xe3; phi&#x1ebf;u "/>
           </Properties>
+<<<<<<< HEAD:src/main/java/cores/truongPhongs/views/TpLuongNhapView.form
+=======
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textField4ActionPerformed"/>
+          </Events>
+>>>>>>> 885dba5c2390c3b3e9d110c93da559ce0624d51a:src/main/java/cores/nhanVienQuanLy/views/NvqlLuongNhapHangView.form
         </Component>
         <Container class="utilities.palette.TextAreaScroll" name="textAreaScroll1">
           <Properties>
@@ -854,9 +1025,8 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="utilities.palette.TextField" name="txtTienPhaiTra">
+        <Component class="utilities.palette.TextField" name="textField5">
           <Properties>
-            <Property name="editable" type="boolean" value="false"/>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="e0" green="ce" red="e4" type="rgb"/>
             </Property>
@@ -888,7 +1058,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThanhToanActionPerformed"/>
           </Events>
         </Component>
-        <Component class="utilities.palette.TextField" name="txtNhaCungCap">
+        <Component class="utilities.palette.TextField" name="textField6">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -900,7 +1070,7 @@
             <Property name="labelText" type="java.lang.String" value="Nh&#xe0; cung c&#x1ea5;p"/>
           </Properties>
         </Component>
-        <Component class="utilities.palette.TextField" name="txtNhanVien">
+        <Component class="utilities.palette.TextField" name="textField7">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -911,10 +1081,15 @@
             </Property>
             <Property name="labelText" type="java.lang.String" value="Nh&#xe2;n vi&#xea;n"/>
           </Properties>
+<<<<<<< HEAD:src/main/java/cores/truongPhongs/views/TpLuongNhapView.form
+=======
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textField7ActionPerformed"/>
+          </Events>
+>>>>>>> 885dba5c2390c3b3e9d110c93da559ce0624d51a:src/main/java/cores/nhanVienQuanLy/views/NvqlLuongNhapHangView.form
         </Component>
-        <Component class="utilities.palette.TextField" name="txtTrangThai">
+        <Component class="utilities.palette.TextField" name="textField8">
           <Properties>
-            <Property name="editable" type="boolean" value="false"/>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="e0" green="ce" red="e4" type="rgb"/>
             </Property>
@@ -923,6 +1098,12 @@
             </Property>
             <Property name="labelText" type="java.lang.String" value="Tr&#x1ea1;ng th&#xe1;i"/>
           </Properties>
+<<<<<<< HEAD:src/main/java/cores/truongPhongs/views/TpLuongNhapView.form
+=======
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textField8ActionPerformed"/>
+          </Events>
+>>>>>>> 885dba5c2390c3b3e9d110c93da559ce0624d51a:src/main/java/cores/nhanVienQuanLy/views/NvqlLuongNhapHangView.form
         </Component>
       </SubComponents>
     </Container>

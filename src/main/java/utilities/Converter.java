@@ -297,6 +297,7 @@ public class Converter {
 
         return trangThai;
     }
+<<<<<<< HEAD
 
     public static String trangThaiPhieuNhap(TrangThaiPhieuConstant th) {
         String trangThai = "";
@@ -316,4 +317,6 @@ public class Converter {
 
         return trangThai;
     }
+=======
+>>>>>>> 885dba5c2390c3b3e9d110c93da559ce0624d51a
 }

@@ -1,7 +1,12 @@
 package views.main;
 
+<<<<<<< HEAD
 import cores.nhanVienQuanLy.views.NvqlKiemKeView;
 import cores.nhanVienQuanLy.views.NvqlLuongHoanXuatView;
+=======
+import cores.nhanVienQuanLy.views.NVQLQuanLyPhieuXuatView;
+import cores.nhanVienQuanLy.views.NvqlQuanLyPhieuNhapView;
+>>>>>>> 885dba5c2390c3b3e9d110c93da559ce0624d51a
 import cores.nhanVienQuanLy.views.NvqlXemThongTinCaNhanForm;
 import cores.nhanVienQuanLy.views.Tai_NvqlLuongPhieuXuatView;
 import cores.truongPhongs.views.TpQuanLyChiTietSanPhamForm;
@@ -57,12 +62,16 @@ public class NhanVienQuanLy extends javax.swing.JFrame {
                     main.showForm(new TrangChu());
                 }
                 if (menuIndex == 1) {
+<<<<<<< HEAD
                     if(subMenuIndex == 0) {
                         main.showForm(new Tai_NvqlLuongPhieuXuatView());
                     }
                     if(subMenuIndex == 1) {
                         main.showForm(new NvqlLuongHoanXuatView());
                     }
+=======
+                    main.showForm(new NvqlQuanLyPhieuNhapView());
+>>>>>>> 885dba5c2390c3b3e9d110c93da559ce0624d51a
                 }
                 if (menuIndex == 2) {
                     main.showForm(new NvqlKiemKeView());

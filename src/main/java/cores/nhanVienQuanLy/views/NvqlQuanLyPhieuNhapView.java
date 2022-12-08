@@ -1,7 +1,19 @@
+<<<<<<< HEAD:src/main/java/cores/truongPhongs/views/TpPhieuNhapView.java
 package cores.truongPhongs.views;
 
 import cores.truongPhongs.customModels.TpPhieuNhapCustom;
 import cores.truongPhongs.services.serviceImpls.TpPhieuNhapServiceImpl;
+=======
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
+ */
+package cores.nhanVienQuanLy.views;
+
+import cores.nhanVienQuanLy.customModels.NvqlQuanLyPhieuNhapCustom;
+import cores.nhanVienQuanLy.services.NvqlQuanLyPhieuNhapService;
+import cores.nhanVienQuanLy.services.serviceImpls.NvqlQuanLyPhieuNhapServiceImpl;
+>>>>>>> 885dba5c2390c3b3e9d110c93da559ce0624d51a:src/main/java/cores/nhanVienQuanLy/views/NvqlQuanLyPhieuNhapView.java
 import infrastructures.constant.TrangThaiPhieuConstant;
 
 import java.util.ArrayList;
@@ -11,18 +23,22 @@ import java.util.UUID;
 import javax.swing.table.DefaultTableModel;
 import utilities.Converter;
 import utilities.MsgBox;
+<<<<<<< HEAD:src/main/java/cores/truongPhongs/views/TpPhieuNhapView.java
 import cores.truongPhongs.services.TpPhieuNhapService;
 import utilities.Page;
+=======
+>>>>>>> 885dba5c2390c3b3e9d110c93da559ce0624d51a:src/main/java/cores/nhanVienQuanLy/views/NvqlQuanLyPhieuNhapView.java
 
 /**
  *
  * @author QUOC HUY
  */
-public class TpPhieuNhapView extends javax.swing.JPanel {
+public class NvqlQuanLyPhieuNhapView extends javax.swing.JPanel {
 
     /**
      * Creates new form DemoCoSoView
      */
+<<<<<<< HEAD:src/main/java/cores/truongPhongs/views/TpPhieuNhapView.java
     private TpPhieuNhapService phieuNhapService;
 
     private List<TpPhieuNhapCustom> getListPhieuNhap;
@@ -43,6 +59,17 @@ public class TpPhieuNhapView extends javax.swing.JPanel {
         getListPhieuNhap = phieuNhapService.getListPn();
 //        this.loadTable(getListPhieuNhap);
         this.loadTable(phieuNhapService.phanTrang(getListPhieuNhap, offset, limit));
+=======
+    private NvqlQuanLyPhieuNhapService phieuNhapService;
+    
+    private List<NvqlQuanLyPhieuNhapCustom> getListPhieuNhap;
+    
+    public NvqlQuanLyPhieuNhapView() {
+        initComponents();
+        phieuNhapService = new NvqlQuanLyPhieuNhapServiceImpl();
+        getListPhieuNhap = new ArrayList<>();
+        this.loadTable(getListPhieuNhap);
+>>>>>>> 885dba5c2390c3b3e9d110c93da559ce0624d51a:src/main/java/cores/nhanVienQuanLy/views/NvqlQuanLyPhieuNhapView.java
         this.loadCbbTrangThai();
 //        clearForm();
     }
@@ -52,11 +79,15 @@ public class TpPhieuNhapView extends javax.swing.JPanel {
         this.cbbTrangThai.addItem(Converter.trangThaiDonHang(TrangThaiPhieuConstant.DA_HUY));
         this.cbbTrangThai.addItem(Converter.trangThaiDonHang(TrangThaiPhieuConstant.CHO_THANH_TOAN));
     }
+<<<<<<< HEAD:src/main/java/cores/truongPhongs/views/TpPhieuNhapView.java
 
     public List<TpPhieuNhapCustom> listSearch(int rdo) {
+=======
+    public List<NvqlQuanLyPhieuNhapCustom> listSearch(int rdo) {
+>>>>>>> 885dba5c2390c3b3e9d110c93da559ce0624d51a:src/main/java/cores/nhanVienQuanLy/views/NvqlQuanLyPhieuNhapView.java
         // nhập vào 
         String timKiem = this.txtSearchTheo.getText();
-        List<TpPhieuNhapCustom> listTimKiem = new ArrayList<>();
+        List<NvqlQuanLyPhieuNhapCustom> listTimKiem = new ArrayList<>();
 
         // tìm kiếm theo tên mã vị trí
         checkCbb(phieuNhapService.loc(this.cbbTrangThai.getSelectedIndex())).forEach(el -> {
@@ -97,9 +128,15 @@ public class TpPhieuNhapView extends javax.swing.JPanel {
 
         return listTimKiem;
     }
+<<<<<<< HEAD:src/main/java/cores/truongPhongs/views/TpPhieuNhapView.java
 
     public List<TpPhieuNhapCustom> checkCbb(TrangThaiPhieuConstant cs) {
         List<TpPhieuNhapCustom> listTimKiem = new ArrayList<>();
+=======
+    
+    public List<NvqlQuanLyPhieuNhapCustom> checkCbb(TrangThaiPhieuConstant cs) {
+        List<NvqlQuanLyPhieuNhapCustom> listTimKiem = new ArrayList<>();
+>>>>>>> 885dba5c2390c3b3e9d110c93da559ce0624d51a:src/main/java/cores/nhanVienQuanLy/views/NvqlQuanLyPhieuNhapView.java
         getListPhieuNhap.forEach(el -> {
             if (el.getTrangThai() == cs) {
                 listTimKiem.add(el);
@@ -132,6 +169,7 @@ public class TpPhieuNhapView extends javax.swing.JPanel {
     private void loadIndex() {
         this.txtIndex.setText(String.valueOf(index) + " / " + (Math.round((sizes / limit) + 0.5)));
     
+<<<<<<< HEAD:src/main/java/cores/truongPhongs/views/TpPhieuNhapView.java
     }
 
     public void loadTable(List<TpPhieuNhapCustom> list) {
@@ -140,6 +178,12 @@ public class TpPhieuNhapView extends javax.swing.JPanel {
 
 
 //            TpPhieuNhapCustom el = list.get(i);
+=======
+    public void loadTable(List<NvqlQuanLyPhieuNhapCustom> list) {
+        DefaultTableModel dtm = (DefaultTableModel) this.tblPhieuNhap.getModel();
+        dtm.setRowCount(0);
+        for (NvqlQuanLyPhieuNhapCustom el : list) {
+>>>>>>> 885dba5c2390c3b3e9d110c93da559ce0624d51a:src/main/java/cores/nhanVienQuanLy/views/NvqlQuanLyPhieuNhapView.java
             
 for (TpPhieuNhapCustom el : list) {
                 Object[] rowData = {
@@ -440,6 +484,7 @@ for (TpPhieuNhapCustom el : list) {
             }
         });
 
+<<<<<<< HEAD:src/main/java/cores/truongPhongs/views/TpPhieuNhapView.java
         javax.swing.GroupLayout panelRound7Layout = new javax.swing.GroupLayout(panelRound7);
         panelRound7.setLayout(panelRound7Layout);
         panelRound7Layout.setHorizontalGroup(
@@ -449,6 +494,62 @@ for (TpPhieuNhapCustom el : list) {
                 .addComponent(cbbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(txtSearchTheo, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+=======
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(rdoMa, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(rdoNcc, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(rdoNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(rdoNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(rdoNgayThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(ngayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(ngayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(9, 9, 9)
+                        .addComponent(cbbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtSearchTheo, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtSearchTheo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(rdoNgayThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(rdoMa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(rdoNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(rdoNcc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(rdoNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2)
+                        .addComponent(cbbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(ngayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ngayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(6, 6, 6)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE)
+>>>>>>> 885dba5c2390c3b3e9d110c93da559ce0624d51a:src/main/java/cores/nhanVienQuanLy/views/NvqlQuanLyPhieuNhapView.java
                 .addGap(28, 28, 28))
         );
         panelRound7Layout.setVerticalGroup(
