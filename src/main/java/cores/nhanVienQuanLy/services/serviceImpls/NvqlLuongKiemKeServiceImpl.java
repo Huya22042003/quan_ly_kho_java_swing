@@ -3,8 +3,10 @@ package cores.nhanVienQuanLy.services.serviceImpls;
 import cores.nhanVienQuanLy.customModels.NvqlLuongKiemKeCustom;
 import cores.nhanVienQuanLy.repositories.NvqlLuongKiemKeRepository;
 import cores.nhanVienQuanLy.services.NvqlLuongKiemKeService;
+import cores.truongPhongs.customModels.TpPhieuNhapCustom;
 import domainModels.NhanVien;
 import domainModels.PhieuKiemKe;
+import infrastructures.constant.TrangThaiPhieuConstant;
 import infrastructures.constant.TrangThaiPhieuKiemConstant;
 import java.util.ArrayList;
 import java.util.Date;
@@ -81,6 +83,18 @@ public class NvqlLuongKiemKeServiceImpl implements NvqlLuongKiemKeService {
             listPhanTrang.add(el);
         }
         return listPhanTrang;
+    }
+
+    @Override
+    public List<NvqlLuongKiemKeCustom> findAllByKhAndNV(String ma, TrangThaiPhieuKiemConstant tt, int rdo) {
+                    switch (rdo) {
+            case 0:
+                return rp.getListByMa(ma, tt);
+            case 1:
+                return rp.getListByTenNv(ma, tt);
+            default:
+                return rp.getListByTenNv("", tt);
+        }
     }
 
 }
