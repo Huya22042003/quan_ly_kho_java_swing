@@ -44,6 +44,8 @@ public class TpQuanLyChiTietSanPhamCustom {
     private String tenNcc;
 
     private String maSpNcc;
+    
+    private Long ngayNhap;
 
     public MauConstant convertMau() {
         switch (mau) {

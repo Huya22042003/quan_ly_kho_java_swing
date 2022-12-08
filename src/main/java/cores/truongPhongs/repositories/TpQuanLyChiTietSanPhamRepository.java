@@ -38,7 +38,8 @@ public class TpQuanLyChiTietSanPhamRepository {
                 ctsp.TrangThai,
                 ctsp.Size,
                 ncc.Ten,
-                ctpn.MaSanPhamNhaCungCap
+                ctpn.MaSanPhamNhaCungCap,
+                ctsp.createDate
                 FROM ChiTietSanPham ctsp
                 join DonVi dv on ctsp.IdDonVi = dv.Id
                 join ChiTietPhieuNhap ctpn on ctpn.IdChiTietSP = ctsp.Id
@@ -62,7 +63,8 @@ public class TpQuanLyChiTietSanPhamRepository {
                     (int) el[8],
                     (int) el[9],
                     (String) el[10],
-                    (String) el[11]
+                    (String) el[11],
+                    Long.valueOf(String.valueOf((BigDecimal) el[12]))
             ));
         });
         s.close();
@@ -236,7 +238,7 @@ public class TpQuanLyChiTietSanPhamRepository {
         return list;
 
     }
-    
+
     public List<TpQuanLyDonViCustom> getAllDonVi1() {
         List<TpQuanLyDonViCustom> list = new ArrayList<>();
         Session s = HibernateUtil.getSessionFactory().openSession();
@@ -273,7 +275,7 @@ public class TpQuanLyChiTietSanPhamRepository {
         s.close();
         return list;
     }
-    
+
     public List<TpQuanLySanPhamCustom> getAllSanPham1() {
         List<TpQuanLySanPhamCustom> list = new ArrayList<>();
         Session s = HibernateUtil.getSessionFactory().openSession();
