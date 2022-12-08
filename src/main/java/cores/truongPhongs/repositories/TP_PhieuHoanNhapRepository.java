@@ -28,6 +28,7 @@ public class TP_PhieuHoanNhapRepository {
         Session s = HibernateUtil.getSessionFactory().openSession();
         Query q = s.createQuery("SELECT new cores.truongPhongs.customModels.TP_HoanNhap_PhieuNhapCustom ("
                 + " pn.id as id, "
+                + " pn.maPhieu as maPhieu, "
                 + " pn.ngayTao as ngayTao, "
                 + " pn.ghiChu as ghiChu, "
                 + " pn.ngayThanhToan as ngayThanhToan, "
@@ -87,7 +88,7 @@ public class TP_PhieuHoanNhapRepository {
         return true;
     }
     
-    public boolean addChiTietPhieuHoanNhap(UUID sp, UUID idPhieuHoanNhap, int soLuongHoan) {
+    public boolean addChiTietPhieuHoanNhap(UUID sp, UUID idPhieuHoanNhap, int soLuongHoan,String lyDo) {
         System.out.println(soLuongHoan);
         try ( Session s = HibernateUtil.getSessionFactory().openSession()) {
             PhieuHoanNhap phn = s.find(PhieuHoanNhap.class, idPhieuHoanNhap);
@@ -97,12 +98,14 @@ public class TP_PhieuHoanNhapRepository {
             Transaction tran = s.beginTransaction();
             if(ctphnFind != null) {
                 ctphnFind.setSoLuong(ctphnFind.getSoLuong() + soLuongHoan);
+                ctphnFind.setLiDo(lyDo);
                 s.saveOrUpdate(ctphnFind);
             } else {
                 ChiTietPhieuHoanNhap ctphn = new ChiTietPhieuHoanNhap();
                 ctphn.setIdChiTietSp(ctsp);
                 ctphn.setIdPhieuHoanNhap(phn);
                 ctphn.setSoLuong(soLuongHoan);
+                ctphn.setLiDo(lyDo);
                 s.saveOrUpdate(ctphn);
             }
             ctsp.setSoLuongTon(ctsp.getSoLuongTon() - soLuongHoan);
@@ -149,7 +152,8 @@ public class TP_PhieuHoanNhapRepository {
                 + " pn.idChiTietSp.mau as mau, "
                 + " pn.idChiTietSp.sanPham as sanPham, "
                 + " pn.idChiTietSp.donVi as donVi, "
-                + " pn.soLuong"
+                + " pn.soLuong,"
+                + " pn.liDo"
                 + ") FROM domainModels.ChiTietPhieuHoanNhap pn WHERE pn.idPhieuHoanNhap = :idPhieuNhap");
         q.setParameter("idPhieuNhap", pn);
         list = q.getResultList();
