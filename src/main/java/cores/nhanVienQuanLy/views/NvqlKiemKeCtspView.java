@@ -122,6 +122,7 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
         errorSoLuong = new javax.swing.JLabel();
         txtGiaBan = new utilities.palette.TextField();
         txtNamBH = new utilities.palette.TextField();
+        txtLiDo = new utilities.palette.TextField();
         panelRound4 = new utilities.palette.PanelRound();
         btnAnh = new utilities.palette.UWPButton();
         btnPre = new utilities.palette.UWPButton();
@@ -334,6 +335,11 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
         txtNamBH.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtNamBH.setLabelText("Năm Bảo Hành");
 
+        txtLiDo.setEditable(false);
+        txtLiDo.setBackground(new java.awt.Color(228, 206, 224));
+        txtLiDo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtLiDo.setLabelText("Lí do");
+
         javax.swing.GroupLayout panelRound2Layout = new javax.swing.GroupLayout(panelRound2);
         panelRound2.setLayout(panelRound2Layout);
         panelRound2Layout.setHorizontalGroup(
@@ -350,7 +356,8 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
                             .addComponent(txtSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(errorSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtGiaBan, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNamBH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(txtNamBH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtLiDo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(panelRound2Layout.createSequentialGroup()
                         .addGap(45, 45, 45)
                         .addComponent(jLabel3)))
@@ -375,7 +382,9 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
                 .addComponent(txtNamBH, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(errorSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtLiDo, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         panelRound4.setBackground(new java.awt.Color(228, 206, 224));
@@ -609,7 +618,8 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
                     nvqlLuongKiemKeCtspCustom.getSoLuongTon(),
                     a,
                     haha,
-                    hihi
+                    hihi,
+                    txtLiDo.getText()
             );
             nvqlLuongKiemKeCtspCustom.setSoLuongTon(a);
             nvqlLuongKiemKeCtspCustom.setTrangThai(TrangThaiSanPhamConstanst.CHO_XAC_NHAN);
@@ -724,6 +734,7 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
     private utilities.palette.TextField txtGiaFrom;
     private utilities.palette.TextField txtGiaTo;
     private javax.swing.JLabel txtIndex;
+    private utilities.palette.TextField txtLiDo;
     private utilities.palette.TextField txtMa;
     private utilities.palette.TextField txtMau;
     private utilities.palette.TextField txtNamBH;
