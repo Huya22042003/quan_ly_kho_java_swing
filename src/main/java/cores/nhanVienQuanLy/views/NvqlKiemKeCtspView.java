@@ -107,7 +107,6 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         panelRound6 = new utilities.palette.PanelRound();
-        jButton1 = new javax.swing.JButton();
         btnHienThi = new utilities.palette.MyButton();
         btnSearch = new utilities.palette.MyButton();
         txtGiaFrom = new utilities.palette.TextField();
@@ -119,9 +118,11 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
         txtTenSp = new utilities.palette.TextField();
         txtMau = new utilities.palette.TextField();
         txtSoLuong = new utilities.palette.TextField();
-        errorSoLuong = new javax.swing.JLabel();
         txtGiaBan = new utilities.palette.TextField();
         txtNamBH = new utilities.palette.TextField();
+        btnThemSPKiem = new utilities.palette.MyButton();
+        jButton1 = new javax.swing.JButton();
+        txtSLThucTon = new utilities.palette.TextField();
         txtLiDo = new utilities.palette.TextField();
         panelRound4 = new utilities.palette.PanelRound();
         btnAnh = new utilities.palette.UWPButton();
@@ -227,14 +228,6 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
         panelRound6.setRoundTopLeft(50);
         panelRound6.setRoundTopRight(50);
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 51));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Delete.png"))); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         btnHienThi.setBackground(new java.awt.Color(255, 255, 102));
         btnHienThi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Show.png"))); // NOI18N
         btnHienThi.setText("\n");
@@ -269,15 +262,13 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
                 .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(txtGiaFrom, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(46, 46, 46)
                 .addComponent(txtGiaTo, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(59, 59, 59)
                 .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(50, 50, 50)
                 .addComponent(btnHienThi, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(63, 63, 63))
+                .addGap(68, 68, 68))
         );
         panelRound6Layout.setVerticalGroup(
             panelRound6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -289,8 +280,7 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
                     .addGroup(panelRound6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtGiaFrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtGiaTo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel2))
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel2)))
                 .addContainerGap())
         );
 
@@ -323,8 +313,6 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
         txtSoLuong.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtSoLuong.setLabelText("Số lượng");
 
-        errorSoLuong.setForeground(new java.awt.Color(255, 0, 0));
-
         txtGiaBan.setEditable(false);
         txtGiaBan.setBackground(new java.awt.Color(228, 206, 224));
         txtGiaBan.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -335,7 +323,30 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
         txtNamBH.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtNamBH.setLabelText("Năm Bảo Hành");
 
-        txtLiDo.setEditable(false);
+        btnThemSPKiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/add-to-basket.png"))); // NOI18N
+        btnThemSPKiem.setToolTipText("Thêm sản phẩm muốn kiểm kê");
+        btnThemSPKiem.setBorderColor(new java.awt.Color(221, 242, 244));
+        btnThemSPKiem.setColor(new java.awt.Color(221, 242, 244));
+        btnThemSPKiem.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnThemSPKiem.setRadius(50);
+        btnThemSPKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemSPKiemActionPerformed(evt);
+            }
+        });
+
+        jButton1.setBackground(new java.awt.Color(255, 255, 51));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Delete.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        txtSLThucTon.setBackground(new java.awt.Color(228, 206, 224));
+        txtSLThucTon.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtSLThucTon.setLabelText("Số lượng thực tồn");
+
         txtLiDo.setBackground(new java.awt.Color(228, 206, 224));
         txtLiDo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtLiDo.setLabelText("Lí do");
@@ -345,46 +356,58 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
         panelRound2Layout.setHorizontalGroup(
             panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound2Layout.createSequentialGroup()
-                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelRound2Layout.createSequentialGroup()
+                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelRound2Layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(jLabel3)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelRound2Layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtTenSp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
-                                .addComponent(txtMa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtMau, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(txtSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(errorSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtGiaBan, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtLiDo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtNamBH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtLiDo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(panelRound2Layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addComponent(jLabel3)))
-                .addContainerGap(29, Short.MAX_VALUE))
+                            .addGroup(panelRound2Layout.createSequentialGroup()
+                                .addComponent(btnThemSPKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtSLThucTon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(panelRound2Layout.createSequentialGroup()
+                                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(txtTenSp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
+                                        .addComponent(txtMa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(txtMau, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(txtSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtGiaBan, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addGap(29, 29, 29))
         );
         panelRound2Layout.setVerticalGroup(
             panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound2Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
+                .addGap(18, 18, 18)
                 .addComponent(txtMa, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
+                .addGap(18, 18, 18)
                 .addComponent(txtTenSp, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
+                .addGap(18, 18, 18)
                 .addComponent(txtSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
+                .addGap(18, 18, 18)
                 .addComponent(txtGiaBan, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
+                .addGap(18, 18, 18)
                 .addComponent(txtMau, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49)
+                .addGap(18, 18, 18)
                 .addComponent(txtNamBH, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(errorSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtLiDo, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(txtSLThucTon, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(txtLiDo, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnThemSPKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(46, 46, 46))
         );
 
         panelRound4.setBackground(new java.awt.Color(228, 206, 224));
@@ -520,7 +543,7 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                         .addComponent(erroViTri, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -588,15 +611,69 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
         txtGiaBan.setText(tbSanPham.getValueAt(rowSp, 7).toString());
         txtMau.setText(tbSanPham.getValueAt(rowSp, 5).toString());
         txtNamBH.setText(tbSanPham.getValueAt(rowSp, 6).toString());
+        txtSLThucTon.setText("");
+        txtLiDo.setText("");
+    }//GEN-LAST:event_tbSanPhamMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnHienThiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHienThiActionPerformed
+        clearForm();
+    }//GEN-LAST:event_btnHienThiActionPerformed
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void btnPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreActionPerformed
+        index = p.prevIndex(offset, limit, index);
+        offset = p.prev(offset, limit);
+        loadIndex();
+        //        loadTable(getList);
+        fillTableSanPham(ctspService.phanTrang(listChiTietSanPham, offset, limit));
+    }//GEN-LAST:event_btnPreActionPerformed
+
+    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
+        index = p.nextIndex(offset, limit, sizes, index);
+        offset = p.next(offset, limit, sizes);
+        loadIndex();
+        //        loadTable(getList);
+        fillTableSanPham(ctspService.phanTrang(listChiTietSanPham, offset, limit));
+    }//GEN-LAST:event_btnNextActionPerformed
+
+    private void txtSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSearchMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSearchMouseClicked
+
+    private void btnThemSPKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemSPKiemActionPerformed
+        int rowSp = this.tbSanPham.getSelectedRow();
+
+        if (rowSp == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn sản phẩm trước khi kiểm kê");
+            return;
+        }
 
         if (rowSp > -1) {
             NvqlLuongKiemKeCtspCustom nvqlLuongKiemKeCtspCustom = mouseClickSanPham(rowSp);
 
-            String input = JOptionPane.showInputDialog("Vui lòng nhập số lượng sản phẩm thực tồn trong kho.");
+            String input = txtSLThucTon.getText();
             int a = 0;
             if (input.equalsIgnoreCase("")) {
+                JOptionPane.showMessageDialog(this, "Số lượng thực tồn không được bỏ trống");
                 return;
             }
+
+            System.out.println(nvqlLuongKiemKeCtspCustom.getSoLuongTon());
+            System.out.println(Integer.parseInt(input));
+            if (nvqlLuongKiemKeCtspCustom.getSoLuongTon() != Integer.parseInt(input)) {
+                if (txtLiDo.getText().equalsIgnoreCase("")) {
+                    JOptionPane.showMessageDialog(this, "Lí do không được để trống");
+                    return;
+                }
+            }
+
             try {
                 a = Integer.parseInt(input);
                 if (a > 1000000000) {
@@ -607,6 +684,7 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Vui lòng nhập số", "Erorr", JOptionPane.ERROR_MESSAGE);
                 return;
             }
+
             PhieuKiemKe haha = new PhieuKiemKe();
             haha.setId(phieu.getId());
             ChiTietSanPham hihi = new ChiTietSanPham();
@@ -630,39 +708,7 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Update thành công số lượng tồn trong kho");
             fillTableSanPham(ctspService.getAll());
         }
-    }//GEN-LAST:event_tbSanPhamMouseClicked
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void btnHienThiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHienThiActionPerformed
-        clearForm();
-    }//GEN-LAST:event_btnHienThiActionPerformed
-
-    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        
-    }//GEN-LAST:event_btnSearchActionPerformed
-
-    private void btnPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreActionPerformed
-        index = p.prevIndex(offset, limit, index);
-        offset = p.prev(offset, limit);
-        loadIndex();
-        //        loadTable(getList);
-        fillTableSanPham(ctspService.phanTrang(listChiTietSanPham, offset, limit));
-    }//GEN-LAST:event_btnPreActionPerformed
-
-    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
-        index = p.nextIndex(offset, limit, sizes, index);
-        offset = p.next(offset, limit, sizes);
-        loadIndex();
-        //        loadTable(getList);
-        fillTableSanPham(ctspService.phanTrang(listChiTietSanPham, offset, limit));
-    }//GEN-LAST:event_btnNextActionPerformed
-
-    private void txtSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSearchMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearchMouseClicked
+    }//GEN-LAST:event_btnThemSPKiemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -712,8 +758,8 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
     private utilities.palette.UWPButton btnNext;
     private utilities.palette.UWPButton btnPre;
     private utilities.palette.MyButton btnSearch;
+    private utilities.palette.MyButton btnThemSPKiem;
     private javax.swing.JLabel erroViTri;
-    private javax.swing.JLabel errorSoLuong;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -738,6 +784,7 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
     private utilities.palette.TextField txtMa;
     private utilities.palette.TextField txtMau;
     private utilities.palette.TextField txtNamBH;
+    private utilities.palette.TextField txtSLThucTon;
     private utilities.palette.SearchCustom.TextFieldAnimation txtSearch;
     private utilities.palette.TextField txtSoLuong;
     private utilities.palette.TextField txtTenSp;

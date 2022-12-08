@@ -24,7 +24,8 @@ public class NvqlLuongKiemKeCtpkRepository {
                 + " m.soLuongTon as soLuongTon,"
                 + " m.soLuongThucTon as soLuongThucTon,"
                 + " m.idPhieuKiemKe as idPhieuKiemKe,"
-                + " m.idChiTietSp as idChiTietSanPham"
+                + " m.idChiTietSp as idChiTietSanPham,"
+                + " m.liDo"
                 + " )"
                 + " from domainModels.ChiTietPhieuKiemKe m WHERE m.idPhieuKiemKe.id = :id");
         query.setParameter("id", id);
