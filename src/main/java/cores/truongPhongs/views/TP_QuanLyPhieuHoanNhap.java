@@ -496,7 +496,7 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
     private void myButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton11ActionPerformed
         int row = this.tblPhieuHoanNhap.getSelectedRow();
         if (row == -1) {
-            JOptionPane.showMessageDialog(this, "Bạn phải chọn một dòng", "ERROR !!!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Bạn phải chọn một phiếu hoàn!", "ERROR !!!", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -504,8 +504,13 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
             tn.setVisible(false);
             ctp.setVisible(false);
         }
+        if (this.hoanNhapCustoms.get(row).getTrangThai() == TrangThaiPhieuHoanConstant.HOAN_THANH_CONG || this.hoanNhapCustoms.get(row).getTrangThai() == TrangThaiPhieuHoanConstant.DA_HUY) {
+            JOptionPane.showMessageDialog(this, "Bạn phải chọn một phiếu hoàn đang chờ xác nhận!", "ERROR !!!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         hoanNhap_sp = new TP_QuanLyPhieuHoanNhap_sp(this.hoanNhapCustoms.get(row));
         hoanNhap_sp.setVisible(true);
+
     }//GEN-LAST:event_myButton11ActionPerformed
 
     private void txtMaPhieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaPhieuActionPerformed

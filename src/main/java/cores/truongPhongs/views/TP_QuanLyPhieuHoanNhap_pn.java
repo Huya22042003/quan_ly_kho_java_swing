@@ -373,21 +373,21 @@ public class TP_QuanLyPhieuHoanNhap_pn extends javax.swing.JFrame {
     private void myButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton6ActionPerformed
         int row = this.tblPhieuNhap.getSelectedRow();
         if (row == -1) {
-            JOptionPane.showMessageDialog(this, "Phải chọn một dòng", "ERROR !!!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Bạn phải chọn một phiếu!", "ERROR !!!", JOptionPane.ERROR_MESSAGE);
             return;
         }
         for (TP_PhieuHoanNhapCustom hoanNhapCustom : hoanNhapService.getListPhieuHoanNhap()) {
             if (listPhieuNhap.get(row).getId().equals(hoanNhapCustom.getPhieuNhap().getId())) {
-                JOptionPane.showMessageDialog(this, "Phiếu nhập này đã có phiếu xuất ! Xin vui lòng chọn phiếu khác");
+                JOptionPane.showMessageDialog(this, "Phiếu nhập này đã có phiếu hoàn! Xin vui lòng chọn phiếu khác");
                 return;
             }
         }
         TP_HoanNhap_PhieuNhapCustom pn = this.listPhieuNhap.get(row);
         if (hoanNhapService.addPhieuNhap(pn, txtGhiChu.getText(),"")) {
-            JOptionPane.showMessageDialog(this, "Thêm thành công", "Thành công !!!", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Tạo phiếu hoàn thành công", "Thành công !!!", JOptionPane.INFORMATION_MESSAGE);
             this.setVisible(false);
         } else {
-            JOptionPane.showMessageDialog(this, "Thêm thất bại", "ERROR !!!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Tạo thất bại", "ERROR !!!", JOptionPane.ERROR_MESSAGE);
             this.setVisible(true);
         }
 
