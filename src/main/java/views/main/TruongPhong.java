@@ -9,6 +9,7 @@ import cores.truongPhongs.views.TpDonViView;
 import cores.truongPhongs.views.TpLuongNhapView;
 import cores.truongPhongs.views.TpQuanLyChiTietSanPhamForm;
 import cores.truongPhongs.views.TpQuanLyNhanVien;
+import cores.truongPhongs.views.TpQuanLySanPhamForm;
 import cores.truongPhongs.views.TpThongKeView;
 import views.component.Header;
 import views.event.EventMenuSelected;
@@ -68,7 +69,7 @@ public class TruongPhong extends javax.swing.JFrame {
                     main.showForm(new TP_KhachHangForm());
                 }
                 if (menuIndex == 3) {
-//                    main.showForm(new TpQuanLyChiTietSanPhamForm());
+                    main.showForm(new TpQuanLySanPhamForm());
                 }
                 if (menuIndex == 4) {
                     main.showForm(new TpQuanLyNhanVien());
