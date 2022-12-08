@@ -7,6 +7,7 @@ import cores.nhanVienQuanLy.services.NvqlLuongKiemKeCtpkService;
 import cores.nhanVienQuanLy.services.NvqlLuongKiemKeCtspService;
 import cores.nhanVienQuanLy.services.serviceImpls.NvqlLuongKiemKeCtpkServiceImpl;
 import cores.nhanVienQuanLy.services.serviceImpls.NvqlLuongKiemKeCtspServiceImpl;
+import infrastructures.constant.TrangThaiPhieuKiemConstant;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,11 +38,11 @@ public class NvqlKiemKeCtpkView extends javax.swing.JFrame {
     private int offset = 0;
     private int sizes = 0;
     private int index = 1;
-
+    
     public void PhieuKiemKe(NvqlLuongKiemKeCustom phieuKiemKe) {
         this.phieuKiemKe = phieuKiemKe;
     }
-
+    
     public NvqlKiemKeCtpkView() {
         p = new Page();
         initComponents();
@@ -51,9 +52,9 @@ public class NvqlKiemKeCtpkView extends javax.swing.JFrame {
         ctpkk = new NvqlLuongKiemKeCtpkCustom();
         sizes = listCtpk.size();
         fillTablePhieuKiemChiTiet(ctpkService.phanTrang(listCtpk, offset, limit));
-
+        
     }
-
+    
     public void fillTablePhieuKiemChiTiet(List<NvqlLuongKiemKeCtpkCustom> list) {
         DefaultTableModel model = (DefaultTableModel) tbPhieuKiemChiTiet.getModel();
         model.setRowCount(0);
@@ -65,9 +66,9 @@ public class NvqlKiemKeCtpkView extends javax.swing.JFrame {
             if (list.get(i) == null) {
                 return;
             }
-
+            
             NvqlLuongKiemKeCtpkCustom m = list.get(i);
-
+            
             Object[] row = new Object[]{
                 model.getRowCount() + 1,
                 m.getMa(),
@@ -75,20 +76,21 @@ public class NvqlKiemKeCtpkView extends javax.swing.JFrame {
                 m.getSoLuongTon(),
                 m.getSoLuongThucTon(),
                 m.getChenhLech(),
-                Converter.trangThaiSanPham(m.getIdChiTietSanPham().getTrangThai())
+                Converter.trangThaiSanPham(m.getIdChiTietSanPham().getTrangThai()),
+                m.getLiDo()
             };
             model.addRow(row);
         }
-
+        
     }
-
+    
     private void clearForm() {
         sizes = listCtpk.size();
         offset = 0;
         index = 1;
         loadIndex();
     }
-
+    
     private void loadIndex() {
         this.txtIndex.setText(String.valueOf(index) + " / " + (Math.round((sizes / limit) + 0.5)));
     }
@@ -122,6 +124,7 @@ public class NvqlKiemKeCtpkView extends javax.swing.JFrame {
         txtSlTon = new utilities.palette.TextField();
         txtSlThuc = new utilities.palette.TextField();
         txtSlChenh = new utilities.palette.TextField();
+        txtLiDo = new utilities.palette.TextField();
         btnAnh = new utilities.palette.UWPButton();
         btnPre = new utilities.palette.UWPButton();
         txtIndex = new javax.swing.JLabel();
@@ -197,11 +200,11 @@ public class NvqlKiemKeCtpkView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "STT", "Mã SP", "Tên SP", "Số lượng tồn", "Số lượng thực tồn", "Lệch", "Trạng thái SP"
+                "STT", "Mã SP", "Tên SP", "Số lượng tồn", "Số lượng thực tồn", "Lệch", "Trạng thái SP", "Lí do"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, true, true
+                false, false, false, false, false, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -273,7 +276,7 @@ public class NvqlKiemKeCtpkView extends javax.swing.JFrame {
         panelRound3.setRoundTopRight(50);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
-        jLabel2.setText("Thông tin phiếu kiểm chi tiết");
+        jLabel2.setText("Thông tin chi tiết");
 
         txtTen.setEditable(false);
         txtTen.setBackground(new java.awt.Color(228, 206, 224));
@@ -298,6 +301,10 @@ public class NvqlKiemKeCtpkView extends javax.swing.JFrame {
         txtSlChenh.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtSlChenh.setLabelText("Số lượng chênh lệch");
 
+        txtLiDo.setBackground(new java.awt.Color(228, 206, 224));
+        txtLiDo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtLiDo.setLabelText("Lí do");
+
         javax.swing.GroupLayout panelRound3Layout = new javax.swing.GroupLayout(panelRound3);
         panelRound3.setLayout(panelRound3Layout);
         panelRound3Layout.setHorizontalGroup(
@@ -305,34 +312,42 @@ public class NvqlKiemKeCtpkView extends javax.swing.JFrame {
             .addGroup(panelRound3Layout.createSequentialGroup()
                 .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelRound3Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(jLabel2))
-                    .addGroup(panelRound3Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
                         .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtSlThuc, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtSlChenh, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtSlTon, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtMaSp, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(panelRound3Layout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addComponent(txtMaSp, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelRound3Layout.createSequentialGroup()
+                                .addGap(67, 67, 67)
+                                .addComponent(jLabel2)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound3Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtTen, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtSlTon, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtSlThuc, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtSlChenh, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtLiDo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
         );
         panelRound3Layout.setVerticalGroup(
             panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound3Layout.createSequentialGroup()
-                .addContainerGap(43, Short.MAX_VALUE)
+                .addContainerGap(44, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addGap(34, 34, 34)
                 .addComponent(txtMaSp, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addGap(18, 18, 18)
                 .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53)
+                .addGap(18, 18, 18)
                 .addComponent(txtSlTon, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55)
+                .addGap(18, 18, 18)
                 .addComponent(txtSlThuc, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
+                .addGap(18, 18, 18)
                 .addComponent(txtSlChenh, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55))
+                .addGap(18, 18, 18)
+                .addComponent(txtLiDo, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(102, 102, 102))
         );
 
         btnAnh.setBackground(new java.awt.Color(228, 206, 224));
@@ -446,7 +461,7 @@ public class NvqlKiemKeCtpkView extends javax.swing.JFrame {
         int y = evt.getYOnScreen();
         this.setLocation(x - xx, y - xy);
     }//GEN-LAST:event_formMouseDragged
-
+    
     public NvqlLuongKiemKeCtspCustom mouseClickSanPham(int row) {
         return listChiTietSanPham.get(row);
     }
@@ -457,8 +472,14 @@ public class NvqlKiemKeCtpkView extends javax.swing.JFrame {
         txtSlTon.setText(tbPhieuKiemChiTiet.getValueAt(s, 3).toString());
         txtSlThuc.setText(tbPhieuKiemChiTiet.getValueAt(s, 4).toString());
         txtSlChenh.setText(tbPhieuKiemChiTiet.getValueAt(s, 5).toString());
+        txtLiDo.setText(tbPhieuKiemChiTiet.getValueAt(s, 7).toString());
+        
+        if (phieuKiemKe.getTrangThai().equals(TrangThaiPhieuKiemConstant.DA_XAC_NHAN)) {
+            MsgBox.alert(this, "Phiếu kiểm kê này đã ở trạng thái đã xác nhận nên không thể sửa số lượng! ");
+            return;
+        }
         String suaSL = JOptionPane.showInputDialog("bạn muốn sửa số lượng thực tồn là bao nhiêu?");
-        if (suaSL.trim().length() == 0) {
+        if (suaSL == null) {
             return;
         }
         int sl = 0;
@@ -506,9 +527,9 @@ public class NvqlKiemKeCtpkView extends javax.swing.JFrame {
         loadIndex();
         fillTablePhieuKiemChiTiet(ctpkService.phanTrang(listCtpk, offset, limit));
     }//GEN-LAST:event_btnNextActionPerformed
-
+    
     public static void main(String args[]) {
-
+        
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -525,7 +546,7 @@ public class NvqlKiemKeCtpkView extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(NvqlKiemKeCtpkView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new NvqlKiemKeCtpkView().setVisible(true);
@@ -553,6 +574,7 @@ public class NvqlKiemKeCtpkView extends javax.swing.JFrame {
     private utilities.palette.TableDark_1 tbPhieuKiemChiTiet;
     private javax.swing.JLabel test;
     private javax.swing.JLabel txtIndex;
+    private utilities.palette.TextField txtLiDo;
     private utilities.palette.TextField txtMaSp;
     private utilities.palette.TextField txtSlChenh;
     private utilities.palette.TextField txtSlThuc;

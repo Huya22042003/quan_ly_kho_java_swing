@@ -68,7 +68,7 @@ public class NhanVienQuanLy extends javax.swing.JFrame {
                     main.showForm(new NvqlKiemKeView());
                 }
                 if (menuIndex == 3) {
-                    main.showForm(new TpQuanLyChiTietSanPhamForm());
+//                    main.showForm(new TpQuanLyChiTietSanPhamForm());
                 }
                 if (menuIndex == 4) {
                     if (subMenuIndex == 2) {

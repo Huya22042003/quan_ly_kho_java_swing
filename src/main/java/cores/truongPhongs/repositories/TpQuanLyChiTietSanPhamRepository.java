@@ -3,7 +3,6 @@ package cores.truongPhongs.repositories;
 import cores.truongPhongs.customModels.TpQuanLyChiTietSanPhamCustom;
 import cores.truongPhongs.customModels.TpQuanLyDonViCustom;
 import cores.truongPhongs.customModels.TpQuanLySanPhamCustom;
-import cores.truongPhongs.customModels.TpXemChiTietSanPhamCustom;
 import domainModels.ChiTietSanPham;
 import domainModels.DonVi;
 import domainModels.SanPham;
@@ -24,26 +23,52 @@ import utilities.HibernateUtil;
  */
 public class TpQuanLyChiTietSanPhamRepository {
 
-    public List<TpQuanLyChiTietSanPhamCustom> getAll() {
-        List<TpQuanLyChiTietSanPhamCustom> ct = new ArrayList<>();
+    public List<TpQuanLyChiTietSanPhamCustom> getAll(UUID idSp) {
         Session s = HibernateUtil.getSessionFactory().openSession();
-        Query q = s.createQuery("select new cores.truongPhongs.customModels.TpQuanLyChiTietSanPhamCustom ("
-                + "ct.id as id,"
-                + "ct.soLuongTon as soLuongTon,"
-                + "ct.hinhAnh as hinhAnh,"
-                + "ct.GiaNhap as GiaNhap,"
-                + "ct.GiaBan as GiaBan,"
-                + "ct.mau as mau,"
-                + "ct.sanPham as ten,"
-                + "ct.donVi as donViGoc,"
-                + "ct.namBaoHanh as namBaoHanh,"
-                + "ct.trangThai as trangThai, "
-                + "ct.size as size,"
-                + "ct.ngayTao as ngayTao"
-                + ") from domainModels.ChiTietSanPham ct");
-        ct = q.getResultList();
+        Query query = s.createNativeQuery("""
+                SELECT 
+                ctsp.Id,
+                ctsp.SoLuongTon,
+                ctsp.HinhAnh,
+                ctsp.GiaNhap,
+                ctsp.GiaBan,
+                ctsp.Mau,
+                dv.DonViQuyDoi,
+                ctsp.namBaoHanh,
+                ctsp.TrangThai,
+                ctsp.Size,
+                ncc.Ten,
+                ctpn.MaSanPhamNhaCungCap,
+                ctsp.createDate
+                FROM ChiTietSanPham ctsp
+                join DonVi dv on ctsp.IdDonVi = dv.Id
+                join ChiTietPhieuNhap ctpn on ctpn.IdChiTietSP = ctsp.Id
+                join PhieuNhap pn on ctpn.IdPhieuNhap = pn.Id
+                join NhaCungCap ncc on ncc.Id = pn.IdNhaCungCap
+                WHERE ctsp.IdSanPham = :idSp
+            """);
+        query.setParameter("idSp", idSp.toString());
+        List<Object[]> listQuery = query.getResultList();
+        List<TpQuanLyChiTietSanPhamCustom> list = new ArrayList<>();
+        listQuery.parallelStream().forEach(el -> {
+            list.add(new TpQuanLyChiTietSanPhamCustom(
+                    UUID.fromString((String) el[0]),
+                    (int) el[1],
+                    (String) el[2],
+                    (BigDecimal) el[3],
+                    (BigDecimal) el[4],
+                    (int) el[5],
+                    (String) el[6],
+                    (int) el[7],
+                    (int) el[8],
+                    (int) el[9],
+                    (String) el[10],
+                    (String) el[11],
+                    Long.valueOf(String.valueOf((BigDecimal) el[12]))
+            ));
+        });
         s.close();
-        return ct;
+        return list;
     }
 
     public ChiTietSanPham addCTSanPham(ChiTietSanPham sp) {
@@ -213,7 +238,7 @@ public class TpQuanLyChiTietSanPhamRepository {
         return list;
 
     }
-    
+
     public List<TpQuanLyDonViCustom> getAllDonVi1() {
         List<TpQuanLyDonViCustom> list = new ArrayList<>();
         Session s = HibernateUtil.getSessionFactory().openSession();
@@ -250,7 +275,7 @@ public class TpQuanLyChiTietSanPhamRepository {
         s.close();
         return list;
     }
-    
+
     public List<TpQuanLySanPhamCustom> getAllSanPham1() {
         List<TpQuanLySanPhamCustom> list = new ArrayList<>();
         Session s = HibernateUtil.getSessionFactory().openSession();
