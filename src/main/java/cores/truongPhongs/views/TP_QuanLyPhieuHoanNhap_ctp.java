@@ -5,6 +5,7 @@ import cores.truongPhongs.customModels.TP_PhieuHoanNhapCustom;
 import cores.truongPhongs.services.TP_PhieuHoanNhapService;
 import cores.truongPhongs.services.serviceImpls.TP_PhieuHoanNhapServiceImpl;
 import infrastructures.constant.MauConstant;
+import infrastructures.constant.TrangThaiPhieuHoanConstant;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,7 @@ public class TP_QuanLyPhieuHoanNhap_ctp extends javax.swing.JFrame {
     private TP_PhieuHoanNhapCustom idPhieuHoanNhap;
     private String duongDan = getClass().getResource("/icons/file.png").getPath();
     private DecimalFormat formatter = new DecimalFormat("###,###,##0 VNĐ");
+
     public TP_QuanLyPhieuHoanNhap_ctp(TP_PhieuHoanNhapCustom idPhieuNhap) {
         this.idPhieuHoanNhap = idPhieuNhap;
         hoanNhapService = new TP_PhieuHoanNhapServiceImpl();
@@ -44,12 +46,13 @@ public class TP_QuanLyPhieuHoanNhap_ctp extends javax.swing.JFrame {
                 el.getSanPham().getTen(),
                 Converter.trangThaiMauSac(el.getMau()),
                 el.getSoLuongHoan(),
-                el.getGiaNhap()== null ? "Chưa có" : formatter.format(el.getGiaNhap())
-                    
+                el.getGiaNhap() == null ? "Chưa có" : formatter.format(el.getGiaNhap())
+
             };
             dtm.addRow(rowData);
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -66,12 +69,12 @@ public class TP_QuanLyPhieuHoanNhap_ctp extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         txtMa = new utilities.palette.TextField();
         txtTenSp = new utilities.palette.TextField();
-        txtSoLuongNhap = new utilities.palette.TextField();
+        txtSoLuongHoan = new utilities.palette.TextField();
         panelRound16 = new utilities.palette.PanelRound();
         myButton12 = new utilities.palette.MyButton();
         myButton6 = new utilities.palette.MyButton();
         txtMau = new utilities.palette.TextField();
-        txtSoLuongHoan = new utilities.palette.TextField();
+        txtSoLuongNhanLai = new utilities.palette.TextField();
         txtGiaNhap = new utilities.palette.TextField();
         errorSoLuong = new javax.swing.JLabel();
         panelRound3 = new utilities.palette.PanelRound();
@@ -115,16 +118,16 @@ public class TP_QuanLyPhieuHoanNhap_ctp extends javax.swing.JFrame {
         panelRound1Layout.setHorizontalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound1Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
+                .addGap(19, 19, 19)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 831, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
-                .addContainerGap(102, Short.MAX_VALUE)
+            .addGroup(panelRound1Layout.createSequentialGroup()
+                .addGap(73, 73, 73)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(70, 70, 70))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
 
         panelRound2.setBackground(new java.awt.Color(228, 206, 224));
@@ -151,13 +154,13 @@ public class TP_QuanLyPhieuHoanNhap_ctp extends javax.swing.JFrame {
         txtTenSp.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtTenSp.setLabelText("Tên SP");
 
-        txtSoLuongNhap.setEditable(false);
-        txtSoLuongNhap.setBackground(new java.awt.Color(228, 206, 224));
-        txtSoLuongNhap.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtSoLuongNhap.setLabelText("Số lượng hoàn");
-        txtSoLuongNhap.addActionListener(new java.awt.event.ActionListener() {
+        txtSoLuongHoan.setEditable(false);
+        txtSoLuongHoan.setBackground(new java.awt.Color(228, 206, 224));
+        txtSoLuongHoan.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtSoLuongHoan.setLabelText("Số lượng hoàn");
+        txtSoLuongHoan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSoLuongNhapActionPerformed(evt);
+                txtSoLuongHoanActionPerformed(evt);
             }
         });
 
@@ -217,12 +220,12 @@ public class TP_QuanLyPhieuHoanNhap_ctp extends javax.swing.JFrame {
         txtMau.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtMau.setLabelText("Màu sắc");
 
-        txtSoLuongHoan.setBackground(new java.awt.Color(228, 206, 224));
-        txtSoLuongHoan.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtSoLuongHoan.setLabelText("Số lượng nhận lại");
-        txtSoLuongHoan.addActionListener(new java.awt.event.ActionListener() {
+        txtSoLuongNhanLai.setBackground(new java.awt.Color(228, 206, 224));
+        txtSoLuongNhanLai.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtSoLuongNhanLai.setLabelText("Số lượng nhận lại");
+        txtSoLuongNhanLai.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSoLuongHoanActionPerformed(evt);
+                txtSoLuongNhanLaiActionPerformed(evt);
             }
         });
 
@@ -251,9 +254,9 @@ public class TP_QuanLyPhieuHoanNhap_ctp extends javax.swing.JFrame {
                             .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(txtTenSp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(txtMa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtSoLuongNhap, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtSoLuongHoan, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(txtMau, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(txtSoLuongHoan, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtSoLuongNhanLai, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtGiaNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(errorSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(panelRound2Layout.createSequentialGroup()
@@ -273,11 +276,11 @@ public class TP_QuanLyPhieuHoanNhap_ctp extends javax.swing.JFrame {
                 .addGap(43, 43, 43)
                 .addComponent(txtMau, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
-                .addComponent(txtSoLuongNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtSoLuongHoan, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addComponent(txtGiaNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(txtSoLuongHoan, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtSoLuongNhanLai, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(errorSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24)
@@ -323,7 +326,7 @@ public class TP_QuanLyPhieuHoanNhap_ctp extends javax.swing.JFrame {
             .addGroup(panelRound3Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(128, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelRound3Layout.setVerticalGroup(
             panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -349,7 +352,7 @@ public class TP_QuanLyPhieuHoanNhap_ctp extends javax.swing.JFrame {
             .addGroup(panelRound4Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(btnAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         panelRound4Layout.setVerticalGroup(
             panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -366,10 +369,10 @@ public class TP_QuanLyPhieuHoanNhap_ctp extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(panelRound3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(panelRound4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(panelRound3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(panelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -398,7 +401,7 @@ public class TP_QuanLyPhieuHoanNhap_ctp extends javax.swing.JFrame {
         txtMa.setText(item.getSanPham().getMa());
         txtTenSp.setText(item.getSanPham().getTen());
         txtMau.setText(Converter.trangThaiMauSac(item.getMau()));
-        txtSoLuongNhap.setText(String.valueOf(item.getSoLuongHoan()));
+        txtSoLuongHoan.setText(String.valueOf(item.getSoLuongHoan()));
         txtGiaNhap.setText(String.valueOf(item.getGiaNhap()));
         if (item.getHinhAnh() == null) {
             this.btnAnh.setIcon(new ImageIcon(duongDan));
@@ -412,24 +415,36 @@ public class TP_QuanLyPhieuHoanNhap_ctp extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMaActionPerformed
 
-    private void txtSoLuongNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSoLuongNhapActionPerformed
+    private void txtSoLuongHoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSoLuongHoanActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtSoLuongNhapActionPerformed
+    }//GEN-LAST:event_txtSoLuongHoanActionPerformed
 
     private void myButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton12ActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_myButton12ActionPerformed
 
     private void myButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton6ActionPerformed
-        String soLuong = this.txtSoLuongHoan.getText();
         int row = this.tblSanPham.getSelectedRow();
         if (row == -1) {
             JOptionPane.showMessageDialog(this, "Bạn phải chọn một dòng", "ERROR !!!", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
-        if(soLuong.trim().length() == 0) {
+
+        if (idPhieuHoanNhap.getTrangThai() == TrangThaiPhieuHoanConstant.HOAN_THANH_CONG) {
+            JOptionPane.showMessageDialog(this, "Phieu nay da duoc hoan thanh cong vui long chon phieu khac !", "ERROR !!!", JOptionPane.ERROR_MESSAGE);
+            return;
+
+        }
+        if (idPhieuHoanNhap.getTrangThai() == TrangThaiPhieuHoanConstant.DA_HUY) {
+            JOptionPane.showMessageDialog(this, "Phieu hoan nay da duoc huy vui long chon phieu khac !", "ERROR !!!", JOptionPane.ERROR_MESSAGE);
+            return;
+
+        }
+        String soLuong = this.txtSoLuongNhanLai.getText();
+
+        if (soLuong.trim().length() == 0) {
             this.errorSoLuong.setText("Bạn phải nhập số lượng nhận lại");
+            return;
         }
 
         int sl = 0;
@@ -439,8 +454,8 @@ public class TP_QuanLyPhieuHoanNhap_ctp extends javax.swing.JFrame {
                 this.errorSoLuong.setText("Số lượng phải là số nguyên dương");
                 return;
             }
-            if (listSP.get(this.tblSanPham.getSelectedRow()).getSoLuongTon() < sl) {
-                this.errorSoLuong.setText("Số lượng nhập phải nhỏ hơn số lượng hoàn");
+            if (listSP.get(this.tblSanPham.getSelectedRow()).getSoLuongHoan() < sl) {
+                this.errorSoLuong.setText("Số lượng nhận lai phải nhỏ hơn số lượng hoàn");
                 return;
             }
             if (hoanNhapService.removeSanPhamInPhieuHoan(listSP.get(row).getId(), idPhieuHoanNhap.getId(), sl)) {
@@ -456,9 +471,9 @@ public class TP_QuanLyPhieuHoanNhap_ctp extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_myButton6ActionPerformed
 
-    private void txtSoLuongHoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSoLuongHoanActionPerformed
+    private void txtSoLuongNhanLaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSoLuongNhanLaiActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtSoLuongHoanActionPerformed
+    }//GEN-LAST:event_txtSoLuongNhanLaiActionPerformed
 
     private void txtGiaNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGiaNhapActionPerformed
         // TODO add your handling code here:
@@ -518,7 +533,7 @@ public class TP_QuanLyPhieuHoanNhap_ctp extends javax.swing.JFrame {
     private utilities.palette.TextField txtMa;
     private utilities.palette.TextField txtMau;
     private utilities.palette.TextField txtSoLuongHoan;
-    private utilities.palette.TextField txtSoLuongNhap;
+    private utilities.palette.TextField txtSoLuongNhanLai;
     private utilities.palette.TextField txtTenSp;
     // End of variables declaration//GEN-END:variables
 }
