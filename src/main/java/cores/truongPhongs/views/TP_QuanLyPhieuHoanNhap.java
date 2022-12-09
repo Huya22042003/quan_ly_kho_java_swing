@@ -15,6 +15,8 @@ import utilities.Converter;
 import utilities.DateTimeUtil;
 import utilities.MsgBox;
 import utilities.Page;
+import utilities.palette.SearchCustom.EventCallBack;
+import utilities.palette.SearchCustom.EventTextField;
 
 /**
  *
@@ -52,6 +54,26 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
         sizes = hoanNhapCustoms.size();
         loadTable(phieuHoanNhapService.phanTrang(hoanNhapCustoms, offset, limit));
         cbbTrangThai.setSelectedIndex(0);
+          txtSearch.addEvent(new EventTextField() {
+            @Override
+            public void onPressed(EventCallBack call) {
+                //  Test
+                try {
+                    for (int i = 1; i <= 100; i++) {
+
+                        Thread.sleep(5);
+                    }
+                    call.done();
+                } catch (Exception e) {
+                    System.err.println(e);
+                }
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+        });
     }
 
     private void loadTable(List<TP_PhieuHoanNhapCustom> list) {
@@ -97,10 +119,10 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
         panelRound5 = new utilities.palette.PanelRound();
         jLabel3 = new javax.swing.JLabel();
         panelRound15 = new utilities.palette.PanelRound();
-        myButton9 = new utilities.palette.MyButton();
-        myButton5 = new utilities.palette.MyButton();
-        myButton11 = new utilities.palette.MyButton();
-        myButton14 = new utilities.palette.MyButton();
+        btnXemCtph = new utilities.palette.MyButton();
+        btnThemPhieuHoan = new utilities.palette.MyButton();
+        btnThemSpHoanVaoPhieuHoan = new utilities.palette.MyButton();
+        btnGetAll = new utilities.palette.MyButton();
         btnPre = new utilities.palette.UWPButton();
         txtIndex = new javax.swing.JLabel();
         btnPre1 = new utilities.palette.UWPButton();
@@ -191,51 +213,51 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
         panelRound15.setRoundTopLeft(50);
         panelRound15.setRoundTopRight(50);
 
-        myButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/file.png"))); // NOI18N
-        myButton9.setToolTipText("Danh sách những sản phẩm hoàn");
-        myButton9.setBorderColor(new java.awt.Color(221, 242, 244));
-        myButton9.setColor(new java.awt.Color(221, 242, 244));
-        myButton9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        myButton9.setRadius(50);
-        myButton9.addActionListener(new java.awt.event.ActionListener() {
+        btnXemCtph.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/file.png"))); // NOI18N
+        btnXemCtph.setToolTipText("Danh sách những sản phẩm hoàn");
+        btnXemCtph.setBorderColor(new java.awt.Color(221, 242, 244));
+        btnXemCtph.setColor(new java.awt.Color(221, 242, 244));
+        btnXemCtph.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnXemCtph.setRadius(50);
+        btnXemCtph.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                myButton9ActionPerformed(evt);
+                btnXemCtphActionPerformed(evt);
             }
         });
 
-        myButton5.setBackground(new java.awt.Color(221, 242, 244));
-        myButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Addd.png"))); // NOI18N
-        myButton5.setToolTipText("Thêm phiếu hoàn");
-        myButton5.setBorderColor(new java.awt.Color(221, 242, 244));
-        myButton5.setColor(new java.awt.Color(221, 242, 244));
-        myButton5.setRadius(50);
-        myButton5.addActionListener(new java.awt.event.ActionListener() {
+        btnThemPhieuHoan.setBackground(new java.awt.Color(221, 242, 244));
+        btnThemPhieuHoan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Addd.png"))); // NOI18N
+        btnThemPhieuHoan.setToolTipText("Thêm phiếu hoàn");
+        btnThemPhieuHoan.setBorderColor(new java.awt.Color(221, 242, 244));
+        btnThemPhieuHoan.setColor(new java.awt.Color(221, 242, 244));
+        btnThemPhieuHoan.setRadius(50);
+        btnThemPhieuHoan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                myButton5ActionPerformed(evt);
+                btnThemPhieuHoanActionPerformed(evt);
             }
         });
 
-        myButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/add-to-basket.png"))); // NOI18N
-        myButton11.setToolTipText("Chọn sản phẩm hoàn");
-        myButton11.setBorderColor(new java.awt.Color(221, 242, 244));
-        myButton11.setColor(new java.awt.Color(221, 242, 244));
-        myButton11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        myButton11.setRadius(50);
-        myButton11.addActionListener(new java.awt.event.ActionListener() {
+        btnThemSpHoanVaoPhieuHoan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/add-to-basket.png"))); // NOI18N
+        btnThemSpHoanVaoPhieuHoan.setToolTipText("Chọn sản phẩm muốn hoàn");
+        btnThemSpHoanVaoPhieuHoan.setBorderColor(new java.awt.Color(221, 242, 244));
+        btnThemSpHoanVaoPhieuHoan.setColor(new java.awt.Color(221, 242, 244));
+        btnThemSpHoanVaoPhieuHoan.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnThemSpHoanVaoPhieuHoan.setRadius(50);
+        btnThemSpHoanVaoPhieuHoan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                myButton11ActionPerformed(evt);
+                btnThemSpHoanVaoPhieuHoanActionPerformed(evt);
             }
         });
 
-        myButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Show.png"))); // NOI18N
-        myButton14.setToolTipText("Hiển thị");
-        myButton14.setBorderColor(new java.awt.Color(221, 242, 244));
-        myButton14.setColor(new java.awt.Color(221, 242, 244));
-        myButton14.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        myButton14.setRadius(50);
-        myButton14.addActionListener(new java.awt.event.ActionListener() {
+        btnGetAll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Show.png"))); // NOI18N
+        btnGetAll.setToolTipText("Hiển thị");
+        btnGetAll.setBorderColor(new java.awt.Color(221, 242, 244));
+        btnGetAll.setColor(new java.awt.Color(221, 242, 244));
+        btnGetAll.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnGetAll.setRadius(50);
+        btnGetAll.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                myButton14ActionPerformed(evt);
+                btnGetAllActionPerformed(evt);
             }
         });
 
@@ -245,13 +267,13 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
             panelRound15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound15Layout.createSequentialGroup()
                 .addGap(8, 8, 8)
-                .addComponent(myButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnThemPhieuHoan, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(myButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnXemCtph, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(myButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnThemSpHoanVaoPhieuHoan, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(myButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnGetAll, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelRound15Layout.setVerticalGroup(
@@ -259,10 +281,10 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
             .addGroup(panelRound15Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelRound15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(myButton11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(myButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(myButton9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(myButton14, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnThemSpHoanVaoPhieuHoan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnThemPhieuHoan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnXemCtph, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnGetAll, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -642,7 +664,7 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void myButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton9ActionPerformed
+    private void btnXemCtphActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXemCtphActionPerformed
         int row = this.tblPhieuHoanNhap.getSelectedRow();
         if (row == -1) {
             JOptionPane.showMessageDialog(this, "Bạn phải chọn một dòng", "ERROR !!!", JOptionPane.ERROR_MESSAGE);
@@ -654,17 +676,17 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
         }
         ctp = new TP_QuanLyPhieuHoanNhap_ctp(this.hoanNhapCustoms.get(row));
         ctp.setVisible(true);
-    }//GEN-LAST:event_myButton9ActionPerformed
+    }//GEN-LAST:event_btnXemCtphActionPerformed
 
-    private void myButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton5ActionPerformed
+    private void btnThemPhieuHoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemPhieuHoanActionPerformed
         if (ctp != null && hoanNhap_sp != null) {
             ctp.setVisible(false);
             hoanNhap_sp.setVisible(false);
         }
         tn.setVisible(true);
-    }//GEN-LAST:event_myButton5ActionPerformed
+    }//GEN-LAST:event_btnThemPhieuHoanActionPerformed
 
-    private void myButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton11ActionPerformed
+    private void btnThemSpHoanVaoPhieuHoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemSpHoanVaoPhieuHoanActionPerformed
         int row = this.tblPhieuHoanNhap.getSelectedRow();
         if (row == -1) {
             JOptionPane.showMessageDialog(this, "Bạn phải chọn một phiếu hoàn!", "ERROR !!!", JOptionPane.ERROR_MESSAGE);
@@ -682,7 +704,7 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
         hoanNhap_sp = new TP_QuanLyPhieuHoanNhap_sp(this.hoanNhapCustoms.get(row));
         hoanNhap_sp.setVisible(true);
 
-    }//GEN-LAST:event_myButton11ActionPerformed
+    }//GEN-LAST:event_btnThemSpHoanVaoPhieuHoanActionPerformed
 
     private void txtNhaCungCapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNhaCungCapActionPerformed
         // TODO add your handling code here:
@@ -727,10 +749,10 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_tblPhieuHoanNhapMouseClicked
 
-    private void myButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton14ActionPerformed
+    private void btnGetAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetAllActionPerformed
         hoanNhapCustoms = phieuHoanNhapService.getListPhieuHoanNhap();
         loadTable(phieuHoanNhapService.phanTrang(hoanNhapCustoms, offset, limit));
-    }//GEN-LAST:event_myButton14ActionPerformed
+    }//GEN-LAST:event_btnGetAllActionPerformed
 
     private void btnPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreActionPerformed
         index = p.prevIndex(offset, limit, index);
@@ -823,10 +845,14 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
         this.txtIndex.setText(String.valueOf(index) + " / " + (Math.round((sizes / limit) + 0.5)));
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private utilities.palette.MyButton btnGetAll;
     private utilities.palette.UWPButton btnPre;
     private utilities.palette.UWPButton btnPre1;
     private utilities.palette.MyButton btnSearch2;
+    private utilities.palette.MyButton btnThemPhieuHoan;
+    private utilities.palette.MyButton btnThemSpHoanVaoPhieuHoan;
     private utilities.palette.MyButton btnXacNhan;
+    private utilities.palette.MyButton btnXemCtph;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private utilities.palette.Combobox cbbTrangThai;
@@ -835,10 +861,6 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private utilities.palette.MyButton myButton11;
-    private utilities.palette.MyButton myButton14;
-    private utilities.palette.MyButton myButton5;
-    private utilities.palette.MyButton myButton9;
     private com.toedter.calendar.JDateChooser ngayBatDau;
     private com.toedter.calendar.JDateChooser ngayKetThuc;
     private utilities.palette.PanelRound panelRound1;

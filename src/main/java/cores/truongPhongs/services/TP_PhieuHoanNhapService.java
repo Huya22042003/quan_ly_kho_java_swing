@@ -19,6 +19,8 @@ public interface TP_PhieuHoanNhapService {
     List<TP_HoanNhap_PhieuNhapCustom> getListPhieuNhap();
 
     List<TP_HoanNhap_spCustom> getListSpByPhieuNhap(UUID idPhieuNhap);
+   
+    List<TP_HoanNhap_spCustom> getListByMaSpAndTenSpByPhieuNhap(UUID idPhieuNhap, String ma,int rdo);
 
     List<TP_HoanNhap_ctpCusTom> getListSpByChiTietPhieuHoanNhap(UUID idPhieuHoan);
 

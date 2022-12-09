@@ -250,13 +250,13 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                      <Component id="myButton5" min="-2" pref="88" max="-2" attributes="0"/>
+                      <Component id="btnThemPhieuHoan" min="-2" pref="88" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="myButton9" min="-2" pref="100" max="-2" attributes="0"/>
+                      <Component id="btnXemCtph" min="-2" pref="100" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="myButton11" min="-2" pref="100" max="-2" attributes="0"/>
+                      <Component id="btnThemSpHoanVaoPhieuHoan" min="-2" pref="100" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="myButton14" min="-2" pref="89" max="-2" attributes="0"/>
+                      <Component id="btnGetAll" min="-2" pref="89" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -266,10 +266,10 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="myButton11" max="32767" attributes="0"/>
-                          <Component id="myButton5" alignment="1" max="32767" attributes="0"/>
-                          <Component id="myButton9" alignment="0" max="32767" attributes="0"/>
-                          <Component id="myButton14" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnThemSpHoanVaoPhieuHoan" max="32767" attributes="0"/>
+                          <Component id="btnThemPhieuHoan" alignment="1" max="32767" attributes="0"/>
+                          <Component id="btnXemCtph" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnGetAll" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -277,7 +277,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="utilities.palette.MyButton" name="myButton9">
+            <Component class="utilities.palette.MyButton" name="btnXemCtph">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/icons/file.png"/>
@@ -295,10 +295,10 @@
                 <Property name="radius" type="int" value="50"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="myButton9ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnXemCtphActionPerformed"/>
               </Events>
             </Component>
-            <Component class="utilities.palette.MyButton" name="myButton5">
+            <Component class="utilities.palette.MyButton" name="btnThemPhieuHoan">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="f4" green="f2" red="dd" type="rgb"/>
@@ -316,15 +316,15 @@
                 <Property name="radius" type="int" value="50"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="myButton5ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThemPhieuHoanActionPerformed"/>
               </Events>
             </Component>
-            <Component class="utilities.palette.MyButton" name="myButton11">
+            <Component class="utilities.palette.MyButton" name="btnThemSpHoanVaoPhieuHoan">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/icons/add-to-basket.png"/>
                 </Property>
-                <Property name="toolTipText" type="java.lang.String" value="Ch&#x1ecd;n s&#x1ea3;n ph&#x1ea9;m ho&#xe0;n"/>
+                <Property name="toolTipText" type="java.lang.String" value="Ch&#x1ecd;n s&#x1ea3;n ph&#x1ea9;m mu&#x1ed1;n ho&#xe0;n"/>
                 <Property name="borderColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="f4" green="f2" red="dd" type="rgb"/>
                 </Property>
@@ -337,10 +337,10 @@
                 <Property name="radius" type="int" value="50"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="myButton11ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThemSpHoanVaoPhieuHoanActionPerformed"/>
               </Events>
             </Component>
-            <Component class="utilities.palette.MyButton" name="myButton14">
+            <Component class="utilities.palette.MyButton" name="btnGetAll">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/icons/Show.png"/>
@@ -358,7 +358,7 @@
                 <Property name="radius" type="int" value="50"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="myButton14ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGetAllActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

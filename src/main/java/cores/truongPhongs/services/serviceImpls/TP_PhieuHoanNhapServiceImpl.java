@@ -135,4 +135,16 @@ public class TP_PhieuHoanNhapServiceImpl implements TP_PhieuHoanNhapService {
         }
     }
 
+    @Override
+    public List<TP_HoanNhap_spCustom> getListByMaSpAndTenSpByPhieuNhap(UUID idPhieuNhap, String ma, int rdo) {
+        switch (rdo) {
+            case 0:
+                return rp.getListByMaSpByPhieuNhap(idPhieuNhap, ma);
+            case 1:
+                return rp.getListByTenSpByPhieuNhap(idPhieuNhap, ma);
+            default:
+                return null;
+        }
+    }
+
 }
