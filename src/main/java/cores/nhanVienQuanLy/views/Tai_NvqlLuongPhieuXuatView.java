@@ -4,13 +4,12 @@ import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamPanel;
 import com.github.sarxos.webcam.WebcamResolution;
 import com.google.zxing.BinaryBitmap;
-import com.google.zxing.EncodeHintType;
+import com.google.zxing.LuminanceSource;
 import com.google.zxing.MultiFormatReader;
 import com.google.zxing.NotFoundException;
 import com.google.zxing.Result;
 import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.common.HybridBinarizer;
-import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import cores.exportPDF.services.ExportSanPhamService;
 import cores.exportPDF.services.serviceImpls.ExportSanPhamServiceImpl;
 import cores.nhanVienQuanLy.customModels.Luong_ChiTietPhieuXuatCustom;
@@ -29,22 +28,19 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import lombok.Synchronized;
 import utilities.Converter;
 import utilities.DateTimeUtil;
 import utilities.MsgBox;
@@ -69,6 +65,7 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
 
     private WebcamPanel jpanl = null;
     private Webcam webcam1;
+    private Thread capture;
 
     private Page p;
 
@@ -104,7 +101,7 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
     private void loadTablePhieuXuat(List<PhieuXuatCustom> listPX) {
         DefaultTableModel dtm = (DefaultTableModel) this.tblPhieuXuat.getModel();
         dtm.setRowCount(0);
-          String pattern = "yyyy-MM-dd HH:mm:ss";
+        String pattern = "yyyy-MM-dd HH:mm:ss";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         for (PhieuXuatCustom el : listPX) {
             Date ngayNhan = new Date(el.getNgayTao());
@@ -175,7 +172,6 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
         txtNgayNhapQuet = new utilities.palette.TextField();
         panelRound2 = new utilities.palette.PanelRound();
         mainCam = new javax.swing.JPanel();
-        buttonGradient2 = new utilities.palette.ButtonGradient();
         panelRound1 = new utilities.palette.PanelRound();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPhieuXuat = new utilities.palette.TableDark_1();
@@ -423,26 +419,13 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
             .addGap(0, 509, Short.MAX_VALUE)
         );
 
-        buttonGradient2.setText("Quét");
-        buttonGradient2.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
-        buttonGradient2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonGradient2ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout panelRound2Layout = new javax.swing.GroupLayout(panelRound2);
         panelRound2.setLayout(panelRound2Layout);
         panelRound2Layout.setHorizontalGroup(
             panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound2Layout.createSequentialGroup()
-                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelRound2Layout.createSequentialGroup()
-                        .addGap(137, 137, 137)
-                        .addComponent(buttonGradient2, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelRound2Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(mainCam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(23, 23, 23)
+                .addComponent(mainCam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(32, Short.MAX_VALUE))
         );
         panelRound2Layout.setVerticalGroup(
@@ -450,9 +433,7 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(mainCam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(buttonGradient2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18))
+                .addGap(109, 109, 109))
         );
 
         javax.swing.GroupLayout diaLogCamLayout = new javax.swing.GroupLayout(diaLogCam.getContentPane());
@@ -1051,7 +1032,7 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
                     .addComponent(txtIndex, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42))
             .addGroup(panelRound1Layout.createSequentialGroup()
-                .addComponent(panelRound3, javax.swing.GroupLayout.PREFERRED_SIZE, 683, Short.MAX_VALUE)
+                .addComponent(panelRound3, javax.swing.GroupLayout.DEFAULT_SIZE, 683, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1099,7 +1080,7 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Bạn phải chọn phiếu xuất");
             return;
         }
-        if(listPhieuXuat.get(row).getTrangThai() != TrangThaiPhieuConstant.CHO_THANH_TOAN) {
+        if (listPhieuXuat.get(row).getTrangThai() != TrangThaiPhieuConstant.CHO_THANH_TOAN) {
             JOptionPane.showMessageDialog(this, "Phiếu không thể mở máy quét khi ở trạng thái khác chờ thanh toán");
             return;
         }
@@ -1118,11 +1099,67 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
             cong = Integer.parseInt(input);
             initWebCame(cong);
             this.diaLogCam.setVisible(true);
+            captureThread();
+            capture.start();
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
-
     }//GEN-LAST:event_btnQuetMaActionPerformed
+
+    @Synchronized
+    public void captureThread() {
+        capture = new Thread() {
+            @Override
+            public synchronized void run() {
+                while (true) {
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException ex) {
+                        ex.printStackTrace();
+                    }
+
+                    try {
+                        Result result = null;
+                        BufferedImage image = null;
+
+                        if (webcam1.isOpen()) {
+                            if ((image = webcam1.getImage()) == null) {
+                                continue;
+                            }
+                        }
+
+                        image = webcam1.getImage();
+                        File fileImg = new File("cde.png");
+                        ImageIO.write(image, "png", fileImg);
+
+                        LuminanceSource source = new BufferedImageLuminanceSource(image);
+                        BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
+                        result = new MultiFormatReader().decode(bitmap);
+                        System.out.println(result.getText());
+                        if (map.containsKey(UUID.fromString(result.getText()))) {
+                            sanPhamQuet = map.get(UUID.fromString(result.getText()));
+                            txtMaSPQuet.setText(sanPhamQuet.getSanPham().getMa());
+                            txtTenSpQuet.setText(sanPhamQuet.getSanPham().getTen());
+                            txtMauQuet.setText(Converter.trangThaiMauSac(sanPhamQuet.getMau()));
+                            txtSizeQuet.setText(String.valueOf(sanPhamQuet.getSize()));
+                            txtNgayNhapQuet.setText(new Date(sanPhamQuet.getNgayTao()).toString());
+                            txtSoLuongQuet.setText(String.valueOf(sanPhamQuet.getSoLuongTon()));
+                            txtGiaBanQuet.setText(String.valueOf(sanPhamQuet.getGiaBan()));
+                            if (sanPhamQuet.getTrangThai() == TrangThaiSanPhamConstanst.DA_MO_BAN) {
+                                btnThemVaoCTPX.setEnabled(true);
+                                txtSoLuongMuaQuet.setEditable(true);
+                            }
+                        }
+                        fileImg.delete();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    } catch (NotFoundException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            }
+        };
+    }
 
     public void initWebCame(int cong) {
         try {
@@ -1142,58 +1179,6 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
             mainCam.removeAll();
             webcam1.close();
         }
-    }
-
-    public static String readQR(String path, String charset,
-            Map hashMap)
-            throws FileNotFoundException, IOException,
-            NotFoundException {
-        BinaryBitmap binaryBitmap
-                = new BinaryBitmap(new HybridBinarizer(
-                        new BufferedImageLuminanceSource(
-                                ImageIO.read(
-                                        new FileInputStream(path)))));
-
-        Result result
-                = new MultiFormatReader().decode(binaryBitmap);
-
-        return result.getText();
-    }
-
-    public void test() throws IOException, FileNotFoundException, NotFoundException, InterruptedException {
-        BufferedImage image = webcam1.getImage();
-        File fileImg = new File("cde.png");
-        ImageIO.write(image, "png", fileImg);
-
-        // The path where the image will get saved
-        String path = "cde.png";
-
-        // Encoding charset
-        String charset = "UTF-8";
-
-        Map<EncodeHintType, ErrorCorrectionLevel> hashMap
-                = new HashMap<>();
-
-        hashMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
-
-        if (map.containsKey(UUID.fromString(readQR(path, charset, hashMap)))) {
-            sanPhamQuet = map.get(UUID.fromString(readQR(path, charset, hashMap)));
-            this.txtMaSPQuet.setText(sanPhamQuet.getSanPham().getMa());
-            this.txtTenSpQuet.setText(sanPhamQuet.getSanPham().getTen());
-            this.txtMauQuet.setText(Converter.trangThaiMauSac(sanPhamQuet.getMau()));
-            this.txtSizeQuet.setText(String.valueOf(sanPhamQuet.getSize()));
-            this.txtNgayNhapQuet.setText(new Date(sanPhamQuet.getNgayTao()).toString());
-            this.txtSoLuongQuet.setText(String.valueOf(sanPhamQuet.getSoLuongTon()));
-            this.txtGiaBanQuet.setText(String.valueOf(sanPhamQuet.getGiaBan()));
-            if (sanPhamQuet.getTrangThai() == TrangThaiSanPhamConstanst.DA_MO_BAN) {
-                this.btnThemVaoCTPX.setEnabled(true);
-                this.txtSoLuongMuaQuet.setEditable(true);
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "Không tìm thấy sản phẩm");
-        }
-
-        fileImg.delete();
     }
 
     private void btnCtPhieuXuatActionPerformed(ActionEvent evt) {//GEN-FIRST:event_btnCtPhieuXuatActionPerformed
@@ -1379,21 +1364,6 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
         clearForm();
     }//GEN-LAST:event_btnShow1ActionPerformed
 
-    private void buttonGradient2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGradient2ActionPerformed
-        try {
-            test();
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(this, "Lỗi đọc dữ liệu");
-            e.printStackTrace();
-        } catch (NotFoundException ex) {
-            JOptionPane.showMessageDialog(this, "Không tìm thấy mã QR code");
-            ex.printStackTrace();
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Lỗi hệ thống");
-            ex.printStackTrace();
-        }
-    }//GEN-LAST:event_buttonGradient2ActionPerformed
-
     private void btnCloseCamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseCamActionPerformed
         diaLogCam.setVisible(false);
         mainCam.removeAll();
@@ -1490,9 +1460,9 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
             loadTablePhieuXuat(getListByTT(0));
         } else if (rdoKhachHang.isSelected()) {
             loadTablePhieuXuat(getListByTT(1));
-        } else if(rdoMa.isSelected()){
+        } else if (rdoMa.isSelected()) {
             loadTablePhieuXuat(getListByTT(2));
-        }else {
+        } else {
             loadTablePhieuXuat(getListByTT(3));
         }
     }
@@ -1528,7 +1498,6 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
     private utilities.palette.MyButton btnThanhToan;
     private utilities.palette.MyButton btnThemVaoCTPX;
     private utilities.palette.ButtonGradient buttonGradient1;
-    private utilities.palette.ButtonGradient buttonGradient2;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private utilities.palette.Combobox cbbTrangThai;
