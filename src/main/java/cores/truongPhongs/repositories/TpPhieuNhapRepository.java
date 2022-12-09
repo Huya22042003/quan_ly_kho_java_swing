@@ -22,6 +22,7 @@ public class TpPhieuNhapRepository {
         Session s = HibernateUtil.getSessionFactory().openSession();
         Query q = s.createQuery("Select new  cores.truongPhongs.customModels.TpPhieuNhapCustom ( "
                 + "p.id as id,"
+                + "p.maPhieu as maPhieu,"
                 + "p.ghiChu as ghiChu,"
                 + "p.ngayThanhToan as ngayThanhToan,"
                 + "p.ngayTao as ngayTao,"
@@ -93,6 +94,7 @@ public class TpPhieuNhapRepository {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery("Select new  cores.truongPhongs.customModels.TpPhieuNhapCustom ( "
                 + "p.id as id,"
+                + "p.maPhieu as maPhieu,"
                 + "p.ghiChu as ghiChu,"
                 + "p.ngayThanhToan as ngayThanhToan,"
                 + "p.ngayTao as ngayTao,"
@@ -112,6 +114,7 @@ public class TpPhieuNhapRepository {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery("Select new  cores.truongPhongs.customModels.TpPhieuNhapCustom ( "
                 + "p.id as id,"
+                + "p.maPhieu as maPhieu,"
                 + "p.ghiChu as ghiChu,"
                 + "p.ngayThanhToan as ngayThanhToan,"
                 + "p.ngayTao as ngayTao,"
@@ -139,6 +142,7 @@ public class TpPhieuNhapRepository {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery("Select new  cores.truongPhongs.customModels.TpPhieuNhapCustom ( "
                 + "p.id as id,"
+                + "p.maPhieu as maPhieu,"
                 + "p.ghiChu as ghiChu,"
                 + "p.ngayThanhToan as ngayThanhToan,"
                 + "p.ngayTao as ngayTao,"
@@ -157,6 +161,7 @@ public class TpPhieuNhapRepository {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery("Select new  cores.truongPhongs.customModels.TpPhieuNhapCustom ( "
                 + "p.id as id,"
+                + "p.maPhieu as maPhieu,"
                 + "p.ghiChu as ghiChu,"
                 + "p.ngayThanhToan as ngayThanhToan,"
                 + "p.ngayTao as ngayTao,"
@@ -177,6 +182,7 @@ public class TpPhieuNhapRepository {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery("Select new  cores.truongPhongs.customModels.TpPhieuNhapCustom ( "
                 + "p.id as id,"
+                + "p.maPhieu as maPhieu,"
                 + "p.ghiChu as ghiChu,"
                 + "p.ngayThanhToan as ngayThanhToan,"
                 + "p.ngayTao as ngayTao,"
