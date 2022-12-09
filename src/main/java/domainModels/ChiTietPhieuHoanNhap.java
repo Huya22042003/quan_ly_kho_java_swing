@@ -35,4 +35,7 @@ public class ChiTietPhieuHoanNhap implements Serializable {
     @Column(name = "SoLuong")
     private int soLuong;
     
+    @Column(name = "LiDo")
+    private String liDo;
+    
 }

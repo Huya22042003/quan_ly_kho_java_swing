@@ -31,6 +31,9 @@ public class PhieuNhap implements Serializable{
     @Column(name = "Id", columnDefinition = "uniqueidentifier")
     private UUID id;
     
+    @Column(name = "MaPhieu")
+    private String maPhieu;
+    
     @Column(name = "NgayTao")
     private Long ngayTao;
     

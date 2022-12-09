@@ -4,7 +4,6 @@
  */
 package cores.truongPhongs.customModels;
 
-import java.math.BigDecimal;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,35 +12,14 @@ import lombok.Setter;
 
 /**
  *
- * @author MMC
+ * @author QUOC HUY
  */
-@Getter
 @Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TpQuanLySanPhamCustom {
-
+public class TpThemSanPhamCustom {
     private UUID id;
-
     private String ma;
-
     private String ten;
-
-    private BigDecimal giaBanMax;
-    
-    private BigDecimal giaBanMin;
-    
-    private BigDecimal giaNhapMax;
-    
-    private BigDecimal giaNhapMin;
-    
-    private int soLuong;
-
-    public TpQuanLySanPhamCustom(UUID id, String ma, String ten) {
-        this.id = id;
-        this.ma = ma;
-        this.ten = ten;
-    }
-    
-    
 }

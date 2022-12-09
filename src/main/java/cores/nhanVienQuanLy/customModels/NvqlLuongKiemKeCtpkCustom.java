@@ -22,8 +22,9 @@ public class NvqlLuongKiemKeCtpkCustom {
     private int soLuongThucTon;
     private PhieuKiemKe idPhieuKiem;
     private ChiTietSanPham idChiTietSanPham;
+    private String liDo;
     
     public int getChenhLech() {
-        return soLuongThucTon - soLuongTon;
+        return (soLuongThucTon - soLuongTon) * -1;
     }
 }

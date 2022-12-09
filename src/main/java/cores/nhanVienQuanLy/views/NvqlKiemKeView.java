@@ -22,6 +22,8 @@ import utilities.Converter;
 import utilities.MaTuSinh;
 import utilities.MsgBox;
 import utilities.Page;
+import utilities.palette.SearchCustom.EventCallBack;
+import utilities.palette.SearchCustom.EventTextField;
 
 /**
  *
@@ -87,62 +89,83 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
         cbbTrangThai.setSelectedIndex(0);
         sizes = listPhieuKiemKeCustom.size();
         fillTablePhieuKiemKe(kiemKeService.phanTrang(listPhieuKiemKeCustom, offset, limit));
-    }
+          txtSearch.addEvent(new EventTextField() {
+            @Override
+            public void onPressed(EventCallBack call) {
+                //  Test
+                try {
+                    for (int i = 1; i <= 100; i++) {
 
-    public List<NvqlLuongKiemKeCustom> listSearch(int rdo) {
-        // nhập vào 
-        String timKiem = this.txtSearch.getText();
-        List<NvqlLuongKiemKeCustom> listTimKiem = new ArrayList<>();
-
-        // tìm kiếm theo tên mã vị trí
-        checkCbb(kiemKeService.loc(this.cbbTrangThai.getSelectedIndex())).forEach(el -> {
-            String search = "";
-            List<String> strings = new ArrayList<>();
-
-            // truyền tham số
-            switch (rdo) {
-                case 0:
-                    search = el.getId().toString();
-                    break;
-
-                case 1:
-                    search = el.getIdNV().getTen();
-                    break;
-
-            }
-            for (int i = 0; i <= search.length(); i++) {
-                String newMa = search.substring(0, i);
-                strings.add(newMa);
-            }
-            // so sánh mảng vừa cắt với phần tử nhập vào
-            for (String e : strings) {
-                if (e.equalsIgnoreCase(timKiem)) {
-                    listTimKiem.add(el);
+                        Thread.sleep(5);
+                    }
+                    call.done();
+                } catch (Exception e) {
+                    System.err.println(e);
                 }
             }
-        });
 
-        return listTimKiem;
-    }
+            @Override
+            public void onCancel() {
 
-    public List<NvqlLuongKiemKeCustom> checkCbb(TrangThaiPhieuKiemConstant cs) {
-        List<NvqlLuongKiemKeCustom> listTimKiem = new ArrayList<>();
-        listPhieuKiemKeCustom.forEach(el -> {
-            if (el.getTrangThai() == cs) {
-                listTimKiem.add(el);
             }
         });
-        return listTimKiem;
+
     }
 
-    public void searchRadio() {
-        if (rdoMa.isSelected()) {
-            fillTablePhieuKiemKe(listSearch(0));
-        }
-        if (rdoNhanVien.isSelected()) {
-            fillTablePhieuKiemKe(listSearch(1));
-        }
-    }
+//    public List<NvqlLuongKiemKeCustom> listSearch(int rdo) {
+//        // nhập vào 
+//        String timKiem = this.txtSearch.getText();
+//        List<NvqlLuongKiemKeCustom> listTimKiem = new ArrayList<>();
+//
+//        // tìm kiếm theo tên mã vị trí
+//        checkCbb(kiemKeService.loc(this.cbbTrangThai.getSelectedIndex())).forEach(el -> {
+//            String search = "";
+//            List<String> strings = new ArrayList<>();
+//
+//            // truyền tham số
+//            switch (rdo) {
+//                case 0:
+//                    search = el.getId().toString();
+//                    break;
+//
+//                case 1:
+//                    search = el.getIdNV().getTen();
+//                    break;
+//
+//            }
+//            for (int i = 0; i <= search.length(); i++) {
+//                String newMa = search.substring(0, i);
+//                strings.add(newMa);
+//            }
+//            // so sánh mảng vừa cắt với phần tử nhập vào
+//            for (String e : strings) {
+//                if (e.equalsIgnoreCase(timKiem)) {
+//                    listTimKiem.add(el);
+//                }
+//            }
+//        });
+//
+//        return listTimKiem;
+//    }
+//
+//    public List<NvqlLuongKiemKeCustom> checkCbb(TrangThaiPhieuKiemConstant cs) {
+//        List<NvqlLuongKiemKeCustom> listTimKiem = new ArrayList<>();
+//        listPhieuKiemKeCustom.forEach(el -> {
+//            if (el.getTrangThai() == cs) {
+//                listTimKiem.add(el);
+//            }
+//        });
+//        return listTimKiem;
+//    }
+//
+//    public void searchRadio() {
+//        if (rdoMa.isSelected()) {
+//            fillTablePhieuKiemKe(listSearch(0));
+//        }
+//        if (rdoNhanVien.isSelected()) {
+//            fillTablePhieuKiemKe(listSearch(1));
+//        }
+//    }
 
     public void TimKiemTheoNgay() {
         if (ngayBatDau.getDate() == null) {
@@ -171,7 +194,8 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
                 m.getMaPhieuKiem(),
                 simpleDateFormat.format(ngayTao),
                 m.getIdNV().getTen(),
-                Converter.TrangThaiPhieuKiem(m.getTrangThai())
+                Converter.TrangThaiPhieuKiem(m.getTrangThai()),
+                m.getGhiChu() == null ? "Nothing" : m.getGhiChu()
             });
 
         });
@@ -199,7 +223,7 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         panelRound8 = new utilities.palette.PanelRound();
         cbbTrangThai = new utilities.palette.Combobox();
-        myButton8 = new utilities.palette.MyButton();
+        btnChiTietSP1 = new utilities.palette.MyButton();
         panelRound15 = new utilities.palette.PanelRound();
         btnChiTietPhieuKiem = new utilities.palette.MyButton();
         btnTaoPhieu = new utilities.palette.MyButton();
@@ -235,7 +259,7 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
 
             },
             new String [] {
-                "STT", "Mã phiếu kiểm", "Ngày tạo", "Tên nhân viên", "Trạng thái"
+                "STT", "Mã phiếu kiểm", "Ngày tạo", "Tên nhân viên", "Trạng thái", "Lí do"
             }
         ));
         tbPhieuKiemKe.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -276,6 +300,11 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
         txtSearch.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtSearchMouseClicked(evt);
+            }
+        });
+        txtSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSearchActionPerformed(evt);
             }
         });
 
@@ -349,34 +378,34 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
             }
         });
 
-        myButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/calendarrrrrr.png"))); // NOI18N
-        myButton8.setToolTipText("Chọn khoảng thời gian để tìm kiếm");
-        myButton8.setBorderColor(new java.awt.Color(221, 242, 244));
-        myButton8.setColor(new java.awt.Color(221, 242, 244));
-        myButton8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        myButton8.setRadius(50);
+        btnChiTietSP1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Print.png"))); // NOI18N
+        btnChiTietSP1.setToolTipText("In danh sách sản phẩm");
+        btnChiTietSP1.setBorderColor(new java.awt.Color(221, 242, 244));
+        btnChiTietSP1.setColor(new java.awt.Color(221, 242, 244));
+        btnChiTietSP1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnChiTietSP1.setRadius(50);
 
         javax.swing.GroupLayout panelRound8Layout = new javax.swing.GroupLayout(panelRound8);
         panelRound8.setLayout(panelRound8Layout);
         panelRound8Layout.setHorizontalGroup(
             panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound8Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(myButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound8Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(btnChiTietSP1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(cbbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(63, 63, 63))
         );
         panelRound8Layout.setVerticalGroup(
             panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound8Layout.createSequentialGroup()
+            .addGroup(panelRound8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelRound8Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(cbbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(myButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(11, 11, 11))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound8Layout.createSequentialGroup()
+                        .addGap(0, 8, Short.MAX_VALUE)
+                        .addComponent(btnChiTietSP1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         panelRound15.setBackground(new java.awt.Color(67, 130, 187));
@@ -498,18 +527,14 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
         panelRound9Layout.setVerticalGroup(
             panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound9Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel4)
-                        .addComponent(ngayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelRound9Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addGroup(panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ngayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel3)
-                                .addComponent(rdoNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(23, 23, 23)
+                .addGroup(panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(ngayBatDau, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(rdoNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ngayKetThuc, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
@@ -737,6 +762,10 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Bạn cần chọn 1 phiếu kiểm");
             return;
         }
+        if (tbPhieuKiemKe.getValueAt(s, 4).toString().equals("Đã xác nhận")) {
+            JOptionPane.showMessageDialog(this, "Bạn phải chọn một phiếu kiểm chưa xác nhận!");
+            return;
+        }
         NvqlKiemKeCtspView create = new NvqlKiemKeCtspView();
         create.PhieuKiemKe(chon());
         create.setVisible(true);
@@ -745,7 +774,7 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
     public NvqlLuongKiemKeCustom chon() {
         int row = tbPhieuKiemKe.getSelectedRow();
         if (row == -1) {
-            JOptionPane.showMessageDialog(this, "Bạn phải chọn 1 phiếu xuất");
+            JOptionPane.showMessageDialog(this, "Bạn phải chọn 1 phiếu kiểm");
             return null;
         }
         NvqlLuongKiemKeCustom kk = new NvqlLuongKiemKeCustom();
@@ -767,6 +796,7 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
         txtNgayTao.setText(ngayTao);
         txtTenNhanVien.setText(tbPhieuKiemKe.getValueAt(s, 3).toString());
         txtTrangThai.setText(tbPhieuKiemKe.getValueAt(s, 4).toString());
+        txtGhiChu.setText(tbPhieuKiemKe.getValueAt(s, 5).toString());
         NvqlLuongKiemKeCustom kiemKeCustom = mouseClickPhieuKiem(s);
         List<NvqlLuongKiemKeCtpkCustom> listCtpk = ctpkService.getAll(listPhieuKiemKeCustom.get(s).getId());
 
@@ -797,7 +827,7 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
             return;
         }
         if (txtGhiChu.getText().equalsIgnoreCase("")) {
-            MsgBox.alert(this, "Ghi chú bắt buộc phải có!!");
+            MsgBox.alert(this, "Lí do bắt buộc phải có!!");
             return;
         }
         if (listPhieuKiemKeCustom.get(row).getTrangThai() == TrangThaiPhieuKiemConstant.DA_XAC_NHAN) {
@@ -806,6 +836,7 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
         }
         NvqlLuongKiemKeCustom a = listPhieuKiemKeCustom.get(row);
         a.setTrangThai(TrangThaiPhieuKiemConstant.DA_XAC_NHAN);
+        a.setGhiChu(txtGhiChu.getText());
         kiemKeService.UpdateTrangThai(a);
         listPhieuKiemKeCustom.set(row, a);
         hienThi();
@@ -814,24 +845,37 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
 
     private void cbbTrangThaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbTrangThaiActionPerformed
         // TODO add your handling code here:
-        searchRadio();
+        searchhRadio();
 
     }//GEN-LAST:event_cbbTrangThaiActionPerformed
+       public List<NvqlLuongKiemKeCustom> getListByTT(int rdo) {
+        String timKiem = this.txtSearch.getText();
+        listPhieuKiemKeCustom = kiemKeService.findAllByKhAndNV(timKiem, kiemKeService.loc(cbbTrangThai.getSelectedIndex()), rdo);
+        return listPhieuKiemKeCustom;
+    }
 
+    public void searchhRadio() {
+        if (rdoMa.isSelected()) {
+            fillTablePhieuKiemKe(getListByTT(0));
+        } 
+        if (rdoNhanVien.isSelected()) {
+           fillTablePhieuKiemKe(getListByTT(1));
+        } 
+    }
     private void txtSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSearchMouseClicked
         // TODO add your handling code here:
-        searchRadio();
+        searchhRadio();
         TimKiemTheoNgay();
     }//GEN-LAST:event_txtSearchMouseClicked
 
     private void rdoMaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoMaActionPerformed
         // TODO add your handling code here:
-        searchRadio();
+        searchhRadio();
     }//GEN-LAST:event_rdoMaActionPerformed
 
     private void rdoNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoNhanVienActionPerformed
         // TODO add your handling code here:
-        searchRadio();
+        searchhRadio();
     }//GEN-LAST:event_rdoNhanVienActionPerformed
     private void loadIndex() {
         this.txtIndex.setText(String.valueOf(index) + " / " + (Math.round((sizes / limit) + 0.5)));
@@ -852,9 +896,14 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
         fillTablePhieuKiemKe(kiemKeService.phanTrang(listPhieuKiemKeCustom, offset, limit));
     }//GEN-LAST:event_btnNextActionPerformed
 
+    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSearchActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private utilities.palette.MyButton btnChiTietPhieuKiem;
+    private utilities.palette.MyButton btnChiTietSP1;
     private utilities.palette.MyButton btnHienThi;
     private utilities.palette.UWPButton btnNext;
     private utilities.palette.UWPButton btnPre;
@@ -868,7 +917,6 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private utilities.palette.MyButton myButton8;
     private com.toedter.calendar.JDateChooser ngayBatDau;
     private com.toedter.calendar.JDateChooser ngayKetThuc;
     private utilities.palette.PanelRound panelRound1;

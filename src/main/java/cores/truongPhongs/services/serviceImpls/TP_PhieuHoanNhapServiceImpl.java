@@ -38,7 +38,7 @@ public class TP_PhieuHoanNhapServiceImpl implements TP_PhieuHoanNhapService {
 
     @Override
     public boolean addPhieuNhap(TP_HoanNhap_PhieuNhapCustom pn, String ghiChu, String lyDo) {
-        PhieuNhap phieuNhap = new PhieuNhap(pn.getId(), pn.getNgayTao(), pn.getGhiChu(), pn.getNgayThanhToan(), pn.getTrangThai(), pn.getNhanVien(), pn.getNhaCungCap());
+        PhieuNhap phieuNhap = new PhieuNhap(pn.getId(), pn.getMaPhieu(), pn.getNgayTao(), pn.getGhiChu(), pn.getNgayThanhToan(), pn.getTrangThai(), pn.getNhanVien(), pn.getNhaCungCap());
         PhieuHoanNhap phn = new PhieuHoanNhap();
         phn.setGhiChu(ghiChu);
         phn.setLiDo(lyDo);
@@ -55,8 +55,8 @@ public class TP_PhieuHoanNhapServiceImpl implements TP_PhieuHoanNhapService {
     }
 
     @Override
-    public boolean addSanPhamInPhieuHoan(UUID sp, UUID idPhieuNhapHoan, int soLuongNhap) {
-        return rp.addChiTietPhieuHoanNhap(sp, idPhieuNhapHoan, soLuongNhap);
+    public boolean addSanPhamInPhieuHoan(UUID sp, UUID idPhieuNhapHoan, int soLuongNhap,String lyDo) {
+        return rp.addChiTietPhieuHoanNhap(sp, idPhieuNhapHoan, soLuongNhap, lyDo);
     }
 
     @Override

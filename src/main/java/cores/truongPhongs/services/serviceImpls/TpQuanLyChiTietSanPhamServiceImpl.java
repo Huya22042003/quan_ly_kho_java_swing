@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.UUID;
 import javax.swing.JLabel;
 import utilities.Converter;
-import utilities.DateTimeUtil;
 import utilities.palette.Combobox;
 
 /**
@@ -30,43 +29,43 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
     private TpQuanLyChiTietSanPhamRepository rp = new TpQuanLyChiTietSanPhamRepository();
 
     @Override
-    public List<TpQuanLyChiTietSanPhamCustom> getAll() {
-        return rp.getAll();
+    public List<TpQuanLyChiTietSanPhamCustom> getAll(UUID idSp) {
+        return rp.getAll(idSp);
     }
 
     @Override
     public TpQuanLyChiTietSanPhamCustom addCTSanPham(TpQuanLyChiTietSanPhamCustom custom) {
         ChiTietSanPham sp = new ChiTietSanPham();
-        sp.setGiaBan(custom.getGiaBan());
-        sp.setGiaNhap(custom.getGiaNhap());
-        sp.setHinhAnh(custom.getHinhAnh());
-        sp.setSoLuongTon(custom.getSoLuongTon());
-        sp.setMau(custom.getMau());
-        sp.setDonVi(custom.getDonVi());
-        sp.setNamBaoHanh(custom.getNamBaoHanh());
-        sp.setSanPham(custom.getSanPham());
-        sp.setNgayTao(DateTimeUtil.convertDateToTimeStampSecond());
-        sp.setTrangThai(custom.getTrangThai());
-        sp.setSize(custom.getSize());
-        custom.setId(rp.addCTSanPham(sp).getId());
+//        sp.setGiaBan(custom.getGiaBan());
+//        sp.setGiaNhap(custom.getGiaNhap());
+//        sp.setHinhAnh(custom.getHinhAnh());
+//        sp.setSoLuongTon(custom.getSoLuongTon());
+//        sp.setMau(custom.getMau());
+//        sp.setDonVi(custom.getDonVi());
+//        sp.setNamBaoHanh(custom.getNamBaoHanh());
+//        sp.setSanPham(custom.getSanPham());
+//        sp.setNgayTao(DateTimeUtil.convertDateToTimeStampSecond());
+//        sp.setTrangThai(custom.getTrangThai());
+//        sp.setSize(custom.getSize());
+//        custom.setId(rp.addCTSanPham(sp).getId());
         return custom;
     }
 
     @Override
     public boolean updateCTSanPham(TpQuanLyChiTietSanPhamCustom custom) {
         ChiTietSanPham sp = new ChiTietSanPham();
-        sp.setGiaBan(custom.getGiaBan());
-        sp.setGiaNhap(custom.getGiaNhap());
-        sp.setHinhAnh(custom.getHinhAnh());
-        sp.setSoLuongTon(custom.getSoLuongTon());
-        sp.setMau(custom.getMau());
-        sp.setDonVi(custom.getDonVi());
-        sp.setNamBaoHanh(custom.getNamBaoHanh());
-        sp.setSanPham(custom.getSanPham());
-        sp.setNgayTao(custom.getNgayTao());
-        sp.setTrangThai(custom.getTrangThai());
-        sp.setSize(custom.getSize());
-        sp.setId(custom.getId());
+//        sp.setGiaBan(custom.getGiaBan());
+//        sp.setGiaNhap(custom.getGiaNhap());
+//        sp.setHinhAnh(custom.getHinhAnh());
+//        sp.setSoLuongTon(custom.getSoLuongTon());
+//        sp.setMau(custom.getMau());
+//        sp.setDonVi(custom.getDonVi());
+//        sp.setNamBaoHanh(custom.getNamBaoHanh());
+//        sp.setSanPham(custom.getSanPham());
+//        sp.setNgayTao(custom.getNgayTao());
+//        sp.setTrangThai(custom.getTrangThai());
+//        sp.setSize(custom.getSize());
+//        sp.setId(custom.getId());
 
         return rp.updateCTSanPham(sp);
     }
@@ -97,7 +96,7 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
         if (giaNhap.trim().length() == 0) {
             erroGiaNhap.setText("Giá nhập không được để trống");
             check = false;
-        } else if (!giaNhap.matches("^[0-9]+$")) {
+        } else if (!giaNhap.trim().matches("^[0-9]+$")) {
             erroGiaNhap.setText("Giá nhập sai định dạng");
             check = false;
         } else {
@@ -107,7 +106,7 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
         if (giaBan.trim().length() == 0) {
             erroGiaBan.setText("Giá bán không được để trống");
             check = false;
-        } else if (!giaBan.matches("^[0-9]+$")) {
+        } else if (!giaBan.trim().matches("^[0-9]+$")) {
             erroGiaBan.setText("Giá bán sai định dạng");
             check = false;
         } else {
@@ -116,8 +115,8 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
         if (soLuong.trim().length() == 0) {
             erroSoLuong.setText("Số lượng tồn không được để trống");
             check = false;
-        } else if (!soLuong.matches("\\d+")) {
-            erroSoLuong.setText("Số lượng tồn không được là chữ");
+        } else if (!soLuong.trim().matches("^[0-9]+$")) {
+            erroSoLuong.setText("Số lượng tồn sai định dạng");
             check = false;
         } else {
             erroSoLuong.setText("");
@@ -126,8 +125,8 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
         if (namBH.trim().length() == 0) {
             erroNamBH.setText("Năm bảo hành không được để trống");
             check = false;
-        } else if (!namBH.matches("\\d+")) {
-            erroNamBH.setText("Năm bảo hành không được là chữ");
+        } else if (!namBH.trim().matches("^[0-9]+$")) {
+            erroNamBH.setText("Năm bảo hành sai định dạng");
             check = false;
         } else {
             erroNamBH.setText("");
@@ -135,7 +134,7 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
         if (size.trim().length() == 0) {
             erroSize.setText("Size không được để trống");
             check = false;
-        } else if (!size.matches("^[0-9]+$")) {
+        } else if (!size.trim().matches("^[0-9]+$")) {
             erroSize.setText("Size sai định dạng");
             check = false;
         } else {
@@ -146,16 +145,16 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
             return null;
         }
         TpQuanLyChiTietSanPhamCustom sp = new TpQuanLyChiTietSanPhamCustom();
-        sp.setGiaBan(new BigDecimal(Double.parseDouble(giaBan)));
-        sp.setGiaNhap(new BigDecimal(Double.parseDouble(giaNhap)));
-        sp.setSoLuongTon(Integer.parseInt(soLuong));
-        sp.setHinhAnh(hinhAnh);
-        sp.setMau(mau);
-        sp.setNamBaoHanh(Integer.parseInt(namBH));
-        sp.setDonVi(findIDDonVi(donVi));
-        sp.setSanPham(findIDSanPham(sanPham));
-        sp.setSize(Integer.parseInt(size));
-        sp.setTrangThai(tt(tt));
+//        sp.setGiaBan(new BigDecimal(Double.parseDouble(giaBan)));
+//        sp.setGiaNhap(new BigDecimal(Double.parseDouble(giaNhap)));
+//        sp.setSoLuongTon(Integer.parseInt(soLuong));
+//        sp.setHinhAnh(hinhAnh);
+//        sp.setMau(mau);
+//        sp.setNamBaoHanh(Integer.parseInt(namBH));
+//        sp.setDonVi(findIDDonVi(donVi));
+//        sp.setSanPham(findIDSanPham(sanPham));
+//        sp.setSize(Integer.parseInt(size));
+//        sp.setTrangThai(tt(tt));
         return sp;
     }
 
