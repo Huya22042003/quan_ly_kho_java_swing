@@ -189,15 +189,6 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
         return listTimKiem;
     }
 
-//    public void searchRadio() {
-//        if (rdoMaSanPham.isSelected()) {
-//            loadTableNcc(listSearch(0));
-//        }
-//        if (rdoTenSanPham.isSelected()) {
-//            loadTableNcc(listSearch(1));
-//        }
-//    }
-
     public void timKiemTheoGia() {
         if (txtGiaFrom.getText().trim().length() == 0) {
             return;
