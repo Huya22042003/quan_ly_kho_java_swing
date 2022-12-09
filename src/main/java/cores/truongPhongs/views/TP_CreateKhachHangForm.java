@@ -29,7 +29,7 @@ public class TP_CreateKhachHangForm extends javax.swing.JFrame {
         setLocation(size.width / 2 - getWidth() / 2, size.height / 2 - getHeight() / 2);
     }
 
-    public TP_KhachHangCustom getFormData() {
+    public TP_KhachHangCustom getFormDataCreate() {
         TP_KhachHangCustom csc = new TP_KhachHangCustom();
         csc.setMa(this.txtMa.getText());
         csc.setTen(txtTen.getText());
@@ -337,7 +337,7 @@ public class TP_CreateKhachHangForm extends javax.swing.JFrame {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
 
-        TP_KhachHangCustom check = hangService.checkValidate(getFormData(), erroMa, erroTen, erroSDT, erroEmail, erroDiaChi, erroMatKhau, erroNgaySinh);
+        TP_KhachHangCustom check = hangService.checkValidateCreate(getFormDataCreate(), erroMa, erroTen, erroSDT, erroEmail, erroDiaChi, erroMatKhau, erroNgaySinh);
         if (check == null) {
             return;
         }

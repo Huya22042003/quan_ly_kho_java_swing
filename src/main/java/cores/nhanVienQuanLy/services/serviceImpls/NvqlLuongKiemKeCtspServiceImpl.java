@@ -4,6 +4,7 @@ import cores.nhanVienQuanLy.customModels.NvqlLuongKiemKeCtspCustom;
 import cores.nhanVienQuanLy.repositories.NvqlLuongKiemKeCtspRepository;
 import cores.nhanVienQuanLy.services.NvqlLuongKiemKeCtspService;
 import domainModels.ChiTietSanPham;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,5 +78,22 @@ public class NvqlLuongKiemKeCtspServiceImpl implements NvqlLuongKiemKeCtspServic
                 a.getDonVi()
         );
         rp.updateTrangThaiSp(ctsp);
+    }
+
+    @Override
+    public List<NvqlLuongKiemKeCtspCustom> findAllByKhAndNV(String ma, int rdo) {
+        switch (rdo) {
+            case 0:
+                return rp.getListByMaSp(ma);
+            case 1:
+                return rp.getListByTenSp(ma);
+            default:
+                return null;
+        }
+    }
+
+    @Override
+    public List<NvqlLuongKiemKeCtspCustom> getListGiaNhap(BigDecimal giaBatDau, BigDecimal giaKetThuc) {
+        return rp.getListByGiaBan(giaBatDau, giaKetThuc);
     }
 }

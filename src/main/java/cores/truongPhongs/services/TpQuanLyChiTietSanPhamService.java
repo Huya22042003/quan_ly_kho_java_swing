@@ -20,7 +20,7 @@ import utilities.palette.Combobox;
  */
 public interface TpQuanLyChiTietSanPhamService {
 
-    public List<TpQuanLyChiTietSanPhamCustom> getAll(UUID idSp);
+    public List<TpQuanLyChiTietSanPhamCustom> getAll(UUID idSp, String maNcc, String tenNcc,String maSpNcc,String emailNcc,String sdtNcc);
 
     TpQuanLyChiTietSanPhamCustom addCTSanPham(TpQuanLyChiTietSanPhamCustom custom);
 

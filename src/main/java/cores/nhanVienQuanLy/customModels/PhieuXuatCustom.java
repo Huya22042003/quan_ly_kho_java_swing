@@ -14,6 +14,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class PhieuXuatCustom {
     private UUID id;
+    private String ma;
     private Long ngayTao;
     private String ghiChu;
     private Long ngayThanhToan;

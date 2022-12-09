@@ -29,8 +29,8 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
     private TpQuanLyChiTietSanPhamRepository rp = new TpQuanLyChiTietSanPhamRepository();
 
     @Override
-    public List<TpQuanLyChiTietSanPhamCustom> getAll(UUID idSp) {
-        return rp.getAll(idSp);
+    public List<TpQuanLyChiTietSanPhamCustom> getAll(UUID idSp, String maNcc, String tenNcc,String maSpNcc,String emailNcc,String sdtNcc) {
+        return rp.getAll(idSp,maNcc, tenNcc,maSpNcc,emailNcc,sdtNcc);
     }
 
     @Override

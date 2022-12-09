@@ -21,7 +21,7 @@ import lombok.Setter;
 public class TP_HoanNhap_ctpCusTom {
     
     private UUID id;
-
+  
     private int soLuongTon;
 
     private String hinhAnh;
@@ -39,4 +39,6 @@ public class TP_HoanNhap_ctpCusTom {
     private DonVi donVi;
 
     private int soLuongHoan;
+    
+    private String lyDo;
 }

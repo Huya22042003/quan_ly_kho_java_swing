@@ -3,9 +3,11 @@ package cores.nhanVienQuanLy.repositories;
 import cores.nhanVienQuanLy.customModels.NvqlLuongKiemKeCtspCustom;
 import domainModels.ChiTietSanPham;
 import infrastructures.constant.TrangThaiSanPhamConstanst;
+import java.math.BigDecimal;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import utilities.HibernateUtil;
 
 /**
@@ -66,4 +68,72 @@ public class NvqlLuongKiemKeCtspRepository {
             s.close();
         }
     }
+     public List<NvqlLuongKiemKeCtspCustom> getListByMaSp(String ma) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+         Query query = session.createQuery("select "
+                + " new cores.nhanVienQuanLy.customModels.NvqlLuongKiemKeCtspCustom("
+                + " m.id,"
+                + " m.sanPham.ma as ma,"
+                + " m.sanPham.ten as ten,"
+                + " m.soLuongTon as soLuongTon,"
+                + " m.donVi as donVi,"
+                + " m.mau as mau,"
+                + " m.namBaoHanh as namBaoHanh,"
+                + " m.GiaBan as giaBan,"
+                + " m.size as size, "
+                + " m.ngayTao as ngayTao) "
+                + " from domainModels.ChiTietSanPham m "
+                + " WHERE m.sanPham.ma like CONCAT('%',:ma,'%') "
+                + "order by m.soLuongTon DESC" );
+       query.setParameter("ma", ma);
+        List<NvqlLuongKiemKeCtspCustom> list = query.getResultList();
+        return list;
+        
+    }
+         public List<NvqlLuongKiemKeCtspCustom> getListByTenSp(String ma) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+         Query query = session.createQuery("select "
+                + " new cores.nhanVienQuanLy.customModels.NvqlLuongKiemKeCtspCustom("
+                + " m.id,"
+                + " m.sanPham.ma as ma,"
+                + " m.sanPham.ten as ten,"
+                + " m.soLuongTon as soLuongTon,"
+                + " m.donVi as donVi,"
+                + " m.mau as mau,"
+                + " m.namBaoHanh as namBaoHanh,"
+                + " m.GiaBan as giaBan,"
+                + " m.size as size, "
+                + " m.ngayTao as ngayTao) "
+                + " from domainModels.ChiTietSanPham m "
+                + " WHERE m.sanPham.ten like CONCAT('%',:ma,'%') "
+                + "order by m.soLuongTon DESC" );
+       query.setParameter("ma", ma);
+        List<NvqlLuongKiemKeCtspCustom> list = query.getResultList();
+        return list;
+        
+    }
+           public List<NvqlLuongKiemKeCtspCustom> getListByGiaBan(BigDecimal giaBatDau, BigDecimal giaKetThuc) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+         Query query = session.createQuery("select "
+                + " new cores.nhanVienQuanLy.customModels.NvqlLuongKiemKeCtspCustom("
+                + " m.id,"
+                + " m.sanPham.ma as ma,"
+                + " m.sanPham.ten as ten,"
+                + " m.soLuongTon as soLuongTon,"
+                + " m.donVi as donVi,"
+                + " m.mau as mau,"
+                + " m.namBaoHanh as namBaoHanh,"
+                + " m.GiaBan as giaBan,"
+                + " m.size as size, "
+                + " m.ngayTao as ngayTao) "
+                + " from domainModels.ChiTietSanPham m "
+                + " WHERE  m.GiaBan > :giaBatDau AND m.GiaBan < :giaKetThuc "
+                + " order by m.soLuongTon DESC" );
+            query.setParameter("giaBatDau", giaBatDau);
+        query.setParameter("giaKetThuc", giaKetThuc);
+        List<NvqlLuongKiemKeCtspCustom> list = query.getResultList();
+        return list;
+        
+    }
+     
 }

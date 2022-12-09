@@ -70,7 +70,7 @@
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                   <Component id="panelRound2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="39" max="32767" attributes="0"/>
                   <Component id="uWPButton1" min="-2" pref="47" max="-2" attributes="0"/>
@@ -116,33 +116,32 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="cbbChucVu" alignment="1" min="-2" pref="300" max="-2" attributes="0"/>
-                          <Component id="cbbTrangThai" alignment="1" min="-2" pref="300" max="-2" attributes="0"/>
-                          <Component id="cbbGioiTinh" alignment="1" min="-2" pref="300" max="-2" attributes="0"/>
-                          <Component id="erroNgaySinh" alignment="1" min="-2" pref="300" max="-2" attributes="0"/>
-                          <Component id="txtDate" alignment="1" min="-2" pref="300" max="-2" attributes="0"/>
-                          <Component id="erroDiaChi" alignment="1" min="-2" pref="300" max="-2" attributes="0"/>
-                          <Component id="txtDiaChi" alignment="1" min="-2" pref="300" max="-2" attributes="0"/>
-                          <Component id="erroMatKhau" alignment="1" min="-2" pref="300" max="-2" attributes="0"/>
-                          <Component id="txtMatKhau" alignment="1" min="-2" pref="300" max="-2" attributes="0"/>
-                          <Component id="erroSDT" alignment="1" min="-2" pref="300" max="-2" attributes="0"/>
-                          <Component id="erroEmail" alignment="1" min="-2" pref="300" max="-2" attributes="0"/>
-                          <Component id="txtSDT" alignment="1" min="-2" pref="300" max="-2" attributes="0"/>
-                          <Component id="txtEmail" alignment="1" min="-2" pref="300" max="-2" attributes="0"/>
-                          <Component id="erroTen" alignment="1" min="-2" pref="300" max="-2" attributes="0"/>
-                          <Component id="txtTen" alignment="1" min="-2" pref="300" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="erroMa" min="-2" pref="300" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                                  <Component id="txtMa" min="-2" pref="300" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="erroNgaySinh" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="erroDiaChi" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="erroMatKhau" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="erroSDT" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="erroEmail" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="erroTen" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="txtDate" alignment="1" pref="329" max="32767" attributes="0"/>
+                                  <Component id="txtDiaChi" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="txtMatKhau" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="txtSDT" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="txtEmail" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="txtTen" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="txtMa" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="erroMa" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
+                          <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="cbbChucVu" alignment="1" pref="329" max="32767" attributes="0"/>
+                              <Component id="cbbTrangThai" alignment="1" max="32767" attributes="0"/>
+                              <Component id="cbbGioiTinh" alignment="1" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace pref="36" max="32767" attributes="0"/>
+                      <EmptySpace pref="27" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -160,36 +159,36 @@
                       <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                       <Component id="txtEmail" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="erroEmail" min="-2" pref="23" max="-2" attributes="0"/>
-                              <EmptySpace min="234" pref="234" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="txtSDT" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                               <Component id="erroSDT" min="-2" pref="23" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                              <Component id="txtMatKhau" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="erroMatKhau" min="-2" pref="23" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="txtDiaChi" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="erroDiaChi" min="-2" pref="23" max="-2" attributes="0"/>
                           </Group>
                       </Group>
+                      <Component id="txtMatKhau" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="erroMatKhau" min="-2" pref="23" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="txtDiaChi" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="erroDiaChi" min="-2" pref="23" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="txtDate" min="-2" pref="30" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="erroNgaySinh" min="-2" pref="23" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="cbbGioiTinh" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="cbbTrangThai" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="28" max="32767" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="cbbChucVu" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                      <EmptySpace pref="37" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -243,11 +242,6 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="utilities.palette.TextField" name="txtMatKhau">
-              <Properties>
-                <Property name="labelText" type="java.lang.String" value="M&#x1ead;t Kh&#x1ea9;u"/>
-              </Properties>
-            </Component>
             <Component class="utilities.palette.lable" name="erroMatKhau">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -280,6 +274,9 @@
               <Properties>
                 <Property name="labeText" type="java.lang.String" value="Gi&#x1edb;i T&#xed;nh"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbbGioiTinhActionPerformed"/>
+              </Events>
             </Component>
             <Component class="utilities.palette.Combobox" name="cbbTrangThai">
               <Properties>
@@ -293,6 +290,12 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbbChucVuActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="utilities.palette.PasswordField" name="txtMatKhau">
+              <Properties>
+                <Property name="labelText" type="java.lang.String" value="M&#x1ead;t kh&#x1ea9;u m&#x1edb;i: "/>
+                <Property name="showAndHide" type="boolean" value="true"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
