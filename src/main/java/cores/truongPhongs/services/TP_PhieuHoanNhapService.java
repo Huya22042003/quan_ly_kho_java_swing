@@ -4,6 +4,7 @@ import cores.truongPhongs.customModels.TP_HoanNhap_PhieuNhapCustom;
 import cores.truongPhongs.customModels.TP_HoanNhap_ctpCusTom;
 import cores.truongPhongs.customModels.TP_HoanNhap_spCustom;
 import cores.truongPhongs.customModels.TP_PhieuHoanNhapCustom;
+import infrastructures.constant.TrangThaiPhieuHoanConstant;
 import java.util.List;
 import java.util.UUID;
 
@@ -30,5 +31,13 @@ public interface TP_PhieuHoanNhapService {
     void updatePhieuHoanNhap(TP_PhieuHoanNhapCustom phnct);
 
     List<TP_PhieuHoanNhapCustom> phanTrang(List<TP_PhieuHoanNhapCustom> list, int offset, int limit);
+
+    List<TP_PhieuHoanNhapCustom> findAllByKhAndNV(String ma, TrangThaiPhieuHoanConstant tt, int rdo);
+
+    List<TP_PhieuHoanNhapCustom> getListByNgayTao(Long ngayBatDau, Long ngayKetThuc);
+
+    List<TP_PhieuHoanNhapCustom> getListByNgayThanhToan(Long ngayBatDau, Long ngayKetThuc);
+
+    TrangThaiPhieuHoanConstant loc(int a);
 
 }

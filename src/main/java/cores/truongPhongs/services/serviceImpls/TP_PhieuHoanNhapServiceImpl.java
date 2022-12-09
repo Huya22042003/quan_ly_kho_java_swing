@@ -99,4 +99,40 @@ public class TP_PhieuHoanNhapServiceImpl implements TP_PhieuHoanNhapService {
         return listPhanTrang;
     }
 
+    @Override
+    public List<TP_PhieuHoanNhapCustom> findAllByKhAndNV(String ma, TrangThaiPhieuHoanConstant tt, int rdo) {
+        switch (rdo) {
+            case 0:
+                return rp.getListByTenNcc(ma, tt);
+            case 1:
+                return rp.getListByTenNv(ma, tt);
+            default:
+                return null;
+        }
+    }
+
+    @Override
+    public List<TP_PhieuHoanNhapCustom> getListByNgayTao(Long ngayBatDau, Long ngayKetThuc) {
+        return rp.getListByNgayTao(ngayBatDau, ngayKetThuc);
+    }
+
+    @Override
+    public List<TP_PhieuHoanNhapCustom> getListByNgayThanhToan(Long ngayBatDau, Long ngayKetThuc) {
+        return rp.getListByNgayThanhToan(ngayBatDau, ngayKetThuc);
+    }
+
+    @Override
+    public TrangThaiPhieuHoanConstant loc(int a) {
+        switch (a) {
+            case 0:
+                return TrangThaiPhieuHoanConstant.CHO_XAC_NHAN;
+            case 1:
+                return TrangThaiPhieuHoanConstant.DA_HUY;
+            case 2:
+                return TrangThaiPhieuHoanConstant.HOAN_THANH_CONG;
+            default:
+                return null;
+        }
+    }
+
 }
