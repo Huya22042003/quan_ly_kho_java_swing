@@ -30,6 +30,7 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
     private TP_QuanLyPhieuHoanNhap_sp hoanNhap_sp;
     private TP_QuanLyPhieuHoanNhap_ctp ctp;
 
+    
     //
     //
     private Page p;
