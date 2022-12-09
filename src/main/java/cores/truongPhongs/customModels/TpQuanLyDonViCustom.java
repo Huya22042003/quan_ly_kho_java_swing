@@ -26,4 +26,8 @@ public class TpQuanLyDonViCustom {
     private String donViQuyDoi;
     
     private int soLuong;
+    
+    public int soLuongQuyDoi(int sl){
+        return sl * this.soLuong;
+    }
 }
