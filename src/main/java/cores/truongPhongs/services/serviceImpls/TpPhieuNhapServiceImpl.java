@@ -40,8 +40,6 @@ public class TpPhieuNhapServiceImpl implements TpPhieuNhapService {
 
     @Override
     public TpPhieuNhapCustom addPn(TpPhieuNhapCustom p) {
-//        p.setNgayTao(utilities.DateTimeUtil.convertDateToTimeStampSecond());
-//        p.setIdNhanVien(UUID.fromString("0E949885-8C5C-6A44-8E30-A8A8A3526A01"));
         NhaCungCap ncc = repoNcc.getNccById(p.getIdNcc());
         NhanVien nv = repoNv.getNhanVienById(Auth.nhanVien.getId());
         PhieuNhap pn = new PhieuNhap();
@@ -50,6 +48,7 @@ public class TpPhieuNhapServiceImpl implements TpPhieuNhapService {
         pn.setNgayTao(p.getNgayTao());
         pn.setNhaCungCap(ncc);
         pn.setNhanVien(nv);
+        pn.setMaPhieu(p.getMaPhieu());
         p.setTrangThai(TrangThaiPhieuConstant.CHO_THANH_TOAN);
         pn.setTrangThai(p.getTrangThai());
         p.setId(repo.addPn(pn).getId());
