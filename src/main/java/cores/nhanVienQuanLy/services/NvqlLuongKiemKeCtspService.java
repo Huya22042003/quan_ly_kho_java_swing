@@ -17,6 +17,8 @@ public interface NvqlLuongKiemKeCtspService {
     public void updateTrangThaiSp(NvqlLuongKiemKeCtspCustom nvqlLuongKiemKeCtpkService);
 
     public List<NvqlLuongKiemKeCtspCustom> phanTrang(List<NvqlLuongKiemKeCtspCustom> list, int offset, int limit);
-     List<NvqlLuongKiemKeCtspCustom> findAllByKhAndNV(String ma,  int rdo);
-      List<NvqlLuongKiemKeCtspCustom> getListGiaNhap(BigDecimal giaBatDau, BigDecimal giaKetThuc);
+
+    List<NvqlLuongKiemKeCtspCustom> findAllByKhAndNV(String ma, int rdo);
+
+    List<NvqlLuongKiemKeCtspCustom> getListGiaNhap(BigDecimal giaBatDau, BigDecimal giaKetThuc);
 }
