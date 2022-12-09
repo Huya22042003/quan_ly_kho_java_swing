@@ -25,8 +25,8 @@ public class TpXemPhieuXuatSerivceImpl implements TpXemPhieuXuatService{
             String tenKh, String maKh, String diaChiKh, String emailKh, String sdtKh,
             String maSp, String tenSp,
             String maPn,
-            String tenNcc, String maNcc, String diaChiNcc, String emailNcc, String sdtNcc) {
-        return rp.getListPhieuXuat(maPhieu, tenKh, maKh, diaChiKh, emailKh, sdtKh, maSp, tenSp, maPn, tenNcc, maNcc, diaChiNcc, emailNcc, sdtNcc);
+            String tenNcc, String maNcc, String diaChiNcc, String emailNcc, String sdtNcc, String maSpNcc) {
+        return rp.getListPhieuXuat(maPhieu, tenKh, maKh, diaChiKh, emailKh, sdtKh, maSp, tenSp, maPn, tenNcc, maNcc, diaChiNcc, emailNcc, sdtNcc, maSpNcc);
     }
     @Override
     public List<TpXemPhieuXuatCustom> phanTrangPhieuXuat(List<TpXemPhieuXuatCustom> list, int offset, int limit) {
@@ -46,8 +46,11 @@ public class TpXemPhieuXuatSerivceImpl implements TpXemPhieuXuatService{
     }
 
     @Override
-    public List<TpXemSanPham_PhieuXuat> getListSanPhamByPhieuXuat(UUID idPhieuXuat, String maSp, String tenSp) {
-        return rp.getListSanPhamByPhieuXuat(tenSp, maSp , idPhieuXuat);
+    public List<TpXemSanPham_PhieuXuat> getListSanPhamByPhieuXuat(UUID idPhieuXuat,
+            String maSp, String tenSp,
+            String maPn,
+            String tenNcc, String maNcc, String diaChiNcc, String emailNcc, String sdtNcc, String maSpNcc) {
+        return rp.getListSanPhamByPhieuXuat(idPhieuXuat, maSp, tenSp, maPn, tenNcc, maNcc, diaChiNcc, emailNcc, sdtNcc, maSpNcc);
     }
     
 }

@@ -14,7 +14,10 @@ public interface TpXemPhieuXuatService {
             String tenKh, String maKh, String diaChiKh, String emailKh, String sdtKh,
             String maSp, String tenSp,
             String maPn,
-            String tenNcc, String maNcc, String diaChiNcc, String emailNcc, String sdtNcc);
+            String tenNcc, String maNcc, String diaChiNcc, String emailNcc, String sdtNcc, String maSpNcc);
     List<TpXemPhieuXuatCustom> phanTrangPhieuXuat(List<TpXemPhieuXuatCustom> list, int offset, int limit);
-    List<TpXemSanPham_PhieuXuat> getListSanPhamByPhieuXuat(UUID idPhieuXuat, String maSp, String tenSp);
+    List<TpXemSanPham_PhieuXuat> getListSanPhamByPhieuXuat(UUID idPhieuXuat,
+            String maSp, String tenSp,
+            String maPn,
+            String tenNcc, String maNcc, String diaChiNcc, String emailNcc, String sdtNcc, String maSpNcc);
 }

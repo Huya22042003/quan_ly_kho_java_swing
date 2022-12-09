@@ -21,7 +21,7 @@ public class TpXemPhieuXuatRepository {
             String tenKh, String maKh, String diaChiKh, String emailKh, String sdtKh,
             String maSp, String tenSp,
             String maPn,
-            String tenNcc, String maNcc, String diaChiNcc, String emailNcc, String sdtNcc
+            String tenNcc, String maNcc, String diaChiNcc, String emailNcc, String sdtNcc, String maSpNcc
     ) {
         List<TpXemPhieuXuatCustom> list = new ArrayList<>();
         Session s = HibernateUtil.getSessionFactory().openSession();
@@ -64,6 +64,7 @@ public class TpXemPhieuXuatRepository {
                                       AND ncc.Ten LIKE CONCAT('%',:tenNcc,'%')
                                       AND ncc.DiaChi LIKE CONCAT('%',:diaChiNcc,'%')
                                       AND ncc.Email LIKE CONCAT('%',:emailNcc,'%')
+                                      AND ctpn.MaSanPhamNhaCungCap LIKE CONCAT('%',:maSpNcc,'%')
                                       AND ncc.Sdt LIKE CONCAT('%',:sdtNcc,'%')
                                       """)
                 .setParameter("maPhieuXuat", maPhieu)
@@ -79,6 +80,7 @@ public class TpXemPhieuXuatRepository {
                 .setParameter("tenNcc", tenNcc)
                 .setParameter("diaChiNcc", diaChiNcc)
                 .setParameter("emailNcc", emailNcc)
+                .setParameter("maSpNcc", maPhieu)
                 .setParameter("sdtNcc", sdtNcc);
 
         List<Object[]> listQuery = q.getResultList();
@@ -90,7 +92,10 @@ public class TpXemPhieuXuatRepository {
         return list;
     }
 
-    public List<TpXemSanPham_PhieuXuat> getListSanPhamByPhieuXuat(String tenSp, String maSp, UUID idPhieuXuat) {
+    public List<TpXemSanPham_PhieuXuat> getListSanPhamByPhieuXuat(UUID idPhieuXuat,
+            String maSp, String tenSp,
+            String maPn,
+            String tenNcc, String maNcc, String diaChiNcc, String emailNcc, String sdtNcc, String maSpNcc) {
         Session s = HibernateUtil.getSessionFactory().openSession();
         javax.persistence.Query query = s.createNativeQuery("""
                                                   SELECT 
@@ -121,7 +126,26 @@ public class TpXemPhieuXuatRepository {
                                                   		join PhieuNhap pn on pn.Id = ctpn.IdPhieuNhap
                                                   		join NhaCungCap ncc on ncc.Id = pn.IdNhaCungCap
                                                             WHERE ctpx.idPhieuXuat = :idPhieuXuat
-                                                  """).setParameter("idPhieuXuat", idPhieuXuat.toString());
+                                                            AND sp.Ten LIKE CONCAT('%',:tenSp,'%')
+                                                            AND sp.Ma LIKE CONCAT('%',:maSp,'%')
+                                                            AND pn.MaPhieu LIKE CONCAT('%',:maPhieuNhap,'%')
+                                                            AND ncc.Ma LIKE CONCAT('%',:maNcc,'%')
+                                                            AND ncc.Ten LIKE CONCAT('%',:tenNcc,'%')
+                                                            AND ncc.DiaChi LIKE CONCAT('%',:diaChiNcc,'%')
+                                                            AND ncc.Email LIKE CONCAT('%',:emailNcc,'%')
+                                                            AND ctpn.MaSanPhamNhaCungCap LIKE CONCAT('%',:maSpNcc,'%')
+                                                            AND ncc.Sdt LIKE CONCAT('%',:sdtNcc,'%')
+                                                  """)
+                .setParameter("idPhieuXuat", idPhieuXuat.toString())
+                .setParameter("tenSp", tenSp)
+                .setParameter("maSp", maSp)
+                .setParameter("maPhieuNhap", maPn)
+                .setParameter("maNcc", maNcc)
+                .setParameter("tenNcc", tenNcc)
+                .setParameter("diaChiNcc", diaChiNcc)
+                .setParameter("emailNcc", emailNcc)
+                .setParameter("maSpNcc", maSpNcc)
+                .setParameter("sdtNcc", sdtNcc);
         List<Object[]> listQuery = query.getResultList();
         List<TpXemSanPham_PhieuXuat> list = new ArrayList<>();
         listQuery.stream().forEach(el -> {
