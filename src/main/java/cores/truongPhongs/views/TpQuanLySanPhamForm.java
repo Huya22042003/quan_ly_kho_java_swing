@@ -745,7 +745,7 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tbSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSanPhamMouseClicked
-
+        
     }//GEN-LAST:event_tbSanPhamMouseClicked
 
     private void btnSearch1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearch1ActionPerformed

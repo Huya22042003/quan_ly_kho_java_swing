@@ -40,7 +40,7 @@ public class TP_ChucVuForm extends javax.swing.JPanel {
     }
 
     public void clearForm() {
-        rdoTen.setSelected(true);
+//        rdoTen.setSelected(true);
         getList = chucVuService.findAllByRadio("", 0);
         sizes = getList.size();
         offset = 0;
