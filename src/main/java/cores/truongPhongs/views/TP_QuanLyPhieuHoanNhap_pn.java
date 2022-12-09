@@ -40,6 +40,7 @@ public class TP_QuanLyPhieuHoanNhap_pn extends javax.swing.JFrame {
             Date ngayTao = new Date(el.getNgayTao());
             Object[] rowData = {
                 dtm.getRowCount() + 1,
+                el.getMaPhieu() == null ? "Không có" : el.getMaPhieu(),
                 el.getNgayTao() == null ? "không có" : simpleDateFormat.format(ngayTao),
                 el.getNhaCungCap().getTen(),
                 el.getNhanVien().getTen(),
@@ -93,11 +94,11 @@ public class TP_QuanLyPhieuHoanNhap_pn extends javax.swing.JFrame {
 
             },
             new String [] {
-                "STT", "Ngày tạo", "Nhà cung cấp", "Nhân viên", "Trạng thái"
+                "STT", "Mã phiếu nhập", "Ngày tạo", "Nhà cung cấp", "Nhân viên", "Trạng thái"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

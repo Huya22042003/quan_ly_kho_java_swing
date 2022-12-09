@@ -21,6 +21,7 @@ import java.util.UUID;
 import javax.swing.JOptionPane;
 import utilities.Auth;
 import utilities.Converter;
+import utilities.MaTuSinh;
 import utilities.MsgBox;
 import utilities.Page;
 import utilities.palette.SearchCustom.EventCallBack;
@@ -60,8 +61,6 @@ public class TpLuongNhapView extends javax.swing.JPanel {
         listPn = new ArrayList<>();
         phieuNhapService = new TpPhieuNhapServiceImpl();
         tpncts = new TpPhieuNhapChiTietServiceImpl();
-
-//        loadTablePn(listPn);
         ctspView = new TpLuongNhapChiTietSanPhamForm();
         ctpnView = new TpLuongNhapChiTietPhieuNhapForm();
         clearForm();
@@ -111,6 +110,7 @@ public class TpLuongNhapView extends javax.swing.JPanel {
         ctspView = new TpLuongNhapChiTietSanPhamForm();
         TpPhieuNhapCustom phieuNhap = new TpPhieuNhapCustom();
         phieuNhap.setIdNcc(id);
+        phieuNhap.setMaPhieu(MaTuSinh.gen("PN"));
         phieuNhap.setIdNhanVien(nhanVien.getId());
         phieuNhap.setNgayTao(new Date().getTime());
         phieuNhapService.addPn(phieuNhap);
@@ -135,12 +135,6 @@ public class TpLuongNhapView extends javax.swing.JPanel {
                 case 0:
                     search = el.getId().toString();
                     break;
-//                case 1:
-//                    search = el.getTenNcc();
-//                    break;
-//                case 2:
-//                    search = el.getTenNhanVien();
-//                    break;
             }
             for (int i = 0; i <= search.length(); i++) {
                 String newMa = search.substring(0, i);
@@ -166,22 +160,10 @@ public class TpLuongNhapView extends javax.swing.JPanel {
         });
         return listTimKiem;
     }
-
-//    public void findPnById(){
-//        if(rdoMa.isSelected()){
-//             List<TpPhieuNhapCustom> list =    phieuNhapService.getListPnById((txtSearch.getText()));
-//             loadTablePn(list);
-//        }
-//    }
     public void searchRadio() {
         if (rdoMa.isSelected()) {
             loadTablePn(listSearch(0));
         }
-//        else if (rdoNcc.isSelected()) {
-//            loadTablePn(listSearch(1));
-//        } else {
-//            loadTablePn(listSearch(2));
-//        }
     }
     
     private void loadTablePn(List<TpPhieuNhapCustom> list) {
@@ -192,7 +174,7 @@ public class TpLuongNhapView extends javax.swing.JPanel {
         for (TpPhieuNhapCustom pn : list) {
             Object[] rowData = {
                 dtm.getRowCount() + 1,
-                pn.getId(),
+                pn.getMaPhieu(),
                 simpleDateFormat.format(new Date(pn.getNgayTao())),
                 pn.getNgayThanhToan() == null ? "Chưa có" : simpleDateFormat.format(new Date(pn.getNgayThanhToan())),
                 pn.getTenNcc(),
@@ -373,6 +355,7 @@ public class TpLuongNhapView extends javax.swing.JPanel {
         panelRound8.setRoundTopRight(50);
 
         cbbTrangThai.setBackground(new java.awt.Color(67, 130, 187));
+        cbbTrangThai.setForeground(new java.awt.Color(255, 255, 255));
         cbbTrangThai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Chờ thanh toán", "Đã hủy", "Đã thanh toán" }));
         cbbTrangThai.setSelectedIndex(-1);
         cbbTrangThai.setToolTipText("Chọn trạng thái để tìm kiếm");
@@ -428,12 +411,16 @@ public class TpLuongNhapView extends javax.swing.JPanel {
 
         rdoNgayTao.setBackground(new java.awt.Color(255, 153, 0));
         buttonGroup2.add(rdoNgayTao);
+        rdoNgayTao.setForeground(new java.awt.Color(255, 255, 255));
         rdoNgayTao.setText("Ngày Tạo");
+        rdoNgayTao.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
         rdoNgayThanhToan.setBackground(new java.awt.Color(255, 102, 0));
         buttonGroup2.add(rdoNgayThanhToan);
+        rdoNgayThanhToan.setForeground(new java.awt.Color(255, 255, 255));
         rdoNgayThanhToan.setSelected(true);
         rdoNgayThanhToan.setText("Ngày Thanh Toán");
+        rdoNgayThanhToan.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
         ngayBatDau.addInputMethodListener(new java.awt.event.InputMethodListener() {
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
@@ -443,8 +430,12 @@ public class TpLuongNhapView extends javax.swing.JPanel {
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("From:");
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("To:");
 
         javax.swing.GroupLayout panelRound9Layout = new javax.swing.GroupLayout(panelRound9);
@@ -453,11 +444,11 @@ public class TpLuongNhapView extends javax.swing.JPanel {
             panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound9Layout.createSequentialGroup()
                 .addGap(37, 37, 37)
-                .addComponent(rdoNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60)
-                .addComponent(rdoNgayThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(rdoNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(rdoNgayThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(ngayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25)
@@ -471,20 +462,18 @@ public class TpLuongNhapView extends javax.swing.JPanel {
             .addGroup(panelRound9Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addGroup(panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(rdoNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(rdoNgayThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panelRound9Layout.createSequentialGroup()
-                                .addGap(5, 5, 5)
-                                .addComponent(ngayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(rdoNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(rdoNgayThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelRound9Layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(ngayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelRound9Layout.createSequentialGroup()
                         .addGap(4, 4, 4)
-                        .addGroup(panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(ngayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))))
+                        .addGroup(panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ngayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
@@ -819,6 +808,7 @@ public class TpLuongNhapView extends javax.swing.JPanel {
         }
         TpPhieuNhapCustom px = new TpPhieuNhapCustom();
         px.setId(listPn.get(row).getId());
+        px.setMaPhieu(listPn.get(row).getMaPhieu());
         px.setNgayTao(listPn.get(row).getNgayTao());
         px.setNgayThanhToan(listPn.get(row).getNgayThanhToan());
         px.setNgayTao(listPn.get(row).getNgayTao());

@@ -38,6 +38,7 @@ public class NVQLQuanLyPhieuXuatRepository {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery("SELECT new cores.nhanVienQuanLy.customModels.PhieuXuatCustom("
                 + "px.id as id,"
+                + "px.maPhieu as ma,"
                 + "px.ngayTao as ngayTao,"
                 + "px.ghiChu as ghiChu,"
                 + "px.ngayThanhToan as ngayThanhToan,"

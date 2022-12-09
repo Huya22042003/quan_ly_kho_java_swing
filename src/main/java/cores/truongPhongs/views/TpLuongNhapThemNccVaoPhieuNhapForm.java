@@ -68,44 +68,6 @@ public class TpLuongNhapThemNccVaoPhieuNhapForm extends javax.swing.JFrame {
             }
         });
     }
-
-//    public List<NhaCungCapCustom> listSearch(int rdo) {
-//        // nhập vào 
-//        String timKiem = this.txtSearch.getText();
-//        List<NhaCungCapCustom> listTimKiem = new ArrayList<>();
-//
-//        // tìm kiếm theo tên mã vị trí
-//        checkCbb(nccService.locKH(this.cbbTrangThai.getSelectedIndex())).forEach(el -> {
-//            String search = "";
-//            List<String> strings = new ArrayList<>();
-//
-//            // truyền tham số
-////            switch (rdo) {
-////                case 0:
-////                    search = el.getTen();
-////                    break;
-////                case 1:
-////                    search = el.getEmail();
-////                    break;
-////                case 2:
-////                    search = el.getSdt();
-////                    break;
-////            }
-//            for (int i = 0; i <= search.length(); i++) {
-//                String newMa = search.substring(0, i);
-//                strings.add(newMa);
-//            }
-//            // so sánh mảng vừa cắt với phần tử nhập vào
-//            for (String e : strings) {
-//                if (e.equalsIgnoreCase(timKiem)) {
-//                    listTimKiem.add(el);
-//                }
-//            }
-//        });
-//
-//        return listTimKiem;
-//    }
-
     public List<NhaCungCapCustom> checkCbb(KhachHangConstant cs) {
         List<NhaCungCapCustom> listTimKiem = new ArrayList<>();
         listNcc.forEach(el -> {
@@ -115,16 +77,6 @@ public class TpLuongNhapThemNccVaoPhieuNhapForm extends javax.swing.JFrame {
         });
         return listTimKiem;
     }
-
-//    public void searchRadio() {
-//        if (rdoTen.isSelected()) {
-//            loadTableNcc(listSearch(0));
-//        } else if (rdoEmail.isSelected()) {
-//            loadTableNcc(listSearch(1));
-//        } else {
-//            loadTableNcc(listSearch(2));
-//        }
-//    }
 
     private void loadTableNcc(List<NhaCungCapCustom> list) {
         DefaultTableModel dtm = (DefaultTableModel) this.tblNcc.getModel();
@@ -589,8 +541,7 @@ public class TpLuongNhapThemNccVaoPhieuNhapForm extends javax.swing.JFrame {
     }//GEN-LAST:event_rdoSdtActionPerformed
 
     private void cbbTrangThaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbTrangThaiActionPerformed
-        // TODO add your handling code here:
-//        loadTableNcc(checkCbb(nccService.locKH(cbbTrangThai.getSelectedIndex())));
+
         searchhRadio();
     }//GEN-LAST:event_cbbTrangThaiActionPerformed
 

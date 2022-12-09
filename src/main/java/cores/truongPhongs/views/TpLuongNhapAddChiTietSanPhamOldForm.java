@@ -44,11 +44,11 @@ public class TpLuongNhapAddChiTietSanPhamOldForm extends javax.swing.JFrame {
     TpXemChiTietSanPhamCustom ct = new TpXemChiTietSanPhamCustom();
     private TpPhieuNhapCustom phieuNhap;
     private TpPhieuNhapChiTietService pnctService;
-    
+
     public void setPhieuNhap(TpPhieuNhapCustom phieuNhap) {
         this.phieuNhap = phieuNhap;
     }
-    
+
     public TpLuongNhapAddChiTietSanPhamOldForm() {
         initComponents();
         pnctService = new TpPhieuNhapChiTietServiceImpl();
@@ -68,7 +68,7 @@ public class TpLuongNhapAddChiTietSanPhamOldForm extends javax.swing.JFrame {
         cbbDonVi.removeAllItems();
         cbbSanPham.removeAllItems();
         for (TpQuanLyDonViCustom dv : listDonVi) {
-            cbbDonVi.addItem(dv.getDonViGoc());
+            cbbDonVi.addItem(dv.getDonViQuyDoi());
         }
         for (TpQuanLySanPhamCustom sp : listSanPham) {
             cbbSanPham.addItem(sp.getTen());
@@ -87,73 +87,50 @@ public class TpLuongNhapAddChiTietSanPhamOldForm extends javax.swing.JFrame {
 
     public TpXemChiTietSanPhamCustom getFormData() {
         TpXemChiTietSanPhamCustom sp = new TpXemChiTietSanPhamCustom();
-
-        
-
+        TpQuanLyDonViCustom dv = new TpQuanLyDonViCustom();
+        dv = listDonVi.get(cbbDonVi.getSelectedIndex());
+        int sl = dv.soLuongQuyDoi(Integer.parseInt(txtSoLuongNhap.getText()));
 //        boolean check = true;
-//        String soLuong = txtSoLuongNhap.getText();
-//        String giaNhap = txtGiaNhap.getText();
-//        if (soLuong.trim().length() == 0) {
-//            lblSoLuong.setText("Số lượng tồn không được để trống");
+//        if (txtGiaNhap.getText().trim().length() == 0) {
+//            lblGiaNhap.setText("Giá nhập không được để trống!");
 //            check = false;
-//        } else if (!soLuong.matches("\\d+")) {
-//            lblSoLuong.setText("Số lượng tồn không được là chữ");
-//            check = false;
-//        } else {
-//            lblSoLuong.setText("");
 //        }
-//        if (giaNhap.trim().length() == 0) {
-//            lblGiaNhap.setText("Giá bán không được để trống");
+//        if (txtSoLuongNhap.getText().trim().length() == 0) {
+//            lblSoLuong.setText("Số lượng không được để trống!");
 //            check = false;
-//        } else if (giaNhap.matches("[A-Z a-z]+")) {
-//            lblGiaNhap.setText("Giá bán không được là chữ");
-//            check = false;
-//        } else {
-//            lblGiaNhap.setText("");
 //        }
-        
-        boolean check = true;
-           if(txtGiaNhap.getText().trim().length() == 0){
-            lblGiaNhap.setText("Giá nhập không được để trống!");
-            check = false;
-        }
-        if(txtSoLuongNhap.getText().trim().length() == 0){
-            lblSoLuong.setText("Số lượng không được để trống!");
-            check = false;
-        }
-        if(check == false){
-            return null;
-        }
-        int sl = 0;
-        try {
-           sl = Integer.parseInt(txtSoLuongNhap.getText());
-           if(sl <= 0 ){
-               lblSoLuong.setText("Số lượng phải lớn hơn 0!");
-               check = false;
-           }
-        } catch (Exception e) {
-            e.printStackTrace();
-            lblSoLuong.setText("Bạn phải nhập số lượng là số!");
-             check = false;
-        } 
-     
-        BigDecimal gia = null;
-        try {
-           gia = BigDecimal.valueOf(Long.parseLong(txtGiaNhap.getText()));
-           if(gia.compareTo(new BigDecimal(0)) <= 0 ){
-               lblGiaNhap.setText("Giá nhập phải lớn hơn 0!");
-               check = false;
-           }
-        } catch (Exception e) {
-            e.printStackTrace();
-            lblGiaNhap.setText("Bạn phải nhập giá nhập là số!");
-             check = false;
-        } 
-        if(check == false){
-            return null;
-        }
+//        if (check == false) {
+//            return null;
+//        }
+//        try {
+//            sl = Integer.parseInt(txtSoLuongNhap.getText());
+//            if (sl <= 0) {
+//                lblSoLuong.setText("Số lượng phải lớn hơn 0!");
+//                check = false;
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            lblSoLuong.setText("Bạn phải nhập số lượng là số!");
+//            check = false;
+//        }
+//
+//        BigDecimal gia = null;
+//        try {
+//            gia = BigDecimal.valueOf(Long.parseLong(txtGiaNhap.getText()));
+//            if (gia.compareTo(new BigDecimal(0)) <= 0) {
+//                lblGiaNhap.setText("Giá nhập phải lớn hơn 0!");
+//                check = false;
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            lblGiaNhap.setText("Bạn phải nhập giá nhập là số!");
+//            check = false;
+//        }
+//        if (check == false) {
+//            return null;
+//        }
         sp.setSoLuongTon(sl);
-        sp.setGiaNhap(gia);
+        sp.setGiaNhap(BigDecimal.valueOf(Long.parseLong(txtGiaNhap.getText())));
         sp.setDonVi(ct.getDonVi());
         sp.setHinhAnh(ct.getHinhAnh());
         sp.setMau(ct.getMau());
@@ -161,7 +138,7 @@ public class TpLuongNhapAddChiTietSanPhamOldForm extends javax.swing.JFrame {
         sp.setNamBaoHanh(ct.getNamBaoHanh());
         sp.setSanPham(ct.getSanPham());
         sp.setHinhAnh(duongdananh);
-       
+
         sp.setTrangThai(ct.getTrangThai().CHO_XAC_NHAN);
         sp.setNgayTao(new Date().getTime());
         return sp;
@@ -171,7 +148,7 @@ public class TpLuongNhapAddChiTietSanPhamOldForm extends javax.swing.JFrame {
         txtMa.setText(ct.getSanPham().getMa());
         txtTenSp.setText(ct.getSanPham().getTen());
         txtSize.setText(ct.getSize() + "");
-        cbbDonVi.setSelectedItem(ct.getDonVi().getDonViGoc());
+        cbbDonVi.setSelectedItem(ct.getDonVi().getDonViQuyDoi());
         cbbTrangThai.setSelectedItem(Converter.trangThaiSanPham(ct.getTrangThai()));
         cbbMauSac.setSelectedItem(Converter.trangThaiMauSac(ct.getMau()).toString());
         cbbSanPham.setSelectedItem(ct.getSanPham().getTen());
@@ -307,20 +284,21 @@ public class TpLuongNhapAddChiTietSanPhamOldForm extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(cbbDonVi, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(cbbMauSac, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cbbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtSize, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txtSoLuongNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTenSp, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtMa, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panelRound3Layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(cbbSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(lblSoLuong, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtGiaNhap, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE))
-                    .addComponent(lblGiaNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblGiaNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelRound3Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbbDonVi, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbbSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
         panelRound3Layout.setVerticalGroup(
@@ -344,11 +322,11 @@ public class TpLuongNhapAddChiTietSanPhamOldForm extends javax.swing.JFrame {
                 .addComponent(txtSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(cbbSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(cbbDonVi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(cbbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
 
         uWPButton1.setBackground(new java.awt.Color(255, 51, 51));
@@ -427,14 +405,18 @@ public class TpLuongNhapAddChiTietSanPhamOldForm extends javax.swing.JFrame {
             return;
         }
         TpXemChiTietSanPhamCustom aaaa = serviceChiTietSP.addCTSanPham(check);
+        int soLuongQuyDoi = aaaa.getSoLuongTon() * Integer.parseInt(txtSoLuongNhap.getText());
+        System.out.println(aaaa.getSoLuongTon());
+        System.out.println(Integer.parseInt(txtSoLuongNhap.getText()));
+        System.out.println(soLuongQuyDoi);
+        
         ChiTietSanPham hihi = new ChiTietSanPham();
         hihi.setId(aaaa.getId());
         PhieuNhap haha = new PhieuNhap();
         haha.setId(phieuNhap.getId());
-        System.out.println(ct.getSoLuongTon());
         TpPhieuNhapChiTietCustom tpPhieuNhapChiTietCustom = new TpPhieuNhapChiTietCustom(
-                aaaa.getSoLuongTon(), 
-                hihi, 
+                soLuongQuyDoi,
+                hihi,
                 haha
         );
         pnctService.addCTPN(tpPhieuNhapChiTietCustom);

@@ -55,6 +55,7 @@ public class Tai_LuongHoanXuatServiceImpl implements Tai_LuongHoanXuatService{
         ctphx.setIdChiTietSp(ctphxct.getIdChiTietSp());
         ctphx.setIdPhieuHoanXuat(ctphxct.getIdPhieuHoanXuat());
         ctphx.setSoLuong(ctphxct.getSoLuong());
+        ctphx.setLiDo(ctphxct.getLiDo());
         rp.updateCtPHX(ctphx);
     }
 
@@ -86,6 +87,7 @@ public class Tai_LuongHoanXuatServiceImpl implements Tai_LuongHoanXuatService{
         ctphx.setIdChiTietSp(ctphxct.getIdChiTietSp());
         ctphx.setIdPhieuHoanXuat(ctphxct.getIdPhieuHoanXuat());
         ctphx.setSoLuong(ctphxct.getSoLuong());
+        ctphx.setLiDo(ctphxct.getLiDo());
         rp.addChiTietPhieuHoanXuat(ctphx);
     }
 

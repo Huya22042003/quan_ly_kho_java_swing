@@ -8,6 +8,7 @@ import cores.nhanVienQuanLy.services.Tai_NvqlLuongPhieuXuatService;
 import cores.nhanVienQuanLy.services.serviceImpls.Tai_LuongHoanXuatServiceImpl;
 import cores.nhanVienQuanLy.services.serviceImpls.Tai_NvqlLuongPhieuXuatServiceImpl;
 import domainModels.PhieuHoanXuat;
+import infrastructures.constant.TrangThaiPhieuHoanConstant;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -67,12 +68,12 @@ public class Tai_LuongHoanXuat_ChiTietPhieuHoanXuatView extends javax.swing.JFra
         for (ChiTietPhieuHoanXuatCustom ctphx : list) {
             Object[] rowData = {
                 dtm.getRowCount() + 1,
-                ctphx.getIdPhieuHoanXuat().getId(),
-                ctphx.getIdChiTietSp().getId(),
+                ctphx.getIdChiTietSp().getSanPham().getMa(),
                 ctphx.getIdChiTietSp().getSanPham().getTen(),
                 ctphx.getSoLuong(),
                 ctphx.getIdChiTietSp().getGiaBan()== null ? "Chưa có" : formatter.format(ctphx.getIdChiTietSp().getGiaBan()),
-                ctphx.getIdChiTietSp().getNamBaoHanh()
+                ctphx.getIdChiTietSp().getNamBaoHanh(),
+                ctphx.getLiDo()
             };
             dtm.addRow(rowData);
         }
@@ -103,6 +104,9 @@ public class Tai_LuongHoanXuat_ChiTietPhieuHoanXuatView extends javax.swing.JFra
         txtGiaBan = new utilities.palette.TextField();
         txtNamBH = new utilities.palette.TextField();
         txtTenSP = new utilities.palette.TextField();
+        textAreaScroll1 = new utilities.palette.TextAreaScroll();
+        txtLyDo = new utilities.palette.TextAreaCustom();
+        txtSoLuong = new utilities.palette.TextField();
         btnPre = new utilities.palette.UWPButton();
         txtIndex = new javax.swing.JLabel();
         btnPre1 = new utilities.palette.UWPButton();
@@ -117,11 +121,11 @@ public class Tai_LuongHoanXuat_ChiTietPhieuHoanXuatView extends javax.swing.JFra
 
             },
             new String [] {
-                "STT", "Mã CT Sản Phẩm", "Tên Sản Phẩm", "Số lượng", "Giá Bán", "Năm Bảo Hành"
+                "STT", "Mã Sản Phẩm", "Tên Sản Phẩm", "Số lượng", "Giá Bán", "Năm Bảo Hành", "Lý do"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -248,7 +252,7 @@ public class Tai_LuongHoanXuat_ChiTietPhieuHoanXuatView extends javax.swing.JFra
         txtIDSP.setEditable(false);
         txtIDSP.setBackground(new java.awt.Color(228, 206, 224));
         txtIDSP.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtIDSP.setLabelText("ID Sản phẩm");
+        txtIDSP.setLabelText("Mã Sản phẩm");
 
         txtGiaBan.setEditable(false);
         txtGiaBan.setBackground(new java.awt.Color(228, 206, 224));
@@ -270,6 +274,22 @@ public class Tai_LuongHoanXuat_ChiTietPhieuHoanXuatView extends javax.swing.JFra
         txtTenSP.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtTenSP.setLabelText("Tên sản phẩm");
 
+        textAreaScroll1.setBackground(new java.awt.Color(153, 204, 255));
+        textAreaScroll1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        textAreaScroll1.setLabelText("Lý do");
+
+        txtLyDo.setEditable(false);
+        txtLyDo.setBackground(new java.awt.Color(228, 206, 224));
+        txtLyDo.setColumns(20);
+        txtLyDo.setRows(5);
+        txtLyDo.setDisabledTextColor(new java.awt.Color(204, 204, 255));
+        textAreaScroll1.setViewportView(txtLyDo);
+
+        txtSoLuong.setEditable(false);
+        txtSoLuong.setBackground(new java.awt.Color(228, 206, 224));
+        txtSoLuong.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtSoLuong.setLabelText("Số lượng");
+
         javax.swing.GroupLayout panelRound3Layout = new javax.swing.GroupLayout(panelRound3);
         panelRound3.setLayout(panelRound3Layout);
         panelRound3Layout.setHorizontalGroup(
@@ -277,6 +297,8 @@ public class Tai_LuongHoanXuat_ChiTietPhieuHoanXuatView extends javax.swing.JFra
             .addGroup(panelRound3Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textAreaScroll1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNamBH, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtIDSP, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
@@ -289,15 +311,19 @@ public class Tai_LuongHoanXuat_ChiTietPhieuHoanXuatView extends javax.swing.JFra
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound3Layout.createSequentialGroup()
                 .addContainerGap(43, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtIDSP, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
+                .addGap(27, 27, 27)
                 .addComponent(txtTenSP, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51)
+                .addGap(36, 36, 36)
                 .addComponent(txtGiaBan, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
+                .addGap(26, 26, 26)
+                .addComponent(txtSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
                 .addComponent(txtNamBH, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(136, 136, 136))
+                .addGap(18, 18, 18)
+                .addComponent(textAreaScroll1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -349,7 +375,7 @@ public class Tai_LuongHoanXuat_ChiTietPhieuHoanXuatView extends javax.swing.JFra
                         .addComponent(btnPre1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(160, 160, 160)))
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -380,7 +406,7 @@ public class Tai_LuongHoanXuat_ChiTietPhieuHoanXuatView extends javax.swing.JFra
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1104, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -399,9 +425,19 @@ public class Tai_LuongHoanXuat_ChiTietPhieuHoanXuatView extends javax.swing.JFra
         }
         txtIDSP.setText(tblCTPhieuXuat.getValueAt(row, 1).toString());
         txtTenSP.setText(tblCTPhieuXuat.getValueAt(row, 2).toString());
-        txtGiaBan.setText(tblCTPhieuXuat.getValueAt(row, 3).toString());
-        txtNamBH.setText(tblCTPhieuXuat.getValueAt(row, 4).toString());
-
+        txtSoLuong.setText(tblCTPhieuXuat.getValueAt(row, 3).toString());
+        txtGiaBan.setText(tblCTPhieuXuat.getValueAt(row, 4).toString());
+        txtNamBH.setText(tblCTPhieuXuat.getValueAt(row, 5).toString());
+        txtLyDo.setText(tblCTPhieuXuat.getValueAt(row, 6).toString());
+        
+        if(phieuHX.getTrangThai() == TrangThaiPhieuHoanConstant.HOAN_THANH_CONG){
+            JOptionPane.showMessageDialog(this, "Phiếu hoàn này đã hoàn thành công mời bạn chọn phiếu hoàn khác!");
+            return;
+        }
+        if(phieuHX.getTrangThai() == TrangThaiPhieuHoanConstant.DA_HUY){
+            JOptionPane.showMessageDialog(this,"Phiếu hoàn này đã hủy mời bạn chọn phiếu hoàn khác!");
+            return;
+        }
         String suaSL = JOptionPane.showInputDialog("Bạn muốn lấy lại bao nhiêu sản phẩm?");
         int sl = 0;
         try {
@@ -537,10 +573,13 @@ public class Tai_LuongHoanXuat_ChiTietPhieuHoanXuatView extends javax.swing.JFra
     private utilities.palette.PanelRound panelRound6;
     private utilities.palette.PanelRound panelRound8;
     private utilities.palette.TableDark_1 tblCTPhieuXuat;
+    private utilities.palette.TextAreaScroll textAreaScroll1;
     private utilities.palette.TextField txtGiaBan;
     private utilities.palette.TextField txtIDSP;
     private javax.swing.JLabel txtIndex;
+    private utilities.palette.TextAreaCustom txtLyDo;
     private utilities.palette.TextField txtNamBH;
+    private utilities.palette.TextField txtSoLuong;
     private utilities.palette.TextField txtTenSP;
     // End of variables declaration//GEN-END:variables
 }

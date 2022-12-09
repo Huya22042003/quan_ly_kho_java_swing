@@ -14,4 +14,5 @@ public class ChiTietPhieuHoanXuatCustom {
     private PhieuHoanXuat idPhieuHoanXuat;
     private ChiTietSanPham idChiTietSp;
     private int soLuong;
+    private String liDo;
 }
