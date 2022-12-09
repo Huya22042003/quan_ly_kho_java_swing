@@ -223,10 +223,12 @@ public class TpDonViView extends javax.swing.JPanel {
         panelRound6.setRoundTopRight(50);
 
         buttonGroup1.add(rdoDonViGoc);
+        rdoDonViGoc.setForeground(new java.awt.Color(255, 255, 255));
         rdoDonViGoc.setSelected(true);
         rdoDonViGoc.setText("Đơn Vị Gốc");
 
         buttonGroup1.add(rdoDonViQuyDoi);
+        rdoDonViQuyDoi.setForeground(new java.awt.Color(255, 255, 255));
         rdoDonViQuyDoi.setText("Đơn Vị Quy Đổi");
 
         javax.swing.GroupLayout panelRound6Layout = new javax.swing.GroupLayout(panelRound6);

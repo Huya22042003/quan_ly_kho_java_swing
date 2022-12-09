@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import cores.truongPhongs.services.TpThongKeService;
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import javax.swing.table.DefaultTableModel;
 import utilities.palette.SearchCustom.EventCallBack;
 import utilities.palette.SearchCustom.EventTextField;
@@ -35,6 +36,8 @@ public class TpThongKeView extends javax.swing.JPanel {
 
     private TpThongKeService khoService = new TpTongSoSanPhamTrongKhoServiceImpl();
     private List<TpThongKeSpCustom> listSp = new ArrayList<>();
+    
+    private DecimalFormat formatter = new DecimalFormat("###,###,##0 VNĐ");
     
 
     public TpThongKeView() {
@@ -79,10 +82,10 @@ public class TpThongKeView extends javax.swing.JPanel {
         for (TpThongKeSpCustom tpThongKeSpCustom : listSP) {
             Object[] rowData = {
                 dtm.getRowCount() + 1,
-                tpThongKeSpCustom.getIdPhieuXuat().getId(),
+                tpThongKeSpCustom.getIdPhieuXuat().getMaPhieu(),
                 tpThongKeSpCustom.getIdPhieuXuat().getNhanVien().getMa(),
                 tpThongKeSpCustom.getIdPhieuXuat().getNhanVien().getTen(),
-                tpThongKeSpCustom.doanhThu()
+                formatter.format(tpThongKeSpCustom.doanhThu())
             };
 
             dtm.addRow(rowData);
@@ -91,7 +94,7 @@ public class TpThongKeView extends javax.swing.JPanel {
             d += dt;
 
         }
-        lblTongDoanhThuTheoNgay.setText(String.valueOf(d));
+        lblTongDoanhThuTheoNgay.setText(formatter.format(d));
     }
 
     public List<TpThongKeSpCustom> listSearch1(int rdo) {
@@ -136,12 +139,6 @@ public class TpThongKeView extends javax.swing.JPanel {
         if (rdoMaHD.isSelected()) {
             loadTableHD(listSearch1(0));
         }
-//        if (rdoMaNv.isSelected()) {
-//            loadTableHD(listSearch1(1));
-//        }
-//        if (rdoTenNv.isSelected()) {
-//            loadTableHD(listSearch1(2));
-//        }
     }
 
     @SuppressWarnings("unchecked")
@@ -445,15 +442,13 @@ public class TpThongKeView extends javax.swing.JPanel {
         panelRound20Layout.setHorizontalGroup(
             panelRound20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound20Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jLabel17)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
+                .addContainerGap())
         );
         panelRound20Layout.setVerticalGroup(
             panelRound20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound20Layout.createSequentialGroup()
-                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         tblHoaDon.setModel(new javax.swing.table.DefaultTableModel(
@@ -486,7 +481,7 @@ public class TpThongKeView extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Tổng doanh thu ");
+        jLabel4.setText("Tổng doanh thu theo ngày");
 
         lblTongDoanhThuTheoNgay.setBackground(new java.awt.Color(255, 255, 255));
         lblTongDoanhThuTheoNgay.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -581,8 +576,10 @@ public class TpThongKeView extends javax.swing.JPanel {
             }
         });
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setText("To:");
 
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setText("From:");
 
         javax.swing.GroupLayout panelRound8Layout = new javax.swing.GroupLayout(panelRound8);

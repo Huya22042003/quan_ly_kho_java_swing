@@ -100,7 +100,7 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
     }
 
     public void clearFormCtsp() {
-        listChiTietSP = serviceChiTietSP.getAll(this.listSanPham.get(tbSanPham.getSelectedRow()).getId());
+        listChiTietSP = serviceChiTietSP.getAll(this.listSanPham.get(tbSanPham.getSelectedRow()).getId(), "", "","","","");
         sizes = listChiTietSP.size();
         offset = 0;
         index = 1;
@@ -180,9 +180,14 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
         uWPButton7 = new utilities.palette.UWPButton();
         diaLogSearchCtsp = new javax.swing.JDialog();
         jPanel1 = new javax.swing.JPanel();
-        textField1 = new utilities.palette.TextField();
-        textField2 = new utilities.palette.TextField();
-        textField3 = new utilities.palette.TextField();
+        txtMaSpNcc = new utilities.palette.TextField();
+        txtTenNcc = new utilities.palette.TextField();
+        btnSearch2 = new utilities.palette.MyButton();
+        btnExit = new utilities.palette.MyButton();
+        jLabel1 = new javax.swing.JLabel();
+        txtSdtNcc = new utilities.palette.TextField();
+        txtEmailNcc = new utilities.palette.TextField();
+        txtMaNcc = new utilities.palette.TextField();
         panelRound2 = new utilities.palette.PanelRound();
         panelRound16 = new utilities.palette.PanelRound();
         btnChon = new utilities.palette.MyButton();
@@ -411,24 +416,72 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        textField1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        textField1.addActionListener(new java.awt.event.ActionListener() {
+        txtMaSpNcc.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtMaSpNcc.setLabelText("Mã sản phẩm nhà cung cấp");
+        txtMaSpNcc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textField1ActionPerformed(evt);
+                txtMaSpNccActionPerformed(evt);
             }
         });
 
-        textField2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        textField2.addActionListener(new java.awt.event.ActionListener() {
+        txtTenNcc.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtTenNcc.setLabelText("Tên nhà cung cấp");
+        txtTenNcc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textField2ActionPerformed(evt);
+                txtTenNccActionPerformed(evt);
             }
         });
 
-        textField3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        textField3.addActionListener(new java.awt.event.ActionListener() {
+        btnSearch2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Search.png"))); // NOI18N
+        btnSearch2.setToolTipText("Tìm kiếm");
+        btnSearch2.setBorderColor(new java.awt.Color(204, 204, 255));
+        btnSearch2.setColorClick(new java.awt.Color(204, 204, 255));
+        btnSearch2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnSearch2.setLabel("Search");
+        btnSearch2.setRadius(200);
+        btnSearch2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textField3ActionPerformed(evt);
+                btnSearch2ActionPerformed(evt);
+            }
+        });
+
+        btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Exit.png"))); // NOI18N
+        btnExit.setText("Exit");
+        btnExit.setToolTipText("Thoát");
+        btnExit.setBorderColor(new java.awt.Color(204, 204, 255));
+        btnExit.setColorClick(new java.awt.Color(204, 204, 255));
+        btnExit.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnExit.setRadius(200);
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setText("Mời bạn tìm kiếm");
+
+        txtSdtNcc.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtSdtNcc.setLabelText("Sdt nhà cung cấp");
+        txtSdtNcc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSdtNccActionPerformed(evt);
+            }
+        });
+
+        txtEmailNcc.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtEmailNcc.setLabelText("Email Ncc");
+        txtEmailNcc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEmailNccActionPerformed(evt);
+            }
+        });
+
+        txtMaNcc.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtMaNcc.setLabelText("Mã nhà cung cấp");
+        txtMaNcc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMaNccActionPerformed(evt);
             }
         });
 
@@ -437,27 +490,49 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
+                .addGap(163, 163, 163)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(65, 65, 65)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(textField2, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
-                        .addComponent(textField3, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(60, 60, 60))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(txtMaNcc, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                        .addComponent(txtTenNcc, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(txtMaSpNcc, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtEmailNcc, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtSdtNcc, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSearch2, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)))
+                .addGap(44, 44, 44))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(151, 151, 151)
-                .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(30, 30, 30)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(178, Short.MAX_VALUE))
+                    .addComponent(txtTenNcc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMaNcc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtEmailNcc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMaSpNcc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(txtSdtNcc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearch2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout diaLogSearchCtspLayout = new javax.swing.GroupLayout(diaLogSearchCtsp.getContentPane());
@@ -468,7 +543,7 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
         );
         diaLogSearchCtspLayout.setVerticalGroup(
             diaLogSearchCtspLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -745,7 +820,7 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tbSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSanPhamMouseClicked
-
+        
     }//GEN-LAST:event_tbSanPhamMouseClicked
 
     private void btnSearch1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearch1ActionPerformed
@@ -833,7 +908,7 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
     }//GEN-LAST:event_tbChiTietSanPhamMouseClicked
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-//        searchRadio();
+        diaLogSearchCtsp.setVisible(true);
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void uWPButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uWPButton6ActionPerformed
@@ -850,31 +925,63 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
         showDataCtsp(serviceChiTietSP.phanTrang(listChiTietSP, offset, limit));
     }//GEN-LAST:event_uWPButton7ActionPerformed
 
-    private void textField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField1ActionPerformed
+    private void txtMaSpNccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaSpNccActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_textField1ActionPerformed
+    }//GEN-LAST:event_txtMaSpNccActionPerformed
 
-    private void textField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField2ActionPerformed
+    private void txtTenNccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTenNccActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_textField2ActionPerformed
+    }//GEN-LAST:event_txtTenNccActionPerformed
 
-    private void textField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField3ActionPerformed
+    private void txtSdtNccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSdtNccActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_textField3ActionPerformed
+    }//GEN-LAST:event_txtSdtNccActionPerformed
+
+    private void txtEmailNccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailNccActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEmailNccActionPerformed
+
+    private void btnSearch2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearch2ActionPerformed
+        String maNcc = this.txtMaNcc.getText();
+        String tenNcc = this.txtTenNcc.getText();
+        String maSpNcc = this.txtMaSpNcc.getText();
+        String emailNcc = this.txtEmailNcc.getText();
+        String sdtNcc = this.txtSdtNcc.getText();
+       
+        listChiTietSP = serviceChiTietSP.getAll(this.listSanPham.get(tbSanPham.getSelectedRow()).getId(), maNcc, tenNcc,maSpNcc,emailNcc,sdtNcc);
+        sizes = listChiTietSP.size();
+        offset = 0;
+        index = 1;
+        loadIndexCtsp();
+        showDataCtsp(listChiTietSP);
+        diaLogSearchCtsp.setVisible(false);
+    }//GEN-LAST:event_btnSearch2ActionPerformed
+
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        // TODO add your handling code here:
+        diaLogSearchCtsp.setVisible(false);
+    }//GEN-LAST:event_btnExitActionPerformed
+
+    private void txtMaNccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaNccActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMaNccActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFrame FrameChiTietSanPham;
     private utilities.palette.MyButton btnChon;
+    private utilities.palette.MyButton btnExit;
     private utilities.palette.MyButton btnHienThi;
     private utilities.palette.MyButton btnHienThi1;
     private utilities.palette.MyButton btnSearch;
     private utilities.palette.MyButton btnSearch1;
+    private utilities.palette.MyButton btnSearch2;
     private utilities.palette.MyButton btnThem;
     private utilities.palette.MyButton btnThem1;
     private utilities.palette.MyButton btnUpdate;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JDialog diaLogSearchCtsp;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
@@ -892,12 +999,14 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
     private utilities.palette.RadioButtonCustom rdoTen;
     private utilities.palette.TableDark_1 tbChiTietSanPham;
     private utilities.palette.TableDark_1 tbSanPham;
-    private utilities.palette.TextField textField1;
-    private utilities.palette.TextField textField2;
-    private utilities.palette.TextField textField3;
+    private utilities.palette.TextField txtEmailNcc;
     private javax.swing.JLabel txtIndex;
     private javax.swing.JLabel txtIndex1;
+    private utilities.palette.TextField txtMaNcc;
+    private utilities.palette.TextField txtMaSpNcc;
+    private utilities.palette.TextField txtSdtNcc;
     private javax.swing.JTextField txtSearchTheo;
+    private utilities.palette.TextField txtTenNcc;
     private utilities.palette.UWPButton uWPButton4;
     private utilities.palette.UWPButton uWPButton5;
     private utilities.palette.UWPButton uWPButton6;

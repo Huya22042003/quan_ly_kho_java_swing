@@ -10,24 +10,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-/**
- *
- * @author MMC
- */
-@Getter
 @Setter
-@NoArgsConstructor
+@Getter
 @AllArgsConstructor
-public class TpQuanLyDonViCustom {
-    private UUID id;  
-    
-    private String donViGoc;
-    
-    private String donViQuyDoi;
-    
-    private int soLuong;
-    
-    public int soLuongQuyDoi(int sl){
-        return sl * this.soLuong;
-    }
+@NoArgsConstructor
+public class TP_SanPhamCustom {
+
+    private UUID id;
+    private String ma;
+    private String ten;
 }

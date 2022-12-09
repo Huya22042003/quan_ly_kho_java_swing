@@ -8,14 +8,17 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.File;
 import java.util.Date;
+import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import utilities.Converter;
 import utilities.MsgBox;
 
 public class TP_RUDKhachHangForm extends javax.swing.JFrame {
 
     private TP_KhachHangService hangService;
+    List<TP_KhachHangCustom> listKH;
     TP_KhachHangCustom custom = new TP_KhachHangCustom();
     String duongdananh = getClass().getResource("/icons/FPT_Polytechnic_doc.png").getPath();
 
@@ -26,6 +29,7 @@ public class TP_RUDKhachHangForm extends javax.swing.JFrame {
         hangService.loadCbbTT(cbbTrangThai);
         hangService.loadCbbDG(cbbDanhGia);
         hangService.loadCbbGT(cbbGioiTinh);
+        listKH = hangService.getListKH();
         Toolkit toolkit = getToolkit();
         Dimension size = toolkit.getScreenSize();
         setLocation(size.width / 2 - getWidth() / 2, size.height / 2 - getHeight() / 2);
@@ -63,7 +67,14 @@ public class TP_RUDKhachHangForm extends javax.swing.JFrame {
         csc.setMa(null);
         csc.setTen(txtTen.getText());
         csc.setSdt(txtSDT.getText());
-        csc.setEmail(txtEmail.getText());
+        for (TP_KhachHangCustom kh : hangService.getListKH()) {
+            if (txtEmail.getText().equalsIgnoreCase(kh.getEmail())) {
+                JOptionPane.showMessageDialog(this, "Email nãy đã được sử dụng! Mời bạn chọn email khác");
+                csc.setEmail("");
+            }else{
+                csc.setEmail(txtEmail.getText());
+            }
+        }
         csc.setDiaChi(txtDicChi.getText());
         csc.setHinhAnh(duongdananh);
         csc.setMatKhau(txtMatKhau.getText());
@@ -378,7 +389,7 @@ public class TP_RUDKhachHangForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        TP_KhachHangCustom check = hangService.checkValidate1(getFormData(), erroMa, erroTen, erroSDT, erroEmail, erroDiaChi, erroMatKhau, erroNgaySinh);
+        TP_KhachHangCustom check = hangService.checkValidateUpdate(getFormData(), erroMa, erroTen, erroSDT, erroEmail, erroDiaChi, erroMatKhau, erroNgaySinh);
         if (check == null) {
             return;
         }
@@ -397,13 +408,13 @@ public class TP_RUDKhachHangForm extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnXActionPerformed
 
-    public ImageIcon ResizeImage(String ImagePath) {
-        ImageIcon MyImage = new ImageIcon(ImagePath);
-        Image img = MyImage.getImage();
-        Image newImg = img.getScaledInstance(lbHinhAnh.getWidth(), lbHinhAnh.getHeight(), Image.SCALE_SMOOTH);
-        ImageIcon image = new ImageIcon(newImg);
-        return image;
-    }
+//    public ImageIcon ResizeImage(String ImagePath) {
+//        ImageIcon MyImage = new ImageIcon(ImagePath);
+//        Image img = MyImage.getImage();
+//        Image newImg = img.getScaledInstance(lbHinhAnh.getWidth(), lbHinhAnh.getHeight(), Image.SCALE_SMOOTH);
+//        ImageIcon image = new ImageIcon(newImg);
+//        return image;
+//    }
     private void btnChonAnhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonAnhActionPerformed
         try {
             JFileChooser f = new JFileChooser();

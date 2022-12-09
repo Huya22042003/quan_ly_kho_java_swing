@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package cores.truongPhongs.services.serviceImpls;
 
 import cores.truongPhongs.customModels.TpQuanLyChiTietSanPhamCustom;
@@ -5,7 +9,7 @@ import cores.truongPhongs.customModels.TpQuanLyDonViCustom;
 import cores.truongPhongs.customModels.TpQuanLySanPhamCustom;
 import cores.truongPhongs.customModels.TpXemChiTietSanPhamCustom;
 import cores.truongPhongs.repositories.TpQuanLyChiTietSanPhamRepository;
-import cores.truongPhongs.services.TpQuanLyChiTietSanPhamService;
+import cores.truongPhongs.services.TP_ChiTietSPService;
 import domainModels.ChiTietSanPham;
 import domainModels.DonVi;
 import domainModels.SanPham;
@@ -18,30 +22,56 @@ import java.util.List;
 import java.util.UUID;
 import javax.swing.JLabel;
 import utilities.Converter;
+import utilities.DateTimeUtil;
 import utilities.palette.Combobox;
 
 /**
  *
- * @author MMC
+ * @author asus
  */
-public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPhamService {
-
+public class TP_ChiTietSPServiceImpl implements TP_ChiTietSPService{
     private TpQuanLyChiTietSanPhamRepository rp = new TpQuanLyChiTietSanPhamRepository();
 
     @Override
-    public List<TpQuanLyChiTietSanPhamCustom> getAll(UUID idSp, String maNcc, String tenNcc,String maSpNcc,String emailNcc,String sdtNcc) {
-        return rp.getAll(idSp,maNcc, tenNcc,maSpNcc,emailNcc,sdtNcc);
+    public List<TpQuanLyChiTietSanPhamCustom> getAll(UUID idSp) {
+        return rp.getAll(idSp);
     }
 
     @Override
     public TpQuanLyChiTietSanPhamCustom addCTSanPham(TpQuanLyChiTietSanPhamCustom custom) {
         ChiTietSanPham sp = new ChiTietSanPham();
+        sp.setGiaBan(custom.getGiaBan());
+        sp.setGiaNhap(custom.getGiaNhap());
+        sp.setHinhAnh(custom.getHinhAnh());
+        sp.setSoLuongTon(custom.getSoLuongTon());
+        sp.setMau(custom.convertMau());
+        custom.setDoViQuyDoi(sp.getDonVi().getDonViQuyDoi());
+        sp.setNamBaoHanh(custom.getNamBaoHanh());
+        custom.setMaSpNcc(sp.getSanPham().getMa());
+//        sp.setNgayTao(DateTimeUtil.convertDateToTimeStampSecond());
+        custom.setNgayNhap(DateTimeUtil.convertDateToTimeStampSecond());
+        sp.setTrangThai(custom.convertTrangThai());
+        sp.setSize(custom.getSize());
+        custom.setId(rp.addCTSanPham(sp).getId());
         return custom;
     }
 
     @Override
     public boolean updateCTSanPham(TpQuanLyChiTietSanPhamCustom custom) {
         ChiTietSanPham sp = new ChiTietSanPham();
+//        sp.setGiaBan(custom.getGiaBan());
+//        sp.setGiaNhap(custom.getGiaNhap());
+//        sp.setHinhAnh(custom.getHinhAnh());
+//        sp.setSoLuongTon(custom.getSoLuongTon());
+//        sp.setMau(custom.getMau());
+//        sp.setDonVi(custom.getDonVi());
+//        sp.setNamBaoHanh(custom.getNamBaoHanh());
+//        sp.setSanPham(custom.getSanPham());
+//        sp.setNgayTao(custom.getNgayTao());
+//        sp.setTrangThai(custom.getTrangThai());
+//        sp.setSize(custom.getSize());
+//        sp.setId(custom.getId());
+
         return rp.updateCTSanPham(sp);
     }
 
@@ -120,6 +150,16 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
             return null;
         }
         TpQuanLyChiTietSanPhamCustom sp = new TpQuanLyChiTietSanPhamCustom();
+//        sp.setGiaBan(new BigDecimal(Double.parseDouble(giaBan)));
+//        sp.setGiaNhap(new BigDecimal(Double.parseDouble(giaNhap)));
+//        sp.setSoLuongTon(Integer.parseInt(soLuong));
+//        sp.setHinhAnh(hinhAnh);
+//        sp.setMau(mau);
+//        sp.setNamBaoHanh(Integer.parseInt(namBH));
+//        sp.setDonVi(findIDDonVi(donVi));
+//        sp.setSanPham(findIDSanPham(sanPham));
+//        sp.setSize(Integer.parseInt(size));
+//        sp.setTrangThai(tt(tt));
         return sp;
     }
 
@@ -198,16 +238,16 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
 
     @Override
     public TpXemChiTietSanPhamCustom checkValidate1(UUID donVi, String namBH, UUID sanPham, String hinhAnh, String giaNhap,
-            int soLuong, String size, MauConstant mau, Long ngayTao, String trangThai, JLabel erroSoLuongNhap,
+            String soLuong, String size, MauConstant mau, Long ngayTao, String trangThai, JLabel erroSoLuongNhap,
             JLabel erroGiaNhap, JLabel erroSize, JLabel erroNamBH) {
 
         boolean check = true;
-        if (soLuong < 0) {
-            erroSoLuongNhap.setText("Số lượng nhập không được dưới 0");
+        if (soLuong.trim().length() == 0) {
+            erroSoLuongNhap.setText("Số lượng nhập không được để trống");
             check = false;
-//        } else if (!soLuong.matches("^[0-9]+$")) {
-//            erroSoLuongNhap.setText("Số lượng nhập sai định dạng");
-//            check = false;
+        } else if (!soLuong.matches("^[0-9]+$")) {
+            erroSoLuongNhap.setText("Số lượng nhập sai định dạng");
+            check = false;
         } else {
             erroSoLuongNhap.setText("");
         }
@@ -246,9 +286,8 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
         }
 
         TpXemChiTietSanPhamCustom sp = new TpXemChiTietSanPhamCustom();
-//        TpQuanLyDonViCustom dv = new TpQuanLyDonViCustom();
         sp.setGiaNhap(new BigDecimal(Double.parseDouble(giaNhap)));
-        sp.setSoLuongTon(soLuong);
+        sp.setSoLuongTon(Integer.parseInt(soLuong));
         sp.setHinhAnh(hinhAnh);
         sp.setMau(mau);
         sp.setNamBaoHanh(Integer.parseInt(namBH));
@@ -290,5 +329,4 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
                 throw new AssertionError();
         }
     }
-
 }

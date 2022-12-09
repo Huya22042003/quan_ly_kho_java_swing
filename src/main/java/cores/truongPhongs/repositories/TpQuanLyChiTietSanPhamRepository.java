@@ -23,7 +23,7 @@ import utilities.HibernateUtil;
  */
 public class TpQuanLyChiTietSanPhamRepository {
 
-    public List<TpQuanLyChiTietSanPhamCustom> getAll(UUID idSp) {
+    public List<TpQuanLyChiTietSanPhamCustom> getAll(UUID idSp, String maNcc, String tenNcc,String maSpNcc,String emailNcc,String sdtNcc) {
         Session s = HibernateUtil.getSessionFactory().openSession();
         Query query = s.createNativeQuery("""
                 SELECT 
@@ -45,9 +45,18 @@ public class TpQuanLyChiTietSanPhamRepository {
                 join ChiTietPhieuNhap ctpn on ctpn.IdChiTietSP = ctsp.Id
                 join PhieuNhap pn on ctpn.IdPhieuNhap = pn.Id
                 join NhaCungCap ncc on ncc.Id = pn.IdNhaCungCap
-                WHERE ctsp.IdSanPham = :idSp
-            """);
-        query.setParameter("idSp", idSp.toString());
+                WHERE ctsp.IdSanPham = :idSp AND ncc.Ma LIKE CONCAT('%', :maNcc,'%')
+                                          AND ncc.Ten LIKE CONCAT('%', :tenNcc,'%')
+                                          AND ctpn.MaSanPhamNhaCungCap LIKE CONCAT('%', :maSpNcc,'%')
+                                          AND ncc.Email LIKE CONCAT('%', :emailNcc,'%')
+                                          AND ncc.Sdt LIKE CONCAT('%', :sdtNcc,'%')
+                              
+            """).setParameter("idSp", idSp.toString())
+                .setParameter("maNcc", maNcc)
+                .setParameter("tenNcc", tenNcc)
+                .setParameter("maSpNcc", maSpNcc)
+                .setParameter("emailNcc", emailNcc)
+                .setParameter("sdtNcc", sdtNcc);
         List<Object[]> listQuery = query.getResultList();
         List<TpQuanLyChiTietSanPhamCustom> list = new ArrayList<>();
         listQuery.parallelStream().forEach(el -> {

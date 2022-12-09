@@ -21,6 +21,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class TpPhieuNhapCustom {
     private UUID id;
+    private String maPhieu;
     private String ghiChu;
     private Long ngayThanhToan;
     private Long ngayTao;
