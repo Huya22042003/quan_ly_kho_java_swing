@@ -16,17 +16,29 @@ import utilities.palette.Combobox;
 import cores.truongPhongs.repositories.TP_KhachHangRepository;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.concurrent.ConcurrentHashMap;
 import javax.swing.JOptionPane;
 
 public class TP_KhachHangServiceImpl implements TP_KhachHangService {
-    
-    private TP_KhachHangRepository rp = new TP_KhachHangRepository();
-    
+
+    private TP_KhachHangRepository rp;
+    private ConcurrentHashMap<String, String> map;
+
+    public TP_KhachHangServiceImpl() {
+        rp = new TP_KhachHangRepository();
+        map = new ConcurrentHashMap<>();
+    }
+
     @Override
     public List<TP_KhachHangCustom> getListKH() {
-        return rp.getList();
+        List<TP_KhachHangCustom> list = new ArrayList<>();
+        list = rp.getList();
+        list.parallelStream().forEach(el -> {
+            map.put(el.getMa(), el.getEmail());
+        });
+        return list;
     }
-    
+
     @Override
     public TP_KhachHangCustom addKH(TP_KhachHangCustom custom) {
         KhachHang kh = new KhachHang();
@@ -42,9 +54,10 @@ public class TP_KhachHangServiceImpl implements TP_KhachHangService {
         kh.setGioiTinh(custom.getGioiTinh());
         kh.setTrangThai(custom.getTrangThai());
         custom.setId(rp.addKH(kh).getId());
+        map.put(kh.getMa(), kh.getEmail());
         return custom;
     }
-    
+
     @Override
     public boolean updateKH(TP_KhachHangCustom custom) {
         KhachHang kh = new KhachHang();
@@ -60,28 +73,29 @@ public class TP_KhachHangServiceImpl implements TP_KhachHangService {
         kh.setGioiTinh(custom.getGioiTinh());
         kh.setTrangThai(custom.getTrangThai());
         kh.setId(custom.getId());
+        map.put(kh.getMa(), kh.getEmail());
         return rp.updateKH(kh);
     }
-    
+
     @Override
     public boolean deleteKH(UUID id) {
         return rp.deleteKH(id);
     }
-    
+
     @Override
     public void loadCbbTT(Combobox cbb) {
         cbb.removeAll();
         cbb.addItem(Converter.trangThaiKhachHang(KhachHangConstant.DANG_LAM_VIEC));
         cbb.addItem(Converter.trangThaiKhachHang(KhachHangConstant.SAP_BO));
         cbb.addItem(Converter.trangThaiKhachHang(KhachHangConstant.DA_NGUNG_CUNG_CAP));
-        
+
     }
-    
+
     @Override
     public TP_KhachHangCustom findKHByMa(String ma) {
         return rp.findByMa(ma);
     }
-    
+
     @Override
     public List<TP_KhachHangCustom> findAllByRadio(String tk, KhachHangConstant tt, int rdo) {
         switch (rdo) {
@@ -95,27 +109,24 @@ public class TP_KhachHangServiceImpl implements TP_KhachHangService {
                 return null;
         }
     }
-    
+
     @Override
-    public TP_KhachHangCustom checkValidate(TP_KhachHangCustom kh, JLabel erroMa, JLabel erroTen, JLabel erroSDT, JLabel erroEmail, JLabel erroDiaChi, JLabel erroMatKhau, JLabel erroNgaySinh) {
+    public TP_KhachHangCustom checkValidateCreate(TP_KhachHangCustom kh, JLabel erroMa, JLabel erroTen, JLabel erroSDT, JLabel erroEmail, JLabel erroDiaChi, JLabel erroMatKhau, JLabel erroNgaySinh) {
         boolean check = true;
-        
-        if (kh.getMa() != null) {
-            if (kh.getMa().trim().length() == 0) {
-                erroMa.setText("Mã không được để trống");
-                check = false;
-                
-            } else if (!kh.getMa().trim().matches(kh.getMa().toUpperCase())) {
-                erroMa.setText("Mã phải viết hoa");
-                check = false;
-            } else if (findKHByMa(kh.getMa().trim()) != null) {
-                erroMa.setText("Mã đã tồn tại");
-                check = false;
-            } else {
-                erroMa.setText("");
-            }
+
+        if (kh.getMa().trim().length() == 0) {
+            erroMa.setText("Mã không được để trống");
+            check = false;
+        } else if (map.containsKey(kh.getMa())) {
+            erroMa.setText("Mã đã tồn tại");
+            check = false;
+        } else if (!kh.getMa().trim().matches(kh.getMa().toUpperCase())) {
+            erroMa.setText("Mã phải viết hoa");
+            check = false;
+        } else {
+            erroMa.setText("");
         }
-        
+
         if (kh.getTen().trim().length() == 0) {
             erroTen.setText("Tên không được để trống");
             check = false;
@@ -125,7 +136,7 @@ public class TP_KhachHangServiceImpl implements TP_KhachHangService {
         } else {
             erroTen.setText("");
         }
-        
+
         if (kh.getSdt().trim().length() == 0) {
             erroSDT.setText("Số điện thoại không được để trống");
             check = false;
@@ -135,19 +146,12 @@ public class TP_KhachHangServiceImpl implements TP_KhachHangService {
         } else {
             erroSDT.setText("");
         }
-        for (TP_KhachHangCustom kha : getListKH()) {
-            if (kh.getEmail().equalsIgnoreCase(kha.getEmail())) {
-                erroEmail.setText("Email nãy đã được sử dụng!");
-                check = false;
-            }else{
-                erroEmail.setText("");
-            }
-        }
+
         if (kh.getEmail().trim().length() == 0) {
             erroEmail.setText("Email không được để trống");
             check = false;
-        } else if (findByEmail(kh.getEmail(), kh.getId()) = true) {
-            erroEmail.setText("Email trùng");
+        } else if (map.containsValue(kh.getEmail())) {
+            erroEmail.setText("Email bị trùng");
             check = false;
         } else if (!kh.getEmail().trim().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
             erroEmail.setText("Email sai định dạng");
@@ -155,7 +159,7 @@ public class TP_KhachHangServiceImpl implements TP_KhachHangService {
         } else {
             erroEmail.setText("");
         }
-        
+
         if (kh.getDiaChi().trim().length() == 0) {
             erroDiaChi.setText("Địa chỉ không được để trống");
             check = false;
@@ -168,11 +172,11 @@ public class TP_KhachHangServiceImpl implements TP_KhachHangService {
         } else if (!kh.getMatKhau().trim().matches("^[A-Z a-z 0-9]+$")) {
             erroMatKhau.setText("Mật khẩu sai định dạng");
             check = false;
-            
+
         } else {
             erroMatKhau.setText("");
         }
-        
+
         if (kh.getNgaySinh() == null) {
             erroNgaySinh.setText("Bạn phải chọn ngày sinh");
             check = false;
@@ -186,11 +190,11 @@ public class TP_KhachHangServiceImpl implements TP_KhachHangService {
         if (!check) {
             return null;
         }
-        
+
         return kh;
-        
+
     }
-    
+
     @Override
     public KhachHangConstant loc(int a) {
         switch (a) {
@@ -204,7 +208,7 @@ public class TP_KhachHangServiceImpl implements TP_KhachHangService {
                 return null;
         }
     }
-    
+
     @Override
     public DanhGiaConstant loc1(int b) {
         switch (b) {
@@ -220,7 +224,7 @@ public class TP_KhachHangServiceImpl implements TP_KhachHangService {
                 return null;
         }
     }
-    
+
     @Override
     public GioiTinhConstant loc2(int c) {
         switch (c) {
@@ -234,14 +238,14 @@ public class TP_KhachHangServiceImpl implements TP_KhachHangService {
                 return null;
         }
     }
-    
+
     @Override
     public void loadCbbGT(Combobox cbb) {
         cbb.addItem(Converter.trangThaiGioiTinh(GioiTinhConstant.NU));
         cbb.addItem(Converter.trangThaiGioiTinh(GioiTinhConstant.KHAC));
         cbb.addItem(Converter.trangThaiGioiTinh(GioiTinhConstant.NAM));
     }
-    
+
     @Override
     public void loadCbbDG(Combobox cbb) {
         cbb.addItem(Converter.trangThaiDanhGia(DanhGiaConstant.TOT));
@@ -249,7 +253,7 @@ public class TP_KhachHangServiceImpl implements TP_KhachHangService {
         cbb.addItem(Converter.trangThaiDanhGia(DanhGiaConstant.TAM_ON));
         cbb.addItem(Converter.trangThaiDanhGia(DanhGiaConstant.XAU));
     }
-    
+
     @Override
     public List<TP_KhachHangCustom> phanTrang(List<TP_KhachHangCustom> list, int offset, int limit) {
         List<TP_KhachHangCustom> listPhanTrang = new ArrayList<>();
@@ -266,11 +270,95 @@ public class TP_KhachHangServiceImpl implements TP_KhachHangService {
         }
         return listPhanTrang;
     }
-    
+
     @Override
-    public TP_KhachHangCustom findByEmail(String email, UUID id) {
-        return rp.findByEmail(email, id);
+    public TP_KhachHangCustom checkValidateUpdate(TP_KhachHangCustom kh, JLabel erroMa, JLabel erroTen, JLabel erroSDT, JLabel erroEmail, JLabel erroDiaChi, JLabel erroMatKhau, JLabel erroNgaySinh) {
+        boolean check = true;
+
+        if (kh.getMa() != null) {
+            if (kh.getMa().trim().length() == 0) {
+                erroMa.setText("Mã không được để trống");
+                check = false;
+
+            } else if (!kh.getMa().trim().matches(kh.getMa().toUpperCase())) {
+                erroMa.setText("Mã phải viết hoa");
+                check = false;
+            } else if (findKHByMa(kh.getMa().trim()) != null) {
+                erroMa.setText("Mã đã tồn tại");
+                check = false;
+            } else {
+                erroMa.setText("");
+            }
+        }
+
+        if (kh.getTen().trim().length() == 0) {
+            erroTen.setText("Tên không được để trống");
+            check = false;
+        } else if (!kh.getTen().trim().matches("^[AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬBCDĐEÈẺẼÉẸÊỀỂỄẾỆFGHIÌỈĨÍỊJKLMNOÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢPQRSTUÙỦŨÚỤƯỪỬỮỨỰVWXYỲỶỸÝỴZ][aàảãáạăằẳẵắặâầẩẫấậbcdđeèẻẽéẹêềểễếệfghiìỉĩíịjklmnoòỏõóọôồổỗốộơờởỡớợpqrstuùủũúụưừửữứựvwxyỳỷỹýỵz]+ [AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬBCDĐEÈẺẼÉẸÊỀỂỄẾỆFGHIÌỈĨÍỊJKLMNOÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢPQRSTUÙỦŨÚỤƯỪỬỮỨỰVWXYỲỶỸÝỴZ][aàảãáạăằẳẵắặâầẩẫấậbcdđeèẻẽéẹêềểễếệfghiìỉĩíịjklmnoòỏõóọôồổỗốộơờởỡớợpqrstuùủũúụưừửữứựvwxyỳỷỹýỵz]+(?: [AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬBCDĐEÈẺẼÉẸÊỀỂỄẾỆFGHIÌỈĨÍỊJKLMNOÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢPQRSTUÙỦŨÚỤƯỪỬỮỨỰVWXYỲỶỸÝỴZ][aàảãáạăằẳẵắặâầẩẫấậbcdđeèẻẽéẹêềểễếệfghiìỉĩíịjklmnoòỏõóọôồổỗốộơờởỡớợpqrstuùủũúụưừửữứựvwxyỳỷỹýỵz]*)*")) {
+            erroTen.setText("Tên sai định dạng");
+            check = false;
+        } else {
+            erroTen.setText("");
+        }
+
+        if (kh.getSdt().trim().length() == 0) {
+            erroSDT.setText("Số điện thoại không được để trống");
+            check = false;
+        } else if (!kh.getSdt().trim().matches(ValidateConstant.REGEX_PHONE_NUMBER)) {
+            erroSDT.setText("SĐT sai định dạng");
+            check = false;
+        } else {
+            erroSDT.setText("");
+        }
+
+        if (kh.getEmail().trim().length() == 0) {
+            erroEmail.setText("Email không được để trống");
+            check = false;
+        } else if (map.containsValue(kh.getEmail())) {
+            if (!map.containsKey(kh.getMa())) {
+                erroEmail.setText("Email không được trùng");
+                check = false;
+            }
+        } else if (!kh.getEmail().trim().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
+            erroEmail.setText("Email sai định dạng");
+            check = false;
+        } else {
+            erroEmail.setText("");
+        }
+
+        if (kh.getDiaChi().trim().length() == 0) {
+            erroDiaChi.setText("Địa chỉ không được để trống");
+            check = false;
+        } else {
+            erroDiaChi.setText("");
+        }
+        if (kh.getMatKhau().trim().length() == 0) {
+            erroMatKhau.setText("Mật khẩu không được để trống");
+            check = false;
+        } else if (!kh.getMatKhau().trim().matches("^[A-Z a-z 0-9]+$")) {
+            erroMatKhau.setText("Mật khẩu sai định dạng");
+            check = false;
+
+        } else {
+            erroMatKhau.setText("");
+        }
+
+        if (kh.getNgaySinh() == null) {
+            erroNgaySinh.setText("Bạn phải chọn ngày sinh");
+            check = false;
+        } else if (kh.getNgaySinh() > new Date().getTime()) {
+            erroNgaySinh.setText("Ngày sinh quá hiện tại ");
+            check = false;
+        } else {
+            erroNgaySinh.setText("");
+        }
+
+        if (!check) {
+            return null;
+        }
+
+        return kh;
+
     }
 
-  
 }

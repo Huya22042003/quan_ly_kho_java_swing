@@ -25,7 +25,9 @@ public interface TP_KhachHangService {
 
     void loadCbbDG(Combobox cbb);
 
-    TP_KhachHangCustom checkValidate(TP_KhachHangCustom kh, JLabel erroMa, JLabel erroTen, JLabel erroSDT, JLabel erroEmail, JLabel erroDiaChi, JLabel erroMatKhau, JLabel erroNgaySinh);
+    TP_KhachHangCustom checkValidateCreate(TP_KhachHangCustom kh, JLabel erroMa, JLabel erroTen, JLabel erroSDT, JLabel erroEmail, JLabel erroDiaChi, JLabel erroMatKhau, JLabel erroNgaySinh);
+
+    TP_KhachHangCustom checkValidateUpdate(TP_KhachHangCustom kh, JLabel erroMa, JLabel erroTen, JLabel erroSDT, JLabel erroEmail, JLabel erroDiaChi, JLabel erroMatKhau, JLabel erroNgaySinh);
 
     KhachHangConstant loc(int a);
 
@@ -38,8 +40,5 @@ public interface TP_KhachHangService {
     List<TP_KhachHangCustom> findAllByRadio(String tk, KhachHangConstant tt, int rdo);
 
     List<TP_KhachHangCustom> phanTrang(List<TP_KhachHangCustom> list, int offset, int limit);
-    
-    TP_KhachHangCustom findByEmail(String email, UUID id);
-
 
 }
