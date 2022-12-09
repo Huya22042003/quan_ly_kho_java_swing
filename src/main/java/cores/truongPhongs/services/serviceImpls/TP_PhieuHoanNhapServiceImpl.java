@@ -9,6 +9,7 @@ import cores.truongPhongs.services.TP_PhieuHoanNhapService;
 import domainModels.PhieuHoanNhap;
 import domainModels.PhieuNhap;
 import infrastructures.constant.TrangThaiPhieuHoanConstant;
+import infrastructures.constant.TrangThaiPhieuNhapConstant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -145,6 +146,25 @@ public class TP_PhieuHoanNhapServiceImpl implements TP_PhieuHoanNhapService {
             default:
                 return null;
         }
+    }
+
+    @Override
+    public List<TP_HoanNhap_PhieuNhapCustom> findAllPnBy(String ma, int rdo) {
+        switch (rdo) {
+            case 0:
+                return rp.findAllPnByMaPhieu(ma);
+            case 1:
+                return rp.findAllPnByNcc(ma);
+            case 2:
+                return rp.findAllPnByNv(ma);
+            default:
+                return null;
+        }
+    }
+
+    @Override
+    public List<TP_HoanNhap_PhieuNhapCustom> getListByNgayTaoPhieuNhap(Long ngayBatDau, Long ngayKetThuc) {
+        return rp.findAllPnNgayTao(ngayBatDau, ngayKetThuc);
     }
 
 }

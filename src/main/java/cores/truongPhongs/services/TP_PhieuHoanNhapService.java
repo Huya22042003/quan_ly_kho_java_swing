@@ -5,6 +5,7 @@ import cores.truongPhongs.customModels.TP_HoanNhap_ctpCusTom;
 import cores.truongPhongs.customModels.TP_HoanNhap_spCustom;
 import cores.truongPhongs.customModels.TP_PhieuHoanNhapCustom;
 import infrastructures.constant.TrangThaiPhieuHoanConstant;
+import infrastructures.constant.TrangThaiPhieuNhapConstant;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,9 +19,12 @@ public interface TP_PhieuHoanNhapService {
 
     List<TP_HoanNhap_PhieuNhapCustom> getListPhieuNhap();
 
+    List<TP_HoanNhap_PhieuNhapCustom> findAllPnBy(String ma, int rdo);
+    List<TP_HoanNhap_PhieuNhapCustom> getListByNgayTaoPhieuNhap(Long ngayBatDau, Long ngayKetThuc);
+
     List<TP_HoanNhap_spCustom> getListSpByPhieuNhap(UUID idPhieuNhap);
-   
-    List<TP_HoanNhap_spCustom> getListByMaSpAndTenSpByPhieuNhap(UUID idPhieuNhap, String ma,int rdo);
+
+    List<TP_HoanNhap_spCustom> getListByMaSpAndTenSpByPhieuNhap(UUID idPhieuNhap, String ma, int rdo);
 
     List<TP_HoanNhap_ctpCusTom> getListSpByChiTietPhieuHoanNhap(UUID idPhieuHoan);
 

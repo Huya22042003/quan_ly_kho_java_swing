@@ -203,7 +203,6 @@ public class TpLuongNhapView extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         panelRound8 = new utilities.palette.PanelRound();
         cbbTrangThai = new utilities.palette.Combobox();
-        btnKhoangTime = new utilities.palette.MyButton();
         panelRound9 = new utilities.palette.PanelRound();
         rdoNgayTao = new utilities.palette.RadioButtonCustom();
         rdoNgayThanhToan = new utilities.palette.RadioButtonCustom();
@@ -368,38 +367,20 @@ public class TpLuongNhapView extends javax.swing.JPanel {
             }
         });
 
-        btnKhoangTime.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/calendarrrrrr.png"))); // NOI18N
-        btnKhoangTime.setToolTipText("Chọn khoảng thời gian để tìm kiếm");
-        btnKhoangTime.setBorderColor(new java.awt.Color(221, 242, 244));
-        btnKhoangTime.setColor(new java.awt.Color(221, 242, 244));
-        btnKhoangTime.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnKhoangTime.setRadius(50);
-        btnKhoangTime.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnKhoangTimeActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout panelRound8Layout = new javax.swing.GroupLayout(panelRound8);
         panelRound8.setLayout(panelRound8Layout);
         panelRound8Layout.setHorizontalGroup(
             panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound8Layout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
-                .addComponent(btnKhoangTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addContainerGap(22, Short.MAX_VALUE)
                 .addComponent(cbbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22))
         );
         panelRound8Layout.setVerticalGroup(
             panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound8Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnKhoangTime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelRound8Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(cbbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cbbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -607,7 +588,7 @@ public class TpLuongNhapView extends javax.swing.JPanel {
                                 .addComponent(panelRound9, javax.swing.GroupLayout.PREFERRED_SIZE, 806, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(panelRound1Layout.createSequentialGroup()
                                     .addComponent(panelRound15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
+                                    .addGap(67, 67, 67)
                                     .addComponent(panelRound8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(panelRound1Layout.createSequentialGroup()
                         .addGap(311, 311, 311)
@@ -962,12 +943,6 @@ public class TpLuongNhapView extends javax.swing.JPanel {
         clearForm();
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
-    private void btnKhoangTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhoangTimeActionPerformed
-        // TODO add your handling code here:
-        TpLuongNhapChonKhongTimeView time = new TpLuongNhapChonKhongTimeView();
-        time.setVisible(true);
-    }//GEN-LAST:event_btnKhoangTimeActionPerformed
-
     private void ngayBatDauInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_ngayBatDauInputMethodTextChanged
         // TODO add your handling code here:
         TimKiemTheoNgay();
@@ -1008,7 +983,6 @@ public class TpLuongNhapView extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private utilities.palette.MyButton btnKhoangTime;
     private utilities.palette.UWPButton btnNext;
     private utilities.palette.MyButton btnPhieuNhapChiTiet;
     private utilities.palette.MyButton btnPhieuNhapChiTiet1;
