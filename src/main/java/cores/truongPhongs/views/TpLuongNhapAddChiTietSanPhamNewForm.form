@@ -93,10 +93,13 @@
                           <Component id="btnSave" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                           <Component id="btnClose" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="165" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="uWPButton1" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="uWPButton1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace pref="165" max="32767" attributes="0"/>
               </Group>
               <Component id="panelRound3" alignment="0" max="32767" attributes="0"/>
           </Group>
@@ -208,7 +211,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                   <Component id="erroNamBH" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txtNamBH" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txtNamBH" alignment="0" pref="264" max="32767" attributes="0"/>
                                   <Component id="erroSize" alignment="0" max="32767" attributes="0"/>
                                   <Component id="txtSize" alignment="0" max="32767" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
@@ -217,10 +220,10 @@
                                           <Component id="cbbTrangThai" alignment="0" max="32767" attributes="0"/>
                                           <Component id="cbbSanPham" min="-2" pref="180" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="btnThemDonVi" min="-2" max="-2" attributes="0"/>
                                           <Component id="btnThemSanPham" max="32767" attributes="0"/>
-                                          <Component id="btnThemDonVi" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -251,23 +254,24 @@
                       <Component id="txtNamBH" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="erroNamBH" min="-2" pref="24" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
                               <Component id="cbbDonVi" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="8" max="32767" attributes="0"/>
+                              <EmptySpace pref="16" max="32767" attributes="0"/>
                               <Component id="cbbTrangThai" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="cbbSanPham" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-                              <Component id="btnThemSanPham" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
                               <Component id="btnThemDonVi" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="cbbSanPham" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnThemSanPham" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -350,27 +354,6 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThemDonViActionPerformed"/>
               </Events>
             </Component>
-            <Component class="utilities.palette.MyButton" name="btnThemSanPham">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="f4" green="f2" red="dd" type="rgb"/>
-                </Property>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/icons/Addd.png"/>
-                </Property>
-                <Property name="toolTipText" type="java.lang.String" value="Th&#xea;m m&#x1edb;i s&#x1ea3;n ph&#x1ea9;m"/>
-                <Property name="borderColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="f4" green="f2" red="dd" type="rgb"/>
-                </Property>
-                <Property name="color" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="f4" green="f2" red="dd" type="rgb"/>
-                </Property>
-                <Property name="radius" type="int" value="50"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThemSanPhamActionPerformed"/>
-              </Events>
-            </Component>
             <Component class="utilities.palette.TextField" name="txtNamBH">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -406,6 +389,27 @@
                   <Color blue="33" green="33" red="ff" type="rgb"/>
                 </Property>
               </Properties>
+            </Component>
+            <Component class="utilities.palette.MyButton" name="btnThemSanPham">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="f4" green="f2" red="dd" type="rgb"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/icons/Addd.png"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" value="Th&#xea;m m&#x1edb;i s&#x1ea3;n ph&#x1ea9;m"/>
+                <Property name="borderColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="f4" green="f2" red="dd" type="rgb"/>
+                </Property>
+                <Property name="color" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="f4" green="f2" red="dd" type="rgb"/>
+                </Property>
+                <Property name="radius" type="int" value="50"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThemSanPhamActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

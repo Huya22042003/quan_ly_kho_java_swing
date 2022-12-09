@@ -78,20 +78,26 @@ public class Migrator {
         DonVi dv = new DonVi();
         dv.setDonViGoc("Đôi");
         dv.setDonViQuyDoi("Thùng");
-        dv.setSoLuong(10);
+        dv.setSoLuong(50);
         session.save(dv);
 
         DonVi dv1 = new DonVi();
         dv1.setDonViGoc("Đôi");
         dv1.setDonViQuyDoi("Túi");
-        dv1.setSoLuong(100);
+        dv1.setSoLuong(10);
         session.save(dv1);
 
         DonVi dv2 = new DonVi();
         dv2.setDonViGoc("Đôi");
         dv2.setDonViQuyDoi("Lô");
-        dv2.setSoLuong(1000);
+        dv2.setSoLuong(500);
         session.save(dv2);
+        
+        DonVi dv3 = new DonVi();
+        dv3.setDonViGoc("Đôi");
+        dv3.setDonViQuyDoi("Đôi");
+        dv3.setSoLuong(1);
+        session.save(dv3);
 
         NhanVien a = new NhanVien();
         a.setDiaChi("Hà Nội");
