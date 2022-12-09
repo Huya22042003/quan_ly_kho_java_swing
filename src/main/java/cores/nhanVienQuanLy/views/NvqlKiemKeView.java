@@ -384,6 +384,11 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
         btnChiTietSP1.setColor(new java.awt.Color(221, 242, 244));
         btnChiTietSP1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnChiTietSP1.setRadius(50);
+        btnChiTietSP1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChiTietSP1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelRound8Layout = new javax.swing.GroupLayout(panelRound8);
         panelRound8.setLayout(panelRound8Layout);
@@ -899,6 +904,10 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
     private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSearchActionPerformed
+
+    private void btnChiTietSP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChiTietSP1ActionPerformed
+        
+    }//GEN-LAST:event_btnChiTietSP1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -1,5 +1,6 @@
 package cores.exportPDF.services;
 
+import cores.nhanVienQuanLy.customModels.NvqlLuongKiemKeCtspCustom;
 import domainModels.ChiTietPhieuXuat;
 import domainModels.ChiTietSanPham;
 import domainModels.PhieuXuat;
@@ -16,4 +17,6 @@ public interface ExportSanPhamService {
     boolean exportPhieuXuat(String fileName, UUID idPhieu);
     PhieuXuat findPhieuXuatById(UUID id);
     List<ChiTietPhieuXuat> findChiTietPhieuXuat(UUID id);
+    List<NvqlLuongKiemKeCtspCustom> getListSanPhamKiemKe();
+    boolean exportDanhSachSanPham(String fileName);
 }

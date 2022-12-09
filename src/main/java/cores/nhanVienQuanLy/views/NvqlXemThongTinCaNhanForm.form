@@ -187,6 +187,9 @@
                 <Property name="labelText" type="java.lang.String" value="M&#x1ead;t kh&#x1ea9;u hi&#x1ec7;n t&#x1ea1;i: "/>
                 <Property name="showAndHide" type="boolean" value="true"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtOldPassActionPerformed"/>
+              </Events>
             </Component>
             <Component class="utilities.palette.PasswordField" name="txtConfirmPass">
               <Properties>

@@ -17,7 +17,6 @@ import cores.truongPhongs.repositories.TP_KhachHangRepository;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.ConcurrentHashMap;
-import javax.swing.JOptionPane;
 
 public class TP_KhachHangServiceImpl implements TP_KhachHangService {
 
@@ -181,7 +180,7 @@ public class TP_KhachHangServiceImpl implements TP_KhachHangService {
             erroNgaySinh.setText("Bạn phải chọn ngày sinh");
             check = false;
         } else if (kh.getNgaySinh() > new Date().getTime()) {
-            erroNgaySinh.setText("Ngày sinh quá hiện tại ");
+            erroNgaySinh.setText("Đã quá ngày tháng năm hiện tại ");
             check = false;
         } else {
             erroNgaySinh.setText("");
@@ -275,21 +274,8 @@ public class TP_KhachHangServiceImpl implements TP_KhachHangService {
     public TP_KhachHangCustom checkValidateUpdate(TP_KhachHangCustom kh, JLabel erroMa, JLabel erroTen, JLabel erroSDT, JLabel erroEmail, JLabel erroDiaChi, JLabel erroMatKhau, JLabel erroNgaySinh) {
         boolean check = true;
 
-        if (kh.getMa() != null) {
-            if (kh.getMa().trim().length() == 0) {
-                erroMa.setText("Mã không được để trống");
-                check = false;
-
-            } else if (!kh.getMa().trim().matches(kh.getMa().toUpperCase())) {
-                erroMa.setText("Mã phải viết hoa");
-                check = false;
-            } else if (findKHByMa(kh.getMa().trim()) != null) {
-                erroMa.setText("Mã đã tồn tại");
-                check = false;
-            } else {
-                erroMa.setText("");
-            }
-        }
+     
+        
 
         if (kh.getTen().trim().length() == 0) {
             erroTen.setText("Tên không được để trống");
@@ -347,7 +333,7 @@ public class TP_KhachHangServiceImpl implements TP_KhachHangService {
             erroNgaySinh.setText("Bạn phải chọn ngày sinh");
             check = false;
         } else if (kh.getNgaySinh() > new Date().getTime()) {
-            erroNgaySinh.setText("Ngày sinh quá hiện tại ");
+            erroNgaySinh.setText("Đã quá ngày tháng năm hiện tại ");
             check = false;
         } else {
             erroNgaySinh.setText("");
