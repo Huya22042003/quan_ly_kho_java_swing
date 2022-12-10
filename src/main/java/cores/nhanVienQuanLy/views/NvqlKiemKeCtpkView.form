@@ -355,7 +355,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/icons/Show.png"/>
                 </Property>
-                <Property name="toolTipText" type="java.lang.String" value="Ch&#x1ecd;n kho&#x1ea3;ng th&#x1edd;i gian"/>
+                <Property name="toolTipText" type="java.lang.String" value="Load l&#x1ea1;i table"/>
                 <Property name="borderColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="f4" green="f2" red="dd" type="rgb"/>
                 </Property>
@@ -376,7 +376,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/icons/Delete.png"/>
                 </Property>
-                <Property name="toolTipText" type="java.lang.String" value="Ch&#x1ecd;n kho&#x1ea3;ng th&#x1edd;i gian"/>
+                <Property name="toolTipText" type="java.lang.String" value="Tho&#xe1;t"/>
                 <Property name="borderColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="f4" green="f2" red="dd" type="rgb"/>
                 </Property>

@@ -4,6 +4,7 @@ import cores.truongPhongs.customModels.TpXemPhieuXuatCustom;
 import cores.truongPhongs.customModels.TpXemSanPham_PhieuXuat;
 import cores.truongPhongs.services.TpXemPhieuXuatService;
 import cores.truongPhongs.services.serviceImpls.TpXemPhieuXuatSerivceImpl;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -27,6 +28,8 @@ public class TpXemPhieuXuatView extends javax.swing.JPanel {
     private List<TpXemPhieuXuatCustom> listPhieuXuat;
 
     private List<TpXemSanPham_PhieuXuat> listSanPham;
+    String pattern = "yyyy-MM-dd HH:mm:ss";
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 
     private Page p;
     private int limit = 3;
@@ -67,8 +70,8 @@ public class TpXemPhieuXuatView extends javax.swing.JPanel {
                 dtm.getRowCount() + 1,
                 el.getMaPhieu(),
                 el.getGhiChu(),
-                new Date(el.getNgayThanhToan()).toString(),
-                new Date(el.getNgayTao()).toString(),
+                simpleDateFormat.format(el.getNgayThanhToan()),
+                simpleDateFormat.format(el.getNgayTao()),
                 el.getTenKhachHang(),
                 Converter.TrangThaiPhieuXuat(el.convertTrangThai())
             };
@@ -89,7 +92,7 @@ public class TpXemPhieuXuatView extends javax.swing.JPanel {
                 el.getSoLuongBan(),
                 el.getGiaBan(),
                 Converter.trangThaiMauSac(el.convertMau()),
-                new Date(el.getNgayNhap()).toString(),
+                simpleDateFormat.format(el.getNgayNhap()),
                 el.getSize(),
                 el.getNamBaoHanh(),
                 el.getMaSpNcc()
@@ -677,7 +680,7 @@ public class TpXemPhieuXuatView extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(219, 219, 219)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(221, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -881,7 +884,7 @@ public class TpXemPhieuXuatView extends javax.swing.JPanel {
         });
 
         btnHienThi2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Zoom.png"))); // NOI18N
-        btnHienThi2.setToolTipText("Hiển thị");
+        btnHienThi2.setToolTipText("Tìm kiếm");
         btnHienThi2.setBorderColor(new java.awt.Color(221, 242, 244));
         btnHienThi2.setColor(new java.awt.Color(221, 242, 244));
         btnHienThi2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -911,13 +914,13 @@ public class TpXemPhieuXuatView extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound16Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(btnHienThi1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(45, 45, 45)
                 .addComponent(btnXemSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 149, Short.MAX_VALUE)
+                .addGap(62, 62, 62)
                 .addComponent(btnHienThi2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addComponent(btnHienThi, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31))
+                .addGap(48, 48, 48))
         );
         panelRound16Layout.setVerticalGroup(
             panelRound16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1054,6 +1057,9 @@ public class TpXemPhieuXuatView extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Bạn phải chọn một dòng");
             return;
         }
+        String pattern1 = "yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat(pattern1);
+        
         TpXemPhieuXuatCustom kh = listPhieuXuat.get(row);
         this.lbTenKh.setText("Thông tin khách hàng " + kh.getTenKhachHang());
         this.txtMaKhCt.setText(kh.getMaKhachHang());
@@ -1061,7 +1067,7 @@ public class TpXemPhieuXuatView extends javax.swing.JPanel {
         this.txtSdtKhCt.setText(kh.getSdtKh());
         this.txtEmailKhCt.setText(kh.getEmailKh());
         this.txtMkKhCt.setText(kh.getMatKhauKh());
-        this.txtNgaySinhKhCt.setText(new Date(kh.getNgaySinhKh()).toString());
+        this.txtNgaySinhKhCt.setText(simpleDateFormat1.format(kh.getNgaySinhKh()));
         this.txtGioiTinhKhCt.setText(Converter.trangThaiGioiTinh(kh.convertGioiTinh()));
         this.txtDiaChiKhCt.setText(kh.getDiaChiKh());
         this.txtDanhGiaKhCt.setText(Converter.trangThaiDanhGia(kh.convertDanhGia()));
@@ -1093,25 +1099,25 @@ public class TpXemPhieuXuatView extends javax.swing.JPanel {
 
     private void btnXemSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXemSanPhamActionPerformed
         int row = this.tblPhieuXuat.getSelectedRow();
-        
-        if(row == -1) {
+
+        if (row == -1) {
             JOptionPane.showMessageDialog(this, "Bạn phải chọn một dòng");
             return;
         }
-        
-        this.listSanPham = service.getListSanPhamByPhieuXuat(this.service.phanTrangPhieuXuat(listPhieuXuat, offset, limit).get(row).getId(), "", "","", "", "","", "", "","");
+
+        this.listSanPham = service.getListSanPhamByPhieuXuat(this.service.phanTrangPhieuXuat(listPhieuXuat, offset, limit).get(row).getId(), "", "", "", "", "", "", "", "", "");
         loadTableSanPham();
         FrameSanPham.setVisible(true);
     }//GEN-LAST:event_btnXemSanPhamActionPerformed
 
     private void btnChonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonActionPerformed
         int row = this.tbSanPham.getSelectedRow();
-        
-        if(row == -1) {
+
+        if (row == -1) {
             JOptionPane.showMessageDialog(this, "Bạn phải chọn một dòng");
             return;
         }
-        
+
         TpXemSanPham_PhieuXuat ncc = listSanPham.get(row);
         this.lbTenNcc.setText("Nhà cung cấp " + ncc.getTenNcc());
         this.txtMaNccCt.setText(ncc.getMaNcc());
@@ -1137,10 +1143,10 @@ public class TpXemPhieuXuatView extends javax.swing.JPanel {
 
     private void myButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton3ActionPerformed
         int row = this.tblPhieuXuat.getSelectedRow();
-        this.listSanPham = service.getListSanPhamByPhieuXuat(this.service.phanTrangPhieuXuat(listPhieuXuat, offset, limit).get(row).getId(), txtMaSp1.getText(), txtTenSp1.getText()
-                , txtMaPn1.getText(), txtTenNcc1.getText(), txtMaNcc1.getText()
-                , txtDiaChiNcc1.getText(), txtEmailNcc1.getText()
-                , txtSdtNcc1.getText(), txtMaSpNcc1.getText());
+        this.listSanPham = service.getListSanPhamByPhieuXuat(this.service.phanTrangPhieuXuat(listPhieuXuat, offset, limit).get(row).getId(), txtMaSp1.getText(), txtTenSp1.getText(),
+                txtMaPn1.getText(), txtTenNcc1.getText(), txtMaNcc1.getText(),
+                txtDiaChiNcc1.getText(), txtEmailNcc1.getText(),
+                txtSdtNcc1.getText(), txtMaSpNcc1.getText());
         loadTableSanPham();
         FrameSearchSanPham.setVisible(false);
         FrameSanPham.setVisible(true);
