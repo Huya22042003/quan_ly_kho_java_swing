@@ -336,6 +336,7 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
         });
 
         cbbTrangThai.setBackground(new java.awt.Color(67, 130, 187));
+        cbbTrangThai.setForeground(new java.awt.Color(255, 255, 255));
         cbbTrangThai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Chờ xác nhận", "Đã hủy", "Hoàn thành công" }));
         cbbTrangThai.setSelectedIndex(-1);
         cbbTrangThai.setToolTipText("Chọn trạng thái để tìm kiếm");
@@ -387,12 +388,14 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
         buttonGroup2.add(rdoNgayTao);
         rdoNgayTao.setForeground(new java.awt.Color(255, 255, 255));
         rdoNgayTao.setText("Ngày Tạo");
+        rdoNgayTao.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
         rdoNgayThanhToan.setBackground(new java.awt.Color(67, 130, 187));
         buttonGroup2.add(rdoNgayThanhToan);
         rdoNgayThanhToan.setForeground(new java.awt.Color(255, 255, 255));
         rdoNgayThanhToan.setSelected(true);
         rdoNgayThanhToan.setText("Ngày Thanh Toán");
+        rdoNgayThanhToan.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
         ngayBatDau.addInputMethodListener(new java.awt.event.InputMethodListener() {
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
@@ -402,9 +405,11 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
             }
         });
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("From:");
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("To:");
 
@@ -424,11 +429,11 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
             .addGroup(panelRound9Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(rdoNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
+                .addGap(10, 10, 10)
                 .addComponent(rdoNgayThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(16, 16, 16)
                 .addComponent(ngayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -450,7 +455,7 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
                         .addComponent(rdoNgayThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel4))
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(panelRound9Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnSearch2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)

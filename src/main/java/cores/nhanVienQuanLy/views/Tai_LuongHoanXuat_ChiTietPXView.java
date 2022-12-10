@@ -9,7 +9,6 @@ import cores.nhanVienQuanLy.services.serviceImpls.Tai_LuongHoanXuatServiceImpl;
 import cores.nhanVienQuanLy.services.serviceImpls.Tai_NvqlLuongPhieuXuatServiceImpl;
 import domainModels.ChiTietSanPham;
 import domainModels.PhieuHoanXuat;
-import infrastructures.constant.TrangThaiPhieuHoanConstant;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +32,7 @@ public class Tai_LuongHoanXuat_ChiTietPXView extends javax.swing.JFrame {
     private List<ChiTietPhieuHoanXuatCustom> listCTPHX;
     private String duongDan = getClass().getResource("/icons/file.png").getPath();
     private DecimalFormat formatter = new DecimalFormat("###,###,##0 VNĐ");
+
     public void setPhieuXuat(PhieuHoanXuat phieuXuat) {
         this.phieuHoanXuat = phieuXuat;
     }
@@ -579,51 +579,51 @@ public class Tai_LuongHoanXuat_ChiTietPXView extends javax.swing.JFrame {
 
         boolean check = true;
         String soLuong = this.txtSoLuongHoan.getText();
-     
+
         if (soLuong.trim().length() == 0) {
             this.errSoLuongHoan.setText("Bạn phải nhập số lượng nhận lại");
             check = false;
-        }else{
-              this.errSoLuongHoan.setText("");
+        } else {
+            this.errSoLuongHoan.setText("");
         }
-        if(this.txtLyDo.getText().trim().length() == 0){
+        if (this.txtLyDo.getText().trim().length() == 0) {
             this.errLyDo.setText("Bạn phải nhập lí do !");
-            check  = false;
-        }else{
-                this.errLyDo.setText("");
-      
+            check = false;
+        } else {
+            this.errLyDo.setText("");
+
         }
-       if(check == false){
-           return;
-       }
+        if (check == false) {
+            return;
+        }
         int sl = 0;
         try {
             sl = Integer.parseInt(soLuong);
             if (sl <= 0) {
                 this.errSoLuongHoan.setText("Số lượng phải là số nguyên dương");
                 return;
-            }else{
-                  this.errSoLuongHoan.setText("");
+            } else {
+                this.errSoLuongHoan.setText("");
             }
             if (sl > listCTPX.get(row).getSoLuong()) {
                 this.errSoLuongHoan.setText("Số lượng nhận lai phải nhỏ hơn số lượng hoàn");
                 return;
-            }else{
-                  this.errSoLuongHoan.setText("");
+            } else {
+                this.errSoLuongHoan.setText("");
             }
-          
+
         } catch (NumberFormatException e) {
             e.printStackTrace();
             this.errSoLuongHoan.setText("Số lượng phải nhập đúng định dạng số");
             return;
         }
-           Luong_ChiTietPhieuXuatCustom ctPhieuXuat = listCTPX.get(row);
+        Luong_ChiTietPhieuXuatCustom ctPhieuXuat = listCTPX.get(row);
         for (ChiTietPhieuHoanXuatCustom ctphx : luongHoanXuatService.getListCTphx()) {
             if (listCTPX.get(row).getIdChiTietSp().getId().equals(ctphx.getIdChiTietSp().getId()) && phieuHoanXuat.getId().equals(ctphx.getIdPhieuHoanXuat().getId())) {
                 ctphx.setSoLuong(ctphx.getSoLuong() + sl);
-               ctphx.setLiDo(txtLyDo.getText());
+                ctphx.setLiDo(txtLyDo.getText());
                 luongHoanXuatService.updateCtPHX(ctphx);
-                System.out.println("Sản phẩm này đã được hoàn và vừa update lại số lượng");
+                MsgBox.alert(this, "Sản phẩm này đã được hoàn và vừa update lại số lượng");
                 ctPhieuXuat.setSoLuong(ctPhieuXuat.getSoLuong() - sl);
                 luongService.updateCTPX(ctPhieuXuat);
                 MsgBox.alert(this, "Bạn đã update lại số lượng hoàn của sản phẩm này thành công !");
@@ -650,10 +650,8 @@ public class Tai_LuongHoanXuat_ChiTietPXView extends javax.swing.JFrame {
                 luongService.updateCTSP(ctspct);
             }
         }
-//        System.out.println(ctPhieuXuat.getSoLuong() - sl);
         ctPhieuXuat.setSoLuong(ctPhieuXuat.getSoLuong() - sl);
         luongService.updateCTPX(ctPhieuXuat);
-//        MsgBox.alert(this, "Update số lượng thành công");
         listCTPX.set(row, ctPhieuXuat);
         loadTable(listCTPX);
 
@@ -664,6 +662,7 @@ public class Tai_LuongHoanXuat_ChiTietPXView extends javax.swing.JFrame {
         ctphxct.setSoLuong(sl);
         ctphxct.setIdChiTietSp(ctsp);
         ctphxct.setIdPhieuHoanXuat(phx);
+        ctphxct.setLiDo(txtLyDo.getText());
         luongHoanXuatService.addChiTietPhieuHoanXuat(ctphxct);
         MsgBox.alert(this, "Bạn đã thêm sản phẩm vào phiếu hoàn chi tiết  thành công!");
 

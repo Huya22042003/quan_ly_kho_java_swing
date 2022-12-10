@@ -592,6 +592,7 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
         panelRound8.setRoundTopRight(50);
 
         cbbTrangThai.setBackground(new java.awt.Color(67, 130, 187));
+        cbbTrangThai.setForeground(new java.awt.Color(255, 255, 255));
         cbbTrangThai.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         cbbTrangThai.setLabeText("Trạng thái");
         cbbTrangThai.setLineColor(new java.awt.Color(145, 200, 249));
@@ -701,7 +702,7 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
         panelRound15Layout.setHorizontalGroup(
             panelRound15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound15Layout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
+                .addContainerGap(28, Short.MAX_VALUE)
                 .addComponent(btnCreatPhieuXuat, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCtPhieuXuat, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -758,11 +759,6 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
         txtMaPhieu.setBackground(new java.awt.Color(228, 206, 224));
         txtMaPhieu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtMaPhieu.setLabelText("Mã phiếu ");
-        txtMaPhieu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMaPhieuActionPerformed(evt);
-            }
-        });
 
         textAreaScroll1.setBackground(new java.awt.Color(153, 204, 255));
         textAreaScroll1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -927,14 +923,27 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
 
         rdoNgayTao.setBackground(new java.awt.Color(255, 153, 0));
         buttonGroup2.add(rdoNgayTao);
+        rdoNgayTao.setForeground(new java.awt.Color(255, 255, 255));
         rdoNgayTao.setText("Ngày Tạo");
+        rdoNgayTao.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
         rdoNgayThanhToan.setBackground(new java.awt.Color(255, 102, 0));
         buttonGroup2.add(rdoNgayThanhToan);
+        rdoNgayThanhToan.setForeground(new java.awt.Color(255, 255, 255));
         rdoNgayThanhToan.setText("Ngày Thanh Toán");
+        rdoNgayThanhToan.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        rdoNgayThanhToan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoNgayThanhToanActionPerformed(evt);
+            }
+        });
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("From:");
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("To:");
 
         javax.swing.GroupLayout panelRound10Layout = new javax.swing.GroupLayout(panelRound10);
@@ -944,14 +953,14 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
             .addGroup(panelRound10Layout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addComponent(rdoNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60)
+                .addGap(48, 48, 48)
                 .addComponent(rdoNgayThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(85, 85, 85)
+                .addGap(58, 58, 58)
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
                 .addComponent(ngayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(ngayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(105, 105, 105))
@@ -960,16 +969,14 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
             panelRound10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound10Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addGroup(panelRound10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ngayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panelRound10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(panelRound10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(rdoNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(rdoNgayThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(panelRound10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(ngayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(panelRound10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ngayKetThuc, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ngayBatDau, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(panelRound10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(rdoNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(rdoNgayThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
@@ -1029,7 +1036,7 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
                     .addComponent(txtIndex, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42))
             .addGroup(panelRound1Layout.createSequentialGroup()
-                .addComponent(panelRound3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(panelRound3, javax.swing.GroupLayout.PREFERRED_SIZE, 681, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1042,7 +1049,7 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, 691, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 4, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -1067,10 +1074,6 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
         chonKhView = new Tai_ChonKhachHangView();
         chonKhView.setVisible(true);
     }//GEN-LAST:event_btnCreatPhieuXuatActionPerformed
-
-    private void txtMaPhieuActionPerformed(ActionEvent evt) {//GEN-FIRST:event_txtMaPhieuActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtMaPhieuActionPerformed
 
     private void btnQuetMaActionPerformed(ActionEvent evt) {//GEN-FIRST:event_btnQuetMaActionPerformed
         int row = this.tblPhieuXuat.getSelectedRow();
@@ -1437,6 +1440,10 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
     private void txtNgayNhapQuetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNgayNhapQuetActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNgayNhapQuetActionPerformed
+
+    private void rdoNgayThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoNgayThanhToanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rdoNgayThanhToanActionPerformed
 
     public void TimKiemTheoNgay() {
         if (ngayBatDau.getDate() == null) {

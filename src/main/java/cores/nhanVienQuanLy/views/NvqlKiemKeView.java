@@ -365,6 +365,7 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
         panelRound8.setRoundTopRight(50);
 
         cbbTrangThai.setBackground(new java.awt.Color(67, 130, 187));
+        cbbTrangThai.setForeground(new java.awt.Color(255, 255, 255));
         cbbTrangThai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Mới tạo", "Chưa xác nhận", "Đã xác nhận" }));
         cbbTrangThai.setSelectedIndex(-1);
         cbbTrangThai.setToolTipText("Chọn trạng thái để tìm kiếm");
@@ -482,15 +483,21 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
         panelRound9.setRoundTopRight(50);
 
         rdoNgayTao.setBackground(new java.awt.Color(255, 153, 0));
+        rdoNgayTao.setForeground(new java.awt.Color(255, 255, 255));
         rdoNgayTao.setText("Ngày Tạo");
+        rdoNgayTao.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         rdoNgayTao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rdoNgayTaoActionPerformed(evt);
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("From:");
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("To:");
 
         javax.swing.GroupLayout panelRound9Layout = new javax.swing.GroupLayout(panelRound9);
@@ -878,7 +885,6 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
         index = p.nextIndex(offset, limit, sizes, index);
         offset = p.next(offset, limit, sizes);
         loadIndex();
-        //        loadTable(getList);
         fillTablePhieuKiemKe(kiemKeService.phanTrang(listPhieuKiemKeCustom, offset, limit));
     }//GEN-LAST:event_btnNextActionPerformed
 

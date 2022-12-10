@@ -748,14 +748,17 @@ public class TpQuanLyNhanVien extends javax.swing.JPanel {
         rdoTen.setForeground(new java.awt.Color(255, 255, 255));
         rdoTen.setSelected(true);
         rdoTen.setText("Tên");
+        rdoTen.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
         buttonGroup1.add(rdoMa);
         rdoMa.setForeground(new java.awt.Color(255, 255, 255));
         rdoMa.setText("Mã");
+        rdoMa.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
         buttonGroup1.add(rdoDiaChi);
         rdoDiaChi.setForeground(new java.awt.Color(255, 255, 255));
         rdoDiaChi.setText("Địa Chỉ");
+        rdoDiaChi.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
         txtSearchtheo.setLabelText("");
 
@@ -786,7 +789,7 @@ public class TpQuanLyNhanVien extends javax.swing.JPanel {
                 .addComponent(txtSearchtheo, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelRound6Layout.setVerticalGroup(
             panelRound6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
