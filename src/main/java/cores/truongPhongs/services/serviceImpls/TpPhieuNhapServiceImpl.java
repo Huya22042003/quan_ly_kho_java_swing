@@ -159,8 +159,10 @@ public class TpPhieuNhapServiceImpl implements TpPhieuNhapService {
     public List<TpPhieuNhapCustom> findAllByKhAndNV(String ma, TrangThaiPhieuConstant tt, int rdo) {
             switch (rdo) {
             case 0:
-                return repo.getListByTenNcc(ma, tt);
+                return repo.getListByMaPhieu(ma, tt);
             case 1:
+                return repo.getListByTenNcc(ma, tt);
+            case 2:
                 return repo.getListByTenNv(ma, tt);
             default:
                 return repo.getListByTenNv("", tt);

@@ -19,6 +19,8 @@ import javax.swing.table.DefaultTableModel;
 import utilities.Converter;
 import utilities.MsgBox;
 import utilities.Page;
+import utilities.palette.SearchCustom.EventCallBack;
+import utilities.palette.SearchCustom.EventTextField;
 
 /**
  *
@@ -58,6 +60,26 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
         listCTPX = luongService.getListCTPhieuXuat();
         sizes = ListSP.size();
         loadTable(ListSP);
+        txtSearch.addEvent(new EventTextField() {
+            @Override
+            public void onPressed(EventCallBack call) {
+                //  Test
+                try {
+                    for (int i = 1; i <= 100; i++) {
+
+                        Thread.sleep(5);
+                    }
+                    call.done();
+                } catch (Exception e) {
+                    System.err.println(e);
+                }
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+        });
 
     }
 

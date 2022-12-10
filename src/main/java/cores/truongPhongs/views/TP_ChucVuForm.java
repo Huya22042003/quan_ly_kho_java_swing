@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import utilities.Page;
+import utilities.palette.SearchCustom.EventCallBack;
+import utilities.palette.SearchCustom.EventTextField;
 
 public class TP_ChucVuForm extends javax.swing.JPanel {
 
@@ -37,6 +39,26 @@ public class TP_ChucVuForm extends javax.swing.JPanel {
 
           loadTable(chucVuService.phanTrang(getList, offset, limit));
         clearForm();
+           txtSearchTheo1.addEvent(new EventTextField() {
+            @Override
+            public void onPressed(EventCallBack call) {
+                //  Test
+                try {
+                    for (int i = 1; i <= 80; i++) {
+
+                        Thread.sleep(5);
+                    }
+                    call.done();
+                } catch (Exception e) {
+                    System.err.println(e);
+                }
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+        });
     }
 
     public void clearForm() {
@@ -107,7 +129,6 @@ public class TP_ChucVuForm extends javax.swing.JPanel {
         txtSearchTheo1 = new utilities.palette.SearchCustom.TextFieldAnimation();
         rdoMa = new utilities.palette.RadioButtonCustom();
         panelRound16 = new utilities.palette.PanelRound();
-        btnSearch = new utilities.palette.MyButton();
         btnThem = new utilities.palette.MyButton();
         btnHienThi = new utilities.palette.MyButton();
         panelRound15 = new utilities.palette.PanelRound();
@@ -260,8 +281,20 @@ public class TP_ChucVuForm extends javax.swing.JPanel {
         rdoTen.setBackground(new java.awt.Color(67, 130, 187));
         buttonGroup1.add(rdoTen);
         rdoTen.setForeground(new java.awt.Color(255, 255, 255));
+        rdoTen.setSelected(true);
         rdoTen.setText("Tên");
         rdoTen.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+
+        txtSearchTheo1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtSearchTheo1MouseClicked(evt);
+            }
+        });
+        txtSearchTheo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSearchTheo1ActionPerformed(evt);
+            }
+        });
 
         rdoMa.setBackground(new java.awt.Color(67, 130, 187));
         buttonGroup1.add(rdoMa);
@@ -299,18 +332,6 @@ public class TP_ChucVuForm extends javax.swing.JPanel {
         panelRound16.setRoundTopLeft(50);
         panelRound16.setRoundTopRight(50);
 
-        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/file.png"))); // NOI18N
-        btnSearch.setToolTipText("Tìm chức vụ");
-        btnSearch.setBorderColor(new java.awt.Color(221, 242, 244));
-        btnSearch.setColor(new java.awt.Color(221, 242, 244));
-        btnSearch.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnSearch.setRadius(50);
-        btnSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearchActionPerformed(evt);
-            }
-        });
-
         btnThem.setBackground(new java.awt.Color(221, 242, 244));
         btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Addd.png"))); // NOI18N
         btnThem.setToolTipText("Thêm chức vụ mới");
@@ -344,16 +365,13 @@ public class TP_ChucVuForm extends javax.swing.JPanel {
                 .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnHienThi, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         panelRound16Layout.setVerticalGroup(
             panelRound16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound16Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelRound16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(btnSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnThem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnHienThi, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -419,7 +437,7 @@ public class TP_ChucVuForm extends javax.swing.JPanel {
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(panelRound1Layout.createSequentialGroup()
                         .addComponent(panelRound16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(138, 138, 138)
                         .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(panelRound15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1))
@@ -489,11 +507,6 @@ rud.custom = chucVuService.phanTrang(getList, offset, limit).get(row);
         rud.showData();
     }//GEN-LAST:event_tableAllMouseClicked
 
-    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        searchRadio();
-        clearForm();
-    }//GEN-LAST:event_btnSearchActionPerformed
-
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         createChucVu.setVisible(true);
         rud.setVisible(false);
@@ -527,6 +540,15 @@ rud.custom = chucVuService.phanTrang(getList, offset, limit).get(row);
         loadTable(chucVuService.phanTrang(getList, offset, limit));
     }//GEN-LAST:event_btnNextActionPerformed
 
+    private void txtSearchTheo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchTheo1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSearchTheo1ActionPerformed
+
+    private void txtSearchTheo1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSearchTheo1MouseClicked
+        // TODO add your handling code here:
+         searchRadio();
+    }//GEN-LAST:event_txtSearchTheo1MouseClicked
+
     private void loadIndex() {
         this.txtIndex.setText(String.valueOf(index) + " / " + (Math.round((sizes / limit) + 0.5)));
     }
@@ -534,7 +556,6 @@ rud.custom = chucVuService.phanTrang(getList, offset, limit).get(row);
     private utilities.palette.MyButton btnHienThi;
     private utilities.palette.UWPButton btnNext;
     private utilities.palette.UWPButton btnPre;
-    private utilities.palette.MyButton btnSearch;
     private utilities.palette.MyButton btnThem;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;

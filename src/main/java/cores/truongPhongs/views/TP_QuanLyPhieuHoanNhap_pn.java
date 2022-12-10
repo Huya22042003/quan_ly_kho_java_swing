@@ -11,6 +11,8 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import utilities.Converter;
+import utilities.palette.SearchCustom.EventCallBack;
+import utilities.palette.SearchCustom.EventTextField;
 
 /**
  *
@@ -29,6 +31,26 @@ public class TP_QuanLyPhieuHoanNhap_pn extends javax.swing.JFrame {
         listPhieuNhap = hoanNhapService.getListPhieuNhap();
         hoanNhapCustoms = hoanNhapService.getListPhieuHoanNhap();
         loadTable(listPhieuNhap);
+         txtSearch.addEvent(new EventTextField() {
+            @Override
+            public void onPressed(EventCallBack call) {
+                //  Test
+                try {
+                    for (int i = 1; i <= 100; i++) {
+
+                        Thread.sleep(5);
+                    }
+                    call.done();
+                } catch (Exception e) {
+                    System.err.println(e);
+                }
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+        });
     }
 
     private void loadTable(List<TP_HoanNhap_PhieuNhapCustom> listPhieuNhap) {
