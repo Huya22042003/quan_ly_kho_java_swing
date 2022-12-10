@@ -158,9 +158,7 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
         txtMa = new utilities.palette.TextField();
         txtTenSp = new utilities.palette.TextField();
         txtSoLuong = new utilities.palette.TextField();
-        txtGiaNhap = new utilities.palette.TextField();
         errorSoLuong = new javax.swing.JLabel();
-        txtGiaBan = new utilities.palette.TextField();
         panelRound6 = new utilities.palette.PanelRound();
         jButton1 = new javax.swing.JButton();
         btnHienThi = new utilities.palette.MyButton();
@@ -413,27 +411,7 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
         txtSoLuong.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtSoLuong.setLabelText("Số lượng");
 
-        txtGiaNhap.setEditable(false);
-        txtGiaNhap.setBackground(new java.awt.Color(228, 206, 224));
-        txtGiaNhap.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtGiaNhap.setLabelText("Giá nhập");
-        txtGiaNhap.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtGiaNhapActionPerformed(evt);
-            }
-        });
-
         errorSoLuong.setForeground(new java.awt.Color(255, 0, 0));
-
-        txtGiaBan.setEditable(false);
-        txtGiaBan.setBackground(new java.awt.Color(228, 206, 224));
-        txtGiaBan.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtGiaBan.setLabelText("Giá Bán");
-        txtGiaBan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtGiaBanActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout panelRound2Layout = new javax.swing.GroupLayout(panelRound2);
         panelRound2.setLayout(panelRound2Layout);
@@ -448,9 +426,7 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
                                 .addComponent(txtTenSp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
                                 .addComponent(txtMa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(txtSoLuong, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(txtGiaNhap, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(errorSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtGiaBan, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(errorSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(panelRound2Layout.createSequentialGroup()
                         .addGap(45, 45, 45)
                         .addComponent(jLabel3)))
@@ -467,11 +443,7 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
                 .addComponent(txtTenSp, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42)
                 .addComponent(txtSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
-                .addComponent(txtGiaNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
-                .addComponent(txtGiaBan, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(89, 89, 89)
+                .addGap(267, 267, 267)
                 .addComponent(errorSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(39, Short.MAX_VALUE))
         );
@@ -718,14 +690,6 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMaActionPerformed
 
-    private void txtGiaNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGiaNhapActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtGiaNhapActionPerformed
-
-    private void txtGiaBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGiaBanActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtGiaBanActionPerformed
-
     private void btnPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreActionPerformed
 //        indexSp = p.prevIndex(offsetSp, limitSp, indexSp);
 //        offset = p.prev(offsetSp, limitSp);
@@ -901,8 +865,6 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
     private utilities.palette.PanelRound panelRound7;
     private utilities.palette.TableDark_1 tbChiTietSanPham;
     private utilities.palette.TableDark_1 tblSanPham;
-    private utilities.palette.TextField txtGiaBan;
-    private utilities.palette.TextField txtGiaNhap;
     private utilities.palette.TextField txtGiaTo;
     private javax.swing.JLabel txtIndex;
     private utilities.palette.TextField txtMa;
