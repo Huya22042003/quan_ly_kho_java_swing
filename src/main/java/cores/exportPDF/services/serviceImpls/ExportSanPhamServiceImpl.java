@@ -9,6 +9,7 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import cores.exportPDF.repositoris.ExportSanPhamRepository;
 import cores.exportPDF.services.ExportSanPhamService;
+import cores.nhanVienQuanLy.customModels.NvqlLuongKiemKeCtspCustom;
 import domainModels.ChiTietPhieuXuat;
 import domainModels.ChiTietSanPham;
 import domainModels.PhieuXuat;
@@ -278,6 +279,113 @@ public class ExportSanPhamServiceImpl implements ExportSanPhamService {
     @Override
     public List<ChiTietPhieuXuat> findChiTietPhieuXuat(UUID id) {
         return rp.findChiTietSanPhamByIdPhieuXuat(id);
+    }
+
+    @Override
+    public boolean exportDanhSachSanPham(String fileName) {
+        try {
+            File file = new File(fileName);
+
+            List<NvqlLuongKiemKeCtspCustom> listKiemKe = getListSanPhamKiemKe();
+            if (listKiemKe.isEmpty()) {
+                return false;
+            }
+
+            //Loading an existing document
+            PDDocument doc = new PDDocument();
+
+            PDPage page = new PDPage();
+
+            PDFont font = PDType0Font.load(doc, new File("font\\vuArial.ttf"));
+
+            PDFont fontBold = PDType0Font.load(doc, new File("font\\vuArialBold.ttf"));
+
+            doc.addPage(page);
+
+            String[][] content = new String[listKiemKe.size() + 1][5];
+            String[] a = {"Mã SP", "Tên SP", "Số lượng", "Đơn giá", "Thành tiền"};
+            content[0] = a;
+            int index = 0;
+            Double tongTien = 0.0;
+            for (NvqlLuongKiemKeCtspCustom el : listKiemKe) {
+                index ++;
+                String [] elment = {el.getIdChiTietSp().getSanPham().getMa()
+                        , el.getIdChiTietSp().getSanPham().getTen()
+                        , String.valueOf(el.getSoLuong())
+                        , String.valueOf(el.getIdChiTietSp().getGiaBan()) + "VND"
+                        , String.valueOf(el.getIdChiTietSp().getGiaBan().doubleValue() * el.getSoLuong()) + "VND"
+                };
+                tongTien += el.getIdChiTietSp().getGiaBan().doubleValue() * el.getSoLuong();
+                content[index] = elment;
+            }
+            PDPageContentStream contentStream = new PDPageContentStream(doc, page);
+            
+            final int rows = content.length;
+            final int cols = content[0].length;
+            final float rowHeight = 20f;
+            final float tableWidth = 500;
+            final float tableHeight = rowHeight * rows;
+            final float colWidth = tableWidth / (float) cols;
+            final float cellMargin = 5f;
+
+            float nexty = 500;
+            for (int i = 0; i <= rows; i++) {
+                contentStream.drawLine(100, nexty, 100 + tableWidth, nexty);
+                nexty -= rowHeight;
+            }
+
+            float nextx = 100;
+            for (int i = 0; i <= cols; i++) {
+                contentStream.drawLine(nextx, 500, nextx, 500 - tableHeight);
+                nextx += colWidth;
+            }
+            contentStream.beginText();
+            contentStream.setFont(fontBold, 30);
+            contentStream.newLineAtOffset(0, 700);
+            contentStream.setLeading(30f);
+            contentStream.showText("       Thông tin phiếu xuất");
+            contentStream.newLine();          
+            contentStream.showText("Tổng tiền: " + String.valueOf(tongTien) + "VND");
+            contentStream.newLine();
+            
+            contentStream.setFont(font, 12);
+            contentStream.endText();
+            float textx = 100 + cellMargin;
+            float texty = 500 - 15;
+            for (int i = 0; i < content.length; i++) {
+                for (int j = 0; j < content[i].length; j++) {
+                    String text = content[i][j];
+                    contentStream.beginText();
+                    contentStream.moveTextPositionByAmount(textx, texty);
+                    contentStream.drawString(text);
+                    contentStream.endText();
+                    textx += colWidth;
+                }
+                texty -= rowHeight;
+                textx = 100 + cellMargin;
+            }
+
+            
+            contentStream.close();
+
+            //Saving the document
+            doc.save(file);
+
+            //Closing the document
+            doc.close();
+            return true;
+        } catch (NullPointerException npe) {
+            npe.printStackTrace();
+            return false;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public List<NvqlLuongKiemKeCtspCustom> getListSanPhamKiemKe() {
+        return rp.getAllSanPhamKiemKe();
     }
 
 }
