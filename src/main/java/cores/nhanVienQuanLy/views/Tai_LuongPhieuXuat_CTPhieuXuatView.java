@@ -2,11 +2,14 @@ package cores.nhanVienQuanLy.views;
 
 import cores.nhanVienQuanLy.customModels.LuongBanHang_ChiTietSanPhamCustom;
 import cores.nhanVienQuanLy.customModels.Luong_ChiTietPhieuXuatCustom;
+import cores.nhanVienQuanLy.services.Tai_ChiTietSanPhamService;
 import cores.nhanVienQuanLy.services.Tai_NvqlLuongPhieuXuatService;
+import cores.nhanVienQuanLy.services.serviceImpls.Tai_ChiTietSanPhamServiceImpl;
 import cores.nhanVienQuanLy.services.serviceImpls.Tai_NvqlLuongPhieuXuatServiceImpl;
 import domainModels.ChiTietPhieuXuat;
 import domainModels.PhieuXuat;
 import infrastructures.constant.TrangThaiPhieuConstant;
+import infrastructures.constant.TrangThaiSanPhamConstanst;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,11 +25,11 @@ import utilities.MsgBox;
  */
 public class Tai_LuongPhieuXuat_CTPhieuXuatView extends javax.swing.JFrame {
 
-    public Tai_NvqlLuongPhieuXuatService luongService;
+    public Tai_NvqlLuongPhieuXuatService luongService; 
     public List<Luong_ChiTietPhieuXuatCustom> listCTPX;
+    public List<LuongBanHang_ChiTietSanPhamCustom> listCTSP;
     private PhieuXuat phieuXuat;
     public ChiTietPhieuXuat ctpx;
-    private List<LuongBanHang_ChiTietSanPhamCustom> listCTSP;
     public double tongTien;
     private String duongDan = getClass().getResource("/icons/file.png").getPath();
 
@@ -37,6 +40,7 @@ public class Tai_LuongPhieuXuat_CTPhieuXuatView extends javax.swing.JFrame {
     public Tai_LuongPhieuXuat_CTPhieuXuatView() {
         initComponents();
         luongService = new Tai_NvqlLuongPhieuXuatServiceImpl();
+        listCTSP = luongService.getListCTSanPham();
         listCTPX = new ArrayList<>();
         ctpx = new ChiTietPhieuXuat();
         loadTable(listCTPX);
@@ -57,10 +61,10 @@ public class Tai_LuongPhieuXuat_CTPhieuXuatView extends javax.swing.JFrame {
         dtm.setRowCount(0);
         DecimalFormat formatter = new DecimalFormat("###,###,##0 VNĐ");
         for (Luong_ChiTietPhieuXuatCustom ctpx : listCTPX) {
-           
+
             Object[] rowData = {
                 dtm.getRowCount() + 1,
-                ctpx.getIdPhieuXuat().getId(),
+                ctpx.getIdPhieuXuat().getMaPhieu(),
                 ctpx.getIdChiTietSp().getSanPham().getTen(),
                 ctpx.getSoLuong() == 0 ? "Hết hàng" : ctpx.getSoLuong(),
                 formatter.format(ctpx.getIdChiTietSp().getGiaBan()),
@@ -446,6 +450,14 @@ public class Tai_LuongPhieuXuat_CTPhieuXuatView extends javax.swing.JFrame {
             MsgBox.alert(this, "Phiếu xuất này đã ở trạng thái đã thanh toán nên không thể sửa số lượng! ");
             return;
         }
+        Luong_ChiTietPhieuXuatCustom ctPhieuXuat = listCTPX.get(row);
+
+        for (Luong_ChiTietPhieuXuatCustom ctpx : listCTPX) {
+            if (ctPhieuXuat.getIdChiTietSp().getTrangThai().equals(TrangThaiSanPhamConstanst.CHO_XAC_NHAN) || ctPhieuXuat.getIdChiTietSp().getTrangThai().equals(TrangThaiSanPhamConstanst.DUNG_BAN)) {
+                MsgBox.alert(this, "Sản phẩm này hiện không được mở bán! Vui lòng quý khách tham khảo những sản phẩm khác ");
+                return;
+            }
+        }
         String suaSL = JOptionPane.showInputDialog("Bạn muốn sửa số lượng thành bao nhiêu ?");
         if (suaSL.trim().length() == 0) {
             return;
@@ -461,12 +473,10 @@ public class Tai_LuongPhieuXuat_CTPhieuXuatView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Bạn phải nhập là kiểu số");
             return;
         }
-        Luong_ChiTietPhieuXuatCustom ctPhieuXuat = listCTPX.get(row);
+
         for (LuongBanHang_ChiTietSanPhamCustom ctsp : luongService.getListCTSanPham()) {
             if (listCTPX.get(row).getIdChiTietSp().getId().equals(ctsp.getId())) {
-                System.out.println(ctsp.getSoLuongTon());
-                System.out.println((ctPhieuXuat.getSoLuong() - sl));
-                ctsp.setSoLuongTon(ctsp.getSoLuongTon() + (ctPhieuXuat.getSoLuong() - sl));
+                ctsp.setSoLuongTon(ctsp.getSoLuongTon() +(ctPhieuXuat.getSoLuong()-sl));
                 luongService.updateCTSP(ctsp);
             }
         }
