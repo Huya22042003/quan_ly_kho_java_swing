@@ -982,7 +982,8 @@ public class TpQuanLyNhanVien extends javax.swing.JPanel {
             dtm.addRow(rowData);
         }
     }
-     public TpNhanVienCustom getFormDataRud() {
+
+    public TpNhanVienCustom getFormDataRud() {
         TpNhanVienCustom nvc = new TpNhanVienCustom();
         nvc.setMa(txtMa.getText());
         nvc.setTen(txtTen.getText());
@@ -1004,6 +1005,7 @@ public class TpQuanLyNhanVien extends javax.swing.JPanel {
 
         return nvc;
     }
+
     public void showData() {
         this.txtTen.setText(custom.getTen());
         this.txtMa.setText(custom.getMa());
@@ -1011,7 +1013,7 @@ public class TpQuanLyNhanVien extends javax.swing.JPanel {
         this.txtEmail.setText(custom.getEmail());
         this.txtMatKhau.setText(custom.getMatKhau());
         this.txtDate.setDate(new Date(custom.getNgaySinh()));
-       this.lblAnh.setIcon(new javax.swing.ImageIcon(custom.getHinhAnh()));
+        this.lblAnh.setIcon(new javax.swing.ImageIcon(custom.getHinhAnh()));
         this.cbbGioiTinhrud.setSelectedItem(Converter.trangThaiGioiTinh(custom.getGioiTinh()));
         this.txtDiaChi.setText(custom.getDiaChi());
         this.cbbTrangThairud.setSelectedItem(Converter.trangThaiNhanVien(custom.getTrangThai()));
@@ -1094,10 +1096,10 @@ public class TpQuanLyNhanVien extends javax.swing.JPanel {
         }
         if (nhanVienSevice.addNhanVien(check) == null) {
             MsgBox.alert(this, "Thêm thất bại");
-            this.setVisible(true);
         } else {
             MsgBox.alert(this, "Thêm thành công");
-            this.setVisible(false);
+            createFrame.setVisible(false);
+            loadTable(nhanVienSevice.phanTrang(getList, offset, limit));
         }
     }//GEN-LAST:event_btnThem1ActionPerformed
 
