@@ -309,14 +309,14 @@ public class ExportSanPhamServiceImpl implements ExportSanPhamService {
             Double tongTien = 0.0;
             for (NvqlLuongKiemKeCtspCustom el : listKiemKe) {
                 index ++;
-                String [] elment = {el.getIdChiTietSp().getSanPham().getMa()
-                        , el.getIdChiTietSp().getSanPham().getTen()
-                        , String.valueOf(el.getSoLuong())
-                        , String.valueOf(el.getIdChiTietSp().getGiaBan()) + "VND"
-                        , String.valueOf(el.getIdChiTietSp().getGiaBan().doubleValue() * el.getSoLuong()) + "VND"
-                };
-                tongTien += el.getIdChiTietSp().getGiaBan().doubleValue() * el.getSoLuong();
-                content[index] = elment;
+//                String [] elment = {el.getIdChiTietSp().getSanPham().getMa()
+//                        , el.getIdChiTietSp().getSanPham().getTen()
+//                        , String.valueOf(el.getSoLuong())
+//                        , String.valueOf(el.getIdChiTietSp().getGiaBan()) + "VND"
+//                        , String.valueOf(el.getIdChiTietSp().getGiaBan().doubleValue() * el.getSoLuong()) + "VND"
+//                };
+//                tongTien += el.getIdChiTietSp().getGiaBan().doubleValue() * el.getSoLuong();
+//                content[index] = elment;
             }
             PDPageContentStream contentStream = new PDPageContentStream(doc, page);
             
