@@ -85,8 +85,109 @@ public class TpXemPhieuXuatRepository {
 
         List<Object[]> listQuery = q.getResultList();
         listQuery.stream().forEach(el -> {
-            list.add(new TpXemPhieuXuatCustom(UUID.fromString((String) el[0]), (String) el[1], (String) el[2], Long.valueOf(String.valueOf((BigDecimal) el[3])), Long.valueOf(String.valueOf((BigDecimal) el[4])), (int) el[5],
-                    (String) el[6], (String) el[7], (String) el[8], (String) el[9], (String) el[10], Long.valueOf(String.valueOf((BigDecimal) el[11])), (String) el[12], (int) el[13], (String) el[14], (int) el[15]
+            UUID id = null;
+            String ghiChu = "";
+            String maPhieuXuat = "";
+            Long ngayTao = 0L;
+            Long ngayThanhToan = 0L;
+            int trangThai = 0;
+            String maKhachHang = "";
+            String tenKhachHang = "";
+            String sdtKhachHang = "";
+            String email = "";
+            String mkKhachHang = "";
+            Long ngaySinh = 0L;
+            String hinhAnh = "";
+            int gioiTinh = 0;
+            String diaChi = "";
+            int danhGia = 0;
+            
+            if("null".equalsIgnoreCase((String) el[0])) {
+                id = null;
+            } else {
+                id = UUID.fromString((String) el[0]);
+            }
+            
+            if("null".equalsIgnoreCase((String) el[1])) {
+                ghiChu = "Không có";
+            } else {
+                ghiChu = (String) el[1];
+            }
+            
+            if("null".equalsIgnoreCase((String) el[2])) {
+                maPhieuXuat = "Không có";
+            } else {
+                maPhieuXuat = (String) el[2];
+            }
+            if(String.valueOf((BigDecimal) el[3]).equalsIgnoreCase("null")) {
+                ngayTao = 0L;
+            } else {
+                ngayTao = Long.valueOf(String.valueOf((BigDecimal) el[3]));
+            }
+            if(String.valueOf((BigDecimal) el[4]).equalsIgnoreCase("null")) {
+                ngayThanhToan = 0L;
+            } else {
+                ngayThanhToan = Long.valueOf(String.valueOf((BigDecimal) el[4]));
+            }
+            if("null".equalsIgnoreCase(String.valueOf((Integer) el[5]))) {
+                trangThai = 0;
+            } else {
+                trangThai = (int) el[5];
+            }
+            if("null".equalsIgnoreCase((String) el[6])) {
+                maKhachHang = "Không có";
+            } else {
+                maKhachHang = (String) el[6];
+            }
+            if("null".equalsIgnoreCase((String) el[7])) {
+                tenKhachHang = "Không có";
+            } else {
+                tenKhachHang = (String) el[7];
+            }
+            if("null".equalsIgnoreCase((String) el[8])) {
+                sdtKhachHang = "Không có";
+            } else {
+                sdtKhachHang = (String) el[8];
+            }
+            if("null".equalsIgnoreCase((String) el[9])) {
+                email = "Không có";
+            } else {
+                email = (String) el[9];
+            }
+            if("null".equalsIgnoreCase((String) el[10])) {
+                mkKhachHang = "Không có";
+            } else {
+                mkKhachHang = (String) el[10];
+            }
+            if("null".equalsIgnoreCase(String.valueOf((BigDecimal) el[11]))) {
+                ngaySinh = 0L;
+            } else {
+                ngaySinh = Long.valueOf(String.valueOf((BigDecimal) el[11]));
+            }
+            if("null".equalsIgnoreCase((String) el[12])) {
+                hinhAnh = null;
+            } else {
+                hinhAnh = (String) el[12];
+             }
+            if("null".equalsIgnoreCase(String.valueOf((Integer) el[13]))) {
+                gioiTinh = 2;
+            } else {
+                gioiTinh = (int) el[13];
+            }
+            if("null".equalsIgnoreCase((String) el[14])) {
+                diaChi = "Không có";
+            } else {
+                diaChi = (String) el[14];
+            }
+            if("null".equalsIgnoreCase(String.valueOf((Integer) el[15]))) {
+                danhGia = 0;
+            } else {
+                danhGia = (int) el[15];
+            }
+            
+            list.add(new TpXemPhieuXuatCustom(id , ghiChu, maPhieuXuat, ngayTao, ngayThanhToan, trangThai,
+                    maKhachHang, tenKhachHang, sdtKhachHang, email, mkKhachHang, 
+                    ngaySinh, hinhAnh, gioiTinh, diaChi, danhGia
             ));
         });
         return list;
