@@ -225,7 +225,7 @@ public class NvqlKiemKeCtpkView extends javax.swing.JFrame {
         panelRound8.setRoundTopRight(50);
 
         btnShow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Show.png"))); // NOI18N
-        btnShow.setToolTipText("Chọn khoảng thời gian");
+        btnShow.setToolTipText("Load lại table");
         btnShow.setBorderColor(new java.awt.Color(221, 242, 244));
         btnShow.setColor(new java.awt.Color(221, 242, 244));
         btnShow.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -237,7 +237,7 @@ public class NvqlKiemKeCtpkView extends javax.swing.JFrame {
         });
 
         btnShow1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Delete.png"))); // NOI18N
-        btnShow1.setToolTipText("Chọn khoảng thời gian");
+        btnShow1.setToolTipText("Thoát");
         btnShow1.setBorderColor(new java.awt.Color(221, 242, 244));
         btnShow1.setColor(new java.awt.Color(221, 242, 244));
         btnShow1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N

@@ -233,11 +233,13 @@ public class TpDonViView extends javax.swing.JPanel {
         rdoDonViGoc.setForeground(new java.awt.Color(255, 255, 255));
         rdoDonViGoc.setSelected(true);
         rdoDonViGoc.setText("Đơn Vị Gốc");
+        rdoDonViGoc.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
         rdoDonViQuyDoi.setBackground(new java.awt.Color(67, 130, 187));
         buttonGroup1.add(rdoDonViQuyDoi);
         rdoDonViQuyDoi.setForeground(new java.awt.Color(255, 255, 255));
         rdoDonViQuyDoi.setText("Đơn Vị Quy Đổi");
+        rdoDonViQuyDoi.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
         txtSearch.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -259,8 +261,8 @@ public class TpDonViView extends javax.swing.JPanel {
                 .addComponent(rdoDonViGoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(rdoDonViQuyDoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         panelRound6Layout.setVerticalGroup(

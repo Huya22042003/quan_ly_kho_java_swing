@@ -1,13 +1,11 @@
 package views.main;
 
-import cores.nhanVienQuanLy.views.NvqlXemThongTinCaNhanForm;
 import cores.truongPhongs.views.TPThongKeBieuDo;
 import cores.truongPhongs.views.TP_ChucVuForm;
 import cores.truongPhongs.views.TP_KhachHangForm;
 import cores.truongPhongs.views.TP_QuanLyPhieuHoanNhap;
 import cores.truongPhongs.views.TpDonViView;
 import cores.truongPhongs.views.TpLuongNhapView;
-import cores.truongPhongs.views.TpQuanLyChiTietSanPhamForm;
 import cores.truongPhongs.views.TpQuanLyNhanVien;
 import cores.truongPhongs.views.TpQuanLySanPhamForm;
 import cores.truongPhongs.views.TpThongKeView;
@@ -82,7 +80,6 @@ public class TruongPhong extends javax.swing.JFrame {
                     main.showForm(new TpDonViView());
                 }
                 if (menuIndex == 6) {
-//                    main.showForm(new TpThongKeView());
                     if (subMenuIndex == 0) {
                         main.showForm(new TpThongKeView());
                     }

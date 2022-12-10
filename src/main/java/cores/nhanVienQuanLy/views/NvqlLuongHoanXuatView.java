@@ -28,7 +28,6 @@ public class NvqlLuongHoanXuatView extends javax.swing.JPanel {
     private Tai_LuongHoanXuat_ChiTietPXView ctpxView;
     private Tai_LuongHoanXuat_ChiTietPhieuHoanXuatView ctphieuHoanXuatView;
 
-//
     private Page p;
 
     private int limit = 7;
@@ -40,7 +39,6 @@ public class NvqlLuongHoanXuatView extends javax.swing.JPanel {
     private int index = 1;
 
     public NvqlLuongHoanXuatView() {
-        //
         p = new Page();
         initComponents();
         luongHXService = new Tai_LuongHoanXuatServiceImpl();
@@ -82,7 +80,6 @@ public class NvqlLuongHoanXuatView extends javax.swing.JPanel {
                 return;
             }
             PhieuHoanXuatCustom phx = ls.get(i);
-//        for (PhieuHoanXuatCustom phx : listPHX) {
             Date ngayTao = new Date(phx.getNgayTao());
             Object[] rowData = {
                 dtm.getRowCount() + 1,
@@ -542,9 +539,6 @@ public class NvqlLuongHoanXuatView extends javax.swing.JPanel {
         if (chon() == null) {
             return;
         }
-//        ctpxHoanXuatView.clearForm();
-//        ctpxHoanXuatView.setPhieuXuat(chon());
-//        ctpxHoanXuatView.setVisible(true);
         ctphieuHoanXuatView.setPhieuHX(chon());
         ctphieuHoanXuatView.setVisible(true);
     }//GEN-LAST:event_btnCtPhieuXuatActionPerformed

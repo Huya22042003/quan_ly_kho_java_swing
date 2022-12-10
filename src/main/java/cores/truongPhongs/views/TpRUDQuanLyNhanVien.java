@@ -77,6 +77,7 @@ String duongdananh = getClass().getResource("/icons/FPT_Polytechnic_doc.png").ge
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        setResizable(false);
 
         panelRound1.setBackground(new java.awt.Color(221, 242, 244));
         panelRound1.setRoundBottomLeft(50);

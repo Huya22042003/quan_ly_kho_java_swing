@@ -87,7 +87,7 @@ public class TP_KhachHangForm extends javax.swing.JPanel {
     public void loadTable(List<TP_KhachHangCustom> list) {
         DefaultTableModel dtm = (DefaultTableModel) this.tableAll.getModel();
         dtm.setRowCount(0);
-        String pattern = "yyyy-MM-dd HH:mm:ss";
+        String pattern = "yyyy-MM-dd";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         for (TP_KhachHangCustom el : list) {
             Date ngaySinh = new Date(el.getNgaySinh());
@@ -98,10 +98,8 @@ public class TP_KhachHangForm extends javax.swing.JPanel {
                 el.getSdt(),
                 el.getEmail(),
                 el.getDiaChi(),
-                //                el.getMatKhau(),
                 el.getNgaySinh() == null ? "" : simpleDateFormat.format(ngaySinh),
                 Converter.trangThaiDanhGia(el.getDanhGia()),
-                //                Converter.trangThaiGioiTinh(el.getGioiTinh()),
                 Converter.trangThaiKhachHang(el.getTrangThai()),};
             dtm.addRow(rowData);
         }

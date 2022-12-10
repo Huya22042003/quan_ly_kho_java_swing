@@ -51,9 +51,6 @@ public class Tai_LuongHoanXuat_ChiTietPhieuHoanXuatView extends javax.swing.JFra
         clearForm();
     }
 
-//    public double getTongTien() {
-//        return tongTien;
-//    }
     public void clearForm() {
         tblCTPhieuXuat.removeAll();
         sizes = listCTPHX.size();
@@ -77,7 +74,6 @@ public class Tai_LuongHoanXuat_ChiTietPhieuHoanXuatView extends javax.swing.JFra
             };
             dtm.addRow(rowData);
         }
-//        System.out.println(tongTien);
     }
 
     private void loadIndex() {
@@ -439,6 +435,9 @@ public class Tai_LuongHoanXuat_ChiTietPhieuHoanXuatView extends javax.swing.JFra
             return;
         }
         String suaSL = JOptionPane.showInputDialog("Bạn muốn lấy lại bao nhiêu sản phẩm?");
+        if(suaSL == null){
+            return;
+        }
         int sl = 0;
         try {
             sl = Integer.parseInt(suaSL);
@@ -458,11 +457,9 @@ public class Tai_LuongHoanXuat_ChiTietPhieuHoanXuatView extends javax.swing.JFra
 
         for (LuongBanHang_ChiTietSanPhamCustom ctsp : luongService.getListCTSanPham()) {
             if (listCTPHX.get(row).getIdChiTietSp().getId().equals(ctsp.getId())) {
-//                System.out.println((ctPhieuXuat.getSoLuong() - sl));
                 ctsp.setSoLuongTon(ctsp.getSoLuongTon() - sl);
                 luongService.updateCTSP(ctsp);
                 System.out.println("đã update số lượng trong ctsp");
-//                  JOptionPane.showMessageDialog(this, "ok");
             }
         }
         for (Luong_ChiTietPhieuXuatCustom ctpx : luongService.getListCTPhieuXuat()) {
@@ -476,13 +473,6 @@ public class Tai_LuongHoanXuat_ChiTietPhieuHoanXuatView extends javax.swing.JFra
         luongHXService.updateCtPHX(ctpHoanXuat);
         listCTPHX.set(row, ctpHoanXuat);
         loadTable(listCTPHX);
-//        ctPhieuXuat.setSoLuong(sl);
-//        luongService.updateCTPX(ctPhieuXuat);
-//        MsgBox.alert(this, "Hoàn số lượng thành công");
-//
-//        listCTPX.set(row, ctPhieuXuat);
-//        loadTable(listCTPX);
-
     }//GEN-LAST:event_tblCTPhieuXuatMouseClicked
 
 
