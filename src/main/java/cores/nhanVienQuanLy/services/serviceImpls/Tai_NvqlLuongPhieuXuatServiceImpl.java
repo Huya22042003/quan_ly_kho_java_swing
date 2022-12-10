@@ -130,4 +130,21 @@ public class Tai_NvqlLuongPhieuXuatServiceImpl implements Tai_NvqlLuongPhieuXuat
         }
     }
 
+    @Override
+    public List<Tai_SanPhamCustom> phanTrangSP(List<Tai_SanPhamCustom> list, int offset, int limit) {
+        List<Tai_SanPhamCustom> listPhanTrang = new ArrayList<>();
+        int sum = limit + offset;
+        if (list.size() <= sum) {
+            sum = list.size();
+        }
+        for (int i = offset; i < sum; i++) {
+            if (list.get(i) == null) {
+                break;
+            }
+            Tai_SanPhamCustom el = list.get(i);
+            listPhanTrang.add(el);
+        }
+        return listPhanTrang;
+    }
+
 }
