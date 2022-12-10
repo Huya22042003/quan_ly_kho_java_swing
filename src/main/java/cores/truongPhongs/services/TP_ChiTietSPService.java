@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
+ */
 package cores.truongPhongs.services;
 
 import cores.truongPhongs.customModels.TpQuanLyChiTietSanPhamCustom;
@@ -16,11 +20,10 @@ import utilities.palette.Combobox;
 
 /**
  *
- * @author MMC
+ * @author asus
  */
-public interface TpQuanLyChiTietSanPhamService {
-
-    public List<TpQuanLyChiTietSanPhamCustom> getAll(UUID idSp, String maNcc, String tenNcc,String maSpNcc,String emailNcc,String sdtNcc);
+public interface TP_ChiTietSPService {
+     public List<TpQuanLyChiTietSanPhamCustom> getAll(UUID idSp);
 
     TpQuanLyChiTietSanPhamCustom addCTSanPham(TpQuanLyChiTietSanPhamCustom custom);
 
@@ -44,10 +47,10 @@ public interface TpQuanLyChiTietSanPhamService {
     public SanPham findIDSanPham(UUID id);
 
     MauConstant loc(int a);
-
+    
     void loadCombobox(Combobox cbb);
 
-    TpXemChiTietSanPhamCustom checkValidate1(UUID donVi, String namBH, UUID sanPham, String hinhAnh, String giaNhap, int soLuong, String size,
+    TpXemChiTietSanPhamCustom checkValidate1(UUID donVi, String namBH, UUID sanPham, String hinhAnh, String giaNhap, String soLuong, String size,
               MauConstant mau, Long ngayTao, String trangThai, JLabel erroSoLuongNhap, JLabel erroGiaNhap, JLabel erroSize, JLabel erroNamBH);
 
     public List<TpQuanLyDonViCustom> getAllDonVi1();

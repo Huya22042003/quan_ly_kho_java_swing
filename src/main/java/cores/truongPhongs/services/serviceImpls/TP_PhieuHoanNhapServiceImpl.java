@@ -9,6 +9,7 @@ import cores.truongPhongs.services.TP_PhieuHoanNhapService;
 import domainModels.PhieuHoanNhap;
 import domainModels.PhieuNhap;
 import infrastructures.constant.TrangThaiPhieuHoanConstant;
+import infrastructures.constant.TrangThaiPhieuNhapConstant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -97,6 +98,73 @@ public class TP_PhieuHoanNhapServiceImpl implements TP_PhieuHoanNhapService {
             listPhanTrang.add(el);
         }
         return listPhanTrang;
+    }
+
+    @Override
+    public List<TP_PhieuHoanNhapCustom> findAllByKhAndNV(String ma, TrangThaiPhieuHoanConstant tt, int rdo) {
+        switch (rdo) {
+            case 0:
+                return rp.getListByTenNcc(ma, tt);
+            case 1:
+                return rp.getListByTenNv(ma, tt);
+            default:
+                return null;
+        }
+    }
+
+    @Override
+    public List<TP_PhieuHoanNhapCustom> getListByNgayTao(Long ngayBatDau, Long ngayKetThuc) {
+        return rp.getListByNgayTao(ngayBatDau, ngayKetThuc);
+    }
+
+    @Override
+    public List<TP_PhieuHoanNhapCustom> getListByNgayThanhToan(Long ngayBatDau, Long ngayKetThuc) {
+        return rp.getListByNgayThanhToan(ngayBatDau, ngayKetThuc);
+    }
+
+    @Override
+    public TrangThaiPhieuHoanConstant loc(int a) {
+        switch (a) {
+            case 0:
+                return TrangThaiPhieuHoanConstant.CHO_XAC_NHAN;
+            case 1:
+                return TrangThaiPhieuHoanConstant.DA_HUY;
+            case 2:
+                return TrangThaiPhieuHoanConstant.HOAN_THANH_CONG;
+            default:
+                return null;
+        }
+    }
+
+    @Override
+    public List<TP_HoanNhap_spCustom> getListByMaSpAndTenSpByPhieuNhap(UUID idPhieuNhap, String ma, int rdo) {
+        switch (rdo) {
+            case 0:
+                return rp.getListByMaSpByPhieuNhap(idPhieuNhap, ma);
+            case 1:
+                return rp.getListByTenSpByPhieuNhap(idPhieuNhap, ma);
+            default:
+                return null;
+        }
+    }
+
+    @Override
+    public List<TP_HoanNhap_PhieuNhapCustom> findAllPnBy(String ma, int rdo) {
+        switch (rdo) {
+            case 0:
+                return rp.findAllPnByMaPhieu(ma);
+            case 1:
+                return rp.findAllPnByNcc(ma);
+            case 2:
+                return rp.findAllPnByNv(ma);
+            default:
+                return null;
+        }
+    }
+
+    @Override
+    public List<TP_HoanNhap_PhieuNhapCustom> getListByNgayTaoPhieuNhap(Long ngayBatDau, Long ngayKetThuc) {
+        return rp.findAllPnNgayTao(ngayBatDau, ngayKetThuc);
     }
 
 }

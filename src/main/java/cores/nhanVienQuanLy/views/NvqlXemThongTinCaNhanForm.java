@@ -168,6 +168,11 @@ public class NvqlXemThongTinCaNhanForm extends javax.swing.JPanel {
 
         txtOldPass.setLabelText("Mật khẩu hiện tại: ");
         txtOldPass.setShowAndHide(true);
+        txtOldPass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtOldPassActionPerformed(evt);
+            }
+        });
 
         txtConfirmPass.setLabelText("Xác nhân mật khẩu mới: ");
         txtConfirmPass.setShowAndHide(true);
@@ -299,6 +304,10 @@ public class NvqlXemThongTinCaNhanForm extends javax.swing.JPanel {
             e.printStackTrace();
         }
     }//GEN-LAST:event_lblDoiMatKhauMouseClicked
+
+    private void txtOldPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOldPassActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtOldPassActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

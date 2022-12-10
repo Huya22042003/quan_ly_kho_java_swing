@@ -146,7 +146,7 @@ public class TpQuanLyChiTietSanPhamForm extends javax.swing.JPanel {
 
     public void clearFormCtsp() {
         rdoGiaNhap.setSelected(true);
-        listChiTietSP = serviceChiTietSP.getAll(idSp);
+        listChiTietSP = serviceChiTietSP.getAll(idSp,"","","","","");
         sizes = listChiTietSP.size();
         offset = 0;
         index = 1;
