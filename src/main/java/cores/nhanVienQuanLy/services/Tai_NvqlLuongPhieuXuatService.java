@@ -29,4 +29,5 @@ public interface Tai_NvqlLuongPhieuXuatService {
     public ChiTietPhieuNhap findCTpnByID(UUID idCTSP);
     public List<Tai_SanPhamCustom> getListSP();
     public List<Tai_SanPhamCustom> getListSPByMa(String ma,int rdo);
+    List<Tai_SanPhamCustom> phanTrangSP(List<Tai_SanPhamCustom> list, int offset, int limit);
 }

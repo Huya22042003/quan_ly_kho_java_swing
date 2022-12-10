@@ -43,6 +43,7 @@ public class Tai_ChonKhachHangView extends javax.swing.JFrame {
 
     public Tai_ChonKhachHangView() {
         initComponents();
+        this.setLocationRelativeTo(null);
         hangService = new TP_KhachHangServiceImpl();
         p = new Page();
         luongPxService = new Tai_NvqlLuongPhieuXuatServiceImpl();
@@ -171,6 +172,7 @@ public class Tai_ChonKhachHangView extends javax.swing.JFrame {
         btnChon = new utilities.palette.MyButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
