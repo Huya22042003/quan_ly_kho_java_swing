@@ -167,4 +167,16 @@ public class TP_PhieuHoanNhapServiceImpl implements TP_PhieuHoanNhapService {
         return rp.findAllPnNgayTao(ngayBatDau, ngayKetThuc);
     }
 
+    @Override
+    public List<TP_HoanNhap_ctpCusTom> getListSpByMaByChiTietPhieuHoanNhap(UUID idPhieuHoan, String ma, int rdo) {
+        switch (rdo) {
+            case 0:
+             return rp.getListSpByMaByChiTietPhieuHoanNhap(idPhieuHoan, ma);
+            case 1:
+                return rp.getListSpByMaByChiTietPhieuHoanNhap(idPhieuHoan, ma);
+            default:
+                return null;
+        }
+    }
+
 }

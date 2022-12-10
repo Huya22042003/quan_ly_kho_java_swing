@@ -188,7 +188,31 @@ public class Tai_NvqlLuongPhieuXuatRepository {
                 + "sp.id as id,"
                 + "sp.ma as ma,"
                 + "sp.ten as ten"
-                + ") FROM domainModels.SanPham sp");
+                + ") FROM domainModels.SanPham sp ");
+        List<Tai_SanPhamCustom> list = query.getResultList();
+        return list;
+    }
+
+    public List<Tai_SanPhamCustom> getListSPByMa(String ma) {
+        Session s = HibernateUtil.getSessionFactory().openSession();
+        Query query = s.createQuery("SELECT new cores.nhanVienQuanLy.customModels.Tai_SanPhamCustom("
+                + "sp.id as id,"
+                + "sp.ma as ma,"
+                + "sp.ten as ten"
+                + ") FROM domainModels.SanPham sp where sp.ma LIKE CONCAT('%',:ma,'%')");
+        query.setParameter("ma", ma);
+        List<Tai_SanPhamCustom> list = query.getResultList();
+        return list;
+    }
+
+    public List<Tai_SanPhamCustom> getListSPByTen(String ma) {
+        Session s = HibernateUtil.getSessionFactory().openSession();
+        Query query = s.createQuery("SELECT new cores.nhanVienQuanLy.customModels.Tai_SanPhamCustom("
+                + "sp.id as id,"
+                + "sp.ma as ma,"
+                + "sp.ten as ten"
+                + ") FROM domainModels.SanPham sp where sp.ten LIKE CONCAT('%',:ma,'%')");
+        query.setParameter("ma", ma);
         List<Tai_SanPhamCustom> list = query.getResultList();
         return list;
     }
