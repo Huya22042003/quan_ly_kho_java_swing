@@ -13,6 +13,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import utilities.Converter;
+import utilities.palette.SearchCustom.EventCallBack;
+import utilities.palette.SearchCustom.EventTextField;
 
 /**
  *
@@ -34,6 +36,26 @@ public class TP_QuanLyPhieuHoanNhap_ctp extends javax.swing.JFrame {
         listSP = hoanNhapService.getListSpByChiTietPhieuHoanNhap(idPhieuHoanNhap.getId());
         this.btnAnh.setIcon(new ImageIcon(duongDan));
         loadTable(listSP);
+         txtSearch.addEvent(new EventTextField() {
+            @Override
+            public void onPressed(EventCallBack call) {
+                //  Test
+                try {
+                    for (int i = 1; i <= 100; i++) {
+
+                        Thread.sleep(5);
+                    }
+                    call.done();
+                } catch (Exception e) {
+                    System.err.println(e);
+                }
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+        });
     }
 
     private void loadTable(List<TP_HoanNhap_ctpCusTom> listSP) {

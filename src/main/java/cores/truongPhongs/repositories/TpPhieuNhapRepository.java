@@ -200,6 +200,27 @@ public class TpPhieuNhapRepository {
         
     }
  
+       public List<TpPhieuNhapCustom> getListByMaPhieu(String tenNcc, TrangThaiPhieuConstant tt) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("Select new  cores.truongPhongs.customModels.TpPhieuNhapCustom ( "
+                + "p.id as id,"
+                + "p.maPhieu as maPhieu,"
+                + "p.ghiChu as ghiChu,"
+                + "p.ngayThanhToan as ngayThanhToan,"
+                + "p.ngayTao as ngayTao,"
+                + "p.trangThai as trangThai,"
+                + "p.nhanVien.id as idNhanVien,"
+                + "p.nhanVien.ten as tenNhanVien,"
+                + "p.nhaCungCap.id as idNcc,"
+                + "p.nhaCungCap.ten as tenNcc) "
+                + "from domainModels.PhieuNhap p WHERE p.maPhieu like CONCAT('%',:tenNcc,'%') and p.trangThai = :tt "
+                + "order by p.ngayTao DESC" );
+       query.setParameter("tenNcc", tenNcc);
+       query.setParameter("tt", tt);
+        List<TpPhieuNhapCustom> list = query.getResultList();
+        return list;
+        
+    }
 
     
 

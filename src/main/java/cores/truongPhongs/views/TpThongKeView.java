@@ -47,8 +47,8 @@ public class TpThongKeView extends javax.swing.JPanel {
         lblTongSp.setText(khoService.getList().get(0).toString());
         lblSoSpDaBan.setText(khoService.getSoSanPhamDaXuat().get(0).toString());
         lblSoSpChuaBan.setText(khoService.getSoSanPhamDaNhap().get(0).toString());
-        lblSoSpHoanNhap.setText(khoService.getSoLuongSpHoanNhap().get(0).toString());
-        lblSoSpHoanXuat.setText(khoService.getSoLuongSpHoanXuat().get(0).toString());
+        lblSoSpHoanNhap.setText(khoService.getSoLuongSpHoanNhap().get(0) == null ? "Chưa có" : khoService.getSoLuongSpHoanNhap().get(0).toString());
+        lblSoSpHoanXuat.setText(khoService.getSoLuongSpHoanXuat().get(0) == 0 ? "Chưa có" : khoService.getSoLuongSpHoanXuat().get(0).toString());
 
         loadTableHD(listSp);
 
@@ -97,49 +97,6 @@ public class TpThongKeView extends javax.swing.JPanel {
         lblTongDoanhThuTheoNgay.setText(formatter.format(d));
     }
 
-    public List<TpThongKeSpCustom> listSearch1(int rdo) {
-        // nhập vào 
-        String timKiem = this.txtSearch1.getText();
-        List<TpThongKeSpCustom> listTimKiem = new ArrayList<>();
-
-        // tìm kiếm theo tên mã vị trí
-        listSp.forEach(el -> {
-            String search = "";
-            List<String> strings = new ArrayList<>();
-
-            // truyền tham số
-            switch (rdo) {
-                case 0:
-                    search = el.getIdPhieuXuat().getId().toString();
-                    break;
-
-                case 1:
-                    search = el.getIdPhieuXuat().getNhanVien().getMa();
-                    break;
-                case 2:
-                    search = el.getIdPhieuXuat().getNhanVien().getTen();
-                    break;
-            }
-            for (int i = 0; i <= search.length(); i++) {
-                String newMa = search.substring(0, i);
-                strings.add(newMa);
-            }
-            // so sánh mảng vừa cắt với phần tử nhập vào
-            for (String e : strings) {
-                if (e.equalsIgnoreCase(timKiem)) {
-                    listTimKiem.add(el);
-                }
-            }
-        });
-
-        return listTimKiem;
-    }
-
-    public void searchRadio1() {
-        if (rdoMaHD.isSelected()) {
-            loadTableHD(listSearch1(0));
-        }
-    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -183,6 +140,7 @@ public class TpThongKeView extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         ngayKetThuc = new com.toedter.calendar.JDateChooser();
         jLabel8 = new javax.swing.JLabel();
+        btnSearch2 = new utilities.palette.MyButton();
 
         materialTabbed1.setBackground(new java.awt.Color(255, 255, 255));
         materialTabbed1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -527,6 +485,11 @@ public class TpThongKeView extends javax.swing.JPanel {
                 txtSearch1MouseClicked(evt);
             }
         });
+        txtSearch1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSearch1ActionPerformed(evt);
+            }
+        });
 
         rdoMaNv.setBackground(new java.awt.Color(67, 130, 187));
         buttonGroup2.add(rdoMaNv);
@@ -582,6 +545,15 @@ public class TpThongKeView extends javax.swing.JPanel {
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setText("From:");
 
+        btnSearch2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Search.png"))); // NOI18N
+        btnSearch2.setToolTipText("Tìm kiếm theo ngày");
+        btnSearch2.setRadius(50);
+        btnSearch2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearch2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelRound8Layout = new javax.swing.GroupLayout(panelRound8);
         panelRound8.setLayout(panelRound8Layout);
         panelRound8Layout.setHorizontalGroup(
@@ -590,34 +562,41 @@ public class TpThongKeView extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2)
-                    .addGroup(panelRound8Layout.createSequentialGroup()
-                        .addComponent(panelRound20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(9, 9, 9)
-                        .addComponent(panelRound18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound8Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(panelRound17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound8Layout.createSequentialGroup()
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(ngayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ngayKetThuc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(panelRound8Layout.createSequentialGroup()
+                        .addGroup(panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(panelRound20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panelRound8Layout.createSequentialGroup()
+                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(ngayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(9, 9, 9)
+                        .addGroup(panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelRound8Layout.createSequentialGroup()
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(31, 31, 31)
+                                .addComponent(ngayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
+                                .addComponent(btnSearch2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(panelRound18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         panelRound8Layout.setVerticalGroup(
             panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound8Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addGroup(panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel8)
-                        .addComponent(ngayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(ngayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(24, 24, 24)
+                .addGroup(panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel8)
+                            .addComponent(ngayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ngayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnSearch2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(panelRound20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -701,18 +680,20 @@ public class TpThongKeView extends javax.swing.JPanel {
     }
 
     public void searchhRadio() {
-        
-     if (rdoMaNv.isSelected()) {
+         if (rdoMaHD.isSelected()) {
             loadTableHD(getListByTT(0));
         }
-     if(rdoTenNv.isSelected()){
+     if (rdoMaNv.isSelected()) {
             loadTableHD(getListByTT(1));
+        }
+     if(rdoTenNv.isSelected()){
+            loadTableHD(getListByTT(2));
         }
     }
     private void txtSearch1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSearch1MouseClicked
-        searchRadio1();
+
         searchhRadio();
-        searchTheoNgay();
+
 
     }//GEN-LAST:event_txtSearch1MouseClicked
 
@@ -721,8 +702,18 @@ public class TpThongKeView extends javax.swing.JPanel {
 //        TimKiemTheoNgay();
     }//GEN-LAST:event_ngayBatDauInputMethodTextChanged
 
+    private void txtSearch1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearch1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSearch1ActionPerformed
+
+    private void btnSearch2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearch2ActionPerformed
+        // TODO add your handling code here:
+                searchTheoNgay();
+    }//GEN-LAST:event_btnSearch2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private utilities.palette.MyButton btnSearch2;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JLabel jLabel1;
