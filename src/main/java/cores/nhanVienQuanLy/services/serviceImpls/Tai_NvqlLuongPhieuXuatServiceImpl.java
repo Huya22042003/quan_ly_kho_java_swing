@@ -118,4 +118,16 @@ public class Tai_NvqlLuongPhieuXuatServiceImpl implements Tai_NvqlLuongPhieuXuat
         return rp.getListSP();
     }
 
+    @Override
+    public List<Tai_SanPhamCustom> getListSPByMa(String ma, int rdo) {
+        switch (rdo) {
+            case 0:
+                return rp.getListSPByMa(ma);
+            case 1:
+                return rp.getListSPByTen(ma);
+            default:
+                return null;
+        }
+    }
+
 }

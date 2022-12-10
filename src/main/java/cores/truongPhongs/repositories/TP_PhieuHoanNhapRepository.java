@@ -278,6 +278,54 @@ public class TP_PhieuHoanNhapRepository {
         list = q.getResultList();
         return list;
     }
+     public List<TP_HoanNhap_ctpCusTom> getListSpByMaByChiTietPhieuHoanNhap(UUID idPhieuHoanNhap, String ma) {
+        List<TP_HoanNhap_ctpCusTom> list = new ArrayList<>();
+        Session s = HibernateUtil.getSessionFactory().openSession();
+        PhieuHoanNhap pn = s.find(PhieuHoanNhap.class, idPhieuHoanNhap);
+        Query q = s.createQuery("SELECT new cores.truongPhongs.customModels.TP_HoanNhap_ctpCusTom ("
+                + " pn.idChiTietSp.id as id, "
+                + " pn.idChiTietSp.soLuongTon as soLuongTon, "
+                + " pn.idChiTietSp.hinhAnh as hinhAnh, "
+                + " pn.idChiTietSp.GiaNhap as GiaNhap, "
+                + " pn.idChiTietSp.GiaBan as GiaBan, "
+                + " pn.idChiTietSp.namBaoHanh as namBaoHanh, "
+                + " pn.idChiTietSp.mau as mau, "
+                + " pn.idChiTietSp.sanPham as sanPham, "
+                + " pn.idChiTietSp.donVi as donVi, "
+                + " pn.soLuong,"
+                + " pn.liDo"
+                + ") FROM domainModels.ChiTietPhieuHoanNhap pn WHERE pn.idPhieuHoanNhap = :idPhieuNhap "
+                + "and pn.idChiTietSp.sanPham.ma like CONCAT('%',:ma,'%') ");
+        
+        q.setParameter("idPhieuNhap", pn);
+        q.setParameter("ma", ma);
+        list = q.getResultList();
+        return list;
+    }
+       public List<TP_HoanNhap_ctpCusTom> getListSpByTenByChiTietPhieuHoanNhap(UUID idPhieuHoanNhap, String ma) {
+        List<TP_HoanNhap_ctpCusTom> list = new ArrayList<>();
+        Session s = HibernateUtil.getSessionFactory().openSession();
+        PhieuHoanNhap pn = s.find(PhieuHoanNhap.class, idPhieuHoanNhap);
+        Query q = s.createQuery("SELECT new cores.truongPhongs.customModels.TP_HoanNhap_ctpCusTom ("
+                + " pn.idChiTietSp.id as id, "
+                + " pn.idChiTietSp.soLuongTon as soLuongTon, "
+                + " pn.idChiTietSp.hinhAnh as hinhAnh, "
+                + " pn.idChiTietSp.GiaNhap as GiaNhap, "
+                + " pn.idChiTietSp.GiaBan as GiaBan, "
+                + " pn.idChiTietSp.namBaoHanh as namBaoHanh, "
+                + " pn.idChiTietSp.mau as mau, "
+                + " pn.idChiTietSp.sanPham as sanPham, "
+                + " pn.idChiTietSp.donVi as donVi, "
+                + " pn.soLuong,"
+                + " pn.liDo"
+                + ") FROM domainModels.ChiTietPhieuHoanNhap pn WHERE pn.idPhieuHoanNhap = :idPhieuNhap "
+                + "and pn.idChiTietSp.sanPham.ten like CONCAT('%',:ma,'%') ");
+        
+        q.setParameter("idPhieuNhap", pn);
+        q.setParameter("ma", ma);
+        list = q.getResultList();
+        return list;
+    }
 
     public void updatePhieuHoanNhap(PhieuHoanNhap phn) {
         Session s = HibernateUtil.getSessionFactory().openSession();

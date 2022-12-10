@@ -57,7 +57,7 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
         ctpxView = new Tai_LuongPhieuXuat_CTPhieuXuatView();
         listCTPX = luongService.getListCTPhieuXuat();
         sizes = ListSP.size();
-        loadTable(luongService.getListSP());
+        loadTable(ListSP);
 
     }
 
@@ -147,6 +147,7 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
         tbChiTietSanPham = new utilities.palette.TableDark_1();
         panelRound7 = new utilities.palette.PanelRound();
         jLabel4 = new javax.swing.JLabel();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblSanPham = new utilities.palette.TableDark_1();
@@ -164,9 +165,11 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
         panelRound6 = new utilities.palette.PanelRound();
         jButton1 = new javax.swing.JButton();
         btnHienThi = new utilities.palette.MyButton();
-        btnSearch = new utilities.palette.MyButton();
-        txtGiaTo = new utilities.palette.TextField();
         btnChon = new utilities.palette.MyButton();
+        panelRound8 = new utilities.palette.PanelRound();
+        rdoMaSp = new utilities.palette.RadioButtonCustom();
+        rdoTenSp = new utilities.palette.RadioButtonCustom();
+        txtSearch = new utilities.palette.SearchCustom.TextFieldAnimation();
         panelRound4 = new utilities.palette.PanelRound();
         btnAnh = new utilities.palette.UWPButton();
         btnPre = new utilities.palette.UWPButton();
@@ -514,15 +517,6 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
             }
         });
 
-        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Search.png"))); // NOI18N
-        btnSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearchActionPerformed(evt);
-            }
-        });
-
-        txtGiaTo.setLabelText("Đến");
-
         btnChon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Lists.png"))); // NOI18N
         btnChon.setText(" ");
         btnChon.setToolTipText("Xem chi tiết sản phẩm");
@@ -532,6 +526,66 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
             }
         });
 
+        panelRound8.setBackground(new java.awt.Color(67, 130, 187));
+        panelRound8.setRoundBottomLeft(50);
+        panelRound8.setRoundBottomRight(50);
+        panelRound8.setRoundTopLeft(50);
+        panelRound8.setRoundTopRight(50);
+
+        rdoMaSp.setBackground(new java.awt.Color(67, 130, 187));
+        buttonGroup1.add(rdoMaSp);
+        rdoMaSp.setForeground(new java.awt.Color(255, 255, 255));
+        rdoMaSp.setSelected(true);
+        rdoMaSp.setText("Mã sản phẩm");
+        rdoMaSp.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        rdoMaSp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoMaSpActionPerformed(evt);
+            }
+        });
+
+        rdoTenSp.setBackground(new java.awt.Color(67, 130, 187));
+        buttonGroup1.add(rdoTenSp);
+        rdoTenSp.setForeground(new java.awt.Color(255, 255, 255));
+        rdoTenSp.setText("Tên sản phẩm");
+        rdoTenSp.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        rdoTenSp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoTenSpActionPerformed(evt);
+            }
+        });
+
+        txtSearch.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtSearchMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelRound8Layout = new javax.swing.GroupLayout(panelRound8);
+        panelRound8.setLayout(panelRound8Layout);
+        panelRound8Layout.setHorizontalGroup(
+            panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound8Layout.createSequentialGroup()
+                .addGap(13, 13, 13)
+                .addComponent(rdoMaSp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rdoTenSp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelRound8Layout.setVerticalGroup(
+            panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(rdoTenSp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(rdoMaSp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout panelRound6Layout = new javax.swing.GroupLayout(panelRound6);
         panelRound6.setLayout(panelRound6Layout);
         panelRound6Layout.setHorizontalGroup(
@@ -539,11 +593,9 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
             .addGroup(panelRound6Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(btnChon, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 204, Short.MAX_VALUE)
-                .addComponent(txtGiaTo, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addComponent(panelRound8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnHienThi, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -556,9 +608,8 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
                 .addGroup(panelRound6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(panelRound6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(btnHienThi, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtGiaTo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(panelRound8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(panelRound6Layout.createSequentialGroup()
                         .addComponent(btnChon, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(1, 1, 1)))
@@ -700,10 +751,6 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
     }//GEN-LAST:event_tblSanPhamMouseClicked
 
 
-    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-
-    }//GEN-LAST:event_btnSearchActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -835,6 +882,38 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tbChiTietSanPhamMouseClicked
 
+    private void rdoTenSpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoTenSpActionPerformed
+        // TODO add your handling code here:
+        searchhRadio();
+    }//GEN-LAST:event_rdoTenSpActionPerformed
+
+      public List<Tai_SanPhamCustom> getListByTT(int rdo) {
+        String timKiem = this.txtSearch.getText();
+        ListSP =  luongService.getListSPByMa(timKiem,rdo);
+        return ListSP;
+    }
+
+    public void searchhRadio() {
+        if (this.rdoMaSp.isSelected()) {
+            loadTable(getListByTT(0));
+        } 
+        if (this.rdoTenSp.isSelected()) {
+            loadTable(getListByTT(1));
+        } 
+    }
+    private void txtSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSearchMouseClicked
+        // TODO add your handling code here:
+
+        //        searchhRadio();
+        searchhRadio();
+        //        TimKiemTheoNgay();
+    }//GEN-LAST:event_txtSearchMouseClicked
+
+    private void rdoMaSpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoMaSpActionPerformed
+        // TODO add your handling code here:
+        searchhRadio();
+    }//GEN-LAST:event_rdoMaSpActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -881,7 +960,7 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
     private utilities.palette.MyButton btnHienThi1;
     private utilities.palette.UWPButton btnNext;
     private utilities.palette.UWPButton btnPre;
-    private utilities.palette.MyButton btnSearch;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel errorSoLuong;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -899,13 +978,16 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
     private utilities.palette.PanelRound panelRound5;
     private utilities.palette.PanelRound panelRound6;
     private utilities.palette.PanelRound panelRound7;
+    private utilities.palette.PanelRound panelRound8;
+    private utilities.palette.RadioButtonCustom rdoMaSp;
+    private utilities.palette.RadioButtonCustom rdoTenSp;
     private utilities.palette.TableDark_1 tbChiTietSanPham;
     private utilities.palette.TableDark_1 tblSanPham;
     private utilities.palette.TextField txtGiaBan;
     private utilities.palette.TextField txtGiaNhap;
-    private utilities.palette.TextField txtGiaTo;
     private javax.swing.JLabel txtIndex;
     private utilities.palette.TextField txtMa;
+    private utilities.palette.SearchCustom.TextFieldAnimation txtSearch;
     private utilities.palette.TextField txtSoLuong;
     private utilities.palette.TextField txtTenSp;
     // End of variables declaration//GEN-END:variables
