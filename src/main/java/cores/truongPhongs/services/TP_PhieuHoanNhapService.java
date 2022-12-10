@@ -20,6 +20,7 @@ public interface TP_PhieuHoanNhapService {
     List<TP_HoanNhap_PhieuNhapCustom> getListPhieuNhap();
 
     List<TP_HoanNhap_PhieuNhapCustom> findAllPnBy(String ma, int rdo);
+
     List<TP_HoanNhap_PhieuNhapCustom> getListByNgayTaoPhieuNhap(Long ngayBatDau, Long ngayKetThuc);
 
     List<TP_HoanNhap_spCustom> getListSpByPhieuNhap(UUID idPhieuNhap);
@@ -27,6 +28,8 @@ public interface TP_PhieuHoanNhapService {
     List<TP_HoanNhap_spCustom> getListByMaSpAndTenSpByPhieuNhap(UUID idPhieuNhap, String ma, int rdo);
 
     List<TP_HoanNhap_ctpCusTom> getListSpByChiTietPhieuHoanNhap(UUID idPhieuHoan);
+
+    List<TP_HoanNhap_ctpCusTom> getListSpByMaByChiTietPhieuHoanNhap(UUID idPhieuHoan, String ma, int rdo);
 
     boolean addPhieuNhap(TP_HoanNhap_PhieuNhapCustom pn, String ghiChu, String lyDo);
 
