@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import utilities.Page;
+import utilities.palette.SearchCustom.EventCallBack;
+import utilities.palette.SearchCustom.EventTextField;
 
 public class TpDonViView extends javax.swing.JPanel {
 
@@ -35,6 +37,26 @@ public class TpDonViView extends javax.swing.JPanel {
         initComponents();
         clearForm();
         loadTable(donViService.phanTrang(getList, offset, limit));
+          txtSearch.addEvent(new EventTextField() {
+            @Override
+            public void onPressed(EventCallBack call) {
+                //  Test
+                try {
+                    for (int i = 1; i <= 80; i++) {
+
+                        Thread.sleep(5);
+                    }
+                    call.done();
+                } catch (Exception e) {
+                    System.err.println(e);
+                }
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+        });
     }
 
     public void loadTable(List<TpDonViCustom> list) {
@@ -94,7 +116,6 @@ public class TpDonViView extends javax.swing.JPanel {
         buttonGroup1 = new javax.swing.ButtonGroup();
         panelRound1 = new utilities.palette.PanelRound();
         panelRound16 = new utilities.palette.PanelRound();
-        btnSearch = new utilities.palette.MyButton();
         btnThem = new utilities.palette.MyButton();
         btnHienThi = new utilities.palette.MyButton();
         panelRound5 = new utilities.palette.PanelRound();
@@ -129,18 +150,6 @@ public class TpDonViView extends javax.swing.JPanel {
         panelRound16.setRoundTopLeft(50);
         panelRound16.setRoundTopRight(50);
 
-        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/file.png"))); // NOI18N
-        btnSearch.setToolTipText("Tìm đơn vị");
-        btnSearch.setBorderColor(new java.awt.Color(221, 242, 244));
-        btnSearch.setColor(new java.awt.Color(221, 242, 244));
-        btnSearch.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnSearch.setRadius(50);
-        btnSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearchActionPerformed(evt);
-            }
-        });
-
         btnThem.setBackground(new java.awt.Color(221, 242, 244));
         btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Addd.png"))); // NOI18N
         btnThem.setToolTipText("Thêm mới đơn vị");
@@ -174,16 +183,13 @@ public class TpDonViView extends javax.swing.JPanel {
                 .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnHienThi, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         panelRound16Layout.setVerticalGroup(
             panelRound16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound16Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelRound16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(btnSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnThem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnHienThi, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -222,14 +228,22 @@ public class TpDonViView extends javax.swing.JPanel {
         panelRound6.setRoundTopLeft(50);
         panelRound6.setRoundTopRight(50);
 
+        rdoDonViGoc.setBackground(new java.awt.Color(67, 130, 187));
         buttonGroup1.add(rdoDonViGoc);
         rdoDonViGoc.setForeground(new java.awt.Color(255, 255, 255));
         rdoDonViGoc.setSelected(true);
         rdoDonViGoc.setText("Đơn Vị Gốc");
 
+        rdoDonViQuyDoi.setBackground(new java.awt.Color(67, 130, 187));
         buttonGroup1.add(rdoDonViQuyDoi);
         rdoDonViQuyDoi.setForeground(new java.awt.Color(255, 255, 255));
         rdoDonViQuyDoi.setText("Đơn Vị Quy Đổi");
+
+        txtSearch.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtSearchMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelRound6Layout = new javax.swing.GroupLayout(panelRound6);
         panelRound6.setLayout(panelRound6Layout);
@@ -440,10 +454,6 @@ public class TpDonViView extends javax.swing.JPanel {
         rud.showData();
     }//GEN-LAST:event_tblDonViMouseClicked
 
-    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        searchRadio();
-    }//GEN-LAST:event_btnSearchActionPerformed
-
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         createView.setVisible(true);
         rud.setVisible(false);
@@ -475,10 +485,14 @@ public class TpDonViView extends javax.swing.JPanel {
         loadTable(donViService.phanTrang(getList, offset, limit));
     }//GEN-LAST:event_uWPButton5ActionPerformed
 
+    private void txtSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSearchMouseClicked
+        // TODO add your handling code here:
+        searchRadio();
+    }//GEN-LAST:event_txtSearchMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private utilities.palette.MyButton btnHienThi;
-    private utilities.palette.MyButton btnSearch;
     private utilities.palette.MyButton btnThem;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;

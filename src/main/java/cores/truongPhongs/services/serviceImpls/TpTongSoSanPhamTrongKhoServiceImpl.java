@@ -89,9 +89,10 @@ public class TpTongSoSanPhamTrongKhoServiceImpl implements TpThongKeService {
     public List<TpThongKeSpCustom> findAllByKhAndNV(String ma, int rdo) {
         switch (rdo) {
             case 0:
-             return repo.getListByMaNv(ma);
-               
+             return repo.getListByMaHd(ma);
             case 1:
+                return repo.getListByMaNv(ma);
+            case 2:
                return repo.getListByTenNv(ma);
             default:
                return  repo.getListByTenNv("");
