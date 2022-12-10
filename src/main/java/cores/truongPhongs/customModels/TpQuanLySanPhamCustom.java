@@ -35,13 +35,6 @@ public class TpQuanLySanPhamCustom {
     
     private BigDecimal giaNhapMin;
     
-    private int soLuong;
+    private Integer soLuong;
 
-    public TpQuanLySanPhamCustom(UUID id, String ma, String ten) {
-        this.id = id;
-        this.ma = ma;
-        this.ten = ten;
-    }
-    
-    
 }

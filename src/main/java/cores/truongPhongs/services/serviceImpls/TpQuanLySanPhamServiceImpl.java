@@ -9,6 +9,7 @@ import infrastructures.constant.ValidateConstant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 import javax.swing.JLabel;
 
 /**
@@ -17,8 +18,12 @@ import javax.swing.JLabel;
  */
 public class TpQuanLySanPhamServiceImpl implements TpQuanLySanPhamService {
 
-    private TpQuanLySanPhamRepository rp = new TpQuanLySanPhamRepository();
+    private TpQuanLySanPhamRepository rp;
 
+    public TpQuanLySanPhamServiceImpl() {
+        rp = new TpQuanLySanPhamRepository();
+    }
+    
     @Override
     public List<TpQuanLySanPhamCustom> getAll(String ten) {
         return rp.getAll(ten);
@@ -34,7 +39,7 @@ public class TpQuanLySanPhamServiceImpl implements TpQuanLySanPhamService {
     }
 
     @Override
-    public boolean updateSanPham(TpThemSanPhamCustom custom) {
+    public boolean updateSanPham(TpQuanLySanPhamCustom custom) {
         SanPham sp = new SanPham();
         sp.setMa(custom.getMa());
         sp.setTen(custom.getTen());
@@ -48,38 +53,11 @@ public class TpQuanLySanPhamServiceImpl implements TpQuanLySanPhamService {
     }
 
     @Override
-    public TpQuanLySanPhamCustom findSanPhamByMa(String ma) {
-        return rp.findByMa(ma);
-    }
-
-    @Override
     public TpQuanLySanPhamCustom checkValidate(TpQuanLySanPhamCustom sp, JLabel erroMa, JLabel erroTen) {
-
         boolean check = true;
-
-        if (sp.getMa().trim() != null) {
-            if (sp.getMa().trim().length() == 0) {
-                erroMa.setText("Mã không được để trống");
-                check = false;
-            } else if (!sp.getMa().trim().matches(sp.getMa().toUpperCase())) {
-                erroMa.setText("Mã phải viết hoa");
-                check = false;
-            } else if (!sp.getMa().trim().matches(ValidateConstant.REGEX_CHU_KHONG_CO_KHOANG_TRANG)) {
-                erroMa.setText("Mã không được có khoảng trắng");
-                check = false;
-            } else if (findSanPhamByMa(sp.getMa().trim()) != null) {
-                erroMa.setText("Mã đã tồn tại");
-                check = false;
-            } else {
-                erroMa.setText("");
-            }
-        }
 
         if (sp.getTen().trim().length() == 0) {
             erroTen.setText("Tên không được để trống");
-            check = false;
-        } else if (sp.getTen().matches("[A-Z a-z]+")) {
-            erroTen.setText("Tên phải là chữ");
             check = false;
         } else {
             erroTen.setText("");

@@ -6,7 +6,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -22,11 +21,27 @@ public class TpQuanLySanPhamRepository {
         Session s = HibernateUtil.getSessionFactory().openSession();
         Query query = s.createNativeQuery("""
                                                   SELECT sp.id, sp.Ma, sp.Ten,
-                                                  MAX(ctsp.GiaBan) as giaBanMax, MIN(ctsp.GiaBan) as giaBanMin,
-                                                  MAX(ctsp.GiaNhap) as giaNhapMax, MIN(ctsp.GiaNhap) as giaNhapMin,
-                                                  SUM(ctsp.SoLuongTon) as soLuongTon
-                                                  FROM SanPham sp join ChiTietSanPham ctsp
-                                                  ON sp.Id = ctsp.IdSanPham
+                                                  (
+                                          SELECT MAX(ctsp.GiaBan) FROM ChiTietSanPham ctsp 
+                                          WHERE ctsp.IdSanPham = sp.Id
+                                          ) AS maxGiaBan , 
+                                          (
+                                        SELECT MIN(ctsp.GiaBan) FROM ChiTietSanPham ctsp 
+                                        WHERE ctsp.IdSanPham = sp.Id
+                                        ) AS minGiaBan , 
+                                          (
+                                        SELECT MAX(ctsp.GiaNhap) FROM ChiTietSanPham ctsp 
+                                        WHERE ctsp.IdSanPham = sp.Id
+                                        ) AS maxGiaNhap , 
+                                          (
+                                        SELECT MIN(ctsp.GiaNhap) FROM ChiTietSanPham ctsp 
+                                        WHERE ctsp.IdSanPham = sp.Id
+                                        ) AS minGiaNhap , 
+                                          (
+                                            SELECT SUM(ctsp.SoLuongTon) FROM ChiTietSanPham ctsp 
+                                            WHERE ctsp.IdSanPham = sp.Id
+                                            ) AS soLuongTon 
+                                                  FROM SanPham sp 
                                                   WHERE sp.Ten LIKE CONCAT('%',:ten,'%') OR sp.Ma LIKE CONCAT('%',:ten,'%')
                                                   GROUP BY sp.Id, sp.Ma, sp.Ten
                                                   """);
@@ -34,7 +49,7 @@ public class TpQuanLySanPhamRepository {
         List<Object[]> listQuery = query.getResultList();
         List<TpQuanLySanPhamCustom> list = new ArrayList<>();
         listQuery.stream().forEach(el -> {
-            list.add(new TpQuanLySanPhamCustom(UUID.fromString((String) el[0]), (String) el[1], (String) el[2], (BigDecimal) el[3], (BigDecimal) el[4], (BigDecimal) el[5], (BigDecimal) el[6], (int) el[7]));
+            list.add(new TpQuanLySanPhamCustom(UUID.fromString((String) el[0]), (String) el[1], (String) el[2], (BigDecimal) el[3], (BigDecimal) el[4], (BigDecimal) el[5], (BigDecimal) el[6], (Integer) el[7]));
         });
         s.close();
         return list;
@@ -60,7 +75,12 @@ public class TpQuanLySanPhamRepository {
         Transaction tran = null;
         try ( Session s = HibernateUtil.getSessionFactory().openSession()) {
             tran = s.beginTransaction();
-            s.update(sp);
+            Query q = s.createNativeQuery("""
+                                          UPDATE SanPham 
+                                          SET Ten = :ten
+                                          WHERE Id = :id
+                                          """).setParameter("ten", sp.getTen()).setParameter("id", sp.getId().toString());
+            q.executeUpdate();
             tran.commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -74,61 +94,18 @@ public class TpQuanLySanPhamRepository {
         Transaction tran = null;
         try ( Session s = HibernateUtil.getSessionFactory().openSession()) {
             tran = s.beginTransaction();
-            SanPham cs = s.find(SanPham.class, id);
-            s.delete(cs);
+            Query q = s.createNativeQuery("""
+                                          DELETE SanPham 
+                                          WHERE Id = :id
+                                          """).setParameter("id", id.toString());
+            q.executeUpdate();
             tran.commit();
-        } catch (Exception e) {
+        } catch (org.hibernate.exception.ConstraintViolationException e) {
             e.printStackTrace();
             tran.rollback();
             return false;
         }
         return true;
-    }
-
-    public TpQuanLySanPhamCustom findByMa(String ma) {
-        TpQuanLySanPhamCustom sp = new TpQuanLySanPhamCustom();
-        try ( Session s = HibernateUtil.getSessionFactory().openSession()) {
-            Query q = s.createQuery("select new cores.truongPhongs.customModels.TpQuanLySanPhamCustom ("
-                    + "sp.id as id,"
-                    + "sp.ma as ma,"
-                    + "sp.ten as ten"
-                    + ") from domainModels.SanPham sp WHERE sp.ma = :ma");
-            q.setParameter("ma", ma);
-            sp = (TpQuanLySanPhamCustom) q.getSingleResult();
-        } catch (NoResultException e) {
-            e.printStackTrace();
-            return null;
-        }
-        return sp;
-    }
-
-    // cách tìm kiếm thứ 2
-    public List<TpQuanLySanPhamCustom> findAllByMa(String ma) {
-        List<TpQuanLySanPhamCustom> list = new ArrayList<>();
-        Session s = HibernateUtil.getSessionFactory().openSession();
-        Query q = s.createQuery("select new cores.truongPhongs.customModels.TpQuanLySanPhamCustom ("
-                + "sp.id as id,"
-                + "sp.ma as ma,"
-                + "sp.ten as ten"
-                + ") from domainModels.SanPham sp WHERE sp.ma LIKE CONCAT('%',:ma,'%') ");
-        q.setParameter("ma", ma);
-        list = q.getResultList();
-        s.close();
-        return list;
-    }
-
-    public List<TpQuanLySanPhamCustom> findAllByTen(String ten) {
-        List<TpQuanLySanPhamCustom> list = new ArrayList<>();
-        Session s = HibernateUtil.getSessionFactory().openSession();
-        Query q = s.createQuery("select new cores.truongPhongs.customModels.TpQuanLySanPhamCustom ("
-                + "sp.id as id,"
-                + "sp.ma as ma,"
-                + "sp.ten as ten"
-                + ") from domainModels.SanPham sp WHERE sp.ten LIKE CONCAT('%',:ten,'%') ");
-        q.setParameter("ten", ten);
-        list = q.getResultList();
-        s.close();
-        return list;
     }
 
 }

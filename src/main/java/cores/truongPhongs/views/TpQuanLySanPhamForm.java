@@ -17,6 +17,8 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import utilities.Converter;
+import utilities.MaTuSinh;
+import utilities.MsgBox;
 import utilities.Page;
 
 /**
@@ -28,8 +30,7 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
     private DefaultTableModel dtm = new DefaultTableModel();
     private TpQuanLySanPhamService serviceSanPham = new TpQuanLySanPhamServiceImpl();
     private List<TpQuanLySanPhamCustom> listSanPham = new ArrayList<>();
-    private TpQuanLySanPhamFormAdd createView = new TpQuanLySanPhamFormAdd();
-    private TpQuanLySanPhamU rud;
+
     private Page p;
 
     private int limitSp = 7;
@@ -55,17 +56,20 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
     private int index = 1;
 
     private ExportSanPhamService esps;
+
     private DecimalFormat formatter = new DecimalFormat("###,###,##0");
 
     public TpQuanLySanPhamForm() {
-        rud = new TpQuanLySanPhamU();
         p = new Page();
         initComponents();
         tbSanPham.setModel(dtm);
+        FormDataCreate.setLocationRelativeTo(null);
+        FormDataUpdate.setLocationRelativeTo(null);
+        FrameChiTietSanPham.setLocationRelativeTo(null);
 
         String[] headers = {"STT", "Mã", "Tên", "Giá Nhập", "Giá Bán", "Số lượng"};
         dtm.setColumnIdentifiers(headers);
-        listSanPham = serviceSanPham.getAll("");
+        clearForm();
         showData(serviceSanPham.phanTrang(listSanPham, offsetSp, limitSp));
 
         // chi tiet sp
@@ -93,14 +97,14 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
                 sp.getTen(),
                 giaNhap,
                 giaBan,
-                formatter.format(sp.getSoLuong()) + " Đôi"
+                sp.getSoLuong() == null? "Chưa có" : formatter.format(sp.getSoLuong()) + " Đôi"
             });
 
         }
     }
 
     public void clearFormCtsp() {
-        listChiTietSP = serviceChiTietSP.getAll(this.listSanPham.get(tbSanPham.getSelectedRow()).getId(), "", "","","","");
+        listChiTietSP = serviceChiTietSP.getAll(this.listSanPham.get(tbSanPham.getSelectedRow()).getId(), "", "", "", "", "");
         sizes = listChiTietSP.size();
         offset = 0;
         index = 1;
@@ -147,12 +151,27 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
     }
 
     public void clearForm() {
-        rdoTen.setSelected(true);
         listSanPham = serviceSanPham.getAll("");
         sizesSp = listSanPham.size();
         offsetSp = 0;
         indexSp = 1;
         loadIndexSp();
+    }
+
+    public TpQuanLySanPhamCustom getFormData() {
+        TpQuanLySanPhamCustom sp = new TpQuanLySanPhamCustom();
+        sp.setMa(this.txtMa.getText());
+        sp.setTen(txtTen.getText());
+
+        return sp;
+    }
+
+    public TpQuanLySanPhamCustom getFormDataUpdate() {
+        TpQuanLySanPhamCustom sp = new TpQuanLySanPhamCustom();
+        sp.setMa(this.txtMaUpdate.getText());
+        sp.setTen(txtTenUpdate.getText());
+
+        return sp;
     }
 
     private void loadIndexSp() {
@@ -188,6 +207,30 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
         txtSdtNcc = new utilities.palette.TextField();
         txtEmailNcc = new utilities.palette.TextField();
         txtMaNcc = new utilities.palette.TextField();
+        FormDataCreate = new javax.swing.JFrame();
+        jPanel2 = new javax.swing.JPanel();
+        uWPButton1 = new utilities.palette.UWPButton();
+        jPanel3 = new javax.swing.JPanel();
+        test = new javax.swing.JLabel();
+        uWPButton2 = new utilities.palette.UWPButton();
+        uWPButton3 = new utilities.palette.UWPButton();
+        txtMa = new utilities.palette.TextField();
+        txtTen = new utilities.palette.TextField();
+        erroMa = new javax.swing.JLabel();
+        erroTen = new javax.swing.JLabel();
+        FormDataUpdate = new javax.swing.JFrame();
+        jPanel4 = new javax.swing.JPanel();
+        uWPButton8 = new utilities.palette.UWPButton();
+        jPanel5 = new javax.swing.JPanel();
+        test1 = new javax.swing.JLabel();
+        btnUpdate1 = new utilities.palette.UWPButton();
+        uWPButton9 = new utilities.palette.UWPButton();
+        txtMaUpdate = new utilities.palette.TextField();
+        txtTenUpdate = new utilities.palette.TextField();
+        erroMa1 = new javax.swing.JLabel();
+        erroViTri = new javax.swing.JLabel();
+        erroTen1 = new javax.swing.JLabel();
+        btnDelete = new utilities.palette.UWPButton();
         panelRound2 = new utilities.palette.PanelRound();
         panelRound16 = new utilities.palette.PanelRound();
         btnChon = new utilities.palette.MyButton();
@@ -197,8 +240,6 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbSanPham = new utilities.palette.TableDark_1();
         panelRound4 = new utilities.palette.PanelRound();
-        rdoTen = new utilities.palette.RadioButtonCustom();
-        rdoMa = new utilities.palette.RadioButtonCustom();
         txtSearchTheo = new javax.swing.JTextField();
         btnSearch1 = new utilities.palette.MyButton();
         panelRound15 = new utilities.palette.PanelRound();
@@ -546,6 +587,259 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
+        FormDataCreate.setUndecorated(true);
+        FormDataCreate.setSize(new java.awt.Dimension(436, 466));
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        uWPButton1.setBackground(new java.awt.Color(255, 51, 51));
+        uWPButton1.setText("X");
+        uWPButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uWPButton1ActionPerformed(evt);
+            }
+        });
+
+        jPanel3.setBackground(new java.awt.Color(51, 153, 255));
+
+        test.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/FPT_Polytechnic_doc.png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(test, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(test, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        uWPButton2.setBackground(new java.awt.Color(255, 153, 102));
+        uWPButton2.setText("Save");
+        uWPButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uWPButton2ActionPerformed(evt);
+            }
+        });
+
+        uWPButton3.setBackground(new java.awt.Color(255, 51, 51));
+        uWPButton3.setText("Close");
+        uWPButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uWPButton3ActionPerformed(evt);
+            }
+        });
+
+        txtMa.setEditable(false);
+        txtMa.setLabelText("Mã");
+
+        txtTen.setLabelText("Tên");
+
+        erroMa.setForeground(new java.awt.Color(255, 51, 51));
+
+        erroTen.setForeground(new java.awt.Color(255, 51, 51));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(237, 237, 237)
+                        .addComponent(uWPButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(uWPButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(uWPButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMa, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(erroMa, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(erroTen, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(37, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(uWPButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(63, 63, 63)
+                .addComponent(txtMa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(erroMa, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(erroTen, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(uWPButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(uWPButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(101, 101, 101))
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout FormDataCreateLayout = new javax.swing.GroupLayout(FormDataCreate.getContentPane());
+        FormDataCreate.getContentPane().setLayout(FormDataCreateLayout);
+        FormDataCreateLayout.setHorizontalGroup(
+            FormDataCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(FormDataCreateLayout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        FormDataCreateLayout.setVerticalGroup(
+            FormDataCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(FormDataCreateLayout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        FormDataUpdate.setUndecorated(true);
+        FormDataUpdate.setSize(new java.awt.Dimension(402, 457));
+
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        uWPButton8.setBackground(new java.awt.Color(255, 51, 51));
+        uWPButton8.setText("X");
+        uWPButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uWPButton8ActionPerformed(evt);
+            }
+        });
+
+        jPanel5.setBackground(new java.awt.Color(51, 153, 255));
+
+        test1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/FPT_Polytechnic_doc.png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(test1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(test1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        btnUpdate1.setBackground(new java.awt.Color(255, 153, 102));
+        btnUpdate1.setText("Update");
+        btnUpdate1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdate1ActionPerformed(evt);
+            }
+        });
+
+        uWPButton9.setBackground(new java.awt.Color(255, 51, 51));
+        uWPButton9.setText("Close");
+        uWPButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uWPButton9ActionPerformed(evt);
+            }
+        });
+
+        txtMaUpdate.setEditable(false);
+        txtMaUpdate.setLabelText("Mã");
+
+        txtTenUpdate.setLabelText("Tên");
+
+        erroMa1.setForeground(new java.awt.Color(255, 51, 51));
+
+        erroViTri.setForeground(new java.awt.Color(255, 51, 51));
+
+        erroTen1.setForeground(new java.awt.Color(255, 51, 51));
+
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(145, 145, 145)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(erroViTri, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(uWPButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(62, 62, 62)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtTenUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMaUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(erroTen1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(erroMa1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(83, 83, 83)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(uWPButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnUpdate1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(28, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(uWPButton8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(52, 52, 52)
+                .addComponent(txtMaUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(erroMa1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(3, 3, 3)
+                .addComponent(txtTenUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(erroTen1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(btnUpdate1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(erroViTri, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(uWPButton9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(59, Short.MAX_VALUE))
+            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout FormDataUpdateLayout = new javax.swing.GroupLayout(FormDataUpdate.getContentPane());
+        FormDataUpdate.getContentPane().setLayout(FormDataUpdateLayout);
+        FormDataUpdateLayout.setHorizontalGroup(
+            FormDataUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        FormDataUpdateLayout.setVerticalGroup(
+            FormDataUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         setBackground(new java.awt.Color(255, 255, 255));
 
         panelRound2.setBackground(new java.awt.Color(204, 255, 255));
@@ -666,18 +960,6 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
         panelRound4.setRoundTopLeft(50);
         panelRound4.setRoundTopRight(50);
 
-        rdoTen.setBackground(new java.awt.Color(67, 130, 187));
-        buttonGroup1.add(rdoTen);
-        rdoTen.setForeground(new java.awt.Color(255, 255, 255));
-        rdoTen.setText("Tên");
-        rdoTen.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-
-        rdoMa.setBackground(new java.awt.Color(67, 130, 187));
-        buttonGroup1.add(rdoMa);
-        rdoMa.setForeground(new java.awt.Color(255, 255, 255));
-        rdoMa.setText("Mã");
-        rdoMa.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-
         btnSearch1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/file.png"))); // NOI18N
         btnSearch1.setToolTipText("Tìm phiếu nhập");
         btnSearch1.setBorderColor(new java.awt.Color(221, 242, 244));
@@ -695,13 +977,9 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
         panelRound4Layout.setHorizontalGroup(
             panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound4Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(rdoTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
-                .addComponent(rdoMa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-                .addComponent(txtSearchTheo, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap(46, Short.MAX_VALUE)
+                .addComponent(txtSearchTheo, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
                 .addComponent(btnSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -713,12 +991,6 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
                     .addComponent(btnSearch1, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
                     .addComponent(txtSearchTheo))
                 .addContainerGap())
-            .addGroup(panelRound4Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rdoTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rdoMa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         panelRound15.setBackground(new java.awt.Color(67, 130, 187));
@@ -791,17 +1063,18 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(panelRound15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(panelRound16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(69, 69, 69)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
+                .addGap(34, 34, 34)
                 .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(uWPButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtIndex, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(uWPButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelRound2Layout.createSequentialGroup()
+                        .addComponent(panelRound16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(53, 53, 53)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(50, 50, 50)
+                        .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(uWPButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtIndex, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(uWPButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(panelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(55, 55, 55))
         );
 
@@ -820,7 +1093,7 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tbSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSanPhamMouseClicked
-        
+
     }//GEN-LAST:event_tbSanPhamMouseClicked
 
     private void btnSearch1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearch1ActionPerformed
@@ -851,8 +1124,9 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
     }//GEN-LAST:event_btnHienThiActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        createView.setVisible(true);
-        rud.setVisible(false);
+        FormDataCreate.setVisible(true);
+        FormDataUpdate.setVisible(false);
+        FrameChiTietSanPham.setVisible(false);
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void uWPButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uWPButton4ActionPerformed
@@ -871,12 +1145,17 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         int row = this.tbSanPham.getSelectedRow();
-        createView.setVisible(false);
-        rud = new TpQuanLySanPhamU();
-        rud.tp = serviceSanPham.phanTrang(listSanPham, offsetSp, limitSp).get(row);
-//        rud.tp = serviceSanPham.findSanPhamByMa(tbSanPham.getValueAt(row, 1).toString());
-        rud.setVisible(true);
-        rud.showData();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(this, "Bạn phải chọn một dòng");
+            return;
+        }
+
+        this.txtMaUpdate.setText(listSanPham.get(row).getMa());
+        this.txtTenUpdate.setText(listSanPham.get(row).getTen());
+
+        FormDataCreate.setVisible(false);
+        FormDataUpdate.setVisible(true);
+        FrameChiTietSanPham.setVisible(false);
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     // chi tiết san pham ------------------------------------------------
@@ -947,8 +1226,8 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
         String maSpNcc = this.txtMaSpNcc.getText();
         String emailNcc = this.txtEmailNcc.getText();
         String sdtNcc = this.txtSdtNcc.getText();
-       
-        listChiTietSP = serviceChiTietSP.getAll(this.listSanPham.get(tbSanPham.getSelectedRow()).getId(), maNcc, tenNcc,maSpNcc,emailNcc,sdtNcc);
+
+        listChiTietSP = serviceChiTietSP.getAll(this.listSanPham.get(tbSanPham.getSelectedRow()).getId(), maNcc, tenNcc, maSpNcc, emailNcc, sdtNcc);
         sizes = listChiTietSP.size();
         offset = 0;
         index = 1;
@@ -966,10 +1245,73 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMaNccActionPerformed
 
+    private void uWPButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uWPButton1ActionPerformed
+        FormDataCreate.setVisible(false);
+    }//GEN-LAST:event_uWPButton1ActionPerformed
+
+    private void uWPButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uWPButton2ActionPerformed
+        TpQuanLySanPhamCustom check = serviceSanPham.checkValidate(getFormData(), erroMa, erroTen);
+        if (check == null) {
+            return;
+        }
+
+        check.setMa(MaTuSinh.gen("SP"));
+
+        if (serviceSanPham.addSanPham(check) == null) {
+            MsgBox.alert(this, "Thêm thất bại");
+            FormDataCreate.setVisible(true);
+        } else {
+            MsgBox.alert(this, "Thêm thành công");
+            FormDataCreate.setVisible(false);
+        }
+    }//GEN-LAST:event_uWPButton2ActionPerformed
+
+    private void uWPButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uWPButton3ActionPerformed
+        FormDataCreate.setVisible(false);
+    }//GEN-LAST:event_uWPButton3ActionPerformed
+
+    private void uWPButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uWPButton8ActionPerformed
+        FormDataUpdate.setVisible(false);
+    }//GEN-LAST:event_uWPButton8ActionPerformed
+
+    private void btnUpdate1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdate1ActionPerformed
+        TpQuanLySanPhamCustom check = serviceSanPham.checkValidate(getFormDataUpdate(), erroMa1, erroTen1);
+        if (check == null) {
+            return;
+        }
+        
+        check.setId(listSanPham.get(tbSanPham.getSelectedRow()).getId());
+
+        if (serviceSanPham.updateSanPham(check)) {
+            MsgBox.alert(this, "Sửa thành công");
+            FormDataUpdate.setVisible(false);
+        } else {
+            MsgBox.alert(this, "Sửa thất bại");
+            FormDataUpdate.setVisible(true);
+        }
+    }//GEN-LAST:event_btnUpdate1ActionPerformed
+
+    private void uWPButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uWPButton9ActionPerformed
+        FormDataUpdate.setVisible(false);
+    }//GEN-LAST:event_uWPButton9ActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        if (serviceSanPham.deleteSanPham(listSanPham.get(this.tbSanPham.getSelectedRow()).getId())) {
+            MsgBox.alert(this, "Xóa thành công");
+            FormDataUpdate.setVisible(false);
+        } else {
+            MsgBox.alert(this, "Xóa thất bại");
+            FormDataUpdate.setVisible(true);
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JFrame FormDataCreate;
+    private javax.swing.JFrame FormDataUpdate;
     private javax.swing.JFrame FrameChiTietSanPham;
     private utilities.palette.MyButton btnChon;
+    private utilities.palette.UWPButton btnDelete;
     private utilities.palette.MyButton btnExit;
     private utilities.palette.MyButton btnHienThi;
     private utilities.palette.MyButton btnHienThi1;
@@ -979,12 +1321,22 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
     private utilities.palette.MyButton btnThem;
     private utilities.palette.MyButton btnThem1;
     private utilities.palette.MyButton btnUpdate;
+    private utilities.palette.UWPButton btnUpdate1;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JDialog diaLogSearchCtsp;
+    private javax.swing.JLabel erroMa;
+    private javax.swing.JLabel erroMa1;
+    private javax.swing.JLabel erroTen;
+    private javax.swing.JLabel erroTen1;
+    private javax.swing.JLabel erroViTri;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private utilities.palette.MyButton myButton7;
@@ -995,21 +1347,30 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
     private utilities.palette.PanelRound panelRound2;
     private utilities.palette.PanelRound panelRound4;
     private utilities.palette.PanelRound panelRound6;
-    private utilities.palette.RadioButtonCustom rdoMa;
-    private utilities.palette.RadioButtonCustom rdoTen;
     private utilities.palette.TableDark_1 tbChiTietSanPham;
     private utilities.palette.TableDark_1 tbSanPham;
+    private javax.swing.JLabel test;
+    private javax.swing.JLabel test1;
     private utilities.palette.TextField txtEmailNcc;
     private javax.swing.JLabel txtIndex;
     private javax.swing.JLabel txtIndex1;
+    private utilities.palette.TextField txtMa;
     private utilities.palette.TextField txtMaNcc;
     private utilities.palette.TextField txtMaSpNcc;
+    private utilities.palette.TextField txtMaUpdate;
     private utilities.palette.TextField txtSdtNcc;
     private javax.swing.JTextField txtSearchTheo;
+    private utilities.palette.TextField txtTen;
     private utilities.palette.TextField txtTenNcc;
+    private utilities.palette.TextField txtTenUpdate;
+    private utilities.palette.UWPButton uWPButton1;
+    private utilities.palette.UWPButton uWPButton2;
+    private utilities.palette.UWPButton uWPButton3;
     private utilities.palette.UWPButton uWPButton4;
     private utilities.palette.UWPButton uWPButton5;
     private utilities.palette.UWPButton uWPButton6;
     private utilities.palette.UWPButton uWPButton7;
+    private utilities.palette.UWPButton uWPButton8;
+    private utilities.palette.UWPButton uWPButton9;
     // End of variables declaration//GEN-END:variables
 }
