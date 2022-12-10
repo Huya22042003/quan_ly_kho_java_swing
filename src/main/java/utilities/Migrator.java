@@ -282,13 +282,13 @@ public class Migrator {
         session.save(pn3);
 
         PhieuNhap pn4 = new PhieuNhap();
-        pn.setGhiChu("Giày đẹp");
-        pn.setMaPhieu(MaTuSinh.gen("PN"));
-        pn.setNgayTao(DateTimeUtil.convertDateToTimeStampSecond());
-        pn.setNgayThanhToan(DateTimeUtil.convertDateToTimeStampSecond());
-        pn.setNhaCungCap(ncc);
-        pn.setNhanVien(nhanVien1);
-        pn.setTrangThai(TrangThaiPhieuConstant.DA_THANH_TOAN);
+        pn4.setGhiChu("Giày đẹp");
+        pn4.setMaPhieu(MaTuSinh.gen("PN"));
+        pn4.setNgayTao(DateTimeUtil.convertDateToTimeStampSecond());
+        pn4.setNgayThanhToan(DateTimeUtil.convertDateToTimeStampSecond());
+        pn4.setNhaCungCap(ncc);
+        pn4.setNhanVien(nhanVien1);
+        pn4.setTrangThai(TrangThaiPhieuConstant.DA_THANH_TOAN);
         session.save(pn4);
 
         PhieuXuat px = new PhieuXuat();
@@ -409,7 +409,7 @@ public class Migrator {
         ctpn.setIdChiTietSp(ctsp);
         ctpn.setIdPhieuNhap(pn);
         ctpn.setSoLuong(1000);
-        ctpn.setMaSanPhamNhaCungCap("SP");
+        ctpn.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn);
 
         ChiTietSanPham ctsp2 = new ChiTietSanPham();
@@ -436,7 +436,7 @@ public class Migrator {
         ctpn2.setIdChiTietSp(ctsp2);
         ctpn2.setIdPhieuNhap(pn1);
         ctpn2.setSoLuong(200);
-        ctpn2.setMaSanPhamNhaCungCap("SP");
+        ctpn2.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn2);
 
         ChiTietSanPham ctsp1 = new ChiTietSanPham();
@@ -457,7 +457,7 @@ public class Migrator {
         ctpn1.setIdChiTietSp(ctsp1);
         ctpn1.setIdPhieuNhap(pn2);
         ctpn1.setSoLuong(1000);
-        ctpn1.setMaSanPhamNhaCungCap("SP");
+        ctpn1.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn1);
 
         ChiTietSanPham ctsp3 = new ChiTietSanPham();
@@ -484,7 +484,7 @@ public class Migrator {
         ctpn3.setIdChiTietSp(ctsp3);
         ctpn3.setIdPhieuNhap(pn4);
         ctpn3.setSoLuong(200);
-        ctpn3.setMaSanPhamNhaCungCap("SP");
+        ctpn3.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn3);
 
         ChiTietSanPham ctsp4 = new ChiTietSanPham();
@@ -511,7 +511,7 @@ public class Migrator {
         ctpn4.setIdChiTietSp(ctsp4);
         ctpn4.setIdPhieuNhap(pn3);
         ctpn4.setSoLuong(200);
-        ctpn4.setMaSanPhamNhaCungCap("SP");
+        ctpn4.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn4);
 
         SanPham sanPham1 = new SanPham();
@@ -537,7 +537,7 @@ public class Migrator {
         ctpn5.setIdChiTietSp(ctsp5);
         ctpn5.setIdPhieuNhap(pn);
         ctpn5.setSoLuong(1000);
-        ctpn5.setMaSanPhamNhaCungCap("SP");
+        ctpn5.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn5);
 
         ChiTietSanPham ctsp6 = new ChiTietSanPham();
@@ -564,7 +564,7 @@ public class Migrator {
         ctpn6.setIdChiTietSp(ctsp6);
         ctpn6.setIdPhieuNhap(pn1);
         ctpn6.setSoLuong(200);
-        ctpn6.setMaSanPhamNhaCungCap("SP");
+        ctpn6.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn6);
 
         ChiTietSanPham ctsp7 = new ChiTietSanPham();
@@ -585,7 +585,7 @@ public class Migrator {
         ctpn7.setIdChiTietSp(ctsp7);
         ctpn7.setIdPhieuNhap(pn2);
         ctpn7.setSoLuong(1000);
-        ctpn7.setMaSanPhamNhaCungCap("SP");
+        ctpn7.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn7);
 
         ChiTietSanPham ctsp8 = new ChiTietSanPham();
@@ -612,7 +612,7 @@ public class Migrator {
         ctpn8.setIdChiTietSp(ctsp8);
         ctpn8.setIdPhieuNhap(pn4);
         ctpn8.setSoLuong(200);
-        ctpn8.setMaSanPhamNhaCungCap("SP");
+        ctpn8.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn8);
 
         SanPham sanPham2 = new SanPham();
@@ -638,7 +638,7 @@ public class Migrator {
         ctpn9.setIdChiTietSp(ctsp9);
         ctpn9.setIdPhieuNhap(pn);
         ctpn9.setSoLuong(1000);
-        ctpn9.setMaSanPhamNhaCungCap("SP");
+        ctpn9.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn9);
 
         ChiTietSanPham ctsp10 = new ChiTietSanPham();
@@ -665,7 +665,7 @@ public class Migrator {
         ctpn10.setIdChiTietSp(ctsp10);
         ctpn10.setIdPhieuNhap(pn1);
         ctpn10.setSoLuong(200);
-        ctpn10.setMaSanPhamNhaCungCap("SP");
+        ctpn10.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn10);
 
         ChiTietSanPham ctsp11 = new ChiTietSanPham();
@@ -686,7 +686,7 @@ public class Migrator {
         ctpn11.setIdChiTietSp(ctsp11);
         ctpn11.setIdPhieuNhap(pn3);
         ctpn11.setSoLuong(1000);
-        ctpn11.setMaSanPhamNhaCungCap("SP");
+        ctpn11.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn11);
 
         ChiTietSanPham ctsp12 = new ChiTietSanPham();
@@ -713,7 +713,7 @@ public class Migrator {
         ctpn12.setIdChiTietSp(ctsp12);
         ctpn12.setIdPhieuNhap(pn4);
         ctpn12.setSoLuong(200);
-        ctpn12.setMaSanPhamNhaCungCap("SP");
+        ctpn12.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn12);
 
         SanPham sanPham3 = new SanPham();
@@ -739,7 +739,7 @@ public class Migrator {
         ctpn13.setIdChiTietSp(ctsp13);
         ctpn13.setIdPhieuNhap(pn);
         ctpn13.setSoLuong(1000);
-        ctpn13.setMaSanPhamNhaCungCap("SP");
+        ctpn13.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn13);
 
         ChiTietSanPham ctsp14 = new ChiTietSanPham();
@@ -766,7 +766,7 @@ public class Migrator {
         ctpn14.setIdChiTietSp(ctsp14);
         ctpn14.setIdPhieuNhap(pn1);
         ctpn14.setSoLuong(200);
-        ctpn14.setMaSanPhamNhaCungCap("SP");
+        ctpn14.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn14);
 
         ChiTietSanPham ctsp15 = new ChiTietSanPham();
@@ -787,7 +787,7 @@ public class Migrator {
         ctpn15.setIdChiTietSp(ctsp15);
         ctpn15.setIdPhieuNhap(pn3);
         ctpn15.setSoLuong(1000);
-        ctpn15.setMaSanPhamNhaCungCap("SP");
+        ctpn15.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn15);
 
         ChiTietSanPham ctsp16 = new ChiTietSanPham();
@@ -814,7 +814,7 @@ public class Migrator {
         ctpn16.setIdChiTietSp(ctsp16);
         ctpn16.setIdPhieuNhap(pn4);
         ctpn16.setSoLuong(200);
-        ctpn16.setMaSanPhamNhaCungCap("SP");
+        ctpn16.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn16);
 
         ChiTietSanPham ctsp17 = new ChiTietSanPham();
@@ -841,7 +841,7 @@ public class Migrator {
         ctpn17.setIdChiTietSp(ctsp17);
         ctpn17.setIdPhieuNhap(pn2);
         ctpn17.setSoLuong(200);
-        ctpn17.setMaSanPhamNhaCungCap("SP");
+        ctpn17.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn17);
 
         SanPham sanPham4 = new SanPham();
@@ -867,7 +867,7 @@ public class Migrator {
         ctpn18.setIdChiTietSp(ctsp18);
         ctpn18.setIdPhieuNhap(pn);
         ctpn18.setSoLuong(1000);
-        ctpn18.setMaSanPhamNhaCungCap("SP");
+        ctpn18.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn18);
 
         ChiTietSanPham ctsp19 = new ChiTietSanPham();
@@ -894,7 +894,7 @@ public class Migrator {
         ctpn19.setIdChiTietSp(ctsp19);
         ctpn19.setIdPhieuNhap(pn1);
         ctpn19.setSoLuong(200);
-        ctpn19.setMaSanPhamNhaCungCap("SP");
+        ctpn19.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn19);
 
         ChiTietSanPham ctsp20 = new ChiTietSanPham();
@@ -915,7 +915,7 @@ public class Migrator {
         ctpn20.setIdChiTietSp(ctsp20);
         ctpn20.setIdPhieuNhap(pn3);
         ctpn20.setSoLuong(1000);
-        ctpn20.setMaSanPhamNhaCungCap("SP");
+        ctpn20.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn20);
 
         ChiTietSanPham ctsp21 = new ChiTietSanPham();
@@ -942,7 +942,7 @@ public class Migrator {
         ctpn21.setIdChiTietSp(ctsp21);
         ctpn21.setIdPhieuNhap(pn4);
         ctpn21.setSoLuong(200);
-        ctpn21.setMaSanPhamNhaCungCap("SP");
+        ctpn21.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn21);
 
         ChiTietSanPham ctsp22 = new ChiTietSanPham();
@@ -969,7 +969,7 @@ public class Migrator {
         ctpn22.setIdChiTietSp(ctsp22);
         ctpn22.setIdPhieuNhap(pn2);
         ctpn22.setSoLuong(200);
-        ctpn22.setMaSanPhamNhaCungCap("SP");
+        ctpn22.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn22);
 
         SanPham sanPham5 = new SanPham();
@@ -995,7 +995,7 @@ public class Migrator {
         ctpn23.setIdChiTietSp(ctsp23);
         ctpn23.setIdPhieuNhap(pn);
         ctpn23.setSoLuong(1000);
-        ctpn23.setMaSanPhamNhaCungCap("SP");
+        ctpn23.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn23);
 
         ChiTietSanPham ctsp24 = new ChiTietSanPham();
@@ -1022,7 +1022,7 @@ public class Migrator {
         ctpn24.setIdChiTietSp(ctsp24);
         ctpn24.setIdPhieuNhap(pn1);
         ctpn24.setSoLuong(200);
-        ctpn24.setMaSanPhamNhaCungCap("SP");
+        ctpn24.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn24);
 
         ChiTietSanPham ctsp25 = new ChiTietSanPham();
@@ -1043,7 +1043,7 @@ public class Migrator {
         ctpn25.setIdChiTietSp(ctsp25);
         ctpn25.setIdPhieuNhap(pn3);
         ctpn25.setSoLuong(1000);
-        ctpn25.setMaSanPhamNhaCungCap("SP");
+        ctpn25.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn25);
 
         ChiTietSanPham ctsp26 = new ChiTietSanPham();
@@ -1070,7 +1070,7 @@ public class Migrator {
         ctpn26.setIdChiTietSp(ctsp26);
         ctpn26.setIdPhieuNhap(pn4);
         ctpn26.setSoLuong(200);
-        ctpn26.setMaSanPhamNhaCungCap("SP");
+        ctpn26.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn26);
 
         ChiTietSanPham ctsp27 = new ChiTietSanPham();
@@ -1097,12 +1097,12 @@ public class Migrator {
         ctpn27.setIdChiTietSp(ctsp27);
         ctpn27.setIdPhieuNhap(pn2);
         ctpn27.setSoLuong(200);
-        ctpn27.setMaSanPhamNhaCungCap("SP");
+        ctpn27.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn27);
 
         SanPham sanPham6 = new SanPham();
         sanPham6.setMa(MaTuSinh.gen("SP"));
-        sanPham6.setTen("Giày bata");
+        sanPham6.setTen("Giày hết lười");
         session.save(sanPham6);
 
         ChiTietSanPham ctsp28 = new ChiTietSanPham();
@@ -1123,7 +1123,7 @@ public class Migrator {
         ctpn28.setIdChiTietSp(ctsp28);
         ctpn28.setIdPhieuNhap(pn);
         ctpn28.setSoLuong(1000);
-        ctpn28.setMaSanPhamNhaCungCap("SP");
+        ctpn28.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn28);
 
         ChiTietSanPham ctsp29 = new ChiTietSanPham();
@@ -1150,7 +1150,7 @@ public class Migrator {
         ctpn29.setIdChiTietSp(ctsp29);
         ctpn29.setIdPhieuNhap(pn1);
         ctpn29.setSoLuong(200);
-        ctpn29.setMaSanPhamNhaCungCap("SP");
+        ctpn29.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn29);
 
         ChiTietSanPham ctsp30 = new ChiTietSanPham();
@@ -1171,7 +1171,7 @@ public class Migrator {
         ctpn30.setIdChiTietSp(ctsp30);
         ctpn30.setIdPhieuNhap(pn3);
         ctpn30.setSoLuong(1000);
-        ctpn30.setMaSanPhamNhaCungCap("SP");
+        ctpn30.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn30);
 
         ChiTietSanPham ctsp31 = new ChiTietSanPham();
@@ -1198,7 +1198,7 @@ public class Migrator {
         ctpn31.setIdChiTietSp(ctsp31);
         ctpn31.setIdPhieuNhap(pn4);
         ctpn31.setSoLuong(200);
-        ctpn31.setMaSanPhamNhaCungCap("SP");
+        ctpn31.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn31);
 
         ChiTietSanPham ctsp32 = new ChiTietSanPham();
@@ -1225,7 +1225,7 @@ public class Migrator {
         ctpn33.setIdChiTietSp(ctsp32);
         ctpn33.setIdPhieuNhap(pn2);
         ctpn33.setSoLuong(200);
-        ctpn33.setMaSanPhamNhaCungCap("SP");
+        ctpn33.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn33);
 
         SanPham sanPham7 = new SanPham();
@@ -1251,7 +1251,7 @@ public class Migrator {
         ctpn34.setIdChiTietSp(ctsp34);
         ctpn34.setIdPhieuNhap(pn);
         ctpn34.setSoLuong(1000);
-        ctpn34.setMaSanPhamNhaCungCap("SP");
+        ctpn34.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn34);
 
         ChiTietSanPham ctsp35 = new ChiTietSanPham();
@@ -1278,7 +1278,7 @@ public class Migrator {
         ctpn35.setIdChiTietSp(ctsp35);
         ctpn35.setIdPhieuNhap(pn1);
         ctpn35.setSoLuong(200);
-        ctpn35.setMaSanPhamNhaCungCap("SP");
+        ctpn35.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn35);
 
         ChiTietSanPham ctsp36 = new ChiTietSanPham();
@@ -1299,7 +1299,7 @@ public class Migrator {
         ctpn36.setIdChiTietSp(ctsp36);
         ctpn36.setIdPhieuNhap(pn3);
         ctpn36.setSoLuong(1000);
-        ctpn36.setMaSanPhamNhaCungCap("SP");
+        ctpn36.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn36);
 
         ChiTietSanPham ctsp37 = new ChiTietSanPham();
@@ -1326,7 +1326,7 @@ public class Migrator {
         ctpn37.setIdChiTietSp(ctsp37);
         ctpn37.setIdPhieuNhap(pn4);
         ctpn37.setSoLuong(200);
-        ctpn37.setMaSanPhamNhaCungCap("SP");
+        ctpn37.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn37);
 
         ChiTietSanPham ctsp38 = new ChiTietSanPham();
@@ -1353,7 +1353,7 @@ public class Migrator {
         ctpn38.setIdChiTietSp(ctsp38);
         ctpn38.setIdPhieuNhap(pn2);
         ctpn38.setSoLuong(200);
-        ctpn38.setMaSanPhamNhaCungCap("SP");
+        ctpn38.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn38);
 
         SanPham sanPham8 = new SanPham();
@@ -1379,7 +1379,7 @@ public class Migrator {
         ctpn39.setIdChiTietSp(ctsp39);
         ctpn39.setIdPhieuNhap(pn);
         ctpn39.setSoLuong(1000);
-        ctpn39.setMaSanPhamNhaCungCap("SP");
+        ctpn39.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn39);
 
         ChiTietSanPham ctsp40 = new ChiTietSanPham();
@@ -1406,7 +1406,7 @@ public class Migrator {
         ctpn40.setIdChiTietSp(ctsp40);
         ctpn40.setIdPhieuNhap(pn1);
         ctpn40.setSoLuong(200);
-        ctpn40.setMaSanPhamNhaCungCap("SP");
+        ctpn40.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn40);
 
         ChiTietSanPham ctsp41 = new ChiTietSanPham();
@@ -1427,7 +1427,7 @@ public class Migrator {
         ctpn41.setIdChiTietSp(ctsp41);
         ctpn41.setIdPhieuNhap(pn3);
         ctpn41.setSoLuong(1000);
-        ctpn41.setMaSanPhamNhaCungCap("SP");
+        ctpn41.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn41);
 
         ChiTietSanPham ctsp42 = new ChiTietSanPham();
@@ -1454,7 +1454,7 @@ public class Migrator {
         ctpn42.setIdChiTietSp(ctsp42);
         ctpn42.setIdPhieuNhap(pn4);
         ctpn42.setSoLuong(200);
-        ctpn42.setMaSanPhamNhaCungCap("SP");
+        ctpn42.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn42);
 
         ChiTietSanPham ctsp43 = new ChiTietSanPham();
@@ -1481,7 +1481,7 @@ public class Migrator {
         ctpn43.setIdChiTietSp(ctsp43);
         ctpn43.setIdPhieuNhap(pn2);
         ctpn43.setSoLuong(200);
-        ctpn43.setMaSanPhamNhaCungCap("SP");
+        ctpn43.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn43);
 
         SanPham sanPham9 = new SanPham();
@@ -1507,7 +1507,7 @@ public class Migrator {
         ctpn44.setIdChiTietSp(ctsp44);
         ctpn44.setIdPhieuNhap(pn);
         ctpn44.setSoLuong(1000);
-        ctpn44.setMaSanPhamNhaCungCap("SP");
+        ctpn44.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn44);
 
         ChiTietSanPham ctsp45 = new ChiTietSanPham();
@@ -1534,7 +1534,7 @@ public class Migrator {
         ctpn45.setIdChiTietSp(ctsp45);
         ctpn45.setIdPhieuNhap(pn1);
         ctpn45.setSoLuong(200);
-        ctpn45.setMaSanPhamNhaCungCap("SP");
+        ctpn45.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn45);
 
         ChiTietSanPham ctsp46 = new ChiTietSanPham();
@@ -1555,7 +1555,7 @@ public class Migrator {
         ctpn46.setIdChiTietSp(ctsp46);
         ctpn46.setIdPhieuNhap(pn3);
         ctpn46.setSoLuong(1000);
-        ctpn46.setMaSanPhamNhaCungCap("SP");
+        ctpn46.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn46);
 
         ChiTietSanPham ctsp47 = new ChiTietSanPham();
@@ -1582,7 +1582,7 @@ public class Migrator {
         ctpn47.setIdChiTietSp(ctsp47);
         ctpn47.setIdPhieuNhap(pn4);
         ctpn47.setSoLuong(200);
-        ctpn47.setMaSanPhamNhaCungCap("SP");
+        ctpn47.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn47);
 
         ChiTietSanPham ctsp48 = new ChiTietSanPham();
@@ -1609,7 +1609,7 @@ public class Migrator {
         ctpn49.setIdChiTietSp(ctsp48);
         ctpn49.setIdPhieuNhap(pn2);
         ctpn49.setSoLuong(200);
-        ctpn49.setMaSanPhamNhaCungCap("SP");
+        ctpn49.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn49);
 
         SanPham sanPham10 = new SanPham();
@@ -1635,7 +1635,7 @@ public class Migrator {
         ctpn50.setIdChiTietSp(ctsp50);
         ctpn50.setIdPhieuNhap(pn);
         ctpn50.setSoLuong(1000);
-        ctpn50.setMaSanPhamNhaCungCap("SP");
+        ctpn50.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn50);
 
         ChiTietSanPham ctsp51 = new ChiTietSanPham();
@@ -1662,7 +1662,7 @@ public class Migrator {
         ctpn51.setIdChiTietSp(ctsp51);
         ctpn51.setIdPhieuNhap(pn1);
         ctpn51.setSoLuong(200);
-        ctpn51.setMaSanPhamNhaCungCap("SP");
+        ctpn51.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn51);
 
         ChiTietSanPham ctsp52 = new ChiTietSanPham();
@@ -1683,7 +1683,7 @@ public class Migrator {
         ctpn52.setIdChiTietSp(ctsp52);
         ctpn52.setIdPhieuNhap(pn3);
         ctpn52.setSoLuong(1000);
-        ctpn52.setMaSanPhamNhaCungCap("SP");
+        ctpn52.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn52);
 
         ChiTietSanPham ctsp53 = new ChiTietSanPham();
@@ -1710,7 +1710,7 @@ public class Migrator {
         ctpn53.setIdChiTietSp(ctsp53);
         ctpn53.setIdPhieuNhap(pn4);
         ctpn53.setSoLuong(200);
-        ctpn53.setMaSanPhamNhaCungCap("SP");
+        ctpn53.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn53);
 
         ChiTietSanPham ctsp54 = new ChiTietSanPham();
@@ -1737,7 +1737,7 @@ public class Migrator {
         ctpn54.setIdChiTietSp(ctsp54);
         ctpn54.setIdPhieuNhap(pn2);
         ctpn54.setSoLuong(200);
-        ctpn54.setMaSanPhamNhaCungCap("SP");
+        ctpn54.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn54);
 
         SanPham sanPham11 = new SanPham();
@@ -1755,13 +1755,13 @@ public class Migrator {
         session.save(pn5);
 
         PhieuNhap pn6 = new PhieuNhap();
-        pn5.setGhiChu("Giày đẹp");
-        pn5.setMaPhieu(MaTuSinh.gen("PN"));
-        pn5.setNgayTao(DateTimeUtil.convertDateToTimeStampSecond());
-        pn5.setNhaCungCap(ncc);
-        pn5.setNhanVien(nhanVien1);
-        pn5.setTrangThai(TrangThaiPhieuConstant.CHO_THANH_TOAN);
-        session.save(pn5);
+        pn6.setGhiChu("Giày đẹp");
+        pn6.setMaPhieu(MaTuSinh.gen("PN"));
+        pn6.setNgayTao(DateTimeUtil.convertDateToTimeStampSecond());
+        pn6.setNhaCungCap(ncc);
+        pn6.setNhanVien(nhanVien1);
+        pn6.setTrangThai(TrangThaiPhieuConstant.CHO_THANH_TOAN);
+        session.save(pn6);
 
         ChiTietSanPham ctsp55 = new ChiTietSanPham();
         ctsp55.setDonVi(dv3);
@@ -1781,7 +1781,7 @@ public class Migrator {
         ctpn55.setIdChiTietSp(ctsp55);
         ctpn55.setIdPhieuNhap(pn5);
         ctpn55.setSoLuong(200);
-        ctpn55.setMaSanPhamNhaCungCap("SP");
+        ctpn55.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn55);
 
         SanPham sanPham12 = new SanPham();
@@ -1812,7 +1812,7 @@ public class Migrator {
         ctpn57.setIdChiTietSp(ctsp57);
         ctpn57.setIdPhieuNhap(pn5);
         ctpn57.setSoLuong(200);
-        ctpn57.setMaSanPhamNhaCungCap("SP");
+        ctpn57.setMaSanPhamNhaCungCap(MaTuSinh.gen("SP"));
         session.save(ctpn57);
 
         SanPham sanPham14 = new SanPham();
@@ -1847,7 +1847,7 @@ public class Migrator {
 
         SanPham sanPham20 = new SanPham();
         sanPham20.setMa(MaTuSinh.gen("SP"));
-        sanPham20.setTen("Giày lười");
+        sanPham20.setTen("Giày nhóm 5");
         session.save(sanPham20);
 
         trans.commit();

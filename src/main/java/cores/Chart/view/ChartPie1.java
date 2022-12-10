@@ -1,8 +1,6 @@
 package cores.Chart.view;
 
-import cores.Chart.item.ItemChartPie;
 import cores.Chart.item.ItemChartPie1;
-import cores.Chart.model.ModelChartPie;
 import cores.Chart.model.ModelChartPie1;
 import java.awt.Color;
 import java.awt.Graphics;
