@@ -274,8 +274,6 @@ public class TP_KhachHangServiceImpl implements TP_KhachHangService {
     public TP_KhachHangCustom checkValidateUpdate(TP_KhachHangCustom kh, JLabel erroMa, JLabel erroTen, JLabel erroSDT, JLabel erroEmail, JLabel erroDiaChi, JLabel erroMatKhau, JLabel erroNgaySinh) {
         boolean check = true;
 
-     
-        
 
         if (kh.getTen().trim().length() == 0) {
             erroTen.setText("Tên không được để trống");
