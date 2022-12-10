@@ -9,6 +9,7 @@ import infrastructures.constant.KhachHangConstant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import utilities.Converter;
 import utilities.palette.Combobox;
 
 /**
@@ -64,18 +65,18 @@ public class TpQuanlyNhaCungCapServiceImpl implements TpQuanlyNhaCungCapService 
     @Override
     public void loadComboxDanhGia(Combobox cbbDanhGia) {
         cbbDanhGia.removeAll();
-        cbbDanhGia.addItem(DanhGiaConstant.BAT_ON);
-        cbbDanhGia.addItem(DanhGiaConstant.TAM_ON);
-        cbbDanhGia.addItem(DanhGiaConstant.TOT);
-        cbbDanhGia.addItem(DanhGiaConstant.XAU);
+        cbbDanhGia.addItem(Converter.trangThaiDanhGia(DanhGiaConstant.BAT_ON));
+        cbbDanhGia.addItem(Converter.trangThaiDanhGia(DanhGiaConstant.TAM_ON));
+        cbbDanhGia.addItem(Converter.trangThaiDanhGia(DanhGiaConstant.TOT));
+        cbbDanhGia.addItem(Converter.trangThaiDanhGia(DanhGiaConstant.XAU));
     }
 
     @Override
     public void loadComboxTrangThai(Combobox cbbTrangThai) {
         cbbTrangThai.removeAll();
-        cbbTrangThai.addItem(KhachHangConstant.DANG_LAM_VIEC);
-        cbbTrangThai.addItem(KhachHangConstant.DA_NGUNG_CUNG_CAP);
-        cbbTrangThai.addItem(KhachHangConstant.SAP_BO);
+        cbbTrangThai.addItem(Converter.trangThaiKhachHang(KhachHangConstant.DANG_LAM_VIEC));
+        cbbTrangThai.addItem(Converter.trangThaiKhachHang(KhachHangConstant.DA_NGUNG_CUNG_CAP));
+        cbbTrangThai.addItem(Converter.trangThaiKhachHang(KhachHangConstant.SAP_BO));
 
     }
 
