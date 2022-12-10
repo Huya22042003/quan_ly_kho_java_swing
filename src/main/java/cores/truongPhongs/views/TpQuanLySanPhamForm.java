@@ -70,9 +70,9 @@ public final class TpQuanLySanPhamForm extends javax.swing.JPanel {
         String[] headers = {"STT", "Mã", "Tên", "Giá Nhập", "Giá Bán", "Số lượng"};
         dtm.setColumnIdentifiers(headers);
         clearForm();
-        loadIndexSp();
+        
         showData(serviceSanPham.phanTrang(listSanPham, offsetSp, limitSp));
-
+        loadIndexSp();
         // chi tiet sp
         esps = new ExportSanPhamServiceImpl();
         tbChiTietSanPham.setModel(dtmCtsp);
@@ -106,7 +106,7 @@ public final class TpQuanLySanPhamForm extends javax.swing.JPanel {
     }
 
     public void clearFormCtsp() {
-        listChiTietSP = serviceChiTietSP.getAll(this.serviceSanPham.phanTrang(listSanPham, offset, limit).get(tbSanPham.getSelectedRow()).getId(), "", "", "", "", "");
+        listChiTietSP = serviceChiTietSP.getAll(this.serviceSanPham.phanTrang(listSanPham, offsetSp, limitSp).get(tbSanPham.getSelectedRow()).getId(), "", "", "", "", "");
         sizes = listChiTietSP.size();
         offset = 0;
         index = 1;
@@ -114,8 +114,20 @@ public final class TpQuanLySanPhamForm extends javax.swing.JPanel {
     }
 
     private void loadIndexCtsp() {
-        sizes = listChiTietSP.size();
-        this.txtIndex.setText(String.valueOf(index) + " / " + (Math.round((sizes / limit) + 0.5)));
+        this.txtIndexCtsp.setText(String.valueOf(index) + " / " + (Math.round((sizes / limit) + 0.5)));
+    }
+    
+    
+    private void loadIndexSp() {
+        this.txtIndex.setText(String.valueOf(indexSp) + " / " + (Math.round((sizesSp / limitSp) + 0.5)));
+    }
+
+    public void clearForm() {
+        listSanPham = serviceSanPham.getAll("");
+        sizesSp = listSanPham.size();
+        offsetSp = 0;
+        indexSp = 1;
+        loadIndexSp();
     }
 
     public void showDataCtsp(List<TpQuanLyChiTietSanPhamCustom> list) {
@@ -153,14 +165,6 @@ public final class TpQuanLySanPhamForm extends javax.swing.JPanel {
         tbChiTietSanPham.addMouseListener(e);
     }
 
-    public void clearForm() {
-        listSanPham = serviceSanPham.getAll("");
-        sizesSp = listSanPham.size();
-        offsetSp = 0;
-        indexSp = 1;
-        loadIndexSp();
-    }
-
     public TpQuanLySanPhamCustom getFormData() {
         TpQuanLySanPhamCustom sp = new TpQuanLySanPhamCustom();
         sp.setMa(this.txtMa.getText());
@@ -175,11 +179,6 @@ public final class TpQuanLySanPhamForm extends javax.swing.JPanel {
         sp.setTen(txtTenUpdate.getText());
 
         return sp;
-    }
-
-    private void loadIndexSp() {
-        sizesSp = listSanPham.size();
-        this.txtIndex.setText(String.valueOf(indexSp) + " / " + (Math.round((sizesSp / limitSp) + 0.5)));
     }
 
     @SuppressWarnings("unchecked")
@@ -198,7 +197,7 @@ public final class TpQuanLySanPhamForm extends javax.swing.JPanel {
         tbChiTietSanPham = new utilities.palette.TableDark_1();
         panelRound6 = new utilities.palette.PanelRound();
         jLabel3 = new javax.swing.JLabel();
-        txtIndex1 = new javax.swing.JLabel();
+        txtIndexCtsp = new javax.swing.JLabel();
         uWPButton6 = new utilities.palette.UWPButton();
         uWPButton7 = new utilities.palette.UWPButton();
         diaLogSearchCtsp = new javax.swing.JDialog();
@@ -387,7 +386,7 @@ public final class TpQuanLySanPhamForm extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        txtIndex1.setText("hihi");
+        txtIndexCtsp.setText("hihi");
 
         uWPButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/skip-next-circle-solid-24.png"))); // NOI18N
         uWPButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -411,7 +410,7 @@ public final class TpQuanLySanPhamForm extends javax.swing.JPanel {
                 .addGap(326, 335, Short.MAX_VALUE)
                 .addComponent(uWPButton7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(101, 101, 101)
-                .addComponent(txtIndex1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtIndexCtsp, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(92, 92, 92)
                 .addComponent(uWPButton6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(478, Short.MAX_VALUE))
@@ -437,7 +436,7 @@ public final class TpQuanLySanPhamForm extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(uWPButton7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtIndex1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtIndexCtsp, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(uWPButton6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30))
         );
@@ -1359,7 +1358,7 @@ public final class TpQuanLySanPhamForm extends javax.swing.JPanel {
     private javax.swing.JLabel test1;
     private utilities.palette.TextField txtEmailNcc;
     private javax.swing.JLabel txtIndex;
-    private javax.swing.JLabel txtIndex1;
+    private javax.swing.JLabel txtIndexCtsp;
     private utilities.palette.TextField txtMa;
     private utilities.palette.TextField txtMaNcc;
     private utilities.palette.TextField txtMaSpNcc;

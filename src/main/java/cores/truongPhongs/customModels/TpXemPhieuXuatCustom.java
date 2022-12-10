@@ -2,7 +2,6 @@ package cores.truongPhongs.customModels;
 
 import infrastructures.constant.DanhGiaConstant;
 import infrastructures.constant.GioiTinhConstant;
-import infrastructures.constant.KhachHangConstant;
 import infrastructures.constant.TrangThaiPhieuConstant;
 import java.util.UUID;
 import lombok.AllArgsConstructor;

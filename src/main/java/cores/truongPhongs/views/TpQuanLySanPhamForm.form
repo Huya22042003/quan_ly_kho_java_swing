@@ -51,7 +51,7 @@
                       <EmptySpace min="326" pref="335" max="32767" attributes="0"/>
                       <Component id="uWPButton7" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
-                      <Component id="txtIndex1" min="-2" pref="36" max="-2" attributes="0"/>
+                      <Component id="txtIndexCtsp" min="-2" pref="36" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
                       <Component id="uWPButton6" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="478" max="32767" attributes="0"/>
@@ -83,7 +83,7 @@
                       <EmptySpace pref="74" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="uWPButton7" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtIndex1" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
+                          <Component id="txtIndexCtsp" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
                           <Component id="uWPButton6" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
@@ -290,7 +290,7 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JLabel" name="txtIndex1">
+            <Component class="javax.swing.JLabel" name="txtIndexCtsp">
               <Properties>
                 <Property name="text" type="java.lang.String" value="hihi"/>
               </Properties>
