@@ -28,8 +28,10 @@ public class NvqlLuongKiemKeCtspRepository {
                 + " m.mau as mau,"
                 + " m.namBaoHanh as namBaoHanh,"
                 + " m.GiaBan as giaBan,"
+                + " m.GiaNhap as giaNhap,"
                 + " m.size as size, "
-                + " m.ngayTao as ngayTao) "
+                + " m.ngayTao as ngayTao,"
+                + " m.trangThai as trangThai) "
                 + " from domainModels.ChiTietSanPham m "
                 + " WHERE m.trangThai = :trangThai "
                 + " ORDER BY m.soLuongTon DESC");

@@ -383,12 +383,14 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
         panelRound9.setRoundTopLeft(50);
         panelRound9.setRoundTopRight(50);
 
-        rdoNgayTao.setBackground(new java.awt.Color(255, 153, 0));
+        rdoNgayTao.setBackground(new java.awt.Color(67, 130, 187));
         buttonGroup2.add(rdoNgayTao);
+        rdoNgayTao.setForeground(new java.awt.Color(255, 255, 255));
         rdoNgayTao.setText("Ngày Tạo");
 
-        rdoNgayThanhToan.setBackground(new java.awt.Color(255, 102, 0));
+        rdoNgayThanhToan.setBackground(new java.awt.Color(67, 130, 187));
         buttonGroup2.add(rdoNgayThanhToan);
+        rdoNgayThanhToan.setForeground(new java.awt.Color(255, 255, 255));
         rdoNgayThanhToan.setSelected(true);
         rdoNgayThanhToan.setText("Ngày Thanh Toán");
 
@@ -400,8 +402,10 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
             }
         });
 
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("From:");
 
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("To:");
 
         btnSearch2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Search.png"))); // NOI18N

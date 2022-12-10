@@ -10,12 +10,26 @@ import cores.nhanVienQuanLy.services.serviceImpls.NvqlLuongKiemKeCtspServiceImpl
 import domainModels.ChiTietSanPham;
 import domainModels.PhieuKiemKe;
 import infrastructures.constant.TrangThaiSanPhamConstanst;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.xssf.usermodel.XSSFFont;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import utilities.Converter;
 import utilities.Page;
 import utilities.palette.SearchCustom.EventCallBack;
@@ -38,6 +52,8 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
     private NvqlKiemKeCtpkView ctpkView;
     private NvqlLuongKiemKeCtpkService ctpkService;
     private Page p;
+    String pattern = "yyyy-MM-dd HH:mm:ss";
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
     private int limit = 7;
 
     private int offset = 0;
@@ -57,7 +73,7 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
         ctspService = new NvqlLuongKiemKeCtspServiceImpl();
         ctpkService = new NvqlLuongKiemKeCtpkServiceImpl();
         clearForm();
-          txtSearch.addEvent(new EventTextField() {
+        txtSearch.addEvent(new EventTextField() {
             @Override
             public void onPressed(EventCallBack call) {
                 //  Test
@@ -158,6 +174,7 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
         rdoTen = new utilities.palette.RadioButtonCustom();
         rdoMa = new utilities.palette.RadioButtonCustom();
         txtSearch = new utilities.palette.SearchCustom.TextFieldAnimation();
+        btnExportExcelDSSP = new utilities.palette.MyButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -536,6 +553,18 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        btnExportExcelDSSP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Print.png"))); // NOI18N
+        btnExportExcelDSSP.setToolTipText("In danh sách sản phẩm");
+        btnExportExcelDSSP.setBorderColor(new java.awt.Color(221, 242, 244));
+        btnExportExcelDSSP.setColor(new java.awt.Color(221, 242, 244));
+        btnExportExcelDSSP.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnExportExcelDSSP.setRadius(50);
+        btnExportExcelDSSP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExportExcelDSSPActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -551,7 +580,9 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
                                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(12, 12, 12)
-                                        .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(btnExportExcelDSSP, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(panelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(4, 4, 4))
@@ -588,6 +619,8 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
                             .addComponent(panelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(34, 34, 34)
+                                .addComponent(btnExportExcelDSSP, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, Short.MAX_VALUE)
@@ -661,7 +694,7 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
         clearForm();
     }//GEN-LAST:event_btnHienThiActionPerformed
 
-       public void timKiemTheoGia() {
+    public void timKiemTheoGia() {
         if (txtGiaFrom.getText().trim().length() == 0) {
             return;
         }
@@ -670,7 +703,7 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
         }
         String giaFrom = txtGiaFrom.getText().toString();
         String giaTo = txtGiaTo.getText().toString();
-           BigDecimal giaF;
+        BigDecimal giaF;
         BigDecimal giaT;
         try {
             giaF = new BigDecimal(giaFrom);
@@ -717,7 +750,8 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
         listChiTietSanPham = ctspService.findAllByKhAndNV(timKiem, rdo);
         return listChiTietSanPham;
     }
-        public void searchhRadio() {
+
+    public void searchhRadio() {
         if (rdoMa.isSelected()) {
             fillTableSanPham(getListByTT(0));
         }
@@ -799,8 +833,113 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
 
     private void rdoTenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoTenActionPerformed
         searchhRadio();
-            // TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_rdoTenActionPerformed
+
+    private void btnExportExcelDSSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportExcelDSSPActionPerformed
+        File file;
+        FileInputStream fis = null;
+        BufferedInputStream bis = null;
+        XSSFWorkbook wb = null;
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        int results = fileChooser.showOpenDialog(this);
+        if (results == JFileChooser.APPROVE_OPTION) {
+            file = fileChooser.getSelectedFile();
+            try {
+                XSSFWorkbook workbook = new XSSFWorkbook();
+                XSSFSheet spreadsheet = workbook.createSheet("ChiTietSP");
+
+                XSSFRow row = null;
+                Cell cell = null;
+
+                XSSFFont headerFont = workbook.createFont();
+                headerFont.setBold(true);
+                headerFont.setFontHeightInPoints((short) 14);
+                headerFont.setColor(IndexedColors.RED.getIndex());
+                CellStyle headerCellStyle = workbook.createCellStyle();
+                headerCellStyle.setFont(headerFont);
+
+                XSSFFont tieuDe = workbook.createFont();
+                tieuDe.setBold(true);
+                tieuDe.setFontHeightInPoints((short) 18);
+                tieuDe.setColor(IndexedColors.BLACK.getIndex());
+                CellStyle tieuDeStyle = workbook.createCellStyle();
+                tieuDeStyle.setFont(tieuDe);
+
+                row = spreadsheet.createRow((short) 2);
+                row.setHeight((short) 500);
+                cell = row.createCell(3, CellType.STRING);
+                cell.setCellValue("Danh sách chi tiết sản phẩm");
+                cell.setCellStyle(tieuDeStyle);
+                row = spreadsheet.createRow((short) 3);
+                row.setHeight((short) 500);
+                cell = row.createCell(0, CellType.STRING);
+                cell.setCellValue("STT");
+                cell.setCellStyle(headerCellStyle);
+                cell = row.createCell(1, CellType.STRING);
+                cell.setCellValue("Mã SP");
+                cell.setCellStyle(headerCellStyle);
+                cell = row.createCell(2, CellType.STRING);
+                cell.setCellValue("Tên SP");
+                cell.setCellStyle(headerCellStyle);
+                cell = row.createCell(3, CellType.STRING);
+                cell.setCellValue("Sl Tồn");
+                cell.setCellStyle(headerCellStyle);
+                cell = row.createCell(4, CellType.STRING);
+                cell.setCellValue("Đơn vị");
+                cell.setCellStyle(headerCellStyle);
+                cell = row.createCell(5, CellType.STRING);
+                cell.setCellValue("Màu");
+                cell.setCellStyle(headerCellStyle);
+                cell = row.createCell(6, CellType.STRING);
+                cell.setCellValue("Năm BH");
+                cell.setCellStyle(headerCellStyle);
+                cell = row.createCell(7, CellType.STRING);
+                cell.setCellValue("Giá nhập");
+                cell.setCellStyle(headerCellStyle);
+                cell = row.createCell(8, CellType.STRING);
+                cell.setCellValue("Giá bán");
+                cell.setCellStyle(headerCellStyle);
+                cell = row.createCell(9, CellType.STRING);
+                cell.setCellValue("Size");
+                cell.setCellStyle(headerCellStyle);
+                cell = row.createCell(10, CellType.STRING);
+                cell.setCellValue("Ngày nhập");
+                cell.setCellStyle(headerCellStyle);
+                cell = row.createCell(11, CellType.STRING);
+                cell.setCellValue("Trạng thái");
+                cell.setCellStyle(headerCellStyle);
+                cell = row.createCell(12, CellType.STRING);
+                cell.setCellValue("Số lượng thực kiểm");
+                cell.setCellStyle(headerCellStyle);
+                for (int i = 0; i < listChiTietSanPham.size(); i++) {
+                    NvqlLuongKiemKeCtspCustom ctcp = listChiTietSanPham.get(i);
+                    row = spreadsheet.createRow((short) 4 + i);
+                    row.setHeight((short) 400);
+                    row.createCell(0).setCellValue(i + 1);
+                    row.createCell(1).setCellValue(ctcp.getMa());
+                    row.createCell(2).setCellValue(ctcp.getTen());
+                    row.createCell(3).setCellValue(ctcp.getSoLuongTon());
+                    row.createCell(4).setCellValue(ctcp.getDonVi().getDonViGoc());
+                    row.createCell(5).setCellValue(Converter.trangThaiMauSac(ctcp.getMau()));
+                    row.createCell(6).setCellValue(ctcp.getNamBaoHanh());
+                    row.createCell(7).setCellValue(ctcp.getGiaBan() == null ? "Chưa có" : formatter.format(ctcp.getGiaBan()));
+                    row.createCell(8).setCellValue(formatter.format(ctcp.getGiaNhap()));
+                    row.createCell(9).setCellValue(String.valueOf(ctcp.getSize()));
+                    row.createCell(10).setCellValue(ctcp.getNgayTao() == null ? "Chưa có" : simpleDateFormat.format(ctcp.getNgayTao()));
+                    row.createCell(11).setCellValue(Converter.trangThaiSanPham(ctcp.getTrangThai()));
+                }
+                FileOutputStream out = new FileOutputStream(file + "/ExportSanPham.xlsx");
+                workbook.write(out);
+                out.close();
+                JOptionPane.showMessageDialog(this, "Xuất file excel thành công");
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Xuất file excel thất bại");
+            }
+        }
+    }//GEN-LAST:event_btnExportExcelDSSPActionPerformed
 
     /**
      * @param args the command line arguments
@@ -846,6 +985,7 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private utilities.palette.UWPButton btnAnh;
+    private utilities.palette.MyButton btnExportExcelDSSP;
     private utilities.palette.MyButton btnHienThi;
     private utilities.palette.UWPButton btnNext;
     private utilities.palette.UWPButton btnPre;
