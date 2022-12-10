@@ -23,6 +23,7 @@ public class NVQLQuanLyPhieuXuatRepository {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery("SELECT new cores.nhanVienQuanLy.customModels.PhieuXuatCustom("
                 + "px.id as id,"
+                + "px.maPhieu as maPhieu,"
                 + "px.ngayTao as ngayTao,"
                 + "px.ghiChu as ghiChu,"
                 + "px.ngayThanhToan as ngayThanhToan,"
@@ -34,11 +35,12 @@ public class NVQLQuanLyPhieuXuatRepository {
         List<PhieuXuatCustom> list = query.getResultList();
         return list;
     }
-        public List<PhieuXuatCustom> getListDaThanhToan() {
+
+    public List<PhieuXuatCustom> getListDaThanhToan() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery("SELECT new cores.nhanVienQuanLy.customModels.PhieuXuatCustom("
                 + "px.id as id,"
-                + "px.maPhieu as ma,"
+                + "px.maPhieu as maPhieu,"
                 + "px.ngayTao as ngayTao,"
                 + "px.ghiChu as ghiChu,"
                 + "px.ngayThanhToan as ngayThanhToan,"
@@ -56,6 +58,7 @@ public class NVQLQuanLyPhieuXuatRepository {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery("SELECT new cores.nhanVienQuanLy.customModels.PhieuXuatCustom("
                 + "px.id as id,"
+                + "px.maPhieu as maPhieu,"
                 + "px.ngayTao as ngayTao,"
                 + "px.ghiChu as ghiChu,"
                 + "px.ngayThanhToan as ngayThanhToan,"
@@ -74,6 +77,7 @@ public class NVQLQuanLyPhieuXuatRepository {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery("SELECT new cores.nhanVienQuanLy.customModels.PhieuXuatCustom("
                 + "px.id as id,"
+                + "px.maPhieu as maPhieu,"
                 + "px.ngayTao as ngayTao,"
                 + "px.ghiChu as ghiChu,"
                 + "px.ngayThanhToan as ngayThanhToan,"
@@ -141,6 +145,7 @@ public class NVQLQuanLyPhieuXuatRepository {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Query query = session.createQuery("SELECT new cores.nhanVienQuanLy.customModels.PhieuXuatCustom("
                     + "px.id as id,"
+                    + "px.maPhieu as maPhieu,"
                     + "px.ngayTao as ngayTao,"
                     + "px.ghiChu as ghiChu,"
                     + "px.ngayThanhToan as ngayThanhToan,"
@@ -172,19 +177,20 @@ public class NVQLQuanLyPhieuXuatRepository {
         return listKh;
     }
 
-    public List<PhieuXuatCustom> findAllByIdPhieu(String id,TrangThaiPhieuConstant tt) {
+    public List<PhieuXuatCustom> findAllByMaPhieu(String ma, TrangThaiPhieuConstant tt) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery("SELECT new cores.nhanVienQuanLy.customModels.PhieuXuatCustom("
                 + "px.id as id,"
+                + "px.maPhieu as maPhieu,"
                 + "px.ngayTao as ngayTao,"
                 + "px.ghiChu as ghiChu,"
                 + "px.ngayThanhToan as ngayThanhToan,"
                 + "px.trangThai as trangThai,"
                 + "px.nhanVien as nhanVien,"
                 + "px.khachHang as khachHang"
-                + ") FROM domainModels.PhieuXuat px WHERE convert(varchar(255), px.id) LIKE CONCAT('%',:id,'%') AND px.trangThai =:tt"
+                + ") FROM domainModels.PhieuXuat px WHERE px.maPhieu LIKE CONCAT('%',:ma,'%') AND px.trangThai =:tt"
                 + " ORDER BY px.ngayTao DESC");
-        query.setParameter("id", id);
+        query.setParameter("ma", ma);
         query.setParameter("tt", tt);
         List<PhieuXuatCustom> list = query.getResultList();
         return list;
@@ -194,6 +200,7 @@ public class NVQLQuanLyPhieuXuatRepository {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery("SELECT new cores.nhanVienQuanLy.customModels.PhieuXuatCustom("
                 + "px.id as id,"
+                + "px.maPhieu as maPhieu,"
                 + "px.ngayTao as ngayTao,"
                 + "px.ghiChu as ghiChu,"
                 + "px.ngayThanhToan as ngayThanhToan,"
@@ -212,6 +219,7 @@ public class NVQLQuanLyPhieuXuatRepository {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery("SELECT new cores.nhanVienQuanLy.customModels.PhieuXuatCustom("
                 + "px.id as id,"
+                + "px.maPhieu as maPhieu,"
                 + "px.ngayTao as ngayTao,"
                 + "px.ghiChu as ghiChu,"
                 + "px.ngayThanhToan as ngayThanhToan,"

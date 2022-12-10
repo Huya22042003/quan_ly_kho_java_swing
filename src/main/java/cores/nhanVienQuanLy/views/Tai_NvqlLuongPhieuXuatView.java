@@ -47,6 +47,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import utilities.Converter;
 import utilities.DateTimeUtil;
+import utilities.MaTuSinh;
 import utilities.MsgBox;
 import utilities.Page;
 
@@ -110,7 +111,7 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
             Date ngayNhan = new Date(el.getNgayTao());
             Object[] rowData = {
                 dtm.getRowCount() + 1,
-                el.getId(),
+                el.getMaPhieu()== null ? "Không có mã" : el.getMaPhieu(),
                 simpleDateFormat.format(ngayNhan),
                 el.getNgayThanhToan() == null ? "Chưa thanh toán" : simpleDateFormat.format(el.getNgayThanhToan()),
                 Converter.TrangThaiPhieuXuat(el.getTrangThai()),
@@ -634,7 +635,7 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
             panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(cbbTrangThai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cbbTrangThai, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1242,8 +1243,7 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
             tien += ctpx.getIdChiTietSp().getGiaBan().multiply(new BigDecimal(ctpx.getSoLuong())).doubleValue();
         }
         int tongTien = (int) tien;
-
-        txtTienPhaitra.setText(tongTien + "");
+        txtTienPhaitra.setText(formatter.format(tongTien) + "");
         if (px.getTrangThai() == TrangThaiPhieuConstant.CHO_THANH_TOAN && tongTien != 0) {
             btnThanhToan.setEnabled(true);
             txtTienKhachDua.setEditable(true);
@@ -1266,6 +1266,9 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
         }
         String tienKhachDua = txtTienKhachDua.getText();
         String tienPhaiTra = txtTienPhaitra.getText();
+        if (tienKhachDua.trim().length()==0) {
+            MsgBox.alert(this, "Bạn phải nhập tiền trước khi bấm nút thanh toán");
+        }
         double tienKhach = 0;
         try {
             tienKhach = Double.parseDouble(tienKhachDua);
