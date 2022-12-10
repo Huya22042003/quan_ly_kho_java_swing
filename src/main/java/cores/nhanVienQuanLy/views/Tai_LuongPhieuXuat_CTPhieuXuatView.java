@@ -426,7 +426,6 @@ public class Tai_LuongPhieuXuat_CTPhieuXuatView extends javax.swing.JFrame {
             return;
         }
         txtMaPhieu.setText(tblCTPhieuXuat.getValueAt(row, 1).toString());
-        txtIDSP.setText(tblCTPhieuXuat.getValueAt(row, 2).toString());
         txtGiaBan.setText(tblCTPhieuXuat.getValueAt(row, 4).toString());
         txtNamBH.setText(tblCTPhieuXuat.getValueAt(row, 5).toString());
         txtMau.setText(tblCTPhieuXuat.getValueAt(row, 6).toString());
