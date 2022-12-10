@@ -2,14 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package cores.truongPhongs.services.serviceImpls;
+package cores.nhanVienQuanLy.services.serviceImpls;
 
+import cores.nhanVienQuanLy.repositories.Tai_ChiTietSanPhamRepository;
+import cores.nhanVienQuanLy.services.Tai_ChiTietSanPhamService;
 import cores.truongPhongs.customModels.TpQuanLyChiTietSanPhamCustom;
 import cores.truongPhongs.customModels.TpQuanLyDonViCustom;
 import cores.truongPhongs.customModels.TpQuanLySanPhamCustom;
 import cores.truongPhongs.customModels.TpXemChiTietSanPhamCustom;
-import cores.truongPhongs.repositories.TpQuanLyChiTietSanPhamRepository;
-import cores.truongPhongs.services.TP_ChiTietSPService;
 import domainModels.ChiTietSanPham;
 import domainModels.DonVi;
 import domainModels.SanPham;
@@ -22,15 +22,19 @@ import java.util.List;
 import java.util.UUID;
 import javax.swing.JLabel;
 import utilities.Converter;
-import utilities.DateTimeUtil;
 import utilities.palette.Combobox;
 
 /**
  *
- * @author asus
+ * @author admin
  */
-public class TP_ChiTietSPServiceImpl implements TP_ChiTietSPService{
-    private TpQuanLyChiTietSanPhamRepository rp = new TpQuanLyChiTietSanPhamRepository();
+public class Tai_ChiTietSanPhamServiceImpl implements Tai_ChiTietSanPhamService {
+
+    private Tai_ChiTietSanPhamRepository rp;
+
+    public Tai_ChiTietSanPhamServiceImpl() {
+        rp = new Tai_ChiTietSanPhamRepository();
+    }
 
     @Override
     public List<TpQuanLyChiTietSanPhamCustom> getAll(UUID idSp) {
@@ -40,25 +44,6 @@ public class TP_ChiTietSPServiceImpl implements TP_ChiTietSPService{
     @Override
     public TpQuanLyChiTietSanPhamCustom addCTSanPham(TpQuanLyChiTietSanPhamCustom custom) {
         ChiTietSanPham sp = new ChiTietSanPham();
-        sp.setGiaBan(custom.getGiaBan());
-        sp.setGiaNhap(custom.getGiaNhap());
-        sp.setHinhAnh(custom.getHinhAnh());
-        sp.setSoLuongTon(custom.getSoLuongTon());
-        sp.setMau(custom.convertMau());
-        custom.setDoViQuyDoi(sp.getDonVi().getDonViQuyDoi());
-        sp.setNamBaoHanh(custom.getNamBaoHanh());
-        custom.setMaSpNcc(sp.getSanPham().getMa());
-//        sp.setNgayTao(DateTimeUtil.convertDateToTimeStampSecond());
-        custom.setNgayNhap(DateTimeUtil.convertDateToTimeStampSecond());
-        sp.setTrangThai(custom.convertTrangThai());
-        sp.setSize(custom.getSize());
-        custom.setId(rp.addCTSanPham(sp).getId());
-        return custom;
-    }
-
-    @Override
-    public boolean updateCTSanPham(TpQuanLyChiTietSanPhamCustom custom) {
-        ChiTietSanPham sp = new ChiTietSanPham();
 //        sp.setGiaBan(custom.getGiaBan());
 //        sp.setGiaNhap(custom.getGiaNhap());
 //        sp.setHinhAnh(custom.getHinhAnh());
@@ -67,12 +52,16 @@ public class TP_ChiTietSPServiceImpl implements TP_ChiTietSPService{
 //        sp.setDonVi(custom.getDonVi());
 //        sp.setNamBaoHanh(custom.getNamBaoHanh());
 //        sp.setSanPham(custom.getSanPham());
-//        sp.setNgayTao(custom.getNgayTao());
+//        sp.setNgayTao(DateTimeUtil.convertDateToTimeStampSecond());
 //        sp.setTrangThai(custom.getTrangThai());
 //        sp.setSize(custom.getSize());
-//        sp.setId(custom.getId());
+//        custom.setId(rp.addCTSanPham(sp).getId());
+        return custom;
+    }
 
-        return rp.updateCTSanPham(sp);
+    @Override
+    public ChiTietSanPham updateCTSanPham(UUID id, int sl) {
+        return rp.updateCTSanPham(id, sl);
     }
 
     @Override
@@ -329,4 +318,10 @@ public class TP_ChiTietSPServiceImpl implements TP_ChiTietSPService{
                 throw new AssertionError();
         }
     }
+
+    @Override
+    public List<TpQuanLyChiTietSanPhamCustom> getListCTSP() {
+        return rp.getListCTSP();
+    }
+
 }

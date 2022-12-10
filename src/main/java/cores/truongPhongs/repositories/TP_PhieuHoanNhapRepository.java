@@ -10,6 +10,7 @@ import domainModels.ChiTietSanPham;
 import domainModels.PhieuHoanNhap;
 import domainModels.PhieuNhap;
 import infrastructures.constant.TrangThaiPhieuHoanConstant;
+import infrastructures.constant.TrangThaiPhieuNhapConstant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -37,6 +38,79 @@ public class TP_PhieuHoanNhapRepository {
                 + " pn.nhanVien as nhanhVien, "
                 + " pn.nhaCungCap as nhaCungCap"
                 + ") FROM domainModels.PhieuNhap pn WHERE pn.ngayThanhToan IS NULL");
+        list = q.getResultList();
+        return list;
+    }
+    public List<TP_HoanNhap_PhieuNhapCustom> findAllPnByMaPhieu(String ma) {
+        List<TP_HoanNhap_PhieuNhapCustom> list = new ArrayList<>();
+        Session s = HibernateUtil.getSessionFactory().openSession();
+        Query q = s.createQuery("SELECT new cores.truongPhongs.customModels.TP_HoanNhap_PhieuNhapCustom ("
+                + " pn.id as id, "
+                + " pn.maPhieu as maPhieu, "
+                + " pn.ngayTao as ngayTao, "
+                + " pn.ghiChu as ghiChu, "
+                + " pn.ngayThanhToan as ngayThanhToan, "
+                + " pn.trangThai as trangThai, "
+                + " pn.nhanVien as nhanhVien, "
+                + " pn.nhaCungCap as nhaCungCap"
+                + ") FROM domainModels.PhieuNhap pn WHERE pn.ngayThanhToan IS NULL  "
+                + "and pn.maPhieu like CONCAT('%',:ma,'%')  ");
+        q.setParameter("ma", ma);
+        list = q.getResultList();
+        return list;
+    }
+    public List<TP_HoanNhap_PhieuNhapCustom> findAllPnByNcc(String ma) {
+        List<TP_HoanNhap_PhieuNhapCustom> list = new ArrayList<>();
+        Session s = HibernateUtil.getSessionFactory().openSession();
+        Query q = s.createQuery("SELECT new cores.truongPhongs.customModels.TP_HoanNhap_PhieuNhapCustom ("
+                + " pn.id as id, "
+                + " pn.maPhieu as maPhieu, "
+                + " pn.ngayTao as ngayTao, "
+                + " pn.ghiChu as ghiChu, "
+                + " pn.ngayThanhToan as ngayThanhToan, "
+                + " pn.trangThai as trangThai, "
+                + " pn.nhanVien as nhanhVien, "
+                + " pn.nhaCungCap as nhaCungCap"
+                + ") FROM domainModels.PhieuNhap pn WHERE pn.ngayThanhToan IS NULL  "
+                + "and pn.nhaCungCap.ten like CONCAT('%',:ma,'%')  ");
+        q.setParameter("ma", ma);
+        list = q.getResultList();
+        return list;
+    }
+      public List<TP_HoanNhap_PhieuNhapCustom> findAllPnByNv(String ma) {
+        List<TP_HoanNhap_PhieuNhapCustom> list = new ArrayList<>();
+        Session s = HibernateUtil.getSessionFactory().openSession();
+        Query q = s.createQuery("SELECT new cores.truongPhongs.customModels.TP_HoanNhap_PhieuNhapCustom ("
+                + " pn.id as id, "
+                + " pn.maPhieu as maPhieu, "
+                + " pn.ngayTao as ngayTao, "
+                + " pn.ghiChu as ghiChu, "
+                + " pn.ngayThanhToan as ngayThanhToan, "
+                + " pn.trangThai as trangThai, "
+                + " pn.nhanVien as nhanhVien, "
+                + " pn.nhaCungCap as nhaCungCap"
+                + ") FROM domainModels.PhieuNhap pn WHERE pn.ngayThanhToan IS NULL  "
+                + "and pn.nhanVien.ten like CONCAT('%',:ma,'%') ");
+        q.setParameter("ma", ma);
+        list = q.getResultList();
+        return list;
+    }
+      public List<TP_HoanNhap_PhieuNhapCustom> findAllPnNgayTao(Long ngayBatDau, Long ngayKetThuc) {
+        List<TP_HoanNhap_PhieuNhapCustom> list = new ArrayList<>();
+        Session s = HibernateUtil.getSessionFactory().openSession();
+        Query q = s.createQuery("SELECT new cores.truongPhongs.customModels.TP_HoanNhap_PhieuNhapCustom ("
+                + " pn.id as id, "
+                + " pn.maPhieu as maPhieu, "
+                + " pn.ngayTao as ngayTao, "
+                + " pn.ghiChu as ghiChu, "
+                + " pn.ngayThanhToan as ngayThanhToan, "
+                + " pn.trangThai as trangThai, "
+                + " pn.nhanVien as nhanhVien, "
+                + " pn.nhaCungCap as nhaCungCap"
+                + ") FROM domainModels.PhieuNhap pn WHERE pn.ngayThanhToan IS NULL  "
+                + "and pn.ngayTao > :ngayBatDau AND pn.ngayTao < :ngayKetThuc  ORDER BY pn.ngayTao DESC ");
+        q.setParameter("ngayBatDau", ngayBatDau);
+        q.setParameter("ngayKetThuc", ngayKetThuc);
         list = q.getResultList();
         return list;
     }
