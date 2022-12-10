@@ -23,7 +23,7 @@ import utilities.HibernateUtil;
  */
 public class TpQuanLyChiTietSanPhamRepository {
 
-    public List<TpQuanLyChiTietSanPhamCustom> getAll(UUID idSp, String maNcc, String tenNcc,String maSpNcc,String emailNcc,String sdtNcc) {
+    public List<TpQuanLyChiTietSanPhamCustom> getAll(UUID idSp, String maNcc, String tenNcc, String maSpNcc, String emailNcc, String sdtNcc) {
         Session s = HibernateUtil.getSessionFactory().openSession();
         Query query = s.createNativeQuery("""
                 SELECT 
@@ -60,20 +60,57 @@ public class TpQuanLyChiTietSanPhamRepository {
         List<Object[]> listQuery = query.getResultList();
         List<TpQuanLyChiTietSanPhamCustom> list = new ArrayList<>();
         listQuery.parallelStream().forEach(el -> {
-            list.add(new TpQuanLyChiTietSanPhamCustom(
-                    UUID.fromString((String) el[0]),
-                    (int) el[1],
-                    (String) el[2],
-                    (BigDecimal) el[3],
-                    (BigDecimal) el[4],
-                    (int) el[5],
-                    (String) el[6],
-                    (int) el[7],
-                    (int) el[8],
-                    (int) el[9],
-                    (String) el[10],
-                    (String) el[11],
-                    Long.valueOf(String.valueOf((BigDecimal) el[12]))
+            UUID id = null;
+            int soLuongTon = 0;
+            String hinhAnh = "";
+            BigDecimal giaNhap = (BigDecimal) el[3];
+            BigDecimal giaBan = (BigDecimal) el[4];
+            int mau = 0;
+            String doViQuyDoi = "Không có";
+            int namBaoHanh = 0;
+            int trangThai = 0;
+            int size = 0;
+            String tenNcc1 = "Chưa có";
+            String maSpNcc1 = "Chưa có";
+            Long ngayNhap = 0L;
+            
+            if(!"null".equalsIgnoreCase((String) el[0])) {
+                id = UUID.fromString((String) el[0]);
+            }
+            if(!"null".equalsIgnoreCase(String.valueOf((Integer) el[1]))) {
+                soLuongTon = (Integer) el[1];
+            }
+            if(!"null".equalsIgnoreCase((String) el[2])) {
+                hinhAnh = (String) el[2];
+            }
+            if(!"null".equalsIgnoreCase(String.valueOf((Integer) el[5]))) {
+                mau = (Integer) el[5];
+            }
+            if(!"null".equalsIgnoreCase((String) el[6])) {
+                doViQuyDoi = (String) el[6];
+            }
+            if(!"null".equalsIgnoreCase(String.valueOf((Integer) el[7]))) {
+                namBaoHanh = (Integer) el[7];
+            }
+            if(!"null".equalsIgnoreCase(String.valueOf((Integer) el[8]))) {
+                trangThai = (Integer) el[8];
+            }
+            if(!"null".equalsIgnoreCase(String.valueOf((Integer) el[9]))) {
+                size = (Integer) el[9];
+            }
+            
+            if(!"null".equalsIgnoreCase((String) el[10])) {
+                tenNcc1 = (String) el[10];
+            }
+            
+            if(!"null".equalsIgnoreCase((String) el[11])) {
+                maSpNcc1 = (String) el[11];
+            }
+            if(!"null".equalsIgnoreCase(String.valueOf((BigDecimal) el[12]))) {
+                ngayNhap = Long.valueOf(String.valueOf((BigDecimal) el[12]));
+            }
+            
+            list.add(new TpQuanLyChiTietSanPhamCustom(id, soLuongTon, hinhAnh, giaNhap, giaBan, mau, doViQuyDoi, namBaoHanh, trangThai, size, tenNcc1, maSpNcc1, ngayNhap
             ));
         });
         s.close();
