@@ -11,7 +11,9 @@ import infrastructures.constant.TrangThaiPhieuConstant;
 import infrastructures.constant.TrangThaiSanPhamConstanst;
 import java.awt.event.MouseListener;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -29,9 +31,8 @@ import utilities.palette.SearchCustom.EventTextField;
 public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
 
     private Tai_NvqlLuongPhieuXuatService luongService;
-    List<Tai_SanPhamCustom> ListSP;
+    private List<Tai_SanPhamCustom> ListSP;
     private List<LuongBanHang_ChiTietSanPhamCustom> listChiTietSP;
-    public List<Luong_ChiTietPhieuXuatCustom> listCTPX;
     private Tai_LuongPhieuXuat_CTPhieuXuatView ctpxView;
     public PhieuXuat phieuXuat;
     private String duongDan = getClass().getResource("/icons/file.png").getPath();
@@ -41,7 +42,7 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
     }
     private Page p;
 
-    private int limit = 6;
+    private int limit = 5;
 
     private int offset = 0;
 
@@ -49,7 +50,7 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
 
     private int index = 1;
 
-    private int limitCTSP = 5;
+    private int limitCTSP = 3;
 
     private int offsetCTSP = 0;
 
@@ -65,9 +66,7 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
         ListSP = luongService.getListSP();
         listChiTietSP = new ArrayList<>();
         ctpxView = new Tai_LuongPhieuXuat_CTPhieuXuatView();
-        listCTPX = luongService.getListCTPhieuXuat();
         loadTable(luongService.phanTrangSP(ListSP, offset, limit));
-        showDataCtsp(luongService.phanTrang(listChiTietSP, offsetCTSP, limitCTSP));
         clear();
         txtSearch.addEvent(new EventTextField() {
             @Override
@@ -99,14 +98,14 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
         loadIndex();
         sizesCTSP = listChiTietSP.size();
         offsetCTSP = 0;
-        indexCTSP = 0;
+        indexCTSP = 1;
         loadIndexCTSP();
     }
 
     public void loadTable(List<Tai_SanPhamCustom> list) {
         DefaultTableModel dtm = (DefaultTableModel) this.tblSanPham.getModel();
         dtm.setRowCount(0);
-        for (Tai_SanPhamCustom sp : ListSP) {
+        for (Tai_SanPhamCustom sp : list) {
             Object[] rowData = {
                 dtm.getRowCount() + 1,
                 sp.getMa(),
@@ -128,18 +127,22 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
     public void showDataCtsp(List<LuongBanHang_ChiTietSanPhamCustom> list) {
         DefaultTableModel dtm = (DefaultTableModel) this.tbChiTietSanPham.getModel();
         dtm.setRowCount(0);
+        String pattern = "yyyy-MM-dd HH:mm:ss";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         for (LuongBanHang_ChiTietSanPhamCustom ctsp : list) {
+            Date ngayTao = new Date(ctsp.getNgayTao());
             Object[] rowData = {
                 dtm.getRowCount() + 1,
                 ctsp.getSoLuongTon(),
-                ctsp.getGiaNhap() == null ? "Chưa có" : formatter.format(ctsp.getGiaNhap()) + "VNĐ",
-                ctsp.getGiaBan() == null ? "Chưa có" : formatter.format(ctsp.getGiaBan()) + "VNĐ",
+                ctsp.getGiaNhap() == null ? "Chưa có" : formatter.format(ctsp.getGiaNhap()) + " VNĐ",
+                ctsp.getGiaBan() == null ? "Chưa có" : formatter.format(ctsp.getGiaBan()) + " VNĐ",
                 Converter.trangThaiMauSac(ctsp.getMau()),
                 ctsp.getDonVi().getDonViGoc(),
                 ctsp.getNamBaoHanh(),
                 Converter.trangThaiSanPham(ctsp.getTrangThai()),
                 ctsp.getSize(),
-                ctsp.getNcc().getTen()
+                ctsp.getNcc().getTen(),
+                simpleDateFormat.format(ngayTao)
             };
             dtm.addRow(rowData);
         }
@@ -234,7 +237,7 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
         });
 
         myButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Log out.png"))); // NOI18N
-        myButton7.setToolTipText("Clear");
+        myButton7.setToolTipText("Thoát");
         myButton7.setBorderColor(new java.awt.Color(221, 242, 244));
         myButton7.setColor(new java.awt.Color(221, 242, 244));
         myButton7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -268,17 +271,17 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
 
         tbChiTietSanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Số lượng", "Giá Nhập", "Giá Bán", "Màu", "Đơn vị", "Năm BH", "Trạng thái", "Size", "Tên NCC"
+                "STT", "Số lượng", "Giá Nhập", "Giá Bán", "Màu", "Đơn vị", "Năm BH", "Trạng thái", "Size", "Tên NCC", "Ngày tạo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -541,6 +544,7 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
 
         jButton1.setBackground(new java.awt.Color(255, 255, 51));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Exit.png"))); // NOI18N
+        jButton1.setToolTipText("Thoát");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -549,6 +553,7 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
 
         btnHienThi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Show.png"))); // NOI18N
         btnHienThi.setText("\n");
+        btnHienThi.setToolTipText("Hiện thị danh sách sản phẩm");
         btnHienThi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHienThiActionPerformed(evt);
@@ -766,7 +771,7 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 657, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -791,6 +796,7 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnHienThiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHienThiActionPerformed
+        txtSearch.setText("");
         ListSP = luongService.getListSP();
         loadTable(luongService.phanTrangSP(ListSP, offset, limit));
     }//GEN-LAST:event_btnHienThiActionPerformed
@@ -801,14 +807,14 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
 
     private void btnPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreActionPerformed
         index = p.prevIndex(offset, limit, index);
-        offset = p.prev(offset, offset);
+        offset = p.prev(offset, limit);
         loadIndex();
         loadTable(luongService.phanTrangSP(ListSP, offset, limit));
     }//GEN-LAST:event_btnPreActionPerformed
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
-        index = p.nextIndex(offset, offset, sizes, index);
-        offset = p.next(offset, offset, sizes);
+        index = p.nextIndex(offset, limit, sizes, index);
+        offset = p.next(offset, limit, sizes);
         loadIndex();
         //        loadTable(getList);
         loadTable(luongService.phanTrangSP(ListSP, offset, limit));
@@ -816,6 +822,7 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
 
     private void btnHienThi1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHienThi1ActionPerformed
         listChiTietSP = luongService.getListCTSanPhamByID(ListSP.get(tblSanPham.getSelectedRow()).getId());
+        loadIndexCTSP();
         showDataCtsp(luongService.phanTrang(listChiTietSP, offsetCTSP, limitCTSP));
     }//GEN-LAST:event_btnHienThi1ActionPerformed
 
@@ -832,7 +839,9 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
         this.FrameChiTietSanPham.setLocationRelativeTo(null);
         this.FrameChiTietSanPham.setVisible(true);
         listChiTietSP = luongService.getListCTSanPhamByID(ListSP.get(row).getId());
+        sizesCTSP = listChiTietSP.size();
         showDataCtsp(luongService.phanTrang(listChiTietSP, offsetCTSP, limitCTSP));
+        loadIndexCTSP();
     }//GEN-LAST:event_btnChonActionPerformed
 
     private void tbChiTietSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbChiTietSanPhamMouseClicked

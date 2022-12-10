@@ -27,7 +27,6 @@ public class Tai_LuongPhieuXuat_CTPhieuXuatView extends javax.swing.JFrame {
 
     public Tai_NvqlLuongPhieuXuatService luongService; 
     public List<Luong_ChiTietPhieuXuatCustom> listCTPX;
-    public List<LuongBanHang_ChiTietSanPhamCustom> listCTSP;
     private PhieuXuat phieuXuat;
     public ChiTietPhieuXuat ctpx;
     public double tongTien;
@@ -40,19 +39,13 @@ public class Tai_LuongPhieuXuat_CTPhieuXuatView extends javax.swing.JFrame {
     public Tai_LuongPhieuXuat_CTPhieuXuatView() {
         initComponents();
         luongService = new Tai_NvqlLuongPhieuXuatServiceImpl();
-        listCTSP = luongService.getListCTSanPham();
         listCTPX = new ArrayList<>();
         ctpx = new ChiTietPhieuXuat();
-
-        clearForm();
+        this.setLocationRelativeTo(null);
     }
 
     public double getTongTien() {
         return tongTien;
-    }
-
-    public void clearForm() {
-        tblCTPhieuXuat.removeAll();
     }
 
     public void loadTable(List<Luong_ChiTietPhieuXuatCustom> list) {
@@ -106,6 +99,22 @@ public class Tai_LuongPhieuXuat_CTPhieuXuatView extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 255));
 
+        tblCTPhieuXuat.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "STT", "Mã phiếu", "Tên sản phẩm", "Số lượng", "Giá bán", "Năm bảo hành", "Màu"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblCTPhieuXuat.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblCTPhieuXuatMouseClicked(evt);
@@ -168,7 +177,7 @@ public class Tai_LuongPhieuXuat_CTPhieuXuatView extends javax.swing.JFrame {
         panelRound8.setRoundTopRight(50);
 
         btnShow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Show.png"))); // NOI18N
-        btnShow.setToolTipText("Chọn khoảng thời gian");
+        btnShow.setToolTipText("Hiển thị");
         btnShow.setBorderColor(new java.awt.Color(221, 242, 244));
         btnShow.setColor(new java.awt.Color(221, 242, 244));
         btnShow.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -179,8 +188,8 @@ public class Tai_LuongPhieuXuat_CTPhieuXuatView extends javax.swing.JFrame {
             }
         });
 
-        btnShow1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Delete.png"))); // NOI18N
-        btnShow1.setToolTipText("Chọn khoảng thời gian");
+        btnShow1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Exit.png"))); // NOI18N
+        btnShow1.setToolTipText("Thoát");
         btnShow1.setBorderColor(new java.awt.Color(221, 242, 244));
         btnShow1.setColor(new java.awt.Color(221, 242, 244));
         btnShow1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -483,6 +492,8 @@ public class Tai_LuongPhieuXuat_CTPhieuXuatView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnShowActionPerformed
 
     private void btnShow1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShow1ActionPerformed
+        DefaultTableModel dtm = (DefaultTableModel) this.tblCTPhieuXuat.getModel();
+        dtm.setRowCount(0);
         this.dispose();
     }//GEN-LAST:event_btnShow1ActionPerformed
 
