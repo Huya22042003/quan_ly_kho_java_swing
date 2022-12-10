@@ -1184,7 +1184,6 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
             return;
         }
         ctpxView = new Tai_LuongPhieuXuat_CTPhieuXuatView();
-        ctpxView.clearForm();
         ctpxView.setPhieuXuat(chon());
         ctpxView.setVisible(true);
     }//GEN-LAST:event_btnCtPhieuXuatActionPerformed

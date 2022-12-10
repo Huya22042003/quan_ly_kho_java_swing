@@ -29,9 +29,8 @@ import utilities.palette.SearchCustom.EventTextField;
 public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
 
     private Tai_NvqlLuongPhieuXuatService luongService;
-    List<Tai_SanPhamCustom> ListSP;
+    private List<Tai_SanPhamCustom> ListSP;
     private List<LuongBanHang_ChiTietSanPhamCustom> listChiTietSP;
-    public List<Luong_ChiTietPhieuXuatCustom> listCTPX;
     private Tai_LuongPhieuXuat_CTPhieuXuatView ctpxView;
     public PhieuXuat phieuXuat;
     private String duongDan = getClass().getResource("/icons/file.png").getPath();
@@ -41,7 +40,7 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
     }
     private Page p;
 
-    private int limit = 6;
+    private int limit = 5;
 
     private int offset = 0;
 
@@ -49,7 +48,7 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
 
     private int index = 1;
 
-    private int limitCTSP = 5;
+    private int limitCTSP = 3;
 
     private int offsetCTSP = 0;
 
@@ -65,9 +64,7 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
         ListSP = luongService.getListSP();
         listChiTietSP = new ArrayList<>();
         ctpxView = new Tai_LuongPhieuXuat_CTPhieuXuatView();
-        listCTPX = luongService.getListCTPhieuXuat();
         loadTable(luongService.phanTrangSP(ListSP, offset, limit));
-        showDataCtsp(luongService.phanTrang(listChiTietSP, offsetCTSP, limitCTSP));
         clear();
         txtSearch.addEvent(new EventTextField() {
             @Override
@@ -99,14 +96,14 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
         loadIndex();
         sizesCTSP = listChiTietSP.size();
         offsetCTSP = 0;
-        indexCTSP = 0;
+        indexCTSP = 1;
         loadIndexCTSP();
     }
 
     public void loadTable(List<Tai_SanPhamCustom> list) {
         DefaultTableModel dtm = (DefaultTableModel) this.tblSanPham.getModel();
         dtm.setRowCount(0);
-        for (Tai_SanPhamCustom sp : ListSP) {
+        for (Tai_SanPhamCustom sp : list) {
             Object[] rowData = {
                 dtm.getRowCount() + 1,
                 sp.getMa(),
@@ -132,8 +129,8 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
             Object[] rowData = {
                 dtm.getRowCount() + 1,
                 ctsp.getSoLuongTon(),
-                ctsp.getGiaNhap() == null ? "Chưa có" : formatter.format(ctsp.getGiaNhap()) + "VNĐ",
-                ctsp.getGiaBan() == null ? "Chưa có" : formatter.format(ctsp.getGiaBan()) + "VNĐ",
+                ctsp.getGiaNhap() == null ? "Chưa có" : formatter.format(ctsp.getGiaNhap()) + " VNĐ",
+                ctsp.getGiaBan() == null ? "Chưa có" : formatter.format(ctsp.getGiaBan()) + " VNĐ",
                 Converter.trangThaiMauSac(ctsp.getMau()),
                 ctsp.getDonVi().getDonViGoc(),
                 ctsp.getNamBaoHanh(),
@@ -801,14 +798,14 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
 
     private void btnPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreActionPerformed
         index = p.prevIndex(offset, limit, index);
-        offset = p.prev(offset, offset);
+        offset = p.prev(offset, limit);
         loadIndex();
         loadTable(luongService.phanTrangSP(ListSP, offset, limit));
     }//GEN-LAST:event_btnPreActionPerformed
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
-        index = p.nextIndex(offset, offset, sizes, index);
-        offset = p.next(offset, offset, sizes);
+        index = p.nextIndex(offset, limit, sizes, index);
+        offset = p.next(offset, limit, sizes);
         loadIndex();
         //        loadTable(getList);
         loadTable(luongService.phanTrangSP(ListSP, offset, limit));
@@ -816,6 +813,7 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
 
     private void btnHienThi1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHienThi1ActionPerformed
         listChiTietSP = luongService.getListCTSanPhamByID(ListSP.get(tblSanPham.getSelectedRow()).getId());
+        loadIndexCTSP();
         showDataCtsp(luongService.phanTrang(listChiTietSP, offsetCTSP, limitCTSP));
     }//GEN-LAST:event_btnHienThi1ActionPerformed
 
@@ -832,7 +830,9 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
         this.FrameChiTietSanPham.setLocationRelativeTo(null);
         this.FrameChiTietSanPham.setVisible(true);
         listChiTietSP = luongService.getListCTSanPhamByID(ListSP.get(row).getId());
+        sizesCTSP = listChiTietSP.size();
         showDataCtsp(luongService.phanTrang(listChiTietSP, offsetCTSP, limitCTSP));
+        loadIndexCTSP();
     }//GEN-LAST:event_btnChonActionPerformed
 
     private void tbChiTietSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbChiTietSanPhamMouseClicked
