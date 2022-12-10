@@ -2,6 +2,7 @@ package cores.truongPhongs.views;
 
 import cores.exportPDF.services.ExportSanPhamService;
 import cores.exportPDF.services.serviceImpls.ExportSanPhamServiceImpl;
+import cores.nhanVienQuanLy.customModels.PhieuXuatCustom;
 import cores.truongPhongs.customModels.TpQuanLyChiTietSanPhamCustom;
 import cores.truongPhongs.customModels.TpQuanLySanPhamCustom;
 import cores.truongPhongs.services.TpQuanLyChiTietSanPhamService;
@@ -13,9 +14,11 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import utilities.Converter;
+import utilities.DateTimeUtil;
 import utilities.MaTuSinh;
 import utilities.MsgBox;
 import utilities.Page;
@@ -70,7 +73,7 @@ public final class TpQuanLySanPhamForm extends javax.swing.JPanel {
         String[] headers = {"STT", "Mã", "Tên", "Giá Nhập", "Giá Bán", "Số lượng"};
         dtm.setColumnIdentifiers(headers);
         clearForm();
-        
+
         showData(serviceSanPham.phanTrang(listSanPham, offsetSp, limitSp));
         loadIndexSp();
         // chi tiet sp
@@ -99,7 +102,7 @@ public final class TpQuanLySanPhamForm extends javax.swing.JPanel {
                 sp.getTen(),
                 giaNhap,
                 giaBan,
-                sp.getSoLuong() == null? "Chưa có" : formatter.format(sp.getSoLuong()) + " Đôi"
+                sp.getSoLuong() == null ? "Chưa có" : formatter.format(sp.getSoLuong()) + " Đôi"
             });
 
         }
@@ -116,8 +119,7 @@ public final class TpQuanLySanPhamForm extends javax.swing.JPanel {
     private void loadIndexCtsp() {
         this.txtIndexCtsp.setText(String.valueOf(index) + " / " + (Math.round((sizes / limit) + 0.5)));
     }
-    
-    
+
     private void loadIndexSp() {
         this.txtIndex.setText(String.valueOf(indexSp) + " / " + (Math.round((sizesSp / limitSp) + 0.5)));
     }
@@ -267,8 +269,8 @@ public final class TpQuanLySanPhamForm extends javax.swing.JPanel {
         panelRound17.setRoundTopRight(50);
 
         btnThem1.setBackground(new java.awt.Color(221, 242, 244));
-        btnThem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Addd.png"))); // NOI18N
-        btnThem1.setToolTipText("Thêm mới ctsp");
+        btnThem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Print.png"))); // NOI18N
+        btnThem1.setToolTipText("In phiếu");
         btnThem1.setBorderColor(new java.awt.Color(221, 242, 244));
         btnThem1.setColor(new java.awt.Color(221, 242, 244));
         btnThem1.setRadius(50);
@@ -1166,8 +1168,25 @@ public final class TpQuanLySanPhamForm extends javax.swing.JPanel {
     // chi tiết san pham ------------------------------------------------
 
     private void btnThem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThem1ActionPerformed
-//        jFrameCreate.setVisible(true);
-//        jFrameUpdate.setVisible(false);
+        int row = this.tbChiTietSanPham.getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(this, "Bạn phải chọn một dòng");
+            return;
+        }
+        TpQuanLyChiTietSanPhamCustom ctsp = listChiTietSP.get(row);
+        String fileName = new Date(DateTimeUtil.convertDateToTimeStampSecond()).toString() + ".pdf";
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        int option = fileChooser.showOpenDialog(this);
+        if (option == JFileChooser.APPROVE_OPTION) {
+            if (esps.exportSanPham(fileChooser.getSelectedFile().getPath() + "\\" + fileName.replaceAll(":", "_"), ctsp.getId())) {
+                JOptionPane.showMessageDialog(this, "Xuất file thành công");
+            } else {
+                JOptionPane.showMessageDialog(this, "Xuất file thất bại");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Folder Selected: ");
+        }
     }//GEN-LAST:event_btnThem1ActionPerformed
 
     private void btnHienThi1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHienThi1ActionPerformed
@@ -1284,7 +1303,7 @@ public final class TpQuanLySanPhamForm extends javax.swing.JPanel {
         if (check == null) {
             return;
         }
-        
+
         check.setId(listSanPham.get(tbSanPham.getSelectedRow()).getId());
 
         if (serviceSanPham.updateSanPham(check)) {

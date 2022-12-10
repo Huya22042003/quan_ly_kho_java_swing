@@ -21,25 +21,23 @@ import utilities.HibernateUtil;
  * @author QUOC HUY
  */
 public class ChiTietSanPhamRepository {
-    public List<ChiTietSanPhamCustom> getListChiTietSanPham() {
-        List<ChiTietSanPhamCustom> list = new ArrayList<>();
+    public List<ChiTietSanPham> getListChiTietSanPham() {
+        List<ChiTietSanPham> list = new ArrayList<>();
         Session s = HibernateUtil.getSessionFactory().openSession();
-        Query q = s.createQuery("SELECT new cores.webCam.customModels.ChiTietSanPhamCustom ("
-                + "s.id ,"
-                + "s.soLuongTon ,"
-                + "s.hinhAnh , "
-                + "s.GiaNhap , "
-                + "s.GiaBan , "
-                + "s.namBaoHanh , "
-                + "s.mau , "
-                + "s.trangThai, "
-                + "s.size,"
-                + "s.ngayTao,"
-                + "s.sanPham,"
-                + "s.donVi"
-                + ") FROM domainModels.ChiTietSanPham s");
+        Query q = s.createNativeQuery("SELECT * FROM ChiTietSanPham", ChiTietSanPham.class);
         list = q.getResultList();
         return list;
+    }
+    
+    public static void main(String[] args) {
+        List<ChiTietSanPham> list = new ArrayList<>();
+        Session s = HibernateUtil.getSessionFactory().openSession();
+        Query q = s.createNativeQuery("SELECT * FROM ChiTietSanPham", ChiTietSanPham.class);
+        list = q.getResultList();
+        list.forEach(el -> {
+            System.out.println(el.getId());
+        });
+        System.out.println(list.size());
     }
     
     public boolean addChiTietPhieuXuat(UUID idPhieuXuat, UUID idCtsp, int sl) {

@@ -70,7 +70,7 @@ public class ExportSanPhamServiceImpl implements ExportSanPhamService {
             File file = new File(fileName);
             ChiTietSanPham ctsp = findChiTietSanPhamById(idSanPham);
 
-            createQR(idSanPham.toString());
+            createQR(ctsp.getId().toString());
 
             //Loading an existing document
             PDDocument doc = new PDDocument();

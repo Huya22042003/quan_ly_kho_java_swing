@@ -4,7 +4,7 @@
  */
 package cores.webCam.serivces;
 
-import cores.webCam.customModels.ChiTietSanPhamCustom;
+import domainModels.ChiTietSanPham;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -13,6 +13,6 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author QUOC HUY
  */
 public interface ChiTietSanPhamService {
-    ConcurrentHashMap<UUID, ChiTietSanPhamCustom> getMapChiTietSanPham();
+    ConcurrentHashMap<UUID, ChiTietSanPham> getMapChiTietSanPham();
     boolean addChiTietPhieuXuat(UUID idPhieuXuat, UUID idChiTietSanPham, int soLuong);
 }

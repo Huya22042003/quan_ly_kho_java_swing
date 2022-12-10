@@ -7,6 +7,7 @@ package cores.webCam.serivces.serviceImpl;
 import cores.webCam.customModels.ChiTietSanPhamCustom;
 import cores.webCam.repositories.ChiTietSanPhamRepository;
 import cores.webCam.serivces.ChiTietSanPhamService;
+import domainModels.ChiTietSanPham;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -23,9 +24,10 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService{
     }
 
     @Override
-    public ConcurrentHashMap<UUID, ChiTietSanPhamCustom> getMapChiTietSanPham() {
-        ConcurrentHashMap<UUID, ChiTietSanPhamCustom> ctsp = new ConcurrentHashMap<>();
+    public ConcurrentHashMap<UUID, ChiTietSanPham> getMapChiTietSanPham() {
+        ConcurrentHashMap<UUID, ChiTietSanPham> ctsp = new ConcurrentHashMap<>();
         rp.getListChiTietSanPham().parallelStream().forEach(el -> {
+            System.out.println(el.getId());
             ctsp.put(el.getId(), el);
         });
         return ctsp;

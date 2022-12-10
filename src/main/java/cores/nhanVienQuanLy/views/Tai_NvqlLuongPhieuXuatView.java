@@ -62,7 +62,7 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
     private ExportSanPhamService esps;
     private ChiTietSanPhamService serviceCam;
     List<Luong_ChiTietPhieuXuatCustom> listCTPX;
-    private ConcurrentHashMap<UUID, ChiTietSanPhamCustom> map;
+    private ConcurrentHashMap<UUID, domainModels.ChiTietSanPham> map;
     private DecimalFormat formatter = new DecimalFormat("###,###,##0 VNĐ");
 
     private WebcamPanel jpanl = null;
@@ -79,11 +79,10 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
 
     private int index = 1;
 
-    private cores.webCam.customModels.ChiTietSanPhamCustom sanPhamQuet;
+    private domainModels.ChiTietSanPham sanPhamQuet;
 
     public Tai_NvqlLuongPhieuXuatView() {
         serviceCam = new ChiTietSanPhamServiceImpl();
-        map = serviceCam.getMapChiTietSanPham();
         initComponents();
         diaLogCam.setLocationRelativeTo(null);
         p = new Page();
@@ -1096,6 +1095,7 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
         try {
             cong = Integer.parseInt(input);
             initWebCame(cong);
+            map = serviceCam.getMapChiTietSanPham();
             this.diaLogCam.setVisible(true);
             captureThread();
             capture.start();

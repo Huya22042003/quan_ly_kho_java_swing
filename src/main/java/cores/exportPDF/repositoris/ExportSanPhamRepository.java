@@ -17,20 +17,37 @@ import utilities.HibernateUtil;
  * @author QUOC HUY
  */
 public class ExportSanPhamRepository {
+
     public ChiTietSanPham findChiTietSanPham(UUID id) {
         Session s = HibernateUtil.getSessionFactory().openSession();
-        ChiTietSanPham ctsp = s.find(ChiTietSanPham.class, id);
+        Query q = s.createNativeQuery("""
+                                      SELECT * FROM ChiTietSanPham ctsp WHERE ctsp.Id = :Id
+                                      """, ChiTietSanPham.class).setParameter("Id", id.toString());
+        ChiTietSanPham ctsp = (ChiTietSanPham) q.getSingleResult();
+        System.out.println(ctsp.getId());
         s.close();
         return ctsp;
     }
     
+    public static void main(String[] args) {
+        List<ChiTietSanPham> list = new ArrayList<>();
+        Session s = HibernateUtil.getSessionFactory().openSession();
+        Query q = s.createNativeQuery("""
+                                      SELECT * FROM ChiTietSanPham ctsp
+                                      """, ChiTietSanPham.class);
+        list = q.getResultList();
+        list.forEach(el -> {
+            System.out.println(el.getId());
+        });
+    }
+
     public PhieuXuat findPhieuXuat(UUID id) {
         Session s = HibernateUtil.getSessionFactory().openSession();
         PhieuXuat px = s.find(PhieuXuat.class, id);
         s.close();
         return px;
     }
-    
+
     public List<ChiTietPhieuXuat> findChiTietSanPhamByIdPhieuXuat(UUID id) {
         List<ChiTietPhieuXuat> list = new ArrayList<>();
         Session s = HibernateUtil.getSessionFactory().openSession();
