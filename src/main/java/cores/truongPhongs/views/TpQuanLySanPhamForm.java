@@ -3,7 +3,6 @@ package cores.truongPhongs.views;
 import cores.exportPDF.services.ExportSanPhamService;
 import cores.exportPDF.services.serviceImpls.ExportSanPhamServiceImpl;
 import cores.truongPhongs.customModels.TpQuanLyChiTietSanPhamCustom;
-import cores.truongPhongs.customModels.TpQuanLyDonViCustom;
 import cores.truongPhongs.customModels.TpQuanLySanPhamCustom;
 import cores.truongPhongs.services.TpQuanLyChiTietSanPhamService;
 import cores.truongPhongs.services.TpQuanLySanPhamService;
@@ -25,7 +24,7 @@ import utilities.Page;
  *
  * @author MMC
  */
-public class TpQuanLySanPhamForm extends javax.swing.JPanel {
+public final class TpQuanLySanPhamForm extends javax.swing.JPanel {
 
     private DefaultTableModel dtm = new DefaultTableModel();
     private TpQuanLySanPhamService serviceSanPham = new TpQuanLySanPhamServiceImpl();
@@ -47,7 +46,7 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
     private TpQuanLyChiTietSanPhamService serviceChiTietSP = new TpQuanLyChiTietSanPhamServiceImpl();
     String duongdananh = getClass().getResource("/icons/FPT_Polytechnic_doc.png").getPath();
 
-    private int limit = 7;
+    private final int limit = 7;
 
     private int offset = 0;
 
@@ -55,9 +54,9 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
 
     private int index = 1;
 
-    private ExportSanPhamService esps;
+    private final ExportSanPhamService esps;
 
-    private DecimalFormat formatter = new DecimalFormat("###,###,##0");
+    private final DecimalFormat formatter = new DecimalFormat("###,###,##0");
 
     public TpQuanLySanPhamForm() {
         p = new Page();
@@ -66,10 +65,12 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
         FormDataCreate.setLocationRelativeTo(null);
         FormDataUpdate.setLocationRelativeTo(null);
         FrameChiTietSanPham.setLocationRelativeTo(null);
+        diaLogSearchCtsp.setLocationRelativeTo(null);
 
         String[] headers = {"STT", "Mã", "Tên", "Giá Nhập", "Giá Bán", "Số lượng"};
         dtm.setColumnIdentifiers(headers);
         clearForm();
+        loadIndexSp();
         showData(serviceSanPham.phanTrang(listSanPham, offsetSp, limitSp));
 
         // chi tiet sp
@@ -77,6 +78,7 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
         tbChiTietSanPham.setModel(dtmCtsp);
         String[] hearders = {"STT", "SL", "Giá Nhập", "Giá Bán", "Màu", "ĐV", "Năm BH", "Trạng thái", "Size", "Tên NCC", "Mã SP NCC", "Ngày nhập"};
         dtmCtsp.setColumnIdentifiers(hearders);
+        loadIndexCtsp();
     }
 
     public void showData(List<TpQuanLySanPhamCustom> list) {
@@ -104,7 +106,7 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
     }
 
     public void clearFormCtsp() {
-        listChiTietSP = serviceChiTietSP.getAll(this.listSanPham.get(tbSanPham.getSelectedRow()).getId(), "", "", "", "", "");
+        listChiTietSP = serviceChiTietSP.getAll(this.serviceSanPham.phanTrang(listSanPham, offset, limit).get(tbSanPham.getSelectedRow()).getId(), "", "", "", "", "");
         sizes = listChiTietSP.size();
         offset = 0;
         index = 1;
@@ -112,6 +114,7 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
     }
 
     private void loadIndexCtsp() {
+        sizes = listChiTietSP.size();
         this.txtIndex.setText(String.valueOf(index) + " / " + (Math.round((sizes / limit) + 0.5)));
     }
 
@@ -175,6 +178,7 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
     }
 
     private void loadIndexSp() {
+        sizesSp = listSanPham.size();
         this.txtIndex.setText(String.valueOf(indexSp) + " / " + (Math.round((sizesSp / limitSp) + 0.5)));
     }
 
@@ -383,7 +387,7 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        txtIndex1.setText("1/1");
+        txtIndex1.setText("hihi");
 
         uWPButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/skip-next-circle-solid-24.png"))); // NOI18N
         uWPButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -454,6 +458,8 @@ public class TpQuanLySanPhamForm extends javax.swing.JPanel {
                 .addComponent(panelRound1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
+
+        diaLogSearchCtsp.setSize(new java.awt.Dimension(549, 383));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 

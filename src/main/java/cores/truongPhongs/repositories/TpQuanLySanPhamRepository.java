@@ -91,18 +91,16 @@ public class TpQuanLySanPhamRepository {
     }
 
     public boolean deleteSanPham(UUID id) {
-        Transaction tran = null;
         try ( Session s = HibernateUtil.getSessionFactory().openSession()) {
-            tran = s.beginTransaction();
             Query q = s.createNativeQuery("""
                                           DELETE SanPham 
                                           WHERE Id = :id
                                           """).setParameter("id", id.toString());
-            q.executeUpdate();
-            tran.commit();
-        } catch (org.hibernate.exception.ConstraintViolationException e) {
+            if(q.executeUpdate() <= 0) {
+                return false;
+            }
+        } catch (Exception e) {
             e.printStackTrace();
-            tran.rollback();
             return false;
         }
         return true;

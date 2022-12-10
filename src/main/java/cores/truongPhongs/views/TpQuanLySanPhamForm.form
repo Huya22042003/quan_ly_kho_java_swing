@@ -292,7 +292,7 @@
             </Container>
             <Component class="javax.swing.JLabel" name="txtIndex1">
               <Properties>
-                <Property name="text" type="java.lang.String" value="1/1"/>
+                <Property name="text" type="java.lang.String" value="hihi"/>
               </Properties>
             </Component>
             <Component class="utilities.palette.UWPButton" name="uWPButton6">
@@ -320,6 +320,11 @@
       </SubComponents>
     </Container>
     <Container class="javax.swing.JDialog" name="diaLogSearchCtsp">
+      <Properties>
+        <Property name="size" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[549, 383]"/>
+        </Property>
+      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
