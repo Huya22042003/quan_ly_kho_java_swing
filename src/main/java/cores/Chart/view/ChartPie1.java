@@ -62,7 +62,7 @@ public class ChartPie1 extends javax.swing.JPanel {
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Biểu đồ tròn thống kê top 3 sản phẩm khách hàng mua nhiều nhất");
+        jLabel1.setText("Biểu đồ tròn thống kê top 5 sản phẩm khách hàng mua nhiều nhất");
 
         javax.swing.GroupLayout panelChartPie11Layout = new javax.swing.GroupLayout(panelChartPie11);
         panelChartPie11.setLayout(panelChartPie11Layout);
