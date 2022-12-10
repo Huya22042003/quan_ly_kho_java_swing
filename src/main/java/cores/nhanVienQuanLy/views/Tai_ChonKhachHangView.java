@@ -19,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
 import utilities.Auth;
 import utilities.Converter;
 import utilities.DateTimeUtil;
+import utilities.MaTuSinh;
 import utilities.MsgBox;
 import utilities.Page;
 
@@ -619,6 +620,7 @@ public class Tai_ChonKhachHangView extends javax.swing.JFrame {
         PhieuXuatCustom pxcs = new PhieuXuatCustom();
         pxcs.setId(phieuXuatService.addPhieuXuat(pxcs).getId());
         pxcs.setNgayTao(DateTimeUtil.convertDateToTimeStampSecond());
+        pxcs.setMaPhieu(MaTuSinh.gen("PX"));
         pxcs.setNgayThanhToan(null);
         pxcs.setGhiChu("Xuất luôn");
         pxcs.setTrangThai(TrangThaiPhieuConstant.CHO_THANH_TOAN);

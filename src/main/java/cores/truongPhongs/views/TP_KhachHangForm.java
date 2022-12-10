@@ -1133,15 +1133,16 @@ public class TP_KhachHangForm extends javax.swing.JPanel {
     }//GEN-LAST:event_btnChonAnhRudActionPerformed
 
     private void btnUpdateRudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateRudActionPerformed
-        int row = this.tableAll.getSelectedRow();
+       
         
-        if (row == -1) {
-            JOptionPane.showMessageDialog(this, "Bạn phải chọn một dòng");
+        TP_KhachHangCustom check = hangService.checkValidateUpdate(getFormDataRud(), erroMa1, erroTen1, erroSDT1, erroEmail1, erroDiaChi1, erroMatKhau1, erroNgaySinh1);
+        if (check == null) {
             return;
         }
+         int row = this.tableAll.getSelectedRow();
         
-        TP_KhachHangCustom check = hangService.checkValidateUpdate(getFormDataRud(), erroMa, erroTen, erroEmail, erroSDT, erroMatKhau, erroDiaChi, erroNgaySinh);
-        if (check == null) {
+        if (row == -1) {
+//            JOptionPane.showMessageDialog(this, "Bạn phải chọn một dòng");
             return;
         }
         

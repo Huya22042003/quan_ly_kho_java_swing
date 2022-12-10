@@ -3,8 +3,10 @@ package cores.nhanVienQuanLy.services.serviceImpls;
 import cores.nhanVienQuanLy.customModels.LuongBanHang_ChiTietSanPhamCustom;
 import cores.nhanVienQuanLy.customModels.Luong_ChiTietPhieuXuatCustom;
 import cores.nhanVienQuanLy.customModels.PhieuXuatCustom;
+import cores.nhanVienQuanLy.customModels.Tai_SanPhamCustom;
 import cores.nhanVienQuanLy.repositories.Tai_NvqlLuongPhieuXuatRepository;
 import cores.nhanVienQuanLy.services.Tai_NvqlLuongPhieuXuatService;
+import domainModels.ChiTietPhieuNhap;
 import domainModels.ChiTietPhieuXuat;
 import domainModels.ChiTietSanPham;
 import domainModels.NhanVien;
@@ -26,8 +28,8 @@ public class Tai_NvqlLuongPhieuXuatServiceImpl implements Tai_NvqlLuongPhieuXuat
     }
 
     @Override
-    public List<LuongBanHang_ChiTietSanPhamCustom> getListCTSanPhamBanHang(BigDecimal giaBatDau, BigDecimal giaKetThuc) {
-        return rp.getListCTSanPhamBanHang(giaBatDau, giaKetThuc);
+    public List<LuongBanHang_ChiTietSanPhamCustom> getListCTSanPhamBanHang() {
+        return rp.getListCTSanPhamBanHang();
     }
 
     @Override
@@ -41,12 +43,12 @@ public class Tai_NvqlLuongPhieuXuatServiceImpl implements Tai_NvqlLuongPhieuXuat
     }
 
     @Override
-    public boolean addCTPX(Luong_ChiTietPhieuXuatCustom ctpxct) {
+    public void addCTPX(Luong_ChiTietPhieuXuatCustom ctpxct) {
         ChiTietPhieuXuat ctpx = new ChiTietPhieuXuat();
         ctpx.setIdChiTietSp(ctpxct.getIdChiTietSp());
         ctpx.setIdPhieuXuat(ctpxct.getIdPhieuXuat());
         ctpx.setSoLuong(ctpxct.getSoLuong());
-        return rp.addCTPX(ctpx);
+        rp.addCTPX(ctpx);
     }
 
     @Override
@@ -99,6 +101,21 @@ public class Tai_NvqlLuongPhieuXuatServiceImpl implements Tai_NvqlLuongPhieuXuat
             listPhanTrang.add(el);
         }
         return listPhanTrang;
+    }
+
+    @Override
+    public List<LuongBanHang_ChiTietSanPhamCustom> getListCTSanPhamByID(UUID id) {
+        return rp.getListCTSanPhamByID(id);
+    }
+
+    @Override
+    public ChiTietPhieuNhap findCTpnByID(UUID idCTSP) {
+        return rp.findCTpnByID(idCTSP);
+    }
+
+    @Override
+    public List<Tai_SanPhamCustom> getListSP() {
+        return rp.getListSP();
     }
 
 }
