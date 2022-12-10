@@ -47,7 +47,6 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import utilities.Converter;
 import utilities.DateTimeUtil;
-import utilities.MaTuSinh;
 import utilities.MsgBox;
 import utilities.Page;
 
@@ -96,7 +95,6 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
         chonKhView = new Tai_ChonKhachHangView();
         phieuXuatService.loadComBox(cbbTrangThai);
         esps = new ExportSanPhamServiceImpl();
-//        loadTablePhieuXuat(listPhieuXuat);
         sizes = listPhieuXuat.size();
         loadTablePhieuXuat(phieuXuatService.phanTrang(listPhieuXuat, offset, limit));
         clearForm();
@@ -105,13 +103,13 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
     private void loadTablePhieuXuat(List<PhieuXuatCustom> listPX) {
         DefaultTableModel dtm = (DefaultTableModel) this.tblPhieuXuat.getModel();
         dtm.setRowCount(0);
-          String pattern = "yyyy-MM-dd HH:mm:ss";
+        String pattern = "yyyy-MM-dd HH:mm:ss";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         for (PhieuXuatCustom el : listPX) {
             Date ngayNhan = new Date(el.getNgayTao());
             Object[] rowData = {
                 dtm.getRowCount() + 1,
-                el.getMaPhieu()== null ? "Không có mã" : el.getMaPhieu(),
+                el.getMaPhieu() == null ? "Không có mã" : el.getMaPhieu(),
                 simpleDateFormat.format(ngayNhan),
                 el.getNgayThanhToan() == null ? "Chưa thanh toán" : simpleDateFormat.format(el.getNgayThanhToan()),
                 Converter.TrangThaiPhieuXuat(el.getTrangThai()),
@@ -124,7 +122,6 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
 
     private void clearForm() {
         txtGhiChu.setText("");
-//        cbbKhachHang.setSelectedIndex(0);
         txtMaKhachHang.setText("");
         txtMaPhieu.setText("");
         txtNgayTao.setText("");
@@ -1100,7 +1097,7 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Bạn phải chọn phiếu xuất");
             return;
         }
-        if(listPhieuXuat.get(row).getTrangThai() != TrangThaiPhieuConstant.CHO_THANH_TOAN) {
+        if (listPhieuXuat.get(row).getTrangThai() != TrangThaiPhieuConstant.CHO_THANH_TOAN) {
             JOptionPane.showMessageDialog(this, "Phiếu không thể mở máy quét khi ở trạng thái khác chờ thanh toán");
             return;
         }
@@ -1264,9 +1261,16 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
             MsgBox.alert(this, "Phiếu xuất này đã thanh toán. Vui lòng mời bạn thanh toán phiếu xuất khác");
             return;
         }
+//        String tienKhachDua = txtTienKhachDua.getText();
+//        String tongTien = txtTongTien.getText();
+//        String tongTienNew = tongTien.replace(",", "");
+//        String tienKhachDuaNew = tienKhachDua.replace(",", "");
+//       
+        String tongTien = txtTienPhaitra.getText();
+        String tongTienNew = tongTien.replace(",", "").replace("VNĐ", "").replace(".", "");
         String tienKhachDua = txtTienKhachDua.getText();
         String tienPhaiTra = txtTienPhaitra.getText();
-        if (tienKhachDua.trim().length()==0) {
+        if (tienKhachDua.trim().length() == 0) {
             MsgBox.alert(this, "Bạn phải nhập tiền trước khi bấm nút thanh toán");
         }
         double tienKhach = 0;
@@ -1276,12 +1280,12 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
                 MsgBox.alert(this, "Phải nhập tiền là kiểu số nguyên dương");
                 return;
             }
+            if (tienKhach < Double.valueOf(tienPhaiTra)) {
+                MsgBox.alert(this, "Phải nhập tiền lớn hơn tiền phải trả");
+                return;
+            }
         } catch (NumberFormatException e) {
             MsgBox.alert(this, "Phải nhập tiền là kiểu số");
-            return;
-        }
-        if (tienKhach < Double.valueOf(tienPhaiTra)) {
-            MsgBox.alert(this, "Phải nhập tiền lớn hơn tiền phải trả");
             return;
         }
 
@@ -1300,11 +1304,16 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTienThuaCaretUpdate
 
     private void txtTienKhachDuaCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtTienKhachDuaCaretUpdate
-        String tienKhachDua = txtTienKhachDua.getText();
-        String tienPhaiTra = txtTienPhaitra.getText();
+        String tongTien = txtTienPhaitra.getText();
+        String tongTienNew = tongTien.replace(",", "").replace("VNĐ", "").replace(".", "");
+        String tienKhachDua = txtTienKhachDua.getText().replace(",", "");
         double tienKhach = 0;
         if (tienKhachDua.trim().length() == 0) {
-            return;
+            txtTienThua.setText("");
+        }
+        if (tongTien.trim().length() == 0) {
+            txtTienKhachDua.setText("");
+            txtTienThua.setText("");
         }
         try {
             tienKhach = Double.parseDouble(tienKhachDua);
@@ -1312,14 +1321,18 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
                 MsgBox.alert(this, "Phải nhập tiền là kiểu số nguyên dương");
                 return;
             }
+
         } catch (NumberFormatException e) {
             MsgBox.alert(this, "Phải nhập tiền là kiểu số");
             return;
         }
-
-        double tienThua = tienKhach - Double.valueOf(tienPhaiTra);
-        int tien = (int) tienThua;
-        txtTienThua.setText(formatter.format(tien) + "");
+        
+        try {
+            double tienThua = tienKhach - Double.valueOf(tongTienNew);
+            txtTienThua.setText(formatter.format(tienThua));
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_txtTienKhachDuaCaretUpdate
 
     private void btnChiTietSP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChiTietSP1ActionPerformed
@@ -1346,10 +1359,6 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
 
     private void buttonGradient1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGradient1ActionPerformed
         searchRadio();
-
-//        if (rdoMa.isSelected()) {
-//            listPhieuXuat = phieuXuatService.findByMa(UUID.fromString(txtTimKiem.getText()));
-//        }
         loadTablePhieuXuat(listPhieuXuat);
         if (rdoNgayTao.isSelected() || rdoNgayThanhToan.isSelected()) {
             TimKiemTheoNgay();
@@ -1360,7 +1369,6 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
         index = p.prevIndex(offset, limit, index);
         offset = p.prev(offset, limit);
         loadIndex();
-        //        loadTable(getList);
         loadTablePhieuXuat(phieuXuatService.phanTrang(listPhieuXuat, offset, limit));
     }//GEN-LAST:event_btnPreActionPerformed
 
@@ -1368,7 +1376,6 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
         index = p.nextIndex(offset, limit, sizes, index);
         offset = p.next(offset, limit, sizes);
         loadIndex();
-        //        loadTable(getList);
         loadTablePhieuXuat(phieuXuatService.phanTrang(listPhieuXuat, offset, limit));
     }//GEN-LAST:event_btnNextActionPerformed
 
@@ -1493,9 +1500,9 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
             loadTablePhieuXuat(getListByTT(0));
         } else if (rdoKhachHang.isSelected()) {
             loadTablePhieuXuat(getListByTT(1));
-        } else if(rdoMa.isSelected()){
+        } else if (rdoMa.isSelected()) {
             loadTablePhieuXuat(getListByTT(2));
-        }else {
+        } else {
             loadTablePhieuXuat(getListByTT(3));
         }
     }

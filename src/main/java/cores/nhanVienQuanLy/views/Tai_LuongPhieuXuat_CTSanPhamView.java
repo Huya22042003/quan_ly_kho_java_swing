@@ -5,21 +5,16 @@ import cores.nhanVienQuanLy.customModels.Luong_ChiTietPhieuXuatCustom;
 import cores.nhanVienQuanLy.customModels.Tai_SanPhamCustom;
 import cores.nhanVienQuanLy.services.Tai_NvqlLuongPhieuXuatService;
 import cores.nhanVienQuanLy.services.serviceImpls.Tai_NvqlLuongPhieuXuatServiceImpl;
-import domainModels.ChiTietPhieuNhap;
 import domainModels.ChiTietSanPham;
 import domainModels.PhieuXuat;
-import infrastructures.constant.MauConstant;
 import infrastructures.constant.TrangThaiPhieuConstant;
 import infrastructures.constant.TrangThaiSanPhamConstanst;
 import java.awt.event.MouseListener;
-import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import static javax.swing.JOptionPane.CANCEL_OPTION;
 import javax.swing.table.DefaultTableModel;
 import utilities.Converter;
 import utilities.MsgBox;
@@ -111,7 +106,7 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
                 ctsp.getGiaNhap() == null ? "Chưa có" : formatter.format(ctsp.getGiaNhap()) + "VNĐ",
                 ctsp.getGiaBan() == null ? "Chưa có" : formatter.format(ctsp.getGiaBan()) + "VNĐ",
                 Converter.trangThaiMauSac(ctsp.getMau()),
-                ctsp.getDonVi().getDonViQuyDoi(),
+                ctsp.getDonVi().getDonViGoc(),
                 ctsp.getNamBaoHanh(),
                 Converter.trangThaiSanPham(ctsp.getTrangThai()),
                 ctsp.getSize(),
@@ -530,6 +525,7 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
 
         btnChon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Lists.png"))); // NOI18N
         btnChon.setText(" ");
+        btnChon.setToolTipText("Xem chi tiết sản phẩm");
         btnChon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnChonActionPerformed(evt);
@@ -691,7 +687,7 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
         txtMa.setText(tblSanPham.getValueAt(row, 1).toString());
         txtTenSp.setText(tblSanPham.getValueAt(row, 2).toString());
         listChiTietSP = luongService.getListCTSanPhamByID(ListSP.get(row).getId());
-        int tongSL;
+        int tongSL = 0;
         for (LuongBanHang_ChiTietSanPhamCustom ctsp : listChiTietSP) {
             tongSL +=ctsp.getSoLuongTon();
         }
@@ -763,18 +759,13 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
         }
         this.FrameChiTietSanPham.setLocationRelativeTo(null);
         this.FrameChiTietSanPham.setVisible(true);
-        listChiTietSP = luongService.getListCTSanPhamByID(ListSP.get(row).getId())
+        listChiTietSP = luongService.getListCTSanPhamByID(ListSP.get(row).getId());
         showDataCtsp(listChiTietSP);
     }//GEN-LAST:event_btnChonActionPerformed
 
     private void tbChiTietSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbChiTietSanPhamMouseClicked
         int row = this.tbChiTietSanPham.getSelectedRow();
         LuongBanHang_ChiTietSanPhamCustom ctsp = listChiTietSP.get(row);
-        //        for (TpQuanLySanPhamCustom sp : ListSP) {
-        //            if (ctsp.get().getId().equals(sp.getSanPham().getId())) {
-        //                ctsp.setSoLuongTon(sp.getSoLuongTon());
-        //            }
-        //        }
         if (phieuXuat.getTrangThai().equals(TrangThaiPhieuConstant.DA_THANH_TOAN)) {
             MsgBox.alert(this, "Phiếu xuất này đã ở trạng thái đã thanh toán nên không thể mua hàng! Vui tạo tạo phiếu xuất mới");
             return;
@@ -784,7 +775,7 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
             return;
         }
         String input = JOptionPane.showInputDialog("Bạn mua muốn bao nhiêu ?");
-        if (input.equalsIgnoreCase("")) {
+        if (input == null) {
             return;
         }
         int sl = 0;

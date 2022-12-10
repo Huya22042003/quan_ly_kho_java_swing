@@ -773,6 +773,7 @@
                   <Image iconType="3" name="/icons/Lists.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value=" "/>
+                <Property name="toolTipText" type="java.lang.String" value="Xem chi ti&#x1ebf;t s&#x1ea3;n ph&#x1ea9;m"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnChonActionPerformed"/>
