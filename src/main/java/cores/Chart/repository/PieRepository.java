@@ -45,7 +45,7 @@ public class PieRepository {
         Session session = HibernateUtil.getSessionFactory().openSession();
         List<ModelChartPie1> listModel = new ArrayList<>();
         List<Object[]> list = session.createNativeQuery("""
-            select b.Ten, SUM(c.SoLuong) as soluong from ChiTietSanPham a 
+            select top 5 b.Ten, SUM(c.SoLuong) as soluong from ChiTietSanPham a 
             join SanPham b on a.IdSanPham = b.Id
             join ChiTietPhieuXuat c on a.Id = c.IdChiTietSP
             group by b.Ten

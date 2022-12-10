@@ -47,8 +47,8 @@ public class TpThongKeView extends javax.swing.JPanel {
         lblTongSp.setText(khoService.getList().get(0).toString());
         lblSoSpDaBan.setText(khoService.getSoSanPhamDaXuat().get(0).toString());
         lblSoSpChuaBan.setText(khoService.getSoSanPhamDaNhap().get(0).toString());
-        lblSoSpHoanNhap.setText(khoService.getSoLuongSpHoanNhap().get(0).toString());
-        lblSoSpHoanXuat.setText(khoService.getSoLuongSpHoanXuat().get(0).toString());
+        lblSoSpHoanNhap.setText(khoService.getSoLuongSpHoanNhap().get(0) == null ? "Chưa có" : khoService.getSoLuongSpHoanNhap().get(0).toString());
+        lblSoSpHoanXuat.setText(khoService.getSoLuongSpHoanXuat().get(0) == 0 ? "Chưa có" : khoService.getSoLuongSpHoanXuat().get(0).toString());
 
         loadTableHD(listSp);
 
