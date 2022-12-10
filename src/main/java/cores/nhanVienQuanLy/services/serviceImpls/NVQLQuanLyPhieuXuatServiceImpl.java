@@ -40,6 +40,7 @@ public class NVQLQuanLyPhieuXuatServiceImpl implements NVQLQuanLyPhieuXuatServic
         PhieuXuat px = new PhieuXuat();
         px.setNgayTao(pxcs.getNgayTao());
         px.setGhiChu(pxcs.getGhiChu());
+        px.setMaPhieu(pxcs.getMaPhieu());
         px.setNgayThanhToan(pxcs.getNgayThanhToan());
         px.setTrangThai(pxcs.getTrangThai());
         px.setNhanVien(pxcs.getNhanVien());
@@ -154,7 +155,7 @@ public class NVQLQuanLyPhieuXuatServiceImpl implements NVQLQuanLyPhieuXuatServic
             case 1:
                 return rp.findAllByIdKhachHang(ma, tt);
             case 2:
-                return rp.findAllByIdPhieu(ma, tt);
+                return rp.findAllByMaPhieu(ma, tt);
             default:
                 return rp.findAllByIdKhachHang("", tt);
         }

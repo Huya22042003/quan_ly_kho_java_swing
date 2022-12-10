@@ -426,7 +426,7 @@ public class Tai_LuongHoanXuat_ListPhieuXuat extends javax.swing.JFrame {
 
             Object[] rowData = {
                 dtm.getRowCount() + 1,
-                el.getMa(),
+                el.getMaPhieu(),
                 el.getNgayTao() == null ? "không có" : simpleDateFormat.format(ngayTao),
                 el.getNgayThanhToan() == null ? "Chưa thanh toán" : simpleDateFormat.format(ngayTao),
                 Converter.TrangThaiPhieuXuat(el.getTrangThai()),
