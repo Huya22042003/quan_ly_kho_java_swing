@@ -5,7 +5,6 @@
 package cores.truongPhongs.services;
 
 import cores.truongPhongs.customModels.TpThongKeSpCustom;
-import cores.truongPhongs.customModels.TpTongSoSanPhamTrongKhoCustom;
 import java.util.List;
 
 /**
@@ -22,11 +21,9 @@ public interface TpThongKeService {
 
     public List<Integer> getSoSanPhamDaNhap();
 
-    List<TpThongKeSpCustom> getListByNgayThanhToan(Long ngayBatDau, Long ngayKetThuc);
-
     public List<Integer> getSoSanPhamDaXuat();
 
-    public List<TpThongKeSpCustom> getListSp();
+    public List<TpThongKeSpCustom> getListSp(Long ngayBatDau, Long ngayKetThuc, String txt);
 
     public List<Integer> getSoLuongSpHoanNhap();
 
@@ -34,5 +31,4 @@ public interface TpThongKeService {
     
     List<TpThongKeSpCustom> phanTrang(List<TpThongKeSpCustom> list, int offset, int limit);
     
-      List<TpThongKeSpCustom> findAllByKhAndNV(String ma,int rdo);
 }

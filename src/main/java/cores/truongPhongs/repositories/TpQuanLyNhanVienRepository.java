@@ -81,7 +81,8 @@ public class TpQuanLyNhanVienRepository {
 
             tran = s.beginTransaction();
             NhanVien nv = s.find(NhanVien.class, id);
-            s.delete(nv);
+            nv.setTrangThai(TrangThaiNhanVienConstant.DA_NGHI_VIEC);
+            s.update(nv);
             tran.commit();
 
         } catch (Exception e) {

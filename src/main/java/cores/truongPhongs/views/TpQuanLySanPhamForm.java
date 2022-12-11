@@ -2,7 +2,6 @@ package cores.truongPhongs.views;
 
 import cores.exportPDF.services.ExportSanPhamService;
 import cores.exportPDF.services.serviceImpls.ExportSanPhamServiceImpl;
-import cores.nhanVienQuanLy.customModels.PhieuXuatCustom;
 import cores.truongPhongs.customModels.TpQuanLyChiTietSanPhamCustom;
 import cores.truongPhongs.customModels.TpQuanLySanPhamCustom;
 import cores.truongPhongs.services.TpQuanLyChiTietSanPhamService;

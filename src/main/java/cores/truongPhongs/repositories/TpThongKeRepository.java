@@ -4,10 +4,10 @@
  */
 package cores.truongPhongs.repositories;
 
-import cores.truongPhongs.customModels.TpPhieuNhapCustom;
+import cores.truongPhongs.customModels.TpQuanLySanPhamCustom;
 import cores.truongPhongs.customModels.TpThongKeSpCustom;
-import cores.truongPhongs.customModels.TpTongSoSanPhamTrongKhoCustom;
-import domainModels.ChiTietPhieuXuat;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -19,14 +19,24 @@ import utilities.HibernateUtil;
  */
 public class TpThongKeRepository {
 
-    public List<TpThongKeSpCustom> getListSanPham() {
+    public List<TpThongKeSpCustom> getListSanPham(Long ngayBd, Long ngayKt, String txt) {
         Session s = HibernateUtil.getSessionFactory().openSession();
-        Query q = s.createQuery("Select new cores.truongPhongs.customModels.TpThongKeSpCustom( "
-                + "m.idPhieuXuat as idPhieuXuat,"
-                + "m.idChiTietSp as idCtsp,"
-                + "m.soLuong as soLuong "
-                + ") from domainModels.ChiTietPhieuXuat m");
-        List<TpThongKeSpCustom> listSP = q.getResultList();
+        Query q = s.createNativeQuery("""
+                                      SELECT px.MaPhieu, kh.Ten as tenKh , nv.Ten  as tenNv,
+                                      (
+                                      SELECT SUM(ctpx.SoLuong*ctsp.GiaBan) FROM ChiTietPhieuXuat ctpx join ChiTietSanPham ctsp on ctsp.Id = ctpx.IdChiTietSP
+                                      WHERE ctpx.IdPhieuXuat = px.Id
+                                      ) AS tongTien 
+                                      FROM PhieuXuat px join KhachHang kh on px.IdKhachHang = kh.Id
+                                      				join NhanVien nv on nv.Id = px.IdNhanVien
+                                      WHERE px.NgayThanhToan >= :ngayBd AND px.NgayThanhToan <= :ngayKt 
+                                      AND px.MaPhieu LIKE CONCAT('%', :txt, '%') OR kh.Ten LIKE CONCAT('%', :txt, '%') OR nv.Ten LIKE CONCAT('%', :txt, '%')
+                                      """).setParameter("ngayBd", ngayBd).setParameter("ngayKt", ngayKt).setParameter("txt", txt);
+        List<Object[]> listQuery = q.getResultList();
+        List<TpThongKeSpCustom> listSP = new ArrayList<>();
+        listQuery.stream().forEach(el -> {
+            listSP.add(new TpThongKeSpCustom((String) el[0], (String) el[1], (String) el[2], (BigDecimal) el[3]));
+        });
         s.close();
         return listSP;
     }

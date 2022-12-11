@@ -49,13 +49,8 @@ public class TpTongSoSanPhamTrongKhoServiceImpl implements TpThongKeService {
     }
 
     @Override
-    public List<TpThongKeSpCustom> getListSp() {
-        return repo.getListSanPham();
-    }
-
-    @Override
-    public List<TpThongKeSpCustom> getListByNgayThanhToan(Long ngayBatDau, Long ngayKetThuc) {
-        return repo.getListByNgayThanhToan(ngayBatDau, ngayKetThuc);
+    public List<TpThongKeSpCustom> getListSp(Long ngayBatDau, Long ngayKetThuc, String txt) {
+        return repo.getListSanPham(ngayBatDau, ngayKetThuc, txt);
     }
 
     @Override
@@ -85,18 +80,4 @@ public class TpTongSoSanPhamTrongKhoServiceImpl implements TpThongKeService {
         return listPhanTrang;
     }
 
-    @Override
-    public List<TpThongKeSpCustom> findAllByKhAndNV(String ma, int rdo) {
-        switch (rdo) {
-            case 0:
-             return repo.getListByMaHd(ma);
-            case 1:
-                return repo.getListByMaNv(ma);
-            case 2:
-               return repo.getListByTenNv(ma);
-            default:
-               return  repo.getListByTenNv("");
-        
-    }
-    }
 }
