@@ -13,7 +13,6 @@ import cores.truongPhongs.services.serviceImpls.TpTongSoSanPhamTrongKhoServiceIm
 import java.util.ArrayList;
 import java.util.List;
 import cores.truongPhongs.services.TpThongKeService;
-import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import javax.swing.table.DefaultTableModel;
 import utilities.DateTimeUtil;
@@ -45,11 +44,11 @@ public class TpThongKeView extends javax.swing.JPanel {
         initComponents();
         listSp = khoService.getListSp(0L, DateTimeUtil.convertDateToTimeStampSecond(), "");
 
-        lblTongSp.setText(khoService.getList().get(0).toString());
-        lblSoSpDaBan.setText(khoService.getSoSanPhamDaXuat().get(0).toString());
-        lblSoSpChuaBan.setText(khoService.getSoSanPhamDaNhap().get(0).toString());
-        lblSoSpHoanNhap.setText(khoService.getSoLuongSpHoanNhap().get(0) == null ? "Chưa có" : khoService.getSoLuongSpHoanNhap().get(0).toString());
-        lblSoSpHoanXuat.setText(khoService.getSoLuongSpHoanXuat().get(0) == 0 ? "Chưa có" : khoService.getSoLuongSpHoanXuat().get(0).toString());
+        lblTongSp.setText(khoService.getList().get(0).toString() + " Sản phẩm");
+        lblSoSpDaBan.setText(khoService.getSoSanPhamDaXuat().get(0).toString()+ " Sản phẩm");
+        lblSoSpChuaBan.setText(khoService.getSoSanPhamDaNhap().get(0).toString()+ " Sản phẩm");
+        lblSoSpHoanNhap.setText(khoService.getSoLuongSpHoanNhap().get(0) == null ? "Chưa có sản phẩm" : khoService.getSoLuongSpHoanNhap().get(0).toString()+ " Sản phẩm");
+        lblSoSpHoanXuat.setText(khoService.getSoLuongSpHoanXuat().get(0) == 0 ? "Chưa có sản phẩm" : khoService.getSoLuongSpHoanXuat().get(0).toString()+ " Sản phẩm");
 
         loadTableHD(listSp);
 

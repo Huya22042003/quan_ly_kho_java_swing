@@ -426,7 +426,7 @@ public class ImportView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Thất bại !!! Bạn chưa chọn file", "Nooooo !!!", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        System.out.println(list.size());
+        
         MessAlert mess = service.importData(list, idPhieuNhap);
         if (mess.isStatus()) {
             JOptionPane.showMessageDialog(this, "Import thành công", "Yeahhh !!!", JOptionPane.INFORMATION_MESSAGE);
