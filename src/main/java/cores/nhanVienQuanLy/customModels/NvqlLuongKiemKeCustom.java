@@ -17,6 +17,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class NvqlLuongKiemKeCustom {
+
     private UUID id;
     private String maPhieuKiem;
     private Long ngayTao;
@@ -24,13 +25,4 @@ public class NvqlLuongKiemKeCustom {
     private TrangThaiPhieuKiemConstant trangThai;
     private String ghiChu;
 
-    public NvqlLuongKiemKeCustom(UUID id, String maPhieuKiem, Long ngayTao, NhanVien idNV, TrangThaiPhieuKiemConstant trangThai) {
-        this.id = id;
-        this.maPhieuKiem = maPhieuKiem;
-        this.ngayTao = ngayTao;
-        this.idNV = idNV;
-        this.trangThai = trangThai;
-    }
-    
-    
 }

@@ -44,6 +44,34 @@ public class TpPhieuNhapChiTietRepository {
         return pn;
     }
 
+    public boolean upDatePhieuNhap(ChiTietPhieuNhap pn) {
+        Transaction tran = null;
+        try {
+            Session s = HibernateUtil.getSessionFactory().openSession();
+            tran = s.beginTransaction();
+            s.save(pn);
+            tran.commit();
+            s.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            tran.rollback();
+            return false;
+        }
+        return true;
+    }
+
+    public void upDatePN(ChiTietPhieuNhap pn) {
+        Session s = HibernateUtil.getSessionFactory().openSession();
+        try {
+            Transaction tran = s.beginTransaction();
+            s.update(pn);
+            tran.commit();
+            s.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public PhieuNhap findPnById(UUID id) {
         Session s = HibernateUtil.getSessionFactory().openSession();
         PhieuNhap pn = s.find(PhieuNhap.class, id);
@@ -58,6 +86,7 @@ public class TpPhieuNhapChiTietRepository {
         s.close();
         return pn;
     }
+
     public boolean addCTPN(ChiTietPhieuNhap ctpx) {
         Session s = HibernateUtil.getSessionFactory().openSession();
         try {

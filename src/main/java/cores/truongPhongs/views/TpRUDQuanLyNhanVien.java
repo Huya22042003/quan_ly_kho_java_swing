@@ -32,8 +32,8 @@ String duongdananh = getClass().getResource("/icons/FPT_Polytechnic_doc.png").ge
         initComponents();
         loadList();
         loadCBB();
-        nhanVienSevice.loadComboboxTT(cbbTrangThai);
-        nhanVienSevice.loadComboboxGT(cbbGioiTinh);
+        nhanVienSevice.loadComboboxTT(cbbTrangThairud);
+        nhanVienSevice.loadComboboxGT(cbbGioiTinhrud);
         Toolkit toolkit = getToolkit();
         Dimension size = toolkit.getScreenSize();
         setLocation(size.width / 2 - getWidth() / 2, size.height / 2 - getHeight() / 2);
@@ -57,16 +57,16 @@ String duongdananh = getClass().getResource("/icons/FPT_Polytechnic_doc.png").ge
         erroSDT = new utilities.palette.lable();
         txtMa = new utilities.palette.TextField();
         erroTen = new utilities.palette.lable();
-        txtMatKhau = new utilities.palette.PasswordField();
         erroMa = new utilities.palette.lable();
         txtTen = new utilities.palette.TextField();
         txtEmail = new utilities.palette.TextField();
         txtDiaChi = new utilities.palette.TextField();
         txtDate = new com.toedter.calendar.JDateChooser();
         erroNgaySinh = new utilities.palette.lable();
-        cbbGioiTinh = new utilities.palette.Combobox();
-        cbbTrangThai = new utilities.palette.Combobox();
-        cbbChucVu = new utilities.palette.Combobox();
+        cbbGioiTinhrud = new utilities.palette.Combobox();
+        cbbTrangThairud = new utilities.palette.Combobox();
+        cbbChucVurud = new utilities.palette.Combobox();
+        txtMatKhau = new utilities.palette.PasswordField();
         panelRound3 = new utilities.palette.PanelRound();
         test = new javax.swing.JLabel();
         lblAnh = new javax.swing.JButton();
@@ -77,6 +77,7 @@ String duongdananh = getClass().getResource("/icons/FPT_Polytechnic_doc.png").ge
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        setResizable(false);
 
         panelRound1.setBackground(new java.awt.Color(221, 242, 244));
         panelRound1.setRoundBottomLeft(50);
@@ -90,24 +91,23 @@ String duongdananh = getClass().getResource("/icons/FPT_Polytechnic_doc.png").ge
         panelRound2.setRoundTopLeft(50);
         panelRound2.setRoundTopRight(50);
 
-        erroDiaChi.setFont(new java.awt.Font("Constantia", 1, 8)); // NOI18N
+        erroDiaChi.setFont(new java.awt.Font("Constantia", 1, 12)); // NOI18N
 
-        erroMatKhau.setFont(new java.awt.Font("Constantia", 1, 8)); // NOI18N
+        erroMatKhau.setFont(new java.awt.Font("Constantia", 1, 12)); // NOI18N
 
         txtSDT.setLabelText("SDT");
 
-        erroEmail.setFont(new java.awt.Font("Constantia", 1, 8)); // NOI18N
+        erroEmail.setFont(new java.awt.Font("Constantia", 1, 12)); // NOI18N
 
-        erroSDT.setFont(new java.awt.Font("Constantia", 1, 8)); // NOI18N
+        erroSDT.setFont(new java.awt.Font("Constantia", 1, 12)); // NOI18N
 
+        txtMa.setDisabledTextColor(new java.awt.Color(51, 51, 51));
         txtMa.setEnabled(false);
         txtMa.setLabelText("Mã");
 
-        erroTen.setFont(new java.awt.Font("Constantia", 1, 8)); // NOI18N
+        erroTen.setFont(new java.awt.Font("Constantia", 1, 12)); // NOI18N
 
-        txtMatKhau.setLabelText("Mật Khẩu");
-
-        erroMa.setFont(new java.awt.Font("Constantia", 1, 8)); // NOI18N
+        erroMa.setFont(new java.awt.Font("Constantia", 1, 12)); // NOI18N
 
         txtTen.setLabelText("Tên");
 
@@ -115,13 +115,16 @@ String duongdananh = getClass().getResource("/icons/FPT_Polytechnic_doc.png").ge
 
         txtDiaChi.setLabelText("Địa Chỉ");
 
-        erroNgaySinh.setFont(new java.awt.Font("Constantia", 1, 8)); // NOI18N
+        erroNgaySinh.setFont(new java.awt.Font("Constantia", 1, 12)); // NOI18N
 
-        cbbGioiTinh.setLabeText("Giới Tính");
+        cbbGioiTinhrud.setLabeText("Giới Tính");
 
-        cbbTrangThai.setLabeText("Trạng Thái");
+        cbbTrangThairud.setLabeText("Trạng Thái");
 
-        cbbChucVu.setLabeText("Chức Vụ");
+        cbbChucVurud.setLabeText("Chức Vụ");
+
+        txtMatKhau.setLabelText("Mật khẩu ");
+        txtMatKhau.setShowAndHide(true);
 
         javax.swing.GroupLayout panelRound2Layout = new javax.swing.GroupLayout(panelRound2);
         panelRound2.setLayout(panelRound2Layout);
@@ -130,7 +133,7 @@ String duongdananh = getClass().getResource("/icons/FPT_Polytechnic_doc.png").ge
             .addGroup(panelRound2Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cbbTrangThai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbbTrangThairud, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(erroNgaySinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtMa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(erroMa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -139,14 +142,14 @@ String duongdananh = getClass().getResource("/icons/FPT_Polytechnic_doc.png").ge
                     .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(erroEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtSDT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(erroSDT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtMatKhau, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtDiaChi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(erroMatKhau, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(erroDiaChi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtDate, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                    .addComponent(cbbGioiTinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cbbChucVu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtDate, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
+                    .addComponent(cbbGioiTinhrud, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbbChucVurud, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(erroMatKhau, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(erroSDT, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
         panelRound2Layout.setVerticalGroup(
@@ -168,11 +171,11 @@ String duongdananh = getClass().getResource("/icons/FPT_Polytechnic_doc.png").ge
                 .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(erroSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(txtMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(erroMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(erroMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(erroDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -181,12 +184,12 @@ String duongdananh = getClass().getResource("/icons/FPT_Polytechnic_doc.png").ge
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(erroNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbbGioiTinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(cbbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addComponent(cbbChucVu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addComponent(cbbGioiTinhrud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(cbbTrangThairud, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(cbbChucVurud, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         panelRound3.setBackground(new java.awt.Color(51, 153, 255));
@@ -266,10 +269,9 @@ String duongdananh = getClass().getResource("/icons/FPT_Polytechnic_doc.png").ge
                         .addGap(77, 77, 77)
                         .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnExit, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                            .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(btnXoa, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                                .addComponent(btnUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                .addGap(33, 33, 33)
+                            .addComponent(btnXoa, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                            .addComponent(btnUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(52, 52, 52)
                 .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39)
                 .addComponent(uWPButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -315,8 +317,8 @@ public TpRUDQuanLyNhanVien(TpNhanVienCustom nv) {
         custom = nv;
         nhanVienSevice = new TpQuanLyNhanVienServiceImpl();
         initComponents();
-        nhanVienSevice.loadComboboxTT(cbbTrangThai);
-        nhanVienSevice.loadComboboxGT(cbbGioiTinh);
+        nhanVienSevice.loadComboboxTT(cbbTrangThairud);
+        nhanVienSevice.loadComboboxGT(cbbGioiTinhrud);
         showData();
         Toolkit toolkit = getToolkit();
         Dimension size = toolkit.getScreenSize();
@@ -331,15 +333,15 @@ public TpRUDQuanLyNhanVien(TpNhanVienCustom nv) {
         this.txtMatKhau.setText(custom.getMatKhau());
         this.txtDate.setDate(new Date(custom.getNgaySinh()));
        this.lblAnh.setIcon(new javax.swing.ImageIcon(custom.getHinhAnh()));
-        this.cbbGioiTinh.setSelectedItem(Converter.trangThaiGioiTinh(custom.getGioiTinh()));
+        this.cbbGioiTinhrud.setSelectedItem(Converter.trangThaiGioiTinh(custom.getGioiTinh()));
         this.txtDiaChi.setText(custom.getDiaChi());
-        this.cbbTrangThai.setSelectedItem(Converter.trangThaiNhanVien(custom.getTrangThai()));
+        this.cbbTrangThairud.setSelectedItem(Converter.trangThaiNhanVien(custom.getTrangThai()));
 
     }
 
-    public TpNhanVienCustom getFormData() {
+    public TpNhanVienCustom getFormDataRud() {
         TpNhanVienCustom nvc = new TpNhanVienCustom();
-        nvc.setMa(null);
+        nvc.setMa(txtMa.getText());
         nvc.setTen(txtTen.getText());
         nvc.setSdt(txtSDT.getText());
         nvc.setEmail(txtEmail.getText());
@@ -352,10 +354,10 @@ public TpRUDQuanLyNhanVien(TpNhanVienCustom nv) {
             nvc.setNgaySinh(null);
         }
         nvc.setHinhAnh(duongdananh);
-        nvc.setGioiTinh(nhanVienSevice.loc1(this.cbbGioiTinh.getSelectedIndex()));
+        nvc.setGioiTinh(nhanVienSevice.loc1(this.cbbGioiTinhrud.getSelectedIndex()));
         nvc.setDiaChi(txtDiaChi.getText());
-        nvc.setTrangThai(nhanVienSevice.loc(this.cbbTrangThai.getSelectedIndex()));
-        nvc.setIdChucVu(nhanVienSevice.findIDCV(nhanVienSevice.getListCV().get(cbbChucVu.getSelectedIndex()).getId()));
+        nvc.setTrangThai(nhanVienSevice.loc(this.cbbTrangThairud.getSelectedIndex()));
+        nvc.setIdChucVu(nhanVienSevice.findIDCV(nhanVienSevice.getListCV().get(cbbChucVurud.getSelectedIndex()).getId()));
 
         return nvc;
     }
@@ -367,9 +369,9 @@ public TpRUDQuanLyNhanVien(TpNhanVienCustom nv) {
 
     public void loadCBB() {
 
-        cbbChucVu.removeAllItems();
+        cbbChucVurud.removeAllItems();
         for (TP_ChucVuCustom tP_ChucVuCustom : ListCV) {
-            cbbChucVu.addItem(tP_ChucVuCustom.getTen());
+            cbbChucVurud.addItem(tP_ChucVuCustom.getTen());
         }
     }
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
@@ -383,7 +385,7 @@ public TpRUDQuanLyNhanVien(TpNhanVienCustom nv) {
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        TpNhanVienCustom check = nhanVienSevice.checkValidate(getFormData(), erroMa, erroTen, erroEmail, erroSDT, erroMatKhau, erroDiaChi, erroNgaySinh);
+        TpNhanVienCustom check = nhanVienSevice.checkValidateUpdate(getFormDataRud(), erroMa, erroTen, erroEmail, erroSDT, erroMatKhau, erroDiaChi, erroNgaySinh);
         if (check == null) {
             return;
         }
@@ -466,9 +468,9 @@ public TpRUDQuanLyNhanVien(TpNhanVienCustom nv) {
     private utilities.palette.UWPButton btnExit;
     private utilities.palette.UWPButton btnUpdate;
     private utilities.palette.UWPButton btnXoa;
-    private utilities.palette.Combobox cbbChucVu;
-    private utilities.palette.Combobox cbbGioiTinh;
-    private utilities.palette.Combobox cbbTrangThai;
+    private utilities.palette.Combobox cbbChucVurud;
+    private utilities.palette.Combobox cbbGioiTinhrud;
+    private utilities.palette.Combobox cbbTrangThairud;
     private utilities.palette.lable erroDiaChi;
     private utilities.palette.lable erroEmail;
     private utilities.palette.lable erroMa;

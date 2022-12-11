@@ -9,14 +9,19 @@ import cores.truongPhongs.customModels.TP_KhachHangCustom;
 import cores.truongPhongs.services.TP_KhachHangService;
 import cores.truongPhongs.services.serviceImpls.TP_KhachHangServiceImpl;
 import domainModels.KhachHang;
+import domainModels.NhanVien;
 import infrastructures.constant.TrangThaiPhieuConstant;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import utilities.Auth;
 import utilities.Converter;
 import utilities.DateTimeUtil;
+import utilities.MaTuSinh;
 import utilities.MsgBox;
+import utilities.Page;
 
 public class Tai_ChonKhachHangView extends javax.swing.JFrame {
 
@@ -26,9 +31,21 @@ public class Tai_ChonKhachHangView extends javax.swing.JFrame {
     private NVQLQuanLyPhieuXuatService phieuXuatService;
     private Tai_NvqlLuongPhieuXuatService luongPxService;
 
+    private Page p;
+
+    private int limit = 7;
+
+    private int offset = 0;
+
+    private int sizes = 0;
+
+    private int index = 1;
+
     public Tai_ChonKhachHangView() {
         initComponents();
+        this.setLocationRelativeTo(null);
         hangService = new TP_KhachHangServiceImpl();
+        p = new Page();
         luongPxService = new Tai_NvqlLuongPhieuXuatServiceImpl();
         getList = new ArrayList<>();
         createView = new LuongBanHang_CreateKhachHang();
@@ -36,10 +53,15 @@ public class Tai_ChonKhachHangView extends javax.swing.JFrame {
         getList = hangService.getListKH();
         hangService.loadCbbTT(cbbTrangThai);
 
-        loadTable(getList);
+        loadTable(hangService.phanTrang(getList, offset, limit));
         clearForm();
 
     }
+
+    private void loadIndex() {
+        this.txtIndex.setText(String.valueOf(index) + " / " + (Math.round((sizes / limit) + 0.5)));
+    }
+
     public void fillData(int i) {
         TP_KhachHangCustom ql = getList.get(i);
         txtMaKH.setText(ql.getMa());
@@ -51,10 +73,24 @@ public class Tai_ChonKhachHangView extends javax.swing.JFrame {
         txtNgaySinh.setText(new Date(ql.getNgaySinh()).toString());
         txtTrangThai.setText(String.valueOf(ql.getTrangThai()));
     }
+
     public void clearForm() {
         rdoTen.setSelected(true);
         cbbTrangThai.setSelectedIndex(0);
         getList = hangService.findAllByRadio("", hangService.loc(cbbTrangThai.getSelectedIndex()), 0);
+    }
+
+    public void clear() {
+        txtDanhGia.setText("");
+        txtDiaChi.setText("");
+        txtEmail.setText("");
+        txtMaKH.setText("");
+        txtNgaySinh.setText("");
+        txtSDT.setText("");
+        txtSearchTheo.setText("");
+        txtTenKH.setText("");
+        txtTrangThai.setText("");
+        rdoTen.setSelected(true);
     }
 
     public List<TP_KhachHangCustom> listSearch(int rdo) {
@@ -76,6 +112,9 @@ public class Tai_ChonKhachHangView extends javax.swing.JFrame {
     public void loadTable(List<TP_KhachHangCustom> list) {
         DefaultTableModel dtm = (DefaultTableModel) this.tblKhachHang.getModel();
         dtm.setRowCount(0);
+        String pattern = "yyyy-MM-dd";
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         for (TP_KhachHangCustom el : list) {
             Object[] rowData = {
                 dtm.getRowCount() + 1,
@@ -85,7 +124,7 @@ public class Tai_ChonKhachHangView extends javax.swing.JFrame {
                 el.getEmail(),
                 el.getDiaChi(),
                 //                el.getMatKhau(),
-                el.getNgaySinh() == null ? "" : new Date(el.getNgaySinh()),
+                el.getNgaySinh() == null ? "" : simpleDateFormat.format(el.getNgaySinh()),
                 Converter.trangThaiDanhGia(el.getDanhGia()),
                 //                Converter.trangThaiGioiTinh(el.getGioiTinh()),
                 Converter.trangThaiKhachHang(el.getTrangThai()), //                el.getHinhAnh()
@@ -93,15 +132,16 @@ public class Tai_ChonKhachHangView extends javax.swing.JFrame {
             dtm.addRow(rowData);
         }
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         panelRound1 = new utilities.palette.PanelRound();
         panelRound15 = new utilities.palette.PanelRound();
         cbbTrangThai = new utilities.palette.Combobox();
-        btnSearch1 = new utilities.palette.MyButton();
         panelRound16 = new utilities.palette.PanelRound();
         btnThem1 = new utilities.palette.MyButton();
         btnHienThi1 = new utilities.palette.MyButton();
@@ -109,11 +149,15 @@ public class Tai_ChonKhachHangView extends javax.swing.JFrame {
         tblKhachHang = new utilities.palette.TableDark_1();
         panelRound4 = new utilities.palette.PanelRound();
         rdoTen = new utilities.palette.RadioButtonCustom();
-        txtSearchTheo = new utilities.palette.SearchCustom.TextFieldAnimation();
         rdoSDT = new utilities.palette.RadioButtonCustom();
         rdoDiaChi = new utilities.palette.RadioButtonCustom();
+        txtSearchTheo = new utilities.palette.TextField();
+        btnSearch1 = new utilities.palette.MyButton();
         panelRound17 = new utilities.palette.PanelRound();
         jLabel3 = new javax.swing.JLabel();
+        btnPre = new utilities.palette.UWPButton();
+        txtIndex = new javax.swing.JLabel();
+        btnNext = new utilities.palette.UWPButton();
         panelRound3 = new utilities.palette.PanelRound();
         jLabel1 = new javax.swing.JLabel();
         txtTenKH = new utilities.palette.TextField();
@@ -128,6 +172,7 @@ public class Tai_ChonKhachHangView extends javax.swing.JFrame {
         btnChon = new utilities.palette.MyButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -145,37 +190,21 @@ public class Tai_ChonKhachHangView extends javax.swing.JFrame {
 
         cbbTrangThai.setLabeText("Trạng thái");
 
-        btnSearch1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/file.png"))); // NOI18N
-        btnSearch1.setToolTipText("Tìm khách hàng");
-        btnSearch1.setBorderColor(new java.awt.Color(221, 242, 244));
-        btnSearch1.setColor(new java.awt.Color(221, 242, 244));
-        btnSearch1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnSearch1.setRadius(50);
-        btnSearch1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearch1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout panelRound15Layout = new javax.swing.GroupLayout(panelRound15);
         panelRound15.setLayout(panelRound15Layout);
         panelRound15Layout.setHorizontalGroup(
             panelRound15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound15Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(btnSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+            .addGroup(panelRound15Layout.createSequentialGroup()
+                .addGap(47, 47, 47)
                 .addComponent(cbbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
         panelRound15Layout.setVerticalGroup(
             panelRound15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound15Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelRound15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnSearch1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cbbTrangThai, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound15Layout.createSequentialGroup()
+                .addContainerGap(16, Short.MAX_VALUE)
+                .addComponent(cbbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         panelRound16.setBackground(new java.awt.Color(67, 130, 187));
@@ -251,25 +280,36 @@ public class Tai_ChonKhachHangView extends javax.swing.JFrame {
         panelRound4.setRoundTopRight(50);
 
         rdoTen.setBackground(new java.awt.Color(67, 130, 187));
+        buttonGroup1.add(rdoTen);
         rdoTen.setForeground(new java.awt.Color(255, 255, 255));
         rdoTen.setText("Tên");
         rdoTen.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
-        txtSearchTheo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSearchTheoActionPerformed(evt);
-            }
-        });
-
         rdoSDT.setBackground(new java.awt.Color(67, 130, 187));
+        buttonGroup1.add(rdoSDT);
         rdoSDT.setForeground(new java.awt.Color(255, 255, 255));
         rdoSDT.setText("SĐT");
         rdoSDT.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
         rdoDiaChi.setBackground(new java.awt.Color(67, 130, 187));
+        buttonGroup1.add(rdoDiaChi);
         rdoDiaChi.setForeground(new java.awt.Color(255, 255, 255));
         rdoDiaChi.setText("Địa chỉ");
         rdoDiaChi.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+
+        txtSearchTheo.setLabelText("Search");
+
+        btnSearch1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Search.png"))); // NOI18N
+        btnSearch1.setToolTipText("Tìm khách hàng");
+        btnSearch1.setBorderColor(new java.awt.Color(221, 242, 244));
+        btnSearch1.setColor(new java.awt.Color(221, 242, 244));
+        btnSearch1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnSearch1.setRadius(50);
+        btnSearch1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearch1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelRound4Layout = new javax.swing.GroupLayout(panelRound4);
         panelRound4.setLayout(panelRound4Layout);
@@ -280,22 +320,28 @@ public class Tai_ChonKhachHangView extends javax.swing.JFrame {
                 .addComponent(rdoTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(rdoSDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addGap(18, 18, 18)
                 .addComponent(rdoDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
-                .addComponent(txtSearchTheo, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(205, 205, 205))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtSearchTheo, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(185, 185, 185))
         );
         panelRound4Layout.setVerticalGroup(
             panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rdoDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rdoSDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rdoTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtSearchTheo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnSearch1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(panelRound4Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtSearchTheo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(rdoDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(rdoSDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(rdoTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
         );
 
         panelRound17.setBackground(new java.awt.Color(67, 130, 187));
@@ -325,23 +371,47 @@ public class Tai_ChonKhachHangView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        btnPre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/skip-previous-circle-solid-24.png"))); // NOI18N
+        btnPre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPreActionPerformed(evt);
+            }
+        });
+
+        txtIndex.setText("1/1");
+
+        btnNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/skip-next-circle-solid-24.png"))); // NOI18N
+        btnNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
         panelRound1.setLayout(panelRound1Layout);
         panelRound1Layout.setHorizontalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound1Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1)
+                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelRound1Layout.createSequentialGroup()
                         .addComponent(panelRound17, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(93, 93, 93)
                         .addComponent(panelRound15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelRound1Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
                         .addComponent(panelRound16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(panelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(29, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnPre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(67, 67, 67)
+                .addComponent(txtIndex)
+                .addGap(67, 67, 67)
+                .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(273, 273, 273))
         );
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -350,13 +420,20 @@ public class Tai_ChonKhachHangView extends javax.swing.JFrame {
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(panelRound17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(panelRound15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
+                .addGap(29, 29, 29)
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelRound16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49))
+                    .addComponent(panelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelRound16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(54, 54, 54)
+                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelRound1Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(txtIndex)))
+                .addGap(48, 48, 48))
         );
 
         panelRound3.setBackground(new java.awt.Color(228, 206, 224));
@@ -382,7 +459,7 @@ public class Tai_ChonKhachHangView extends javax.swing.JFrame {
         txtDanhGia.setLabelText("Đánh giá");
 
         myButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Exit.png"))); // NOI18N
-        myButton7.setToolTipText("Clear");
+        myButton7.setToolTipText("Thoát");
         myButton7.setBorderColor(new java.awt.Color(221, 242, 244));
         myButton7.setColor(new java.awt.Color(221, 242, 244));
         myButton7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -510,13 +587,13 @@ public class Tai_ChonKhachHangView extends javax.swing.JFrame {
             .addGap(0, 1227, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGap(0, 31, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGap(0, 32, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 717, Short.MAX_VALUE)
+            .addGap(0, 727, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -527,22 +604,15 @@ public class Tai_ChonKhachHangView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSearch1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearch1ActionPerformed
-        searchRadio();
-    }//GEN-LAST:event_btnSearch1ActionPerformed
-
     private void btnThem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThem1ActionPerformed
         createView.setVisible(true);
     }//GEN-LAST:event_btnThem1ActionPerformed
 
     private void btnHienThi1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHienThi1ActionPerformed
+        clear();
         getList = hangService.getListKH();
-        loadTable(getList);
+        loadTable(hangService.phanTrang(getList, offset, limit));
     }//GEN-LAST:event_btnHienThi1ActionPerformed
-
-    private void txtSearchTheoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchTheoActionPerformed
-
-    }//GEN-LAST:event_txtSearchTheoActionPerformed
 
     private void myButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton7ActionPerformed
         this.setVisible(false);
@@ -552,18 +622,32 @@ public class Tai_ChonKhachHangView extends javax.swing.JFrame {
         PhieuXuatCustom pxcs = new PhieuXuatCustom();
         pxcs.setId(phieuXuatService.addPhieuXuat(pxcs).getId());
         pxcs.setNgayTao(DateTimeUtil.convertDateToTimeStampSecond());
-        pxcs.setNgayThanhToan(DateTimeUtil.convertDateToTimeStampSecond());
-        pxcs.setGhiChu("new");
+        pxcs.setMaPhieu(MaTuSinh.gen("PX"));
+        pxcs.setNgayThanhToan(null);
+        pxcs.setGhiChu("Xuất luôn");
         pxcs.setTrangThai(TrangThaiPhieuConstant.CHO_THANH_TOAN);
         pxcs.setKhachHang(chon());
-        pxcs.setNhanVien(luongPxService.getNhanVienByMa("NV00002"));
+        NhanVien nv = new NhanVien();
+        nv.setDiaChi(Auth.nhanVien.getDiaChi());
+        nv.setEmail(Auth.nhanVien.getEmail());
+        nv.setGioiTinh(Auth.nhanVien.getGioiTinh());
+        nv.setHinhAnh(Auth.nhanVien.getHinhAnh());
+        nv.setId(Auth.nhanVien.getId());
+        nv.setIdChucVu(Auth.nhanVien.getChucVu());
+        nv.setMa(Auth.nhanVien.getMa());
+        nv.setMatKhau(Auth.nhanVien.getMatKhau());
+        nv.setNgaySinh(Auth.nhanVien.getNgaySinh());
+        nv.setSdt(Auth.nhanVien.getSdt());
+        nv.setTen(Auth.nhanVien.getTen());
+        nv.setTrangThai(Auth.nhanVien.getTrangThai());
+        pxcs.setNhanVien(nv);
         phieuXuatService.addPhieuXuat(pxcs);
         MsgBox.alert(this, "Chọn thành công");
         this.dispose();
     }//GEN-LAST:event_btnChonActionPerformed
 
     private void tblKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKhachHangMouseClicked
-                int row = this.tblKhachHang.getSelectedRow();
+        int row = this.tblKhachHang.getSelectedRow();
         if (row == -1) {
             return;
         }
@@ -576,6 +660,24 @@ public class Tai_ChonKhachHangView extends javax.swing.JFrame {
         txtDanhGia.setText(tblKhachHang.getValueAt(row, 7).toString());
         txtTrangThai.setText(tblKhachHang.getValueAt(row, 8).toString());
     }//GEN-LAST:event_tblKhachHangMouseClicked
+
+    private void btnPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreActionPerformed
+        index = p.prevIndex(offset, limit, index);
+        offset = p.prev(offset, limit);
+        loadIndex();
+        loadTable(hangService.phanTrang(getList, offset, limit));
+    }//GEN-LAST:event_btnPreActionPerformed
+
+    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
+        index = p.nextIndex(offset, limit, sizes, index);
+        offset = p.next(offset, limit, sizes);
+        loadIndex();
+        loadTable(hangService.phanTrang(getList, offset, limit));
+    }//GEN-LAST:event_btnNextActionPerformed
+
+    private void btnSearch1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearch1ActionPerformed
+        searchRadio();
+    }//GEN-LAST:event_btnSearch1ActionPerformed
     public KhachHang chon() {
         int row = this.tblKhachHang.getSelectedRow();
         if (row == -1) {
@@ -597,6 +699,7 @@ public class Tai_ChonKhachHangView extends javax.swing.JFrame {
         kh.setTrangThai(khct.getTrangThai());
         return kh;
     }
+
     /**
      * @param args the command line arguments
      */
@@ -635,8 +738,11 @@ public class Tai_ChonKhachHangView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private utilities.palette.MyButton btnChon;
     private utilities.palette.MyButton btnHienThi1;
+    private utilities.palette.UWPButton btnNext;
+    private utilities.palette.UWPButton btnPre;
     private utilities.palette.MyButton btnSearch1;
     private utilities.palette.MyButton btnThem1;
+    private javax.swing.ButtonGroup buttonGroup1;
     private utilities.palette.Combobox cbbTrangThai;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
@@ -656,10 +762,11 @@ public class Tai_ChonKhachHangView extends javax.swing.JFrame {
     private utilities.palette.TextField txtDanhGia;
     private utilities.palette.TextField txtDiaChi;
     private utilities.palette.TextField txtEmail;
+    private javax.swing.JLabel txtIndex;
     private utilities.palette.TextField txtMaKH;
     private utilities.palette.TextField txtNgaySinh;
     private utilities.palette.TextField txtSDT;
-    private utilities.palette.SearchCustom.TextFieldAnimation txtSearchTheo;
+    private utilities.palette.TextField txtSearchTheo;
     private utilities.palette.TextField txtTenKH;
     private utilities.palette.TextField txtTrangThai;
     // End of variables declaration//GEN-END:variables

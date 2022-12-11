@@ -14,7 +14,7 @@ import javax.swing.JLabel;
  * @author Acer
  */
 public interface TpPhieuNhapService {
-    
+     List<TpPhieuNhapCustom> getListPnById(String ghiChu);
     List<TpPhieuNhapCustom> getListPn();
     TpPhieuNhapCustom addPn(TpPhieuNhapCustom p);
     boolean updatePn(TpPhieuNhapCustom p);
@@ -25,6 +25,8 @@ public interface TpPhieuNhapService {
     List<TpPhieuNhapCustom> getListByNgayThanhToan(Long ngayBatDau, Long ngayKetThuc);
     List<TpPhieuNhapCustom> getListByNgayTao(Long ngayBatDau, Long ngayKetThuc);
     public NhanVien getNhanVienByMa(String ma);
+     List<TpPhieuNhapCustom> findAllByKhAndNV(String ma, TrangThaiPhieuConstant tt, int rdo);
+    List<TpPhieuNhapCustom> phanTrang(List<TpPhieuNhapCustom> list, int offset, int limit);
 
 }
 

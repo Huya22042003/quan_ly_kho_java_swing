@@ -1,6 +1,7 @@
 package cores.nhanVienQuanLy.customModels;
 
 import domainModels.DonVi;
+import domainModels.NhaCungCap;
 import domainModels.SanPham;
 import infrastructures.constant.MauConstant;
 import infrastructures.constant.TrangThaiSanPhamConstanst;
@@ -27,4 +28,5 @@ public class LuongBanHang_ChiTietSanPhamCustom {
     private DonVi donVi;
     private int size;
     private Long ngayTao;
+    private NhaCungCap ncc;
 }

@@ -6,6 +6,7 @@
     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
       <Color blue="cc" green="cc" red="ff" type="rgb"/>
     </Property>
+    <Property name="undecorated" type="boolean" value="true"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -101,12 +102,12 @@
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="7" rowCount="0">
                     <Column editable="false" title="STT" type="java.lang.Object"/>
-                    <Column editable="false" title="M&#xe3; Phi&#x1ebf;u xu&#x1ea5;t" type="java.lang.Object"/>
-                    <Column editable="false" title="ID S&#x1ea3;n Ph&#x1ea9;m" type="java.lang.Object"/>
+                    <Column editable="false" title="M&#xe3; phi&#x1ebf;u" type="java.lang.Object"/>
+                    <Column editable="false" title="T&#xea;n s&#x1ea3;n ph&#x1ea9;m" type="java.lang.Object"/>
                     <Column editable="false" title="S&#x1ed1; l&#x1b0;&#x1ee3;ng" type="java.lang.Object"/>
-                    <Column editable="true" title="Gi&#xe1; B&#xe1;n" type="java.lang.Object"/>
-                    <Column editable="true" title="N&#x103;m B&#x1ea3;o h&#xe0;nh" type="java.lang.Object"/>
-                    <Column editable="true" title="M&#xe0;u" type="java.lang.Object"/>
+                    <Column editable="false" title="Gi&#xe1; b&#xe1;n" type="java.lang.Object"/>
+                    <Column editable="false" title="N&#x103;m b&#x1ea3;o h&#xe0;nh" type="java.lang.Object"/>
+                    <Column editable="false" title="M&#xe0;u" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -278,7 +279,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/icons/Show.png"/>
                 </Property>
-                <Property name="toolTipText" type="java.lang.String" value="Ch&#x1ecd;n kho&#x1ea3;ng th&#x1edd;i gian"/>
+                <Property name="toolTipText" type="java.lang.String" value="Hi&#x1ec3;n th&#x1ecb;"/>
                 <Property name="borderColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="f4" green="f2" red="dd" type="rgb"/>
                 </Property>
@@ -297,9 +298,9 @@
             <Component class="utilities.palette.MyButton" name="btnShow1">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/icons/Delete.png"/>
+                  <Image iconType="3" name="/icons/Exit.png"/>
                 </Property>
-                <Property name="toolTipText" type="java.lang.String" value="Ch&#x1ecd;n kho&#x1ea3;ng th&#x1edd;i gian"/>
+                <Property name="toolTipText" type="java.lang.String" value="Tho&#xe1;t"/>
                 <Property name="borderColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="f4" green="f2" red="dd" type="rgb"/>
                 </Property>
@@ -457,7 +458,7 @@
                                       <Component id="txtNamBH" min="-2" pref="281" max="-2" attributes="0"/>
                                       <Component id="txtMau" min="-2" pref="281" max="-2" attributes="0"/>
                                       <Component id="txtGiaBan" alignment="0" min="-2" pref="281" max="-2" attributes="0"/>
-                                      <Component id="txtIDSP" alignment="0" min="-2" pref="281" max="-2" attributes="0"/>
+                                      <Component id="txtTenSP" alignment="0" min="-2" pref="281" max="-2" attributes="0"/>
                                       <Component id="txtMaPhieu" alignment="0" min="-2" pref="281" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
@@ -474,7 +475,7 @@
                           <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                           <Component id="txtMaPhieu" min="-2" pref="46" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                          <Component id="txtIDSP" min="-2" pref="46" max="-2" attributes="0"/>
+                          <Component id="txtTenSP" min="-2" pref="46" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
                           <Component id="txtGiaBan" min="-2" pref="46" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
@@ -495,7 +496,7 @@
                     <Property name="text" type="java.lang.String" value="Th&#xf4;ng tin phi&#x1ebf;u xu&#x1ea5;t chi ti&#x1ebf;t"/>
                   </Properties>
                 </Component>
-                <Component class="utilities.palette.TextField" name="txtIDSP">
+                <Component class="utilities.palette.TextField" name="txtTenSP">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -504,7 +505,7 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="14" style="1"/>
                     </Property>
-                    <Property name="labelText" type="java.lang.String" value="ID S&#x1ea3;n ph&#x1ea9;m"/>
+                    <Property name="labelText" type="java.lang.String" value="T&#xea;n S&#x1ea3;n ph&#x1ea9;m"/>
                   </Properties>
                 </Component>
                 <Component class="utilities.palette.TextField" name="txtMaPhieu">
@@ -516,7 +517,7 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="14" style="1"/>
                     </Property>
-                    <Property name="labelText" type="java.lang.String" value="M&#xe3; phi&#x1ebf;u "/>
+                    <Property name="labelText" type="java.lang.String" value="M&#xe3; S&#x1ea3;n Ph&#x1ea9;m"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtMaPhieuActionPerformed"/>

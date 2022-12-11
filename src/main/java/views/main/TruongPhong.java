@@ -1,10 +1,15 @@
 package views.main;
 
-import cores.nhanVienQuanLy.views.NvqlXemThongTinCaNhanForm;
+import cores.truongPhongs.views.TPThongKeBieuDo;
 import cores.truongPhongs.views.TP_ChucVuForm;
 import cores.truongPhongs.views.TP_KhachHangForm;
+import cores.truongPhongs.views.TP_QuanLyPhieuHoanNhap;
 import cores.truongPhongs.views.TpDonViView;
-import cores.truongPhongs.views.TpQuanLyChiTietSanPhamForm;
+import cores.truongPhongs.views.TpLuongNhapView;
+import cores.truongPhongs.views.TpQuanLyNhanVien;
+import cores.truongPhongs.views.TpQuanLySanPhamForm;
+import cores.truongPhongs.views.TpThongKeView;
+import cores.truongPhongs.views.TpXemPhieuXuatView;
 import views.component.Header;
 import views.event.EventMenuSelected;
 import views.event.EventShowPopupMenu;
@@ -63,13 +68,39 @@ public class TruongPhong extends javax.swing.JFrame {
                     main.showForm(new TP_KhachHangForm());
                 }
                 if (menuIndex == 3) {
-                    main.showForm(new TpQuanLyChiTietSanPhamForm());
+                    main.showForm(new TpQuanLySanPhamForm());
                 }
                 if (menuIndex == 4) {
+                    main.showForm(new TpQuanLyNhanVien());
+                }
+                if (menuIndex == 5) {
                     main.showForm(new TpDonViView());
                 }
+                if (menuIndex == 5) {
+                    main.showForm(new TpDonViView());
+                }
+                if (menuIndex == 6) {
+                    if (subMenuIndex == 0) {
+                        main.showForm(new TpThongKeView());
+                    }
+                    if (subMenuIndex == 1) {
+                        main.showForm(new TPThongKeBieuDo());
+                    }
+                }
+                if (menuIndex == 7) {
 
-                if (menuIndex == 10) {
+                    if (subMenuIndex == 0) {
+                        main.showForm(new TpLuongNhapView());
+                    }
+                    if (subMenuIndex == 1) {
+                        main.showForm(new TP_QuanLyPhieuHoanNhap());
+                    }
+                    if (subMenuIndex == 2) {
+                        main.showForm(new TpXemPhieuXuatView());
+                    }
+                }
+
+                if (menuIndex == 8) {
                     if (subMenuIndex == 2) {
                         Auth.clear();
                         frame.setVisible(false);
@@ -81,13 +112,13 @@ public class TruongPhong extends javax.swing.JFrame {
                                 }
                             }
                         } catch (ClassNotFoundException ex) {
-                            java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                            ex.printStackTrace();
                         } catch (InstantiationException ex) {
-                            java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                            ex.printStackTrace();
                         } catch (IllegalAccessException ex) {
-                            java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                            ex.printStackTrace();
                         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-                            java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                            ex.printStackTrace();
                         }
                         //</editor-fold>
                         //</editor-fold>
@@ -114,14 +145,39 @@ public class TruongPhong extends javax.swing.JFrame {
                 popup.setVisible(true);
             }
         });
+        header.addClose(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                System.exit(0);
+            }
+        });
+        header.addSap(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                frame.setExtendedState(frame.ICONIFIED);
+            }
+        });
+
+//        header.openNavBar(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent ae) {
+//                main.showForm(new NvqlXemThongTinCaNhanForm());
+//            }
+//        });
         menu.initMenuItem();
-        bg.add(menu, "w 60!, spany 2");    // Span Y 2cell
-        bg.add(header, "h 107!, wrap");
+        bg.add(menu, "w 170!, spany 2");    // Span Y 2cell
+        bg.add(header, "h 100!, wrap");
         bg.add(main, "w 100%, h 100%");
         TimingTarget target = new TimingTargetAdapter() {
             @Override
             public void timingEvent(float fraction) {
-                layout.setComponentConstraints(menu, "w " + 60 + "!, spany2");
+                double width;
+                if (menu.isShowMenu()) {
+                    width = 60 + (170 * (1f - fraction));
+                } else {
+                    width = 60 + (170 * fraction);
+                }
+                layout.setComponentConstraints(menu, "w " + width + "!, spany2");
                 menu.revalidate();
             }
 
@@ -136,39 +192,10 @@ public class TruongPhong extends javax.swing.JFrame {
         animator.setResolution(0);
         animator.setDeceleration(0.5f);
         animator.setAcceleration(0.5f);
-        menu.addMenuEvent(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                if (!animator.isRunning()) {
-                    animator.start();
-                }
-                menu.setEnableMenu(false);
-                if (menu.isShowMenu()) {
-                    menu.hideallMenu();
-                }
-            }
-        });
-        header.addClose(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                System.exit(0);
-            }
-        });
-        header.addSap(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                frame.setExtendedState(frame.ICONIFIED);
-            }
-        });
-        header.openNavBar(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                main.showForm(new NvqlXemThongTinCaNhanForm());
-            }
-        });
 
         //  Start with this form
         main.showForm(new TrangChu());
+
     }
 
     @SuppressWarnings("unchecked")

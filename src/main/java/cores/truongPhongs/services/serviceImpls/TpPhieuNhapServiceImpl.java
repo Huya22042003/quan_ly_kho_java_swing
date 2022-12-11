@@ -14,6 +14,7 @@ import java.util.UUID;
 import javax.swing.JLabel;
 import utilities.DateTimeUtil;
 import cores.truongPhongs.services.TpPhieuNhapService;
+import java.util.ArrayList;
 import utilities.Auth;
 
 /**
@@ -39,8 +40,6 @@ public class TpPhieuNhapServiceImpl implements TpPhieuNhapService {
 
     @Override
     public TpPhieuNhapCustom addPn(TpPhieuNhapCustom p) {
-//        p.setNgayTao(utilities.DateTimeUtil.convertDateToTimeStampSecond());
-//        p.setIdNhanVien(UUID.fromString("0E949885-8C5C-6A44-8E30-A8A8A3526A01"));
         NhaCungCap ncc = repoNcc.getNccById(p.getIdNcc());
         NhanVien nv = repoNv.getNhanVienById(Auth.nhanVien.getId());
         PhieuNhap pn = new PhieuNhap();
@@ -49,6 +48,7 @@ public class TpPhieuNhapServiceImpl implements TpPhieuNhapService {
         pn.setNgayTao(p.getNgayTao());
         pn.setNhaCungCap(ncc);
         pn.setNhanVien(nv);
+        pn.setMaPhieu(p.getMaPhieu());
         p.setTrangThai(TrangThaiPhieuConstant.CHO_THANH_TOAN);
         pn.setTrangThai(p.getTrangThai());
         p.setId(repo.addPn(pn).getId());
@@ -67,6 +67,7 @@ public class TpPhieuNhapServiceImpl implements TpPhieuNhapService {
         pn.setNgayTao(p.getNgayTao());
         pn.setNhaCungCap(ncc);
         pn.setNhanVien(nv);
+        pn.setMaPhieu(p.getMaPhieu());
         return repo.updatePn(pn);
     }
 
@@ -129,6 +130,44 @@ public class TpPhieuNhapServiceImpl implements TpPhieuNhapService {
     @Override
     public NhanVien getNhanVienByMa(String ma) {
         return repo.getNhanVienByMa(ma);
+    }
+
+    @Override
+    public List<TpPhieuNhapCustom> phanTrang(List<TpPhieuNhapCustom> list, int offset, int limit) {
+        List<TpPhieuNhapCustom> listPhanTrang = new ArrayList<>();
+        int sum = limit + offset;
+        if (list.size() <= sum) {
+            sum = list.size();
+        }
+        for (int i = offset; i < sum; i++) {
+            if (list.get(i) == null) {
+                break;
+            }
+            TpPhieuNhapCustom el = list.get(i);
+            listPhanTrang.add(el);
+        }
+        return listPhanTrang;
+    }
+
+    @Override
+    public List<TpPhieuNhapCustom> getListPnById(String ghiChu) {
+        return repo.getListPnById(ghiChu);
+    }
+
+   
+
+    @Override
+    public List<TpPhieuNhapCustom> findAllByKhAndNV(String ma, TrangThaiPhieuConstant tt, int rdo) {
+            switch (rdo) {
+            case 0:
+                return repo.getListByMaPhieu(ma, tt);
+            case 1:
+                return repo.getListByTenNcc(ma, tt);
+            case 2:
+                return repo.getListByTenNv(ma, tt);
+            default:
+                return repo.getListByTenNv("", tt);
+        }
     }
 
 }

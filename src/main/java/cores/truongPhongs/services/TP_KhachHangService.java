@@ -17,15 +17,18 @@ public interface TP_KhachHangService {
 
     boolean updateKH(TP_KhachHangCustom custom);
 
-    boolean deleteKH(UUID id);
+//    boolean deleteKH(UUID id);
 
+//    boolean deleteKH(TP_KhachHangCustom custom);
     void loadCbbTT(Combobox cbb);
 
     void loadCbbGT(Combobox cbb);
 
     void loadCbbDG(Combobox cbb);
 
-    TP_KhachHangCustom checkValidate(TP_KhachHangCustom kh, JLabel erroMa, JLabel erroTen, JLabel erroSDT, JLabel erroEmail, JLabel erroDiaChi, JLabel erroMatKhau, JLabel erroNgaySinh);
+    TP_KhachHangCustom checkValidateCreate(TP_KhachHangCustom kh, JLabel erroMa, JLabel erroTen, JLabel erroSDT, JLabel erroEmail, JLabel erroDiaChi, JLabel erroMatKhau, JLabel erroNgaySinh);
+
+    TP_KhachHangCustom checkValidateUpdate(TP_KhachHangCustom kh, JLabel erroMa, JLabel erroTen, JLabel erroSDT, JLabel erroEmail, JLabel erroDiaChi, JLabel erroMatKhau, JLabel erroNgaySinh);
 
     KhachHangConstant loc(int a);
 
@@ -36,4 +39,7 @@ public interface TP_KhachHangService {
     TP_KhachHangCustom findKHByMa(String ma);
 
     List<TP_KhachHangCustom> findAllByRadio(String tk, KhachHangConstant tt, int rdo);
+
+    List<TP_KhachHangCustom> phanTrang(List<TP_KhachHangCustom> list, int offset, int limit);
+
 }

@@ -6,8 +6,10 @@ import cores.truongPhongs.services.TpQuanlyNhaCungCapService;
 import domainModels.NhaCungCap;
 import infrastructures.constant.DanhGiaConstant;
 import infrastructures.constant.KhachHangConstant;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import utilities.Converter;
 import utilities.palette.Combobox;
 
 /**
@@ -63,18 +65,19 @@ public class TpQuanlyNhaCungCapServiceImpl implements TpQuanlyNhaCungCapService 
     @Override
     public void loadComboxDanhGia(Combobox cbbDanhGia) {
         cbbDanhGia.removeAll();
-        cbbDanhGia.addItem(DanhGiaConstant.BAT_ON);
-        cbbDanhGia.addItem(DanhGiaConstant.TAM_ON);
-        cbbDanhGia.addItem(DanhGiaConstant.TOT);
-        cbbDanhGia.addItem(DanhGiaConstant.XAU);
+        cbbDanhGia.addItem(Converter.trangThaiDanhGia(DanhGiaConstant.BAT_ON));
+        cbbDanhGia.addItem(Converter.trangThaiDanhGia(DanhGiaConstant.TAM_ON));
+        cbbDanhGia.addItem(Converter.trangThaiDanhGia(DanhGiaConstant.TOT));
+        cbbDanhGia.addItem(Converter.trangThaiDanhGia(DanhGiaConstant.XAU));
     }
 
     @Override
     public void loadComboxTrangThai(Combobox cbbTrangThai) {
         cbbTrangThai.removeAll();
-        cbbTrangThai.addItem(KhachHangConstant.DANG_LAM_VIEC);
-        cbbTrangThai.addItem(KhachHangConstant.SAP_BO);
-        cbbTrangThai.addItem(KhachHangConstant.DA_NGUNG_CUNG_CAP);
+        cbbTrangThai.addItem(Converter.trangThaiKhachHang(KhachHangConstant.DANG_LAM_VIEC));
+        cbbTrangThai.addItem(Converter.trangThaiKhachHang(KhachHangConstant.DA_NGUNG_CUNG_CAP));
+        cbbTrangThai.addItem(Converter.trangThaiKhachHang(KhachHangConstant.SAP_BO));
+
     }
 
     @Override
@@ -117,4 +120,38 @@ public class TpQuanlyNhaCungCapServiceImpl implements TpQuanlyNhaCungCapService 
     public List<NhaCungCapCustom> getList() {
         return rp.getList();
     }
+
+    @Override
+    public List<NhaCungCapCustom> phanTrang(List<NhaCungCapCustom> list, int offset, int limit) {
+        List<NhaCungCapCustom> listPhanTrang = new ArrayList<>();
+        int sum = limit + offset;
+        if (list.size() <= sum) {
+            sum = list.size();
+        }
+        for (int i = offset; i < sum; i++) {
+            if (list.get(i) == null) {
+                break;
+            }
+            NhaCungCapCustom el = list.get(i);
+            listPhanTrang.add(el);
+        }
+        return listPhanTrang;
+    }
+
+    @Override
+    public List<NhaCungCapCustom> findAllByKhAndNV(String ma, KhachHangConstant tt, int rdo) {
+        switch (rdo) {
+            case 0:
+                return rp.getListByMaa(ma, tt);
+            case 1:
+                return rp.getListByTenn(ma, tt);
+            case 2:
+                return rp.getListByEmaill(ma, tt);
+            case 3:
+                return rp.getListBySdtt(ma, tt);
+            default:
+                return rp.getListByMaa("", tt);
+        }
+    }
+
 }

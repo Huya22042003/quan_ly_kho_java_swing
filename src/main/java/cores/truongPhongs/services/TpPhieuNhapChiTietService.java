@@ -10,8 +10,17 @@ import java.util.UUID;
  * @author Acer
  */
 public interface TpPhieuNhapChiTietService {
+
     public TpPhieuNhapChiTietCustom addPhieuNhap(TpPhieuNhapChiTietCustom pnct);
+
     List<TpPhieuNhapChiTietCustom> getListCTPhieuNhapByID(UUID idPX);
+
     public boolean addCTPN(TpPhieuNhapChiTietCustom ctpxct);
-    public MauConstant loc(int a);
+
+    public boolean upDateCTPN(TpPhieuNhapChiTietCustom ctpxct);
+
+    public void upDatePN(TpPhieuNhapChiTietCustom ctpxct);
+
+    MauConstant loc(int a);
+
 }

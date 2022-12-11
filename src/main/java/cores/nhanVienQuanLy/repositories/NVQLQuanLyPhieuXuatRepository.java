@@ -23,6 +23,7 @@ public class NVQLQuanLyPhieuXuatRepository {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery("SELECT new cores.nhanVienQuanLy.customModels.PhieuXuatCustom("
                 + "px.id as id,"
+                + "px.maPhieu as maPhieu,"
                 + "px.ngayTao as ngayTao,"
                 + "px.ghiChu as ghiChu,"
                 + "px.ngayThanhToan as ngayThanhToan,"
@@ -34,10 +35,12 @@ public class NVQLQuanLyPhieuXuatRepository {
         List<PhieuXuatCustom> list = query.getResultList();
         return list;
     }
-        public List<PhieuXuatCustom> getListDaThanhToan() {
+
+    public List<PhieuXuatCustom> getListDaThanhToan() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery("SELECT new cores.nhanVienQuanLy.customModels.PhieuXuatCustom("
                 + "px.id as id,"
+                + "px.maPhieu as maPhieu,"
                 + "px.ngayTao as ngayTao,"
                 + "px.ghiChu as ghiChu,"
                 + "px.ngayThanhToan as ngayThanhToan,"
@@ -55,13 +58,14 @@ public class NVQLQuanLyPhieuXuatRepository {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery("SELECT new cores.nhanVienQuanLy.customModels.PhieuXuatCustom("
                 + "px.id as id,"
+                + "px.maPhieu as maPhieu,"
                 + "px.ngayTao as ngayTao,"
                 + "px.ghiChu as ghiChu,"
                 + "px.ngayThanhToan as ngayThanhToan,"
                 + "px.trangThai as trangThai,"
                 + "px.nhanVien as nhanVien,"
                 + "px.khachHang as khachHang"
-                + ") FROM domainModels.PhieuXuat px WHERE px.ngayTao > :ngayBatDau AND px.ngayTao < :ngayKetThuc "
+                + ") FROM domainModels.PhieuXuat px WHERE px.ngayTao >= :ngayBatDau AND px.ngayTao <= :ngayKetThuc "
                 + " ORDER BY px.ngayTao DESC");
         query.setParameter("ngayBatDau", ngayBatDau);
         query.setParameter("ngayKetThuc", ngayKetThuc);
@@ -73,13 +77,14 @@ public class NVQLQuanLyPhieuXuatRepository {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery("SELECT new cores.nhanVienQuanLy.customModels.PhieuXuatCustom("
                 + "px.id as id,"
+                + "px.maPhieu as maPhieu,"
                 + "px.ngayTao as ngayTao,"
                 + "px.ghiChu as ghiChu,"
                 + "px.ngayThanhToan as ngayThanhToan,"
                 + "px.trangThai as trangThai,"
                 + "px.nhanVien as nhanVien,"
                 + "px.khachHang as khachHang"
-                + ") FROM domainModels.PhieuXuat px WHERE px.ngayThanhToan > :ngayBatDau AND px.ngayThanhToan < :ngayKetThuc "
+                + ") FROM domainModels.PhieuXuat px WHERE px.ngayThanhToan >= :ngayBatDau AND px.ngayThanhToan <= :ngayKetThuc "
                 + " ORDER BY px.ngayTao DESC");
         query.setParameter("ngayBatDau", ngayBatDau);
         query.setParameter("ngayKetThuc", ngayKetThuc);
@@ -140,6 +145,7 @@ public class NVQLQuanLyPhieuXuatRepository {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Query query = session.createQuery("SELECT new cores.nhanVienQuanLy.customModels.PhieuXuatCustom("
                     + "px.id as id,"
+                    + "px.maPhieu as maPhieu,"
                     + "px.ngayTao as ngayTao,"
                     + "px.ghiChu as ghiChu,"
                     + "px.ngayThanhToan as ngayThanhToan,"
@@ -171,54 +177,58 @@ public class NVQLQuanLyPhieuXuatRepository {
         return listKh;
     }
 
-    public List<PhieuXuatCustom> findAllByIdPhieu(UUID id) {
+    public List<PhieuXuatCustom> findAllByMaPhieu(String ma, TrangThaiPhieuConstant tt) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery("SELECT new cores.nhanVienQuanLy.customModels.PhieuXuatCustom("
                 + "px.id as id,"
+                + "px.maPhieu as maPhieu,"
                 + "px.ngayTao as ngayTao,"
                 + "px.ghiChu as ghiChu,"
                 + "px.ngayThanhToan as ngayThanhToan,"
                 + "px.trangThai as trangThai,"
                 + "px.nhanVien as nhanVien,"
                 + "px.khachHang as khachHang"
-                + ") FROM domainModels.PhieuXuat px WHERE px.id =:id "
+                + ") FROM domainModels.PhieuXuat px WHERE px.maPhieu LIKE CONCAT('%',:ma,'%') AND px.trangThai =:tt"
                 + " ORDER BY px.ngayTao DESC");
-        query.setParameter("id", id);
-        List<PhieuXuatCustom> list = query.getResultList();
-        return list;
-    }
-
-    public List<PhieuXuatCustom> findAllByIdNhanVien(String maNV, TrangThaiPhieuConstant tt) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Query query = session.createQuery("SELECT new cores.nhanVienQuanLy.customModels.PhieuXuatCustom("
-                + "px.id as id,"
-                + "px.ngayTao as ngayTao,"
-                + "px.ghiChu as ghiChu,"
-                + "px.ngayThanhToan as ngayThanhToan,"
-                + "px.trangThai as trangThai,"
-                + "px.nhanVien as nhanVien,"
-                + "px.khachHang as khachHang"
-                + ") FROM domainModels.PhieuXuat px WHERE px.nhanVien.ma LIKE CONCAT('%',:ma,'%') AND px.trangThai =:tt "
-                + " ORDER BY px.ngayTao DESC");
-        query.setParameter("ma", maNV);
+        query.setParameter("ma", ma);
         query.setParameter("tt", tt);
         List<PhieuXuatCustom> list = query.getResultList();
         return list;
     }
 
-    public List<PhieuXuatCustom> findAllByIdKhachHang(String maKH, TrangThaiPhieuConstant tt) {
+    public List<PhieuXuatCustom> findAllByIdNhanVien(String tenNV, TrangThaiPhieuConstant tt) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery("SELECT new cores.nhanVienQuanLy.customModels.PhieuXuatCustom("
                 + "px.id as id,"
+                + "px.maPhieu as maPhieu,"
                 + "px.ngayTao as ngayTao,"
                 + "px.ghiChu as ghiChu,"
                 + "px.ngayThanhToan as ngayThanhToan,"
                 + "px.trangThai as trangThai,"
                 + "px.nhanVien as nhanVien,"
                 + "px.khachHang as khachHang"
-                + ") FROM domainModels.PhieuXuat px WHERE px.khachHang.ma LIKE CONCAT('%',:ma,'%') AND px.trangThai =:tt "
+                + ") FROM domainModels.PhieuXuat px WHERE px.nhanVien.ten LIKE CONCAT('%',:ten,'%') AND px.trangThai =:tt "
                 + " ORDER BY px.ngayTao DESC");
-        query.setParameter("ma", maKH);
+        query.setParameter("ten", tenNV);
+        query.setParameter("tt", tt);
+        List<PhieuXuatCustom> list = query.getResultList();
+        return list;
+    }
+
+    public List<PhieuXuatCustom> findAllByIdKhachHang(String tenKH, TrangThaiPhieuConstant tt) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("SELECT new cores.nhanVienQuanLy.customModels.PhieuXuatCustom("
+                + "px.id as id,"
+                + "px.maPhieu as maPhieu,"
+                + "px.ngayTao as ngayTao,"
+                + "px.ghiChu as ghiChu,"
+                + "px.ngayThanhToan as ngayThanhToan,"
+                + "px.trangThai as trangThai,"
+                + "px.nhanVien as nhanVien,"
+                + "px.khachHang as khachHang"
+                + ") FROM domainModels.PhieuXuat px WHERE px.khachHang.ten LIKE CONCAT('%',:ten,'%') AND px.trangThai =:tt "
+                + " ORDER BY px.ngayTao DESC");
+        query.setParameter("ten", tenKH);
         query.setParameter("tt", tt);
         List<PhieuXuatCustom> list = query.getResultList();
         return list;

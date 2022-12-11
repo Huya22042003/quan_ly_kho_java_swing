@@ -10,7 +10,6 @@ import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import net.miginfocom.swing.MigLayout;
 import views.event.EventMenu;
@@ -55,7 +54,7 @@ public class MenuTruongPhong extends javax.swing.JPanel {
     private EventMenuSelected event;
     private EventShowPopupMenu eventShowPopup;
     private boolean enableMenu = true;
-    private boolean showMenu = false;
+    private boolean showMenu = true;
 
     public MenuTruongPhong() {
         initComponents();
@@ -74,10 +73,8 @@ public class MenuTruongPhong extends javax.swing.JPanel {
         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/Search.png")), "Sản Phẩm"));
         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/team.png")), "Nhân Viên"));
         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/cost.png")), "Đơn vị"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/Statistics.png")), "Thống kê"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/Statistics.png")), "Năm bảo hành"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/Statistics.png")), "Cơ Sở"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/bill.png")), "Phiếu", "Phiếu nhập", "Phiếu hoàn - nhập"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/Statistics.png")), "Thống kê", "Số liệu", "Biểu đồ"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/bill.png")), "Phiếu", "Phiếu nhập", "Phiếu hoàn - nhập", "Phiếu Xuất"));
         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/Gear.png")), "Cài đặt", "Thay đổi thông tin", "Hỗ trợ", "Đăng xuất"));
     }
 
@@ -114,10 +111,6 @@ public class MenuTruongPhong extends javax.swing.JPanel {
                 item.setOpen(false);
             }
         }
-    }
-    
-    public void addMenuEvent(ActionListener event) {
-        cmdMenu.addActionListener(event);
     }
     
     @Override
@@ -165,7 +158,7 @@ public class MenuTruongPhong extends javax.swing.JPanel {
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 609, Short.MAX_VALUE)
+            .addGap(0, 698, Short.MAX_VALUE)
         );
 
         sp.setViewportView(panel);
@@ -175,12 +168,10 @@ public class MenuTruongPhong extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(sp, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(cmdMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(122, Short.MAX_VALUE))
+            .addComponent(sp, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -188,7 +179,7 @@ public class MenuTruongPhong extends javax.swing.JPanel {
                 .addGap(21, 21, 21)
                 .addComponent(cmdMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42)
-                .addComponent(sp, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(sp, javax.swing.GroupLayout.PREFERRED_SIZE, 698, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

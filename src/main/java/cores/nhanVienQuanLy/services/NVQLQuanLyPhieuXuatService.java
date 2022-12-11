@@ -1,5 +1,6 @@
 package cores.nhanVienQuanLy.services;
 
+import cores.nhanVienQuanLy.customModels.Luong_ChiTietPhieuXuatCustom;
 import cores.nhanVienQuanLy.customModels.PhieuXuatCustom;
 import domainModels.KhachHang;
 import domainModels.NhanVien;
@@ -30,5 +31,6 @@ public interface NVQLQuanLyPhieuXuatService {
     KhachHang chonKH(int chon);
     List<PhieuXuatCustom> getListByNgayThanhToan(Long ngayBatDau, Long ngayKetThuc);
     List<PhieuXuatCustom> findAllByKhAndNV(String ma, TrangThaiPhieuConstant tt, int rdo);
-    List<PhieuXuatCustom> findByMa(UUID id);
+//    List<PhieuXuatCustom> findByMa(UUID id);
+    List<PhieuXuatCustom> phanTrang(List<PhieuXuatCustom> list, int offset, int limit);
 }

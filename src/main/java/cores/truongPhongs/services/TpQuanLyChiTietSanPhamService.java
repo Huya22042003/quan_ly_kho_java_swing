@@ -7,6 +7,7 @@ import cores.truongPhongs.customModels.TpXemChiTietSanPhamCustom;
 import domainModels.DonVi;
 import domainModels.SanPham;
 import infrastructures.constant.MauConstant;
+import infrastructures.constant.TrangThaiSanPhamConstanst;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
@@ -19,13 +20,11 @@ import utilities.palette.Combobox;
  */
 public interface TpQuanLyChiTietSanPhamService {
 
-    public List<TpQuanLyChiTietSanPhamCustom> getAll();
+    public List<TpQuanLyChiTietSanPhamCustom> getAll(UUID idSp, String maNcc, String tenNcc,String maSpNcc,String emailNcc,String sdtNcc);
 
     TpQuanLyChiTietSanPhamCustom addCTSanPham(TpQuanLyChiTietSanPhamCustom custom);
 
     boolean updateCTSanPham(TpQuanLyChiTietSanPhamCustom custom);
-
-    boolean deleteCTSanPham(UUID id);
 
     TpQuanLyChiTietSanPhamCustom findCTSanPhamById(UUID id);
 
@@ -34,7 +33,7 @@ public interface TpQuanLyChiTietSanPhamService {
     List<TpQuanLyChiTietSanPhamCustom> findAllByRadio(int rdo, MauConstant tt, String tk);
 
     TpQuanLyChiTietSanPhamCustom checkValidate(UUID donVi, String namBH, UUID sanPham, String hinhAnh, String giaNhap, String giaBan, String soLuong, String size,
-             JLabel erroHinhAnh, JLabel erroGiaNhap, JLabel erroGiaBan, JLabel erroSoLuong, JLabel erroSize, JLabel erroNamBH, MauConstant mau);
+                                               int trangThai, JLabel erroHinhAnh, JLabel erroGiaNhap, JLabel erroGiaBan, JLabel erroSoLuong, JLabel erroSize, JLabel erroNamBH, MauConstant mau);
 
     public List<TpQuanLyDonViCustom> getAllDonVi();
 
@@ -47,12 +46,15 @@ public interface TpQuanLyChiTietSanPhamService {
     MauConstant loc(int a);
 
     void loadCombobox(Combobox cbb);
-    
-    TpXemChiTietSanPhamCustom checkValidate1(UUID donVi, String namBH, UUID sanPham, String hinhAnh, String giaNhap, String soLuong, String size,
-              MauConstant mau, Long ngayTao);
+
+    TpXemChiTietSanPhamCustom checkValidate1(UUID donVi, String namBH, UUID sanPham, String hinhAnh, String giaNhap, int soLuong, String size,
+              MauConstant mau, Long ngayTao, String trangThai, JLabel erroSoLuongNhap, JLabel erroGiaNhap, JLabel erroSize, JLabel erroNamBH);
 
     public List<TpQuanLyDonViCustom> getAllDonVi1();
-  
+
     public List<TpQuanLySanPhamCustom> getAllSanPham1();
 
+    List<TpQuanLyChiTietSanPhamCustom> phanTrang(List<TpQuanLyChiTietSanPhamCustom> list, int offset, int limit);
+
+    public TrangThaiSanPhamConstanst tt(int item);
 }

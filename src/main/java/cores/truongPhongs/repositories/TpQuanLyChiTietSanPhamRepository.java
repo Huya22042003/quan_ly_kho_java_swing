@@ -3,7 +3,6 @@ package cores.truongPhongs.repositories;
 import cores.truongPhongs.customModels.TpQuanLyChiTietSanPhamCustom;
 import cores.truongPhongs.customModels.TpQuanLyDonViCustom;
 import cores.truongPhongs.customModels.TpQuanLySanPhamCustom;
-import cores.truongPhongs.customModels.TpXemChiTietSanPhamCustom;
 import domainModels.ChiTietSanPham;
 import domainModels.DonVi;
 import domainModels.SanPham;
@@ -24,26 +23,98 @@ import utilities.HibernateUtil;
  */
 public class TpQuanLyChiTietSanPhamRepository {
 
-    public List<TpQuanLyChiTietSanPhamCustom> getAll() {
-        List<TpQuanLyChiTietSanPhamCustom> ct = new ArrayList<>();
+    public List<TpQuanLyChiTietSanPhamCustom> getAll(UUID idSp, String maNcc, String tenNcc, String maSpNcc, String emailNcc, String sdtNcc) {
         Session s = HibernateUtil.getSessionFactory().openSession();
-        Query q = s.createQuery("select new cores.truongPhongs.customModels.TpQuanLyChiTietSanPhamCustom ("
-                + "ct.id as id,"
-                + "ct.soLuongTon as soLuongTon,"
-                + "ct.hinhAnh as hinhAnh,"
-                + "ct.GiaNhap as GiaNhap,"
-                + "ct.GiaBan as GiaBan,"
-                + "ct.mau as mau,"
-                + "ct.sanPham as ten,"
-                + "ct.donVi as donViGoc,"
-                + "ct.namBaoHanh as namBaoHanh,"
-                + "ct.trangThai as trangThai, "
-                + "ct.size as size,"
-                + "ct.ngayTao as ngayTao"
-                + ") from domainModels.ChiTietSanPham ct");
-        ct = q.getResultList();
+        Query query = s.createNativeQuery("""
+                SELECT 
+                ctsp.Id,
+                ctsp.SoLuongTon,
+                ctsp.HinhAnh,
+                ctsp.GiaNhap,
+                ctsp.GiaBan,
+                ctsp.Mau,
+                dv.DonViQuyDoi,
+                ctsp.namBaoHanh,
+                ctsp.TrangThai,
+                ctsp.Size,
+                ncc.Ten,
+                ctpn.MaSanPhamNhaCungCap,
+                ctsp.createDate
+                FROM ChiTietSanPham ctsp
+                join DonVi dv on ctsp.IdDonVi = dv.Id
+                join ChiTietPhieuNhap ctpn on ctpn.IdChiTietSP = ctsp.Id
+                join PhieuNhap pn on ctpn.IdPhieuNhap = pn.Id
+                join NhaCungCap ncc on ncc.Id = pn.IdNhaCungCap
+                WHERE ctsp.IdSanPham = :idSp AND ncc.Ma LIKE CONCAT('%', :maNcc,'%')
+                                          AND ncc.Ten LIKE CONCAT('%', :tenNcc,'%')
+                                          AND ctpn.MaSanPhamNhaCungCap LIKE CONCAT('%', :maSpNcc,'%')
+                                          AND ncc.Email LIKE CONCAT('%', :emailNcc,'%')
+                                          AND ncc.Sdt LIKE CONCAT('%', :sdtNcc,'%')
+                              
+            """).setParameter("idSp", idSp.toString())
+                .setParameter("maNcc", maNcc)
+                .setParameter("tenNcc", tenNcc)
+                .setParameter("maSpNcc", maSpNcc)
+                .setParameter("emailNcc", emailNcc)
+                .setParameter("sdtNcc", sdtNcc);
+        List<Object[]> listQuery = query.getResultList();
+        List<TpQuanLyChiTietSanPhamCustom> list = new ArrayList<>();
+        listQuery.parallelStream().forEach(el -> {
+            UUID id = null;
+            int soLuongTon = 0;
+            String hinhAnh = "";
+            BigDecimal giaNhap = (BigDecimal) el[3];
+            BigDecimal giaBan = (BigDecimal) el[4];
+            int mau = 0;
+            String doViQuyDoi = "Không có";
+            int namBaoHanh = 0;
+            int trangThai = 0;
+            int size = 0;
+            String tenNcc1 = "Chưa có";
+            String maSpNcc1 = "Chưa có";
+            Long ngayNhap = 0L;
+            
+            if(!"null".equalsIgnoreCase((String) el[0])) {
+                id = UUID.fromString((String) el[0]);
+            }
+            if(!"null".equalsIgnoreCase(String.valueOf((Integer) el[1]))) {
+                soLuongTon = (Integer) el[1];
+            }
+            if(!"null".equalsIgnoreCase((String) el[2])) {
+                hinhAnh = (String) el[2];
+            }
+            if(!"null".equalsIgnoreCase(String.valueOf((Integer) el[5]))) {
+                mau = (Integer) el[5];
+            }
+            if(!"null".equalsIgnoreCase((String) el[6])) {
+                doViQuyDoi = (String) el[6];
+            }
+            if(!"null".equalsIgnoreCase(String.valueOf((Integer) el[7]))) {
+                namBaoHanh = (Integer) el[7];
+            }
+            if(!"null".equalsIgnoreCase(String.valueOf((Integer) el[8]))) {
+                trangThai = (Integer) el[8];
+            }
+            if(!"null".equalsIgnoreCase(String.valueOf((Integer) el[9]))) {
+                size = (Integer) el[9];
+            }
+            
+            if(!"null".equalsIgnoreCase((String) el[10])) {
+                tenNcc1 = (String) el[10];
+            }
+            
+            if(!"null".equalsIgnoreCase((String) el[11])) {
+                maSpNcc1 = (String) el[11];
+            }
+            if(!"null".equalsIgnoreCase(String.valueOf((BigDecimal) el[12]))) {
+                ngayNhap = Long.valueOf(String.valueOf((BigDecimal) el[12]));
+            }
+            
+            list.add(new TpQuanLyChiTietSanPhamCustom(id, soLuongTon, hinhAnh, giaNhap, giaBan, mau, doViQuyDoi, namBaoHanh, trangThai, size, tenNcc1, maSpNcc1, ngayNhap
+            ));
+        });
         s.close();
-        return ct;
+        return list;
     }
 
     public ChiTietSanPham addCTSanPham(ChiTietSanPham sp) {
@@ -67,21 +138,6 @@ public class TpQuanLyChiTietSanPhamRepository {
         try ( Session s = HibernateUtil.getSessionFactory().openSession()) {
             tran = s.beginTransaction();
             s.update(sp);
-            tran.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            tran.rollback();
-            return false;
-        }
-        return true;
-    }
-
-    public boolean deleteCTSanPham(UUID id) {
-        Transaction tran = null;
-        try ( Session s = HibernateUtil.getSessionFactory().openSession()) {
-            tran = s.beginTransaction();
-            ChiTietSanPham cs = s.find(ChiTietSanPham.class, id);
-            s.delete(cs);
             tran.commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -228,7 +284,7 @@ public class TpQuanLyChiTietSanPhamRepository {
         return list;
 
     }
-    
+
     public List<TpQuanLyDonViCustom> getAllDonVi1() {
         List<TpQuanLyDonViCustom> list = new ArrayList<>();
         Session s = HibernateUtil.getSessionFactory().openSession();
@@ -265,7 +321,7 @@ public class TpQuanLyChiTietSanPhamRepository {
         s.close();
         return list;
     }
-    
+
     public List<TpQuanLySanPhamCustom> getAllSanPham1() {
         List<TpQuanLySanPhamCustom> list = new ArrayList<>();
         Session s = HibernateUtil.getSessionFactory().openSession();

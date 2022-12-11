@@ -12,4 +12,5 @@ public interface NvqlXemThongTinCaNhanService {
     public List<NvqlXemThongTinCaNhanCustom> getAll();
     public void doiMatKhau(NhanVienCustom nvc);
     public boolean checkMatKhau(String matKhau);
+    public NvqlXemThongTinCaNhanCustom getMatKhauByEmail(String email);
 }

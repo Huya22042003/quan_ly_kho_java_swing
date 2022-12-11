@@ -27,4 +27,11 @@ public class TP_KhachHangCustom {
     private String diaChi;
     private DanhGiaConstant danhGia;
     private KhachHangConstant trangThai;
+
+    public TP_KhachHangCustom(KhachHangConstant trangThai) {
+        this.trangThai = trangThai;
+    }
+    
+    
 }
+

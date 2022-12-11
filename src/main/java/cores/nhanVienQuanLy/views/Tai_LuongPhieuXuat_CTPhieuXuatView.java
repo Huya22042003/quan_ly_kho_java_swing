@@ -2,11 +2,15 @@ package cores.nhanVienQuanLy.views;
 
 import cores.nhanVienQuanLy.customModels.LuongBanHang_ChiTietSanPhamCustom;
 import cores.nhanVienQuanLy.customModels.Luong_ChiTietPhieuXuatCustom;
+import cores.nhanVienQuanLy.services.Tai_ChiTietSanPhamService;
 import cores.nhanVienQuanLy.services.Tai_NvqlLuongPhieuXuatService;
+import cores.nhanVienQuanLy.services.serviceImpls.Tai_ChiTietSanPhamServiceImpl;
 import cores.nhanVienQuanLy.services.serviceImpls.Tai_NvqlLuongPhieuXuatServiceImpl;
 import domainModels.ChiTietPhieuXuat;
 import domainModels.PhieuXuat;
 import infrastructures.constant.TrangThaiPhieuConstant;
+import infrastructures.constant.TrangThaiSanPhamConstanst;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -21,11 +25,10 @@ import utilities.MsgBox;
  */
 public class Tai_LuongPhieuXuat_CTPhieuXuatView extends javax.swing.JFrame {
 
-    public Tai_NvqlLuongPhieuXuatService luongService;
+    public Tai_NvqlLuongPhieuXuatService luongService; 
     public List<Luong_ChiTietPhieuXuatCustom> listCTPX;
     private PhieuXuat phieuXuat;
     public ChiTietPhieuXuat ctpx;
-    private List<LuongBanHang_ChiTietSanPhamCustom> listCTSP;
     public double tongTien;
     private String duongDan = getClass().getResource("/icons/file.png").getPath();
 
@@ -38,29 +41,25 @@ public class Tai_LuongPhieuXuat_CTPhieuXuatView extends javax.swing.JFrame {
         luongService = new Tai_NvqlLuongPhieuXuatServiceImpl();
         listCTPX = new ArrayList<>();
         ctpx = new ChiTietPhieuXuat();
-        loadTable(listCTPX);
-
-        clearForm();
+        this.setLocationRelativeTo(null);
     }
 
     public double getTongTien() {
         return tongTien;
     }
 
-    public void clearForm() {
-        tblCTPhieuXuat.removeAll();
-    }
-
     public void loadTable(List<Luong_ChiTietPhieuXuatCustom> list) {
         DefaultTableModel dtm = (DefaultTableModel) this.tblCTPhieuXuat.getModel();
         dtm.setRowCount(0);
-        for (Luong_ChiTietPhieuXuatCustom ctpx : listCTPX) {
+        DecimalFormat formatter = new DecimalFormat("###,###,##0 VNĐ");
+        for (Luong_ChiTietPhieuXuatCustom ctpx : list) {
+
             Object[] rowData = {
                 dtm.getRowCount() + 1,
-                ctpx.getIdPhieuXuat().getId(),
-                ctpx.getIdChiTietSp().getId(),
-                ctpx.getSoLuong(),
-                ctpx.getIdChiTietSp().getGiaBan(),
+                ctpx.getIdPhieuXuat().getMaPhieu(),
+                ctpx.getIdChiTietSp().getSanPham().getTen(),
+                ctpx.getSoLuong() == 0 ? "Hết hàng" : ctpx.getSoLuong(),
+                formatter.format(ctpx.getIdChiTietSp().getGiaBan()),
                 ctpx.getIdChiTietSp().getNamBaoHanh(),
                 Converter.trangThaiMauSac(ctpx.getIdChiTietSp().getMau())
             };
@@ -88,7 +87,7 @@ public class Tai_LuongPhieuXuat_CTPhieuXuatView extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         panelRound3 = new utilities.palette.PanelRound();
         jLabel2 = new javax.swing.JLabel();
-        txtIDSP = new utilities.palette.TextField();
+        txtTenSP = new utilities.palette.TextField();
         txtMaPhieu = new utilities.palette.TextField();
         txtGiaBan = new utilities.palette.TextField();
         txtNamBH = new utilities.palette.TextField();
@@ -96,6 +95,7 @@ public class Tai_LuongPhieuXuat_CTPhieuXuatView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 204, 204));
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 255));
 
@@ -104,11 +104,11 @@ public class Tai_LuongPhieuXuat_CTPhieuXuatView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "STT", "Mã Phiếu xuất", "ID Sản Phẩm", "Số lượng", "Giá Bán", "Năm Bảo hành", "Màu"
+                "STT", "Mã phiếu", "Tên sản phẩm", "Số lượng", "Giá bán", "Năm bảo hành", "Màu"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true, true, true
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -177,7 +177,7 @@ public class Tai_LuongPhieuXuat_CTPhieuXuatView extends javax.swing.JFrame {
         panelRound8.setRoundTopRight(50);
 
         btnShow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Show.png"))); // NOI18N
-        btnShow.setToolTipText("Chọn khoảng thời gian");
+        btnShow.setToolTipText("Hiển thị");
         btnShow.setBorderColor(new java.awt.Color(221, 242, 244));
         btnShow.setColor(new java.awt.Color(221, 242, 244));
         btnShow.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -188,8 +188,8 @@ public class Tai_LuongPhieuXuat_CTPhieuXuatView extends javax.swing.JFrame {
             }
         });
 
-        btnShow1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Delete.png"))); // NOI18N
-        btnShow1.setToolTipText("Chọn khoảng thời gian");
+        btnShow1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Exit.png"))); // NOI18N
+        btnShow1.setToolTipText("Thoát");
         btnShow1.setBorderColor(new java.awt.Color(221, 242, 244));
         btnShow1.setColor(new java.awt.Color(221, 242, 244));
         btnShow1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -281,15 +281,15 @@ public class Tai_LuongPhieuXuat_CTPhieuXuatView extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         jLabel2.setText("Thông tin phiếu xuất chi tiết");
 
-        txtIDSP.setEditable(false);
-        txtIDSP.setBackground(new java.awt.Color(228, 206, 224));
-        txtIDSP.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtIDSP.setLabelText("ID Sản phẩm");
+        txtTenSP.setEditable(false);
+        txtTenSP.setBackground(new java.awt.Color(228, 206, 224));
+        txtTenSP.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtTenSP.setLabelText("Tên Sản phẩm");
 
         txtMaPhieu.setEditable(false);
         txtMaPhieu.setBackground(new java.awt.Color(228, 206, 224));
         txtMaPhieu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtMaPhieu.setLabelText("Mã phiếu ");
+        txtMaPhieu.setLabelText("Mã Sản Phẩm");
         txtMaPhieu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtMaPhieuActionPerformed(evt);
@@ -336,7 +336,7 @@ public class Tai_LuongPhieuXuat_CTPhieuXuatView extends javax.swing.JFrame {
                             .addComponent(txtNamBH, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtMau, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtGiaBan, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtIDSP, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtTenSP, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtMaPhieu, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
@@ -348,7 +348,7 @@ public class Tai_LuongPhieuXuat_CTPhieuXuatView extends javax.swing.JFrame {
                 .addGap(35, 35, 35)
                 .addComponent(txtMaPhieu, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
-                .addComponent(txtIDSP, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtTenSP, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(53, 53, 53)
                 .addComponent(txtGiaBan, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(55, 55, 55)
@@ -435,7 +435,6 @@ public class Tai_LuongPhieuXuat_CTPhieuXuatView extends javax.swing.JFrame {
             return;
         }
         txtMaPhieu.setText(tblCTPhieuXuat.getValueAt(row, 1).toString());
-        txtIDSP.setText(tblCTPhieuXuat.getValueAt(row, 2).toString());
         txtGiaBan.setText(tblCTPhieuXuat.getValueAt(row, 4).toString());
         txtNamBH.setText(tblCTPhieuXuat.getValueAt(row, 5).toString());
         txtMau.setText(tblCTPhieuXuat.getValueAt(row, 6).toString());
@@ -443,7 +442,18 @@ public class Tai_LuongPhieuXuat_CTPhieuXuatView extends javax.swing.JFrame {
             MsgBox.alert(this, "Phiếu xuất này đã ở trạng thái đã thanh toán nên không thể sửa số lượng! ");
             return;
         }
+        Luong_ChiTietPhieuXuatCustom ctPhieuXuat = listCTPX.get(row);
+
+        for (Luong_ChiTietPhieuXuatCustom ctpx : listCTPX) {
+            if (ctPhieuXuat.getIdChiTietSp().getTrangThai().equals(TrangThaiSanPhamConstanst.CHO_XAC_NHAN) || ctPhieuXuat.getIdChiTietSp().getTrangThai().equals(TrangThaiSanPhamConstanst.DUNG_BAN)) {
+                MsgBox.alert(this, "Sản phẩm này hiện không được mở bán! Vui lòng quý khách tham khảo những sản phẩm khác ");
+                return;
+            }
+        }
         String suaSL = JOptionPane.showInputDialog("Bạn muốn sửa số lượng thành bao nhiêu ?");
+        if (suaSL.trim().length() == 0) {
+            return;
+        }
         int sl = 0;
         try {
             sl = Integer.parseInt(suaSL);
@@ -455,16 +465,10 @@ public class Tai_LuongPhieuXuat_CTPhieuXuatView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Bạn phải nhập là kiểu số");
             return;
         }
-//        if (sl > listCTPX.get(row).getSoLuong()) {
-//            JOptionPane.showMessageDialog(this, "Bạn phải nhập số lượng nhỏ hơn số lượng ban đầu");
-//            return;
-//        }
-        Luong_ChiTietPhieuXuatCustom ctPhieuXuat = listCTPX.get(row);
+
         for (LuongBanHang_ChiTietSanPhamCustom ctsp : luongService.getListCTSanPham()) {
             if (listCTPX.get(row).getIdChiTietSp().getId().equals(ctsp.getId())) {
-                System.out.println(ctsp.getSoLuongTon());
-                System.out.println((ctPhieuXuat.getSoLuong() - sl));
-                ctsp.setSoLuongTon(ctsp.getSoLuongTon() + (ctPhieuXuat.getSoLuong() - sl));
+                ctsp.setSoLuongTon(ctsp.getSoLuongTon() +(ctPhieuXuat.getSoLuong()-sl));
                 luongService.updateCTSP(ctsp);
             }
         }
@@ -488,6 +492,8 @@ public class Tai_LuongPhieuXuat_CTPhieuXuatView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnShowActionPerformed
 
     private void btnShow1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShow1ActionPerformed
+        DefaultTableModel dtm = (DefaultTableModel) this.tblCTPhieuXuat.getModel();
+        dtm.setRowCount(0);
         this.dispose();
     }//GEN-LAST:event_btnShow1ActionPerformed
 
@@ -556,9 +562,9 @@ public class Tai_LuongPhieuXuat_CTPhieuXuatView extends javax.swing.JFrame {
     private utilities.palette.PanelRound panelRound8;
     private utilities.palette.TableDark_1 tblCTPhieuXuat;
     private utilities.palette.TextField txtGiaBan;
-    private utilities.palette.TextField txtIDSP;
     private utilities.palette.TextField txtMaPhieu;
     private utilities.palette.TextField txtMau;
     private utilities.palette.TextField txtNamBH;
+    private utilities.palette.TextField txtTenSP;
     // End of variables declaration//GEN-END:variables
 }

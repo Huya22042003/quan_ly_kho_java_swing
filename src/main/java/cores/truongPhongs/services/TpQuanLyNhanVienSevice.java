@@ -28,7 +28,11 @@ public interface TpQuanLyNhanVienSevice {
 
     void loadComboboxGT(Combobox cbb);
 
-    TpNhanVienCustom checkValidate(TpNhanVienCustom nv, JLabel erroMa, JLabel erroTen,
+    TpNhanVienCustom checkValidateCreate(TpNhanVienCustom nv, JLabel erroMa, JLabel erroTen,
+            JLabel erroEmail, JLabel erroSDT, JLabel erroMatKhau,
+            JLabel erroDiaChi, JLabel erroNgaySinh);
+
+    TpNhanVienCustom checkValidateUpdate(TpNhanVienCustom nv, JLabel erroMa, JLabel erroTen,
             JLabel erroEmail, JLabel erroSDT, JLabel erroMatKhau,
             JLabel erroDiaChi, JLabel erroNgaySinh);
 
@@ -43,4 +47,7 @@ public interface TpQuanLyNhanVienSevice {
     public ChucVu findIDCV(UUID id);
 
     List<TpNhanVienCustom> findAllByRadio(String ten, TrangThaiNhanVienConstant tt, int rdo);
+
+    List<TpNhanVienCustom> phanTrang(List<TpNhanVienCustom> list, int offset, int limit);
+
 }

@@ -1,8 +1,9 @@
 package views.main;
 
-import cores.nhanVienQuanLy.views.NVQLQuanLyPhieuXuatView;
-import cores.truongPhongs.views.TpPhieuNhapView;
-import cores.nhanVienQuanLy.views.NvqlXemThongTinCaNhanForm;
+import cores.nhanVienQuanLy.views.NvqlKiemKeView;
+import cores.nhanVienQuanLy.views.NvqlLuongHoanXuatView;
+import cores.nhanVienQuanLy.views.Tai_NvqlLuongPhieuXuatView;
+import cores.truongPhongs.views.TpQuanLySanPhamForm;
 import views.component.Header;
 import views.event.EventMenuSelected;
 import views.event.EventShowPopupMenu;
@@ -55,13 +56,20 @@ public class NhanVienQuanLy extends javax.swing.JFrame {
                     main.showForm(new TrangChu());
                 }
                 if (menuIndex == 1) {
-                    main.showForm(new TpPhieuNhapView());
+                    if(subMenuIndex == 0) {
+                        main.showForm(new Tai_NvqlLuongPhieuXuatView());
+                    }
+                    if(subMenuIndex == 1) {
+                        main.showForm(new NvqlLuongHoanXuatView());
+                    }
                 }
                 if (menuIndex == 2) {
-                    main.showForm(new NVQLQuanLyPhieuXuatView());
+                    main.showForm(new NvqlKiemKeView());
                 }
-
-                if (menuIndex == 7) {
+                if (menuIndex == 3) {
+                    main.showForm(new TpQuanLySanPhamForm());
+                }
+                if (menuIndex == 4) {
                     if (subMenuIndex == 2) {
                         Auth.clear();
                         frame.setVisible(false);
@@ -106,14 +114,39 @@ public class NhanVienQuanLy extends javax.swing.JFrame {
                 popup.setVisible(true);
             }
         });
+        header.addClose(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                System.exit(0);
+            }
+        });
+        header.addSap(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                frame.setExtendedState(frame.ICONIFIED);
+            }
+        });
+        
+//        header.openNavBar(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent ae) {
+//                main.showForm(new NvqlXemThongTinCaNhanForm());
+//            }
+//        });
         menu.initMenuItem();
-        bg.add(menu, "w 60!, spany 2");    // Span Y 2cell
-        bg.add(header, "h 107!, wrap");
+        bg.add(menu, "w 170!, spany 2");    // Span Y 2cell
+        bg.add(header, "h 100!, wrap");
         bg.add(main, "w 100%, h 100%");
         TimingTarget target = new TimingTargetAdapter() {
             @Override
             public void timingEvent(float fraction) {
-                layout.setComponentConstraints(menu, "w " + 60 + "!, spany2");
+                double width;
+                if (menu.isShowMenu()) {
+                    width = 60 + (170 * (1f - fraction));
+                } else {
+                    width = 60 + (170 * fraction);
+                }
+                layout.setComponentConstraints(menu, "w " + width + "!, spany2");
                 menu.revalidate();
             }
 
@@ -128,40 +161,10 @@ public class NhanVienQuanLy extends javax.swing.JFrame {
         animator.setResolution(0);
         animator.setDeceleration(0.5f);
         animator.setAcceleration(0.5f);
-        menu.addMenuEvent(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                if (!animator.isRunning()) {
-                    animator.start();
-                }
-                menu.setEnableMenu(false);
-                if (menu.isShowMenu()) {
-                    menu.hideallMenu();
-                }
-            }
-        });
-        header.addClose(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                System.exit(0);
-            }
-        });
-        header.addSap(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                frame.setExtendedState(frame.ICONIFIED);
-            }
-        });
-        
-        header.openNavBar(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                main.showForm(new NvqlXemThongTinCaNhanForm());
-            }
-        });
 
         //  Start with this form
         main.showForm(new TrangChu());
+    
     }
 
     @SuppressWarnings("unchecked")
