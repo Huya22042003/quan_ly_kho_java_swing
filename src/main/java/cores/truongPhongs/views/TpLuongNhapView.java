@@ -44,7 +44,7 @@ public class TpLuongNhapView extends javax.swing.JPanel {
     private TpPhieuNhapChiTietService tpncts;
     private List<TpPhieuNhapChiTietCustom> listCtpn = new ArrayList<>();
     private Page p;
-    
+
     private DecimalFormat formatter = new DecimalFormat("###,###,##0 VNĐ");
 
     private int limit = 7;
@@ -85,9 +85,11 @@ public class TpLuongNhapView extends javax.swing.JPanel {
             }
         });
         cbbTrangThai.setSelectedIndex(0);
-        listPn = phieuNhapService.getListPn();
         p = new Page();
+        listPn = phieuNhapService.getListPn();
+        sizes = listPn.size();
         loadTablePn(phieuNhapService.phanTrang(listPn, offset, limit));
+        loadIndex();
     }
 
     public TpLuongNhapView(UUID id) {
@@ -160,12 +162,13 @@ public class TpLuongNhapView extends javax.swing.JPanel {
         });
         return listTimKiem;
     }
+
     public void searchRadio() {
         if (rdoMa.isSelected()) {
             loadTablePn(listSearch(0));
         }
     }
-    
+
     private void loadTablePn(List<TpPhieuNhapCustom> list) {
         DefaultTableModel dtm = (DefaultTableModel) this.tblPhieuNhap.getModel();
         String pattern = "yyyy-MM-dd HH:mm:ss";
@@ -836,32 +839,30 @@ public class TpLuongNhapView extends javax.swing.JPanel {
         chonSp.setPhieuNhap(chon());
         chonSp.setVisible(true);
     }//GEN-LAST:event_btnThemSpVaoPhieuActionPerformed
-        
-     public List<TpPhieuNhapCustom> getListByTT(int rdo) {
+
+    public List<TpPhieuNhapCustom> getListByTT(int rdo) {
         String timKiem = this.txtSearch.getText();
-        listPn = phieuNhapService.findAllByKhAndNV(timKiem, phieuNhapService.loc(cbbTrangThai.getSelectedIndex()), rdo);
+        listPn = phieuNhapService.phanTrang(phieuNhapService.findAllByKhAndNV(timKiem, phieuNhapService.loc(cbbTrangThai.getSelectedIndex()), rdo), offset, limit);
         return listPn;
     }
 
     public void searchhRadio() {
-        
+
         if (rdoMa.isSelected()) {
             loadTablePn(getListByTT(0));
-        } 
+        }
         if (rdoNcc.isSelected()) {
             loadTablePn(getListByTT(1));
-        } 
-        if(rdoNhanVien.isSelected()){
+        }
+        if (rdoNhanVien.isSelected()) {
             loadTablePn(getListByTT(2));
         }
     }
     private void txtSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSearchMouseClicked
         // TODO add your handling code here:
-        
         searchhRadio();
-        
-        
-
+        sizes = listPn.size();
+        loadIndex();
     }//GEN-LAST:event_txtSearchMouseClicked
 
     private void tblPhieuNhapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPhieuNhapMouseClicked
@@ -930,12 +931,16 @@ public class TpLuongNhapView extends javax.swing.JPanel {
         }
 
         if (rdoNgayTao.isSelected()) {
-            listPn = phieuNhapService.getListByNgayTao(ngayBatDau.getDate().getTime(), ngayKetThuc.getDate().getTime());
+            listPn = phieuNhapService.phanTrang(phieuNhapService.getListByNgayTao(ngayBatDau.getDate().getTime(), ngayKetThuc.getDate().getTime()), offset, limit);
             loadTablePn(listPn);
+            sizes = listPn.size();
+            loadIndex();
             searchRadio();
         } else {
-            listPn = phieuNhapService.getListByNgayThanhToan(ngayBatDau.getDate().getTime(), ngayKetThuc.getDate().getTime());
+            listPn = phieuNhapService.phanTrang(phieuNhapService.getListByNgayThanhToan(ngayBatDau.getDate().getTime(), ngayKetThuc.getDate().getTime()), offset, limit);
             loadTablePn(listPn);
+            sizes = listPn.size();
+            loadIndex();
             searchRadio();
         }
     }
@@ -999,7 +1004,7 @@ public class TpLuongNhapView extends javax.swing.JPanel {
         offset = p.next(offset, limit, sizes);
         loadIndex();
         //        loadTable(getList);
-        listPn = phieuNhapService.getListPn();
+//        listPn = phieuNhapService.getListPn();
         loadTablePn(phieuNhapService.phanTrang(listPn, offset, limit));
     }//GEN-LAST:event_btnNextActionPerformed
 
@@ -1009,7 +1014,7 @@ public class TpLuongNhapView extends javax.swing.JPanel {
 
     private void btnSearch2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearch2ActionPerformed
         // TODO add your handling code here:
-       TimKiemTheoNgay();
+        TimKiemTheoNgay();
     }//GEN-LAST:event_btnSearch2ActionPerformed
     private void loadIndex() {
         this.txtIndex.setText(String.valueOf(index) + " / " + (Math.round((sizes / limit) + 0.5)));

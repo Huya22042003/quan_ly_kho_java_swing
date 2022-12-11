@@ -20,7 +20,6 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import utilities.Converter;
-import utilities.MsgBox;
 import utilities.Page;
 import utilities.palette.SearchCustom.EventCallBack;
 import utilities.palette.SearchCustom.EventTextField;
@@ -39,7 +38,7 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
     String duongdananh = getClass().getResource("/icons/FPT_Polytechnic_doc.png").getPath();
     private Page p;
 
-    private int limit = 7;
+    private int limit = 5;
 
     private int offset = 0;
 
@@ -59,7 +58,7 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
         listSp = ctspService.listCtsp();
         p = new Page();
         sizes = listSp.size();
-        loadTableNcc(ctspService.phanTrang(listSp, offset, limit));
+        loadIndex();
         rdoMaSanPham.setSelected(true);
         cbbTrangThai.setSelectedIndex(0);
         txtSearch.addEvent(new EventTextField() {
@@ -90,7 +89,7 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
         listSp = ctspService.listCtsp();
         p = new Page();
         sizes = listSp.size();
-        loadTableNcc(ctspService.phanTrang(listSp, offset, limit));
+        loadIndex();
         txtSearch.addEvent(new EventTextField() {
             @Override
             public void onPressed(EventCallBack call) {
@@ -668,7 +667,7 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
 
     private void cbbTrangThaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbTrangThaiActionPerformed
         // TODO add your handling code here:
-        loadTableNcc(checkCbb(ctspService.locTt(cbbTrangThai.getSelectedIndex()))) ;
+        loadTableNcc(ctspService.phanTrang(checkCbb(ctspService.locTt(cbbTrangThai.getSelectedIndex())), offset, limit)) ;
 
     }//GEN-LAST:event_cbbTrangThaiActionPerformed
 
