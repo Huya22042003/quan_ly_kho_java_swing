@@ -122,53 +122,6 @@ public class TpLuongNhapView extends javax.swing.JPanel {
         loadTablePn(phieuNhapService.phanTrang(listPn, offset, limit));
     }
 
-    public List<TpPhieuNhapCustom> listSearch(int rdo) {
-        // nhập vào 
-        String timKiem = this.txtSearch.getText();
-        List<TpPhieuNhapCustom> listTimKiem = new ArrayList<>();
-
-        // tìm kiếm theo tên mã vị trí
-        checkCbb(phieuNhapService.loc(this.cbbTrangThai.getSelectedIndex())).forEach(el -> {
-            String search = "";
-            List<String> strings = new ArrayList<>();
-
-            // truyền tham số
-            switch (rdo) {
-                case 0:
-                    search = el.getId().toString();
-                    break;
-            }
-            for (int i = 0; i <= search.length(); i++) {
-                String newMa = search.substring(0, i);
-                strings.add(newMa);
-            }
-            // so sánh mảng vừa cắt với phần tử nhập vào
-            for (String e : strings) {
-                if (e.equalsIgnoreCase(timKiem)) {
-                    listTimKiem.add(el);
-                }
-            }
-        });
-
-        return listTimKiem;
-    }
-
-    public List<TpPhieuNhapCustom> checkCbb(TrangThaiPhieuConstant cs) {
-        List<TpPhieuNhapCustom> listTimKiem = new ArrayList<>();
-        listPn.forEach(el -> {
-            if (el.getTrangThai() == cs) {
-                listTimKiem.add(el);
-            }
-        });
-        return listTimKiem;
-    }
-
-    public void searchRadio() {
-        if (rdoMa.isSelected()) {
-            loadTablePn(listSearch(0));
-        }
-    }
-
     private void loadTablePn(List<TpPhieuNhapCustom> list) {
         DefaultTableModel dtm = (DefaultTableModel) this.tblPhieuNhap.getModel();
         String pattern = "yyyy-MM-dd HH:mm:ss";
@@ -784,8 +737,6 @@ public class TpLuongNhapView extends javax.swing.JPanel {
 
     private void cbbTrangThaiActionPerformed(ActionEvent evt) {//GEN-FIRST:event_cbbTrangThaiActionPerformed
         // TODO add your handling code here:
-        listSearch(this.cbbTrangThai.getSelectedIndex());
-        searchRadio();
         searchhRadio();
     }//GEN-LAST:event_cbbTrangThaiActionPerformed
 
@@ -935,13 +886,11 @@ public class TpLuongNhapView extends javax.swing.JPanel {
             loadTablePn(listPn);
             sizes = listPn.size();
             loadIndex();
-            searchRadio();
         } else {
             listPn = phieuNhapService.phanTrang(phieuNhapService.getListByNgayThanhToan(ngayBatDau.getDate().getTime(), ngayKetThuc.getDate().getTime()), offset, limit);
             loadTablePn(listPn);
             sizes = listPn.size();
             loadIndex();
-            searchRadio();
         }
     }
 

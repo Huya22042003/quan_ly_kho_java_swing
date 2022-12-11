@@ -217,7 +217,7 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
         }
 
         List<TpXemChiTietSanPhamCustom> listPn = ctspService.getListGiaNhap(giaF, giaT);
-        loadTableNcc(listPn);
+         loadTableNcc(ctspService.phanTrang(listPn, offset, limit));
     }
 
     @SuppressWarnings("unchecked")
@@ -729,7 +729,7 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
 //        listCTSP = luongService.getListCTSanPhamBanHang(new BigDecimal(txtGiaFrom.getText()), new BigDecimal(txtGiaTo.getText()));
 //        loadTable(listCTSP);
 //        searchRadio();
-        searchhRadio();
+        
         timKiemTheoGia();
 
     }//GEN-LAST:event_btnSearchActionPerformed
@@ -751,10 +751,10 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
 
     public void searchhRadio() {
         if (rdoMaSanPham.isSelected()) {
-            loadTableNcc(getListByTT(0));
+            loadTableNcc(ctspService.phanTrang(getListByTT(0), offset, limit));
         }
         if (rdoTenSanPham.isSelected()) {
-            loadTableNcc(getListByTT(1));
+            loadTableNcc(ctspService.phanTrang(getListByTT(1), offset, limit));
         }
     }
     private void txtSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSearchMouseClicked
