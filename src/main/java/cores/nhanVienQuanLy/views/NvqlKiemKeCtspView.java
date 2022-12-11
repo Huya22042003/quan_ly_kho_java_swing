@@ -820,7 +820,10 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
             ctpkService.addCTPK(ct);
             ctpkView.listCtpk.add(ct);
             JOptionPane.showMessageDialog(this, "Update thành công số lượng tồn trong kho");
-            fillTableSanPham(ctspService.getAll());
+            listChiTietSanPham = ctspService.getAll();
+            sizes = listChiTietSanPham.size();
+            loadIndex();
+            fillTableSanPham(ctspService.phanTrang(listChiTietSanPham, offset, limit));
         }
     }//GEN-LAST:event_btnThemSPKiemActionPerformed
 

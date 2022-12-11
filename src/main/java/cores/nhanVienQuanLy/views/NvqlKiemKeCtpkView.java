@@ -38,11 +38,11 @@ public class NvqlKiemKeCtpkView extends javax.swing.JFrame {
     private int offset = 0;
     private int sizes = 0;
     private int index = 1;
-    
+
     public void PhieuKiemKe(NvqlLuongKiemKeCustom phieuKiemKe) {
         this.phieuKiemKe = phieuKiemKe;
     }
-    
+
     public NvqlKiemKeCtpkView() {
         p = new Page();
         initComponents();
@@ -52,23 +52,14 @@ public class NvqlKiemKeCtpkView extends javax.swing.JFrame {
         ctpkk = new NvqlLuongKiemKeCtpkCustom();
         sizes = listCtpk.size();
         fillTablePhieuKiemChiTiet(ctpkService.phanTrang(listCtpk, offset, limit));
-        
+
     }
-    
+
     public void fillTablePhieuKiemChiTiet(List<NvqlLuongKiemKeCtpkCustom> list) {
         DefaultTableModel model = (DefaultTableModel) tbPhieuKiemChiTiet.getModel();
         model.setRowCount(0);
-        int sum = limit + offset;
-        if (list.size() <= sum) {
-            sum = list.size();
-        }
-        for (int i = offset; i < sum; i++) {
-            if (list.get(i) == null) {
-                return;
-            }
-            
-            NvqlLuongKiemKeCtpkCustom m = list.get(i);
-            
+
+        for (NvqlLuongKiemKeCtpkCustom m : list) {
             Object[] row = new Object[]{
                 model.getRowCount() + 1,
                 m.getMa(),
@@ -81,16 +72,16 @@ public class NvqlKiemKeCtpkView extends javax.swing.JFrame {
             };
             model.addRow(row);
         }
-        
+
     }
-    
+
     private void clearForm() {
         sizes = listCtpk.size();
         offset = 0;
         index = 1;
         loadIndex();
     }
-    
+
     private void loadIndex() {
         this.txtIndex.setText(String.valueOf(index) + " / " + (Math.round((sizes / limit) + 0.5)));
     }
@@ -461,7 +452,7 @@ public class NvqlKiemKeCtpkView extends javax.swing.JFrame {
         int y = evt.getYOnScreen();
         this.setLocation(x - xx, y - xy);
     }//GEN-LAST:event_formMouseDragged
-    
+
     public NvqlLuongKiemKeCtspCustom mouseClickSanPham(int row) {
         return listChiTietSanPham.get(row);
     }
@@ -473,7 +464,7 @@ public class NvqlKiemKeCtpkView extends javax.swing.JFrame {
         txtSlThuc.setText(tbPhieuKiemChiTiet.getValueAt(s, 4).toString());
         txtSlChenh.setText(tbPhieuKiemChiTiet.getValueAt(s, 5).toString());
         txtLiDo.setText(tbPhieuKiemChiTiet.getValueAt(s, 7).toString());
-        
+
         if (phieuKiemKe.getTrangThai().equals(TrangThaiPhieuKiemConstant.DA_XAC_NHAN)) {
             MsgBox.alert(this, "Phiếu kiểm kê này đã ở trạng thái đã xác nhận nên không thể sửa số lượng! ");
             return;
@@ -495,18 +486,18 @@ public class NvqlKiemKeCtpkView extends javax.swing.JFrame {
         }
         NvqlLuongKiemKeCtpkCustom ctPhieuKiem = listCtpk.get(s);
         ctpkService.updateSoLuongTon(ctPhieuKiem.getIdChiTietSanPham().getId(), sl);
-        
+
         ctPhieuKiem.setSoLuongThucTon(sl);
         ctpkService.updateCTPKK(ctPhieuKiem);
         MsgBox.alert(this, "Update số lượng thực tồn thành công");
         listCtpk.set(s, ctPhieuKiem);
-        fillTablePhieuKiemChiTiet(listCtpk);
+        fillTablePhieuKiemChiTiet(ctpkService.phanTrang(listCtpk, offset, limit));
 
     }//GEN-LAST:event_tbPhieuKiemChiTietMouseClicked
 
     private void btnShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowActionPerformed
         listCtpk = ctpkService.getAll(phieuKiemKe.getId());
-        fillTablePhieuKiemChiTiet(listCtpk);
+        fillTablePhieuKiemChiTiet(ctpkService.phanTrang(listCtpk, offset, limit));
         clearForm();
     }//GEN-LAST:event_btnShowActionPerformed
 
@@ -527,9 +518,9 @@ public class NvqlKiemKeCtpkView extends javax.swing.JFrame {
         loadIndex();
         fillTablePhieuKiemChiTiet(ctpkService.phanTrang(listCtpk, offset, limit));
     }//GEN-LAST:event_btnNextActionPerformed
-    
+
     public static void main(String args[]) {
-        
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -546,7 +537,7 @@ public class NvqlKiemKeCtpkView extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(NvqlKiemKeCtpkView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new NvqlKiemKeCtpkView().setVisible(true);

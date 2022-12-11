@@ -88,6 +88,7 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
         rdoMa.setSelected(true);
         cbbTrangThai.setSelectedIndex(0);
         sizes = listPhieuKiemKeCustom.size();
+        loadIndex();
         fillTablePhieuKiemKe(kiemKeService.phanTrang(listPhieuKiemKeCustom, offset, limit));
           txtSearch.addEvent(new EventTextField() {
             @Override
