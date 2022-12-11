@@ -12,7 +12,7 @@ import utilities.palette.Combobox;
 public interface TP_KhachHangService {
 
     List<TP_KhachHangCustom> getListKH();
-
+    List<TP_KhachHangCustom> getListKHByTrangThai();
     TP_KhachHangCustom addKH(TP_KhachHangCustom custom);
 
     boolean updateKH(TP_KhachHangCustom custom);
