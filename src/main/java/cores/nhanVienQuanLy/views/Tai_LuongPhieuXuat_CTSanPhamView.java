@@ -130,7 +130,6 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
         String pattern = "yyyy-MM-dd HH:mm:ss";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         for (LuongBanHang_ChiTietSanPhamCustom ctsp : list) {
-            Date ngayTao = new Date(ctsp.getNgayTao());
             Object[] rowData = {
                 dtm.getRowCount() + 1,
                 ctsp.getSoLuongTon(),
@@ -142,7 +141,7 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
                 Converter.trangThaiSanPham(ctsp.getTrangThai()),
                 ctsp.getSize(),
                 ctsp.getNcc().getTen(),
-                simpleDateFormat.format(ngayTao)
+                ctsp.getNgayTao()==null ? "Chưa có" :simpleDateFormat.format(new Date(ctsp.getNgayTao()))
             };
             dtm.addRow(rowData);
         }

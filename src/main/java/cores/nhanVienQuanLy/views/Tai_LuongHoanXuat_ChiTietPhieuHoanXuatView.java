@@ -26,6 +26,7 @@ public class Tai_LuongHoanXuat_ChiTietPhieuHoanXuatView extends javax.swing.JFra
 //    public double tongTien;
     private String duongDan = getClass().getResource("/icons/file.png").getPath();
     private DecimalFormat formatter = new DecimalFormat("###,###,##0 VNĐ");
+
     public void setPhieuHX(PhieuHoanXuat phieuHX) {
         this.phieuHX = phieuHX;
     }
@@ -42,12 +43,13 @@ public class Tai_LuongHoanXuat_ChiTietPhieuHoanXuatView extends javax.swing.JFra
     public Tai_LuongHoanXuat_ChiTietPhieuHoanXuatView() {
         p = new Page();
         initComponents();
+        this.setLocationRelativeTo(null);
         luongHXService = new Tai_LuongHoanXuatServiceImpl();
         luongService = new Tai_NvqlLuongPhieuXuatServiceImpl();
         listCTPHX = new ArrayList<>();
         sizes = listCTPHX.size();
         loadTable(luongHXService.phanTrangCT(listCTPHX, offset, limit));
-
+        clear();
         clearForm();
     }
 
@@ -59,6 +61,15 @@ public class Tai_LuongHoanXuat_ChiTietPhieuHoanXuatView extends javax.swing.JFra
         loadIndex();
     }
 
+    public void clear() {
+        txtGiaBan.setText("");
+        txtMaSP.setText("");
+        txtLyDo.setText("");
+        txtNamBH.setText("");
+        txtSoLuong.setText("");
+        txtTenSP.setText("");
+    }
+
     public void loadTable(List<ChiTietPhieuHoanXuatCustom> list) {
         DefaultTableModel dtm = (DefaultTableModel) this.tblCTPhieuXuat.getModel();
         dtm.setRowCount(0);
@@ -68,7 +79,7 @@ public class Tai_LuongHoanXuat_ChiTietPhieuHoanXuatView extends javax.swing.JFra
                 ctphx.getIdChiTietSp().getSanPham().getMa(),
                 ctphx.getIdChiTietSp().getSanPham().getTen(),
                 ctphx.getSoLuong(),
-                ctphx.getIdChiTietSp().getGiaBan()== null ? "Chưa có" : formatter.format(ctphx.getIdChiTietSp().getGiaBan()),
+                ctphx.getIdChiTietSp().getGiaBan() == null ? "Chưa có" : formatter.format(ctphx.getIdChiTietSp().getGiaBan()),
                 ctphx.getIdChiTietSp().getNamBaoHanh(),
                 ctphx.getLiDo()
             };
@@ -92,11 +103,11 @@ public class Tai_LuongHoanXuat_ChiTietPhieuHoanXuatView extends javax.swing.JFra
         jLabel3 = new javax.swing.JLabel();
         panelRound8 = new utilities.palette.PanelRound();
         btnShow = new utilities.palette.MyButton();
-        btnShow1 = new utilities.palette.MyButton();
+        btnExit = new utilities.palette.MyButton();
         jPanel3 = new javax.swing.JPanel();
         panelRound3 = new utilities.palette.PanelRound();
         jLabel2 = new javax.swing.JLabel();
-        txtIDSP = new utilities.palette.TextField();
+        txtMaSP = new utilities.palette.TextField();
         txtGiaBan = new utilities.palette.TextField();
         txtNamBH = new utilities.palette.TextField();
         txtTenSP = new utilities.palette.TextField();
@@ -109,6 +120,7 @@ public class Tai_LuongHoanXuat_ChiTietPhieuHoanXuatView extends javax.swing.JFra
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 204, 204));
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 255));
 
@@ -201,15 +213,15 @@ public class Tai_LuongHoanXuat_ChiTietPhieuHoanXuatView extends javax.swing.JFra
             }
         });
 
-        btnShow1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Exit.png"))); // NOI18N
-        btnShow1.setToolTipText("Exit\n");
-        btnShow1.setBorderColor(new java.awt.Color(221, 242, 244));
-        btnShow1.setColor(new java.awt.Color(221, 242, 244));
-        btnShow1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnShow1.setRadius(50);
-        btnShow1.addActionListener(new java.awt.event.ActionListener() {
+        btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Exit.png"))); // NOI18N
+        btnExit.setToolTipText("Exit\n");
+        btnExit.setBorderColor(new java.awt.Color(221, 242, 244));
+        btnExit.setColor(new java.awt.Color(221, 242, 244));
+        btnExit.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnExit.setRadius(50);
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnShow1ActionPerformed(evt);
+                btnExitActionPerformed(evt);
             }
         });
 
@@ -221,7 +233,7 @@ public class Tai_LuongHoanXuat_ChiTietPhieuHoanXuatView extends javax.swing.JFra
                 .addGap(37, 37, 37)
                 .addComponent(btnShow, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
-                .addComponent(btnShow1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(61, Short.MAX_VALUE))
         );
         panelRound8Layout.setVerticalGroup(
@@ -229,7 +241,7 @@ public class Tai_LuongHoanXuat_ChiTietPhieuHoanXuatView extends javax.swing.JFra
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound8Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnShow1, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+                    .addComponent(btnExit, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
                     .addComponent(btnShow, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -245,10 +257,10 @@ public class Tai_LuongHoanXuat_ChiTietPhieuHoanXuatView extends javax.swing.JFra
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         jLabel2.setText("Thông tin sản phẩm được hoàn");
 
-        txtIDSP.setEditable(false);
-        txtIDSP.setBackground(new java.awt.Color(228, 206, 224));
-        txtIDSP.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtIDSP.setLabelText("Mã Sản phẩm");
+        txtMaSP.setEditable(false);
+        txtMaSP.setBackground(new java.awt.Color(228, 206, 224));
+        txtMaSP.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtMaSP.setLabelText("Mã Sản phẩm");
 
         txtGiaBan.setEditable(false);
         txtGiaBan.setBackground(new java.awt.Color(228, 206, 224));
@@ -296,7 +308,7 @@ public class Tai_LuongHoanXuat_ChiTietPhieuHoanXuatView extends javax.swing.JFra
                     .addComponent(txtSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(textAreaScroll1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNamBH, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtIDSP, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMaSP, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(txtTenSP, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtGiaBan, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -308,7 +320,7 @@ public class Tai_LuongHoanXuat_ChiTietPhieuHoanXuatView extends javax.swing.JFra
                 .addContainerGap(43, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtIDSP, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtMaSP, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(txtTenSP, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
@@ -419,23 +431,23 @@ public class Tai_LuongHoanXuat_ChiTietPhieuHoanXuatView extends javax.swing.JFra
         if (row == -1) {
             return;
         }
-        txtIDSP.setText(tblCTPhieuXuat.getValueAt(row, 1).toString());
+        txtMaSP.setText(tblCTPhieuXuat.getValueAt(row, 1).toString());
         txtTenSP.setText(tblCTPhieuXuat.getValueAt(row, 2).toString());
         txtSoLuong.setText(tblCTPhieuXuat.getValueAt(row, 3).toString());
         txtGiaBan.setText(tblCTPhieuXuat.getValueAt(row, 4).toString());
         txtNamBH.setText(tblCTPhieuXuat.getValueAt(row, 5).toString());
         txtLyDo.setText(tblCTPhieuXuat.getValueAt(row, 6).toString());
-        
-        if(phieuHX.getTrangThai() == TrangThaiPhieuHoanConstant.HOAN_THANH_CONG){
+
+        if (phieuHX.getTrangThai() == TrangThaiPhieuHoanConstant.HOAN_THANH_CONG) {
             JOptionPane.showMessageDialog(this, "Phiếu hoàn này đã hoàn thành công mời bạn chọn phiếu hoàn khác!");
             return;
         }
-        if(phieuHX.getTrangThai() == TrangThaiPhieuHoanConstant.DA_HUY){
-            JOptionPane.showMessageDialog(this,"Phiếu hoàn này đã hủy mời bạn chọn phiếu hoàn khác!");
+        if (phieuHX.getTrangThai() == TrangThaiPhieuHoanConstant.DA_HUY) {
+            JOptionPane.showMessageDialog(this, "Phiếu hoàn này đã hủy mời bạn chọn phiếu hoàn khác!");
             return;
         }
         String suaSL = JOptionPane.showInputDialog("Bạn muốn lấy lại bao nhiêu sản phẩm?");
-        if(suaSL == null){
+        if (suaSL == null) {
             return;
         }
         int sl = 0;
@@ -473,6 +485,7 @@ public class Tai_LuongHoanXuat_ChiTietPhieuHoanXuatView extends javax.swing.JFra
         luongHXService.updateCtPHX(ctpHoanXuat);
         listCTPHX.set(row, ctpHoanXuat);
         loadTable(listCTPHX);
+        clear();
     }//GEN-LAST:event_tblCTPhieuXuatMouseClicked
 
 
@@ -483,10 +496,12 @@ public class Tai_LuongHoanXuat_ChiTietPhieuHoanXuatView extends javax.swing.JFra
         clearForm();
     }//GEN-LAST:event_btnShowActionPerformed
 
-    private void btnShow1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShow1ActionPerformed
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         this.dispose();
+        DefaultTableModel dtm = (DefaultTableModel) this.tblCTPhieuXuat.getModel();
+        dtm.setRowCount(0);
 
-    }//GEN-LAST:event_btnShow1ActionPerformed
+    }//GEN-LAST:event_btnExitActionPerformed
 
     private void txtNamBHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNamBHActionPerformed
         // TODO add your handling code here:
@@ -549,10 +564,10 @@ public class Tai_LuongHoanXuat_ChiTietPhieuHoanXuatView extends javax.swing.JFra
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private utilities.palette.MyButton btnExit;
     private utilities.palette.UWPButton btnPre;
     private utilities.palette.UWPButton btnPre1;
     private utilities.palette.MyButton btnShow;
-    private utilities.palette.MyButton btnShow1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
@@ -565,9 +580,9 @@ public class Tai_LuongHoanXuat_ChiTietPhieuHoanXuatView extends javax.swing.JFra
     private utilities.palette.TableDark_1 tblCTPhieuXuat;
     private utilities.palette.TextAreaScroll textAreaScroll1;
     private utilities.palette.TextField txtGiaBan;
-    private utilities.palette.TextField txtIDSP;
     private javax.swing.JLabel txtIndex;
     private utilities.palette.TextAreaCustom txtLyDo;
+    private utilities.palette.TextField txtMaSP;
     private utilities.palette.TextField txtNamBH;
     private utilities.palette.TextField txtSoLuong;
     private utilities.palette.TextField txtTenSP;
