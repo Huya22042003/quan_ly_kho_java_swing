@@ -104,7 +104,7 @@ public class TPThongKeBieuDo extends javax.swing.JPanel {
                 .addContainerGap(246, Short.MAX_VALUE))
         );
 
-        materialTabbed1.addTab("Biểu đồ cột", jPanel2);
+        materialTabbed1.addTab("Biểu đồ miền", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

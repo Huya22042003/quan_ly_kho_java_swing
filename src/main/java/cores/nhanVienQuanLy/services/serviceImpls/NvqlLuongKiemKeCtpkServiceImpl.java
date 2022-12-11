@@ -55,6 +55,7 @@ public class NvqlLuongKiemKeCtpkServiceImpl implements NvqlLuongKiemKeCtpkServic
         ctpkk.setIdChiTietSp(ctpkCustom.getIdChiTietSanPham());
         ctpkk.setSoLuongTon(ctpkCustom.getSoLuongTon());
         ctpkk.setSoLuongThucTon(ctpkCustom.getSoLuongThucTon());
+        ctpkk.setLiDo(ctpkCustom.getLiDo());
         rp.updateCTPKK(ctpkk);
     }
 
