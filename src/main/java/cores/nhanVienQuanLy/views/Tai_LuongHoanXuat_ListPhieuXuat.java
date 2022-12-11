@@ -38,6 +38,7 @@ public class Tai_LuongHoanXuat_ListPhieuXuat extends javax.swing.JFrame {
 
     public Tai_LuongHoanXuat_ListPhieuXuat() {
         initComponents();
+        this.setLocationRelativeTo(null);
         p = new Page();
         phieuXuatService = new NVQLQuanLyPhieuXuatServiceImpl();
         listPhieuXuat = phieuXuatService.getListDaThanhToan();
@@ -75,6 +76,7 @@ public class Tai_LuongHoanXuat_ListPhieuXuat extends javax.swing.JFrame {
         txtMaPhieu = new utilities.palette.TextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -260,7 +262,7 @@ public class Tai_LuongHoanXuat_ListPhieuXuat extends javax.swing.JFrame {
         });
 
         myButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Exit.png"))); // NOI18N
-        myButton12.setToolTipText("Phiếu nhập chi tiết");
+        myButton12.setToolTipText("Thoát");
         myButton12.setBorderColor(new java.awt.Color(221, 242, 244));
         myButton12.setColor(new java.awt.Color(221, 242, 244));
         myButton12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -427,7 +429,7 @@ public class Tai_LuongHoanXuat_ListPhieuXuat extends javax.swing.JFrame {
 
             Object[] rowData = {
                 dtm.getRowCount() + 1,
-                el.getMaPhieu(),
+                el.getMaPhieu()== null ? "Không có": el.getMaPhieu(),
                 el.getNgayTao() == null ? "không có" : simpleDateFormat.format(ngayTao),
                 el.getNgayThanhToan() == null ? "Chưa thanh toán" : simpleDateFormat.format(ngayTao),
                 Converter.TrangThaiPhieuXuat(el.getTrangThai()),

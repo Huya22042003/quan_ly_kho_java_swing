@@ -518,8 +518,8 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
         txtTimKiem.setLabelText("Search");
 
         buttonGradient1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Search.png"))); // NOI18N
+        buttonGradient1.setToolTipText("Tìm kiếm theo mã phiếu, nhân viên, khách hàng, ngày tạo,...");
         buttonGradient1.setColor1(new java.awt.Color(51, 255, 255));
-        buttonGradient1.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/OK.png"))); // NOI18N
         buttonGradient1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonGradient1ActionPerformed(evt);
@@ -1300,7 +1300,7 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
         phieuXuatService.updatePhieuXuat(pxcs);
         MsgBox.alert(this, "Bạn đã thanh toán thành công");
         listPhieuXuat.set(row, pxcs);
-        loadTablePhieuXuat(listPhieuXuat);
+        loadTablePhieuXuat(phieuXuatService.phanTrang(listPhieuXuat, offset, limit));
         clearForm();
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
@@ -1313,11 +1313,6 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
         String tongTienNew = tongTien.replace(",", "").replace("VNĐ", "").replace(".", "").replaceAll(" ", "");
         String tienKhachDua = txtTienKhachDua.getText().replace(",", "");
         double tienKhach = 0;
-        if (listPhieuXuat.get(tblPhieuXuat.getSelectedRow()).getTrangThai().equals(TrangThaiPhieuConstant.DA_THANH_TOAN)) {
-            txtTienKhachDua.setText("");
-            txtTienThua.setText("");
-            return;
-        }
         if (tienKhachDua.trim().length() == 0) {
             txtTienThua.setText("");
         }
@@ -1332,7 +1327,7 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
                 return;
             }
         } catch (NumberFormatException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
 
         try {

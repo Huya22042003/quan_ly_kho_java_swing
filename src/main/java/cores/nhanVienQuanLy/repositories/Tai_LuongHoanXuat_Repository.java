@@ -23,7 +23,7 @@ public class Tai_LuongHoanXuat_Repository {
                 + "phx.liDo as liDo,"
                 + "phx.trangThai as trangThai,"
                 + "phx.phieuXuat as phieuXuat"
-                + ") FROM domainModels.PhieuHoanXuat phx");
+                + ") FROM domainModels.PhieuHoanXuat phx ORDER BY phx.ngayTao DESC");
         List<PhieuHoanXuatCustom> list = query.getResultList();
         return list;
     }
