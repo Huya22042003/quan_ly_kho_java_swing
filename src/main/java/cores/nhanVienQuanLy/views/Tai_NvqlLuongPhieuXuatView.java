@@ -65,7 +65,7 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
     private DecimalFormat formatter = new DecimalFormat("###,###,##0 VNĐ");
     String pattern = "yyyy-MM-dd HH:mm:ss";
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-    
+
     private WebcamPanel jpanl = null;
     private Webcam webcam1;
     private Thread capture;
@@ -1196,6 +1196,10 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTrangThaiActionPerformed
 
     private void btnChiTietSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChiTietSPActionPerformed
+        if (listPhieuXuat.get(tblPhieuXuat.getSelectedRow()).getTrangThai().equals(TrangThaiPhieuConstant.DA_THANH_TOAN)) {
+            MsgBox.alert(this, "Phiếu xuất đã ở trạng thái đã thanh toán nên không thể mua hàng !");
+            return;
+        }
         if (chon() == null) {
             return;
         }
@@ -1236,6 +1240,16 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
         } else {
             btnThanhToan.setEnabled(false);
             txtTienKhachDua.setEditable(false);
+            txtTienKhachDua.setText("");
+            txtTienThua.setText("");
+        }
+        if (px.getTrangThai() == TrangThaiPhieuConstant.DA_THANH_TOAN) {
+            txtTienKhachDua.setText("");
+            txtTienThua.setText("");
+
+        }
+        if (txtTienKhachDua.getText().equals("")) {
+            txtTienThua.setText("");
         }
 
     }//GEN-LAST:event_tblPhieuXuatMouseClicked
@@ -1299,6 +1313,11 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
         String tongTienNew = tongTien.replace(",", "").replace("VNĐ", "").replace(".", "").replaceAll(" ", "");
         String tienKhachDua = txtTienKhachDua.getText().replace(",", "");
         double tienKhach = 0;
+        if (listPhieuXuat.get(tblPhieuXuat.getSelectedRow()).getTrangThai().equals(TrangThaiPhieuConstant.DA_THANH_TOAN)) {
+            txtTienKhachDua.setText("");
+            txtTienThua.setText("");
+            return;
+        }
         if (tienKhachDua.trim().length() == 0) {
             txtTienThua.setText("");
         }
