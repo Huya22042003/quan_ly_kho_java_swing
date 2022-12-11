@@ -56,6 +56,7 @@ public class NvqlLuongKiemKeCtspRepository {
             s.close();
         }
     }
+
     public void updateTrangThaiSp(ChiTietSanPham nvqlLuongKiemKeCtspCustom) {
         Session s = HibernateUtil.getSessionFactory().openSession();
         try {
@@ -70,9 +71,11 @@ public class NvqlLuongKiemKeCtspRepository {
             s.close();
         }
     }
-     public List<NvqlLuongKiemKeCtspCustom> getListByMaSp(String ma) {
+
+    public List<NvqlLuongKiemKeCtspCustom> getListByMaSp(String ma) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-         Query query = session.createQuery("select "
+
+        Query query = session.createQuery("select "
                 + " new cores.nhanVienQuanLy.customModels.NvqlLuongKiemKeCtspCustom("
                 + " m.id,"
                 + " m.sanPham.ma as ma,"
@@ -82,19 +85,23 @@ public class NvqlLuongKiemKeCtspRepository {
                 + " m.mau as mau,"
                 + " m.namBaoHanh as namBaoHanh,"
                 + " m.GiaBan as giaBan,"
+                + " m.GiaNhap as giaNhap,"
                 + " m.size as size, "
-                + " m.ngayTao as ngayTao) "
+                + " m.ngayTao as ngayTao,"
+                + " m.trangThai as trangThai) "
                 + " from domainModels.ChiTietSanPham m "
-                + " WHERE m.sanPham.ma like CONCAT('%',:ma,'%') "
-                + "order by m.soLuongTon DESC" );
-       query.setParameter("ma", ma);
+                + " WHERE m.trangThai = :trangThai  and  m.sanPham.ma like CONCAT('%',:ma,'%') "
+                + "order by m.soLuongTon DESC");
+        query.setParameter("trangThai", TrangThaiSanPhamConstanst.DA_MO_BAN);
+        query.setParameter("ma", ma);
         List<NvqlLuongKiemKeCtspCustom> list = query.getResultList();
         return list;
-        
+
     }
-         public List<NvqlLuongKiemKeCtspCustom> getListByTenSp(String ma) {
+
+    public List<NvqlLuongKiemKeCtspCustom> getListByTenSp(String ma) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-         Query query = session.createQuery("select "
+        Query query = session.createQuery("select "
                 + " new cores.nhanVienQuanLy.customModels.NvqlLuongKiemKeCtspCustom("
                 + " m.id,"
                 + " m.sanPham.ma as ma,"
@@ -104,19 +111,23 @@ public class NvqlLuongKiemKeCtspRepository {
                 + " m.mau as mau,"
                 + " m.namBaoHanh as namBaoHanh,"
                 + " m.GiaBan as giaBan,"
+                + " m.GiaNhap as giaNhap,"
                 + " m.size as size, "
-                + " m.ngayTao as ngayTao) "
+                + " m.ngayTao as ngayTao,"
+                + " m.trangThai as trangThai) "
                 + " from domainModels.ChiTietSanPham m "
-                + " WHERE m.sanPham.ten like CONCAT('%',:ma,'%') "
-                + "order by m.soLuongTon DESC" );
-       query.setParameter("ma", ma);
+                + " WHERE m.trangThai = :trangThai  and  m.sanPham.ten like CONCAT('%',:ma,'%') "
+                + "order by m.soLuongTon DESC");
+        query.setParameter("trangThai", TrangThaiSanPhamConstanst.DA_MO_BAN);
+        query.setParameter("ma", ma);
         List<NvqlLuongKiemKeCtspCustom> list = query.getResultList();
         return list;
-        
+
     }
-           public List<NvqlLuongKiemKeCtspCustom> getListByGiaBan(BigDecimal giaBatDau, BigDecimal giaKetThuc) {
+
+    public List<NvqlLuongKiemKeCtspCustom> getListByGiaBan(BigDecimal giaBatDau, BigDecimal giaKetThuc) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-         Query query = session.createQuery("select "
+        Query query = session.createQuery("select "
                 + " new cores.nhanVienQuanLy.customModels.NvqlLuongKiemKeCtspCustom("
                 + " m.id,"
                 + " m.sanPham.ma as ma,"
@@ -126,16 +137,19 @@ public class NvqlLuongKiemKeCtspRepository {
                 + " m.mau as mau,"
                 + " m.namBaoHanh as namBaoHanh,"
                 + " m.GiaBan as giaBan,"
+                + " m.GiaNhap as giaNhap,"
                 + " m.size as size, "
-                + " m.ngayTao as ngayTao) "
+                + " m.ngayTao as ngayTao,"
+                + " m.trangThai as trangThai) "
                 + " from domainModels.ChiTietSanPham m "
-                + " WHERE  m.GiaBan > :giaBatDau AND m.GiaBan < :giaKetThuc "
-                + " order by m.soLuongTon DESC" );
-            query.setParameter("giaBatDau", giaBatDau);
+                + " WHERE m.trangThai = :trangThai  and  m.GiaBan >= :giaBatDau AND m.GiaBan <= :giaKetThuc "
+                + " order by m.soLuongTon DESC");
+          query.setParameter("trangThai", TrangThaiSanPhamConstanst.DA_MO_BAN);
+        query.setParameter("giaBatDau", giaBatDau);
         query.setParameter("giaKetThuc", giaKetThuc);
         List<NvqlLuongKiemKeCtspCustom> list = query.getResultList();
         return list;
-        
+
     }
-     
+
 }

@@ -91,7 +91,7 @@ public class TpThongKeRepository {
                 + "m.idPhieuXuat as idPhieuXuat,"
                 + "m.idChiTietSp as idCtsp,"
                 + "m.soLuong as soLuong "
-                + ") from domainModels.ChiTietPhieuXuat m WHERE m.idPhieuXuat.ngayThanhToan > :ngayBatDau AND m.idPhieuXuat.ngayThanhToan < :ngayKetThuc  ORDER BY m.idPhieuXuat.ngayThanhToan DESC");
+                + ") from domainModels.ChiTietPhieuXuat m WHERE m.idPhieuXuat.ngayThanhToan >= :ngayBatDau AND m.idPhieuXuat.ngayThanhToan <= :ngayKetThuc  ORDER BY m.idPhieuXuat.ngayThanhToan DESC");
         query.setParameter("ngayBatDau", ngayBatDau);
         query.setParameter("ngayKetThuc", ngayKetThuc);
         List<TpThongKeSpCustom> list = query.getResultList();
@@ -117,7 +117,7 @@ public class TpThongKeRepository {
                 + "m.idPhieuXuat as idPhieuXuat,"
                 + "m.idChiTietSp as idCtsp,"
                 + "m.soLuong as soLuong "
-                + ") from domainModels.ChiTietPhieuXuat m WHERE m.idPhieuXuat.MaPhieu like CONCAT ('%',:ma,'%') "
+                + ") from domainModels.ChiTietPhieuXuat m WHERE m.idPhieuXuat.maPhieu like CONCAT ('%',:ma,'%') "
                 + "order by m.soLuong DESC");
         query.setParameter("ma", ma);
 

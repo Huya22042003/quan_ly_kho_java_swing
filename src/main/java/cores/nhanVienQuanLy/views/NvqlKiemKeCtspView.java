@@ -721,7 +721,7 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
         }
 
         List<NvqlLuongKiemKeCtspCustom> listPn = ctspService.getListGiaNhap(giaF, giaT);
-        fillTableSanPham(listPn);
+        fillTableSanPham(ctspService.phanTrang(listPn, offset, limit));
     }
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         timKiemTheoGia();
@@ -751,10 +751,10 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
 
     public void searchhRadio() {
         if (rdoMa.isSelected()) {
-            fillTableSanPham(getListByTT(0));
+             fillTableSanPham(ctspService.phanTrang(getListByTT(0), offset, limit));
         }
         if (rdoTen.isSelected()) {
-            fillTableSanPham(getListByTT(1));
+            fillTableSanPham(ctspService.phanTrang(getListByTT(1), offset, limit));
         }
     }
     private void txtSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSearchMouseClicked

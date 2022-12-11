@@ -42,7 +42,7 @@ public class NvqlQuanLyPhieuHoanXuatRepository {
                 + "phx.liDo as liDo,"
                 + "phx.trangThai as trangThai,"
                 + "phx.phieuXuat as phieuXuat"
-                + ") FROM domainModels.PhieuHoanXuat phx WHERE phx.ngayTao > :ngayBatDau AND phx.ngayTao < :ngayKetThuc");
+                + ") FROM domainModels.PhieuHoanXuat phx WHERE phx.ngayTao >= :ngayBatDau AND phx.ngayTao <= :ngayKetThuc");
         query.setParameter("ngayBatDau", ngayBatDau);
         query.setParameter("ngayKetThuc", ngayKetThuc);
         List<NvqlQuanLyPhieuHoanXuatCustom> list = query.getResultList();
@@ -59,7 +59,7 @@ public class NvqlQuanLyPhieuHoanXuatRepository {
                 + "phx.liDo as liDo,"
                 + "phx.trangThai as trangThai,"
                 + "phx.phieuXuat as phieuXuat"
-                + ") FROM domainModels.PhieuHoanXuat phx WHERE phx.ngayThanhToan > :ngayBatDau AND phx.ngayThanhToan < :ngayKetThuc");
+                + ") FROM domainModels.PhieuHoanXuat phx WHERE phx.ngayThanhToan >= :ngayBatDau AND phx.ngayThanhToan <= :ngayKetThuc");
         query.setParameter("ngayBatDau", ngayBatDau);
         query.setParameter("ngayKetThuc", ngayKetThuc);
         List<NvqlQuanLyPhieuHoanXuatCustom> list = query.getResultList();

@@ -103,7 +103,7 @@ public class TpPhieuNhapRepository {
                 + "p.nhanVien.ten as tenNhanVien,"
                 + "p.nhaCungCap.id as idNcc,"
                 + "p.nhaCungCap.ten as tenNcc) "
-                + "from domainModels.PhieuNhap p WHERE p.ngayTao > :ngayBatDau AND p.ngayTao < :ngayKetThuc  ORDER BY p.ngayTao DESC");
+                + "from domainModels.PhieuNhap p WHERE p.ngayTao >= :ngayBatDau AND p.ngayTao <= :ngayKetThuc  ORDER BY p.ngayTao DESC");
         query.setParameter("ngayBatDau", ngayBatDau);
         query.setParameter("ngayKetThuc", ngayKetThuc);
         List<TpPhieuNhapCustom> list = query.getResultList();
@@ -123,7 +123,7 @@ public class TpPhieuNhapRepository {
                 + "p.nhanVien.ten as tenNhanVien,"
                 + "p.nhaCungCap.id as idNcc,"
                 + "p.nhaCungCap.ten as tenNcc) "
-                + "from domainModels.PhieuNhap p WHERE p.ngayThanhToan > :ngayBatDau AND p.ngayThanhToan < :ngayKetThuc  ORDER BY p.ngayThanhToan DESC");
+                + "from domainModels.PhieuNhap p WHERE p.ngayThanhToan >= :ngayBatDau AND p.ngayThanhToan <= :ngayKetThuc  ORDER BY p.ngayThanhToan DESC");
         query.setParameter("ngayBatDau", ngayBatDau);
         query.setParameter("ngayKetThuc", ngayKetThuc);
         List<TpPhieuNhapCustom> list = query.getResultList();

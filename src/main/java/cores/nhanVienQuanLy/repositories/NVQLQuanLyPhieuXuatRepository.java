@@ -65,7 +65,7 @@ public class NVQLQuanLyPhieuXuatRepository {
                 + "px.trangThai as trangThai,"
                 + "px.nhanVien as nhanVien,"
                 + "px.khachHang as khachHang"
-                + ") FROM domainModels.PhieuXuat px WHERE px.ngayTao > :ngayBatDau AND px.ngayTao < :ngayKetThuc "
+                + ") FROM domainModels.PhieuXuat px WHERE px.ngayTao >= :ngayBatDau AND px.ngayTao <= :ngayKetThuc "
                 + " ORDER BY px.ngayTao DESC");
         query.setParameter("ngayBatDau", ngayBatDau);
         query.setParameter("ngayKetThuc", ngayKetThuc);
@@ -84,7 +84,7 @@ public class NVQLQuanLyPhieuXuatRepository {
                 + "px.trangThai as trangThai,"
                 + "px.nhanVien as nhanVien,"
                 + "px.khachHang as khachHang"
-                + ") FROM domainModels.PhieuXuat px WHERE px.ngayThanhToan > :ngayBatDau AND px.ngayThanhToan < :ngayKetThuc "
+                + ") FROM domainModels.PhieuXuat px WHERE px.ngayThanhToan >= :ngayBatDau AND px.ngayThanhToan <= :ngayKetThuc "
                 + " ORDER BY px.ngayTao DESC");
         query.setParameter("ngayBatDau", ngayBatDau);
         query.setParameter("ngayKetThuc", ngayKetThuc);

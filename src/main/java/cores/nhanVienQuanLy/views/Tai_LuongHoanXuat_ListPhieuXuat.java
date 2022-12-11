@@ -399,6 +399,7 @@ public class Tai_LuongHoanXuat_ListPhieuXuat extends javax.swing.JFrame {
         String pattern = "yyyy-MM-dd HH:mm:ss";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         Date ngayTaos = new Date(item.getNgayTao());
+        txtMaPhieu.setText(item.getMaPhieu());
         txtNgayTao.setText(simpleDateFormat.format(ngayTaos));
         txtNgayThanhToan.setText(item.getNgayThanhToan() == null ? "chưa thanh toán" : simpleDateFormat.format(ngayTaos));
         txtTrangThai.setText(trangThai);

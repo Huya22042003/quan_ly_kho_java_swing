@@ -67,6 +67,7 @@ public class TpPhieuNhapServiceImpl implements TpPhieuNhapService {
         pn.setNgayTao(p.getNgayTao());
         pn.setNhaCungCap(ncc);
         pn.setNhanVien(nv);
+        pn.setMaPhieu(p.getMaPhieu());
         return repo.updatePn(pn);
     }
 

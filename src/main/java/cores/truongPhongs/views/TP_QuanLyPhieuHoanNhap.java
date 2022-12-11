@@ -731,7 +731,7 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
         }
         TP_PhieuHoanNhapCustom phn = this.hoanNhapCustoms.get(row);
         phn.setTrangThai(TrangThaiPhieuHoanConstant.HOAN_THANH_CONG);
-        phn.setNgayThanhToan(DateTimeUtil.convertDateToTimeStampSecond());
+//        phn.setNgayThanhToan(DateTimeUtil.convertDateToTimeStampSecond());
         phieuHoanNhapService.updatePhieuHoanNhap(phn);
         MsgBox.alert(this, "Bạn đã xác nhận thành công !");
     }//GEN-LAST:event_btnXacNhanActionPerformed
@@ -790,10 +790,10 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
 
     public void searchhRadio() {
         if (rdoNcc.isSelected()) {
-            loadTable(getListByTT(0));
+              loadTable(phieuHoanNhapService.phanTrang(getListByTT(0), offset, limit));
         } 
         if (rdoNhanVien.isSelected()) {
-            loadTable(getListByTT(1));
+                  loadTable(phieuHoanNhapService.phanTrang(getListByTT(1), offset, limit));
         } 
     }
      public void TimKiemTheoNgay() {
@@ -808,11 +808,11 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
 
         if (rdoNgayTao.isSelected()) {
             hoanNhapCustoms = phieuHoanNhapService.getListByNgayTao(ngayBatDau.getDate().getTime(), ngayKetThuc.getDate().getTime());
-            loadTable(hoanNhapCustoms);
+            loadTable(phieuHoanNhapService.phanTrang(hoanNhapCustoms, offset, limit));
             
         } else {
             hoanNhapCustoms = phieuHoanNhapService.getListByNgayThanhToan(ngayBatDau.getDate().getTime(), ngayKetThuc.getDate().getTime());
-            loadTable(hoanNhapCustoms);
+               loadTable(phieuHoanNhapService.phanTrang(hoanNhapCustoms, offset, limit));
             
         }
     }

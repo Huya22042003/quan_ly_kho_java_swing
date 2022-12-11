@@ -702,13 +702,17 @@ public class NvqlLuongHoanXuatView extends javax.swing.JPanel {
     private utilities.palette.MyButton btnThanhToan;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
+    private utilities.palette.Combobox cbbTrangThai;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private utilities.palette.PanelRound panelRound1;
     private utilities.palette.PanelRound panelRound15;
     private utilities.palette.PanelRound panelRound3;
+    private utilities.palette.PanelRound panelRound4;
     private utilities.palette.PanelRound panelRound5;
+    private utilities.palette.RadioButtonCustom rdoNcc;
+    private utilities.palette.RadioButtonCustom rdoNhanVien;
     private utilities.palette.TableDark_1 tblPhieuHoanXuat;
     private utilities.palette.TextAreaScroll textAreaScroll1;
     private utilities.palette.TextAreaCustom txtGhiChu;
@@ -718,6 +722,7 @@ public class NvqlLuongHoanXuatView extends javax.swing.JPanel {
     private utilities.palette.TextField txtNgayTao;
     private utilities.palette.TextField txtNgayThanhToan;
     private utilities.palette.TextField txtNhapTien;
+    private utilities.palette.SearchCustom.TextFieldAnimation txtSearch;
     private utilities.palette.TextField txtTienThua;
     private utilities.palette.TextField txtTongTienPhaiTraKhach;
     private utilities.palette.TextField txtTrangThai;

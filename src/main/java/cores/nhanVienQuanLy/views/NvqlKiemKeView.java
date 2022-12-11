@@ -44,8 +44,8 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
     private NvqlLuongKiemKeCtspService ctspService;
     private Page p;
     private NvqlLuongKiemKeCtspCustom ctspct;
-    
-    public void SanPham(NvqlLuongKiemKeCtspCustom ctspct){
+
+    public void SanPham(NvqlLuongKiemKeCtspCustom ctspct) {
         this.ctspct = ctspct;
     }
 
@@ -90,7 +90,7 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
         sizes = listPhieuKiemKeCustom.size();
         loadIndex();
         fillTablePhieuKiemKe(kiemKeService.phanTrang(listPhieuKiemKeCustom, offset, limit));
-          txtSearch.addEvent(new EventTextField() {
+        txtSearch.addEvent(new EventTextField() {
             @Override
             public void onPressed(EventCallBack call) {
                 //  Test
@@ -167,21 +167,18 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
 //            fillTablePhieuKiemKe(listSearch(1));
 //        }
 //    }
-
-    public void TimKiemTheoNgay() {
+    public List<NvqlLuongKiemKeCustom> TimKiemTheoNgay() {
         if (ngayBatDau.getDate() == null) {
 
-            return;
+            return null;
         }
         if (ngayKetThuc.getDate() == null) {
 
-            return;
+            return null;
         }
 
-        if (rdoNgayTao.isSelected()) {
-            listPhieuKiemKeCustom = kiemKeService.getListByNgayTao(ngayBatDau.getDate().getTime(), ngayKetThuc.getDate().getTime());
-            fillTablePhieuKiemKe(listPhieuKiemKeCustom);
-        }
+        return listPhieuKiemKeCustom = kiemKeService.getListByNgayTao(ngayBatDau.getDate().getTime(), ngayKetThuc.getDate().getTime());
+
     }
 
     public void fillTablePhieuKiemKe(List<NvqlLuongKiemKeCustom> list) {
@@ -483,7 +480,8 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
         panelRound9.setRoundTopLeft(50);
         panelRound9.setRoundTopRight(50);
 
-        rdoNgayTao.setBackground(new java.awt.Color(255, 153, 0));
+        rdoNgayTao.setBackground(new java.awt.Color(67, 130, 187));
+        buttonGroup1.add(rdoNgayTao);
         rdoNgayTao.setForeground(new java.awt.Color(255, 255, 255));
         rdoNgayTao.setText("Ngày Tạo");
         rdoNgayTao.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -842,7 +840,7 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
         searchhRadio();
 
     }//GEN-LAST:event_cbbTrangThaiActionPerformed
-       public List<NvqlLuongKiemKeCustom> getListByTT(int rdo) {
+    public List<NvqlLuongKiemKeCustom> getListByTT(int rdo) {
         String timKiem = this.txtSearch.getText();
         listPhieuKiemKeCustom = kiemKeService.findAllByKhAndNV(timKiem, kiemKeService.loc(cbbTrangThai.getSelectedIndex()), rdo);
         return listPhieuKiemKeCustom;
@@ -850,16 +848,20 @@ public class NvqlKiemKeView extends javax.swing.JPanel {
 
     public void searchhRadio() {
         if (rdoMa.isSelected()) {
-            fillTablePhieuKiemKe(getListByTT(0));
-        } 
+            fillTablePhieuKiemKe(kiemKeService.phanTrang(getListByTT(0), offset, limit));
+        }
         if (rdoNhanVien.isSelected()) {
-           fillTablePhieuKiemKe(getListByTT(1));
-        } 
+            fillTablePhieuKiemKe(kiemKeService.phanTrang(getListByTT(1), offset, limit));
+        }
+        if (rdoNgayTao.isSelected()) {
+            fillTablePhieuKiemKe(kiemKeService.phanTrang(TimKiemTheoNgay(), offset, limit));
+
+        }
     }
     private void txtSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSearchMouseClicked
         // TODO add your handling code here:
         searchhRadio();
-        TimKiemTheoNgay();
+
     }//GEN-LAST:event_txtSearchMouseClicked
 
     private void rdoMaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoMaActionPerformed
