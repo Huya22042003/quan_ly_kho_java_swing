@@ -1030,6 +1030,7 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="btnClose" alignment="0" min="-2" pref="97" max="-2" attributes="0"/>
                                   <Component id="btnSave" alignment="0" min="-2" pref="97" max="-2" attributes="0"/>
+                                  <Component id="btnSave1" alignment="0" min="-2" pref="97" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -1053,7 +1054,9 @@
                               <Component id="erroHinhAnh" min="-2" pref="24" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                               <Component id="btnSave" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                              <Component id="btnSave1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                               <Component id="btnClose" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
@@ -1166,7 +1169,7 @@
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="cbbMauSac" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="txtGiaNhap" alignment="0" pref="237" max="32767" attributes="0"/>
+                                      <Component id="txtGiaNhap" alignment="0" pref="251" max="32767" attributes="0"/>
                                       <Component id="erroGiaNhap" alignment="0" max="32767" attributes="0"/>
                                       <Component id="txtSoLuongNhap" alignment="0" pref="251" max="32767" attributes="0"/>
                                       <Component id="erroSoLuongNhap" alignment="0" max="32767" attributes="0"/>
@@ -1347,6 +1350,17 @@
                   <Color blue="33" green="33" red="ff" type="rgb"/>
                 </Property>
               </Properties>
+            </Component>
+            <Component class="utilities.palette.UWPButton" name="btnSave1">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="0" green="99" red="0" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="D&#x1eeb;ng b&#xe1;n"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSave1ActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

@@ -274,6 +274,7 @@ public final class TpQuanLySanPhamForm extends javax.swing.JPanel {
         erroGiaBan = new javax.swing.JLabel();
         uWPButton10 = new utilities.palette.UWPButton();
         erroHinhAnh = new javax.swing.JLabel();
+        btnSave1 = new utilities.palette.UWPButton();
         panelRound2 = new utilities.palette.PanelRound();
         panelRound16 = new utilities.palette.PanelRound();
         btnChon = new utilities.palette.MyButton();
@@ -1017,10 +1018,9 @@ public final class TpQuanLySanPhamForm extends javax.swing.JPanel {
                 .addGroup(panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelRound5Layout.createSequentialGroup()
                         .addGroup(panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(cbbMauSac, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtGiaNhap, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
-                                .addComponent(erroGiaNhap, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(cbbMauSac, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtGiaNhap, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
+                            .addComponent(erroGiaNhap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtSoLuongNhap, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
                             .addComponent(erroSoLuongNhap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1080,6 +1080,14 @@ public final class TpQuanLySanPhamForm extends javax.swing.JPanel {
 
         erroHinhAnh.setForeground(new java.awt.Color(255, 51, 51));
 
+        btnSave1.setBackground(new java.awt.Color(0, 153, 0));
+        btnSave1.setText("Dừng bán");
+        btnSave1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSave1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelRound3Layout = new javax.swing.GroupLayout(panelRound3);
         panelRound3.setLayout(panelRound3Layout);
         panelRound3Layout.setHorizontalGroup(
@@ -1096,7 +1104,8 @@ public final class TpQuanLySanPhamForm extends javax.swing.JPanel {
                         .addGap(72, 72, 72)
                         .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSave1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
@@ -1115,7 +1124,9 @@ public final class TpQuanLySanPhamForm extends javax.swing.JPanel {
                         .addComponent(erroHinhAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(48, 48, 48)
                         .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(58, 58, 58)
+                        .addGap(35, 35, 35)
+                        .addComponent(btnSave1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35)
                         .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelRound3Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
@@ -1781,6 +1792,18 @@ public final class TpQuanLySanPhamForm extends javax.swing.JPanel {
         this.FrameChiTietSanPham.setVisible(true);
     }//GEN-LAST:event_uWPButton10ActionPerformed
 
+    private void btnSave1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSave1ActionPerformed
+        TpQuanLyChiTietSanPhamCustom sp = serviceChiTietSP.phanTrang(listChiTietSP, offset, limit).get(tbChiTietSanPham.getSelectedRow());
+        sp.setTrangThai(2);
+        if (serviceChiTietSP.updateChiTietSanPham(sp)) {
+            JOptionPane.showMessageDialog(this, "Đã dừng bán");
+            FrameChiTietSanPham.setVisible(true);
+            FrameUpdateCtsp.setVisible(false);
+        } else {
+            JOptionPane.showMessageDialog(this, "Lỗi hệ thống");
+        }
+    }//GEN-LAST:event_btnSave1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFrame FormDataCreate;
@@ -1795,6 +1818,7 @@ public final class TpQuanLySanPhamForm extends javax.swing.JPanel {
     private utilities.palette.MyButton btnHienThi;
     private utilities.palette.MyButton btnHienThi1;
     private utilities.palette.UWPButton btnSave;
+    private utilities.palette.UWPButton btnSave1;
     private utilities.palette.MyButton btnSearch;
     private utilities.palette.MyButton btnSearch1;
     private utilities.palette.MyButton btnSearch2;
