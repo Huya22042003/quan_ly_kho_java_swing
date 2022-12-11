@@ -468,7 +468,15 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
             new String [] {
                 "STT", "Mã phiếu", "Ngày tạo", "Ngày thanh toán", "Trạng thái", "Nhân viên", "Khách hàng"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblPhieuXuat.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblPhieuXuatMouseClicked(evt);
@@ -763,7 +771,6 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
         textAreaScroll1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         textAreaScroll1.setLabelText("Ghi chú");
 
-        txtGhiChu.setEditable(false);
         txtGhiChu.setBackground(new java.awt.Color(228, 206, 224));
         txtGhiChu.setColumns(20);
         txtGhiChu.setRows(5);
@@ -1297,6 +1304,7 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
         PhieuXuatCustom pxcs = listPhieuXuat.get(row);
         pxcs.setTrangThai(TrangThaiPhieuConstant.DA_THANH_TOAN);
         pxcs.setNgayThanhToan(DateTimeUtil.convertDateToTimeStampSecond());
+        pxcs.setGhiChu(txtGhiChu.getText());
         phieuXuatService.updatePhieuXuat(pxcs);
         MsgBox.alert(this, "Bạn đã thanh toán thành công");
         listPhieuXuat.set(row, pxcs);
@@ -1309,33 +1317,7 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTienThuaCaretUpdate
 
     private void txtTienKhachDuaCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtTienKhachDuaCaretUpdate
-        String tongTien = txtTienPhaitra.getText();
-        String tongTienNew = tongTien.replace(",", "").replace("VNĐ", "").replace(".", "").replaceAll(" ", "");
-        String tienKhachDua = txtTienKhachDua.getText().replace(",", "");
-        double tienKhach = 0;
-        if (tienKhachDua.trim().length() == 0) {
-            txtTienThua.setText("");
-        }
-        if (tongTien.trim().length() == 0) {
-            txtTienKhachDua.setText("");
-            txtTienThua.setText("");
-        }
-        try {
-            tienKhach = Double.parseDouble(tienKhachDua);
-            if (tienKhach <= 0) {
-                MsgBox.alert(this, "Phải nhập tiền là kiểu số nguyên dương");
-                return;
-            }
-        } catch (NumberFormatException e) {
-//            e.printStackTrace();
-        }
-
-        try {
-            double tienThua = tienKhach - Double.valueOf(tongTienNew);
-            txtTienThua.setText(formatter.format(tienThua));
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-        }
+        
     }//GEN-LAST:event_txtTienKhachDuaCaretUpdate
 
     private void btnChiTietSP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChiTietSP1ActionPerformed
@@ -1383,7 +1365,37 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
     }//GEN-LAST:event_btnNextActionPerformed
 
     private void txtTienKhachDuaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTienKhachDuaKeyReleased
-        // TODO add your handling code here:
+        String tongTien = txtTienPhaitra.getText();
+        String tongTienNew = tongTien.replace(",", "").replace("VNĐ", "").replace(".", "").replaceAll(" ", "");
+        String tienKhachDua = txtTienKhachDua.getText().replace(",", "");
+        double tienKhach = 0;
+        if (tienKhachDua.trim().length() == 0) {
+            txtTienThua.setText("");
+        }
+        if (listPhieuXuat.get(tblPhieuXuat.getSelectedRow()).getTrangThai().equals(TrangThaiPhieuConstant.DA_THANH_TOAN)) {
+            txtTienKhachDua.setText("");
+            txtTienThua.setText("");
+        }
+        if (tongTien.trim().length() == 0) {
+            txtTienKhachDua.setText("");
+            txtTienThua.setText("");
+        }
+        try {
+            tienKhach = Double.parseDouble(tienKhachDua);
+            if (tienKhach <= 0) {
+                MsgBox.alert(this, "Phải nhập tiền là kiểu số nguyên dương");
+                return;
+            }
+        } catch (NumberFormatException e) {
+//            e.printStackTrace();
+        }
+
+        try {
+            double tienThua = tienKhach - Double.valueOf(tongTienNew);
+            txtTienThua.setText(formatter.format(tienThua));
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_txtTienKhachDuaKeyReleased
 
     private void btnShow1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShow1ActionPerformed

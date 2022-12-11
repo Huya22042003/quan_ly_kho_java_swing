@@ -36,7 +36,28 @@ public class TP_KhachHangRepository {
         s.close();
         return list;
     }
-
+    public List<TP_KhachHangCustom> getListKHByTrangThai(){
+        List<TP_KhachHangCustom> list = new ArrayList<>();
+        Session s = HibernateUtil.getSessionFactory().openSession();
+        Query q = s.createQuery("SELECT new cores.truongPhongs.customModels.TP_KhachHangCustom ("
+                + "k.id as id, "
+                + "k.ma as ma, "
+                + "k.ten as ten,"
+                + "k.sdt as sdt,"
+                + "k.email as email,"
+                + "k.matKhau as matKhau,"
+                + "k.ngaySinh as ngaySinh,"
+                + "k.hinhAnh as hinhAnh,"
+                + "k.gioiTinh as gioiTinh,"
+                + "k.diaChi as diaChi,"
+                + "k.danhGia as danhGia,"
+                + "k.trangThai as trangThai"
+                + ") FROM domainModels.KhachHang k WHERE k.trangThai =:trangThai");
+        q.setParameter("trangThai", KhachHangConstant.DANG_LAM_VIEC);
+        list = q.getResultList();
+        s.close();
+        return list;
+    }
     public KhachHang addKH(KhachHang kh) {
         Session s = HibernateUtil.getSessionFactory().openSession();
         try {
