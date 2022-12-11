@@ -147,29 +147,29 @@ public class TpQuanLyNhanVien extends javax.swing.JPanel {
         panelRound3.setRoundTopLeft(50);
         panelRound3.setRoundTopRight(50);
 
-        erroMa.setFont(new java.awt.Font("Constantia", 1, 8)); // NOI18N
+        erroMa.setFont(new java.awt.Font("Constantia", 1, 12)); // NOI18N
 
         txtMa.setLabelText("Mã");
 
         txtTen.setLabelText("Tên");
 
-        erroTen.setFont(new java.awt.Font("Constantia", 1, 8)); // NOI18N
+        erroTen.setFont(new java.awt.Font("Constantia", 1, 12)); // NOI18N
 
         txtEmail.setLabelText("Email");
 
-        erroEmail.setFont(new java.awt.Font("Constantia", 1, 8)); // NOI18N
+        erroEmail.setFont(new java.awt.Font("Constantia", 1, 12)); // NOI18N
 
         txtSDT.setLabelText("SDT");
 
-        erroSDT.setFont(new java.awt.Font("Constantia", 1, 8)); // NOI18N
+        erroSDT.setFont(new java.awt.Font("Constantia", 1, 12)); // NOI18N
 
-        erroMatKhau.setFont(new java.awt.Font("Constantia", 1, 8)); // NOI18N
+        erroMatKhau.setFont(new java.awt.Font("Constantia", 1, 12)); // NOI18N
 
         txtDiaChi.setLabelText("Địa Chỉ");
 
-        erroDiaChi.setFont(new java.awt.Font("Constantia", 1, 8)); // NOI18N
+        erroDiaChi.setFont(new java.awt.Font("Constantia", 1, 12)); // NOI18N
 
-        erroNgaySinh.setFont(new java.awt.Font("Constantia", 1, 8)); // NOI18N
+        erroNgaySinh.setFont(new java.awt.Font("Constantia", 1, 12)); // NOI18N
 
         cbbGioiTinh.setLabeText("Giới Tính");
         cbbGioiTinh.addActionListener(new java.awt.event.ActionListener() {
@@ -380,23 +380,23 @@ public class TpQuanLyNhanVien extends javax.swing.JPanel {
         panelRound13.setRoundTopLeft(50);
         panelRound13.setRoundTopRight(50);
 
-        erroDiaChi2.setFont(new java.awt.Font("Constantia", 1, 8)); // NOI18N
+        erroDiaChi2.setFont(new java.awt.Font("Constantia", 1, 12)); // NOI18N
 
-        erroMatKhau2.setFont(new java.awt.Font("Constantia", 1, 8)); // NOI18N
+        erroMatKhau2.setFont(new java.awt.Font("Constantia", 1, 12)); // NOI18N
 
         txtSDT2.setLabelText("SDT");
 
-        erroEmail2.setFont(new java.awt.Font("Constantia", 1, 8)); // NOI18N
+        erroEmail2.setFont(new java.awt.Font("Constantia", 1, 12)); // NOI18N
 
-        erroSDT2.setFont(new java.awt.Font("Constantia", 1, 8)); // NOI18N
+        erroSDT2.setFont(new java.awt.Font("Constantia", 1, 12)); // NOI18N
 
         txtMa2.setDisabledTextColor(new java.awt.Color(51, 51, 51));
         txtMa2.setEnabled(false);
         txtMa2.setLabelText("Mã");
 
-        erroTen2.setFont(new java.awt.Font("Constantia", 1, 8)); // NOI18N
+        erroTen2.setFont(new java.awt.Font("Constantia", 1, 12)); // NOI18N
 
-        erroMa2.setFont(new java.awt.Font("Constantia", 1, 8)); // NOI18N
+        erroMa2.setFont(new java.awt.Font("Constantia", 1, 12)); // NOI18N
 
         txtTen2.setLabelText("Tên");
 
@@ -404,7 +404,7 @@ public class TpQuanLyNhanVien extends javax.swing.JPanel {
 
         txtDiaChi2.setLabelText("Địa Chỉ");
 
-        erroNgaySinh2.setFont(new java.awt.Font("Constantia", 1, 8)); // NOI18N
+        erroNgaySinh2.setFont(new java.awt.Font("Constantia", 1, 12)); // NOI18N
 
         cbbGioiTinhrud.setLabeText("Giới Tính");
 

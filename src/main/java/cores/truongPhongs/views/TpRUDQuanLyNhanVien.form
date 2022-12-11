@@ -188,14 +188,14 @@
             <Component class="utilities.palette.lable" name="erroDiaChi">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Constantia" size="8" style="1"/>
+                  <Font name="Constantia" size="12" style="1"/>
                 </Property>
               </Properties>
             </Component>
             <Component class="utilities.palette.lable" name="erroMatKhau">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Constantia" size="8" style="1"/>
+                  <Font name="Constantia" size="12" style="1"/>
                 </Property>
               </Properties>
             </Component>
@@ -207,14 +207,14 @@
             <Component class="utilities.palette.lable" name="erroEmail">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Constantia" size="8" style="1"/>
+                  <Font name="Constantia" size="12" style="1"/>
                 </Property>
               </Properties>
             </Component>
             <Component class="utilities.palette.lable" name="erroSDT">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Constantia" size="8" style="1"/>
+                  <Font name="Constantia" size="12" style="1"/>
                 </Property>
               </Properties>
             </Component>
@@ -230,14 +230,14 @@
             <Component class="utilities.palette.lable" name="erroTen">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Constantia" size="8" style="1"/>
+                  <Font name="Constantia" size="12" style="1"/>
                 </Property>
               </Properties>
             </Component>
             <Component class="utilities.palette.lable" name="erroMa">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Constantia" size="8" style="1"/>
+                  <Font name="Constantia" size="12" style="1"/>
                 </Property>
               </Properties>
             </Component>
@@ -261,7 +261,7 @@
             <Component class="utilities.palette.lable" name="erroNgaySinh">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Constantia" size="8" style="1"/>
+                  <Font name="Constantia" size="12" style="1"/>
                 </Property>
               </Properties>
             </Component>
