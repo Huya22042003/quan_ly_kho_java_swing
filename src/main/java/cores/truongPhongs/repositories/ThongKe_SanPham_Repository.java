@@ -26,7 +26,7 @@ public class ThongKe_SanPham_Repository {
                                                                             join chiTietSanPham ctsp on ctsp.idSanPham = sp.id
                                                                             join chitietPhieuXuat ctpx on ctsp.id = ctpx.IdChiTietSP
                                                                             join phieuXuat px  on px.id = ctpx.idphieuXuat
-                                                                            where px.NgayThanhToan  > :giaBatDau AND  px.NgayThanhToan <  :giaKetThuc
+                                                                            where px.NgayThanhToan  >= :giaBatDau AND  px.NgayThanhToan <=  :giaKetThuc
                                                                             group by sp.id, sp.ma, sp.ten,px.NgayThanhToan
                                                                             order by sum(ctpx.soluong) Desc                                         
                                       """, SanPham.class);
@@ -46,7 +46,7 @@ public class ThongKe_SanPham_Repository {
                                                                             join chiTietSanPham ctsp on ctsp.idSanPham = sp.id
                                                                             join ChiTietPhieuNhap ctpn on ctsp.id = ctpn.IdChiTietSP
                                                                             join PhieuNhap pn  on pn.id = ctpn.IdPhieuNhap
-                                                                            where pn.NgayThanhToan  > :giaBatDau AND  pn.NgayThanhToan <  :giaKetThuc
+                                                                            where pn.NgayThanhToan  >= :giaBatDau AND  pn.NgayThanhToan <=  :giaKetThuc
                                                                             group by sp.id, sp.ma, sp.ten,pn.NgayThanhToan
                                                                             order by sum(ctpn.soluong) Desc                                
                                       """, SanPham.class);

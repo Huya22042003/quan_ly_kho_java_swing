@@ -108,7 +108,7 @@ public class TP_PhieuHoanNhapRepository {
                 + " pn.nhanVien as nhanhVien, "
                 + " pn.nhaCungCap as nhaCungCap"
                 + ") FROM domainModels.PhieuNhap pn WHERE pn.ngayThanhToan IS NULL  "
-                + "and pn.ngayTao > :ngayBatDau AND pn.ngayTao < :ngayKetThuc  ORDER BY pn.ngayTao DESC ");
+                + "and pn.ngayTao >= :ngayBatDau AND pn.ngayTao <= :ngayKetThuc  ORDER BY pn.ngayTao DESC ");
         q.setParameter("ngayBatDau", ngayBatDau);
         q.setParameter("ngayKetThuc", ngayKetThuc);
         list = q.getResultList();

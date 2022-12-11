@@ -24,7 +24,7 @@ public class ThongKePhieuXuatRepository {
                 + "join ChiTietSanPham ctsp on ctsp.IdSanPham = sp.Id\n"
                 + "join ChiTietPhieuXuat ctpx on ctsp.Id = ctpx.IdChiTietSP\n"
                 + "join PhieuXuat px on px.Id = ctpx.IdPhieuXuat\n"
-                + "where px.NgayThanhToan > giaBatDau AND px.NgayThanhToan < giaKetThuc\n"
+                + "where px.NgayThanhToan >= giaBatDau AND px.NgayThanhToan <= giaKetThuc\n"
                 + "order by SUM(ctpx.SoLuong * ctsp.GiaBan) DESC");
 
         query.setParameter("giaBatDau", ngayBD);
@@ -42,7 +42,7 @@ public class ThongKePhieuXuatRepository {
                 + "join ChiTietSanPham ctsp on ctsp.IdSanPham = sp.Id\n"
                 + "join ChiTietPhieuNhap ctpn on ctsp.Id = ctpn.IdChiTietSP\n"
                 + "join PhieuNhap pn on pn.Id = ctpn.IdPhieuNhap\n"
-                + "where pn.NgayThanhToan > giaBatDau AND pn.NgayThanhToan < giaKetThuc\n"
+                + "where pn.NgayThanhToan >= giaBatDau AND pn.NgayThanhToan <= giaKetThuc\n"
                 + "order by SUM(ctpn.SoLuong * ctsp.GiaBan) DESC");
 
         query.setParameter("giaBatDau", ngayBD);
