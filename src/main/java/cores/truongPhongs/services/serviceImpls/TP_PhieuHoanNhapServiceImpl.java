@@ -77,7 +77,7 @@ public class TP_PhieuHoanNhapServiceImpl implements TP_PhieuHoanNhapService {
         phn.setId(phnct.getId());
         phn.setLiDo(phnct.getLiDo());
         phn.setNgayTao(phnct.getNgayTao());
-        phn.setNgayThanhToan(phnct.getNgayThanhToan());
+        phn.setNgayThanhToan(DateTimeUtil.convertDateToTimeStampSecond());
         phn.setPhieuNhap(phnct.getPhieuNhap());
         phn.setTrangThai(phnct.getTrangThai());
         rp.updatePhieuHoanNhap(phn);

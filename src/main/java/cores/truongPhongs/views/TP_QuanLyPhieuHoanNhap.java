@@ -731,7 +731,7 @@ public class TP_QuanLyPhieuHoanNhap extends javax.swing.JPanel {
         }
         TP_PhieuHoanNhapCustom phn = this.hoanNhapCustoms.get(row);
         phn.setTrangThai(TrangThaiPhieuHoanConstant.HOAN_THANH_CONG);
-        phn.setNgayThanhToan(DateTimeUtil.convertDateToTimeStampSecond());
+//        phn.setNgayThanhToan(DateTimeUtil.convertDateToTimeStampSecond());
         phieuHoanNhapService.updatePhieuHoanNhap(phn);
         MsgBox.alert(this, "Bạn đã xác nhận thành công !");
     }//GEN-LAST:event_btnXacNhanActionPerformed
