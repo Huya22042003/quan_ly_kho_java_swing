@@ -1,8 +1,5 @@
 package utilities;
 
-import domainModels.ChiTietPhieuHoanNhap;
-import domainModels.ChiTietPhieuHoanXuat;
-import domainModels.ChiTietPhieuKiemKe;
 import domainModels.ChiTietPhieuNhap;
 import domainModels.ChiTietPhieuXuat;
 import domainModels.ChiTietSanPham;
@@ -11,9 +8,6 @@ import domainModels.DonVi;
 import domainModels.KhachHang;
 import domainModels.NhaCungCap;
 import domainModels.NhanVien;
-import domainModels.PhieuHoanNhap;
-import domainModels.PhieuHoanXuat;
-import domainModels.PhieuKiemKe;
 import domainModels.PhieuNhap;
 import domainModels.PhieuXuat;
 import domainModels.SanPham;
@@ -23,8 +17,6 @@ import infrastructures.constant.KhachHangConstant;
 import infrastructures.constant.MauConstant;
 import infrastructures.constant.TrangThaiNhanVienConstant;
 import infrastructures.constant.TrangThaiPhieuConstant;
-import infrastructures.constant.TrangThaiPhieuHoanConstant;
-import infrastructures.constant.TrangThaiPhieuKiemConstant;
 import infrastructures.constant.TrangThaiSanPhamConstanst;
 import java.math.BigDecimal;
 import org.hibernate.Session;

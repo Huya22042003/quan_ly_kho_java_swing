@@ -11,6 +11,7 @@ import cores.truongPhongs.services.serviceImpls.TpQuanLyChiTietSanPhamServiceImp
 import cores.truongPhongs.services.serviceImpls.TpQuanLySanPhamServiceImpl;
 import java.awt.event.MouseListener;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -134,14 +135,14 @@ public final class TpQuanLySanPhamForm extends javax.swing.JPanel {
 
     public void showDataCtsp(List<TpQuanLyChiTietSanPhamCustom> list) {
         dtmCtsp.setRowCount(0);
-
-//            TpQuanLyChiTietSanPhamCustom ct = list.get(i);
+        String pattern = "yyyy-MM-dd HH:mm:ss";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         for (TpQuanLyChiTietSanPhamCustom ct : list) {
             dtmCtsp.addRow(new Object[]{
                 dtmCtsp.getRowCount() + 1,
-                formatter.format(ct.getSoLuongTon()) + "Đôi",
-                ct.getGiaNhap() == null ? "Chưa có" : formatter.format(ct.getGiaNhap()) + "VNĐ",
-                ct.getGiaBan() == null ? "Chưa có" : formatter.format(ct.getGiaBan()) + "VNĐ",
+                formatter.format(ct.getSoLuongTon()) + " Đôi",
+                ct.getGiaNhap() == null ? "Chưa có" : formatter.format(ct.getGiaNhap()) + " VNĐ",
+                ct.getGiaBan() == null ? "Chưa có" : formatter.format(ct.getGiaBan()) + " VNĐ",
                 Converter.trangThaiMauSac(ct.convertMau()),
                 ct.getDoViQuyDoi(),
                 ct.getNamBaoHanh(),
@@ -149,7 +150,7 @@ public final class TpQuanLySanPhamForm extends javax.swing.JPanel {
                 ct.getSize(),
                 ct.getTenNcc(),
                 ct.getMaSpNcc(),
-                new Date(ct.getNgayNhap()).toString()
+                simpleDateFormat.format(ct.getNgayNhap())
             });
         }
     }
@@ -293,7 +294,7 @@ public final class TpQuanLySanPhamForm extends javax.swing.JPanel {
         });
 
         myButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Log out.png"))); // NOI18N
-        myButton7.setToolTipText("Clear");
+        myButton7.setToolTipText("Exit");
         myButton7.setBorderColor(new java.awt.Color(221, 242, 244));
         myButton7.setColor(new java.awt.Color(221, 242, 244));
         myButton7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -353,7 +354,15 @@ public final class TpQuanLySanPhamForm extends javax.swing.JPanel {
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tbChiTietSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbChiTietSanPhamMouseClicked(evt);
@@ -463,6 +472,7 @@ public final class TpQuanLySanPhamForm extends javax.swing.JPanel {
         diaLogSearchCtsp.setSize(new java.awt.Dimension(549, 383));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setPreferredSize(new java.awt.Dimension(549, 400));
 
         txtMaSpNcc.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtMaSpNcc.setLabelText("Mã sản phẩm nhà cung cấp");
@@ -580,7 +590,7 @@ public final class TpQuanLySanPhamForm extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSearch2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout diaLogSearchCtspLayout = new javax.swing.GroupLayout(diaLogSearchCtsp.getContentPane());
@@ -887,7 +897,7 @@ public final class TpQuanLySanPhamForm extends javax.swing.JPanel {
 
         btnThem.setBackground(new java.awt.Color(221, 242, 244));
         btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Addd.png"))); // NOI18N
-        btnThem.setToolTipText("Thêm mới phiếu nhập");
+        btnThem.setToolTipText("Thêm mới sản phẩm");
         btnThem.setBorderColor(new java.awt.Color(221, 242, 244));
         btnThem.setColor(new java.awt.Color(221, 242, 244));
         btnThem.setRadius(50);
@@ -953,7 +963,15 @@ public final class TpQuanLySanPhamForm extends javax.swing.JPanel {
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tbSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbSanPhamMouseClicked(evt);
@@ -968,7 +986,7 @@ public final class TpQuanLySanPhamForm extends javax.swing.JPanel {
         panelRound4.setRoundTopRight(50);
 
         btnSearch1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/file.png"))); // NOI18N
-        btnSearch1.setToolTipText("Tìm phiếu nhập");
+        btnSearch1.setToolTipText("Tìm theo mã hoặc tên");
         btnSearch1.setBorderColor(new java.awt.Color(221, 242, 244));
         btnSearch1.setColor(new java.awt.Color(221, 242, 244));
         btnSearch1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N

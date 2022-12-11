@@ -5,6 +5,7 @@ import cores.truongPhongs.customModels.TpNhanVienCustom;
 import cores.truongPhongs.services.TpQuanLyNhanVienSevice;
 import cores.truongPhongs.services.serviceImpls.TpQuanLyNhanVienServiceImpl;
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -908,12 +909,9 @@ public class TpQuanLyNhanVien extends javax.swing.JPanel {
 
             nvc.setNgaySinh(txtDate.getDate().getTime());
         } catch (Exception e) {
-//lại
             e.printStackTrace();
             nvc.setNgaySinh(null);
-//            nvc.setNgaySinh(DateTimeUtil.convertDateToTimeStampSecond());
         }
-//      nvc.setNgaySinh(txtDate.getDate().getTime());
         nvc.setTrangThai(nhanVienSevice.loc(this.cbbTrangThai1.getSelectedIndex()));
         nvc.setGioiTinh(nhanVienSevice.loc1(this.cbbGioiTinh.getSelectedIndex()));
         nvc.setIdChucVu(nhanVienSevice.findIDCV(nhanVienSevice.getListCV().get(cbbChucVu.getSelectedIndex()).getId()));
@@ -968,6 +966,8 @@ public class TpQuanLyNhanVien extends javax.swing.JPanel {
     public void loadTable(List<TpNhanVienCustom> list) {
         DefaultTableModel dtm = (DefaultTableModel) this.tblQLNV.getModel();
         dtm.setRowCount(0);
+        String pattern = "yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         for (TpNhanVienCustom nv : list) {
             Object[] rowData = {
                 dtm.getRowCount() + 1,
@@ -975,10 +975,7 @@ public class TpQuanLyNhanVien extends javax.swing.JPanel {
                 nv.getMa(),
                 nv.getSdt(),
                 nv.getEmail(),
-                //                nv.getMatKhau(),
-                nv.getNgaySinh() == null ? "" : new Date(nv.getNgaySinh()),
-                //                nv.getHinhAnh(),
-                //                Converter.trangThaiGioiTinh(nv.getGioiTinh()),
+                simpleDateFormat.format(nv.getNgaySinh()),
                 nv.getDiaChi(),
                 Converter.trangThaiNhanVien(nv.getTrangThai())
             };
@@ -993,7 +990,6 @@ public class TpQuanLyNhanVien extends javax.swing.JPanel {
         nvc.setSdt(txtSDT.getText());
         nvc.setEmail(txtEmail.getText());
         nvc.setMatKhau(txtMatKhau.getText());
-//        nvc.setNgaySinh(txtDate.getDate().getTime());
         try {
             nvc.setNgaySinh(txtDate.getDate().getTime());
         } catch (Exception e) {
@@ -1037,20 +1033,16 @@ public class TpQuanLyNhanVien extends javax.swing.JPanel {
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnHienThiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHienThiActionPerformed
-//        getList = nhanVienSevice.getListNhanVien();
         clearForm();
         loadTable(nhanVienSevice.phanTrang(getList, offset, limit));
 
     }//GEN-LAST:event_btnHienThiActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-
         searchRadio();
-
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void uWPButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uWPButton4ActionPerformed
-//        getList = nhanVienSevice.getListNhanVien();
         index = p.prevIndex(offset, limit, index);
         offset = p.prev(offset, limit);
         loadIndex();
@@ -1058,7 +1050,6 @@ public class TpQuanLyNhanVien extends javax.swing.JPanel {
     }//GEN-LAST:event_uWPButton4ActionPerformed
 
     private void uWPButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uWPButton5ActionPerformed
-//        getList = nhanVienSevice.getListNhanVien();
         index = p.nextIndex(offset, limit, sizes, index);
         offset = p.next(offset, limit, sizes);
         loadIndex();

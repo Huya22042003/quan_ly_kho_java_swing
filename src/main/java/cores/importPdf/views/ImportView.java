@@ -173,7 +173,7 @@ public class ImportView extends javax.swing.JFrame {
         });
 
         myButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Exit.png"))); // NOI18N
-        myButton7.setToolTipText("Clear");
+        myButton7.setToolTipText("Exit");
         myButton7.setBorderColor(new java.awt.Color(221, 242, 244));
         myButton7.setColor(new java.awt.Color(221, 242, 244));
         myButton7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N

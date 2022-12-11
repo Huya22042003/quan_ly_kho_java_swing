@@ -18,7 +18,6 @@ import cores.nhanVienQuanLy.services.NVQLQuanLyPhieuXuatService;
 import cores.nhanVienQuanLy.services.Tai_NvqlLuongPhieuXuatService;
 import cores.nhanVienQuanLy.services.serviceImpls.NVQLQuanLyPhieuXuatServiceImpl;
 import cores.nhanVienQuanLy.services.serviceImpls.Tai_NvqlLuongPhieuXuatServiceImpl;
-import cores.webCam.customModels.ChiTietSanPhamCustom;
 import cores.webCam.serivces.ChiTietSanPhamService;
 import cores.webCam.serivces.serviceImpl.ChiTietSanPhamServiceImpl;
 import domainModels.PhieuXuat;
@@ -64,7 +63,9 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
     List<Luong_ChiTietPhieuXuatCustom> listCTPX;
     private ConcurrentHashMap<UUID, domainModels.ChiTietSanPham> map;
     private DecimalFormat formatter = new DecimalFormat("###,###,##0 VNĐ");
-
+    String pattern = "yyyy-MM-dd HH:mm:ss";
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+    
     private WebcamPanel jpanl = null;
     private Webcam webcam1;
     private Thread capture;
@@ -100,8 +101,7 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
     private void loadTablePhieuXuat(List<PhieuXuatCustom> listPX) {
         DefaultTableModel dtm = (DefaultTableModel) this.tblPhieuXuat.getModel();
         dtm.setRowCount(0);
-        String pattern = "yyyy-MM-dd HH:mm:ss";
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+
         for (PhieuXuatCustom el : listPX) {
             Date ngayNhan = new Date(el.getNgayTao());
             Object[] rowData = {
@@ -672,7 +672,7 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
             }
         });
 
-        btnQuetMa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/bill.png"))); // NOI18N
+        btnQuetMa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Camera.png"))); // NOI18N
         btnQuetMa.setToolTipText("Quét sản phẩm");
         btnQuetMa.setBorderColor(new java.awt.Color(221, 242, 244));
         btnQuetMa.setColor(new java.awt.Color(221, 242, 244));
@@ -1081,7 +1081,7 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
             return;
         }
         if (listPhieuXuat.get(row).getTrangThai() != TrangThaiPhieuConstant.CHO_THANH_TOAN) {
-            JOptionPane.showMessageDialog(this, "Phiếu không thể mở máy quét khi ở trạng thái khác chờ thanh toán");
+            JOptionPane.showMessageDialog(this, "Phiếu không thể mở máy quét khi ở trạng thái khác đã thanh toán");
             return;
         }
 
@@ -1143,9 +1143,9 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
                             txtTenSpQuet.setText(sanPhamQuet.getSanPham().getTen());
                             txtMauQuet.setText(Converter.trangThaiMauSac(sanPhamQuet.getMau()));
                             txtSizeQuet.setText(String.valueOf(sanPhamQuet.getSize()));
-                            txtNgayNhapQuet.setText(new Date(sanPhamQuet.getNgayTao()).toString());
+                            txtNgayNhapQuet.setText(simpleDateFormat.format(sanPhamQuet.getNgayTao()));
                             txtSoLuongQuet.setText(String.valueOf(sanPhamQuet.getSoLuongTon()));
-                            txtGiaBanQuet.setText(String.valueOf(sanPhamQuet.getGiaBan()));
+                            txtGiaBanQuet.setText(formatter.format(sanPhamQuet.getGiaBan()));
                             if (sanPhamQuet.getTrangThai() == TrangThaiSanPhamConstanst.DA_MO_BAN) {
                                 btnThemVaoCTPX.setEnabled(true);
                                 txtSoLuongMuaQuet.setEditable(true);
