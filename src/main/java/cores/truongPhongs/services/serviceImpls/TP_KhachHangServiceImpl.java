@@ -76,10 +76,10 @@ public class TP_KhachHangServiceImpl implements TP_KhachHangService {
         return rp.updateKH(kh);
     }
 
-    @Override
-    public boolean deleteKH(UUID id) {
-        return rp.deleteKH(id);
-    }
+//    @Override
+//    public boolean deleteKH(UUID id) {
+//        return rp.deleteKH(id);
+//    }
 
     @Override
     public void loadCbbTT(Combobox cbb) {
@@ -344,5 +344,14 @@ public class TP_KhachHangServiceImpl implements TP_KhachHangService {
         return kh;
 
     }
+//
+//    @Override
+//    public boolean deleteKH(TP_KhachHangCustom custom) {
+//        KhachHang kh = new KhachHang();     
+//        kh.setTrangThai(custom.getTrangThai());
+//        kh.setId(custom.getId());
+////        map.put(kh.getMa(), kh.getEmail());
+//        return rp.deleteKH(kh);
+//    }
 
 }
