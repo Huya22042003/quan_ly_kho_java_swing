@@ -109,7 +109,7 @@ public class TpXemChiTietSanPhamRepository {
                 + "ct.trangThai as trangThai,"
                 + "ct.soLuongTon as soLuongTon,"
                 + "ct.ngayTao as ngayTao"
-                + ") from domainModels.ChiTietSanPham ct WHERE ct.GiaNhap > :giaBatDau AND ct.GiaNhap < :giaKetThuc  ORDER BY ct.GiaNhap DESC");
+                + ") from domainModels.ChiTietSanPham ct WHERE ct.GiaNhap >= :giaBatDau AND ct.GiaNhap <= :giaKetThuc  ORDER BY ct.GiaNhap DESC");
         query.setParameter("giaBatDau", giaBatDau);
         query.setParameter("giaKetThuc", giaKetThuc);
         List<TpXemChiTietSanPhamCustom> list = query.getResultList();

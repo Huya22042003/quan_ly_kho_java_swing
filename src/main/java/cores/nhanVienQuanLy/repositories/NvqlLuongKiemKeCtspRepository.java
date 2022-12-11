@@ -129,7 +129,7 @@ public class NvqlLuongKiemKeCtspRepository {
                 + " m.size as size, "
                 + " m.ngayTao as ngayTao) "
                 + " from domainModels.ChiTietSanPham m "
-                + " WHERE  m.GiaBan > :giaBatDau AND m.GiaBan < :giaKetThuc "
+                + " WHERE  m.GiaBan >= :giaBatDau AND m.GiaBan <= :giaKetThuc "
                 + " order by m.soLuongTon DESC" );
             query.setParameter("giaBatDau", giaBatDau);
         query.setParameter("giaKetThuc", giaKetThuc);
