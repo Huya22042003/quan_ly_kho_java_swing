@@ -3,6 +3,7 @@ package cores.truongPhongs.views;
 import cores.truongPhongs.customModels.TP_KhachHangCustom;
 import cores.truongPhongs.services.TP_KhachHangService;
 import cores.truongPhongs.services.serviceImpls.TP_KhachHangServiceImpl;
+import infrastructures.constant.KhachHangConstant;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.File;
@@ -18,21 +19,21 @@ import utilities.MsgBox;
 import utilities.Page;
 
 public class TP_KhachHangForm extends javax.swing.JPanel {
-    
+
     private TP_KhachHangService hangService;
     private List<TP_KhachHangCustom> getList;
     String duongdananh = getClass().getResource("/icons/FPT_Polytechnic_doc.png").getPath();
-    
+
     private Page p;
-    
+
     private int limit = 5;
-    
+
     private int offset = 0;
-    
+
     private int sizes = 0;
-    
+
     private int index = 1;
-    
+
     public TP_KhachHangForm() {
         hangService = new TP_KhachHangServiceImpl();
         getList = new ArrayList<>();
@@ -44,18 +45,18 @@ public class TP_KhachHangForm extends javax.swing.JPanel {
         hangService.loadCbbTT(cbbTrangThaiRud);
         hangService.loadCbbDG(cbbDanhGiaRud);
         hangService.loadCbbGT(cbbGioiTinhRud);
-        
+
         getList = hangService.getListKH();
         sizes = getList.size();
         loadTable(hangService.phanTrang(getList, offset, limit));
         hangService.loadCbbTT(cbbTrangThai);
-        
+
         clearForm();
-        
+
         Toolkit toolkit = getToolkit();
         Dimension size = toolkit.getScreenSize();
         setLocation(size.width / 2 - getWidth() / 2, size.height / 2 - getHeight() / 2);
-        
+
     }
 
     public void clearForm() {
@@ -65,25 +66,25 @@ public class TP_KhachHangForm extends javax.swing.JPanel {
         index = 1;
         loadIndex();
     }
-    
+
     public List<TP_KhachHangCustom> listSearch(int rdo) {
         String timKiem = this.txtSearchTheo.getText();
         getList = hangService.findAllByRadio(timKiem, hangService.loc(cbbTrangThai.getSelectedIndex()), rdo);
         return getList;
     }
-    
+
     public void searchRadio() {
         if (rdoTen.isSelected()) {
             loadTable(hangService.phanTrang(listSearch(0), offset, limit));
         } else if (rdoSDT.isSelected()) {
             loadTable(hangService.phanTrang(listSearch(1), offset, limit));
-            
+
         } else {
             loadTable(hangService.phanTrang(listSearch(2), offset, limit));
-            
+
         }
     }
-    
+
     public void loadTable(List<TP_KhachHangCustom> list) {
         DefaultTableModel dtm = (DefaultTableModel) this.tableAll.getModel();
         dtm.setRowCount(0);
@@ -104,7 +105,7 @@ public class TP_KhachHangForm extends javax.swing.JPanel {
             dtm.addRow(rowData);
         }
     }
-    
+
     public TP_KhachHangCustom getFormDataCreate() {
         TP_KhachHangCustom csc = new TP_KhachHangCustom();
         csc.setMa(txtMaCre.getText());
@@ -114,7 +115,7 @@ public class TP_KhachHangForm extends javax.swing.JPanel {
         csc.setDiaChi(txtDiaChiCre.getText());
         csc.setHinhAnh(duongdananh);
         csc.setMatKhau(txtMatKhauCre.getText());
-        
+
         try {
             csc.setNgaySinh(txtDateCre.getDate().getTime());
         } catch (Exception e) {
@@ -126,7 +127,7 @@ public class TP_KhachHangForm extends javax.swing.JPanel {
         csc.setGioiTinh(hangService.loc2(this.cbbGioiTinhCre.getSelectedIndex()));
         return csc;
     }
-    
+
     public TP_KhachHangCustom getFormDataRud() {
         TP_KhachHangCustom csc = new TP_KhachHangCustom();
         csc.setMa(txtMaRud.getText());
@@ -147,7 +148,7 @@ public class TP_KhachHangForm extends javax.swing.JPanel {
         csc.setGioiTinh(hangService.loc2(this.cbbGioiTinhRud.getSelectedIndex()));
         return csc;
     }
-    
+
     public void showData() {
         int row = this.tableAll.getSelectedRow();
         if (row == -1) {
@@ -165,7 +166,7 @@ public class TP_KhachHangForm extends javax.swing.JPanel {
         this.cbbDanhGiaRud.setSelectedItem(Converter.trangThaiDanhGia(getList.get(row).getDanhGia()));
         this.cbbGioiTinhRud.setSelectedItem(Converter.trangThaiGioiTinh(getList.get(row).getGioiTinh()));
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -1078,7 +1079,7 @@ public class TP_KhachHangForm extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCloseCreActionPerformed
 
     private void btnThemCreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemCreActionPerformed
-        
+
         TP_KhachHangCustom check = hangService.checkValidateCreate(getFormDataCreate(), erroMa, erroTen, erroSDT, erroEmail, erroDiaChi, erroMatKhau, erroNgaySinh);
         if (check == null) {
             return;
@@ -1100,10 +1101,10 @@ public class TP_KhachHangForm extends javax.swing.JPanel {
             f.showOpenDialog(null);
             File ftenanh = f.getSelectedFile();
             duongdananh = ftenanh.getAbsolutePath();
-            
+
             lbHinhAnhcre.setIcon(new javax.swing.ImageIcon(duongdananh));
             System.out.println(duongdananh);
-            
+
         } catch (Exception e) {
             System.out.println("Ban chua chon anh");
             System.out.println(duongdananh);
@@ -1123,7 +1124,7 @@ public class TP_KhachHangForm extends javax.swing.JPanel {
             duongdananh = ftenanh.getAbsolutePath();
             lbHinhAnhRud.setIcon(new javax.swing.ImageIcon(duongdananh));
             System.out.println(duongdananh);
-            
+
         } catch (Exception e) {
             System.out.println("Ban chua chon anh");
             System.out.println(duongdananh);
@@ -1131,19 +1132,18 @@ public class TP_KhachHangForm extends javax.swing.JPanel {
     }//GEN-LAST:event_btnChonAnhRudActionPerformed
 
     private void btnUpdateRudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateRudActionPerformed
-       
-        
+
         TP_KhachHangCustom check = hangService.checkValidateUpdate(getFormDataRud(), erroMa1, erroTen1, erroSDT1, erroEmail1, erroDiaChi1, erroMatKhau1, erroNgaySinh1);
         if (check == null) {
             return;
         }
-         int row = this.tableAll.getSelectedRow();
-        
+        int row = this.tableAll.getSelectedRow();
+
         if (row == -1) {
 //            JOptionPane.showMessageDialog(this, "Bạn phải chọn một dòng");
             return;
         }
-        
+
         TP_KhachHangCustom nv = new TP_KhachHangCustom(getList.get(row).getId(), check.getMa(), check.getTen(),
                 check.getSdt(), check.getEmail(), check.getMatKhau(), check.getNgaySinh(),
                 check.getHinhAnh(), check.getGioiTinh(), check.getDiaChi(), check.getDanhGia(), check.getTrangThai());
@@ -1157,13 +1157,20 @@ public class TP_KhachHangForm extends javax.swing.JPanel {
     }//GEN-LAST:event_btnUpdateRudActionPerformed
 
     private void btnDeleteRudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteRudActionPerformed
-        if (hangService.deleteKH(getList.get(this.tableAll.getSelectedRow()).getId())) {
-            MsgBox.alert(this, "Xóa Thành Công");
-            Rud.setVisible(false);
-        } else {
-            MsgBox.alert(this, "Xóa Thất Bại");
-            Rud.setVisible(true);
+        int row = this.tableAll.getSelectedRow();
+        if (row == -1) {
+            return;
         }
+        TP_KhachHangCustom kh = getList.get(row);
+        kh.setTrangThai(KhachHangConstant.DA_NGUNG_CUNG_CAP);
+        
+        hangService.updateKH(kh);
+        MsgBox.alert(this, "Xóa Thành Công");
+        getList.set(row, kh);
+        loadTable(getList);
+        clearForm();
+
+
     }//GEN-LAST:event_btnDeleteRudActionPerformed
 
     private void btnCloseRudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseRudActionPerformed
@@ -1173,7 +1180,7 @@ public class TP_KhachHangForm extends javax.swing.JPanel {
     private void btnXRudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXRudActionPerformed
         Rud.setVisible(false);
     }//GEN-LAST:event_btnXRudActionPerformed
-    
+
     private void loadIndex() {
         this.txtIndex.setText(String.valueOf(index) + " / " + (Math.round((sizes / limit) + 0.5)));
     }

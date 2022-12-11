@@ -10,7 +10,9 @@ import domainModels.SanPham;
 import infrastructures.constant.TrangThaiSanPhamConstanst;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 import javax.persistence.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -69,7 +71,7 @@ public class ImportRepository {
             s.save(ctsp);
 
             PhieuNhap pn = s.find(PhieuNhap.class, sp.getIdPhieuNhap());
-            
+
             ChiTietPhieuNhap ctpn = new ChiTietPhieuNhap(pn, ctsp, sp.getSoLuongTon(), sp.getMaSpNcc());
             s.save(ctpn);
             tran.commit();

@@ -67,12 +67,30 @@ public class TP_KhachHangRepository {
         return true;
     }
 
-    public boolean deleteKH(UUID id) {
+//    public boolean deleteKH(UUID id) {
+//        Transaction tran = null;
+//        try ( Session s = HibernateUtil.getSessionFactory().openSession()) {
+//            tran = s.beginTransaction();
+//            KhachHang kh = s.find(KhachHang.class, id);
+//            s.delete(kh);
+//            tran.commit();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            tran.rollback();
+//            return false;
+//        }
+//        return true;
+//    }
+    public boolean deleteKH(KhachHang kh) {
         Transaction tran = null;
         try ( Session s = HibernateUtil.getSessionFactory().openSession()) {
             tran = s.beginTransaction();
-            KhachHang kh = s.find(KhachHang.class, id);
-            s.delete(kh);
+            Query q = s.createNativeQuery("""
+                                          UPDATE KhachHang 
+                                          SET TrangThai = :TrangThai
+                                          WHERE Id = :id
+                                          """).setParameter("TrangThai", kh.getTrangThai()).setParameter("id", kh.getId().toString());
+            q.executeUpdate();
             tran.commit();
         } catch (Exception e) {
             e.printStackTrace();
