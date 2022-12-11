@@ -17,8 +17,9 @@ public interface TP_KhachHangService {
 
     boolean updateKH(TP_KhachHangCustom custom);
 
-    boolean deleteKH(UUID id);
+//    boolean deleteKH(UUID id);
 
+//    boolean deleteKH(TP_KhachHangCustom custom);
     void loadCbbTT(Combobox cbb);
 
     void loadCbbGT(Combobox cbb);

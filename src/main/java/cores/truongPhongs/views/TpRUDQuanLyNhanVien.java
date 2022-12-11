@@ -91,23 +91,23 @@ String duongdananh = getClass().getResource("/icons/FPT_Polytechnic_doc.png").ge
         panelRound2.setRoundTopLeft(50);
         panelRound2.setRoundTopRight(50);
 
-        erroDiaChi.setFont(new java.awt.Font("Constantia", 1, 8)); // NOI18N
+        erroDiaChi.setFont(new java.awt.Font("Constantia", 1, 12)); // NOI18N
 
-        erroMatKhau.setFont(new java.awt.Font("Constantia", 1, 8)); // NOI18N
+        erroMatKhau.setFont(new java.awt.Font("Constantia", 1, 12)); // NOI18N
 
         txtSDT.setLabelText("SDT");
 
-        erroEmail.setFont(new java.awt.Font("Constantia", 1, 8)); // NOI18N
+        erroEmail.setFont(new java.awt.Font("Constantia", 1, 12)); // NOI18N
 
-        erroSDT.setFont(new java.awt.Font("Constantia", 1, 8)); // NOI18N
+        erroSDT.setFont(new java.awt.Font("Constantia", 1, 12)); // NOI18N
 
         txtMa.setDisabledTextColor(new java.awt.Color(51, 51, 51));
         txtMa.setEnabled(false);
         txtMa.setLabelText("Mã");
 
-        erroTen.setFont(new java.awt.Font("Constantia", 1, 8)); // NOI18N
+        erroTen.setFont(new java.awt.Font("Constantia", 1, 12)); // NOI18N
 
-        erroMa.setFont(new java.awt.Font("Constantia", 1, 8)); // NOI18N
+        erroMa.setFont(new java.awt.Font("Constantia", 1, 12)); // NOI18N
 
         txtTen.setLabelText("Tên");
 
@@ -115,7 +115,7 @@ String duongdananh = getClass().getResource("/icons/FPT_Polytechnic_doc.png").ge
 
         txtDiaChi.setLabelText("Địa Chỉ");
 
-        erroNgaySinh.setFont(new java.awt.Font("Constantia", 1, 8)); // NOI18N
+        erroNgaySinh.setFont(new java.awt.Font("Constantia", 1, 12)); // NOI18N
 
         cbbGioiTinhrud.setLabeText("Giới Tính");
 
