@@ -22,6 +22,10 @@ public interface TpQuanLyChiTietSanPhamService {
 
     public List<TpQuanLyChiTietSanPhamCustom> getAll(UUID idSp, String maNcc, String tenNcc,String maSpNcc,String emailNcc,String sdtNcc);
 
+    List<DonVi> getCbbDonVi();
+    
+    boolean updateChiTietSanPham(TpQuanLyChiTietSanPhamCustom sp);
+    
     TpQuanLyChiTietSanPhamCustom addCTSanPham(TpQuanLyChiTietSanPhamCustom custom);
 
     boolean updateCTSanPham(TpQuanLyChiTietSanPhamCustom custom);

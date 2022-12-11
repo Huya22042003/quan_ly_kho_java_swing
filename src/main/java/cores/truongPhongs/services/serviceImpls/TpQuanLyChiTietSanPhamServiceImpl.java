@@ -291,4 +291,14 @@ public class TpQuanLyChiTietSanPhamServiceImpl implements TpQuanLyChiTietSanPham
         }
     }
 
+    @Override
+    public List<DonVi> getCbbDonVi() {
+        return rp.getCbbDonVi();
+    }
+
+    @Override
+    public boolean updateChiTietSanPham(TpQuanLyChiTietSanPhamCustom sp) {
+        return rp.updateChiTietSanPham(sp);
+    }
+
 }
