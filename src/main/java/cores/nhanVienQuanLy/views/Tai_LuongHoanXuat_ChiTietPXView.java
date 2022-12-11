@@ -39,11 +39,22 @@ public class Tai_LuongHoanXuat_ChiTietPXView extends javax.swing.JFrame {
 
     public Tai_LuongHoanXuat_ChiTietPXView() {
         initComponents();
+        this.setLocationRelativeTo(null);
         luongHoanXuatService = new Tai_LuongHoanXuatServiceImpl();
         luongService = new Tai_NvqlLuongPhieuXuatServiceImpl();
         listCTPHX = luongHoanXuatService.getListCTphx();
         listCTPX = new ArrayList<>();
         loadTable(listCTPX);
+        clearForm();
+    }
+
+    public void clearForm() {
+        txtGiaBan.setText("");
+        txtLyDo.setText("");
+        txtMau.setText("");
+        txtNamBH.setText("");
+        txtSoLuongHoan.setText("");
+        txtTenSp.setText("");
     }
 
     public void loadTable(List<Luong_ChiTietPhieuXuatCustom> list) {
@@ -99,6 +110,7 @@ public class Tai_LuongHoanXuat_ChiTietPXView extends javax.swing.JFrame {
         btnAnh = new utilities.palette.UWPButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel2.setBackground(new java.awt.Color(204, 255, 255));
 
@@ -213,7 +225,7 @@ public class Tai_LuongHoanXuat_ChiTietPXView extends javax.swing.JFrame {
         panelRound16.setRoundTopRight(50);
 
         myButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Log out.png"))); // NOI18N
-        myButton12.setToolTipText("Phiếu nhập chi tiết");
+        myButton12.setToolTipText("Thoát");
         myButton12.setBorderColor(new java.awt.Color(221, 242, 244));
         myButton12.setColor(new java.awt.Color(221, 242, 244));
         myButton12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -226,7 +238,7 @@ public class Tai_LuongHoanXuat_ChiTietPXView extends javax.swing.JFrame {
 
         myButton6.setBackground(new java.awt.Color(221, 242, 244));
         myButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Addd.png"))); // NOI18N
-        myButton6.setToolTipText("Thêm mới phiếu nhập");
+        myButton6.setToolTipText("Thêm mới phiếu nhập chi tiết");
         myButton6.setBorderColor(new java.awt.Color(221, 242, 244));
         myButton6.setColor(new java.awt.Color(221, 242, 244));
         myButton6.setRadius(50);
@@ -342,7 +354,7 @@ public class Tai_LuongHoanXuat_ChiTietPXView extends javax.swing.JFrame {
         });
 
         btnShow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Show.png"))); // NOI18N
-        btnShow.setToolTipText("Hiện thị danh sách sản phẩm hoàn");
+        btnShow.setToolTipText("Hiện thị danh sách sản phẩm đã mua");
         btnShow.setBorderColor(new java.awt.Color(221, 242, 244));
         btnShow.setColor(new java.awt.Color(221, 242, 244));
         btnShow.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -428,9 +440,7 @@ public class Tai_LuongHoanXuat_ChiTietPXView extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(panelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(panelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -568,6 +578,8 @@ public class Tai_LuongHoanXuat_ChiTietPXView extends javax.swing.JFrame {
 
     private void myButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton12ActionPerformed
         this.setVisible(false);
+        DefaultTableModel dtm = (DefaultTableModel) this.tblCTPhieuXuat.getModel();
+        dtm.setRowCount(0);
     }//GEN-LAST:event_myButton12ActionPerformed
 
     private void myButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton6ActionPerformed
@@ -671,7 +683,7 @@ public class Tai_LuongHoanXuat_ChiTietPXView extends javax.swing.JFrame {
         } else {
             btnAnh.setIcon(new ImageIcon(ctPhieuXuat.getIdChiTietSp().getHinhAnh()));
         }
-
+        clearForm();
     }//GEN-LAST:event_myButton6ActionPerformed
 
     /**

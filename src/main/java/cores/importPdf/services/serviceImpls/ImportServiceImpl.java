@@ -17,14 +17,11 @@ import domainModels.DonVi;
 import domainModels.SanPham;
 import infrastructures.constant.MauConstant;
 import infrastructures.constant.TrangThaiSanPhamConstanst;
-import java.util.ArrayDeque;
-import java.util.Iterator;
-import java.util.LinkedList;
+import java.text.Normalizer;
 import java.util.Map;
-import java.util.PriorityQueue;
-import java.util.Queue;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.regex.Pattern;
 import utilities.DateTimeUtil;
 import utilities.MaTuSinh;
 
@@ -34,9 +31,9 @@ import utilities.MaTuSinh;
  */
 public class ImportServiceImpl implements ImportService {
 
-    private ImportRepository rp;
+    private static ImportRepository rp;
 
-    private ConcurrentHashMap<String, DonVi> mapDonVi;
+    private ConcurrentHashMap<Integer, DonVi> mapDonVi;
 
     private ConcurrentHashMap<String, SanPham> mapSanPham;
 
@@ -103,7 +100,7 @@ public class ImportServiceImpl implements ImportService {
         mapSanPham = new ConcurrentHashMap<>();
 
         for (DonVi el : rp.findDonViByDonViQuyDoi()) {
-            mapDonVi.put(el.getDonViQuyDoi(), el);
+            mapDonVi.put(el.getSoLuong(), el);
         }
 
         for (SanPham el : rp.findSanPhamByTenSanPham()) {
@@ -133,11 +130,26 @@ public class ImportServiceImpl implements ImportService {
         }
     }
 
+    public static void main(String[] args) {
+        rp = new ImportRepository();
+        ConcurrentHashMap<Integer, DonVi> mapDonVi = new ConcurrentHashMap<>();
+        for (DonVi el : rp.findDonViByDonViQuyDoi()) {
+            mapDonVi.put(el.getSoLuong(), el);
+        }
+        System.out.println(mapDonVi.get(1));
+        for (Map.Entry<Integer, DonVi> entry : mapDonVi.entrySet()) {
+            int key = entry.getKey();
+            System.out.println(key);
+//            System.out.println(ten);
+//            System.out.println(key.equalsIgnoreCase("Đôi"));
+        }
+    }
+
     @Override
     public MessAlert importData(List<SanPhamCustom> listPdf, UUID idPhieuNhap) {
-        loadMap();
         MessAlert alert = new MessAlert();
-        ConcurrentHashMap<String,ChiTietSanPhamCustom> que = new ConcurrentHashMap<>();
+        loadMap();
+        ConcurrentHashMap<String, ChiTietSanPhamCustom> que = new ConcurrentHashMap<>();
         try {
             listPdf.parallelStream().forEach(el -> {
                 if (!mapSanPham.containsKey(el.getTen())) {
@@ -147,12 +159,12 @@ public class ImportServiceImpl implements ImportService {
                     mapSanPham.put(sp.getTen(), sp);
                 }
 
-                if (!mapDonVi.containsKey(el.getDonVi())) {
+                if (!mapDonVi.containsKey(1)) {
                     DonVi dv = new DonVi();
-                    dv.setSoLuong(100);
+                    dv.setSoLuong(1);
                     dv.setDonViGoc("Đôi");
                     dv.setDonViQuyDoi(el.getDonVi());
-                    mapDonVi.put(dv.getDonViQuyDoi(), dv);
+                    mapDonVi.put(dv.getSoLuong(), dv);
                 }
 
                 ChiTietSanPhamCustom ctsp = new ChiTietSanPhamCustom();
@@ -162,7 +174,7 @@ public class ImportServiceImpl implements ImportService {
                 ctsp.setNgayTao(DateTimeUtil.convertDateToTimeStampSecond());
                 ctsp.setSanPham(mapSanPham.get(el.getTen()));
                 ctsp.setGiaNhap(el.getGiaNhap());
-                ctsp.setDonVi(mapDonVi.get(el.getDonVi()));
+                ctsp.setDonVi(mapDonVi.get(1));
                 ctsp.setTrangThai(TrangThaiSanPhamConstanst.CHO_XAC_NHAN);
                 ctsp.setMaSpNcc(el.getMa());
                 ctsp.setIdPhieuNhap(idPhieuNhap);
