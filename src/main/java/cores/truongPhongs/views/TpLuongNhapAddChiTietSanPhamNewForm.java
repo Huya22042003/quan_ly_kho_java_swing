@@ -66,6 +66,7 @@ public class TpLuongNhapAddChiTietSanPhamNewForm extends javax.swing.JFrame {
     }
 
     public void loadCbb() {
+        cbbMauSac.removeAllItems();
         cbbDonVi.removeAllItems();
         cbbSanPham.removeAllItems();
         for (TpQuanLyDonViCustom dv : listDonVi) {
@@ -77,14 +78,14 @@ public class TpLuongNhapAddChiTietSanPhamNewForm extends javax.swing.JFrame {
 
         cbbTrangThai.addItem(Converter.trangThaiSanPham(TrangThaiSanPhamConstanst.DA_MO_BAN));
         cbbTrangThai.addItem(Converter.trangThaiSanPham(TrangThaiSanPhamConstanst.CHO_XAC_NHAN));
+        cbbMauSac.addItem(Converter.trangThaiMauSac(MauConstant.VANG));
+        cbbMauSac.addItem(Converter.trangThaiMauSac(MauConstant.XANH_LA));
+        cbbMauSac.addItem(Converter.trangThaiMauSac(MauConstant.DO));
+        cbbMauSac.addItem(Converter.trangThaiMauSac(MauConstant.XANH_DUONG));
+        cbbMauSac.addItem(Converter.trangThaiMauSac(MauConstant.HONG));
         cbbMauSac.addItem(Converter.trangThaiMauSac(MauConstant.CAM));
         cbbMauSac.addItem(Converter.trangThaiMauSac(MauConstant.DEN));
-        cbbMauSac.addItem(Converter.trangThaiMauSac(MauConstant.DO));
-        cbbMauSac.addItem(Converter.trangThaiMauSac(MauConstant.HONG));
         cbbMauSac.addItem(Converter.trangThaiMauSac(MauConstant.TRANG));
-        cbbMauSac.addItem(Converter.trangThaiMauSac(MauConstant.VANG));
-        cbbMauSac.addItem(Converter.trangThaiMauSac(MauConstant.XANH_DUONG));
-        cbbMauSac.addItem(Converter.trangThaiMauSac(MauConstant.XANH_LA));
     }
 
     public TpXemChiTietSanPhamCustom getFormData() {
