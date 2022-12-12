@@ -824,6 +824,7 @@ public class TpLuongNhapView extends javax.swing.JPanel {
     }//GEN-LAST:event_txtSearchMouseClicked
 
     private void tblPhieuNhapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPhieuNhapMouseClicked
+        clearForm();
         int row = tblPhieuNhap.getSelectedRow();
         if (row == -1) {
             return;
@@ -840,23 +841,19 @@ public class TpLuongNhapView extends javax.swing.JPanel {
         txtTrangThai.setText(trangThai);
         txtNhanVien.setText(nhanVien);
         txtNhaCungCap.setText(nhaCungCap);
-        TpPhieuNhapCustom pxcs = listPn.get(row);
+        TpPhieuNhapCustom pxcs = phieuNhapService.phanTrang(listPn, offset, limit).get(row);
         if (pxcs.getGhiChu() == null) {
             txtGhiChu.setText("new");
-            return;
+        } else {
+            txtGhiChu.setText(pxcs.getGhiChu());
         }
-        txtGhiChu.setText(pxcs.getGhiChu());
         
         double tien = 0;
-        List<TpPhieuNhapChiTietCustom> listCTPX = tpncts.getListCTPhieuNhapByID(listPn.get(row).getId());
-        
+        List<TpPhieuNhapChiTietCustom> listCTPX = tpncts.getListCTPhieuNhapByID(phieuNhapService.phanTrang(listPn, offset, limit).get(row).getId());
         for (TpPhieuNhapChiTietCustom ctpx : listCTPX) {
-            tien += ctpx.getIdSanPham().getGiaNhap().multiply(new BigDecimal(ctpx.getSoLuong())).doubleValue();
+            tien += ctpx.getSoLuong() * ctpx.getIdSanPham().getGiaNhap().doubleValue();
         }
-        int tongTien = (int) tien;
-        
-            txtTienPhaiTra.setText(formatter.format(tongTien) + "");
-        
+        txtTienPhaiTra.setText(formatter.format(tien) + "");
         
         if (txtTrangThai.getText().equalsIgnoreCase("Đã Thanh Toán")) {
             btnThanhToan.setEnabled(false);
@@ -937,7 +934,7 @@ public class TpLuongNhapView extends javax.swing.JPanel {
         
         MsgBox.alert(this, "Bạn đã xác nhận thành công");
         listPn.set(row, pxcs);
-        loadTablePn(listPn);
+        loadTablePn(phieuNhapService.phanTrang(listPn, offset, limit));
         clearForm();
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
