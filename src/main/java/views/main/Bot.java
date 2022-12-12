@@ -71,11 +71,11 @@ public class Bot extends javax.swing.JFrame {
         Thread bot = new Thread(() -> {
             while (true) {
                 try {
-//                    Thread.sleep(3600000);
-                    Thread.sleep(10000);                    
-//                    if(botService.updateTrangThai()) {
-//                        JOptionPane.showMessageDialog(this, "Đã update phiếu xuất", "WARNING !!!", JOptionPane.WARNING_MESSAGE);
-//                    }
+                    Thread.sleep(3600000);
+//                    Thread.sleep(10000);                    
+                    if(botService.updateTrangThai()) {
+                        JOptionPane.showMessageDialog(this, "Đã update phiếu xuất", "WARNING !!!", JOptionPane.WARNING_MESSAGE);
+                    }
 
                 } catch (InterruptedException e) {
                     e.printStackTrace();

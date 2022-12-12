@@ -6,6 +6,7 @@ import cores.logins.service.UserService;
 import cores.nhanVienQuanLy.customModels.NvqlXemThongTinCaNhanCustom;
 import cores.nhanVienQuanLy.services.NvqlXemThongTinCaNhanService;
 import cores.nhanVienQuanLy.services.serviceImpls.NvqlXemThongTinCaNhanServiceImpl;
+import infrastructures.constant.TrangThaiNhanVienConstant;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -203,8 +204,14 @@ public class LoginView extends javax.swing.JFrame {
         if (map.containsKey(email)) {
             if (map.get(email).getMatKhau().equals(txtPassWord.getText())) {
                 Auth.nhanVien = map.get(email);
-//                Bot bot = new Bot();
-//                bot.setVisible(true);
+                Bot bot = new Bot();
+                bot.setVisible(true);
+                // check hoat dong
+                if(Auth.nhanVien.getTrangThai() == TrangThaiNhanVienConstant.CHUA_HOAT_DONG || Auth.nhanVien.getTrangThai() == TrangThaiNhanVienConstant.DA_NGHI_VIEC) {
+                    JOptionPane.showMessageDialog(this, "Tài khoản không có hiệu lực", "Welcome", JOptionPane.PLAIN_MESSAGE);
+                    return;
+                }
+                
                 // check chức vụ
                 if (Auth.nhanVien.getChucVu().getMa().equalsIgnoreCase("CV0001")) {
                     JOptionPane.showMessageDialog(this, "Thành công", "Welcome", JOptionPane.PLAIN_MESSAGE);
