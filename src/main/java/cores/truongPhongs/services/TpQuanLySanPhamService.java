@@ -1,7 +1,6 @@
 package cores.truongPhongs.services;
 
 import cores.truongPhongs.customModels.TpQuanLySanPhamCustom;
-import cores.truongPhongs.customModels.TpThemSanPhamCustom;
 import java.util.List;
 import java.util.UUID;
 import javax.swing.JLabel;
@@ -12,7 +11,9 @@ import javax.swing.JLabel;
  */
 public interface TpQuanLySanPhamService {
 
-    public List<TpQuanLySanPhamCustom> getAll(String ten);
+    List<TpQuanLySanPhamCustom> getAll(String ten);
+
+    List<TpQuanLySanPhamCustom> getByMaSpNcc(String ten);
 
     TpQuanLySanPhamCustom addSanPham(TpQuanLySanPhamCustom custom);
 

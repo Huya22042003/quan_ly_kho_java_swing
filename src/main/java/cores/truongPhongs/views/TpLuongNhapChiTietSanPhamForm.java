@@ -708,6 +708,7 @@ public class TpLuongNhapChiTietSanPhamForm extends javax.swing.JFrame {
         createViewAddSpOld.ct = listSp.get(row);
         createViewAddSpOld.setPhieuNhap(phieuNhap);
         createViewAddSpOld.setVisible(true);
+        createViewAddSpOld.loadCbb();
         createViewAddSpOld.showData();
 
     }//GEN-LAST:event_tblCtspMouseClicked

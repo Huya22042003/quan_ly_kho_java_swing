@@ -354,4 +354,9 @@ public class TP_KhachHangServiceImpl implements TP_KhachHangService {
 //        return rp.deleteKH(kh);
 //    }
 
+    @Override
+    public List<TP_KhachHangCustom> getListKHByTrangThai() {
+        return rp.getListKHByTrangThai();
+    }
+
 }

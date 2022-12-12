@@ -50,7 +50,7 @@ public class Tai_ChonKhachHangView extends javax.swing.JFrame {
         getList = new ArrayList<>();
         createView = new LuongBanHang_CreateKhachHang();
         phieuXuatService = new NVQLQuanLyPhieuXuatServiceImpl();
-        getList = hangService.getListKH();
+        getList = hangService.getListKHByTrangThai();
         hangService.loadCbbTT(cbbTrangThai);
 
         loadTable(hangService.phanTrang(getList, offset, limit));
@@ -265,7 +265,15 @@ public class Tai_ChonKhachHangView extends javax.swing.JFrame {
             new String [] {
                 "STT", "Mã", "Tên", "SĐT", "Email", "Địa chỉ", "Ngày sinh", "Đánh giá", "Trạng thái"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblKhachHang.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblKhachHangMouseClicked(evt);
@@ -610,7 +618,7 @@ public class Tai_ChonKhachHangView extends javax.swing.JFrame {
 
     private void btnHienThi1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHienThi1ActionPerformed
         clear();
-        getList = hangService.getListKH();
+        getList = hangService.getListKHByTrangThai();
         loadTable(hangService.phanTrang(getList, offset, limit));
     }//GEN-LAST:event_btnHienThi1ActionPerformed
 

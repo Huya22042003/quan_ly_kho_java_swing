@@ -5,11 +5,9 @@ import cores.truongPhongs.customModels.TpThemSanPhamCustom;
 import cores.truongPhongs.repositories.TpQuanLySanPhamRepository;
 import cores.truongPhongs.services.TpQuanLySanPhamService;
 import domainModels.SanPham;
-import infrastructures.constant.ValidateConstant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 import javax.swing.JLabel;
 
 /**
@@ -85,6 +83,11 @@ public class TpQuanLySanPhamServiceImpl implements TpQuanLySanPhamService {
             listPhanTrang.add(el);
         }
         return listPhanTrang;
+    }
+
+    @Override
+    public List<TpQuanLySanPhamCustom> getByMaSpNcc(String ten) {
+        return rp.getFindByMaSpNcc(ten);
     }
 
 }

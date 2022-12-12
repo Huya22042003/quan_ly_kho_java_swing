@@ -13,9 +13,9 @@ import cores.truongPhongs.services.serviceImpls.TpTongSoSanPhamTrongKhoServiceIm
 import java.util.ArrayList;
 import java.util.List;
 import cores.truongPhongs.services.TpThongKeService;
-import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import javax.swing.table.DefaultTableModel;
+import utilities.DateTimeUtil;
 import utilities.palette.SearchCustom.EventCallBack;
 import utilities.palette.SearchCustom.EventTextField;
 
@@ -42,13 +42,13 @@ public class TpThongKeView extends javax.swing.JPanel {
 
     public TpThongKeView() {
         initComponents();
-        listSp = khoService.getListSp();
+        listSp = khoService.getListSp(0L, DateTimeUtil.convertDateToTimeStampSecond(), "");
 
-        lblTongSp.setText(khoService.getList().get(0).toString());
-        lblSoSpDaBan.setText(khoService.getSoSanPhamDaXuat().get(0).toString());
-        lblSoSpChuaBan.setText(khoService.getSoSanPhamDaNhap().get(0).toString());
-        lblSoSpHoanNhap.setText(khoService.getSoLuongSpHoanNhap().get(0) == null ? "Chưa có" : khoService.getSoLuongSpHoanNhap().get(0).toString());
-        lblSoSpHoanXuat.setText(khoService.getSoLuongSpHoanXuat().get(0) == 0 ? "Chưa có" : khoService.getSoLuongSpHoanXuat().get(0).toString());
+        lblTongSp.setText(khoService.getList().get(0).toString() + " Sản phẩm");
+        lblSoSpDaBan.setText(khoService.getSoSanPhamDaXuat().get(0).toString()+ " Sản phẩm");
+        lblSoSpChuaBan.setText(khoService.getSoSanPhamDaNhap().get(0).toString()+ " Sản phẩm");
+        lblSoSpHoanNhap.setText(khoService.getSoLuongSpHoanNhap().get(0) == null ? "Chưa có sản phẩm" : khoService.getSoLuongSpHoanNhap().get(0).toString()+ " Sản phẩm");
+        lblSoSpHoanXuat.setText(khoService.getSoLuongSpHoanXuat().get(0) == 0 ? "Chưa có sản phẩm" : khoService.getSoLuongSpHoanXuat().get(0).toString()+ " Sản phẩm");
 
         loadTableHD(listSp);
 
@@ -79,17 +79,17 @@ public class TpThongKeView extends javax.swing.JPanel {
         dtm.setRowCount(0);
         double dt;
         double d = 0;
-        for (TpThongKeSpCustom tpThongKeSpCustom : listSP) {
+        for (TpThongKeSpCustom el : listSP) {
             Object[] rowData = {
                 dtm.getRowCount() + 1,
-                tpThongKeSpCustom.getIdPhieuXuat().getMaPhieu(),
-                tpThongKeSpCustom.getIdPhieuXuat().getNhanVien().getMa(),
-                tpThongKeSpCustom.getIdPhieuXuat().getNhanVien().getTen(),
-                formatter.format(tpThongKeSpCustom.doanhThu())
+                el.getMaPhieu(),
+                el.getTenKh(),
+                el.getTenNv(),
+                formatter.format(el.getDoanhThu())
             };
 
             dtm.addRow(rowData);
-            dt = tpThongKeSpCustom.getIdCtsp().getGiaBan().multiply(new BigDecimal(tpThongKeSpCustom.getSoLuong())).doubleValue();
+            dt = el.getDoanhThu().doubleValue();
 
             d += dt;
 
@@ -104,7 +104,6 @@ public class TpThongKeView extends javax.swing.JPanel {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
-        materialTabbed1 = new utilities.palette.MaterialTabbed();
         panelRound7 = new utilities.palette.PanelRound();
         panelRound1 = new utilities.palette.PanelRound();
         panelRound6 = new utilities.palette.PanelRound();
@@ -132,18 +131,13 @@ public class TpThongKeView extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         lblTongDoanhThuTheoNgay = new javax.swing.JLabel();
         panelRound18 = new utilities.palette.PanelRound();
-        rdoMaHD = new utilities.palette.RadioButtonCustom();
         txtSearch1 = new utilities.palette.SearchCustom.TextFieldAnimation();
-        rdoMaNv = new utilities.palette.RadioButtonCustom();
-        rdoTenNv = new utilities.palette.RadioButtonCustom();
         ngayBatDau = new com.toedter.calendar.JDateChooser();
         jLabel6 = new javax.swing.JLabel();
         ngayKetThuc = new com.toedter.calendar.JDateChooser();
         jLabel8 = new javax.swing.JLabel();
-        btnSearch2 = new utilities.palette.MyButton();
 
-        materialTabbed1.setBackground(new java.awt.Color(255, 255, 255));
-        materialTabbed1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        setBackground(new java.awt.Color(255, 255, 255));
 
         panelRound7.setBackground(new java.awt.Color(204, 204, 255));
         panelRound7.setRoundBottomLeft(50);
@@ -417,7 +411,7 @@ public class TpThongKeView extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "STT", "Mã HĐ", "Mã NV", "Tên NV", "Tổng tiền"
+                "STT", "Mã HĐ", "Tên KH", "Tên NV", "Tổng tiền"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -473,13 +467,6 @@ public class TpThongKeView extends javax.swing.JPanel {
         panelRound18.setRoundTopLeft(50);
         panelRound18.setRoundTopRight(50);
 
-        rdoMaHD.setBackground(new java.awt.Color(67, 130, 187));
-        buttonGroup2.add(rdoMaHD);
-        rdoMaHD.setForeground(new java.awt.Color(255, 255, 255));
-        rdoMaHD.setSelected(true);
-        rdoMaHD.setText("Mã HD");
-        rdoMaHD.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-
         txtSearch1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtSearch1MouseClicked(evt);
@@ -491,43 +478,20 @@ public class TpThongKeView extends javax.swing.JPanel {
             }
         });
 
-        rdoMaNv.setBackground(new java.awt.Color(67, 130, 187));
-        buttonGroup2.add(rdoMaNv);
-        rdoMaNv.setForeground(new java.awt.Color(255, 255, 255));
-        rdoMaNv.setText("Mã NV");
-        rdoMaNv.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-
-        rdoTenNv.setBackground(new java.awt.Color(67, 130, 187));
-        buttonGroup2.add(rdoTenNv);
-        rdoTenNv.setForeground(new java.awt.Color(255, 255, 255));
-        rdoTenNv.setText("Tên NV");
-        rdoTenNv.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-
         javax.swing.GroupLayout panelRound18Layout = new javax.swing.GroupLayout(panelRound18);
         panelRound18.setLayout(panelRound18Layout);
         panelRound18Layout.setHorizontalGroup(
             panelRound18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound18Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(rdoMaHD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(rdoMaNv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(rdoTenNv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25)
+                .addComponent(txtSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelRound18Layout.setVerticalGroup(
             panelRound18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound18Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelRound18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelRound18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(rdoMaHD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(rdoMaNv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(rdoTenNv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(txtSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -545,15 +509,6 @@ public class TpThongKeView extends javax.swing.JPanel {
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setText("From:");
 
-        btnSearch2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Search.png"))); // NOI18N
-        btnSearch2.setToolTipText("Tìm kiếm theo ngày");
-        btnSearch2.setRadius(50);
-        btnSearch2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearch2ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout panelRound8Layout = new javax.swing.GroupLayout(panelRound8);
         panelRound8.setLayout(panelRound8Layout);
         panelRound8Layout.setHorizontalGroup(
@@ -567,36 +522,38 @@ public class TpThongKeView extends javax.swing.JPanel {
                         .addComponent(panelRound17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelRound8Layout.createSequentialGroup()
                         .addGroup(panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(panelRound20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(panelRound8Layout.createSequentialGroup()
+                                .addComponent(panelRound20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(9, 9, 9))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound8Layout.createSequentialGroup()
                                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(ngayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(9, 9, 9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addGroup(panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(panelRound18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(panelRound8Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(ngayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(31, 31, 31)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(ngayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(30, 30, 30)
-                                .addComponent(btnSearch2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(panelRound18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addGap(12, 12, 12)))))
                 .addContainerGap())
         );
         panelRound8Layout.setVerticalGroup(
             panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound8Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelRound8Layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
                         .addGroup(panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel8)
-                            .addComponent(ngayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ngayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(btnSearch2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(ngayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound8Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ngayBatDau, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addGap(18, 18, 18)
                 .addGroup(panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(panelRound20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -646,55 +603,39 @@ public class TpThongKeView extends javax.swing.JPanel {
                 .addGap(21, 21, 21))
         );
 
-        materialTabbed1.addTab("Thống kê sản phẩm", panelRound7);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(materialTabbed1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 5, Short.MAX_VALUE)
+                .addComponent(panelRound7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 6, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(materialTabbed1, javax.swing.GroupLayout.PREFERRED_SIZE, 616, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(panelRound7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
     private void searchTheoNgay() {
-        if (ngayBatDau == null) {
-            return;
+        Long ngayBd = 0L;
+        Long ngayKt = DateTimeUtil.convertDateToTimeStampSecond();
+        String search = txtSearch1.getText();
+        if (ngayBatDau.getDate() != null) {
+            ngayBd = ngayBatDau.getDate().getTime();
         }
-        if (ngayKetThuc == null) {
-            return;
+        if (ngayKetThuc.getDate() != null) {
+            ngayKt = ngayKetThuc.getDate().getTime();
         }
-        listSp = khoService.getListByNgayThanhToan(ngayBatDau.getDate().getTime(), ngayKetThuc.getDate().getTime());
+        listSp = khoService.getListSp(ngayBd, ngayKt, search);
         loadTableHD(listSp);
     }
-    public List<TpThongKeSpCustom> getListByTT(int rdo) {
-        String timKiem = this.txtSearch1.getText();
-        listSp=  khoService.findAllByKhAndNV(timKiem,  rdo);
-        return listSp;
-    }
-
-    public void searchhRadio() {
-         if (rdoMaHD.isSelected()) {
-            loadTableHD(getListByTT(0));
-        }
-     if (rdoMaNv.isSelected()) {
-            loadTableHD(getListByTT(1));
-        }
-     if(rdoTenNv.isSelected()){
-            loadTableHD(getListByTT(2));
-        }
-    }
+    
     private void txtSearch1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSearch1MouseClicked
-
-        searchhRadio();
-
-
+        searchTheoNgay();
     }//GEN-LAST:event_txtSearch1MouseClicked
 
     private void ngayBatDauInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_ngayBatDauInputMethodTextChanged
@@ -706,14 +647,8 @@ public class TpThongKeView extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSearch1ActionPerformed
 
-    private void btnSearch2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearch2ActionPerformed
-        // TODO add your handling code here:
-                searchTheoNgay();
-    }//GEN-LAST:event_btnSearch2ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private utilities.palette.MyButton btnSearch2;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JLabel jLabel1;
@@ -732,7 +667,6 @@ public class TpThongKeView extends javax.swing.JPanel {
     private javax.swing.JLabel lblSoSpHoanXuat;
     private javax.swing.JLabel lblTongDoanhThuTheoNgay;
     private javax.swing.JLabel lblTongSp;
-    private utilities.palette.MaterialTabbed materialTabbed1;
     private com.toedter.calendar.JDateChooser ngayBatDau;
     private com.toedter.calendar.JDateChooser ngayKetThuc;
     private utilities.palette.PanelRound panelRound1;
@@ -747,9 +681,6 @@ public class TpThongKeView extends javax.swing.JPanel {
     private utilities.palette.PanelRound panelRound7;
     private utilities.palette.PanelRound panelRound8;
     private utilities.palette.PanelRound panelRound9;
-    private utilities.palette.RadioButtonCustom rdoMaHD;
-    private utilities.palette.RadioButtonCustom rdoMaNv;
-    private utilities.palette.RadioButtonCustom rdoTenNv;
     private utilities.palette.TableDark_1 tblHoaDon;
     private utilities.palette.SearchCustom.TextFieldAnimation txtSearch1;
     // End of variables declaration//GEN-END:variables

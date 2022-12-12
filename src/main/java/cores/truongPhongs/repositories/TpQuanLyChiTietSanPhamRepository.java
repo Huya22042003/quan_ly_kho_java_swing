@@ -73,48 +73,102 @@ public class TpQuanLyChiTietSanPhamRepository {
             String tenNcc1 = "Chưa có";
             String maSpNcc1 = "Chưa có";
             Long ngayNhap = 0L;
-            
-            if(!"null".equalsIgnoreCase((String) el[0])) {
+
+            if (!"null".equalsIgnoreCase((String) el[0])) {
                 id = UUID.fromString((String) el[0]);
             }
-            if(!"null".equalsIgnoreCase(String.valueOf((Integer) el[1]))) {
+            if (!"null".equalsIgnoreCase(String.valueOf((Integer) el[1]))) {
                 soLuongTon = (Integer) el[1];
             }
-            if(!"null".equalsIgnoreCase((String) el[2])) {
+            if (!"null".equalsIgnoreCase((String) el[2])) {
                 hinhAnh = (String) el[2];
             }
-            if(!"null".equalsIgnoreCase(String.valueOf((Integer) el[5]))) {
+            if (!"null".equalsIgnoreCase(String.valueOf((Integer) el[5]))) {
                 mau = (Integer) el[5];
             }
-            if(!"null".equalsIgnoreCase((String) el[6])) {
+            if (!"null".equalsIgnoreCase((String) el[6])) {
                 doViQuyDoi = (String) el[6];
             }
-            if(!"null".equalsIgnoreCase(String.valueOf((Integer) el[7]))) {
+            if (!"null".equalsIgnoreCase(String.valueOf((Integer) el[7]))) {
                 namBaoHanh = (Integer) el[7];
             }
-            if(!"null".equalsIgnoreCase(String.valueOf((Integer) el[8]))) {
+            if (!"null".equalsIgnoreCase(String.valueOf((Integer) el[8]))) {
                 trangThai = (Integer) el[8];
             }
-            if(!"null".equalsIgnoreCase(String.valueOf((Integer) el[9]))) {
+            if (!"null".equalsIgnoreCase(String.valueOf((Integer) el[9]))) {
                 size = (Integer) el[9];
             }
-            
-            if(!"null".equalsIgnoreCase((String) el[10])) {
+
+            if (!"null".equalsIgnoreCase((String) el[10])) {
                 tenNcc1 = (String) el[10];
             }
-            
-            if(!"null".equalsIgnoreCase((String) el[11])) {
+
+            if (!"null".equalsIgnoreCase((String) el[11])) {
                 maSpNcc1 = (String) el[11];
             }
-            if(!"null".equalsIgnoreCase(String.valueOf((BigDecimal) el[12]))) {
+            if (!"null".equalsIgnoreCase(String.valueOf((BigDecimal) el[12]))) {
                 ngayNhap = Long.valueOf(String.valueOf((BigDecimal) el[12]));
             }
-            
+
             list.add(new TpQuanLyChiTietSanPhamCustom(id, soLuongTon, hinhAnh, giaNhap, giaBan, mau, doViQuyDoi, namBaoHanh, trangThai, size, tenNcc1, maSpNcc1, ngayNhap
             ));
         });
         s.close();
         return list;
+    }
+
+    public List<DonVi> getCbbDonVi() {
+        List<DonVi> list = new ArrayList<>();
+        Session s = HibernateUtil.getSessionFactory().openSession();
+        Query q = s.createNativeQuery("select * from DonVi dv", DonVi.class);
+        list = q.getResultList();
+        s.close();
+        return list;
+    }
+
+    public boolean updateChiTietSanPham(TpQuanLyChiTietSanPhamCustom sp) {
+        try {
+            Session s = HibernateUtil.getSessionFactory().openSession();
+            Transaction tran = s.beginTransaction();
+            Query q = s.createNativeQuery("""
+                                          UPDATE [dbo].[ChiTietSanPham]
+                                             SET 
+                                                [GiaBan] = :giaBan
+                                                ,[GiaNhap] = :giaNhap
+                                                ,[HinhAnh] = :hinhAnh
+                                                ,[Mau] = :mau
+                                                ,[namBaoHanh] = :namBh 
+                                                ,[Size] = :size
+                                                ,[SoLuongTon] = :soLuongTon
+                                                ,[TrangThai] = :trangThai
+                                                ,[IdDonVi] = :donVi
+                                           WHERE [Id] = :id
+                                          """)
+                    .setParameter("giaBan", sp.getGiaBan())
+                    .setParameter("giaNhap", sp.getGiaNhap())
+                    .setParameter("hinhAnh", sp.getHinhAnh())
+                    .setParameter("mau", sp.getMau())
+                    .setParameter("namBh", sp.getNamBaoHanh())
+                    .setParameter("size", sp.getSize())
+                    .setParameter("soLuongTon", sp.getSoLuongTon())
+                    .setParameter("trangThai", sp.getTrangThai())
+                    .setParameter("donVi", "B0E60DD2-A779-2B46-AE6C-473D0C996BC5")
+                    .setParameter("id", sp.getId().toString());
+            System.out.println(sp.getDoViQuyDoi());
+            System.out.println(sp.getId());
+            if (q.executeUpdate() < 0) {
+                tran.commit();
+                s.close();
+                return false;
+            }
+            tran.commit();
+            s.close();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+
     }
 
     public ChiTietSanPham addCTSanPham(ChiTietSanPham sp) {
@@ -293,7 +347,7 @@ public class TpQuanLyChiTietSanPhamRepository {
                 + "dv.donViGoc as donViGoc,"
                 + "dv.donViQuyDoi as donViQuyDoi,"
                 + "dv.soLuong as soLuong"
-                + " )from domainModels.DonVi dv");
+                + " )FROM domainModels.DonVi dv");
         list = q.getResultList();
         s.close();
         return list;
