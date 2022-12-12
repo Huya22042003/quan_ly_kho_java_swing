@@ -108,7 +108,8 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
                 m.getDonVi().getDonViGoc(),
                 Converter.trangThaiMauSac(m.getMau()),
                 m.getNamBaoHanh(),
-                m.getGiaBan() == null ? "Chưa có" : formatter.format(m.getGiaBan())
+                m.getGiaBan() == null ? "Chưa có" : formatter.format(m.getGiaBan()),
+                Converter.trangThaiSanPham(m.getTrangThai())
             };
             model.addRow(row);
         }
@@ -220,11 +221,11 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "STT", "Mã SP", "Tên SP", "Số lượng", "Đơn vị", "Màu sắc", "Năm bh", "Giá bán"
+                "STT", "Mã SP", "Tên SP", "Số lượng", "Đơn vị", "Màu sắc", "Năm bh", "Giá bán", "TT"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, true, true, true
+                false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -237,10 +238,6 @@ public class NvqlKiemKeCtspView extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(tbSanPham);
-        if (tbSanPham.getColumnModel().getColumnCount() > 0) {
-            tbSanPham.getColumnModel().getColumn(6).setHeaderValue("Năm bh");
-            tbSanPham.getColumnModel().getColumn(7).setHeaderValue("Giá bán");
-        }
 
         jPanel3.setBackground(new java.awt.Color(102, 102, 255));
 

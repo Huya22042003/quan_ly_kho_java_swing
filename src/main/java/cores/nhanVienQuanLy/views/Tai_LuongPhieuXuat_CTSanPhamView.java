@@ -928,6 +928,8 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
     public List<Tai_SanPhamCustom> getListByTT(int rdo) {
         String timKiem = this.txtSearch.getText();
         ListSP = luongService.phanTrangSP(luongService.getListSPByMa(timKiem, rdo), offset, limit);
+        sizes = ListSP.size();
+        loadIndex();
         return ListSP;
     }
 
