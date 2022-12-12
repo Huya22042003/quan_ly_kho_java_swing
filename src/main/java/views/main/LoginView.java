@@ -276,7 +276,7 @@ public class LoginView extends javax.swing.JFrame {
                 }
 
             } else {
-                JOptionPane.showMessageDialog(this, "Mật khẩu không chính sác", "ERROR !!!", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Mật khẩu không chính xác", "ERROR !!!", JOptionPane.ERROR_MESSAGE);
             }
         } else {
             JOptionPane.showMessageDialog(this, "Tài khoản không có trong bộ nhớ", "ERROR !!!", JOptionPane.ERROR_MESSAGE);

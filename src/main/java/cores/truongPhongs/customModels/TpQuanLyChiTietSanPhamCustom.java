@@ -46,6 +46,8 @@ public class TpQuanLyChiTietSanPhamCustom {
     private String maSpNcc;
     
     private Long ngayNhap;
+    
+    private UUID idDv;
 
     public MauConstant convertMau() {
         switch (mau) {

@@ -1751,7 +1751,7 @@ public final class TpQuanLySanPhamForm extends javax.swing.JPanel {
                             new BigDecimal(giaBan.trim()), cbbMauSac.getSelectedIndex(),
                             sp.getDoViQuyDoi(), Integer.parseInt(namBh.trim()),
                             cbbTrangThai.getSelectedIndex(), Integer.parseInt(size.trim()),
-                            sp.getTenNcc().trim(), sp.getMaSpNcc().trim(), sp.getNgayNhap());
+                            sp.getTenNcc().trim(), sp.getMaSpNcc().trim(), sp.getNgayNhap(), sp.getIdDv());
             if (serviceChiTietSP.updateChiTietSanPham(getFormData)) {
                 JOptionPane.showMessageDialog(this, "Update thành công");
                 FrameChiTietSanPham.setVisible(true);

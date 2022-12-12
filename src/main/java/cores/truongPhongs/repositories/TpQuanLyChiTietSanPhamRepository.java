@@ -39,7 +39,8 @@ public class TpQuanLyChiTietSanPhamRepository {
                 ctsp.Size,
                 ncc.Ten,
                 ctpn.MaSanPhamNhaCungCap,
-                ctsp.createDate
+                ctsp.createDate,
+                dv.id
                 FROM ChiTietSanPham ctsp
                 join DonVi dv on ctsp.IdDonVi = dv.Id
                 join ChiTietPhieuNhap ctpn on ctpn.IdChiTietSP = ctsp.Id
@@ -110,7 +111,7 @@ public class TpQuanLyChiTietSanPhamRepository {
                 ngayNhap = Long.valueOf(String.valueOf((BigDecimal) el[12]));
             }
 
-            list.add(new TpQuanLyChiTietSanPhamCustom(id, soLuongTon, hinhAnh, giaNhap, giaBan, mau, doViQuyDoi, namBaoHanh, trangThai, size, tenNcc1, maSpNcc1, ngayNhap
+            list.add(new TpQuanLyChiTietSanPhamCustom(id, soLuongTon, hinhAnh, giaNhap, giaBan, mau, doViQuyDoi, namBaoHanh, trangThai, size, tenNcc1, maSpNcc1, ngayNhap, UUID.fromString((String) el[13])
             ));
         });
         s.close();
@@ -152,7 +153,7 @@ public class TpQuanLyChiTietSanPhamRepository {
                     .setParameter("size", sp.getSize())
                     .setParameter("soLuongTon", sp.getSoLuongTon())
                     .setParameter("trangThai", sp.getTrangThai())
-                    .setParameter("donVi", "B0E60DD2-A779-2B46-AE6C-473D0C996BC5")
+                    .setParameter("donVi", sp.getIdDv().toString())
                     .setParameter("id", sp.getId().toString());
             System.out.println(sp.getDoViQuyDoi());
             System.out.println(sp.getId());

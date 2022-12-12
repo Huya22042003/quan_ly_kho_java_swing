@@ -36,19 +36,18 @@ public class TpThongKeView extends javax.swing.JPanel {
 
     private TpThongKeService khoService = new TpTongSoSanPhamTrongKhoServiceImpl();
     private List<TpThongKeSpCustom> listSp = new ArrayList<>();
-    
+
     private DecimalFormat formatter = new DecimalFormat("###,###,##0 VNĐ");
-    
 
     public TpThongKeView() {
         initComponents();
         listSp = khoService.getListSp(0L, DateTimeUtil.convertDateToTimeStampSecond(), "");
 
         lblTongSp.setText(khoService.getList().get(0).toString() + " Sản phẩm");
-        lblSoSpDaBan.setText(khoService.getSoSanPhamDaXuat().get(0).toString()+ " Sản phẩm");
-        lblSoSpChuaBan.setText(khoService.getSoSanPhamDaNhap().get(0).toString()+ " Sản phẩm");
-        lblSoSpHoanNhap.setText(khoService.getSoLuongSpHoanNhap().get(0) == null ? "Chưa có sản phẩm" : khoService.getSoLuongSpHoanNhap().get(0).toString()+ " Sản phẩm");
-        lblSoSpHoanXuat.setText(khoService.getSoLuongSpHoanXuat().get(0) == 0 ? "Chưa có sản phẩm" : khoService.getSoLuongSpHoanXuat().get(0).toString()+ " Sản phẩm");
+        lblSoSpDaBan.setText(khoService.getSoSanPhamDaXuat().get(0).toString() + " Sản phẩm");
+        lblSoSpChuaBan.setText(khoService.getSoSanPhamDaNhap().get(0).toString() + " Sản phẩm");
+        lblSoSpHoanNhap.setText(khoService.getSoLuongSpHoanNhap().get(0) == null ? "Chưa có sản phẩm" : khoService.getSoLuongSpHoanNhap().get(0).toString() + " Sản phẩm");
+        lblSoSpHoanXuat.setText(khoService.getSoLuongSpHoanXuat().get(0) == 0 ? "Chưa có sản phẩm" : khoService.getSoLuongSpHoanXuat().get(0).toString() + " Sản phẩm");
 
         loadTableHD(listSp);
 
@@ -97,7 +96,6 @@ public class TpThongKeView extends javax.swing.JPanel {
         lblTongDoanhThuTheoNgay.setText(formatter.format(d));
     }
 
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -132,10 +130,12 @@ public class TpThongKeView extends javax.swing.JPanel {
         lblTongDoanhThuTheoNgay = new javax.swing.JLabel();
         panelRound18 = new utilities.palette.PanelRound();
         txtSearch1 = new utilities.palette.SearchCustom.TextFieldAnimation();
+        jLabel10 = new javax.swing.JLabel();
         ngayBatDau = new com.toedter.calendar.JDateChooser();
         jLabel6 = new javax.swing.JLabel();
         ngayKetThuc = new com.toedter.calendar.JDateChooser();
         jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -478,20 +478,28 @@ public class TpThongKeView extends javax.swing.JPanel {
             }
         });
 
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("Mã phiếu xuất");
+
         javax.swing.GroupLayout panelRound18Layout = new javax.swing.GroupLayout(panelRound18);
         panelRound18.setLayout(panelRound18Layout);
         panelRound18Layout.setHorizontalGroup(
             panelRound18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound18Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(txtSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelRound18Layout.setVerticalGroup(
             panelRound18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound18Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(txtSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelRound18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -509,6 +517,9 @@ public class TpThongKeView extends javax.swing.JPanel {
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setText("From:");
 
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel9.setText("Tìm kiếm theo ngày thanh toán");
+
         javax.swing.GroupLayout panelRound8Layout = new javax.swing.GroupLayout(panelRound8);
         panelRound8.setLayout(panelRound8Layout);
         panelRound8Layout.setHorizontalGroup(
@@ -521,11 +532,12 @@ public class TpThongKeView extends javax.swing.JPanel {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(panelRound17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelRound8Layout.createSequentialGroup()
-                        .addGroup(panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(panelRound8Layout.createSequentialGroup()
                                 .addComponent(panelRound20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(9, 9, 9))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound8Layout.createSequentialGroup()
+                            .addGroup(panelRound8Layout.createSequentialGroup()
+                                .addGap(14, 14, 14)
                                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addGroup(panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -537,7 +549,11 @@ public class TpThongKeView extends javax.swing.JPanel {
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(ngayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(12, 12, 12)))))
+                                .addGap(12, 12, 12))))
+                    .addGroup(panelRound8Layout.createSequentialGroup()
+                        .addGap(173, 173, 173)
+                        .addComponent(jLabel9)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panelRound8Layout.setVerticalGroup(
@@ -551,6 +567,8 @@ public class TpThongKeView extends javax.swing.JPanel {
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound8Layout.createSequentialGroup()
                         .addContainerGap()
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(ngayBatDau, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING))))
@@ -624,16 +642,16 @@ public class TpThongKeView extends javax.swing.JPanel {
         Long ngayBd = 0L;
         Long ngayKt = DateTimeUtil.convertDateToTimeStampSecond();
         String search = txtSearch1.getText();
-        if (ngayBatDau.getDate() != null) {
+        if (ngayBatDau.getDate() != null && ngayKetThuc.getDate() != null) {
             ngayBd = ngayBatDau.getDate().getTime();
-        }
-        if (ngayKetThuc.getDate() != null) {
             ngayKt = ngayKetThuc.getDate().getTime();
         }
+        System.out.println(ngayBd);
+        System.out.println(ngayKt);
         listSp = khoService.getListSp(ngayBd, ngayKt, search);
         loadTableHD(listSp);
     }
-    
+
     private void txtSearch1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSearch1MouseClicked
         searchTheoNgay();
     }//GEN-LAST:event_txtSearch1MouseClicked
@@ -644,7 +662,6 @@ public class TpThongKeView extends javax.swing.JPanel {
     }//GEN-LAST:event_ngayBatDauInputMethodTextChanged
 
     private void txtSearch1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearch1ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_txtSearch1ActionPerformed
 
 
@@ -652,6 +669,7 @@ public class TpThongKeView extends javax.swing.JPanel {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel3;
@@ -660,6 +678,7 @@ public class TpThongKeView extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblSoSpChuaBan;
     private javax.swing.JLabel lblSoSpDaBan;
