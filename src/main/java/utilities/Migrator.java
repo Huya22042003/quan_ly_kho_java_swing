@@ -432,7 +432,7 @@ public class Migrator {
         session.save(ctpn2);
 
         ChiTietSanPham ctsp1 = new ChiTietSanPham();
-        ctsp1.setDonVi(dv);
+        ctsp1.setDonVi(dv3);
         ctsp1.setGiaBan(new BigDecimal(10000));
         ctsp1.setGiaNhap(new BigDecimal(100));
         ctsp1.setHinhAnh(null);
@@ -560,7 +560,7 @@ public class Migrator {
         session.save(ctpn6);
 
         ChiTietSanPham ctsp7 = new ChiTietSanPham();
-        ctsp7.setDonVi(dv);
+        ctsp7.setDonVi(dv3);
         ctsp7.setGiaBan(new BigDecimal(10000));
         ctsp7.setGiaNhap(new BigDecimal(100));
         ctsp7.setHinhAnh(null);
@@ -661,7 +661,7 @@ public class Migrator {
         session.save(ctpn10);
 
         ChiTietSanPham ctsp11 = new ChiTietSanPham();
-        ctsp11.setDonVi(dv);
+        ctsp11.setDonVi(dv3);
         ctsp11.setGiaBan(new BigDecimal(10000));
         ctsp11.setGiaNhap(new BigDecimal(100));
         ctsp11.setHinhAnh(null);
@@ -762,7 +762,7 @@ public class Migrator {
         session.save(ctpn14);
 
         ChiTietSanPham ctsp15 = new ChiTietSanPham();
-        ctsp15.setDonVi(dv);
+        ctsp15.setDonVi(dv3);
         ctsp15.setGiaBan(new BigDecimal(10000));
         ctsp15.setGiaNhap(new BigDecimal(100));
         ctsp15.setHinhAnh(null);
@@ -890,7 +890,7 @@ public class Migrator {
         session.save(ctpn19);
 
         ChiTietSanPham ctsp20 = new ChiTietSanPham();
-        ctsp20.setDonVi(dv);
+        ctsp20.setDonVi(dv3);
         ctsp20.setGiaBan(new BigDecimal(10000));
         ctsp20.setGiaNhap(new BigDecimal(100));
         ctsp20.setHinhAnh(null);
@@ -1018,7 +1018,7 @@ public class Migrator {
         session.save(ctpn24);
 
         ChiTietSanPham ctsp25 = new ChiTietSanPham();
-        ctsp25.setDonVi(dv);
+        ctsp25.setDonVi(dv3);
         ctsp25.setGiaBan(new BigDecimal(10000));
         ctsp25.setGiaNhap(new BigDecimal(100));
         ctsp25.setHinhAnh(null);
@@ -1146,7 +1146,7 @@ public class Migrator {
         session.save(ctpn29);
 
         ChiTietSanPham ctsp30 = new ChiTietSanPham();
-        ctsp30.setDonVi(dv);
+        ctsp30.setDonVi(dv3);
         ctsp30.setGiaBan(new BigDecimal(10000));
         ctsp30.setGiaNhap(new BigDecimal(100));
         ctsp30.setHinhAnh(null);
@@ -1274,7 +1274,7 @@ public class Migrator {
         session.save(ctpn35);
 
         ChiTietSanPham ctsp36 = new ChiTietSanPham();
-        ctsp36.setDonVi(dv);
+        ctsp36.setDonVi(dv3);
         ctsp36.setGiaBan(new BigDecimal(10000));
         ctsp36.setGiaNhap(new BigDecimal(100));
         ctsp36.setHinhAnh(null);
@@ -1402,7 +1402,7 @@ public class Migrator {
         session.save(ctpn40);
 
         ChiTietSanPham ctsp41 = new ChiTietSanPham();
-        ctsp41.setDonVi(dv);
+        ctsp41.setDonVi(dv3);
         ctsp41.setGiaBan(new BigDecimal(10000));
         ctsp41.setGiaNhap(new BigDecimal(100));
         ctsp41.setHinhAnh(null);
@@ -1530,7 +1530,7 @@ public class Migrator {
         session.save(ctpn45);
 
         ChiTietSanPham ctsp46 = new ChiTietSanPham();
-        ctsp46.setDonVi(dv);
+        ctsp46.setDonVi(dv3);
         ctsp46.setGiaBan(new BigDecimal(10000));
         ctsp46.setGiaNhap(new BigDecimal(100));
         ctsp46.setHinhAnh(null);
@@ -1658,7 +1658,7 @@ public class Migrator {
         session.save(ctpn51);
 
         ChiTietSanPham ctsp52 = new ChiTietSanPham();
-        ctsp52.setDonVi(dv);
+        ctsp52.setDonVi(dv3);
         ctsp52.setGiaBan(new BigDecimal(10000));
         ctsp52.setGiaNhap(new BigDecimal(100));
         ctsp52.setHinhAnh(null);
