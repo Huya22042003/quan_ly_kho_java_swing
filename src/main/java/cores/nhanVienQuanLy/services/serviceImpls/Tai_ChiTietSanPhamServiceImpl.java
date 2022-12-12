@@ -42,24 +42,6 @@ public class Tai_ChiTietSanPhamServiceImpl implements Tai_ChiTietSanPhamService 
     }
 
     @Override
-    public TpQuanLyChiTietSanPhamCustom addCTSanPham(TpQuanLyChiTietSanPhamCustom custom) {
-        ChiTietSanPham sp = new ChiTietSanPham();
-//        sp.setGiaBan(custom.getGiaBan());
-//        sp.setGiaNhap(custom.getGiaNhap());
-//        sp.setHinhAnh(custom.getHinhAnh());
-//        sp.setSoLuongTon(custom.getSoLuongTon());
-//        sp.setMau(custom.getMau());
-//        sp.setDonVi(custom.getDonVi());
-//        sp.setNamBaoHanh(custom.getNamBaoHanh());
-//        sp.setSanPham(custom.getSanPham());
-//        sp.setNgayTao(DateTimeUtil.convertDateToTimeStampSecond());
-//        sp.setTrangThai(custom.getTrangThai());
-//        sp.setSize(custom.getSize());
-//        custom.setId(rp.addCTSanPham(sp).getId());
-        return custom;
-    }
-
-    @Override
     public ChiTietSanPham updateCTSanPham(UUID id, int sl) {
         return rp.updateCTSanPham(id, sl);
     }
@@ -317,11 +299,6 @@ public class Tai_ChiTietSanPhamServiceImpl implements Tai_ChiTietSanPhamService 
             default:
                 throw new AssertionError();
         }
-    }
-
-    @Override
-    public List<TpQuanLyChiTietSanPhamCustom> getListCTSP() {
-        return rp.getListCTSP();
     }
 
 }

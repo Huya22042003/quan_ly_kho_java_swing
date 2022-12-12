@@ -27,10 +27,6 @@ public interface Tai_ChiTietSanPhamService {
 
     public List<TpQuanLyChiTietSanPhamCustom> getAll(UUID idSp);
 
-    public List<TpQuanLyChiTietSanPhamCustom> getListCTSP();
-
-    TpQuanLyChiTietSanPhamCustom addCTSanPham(TpQuanLyChiTietSanPhamCustom custom);
-
     ChiTietSanPham updateCTSanPham(UUID id, int sl);
 
     TpQuanLyChiTietSanPhamCustom findCTSanPhamById(UUID id);

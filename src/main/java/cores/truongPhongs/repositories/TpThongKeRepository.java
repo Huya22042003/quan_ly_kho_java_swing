@@ -30,7 +30,7 @@ public class TpThongKeRepository {
                                       FROM PhieuXuat px join KhachHang kh on px.IdKhachHang = kh.Id
                                       				join NhanVien nv on nv.Id = px.IdNhanVien
                                       WHERE px.NgayThanhToan >= :ngayBd AND px.NgayThanhToan <= :ngayKt 
-                                      AND px.MaPhieu LIKE CONCAT('%', :txt, '%') OR kh.Ten LIKE CONCAT('%', :txt, '%') OR nv.Ten LIKE CONCAT('%', :txt, '%')
+                                      AND px.MaPhieu LIKE CONCAT('%', :txt, '%')
                                       """).setParameter("ngayBd", ngayBd).setParameter("ngayKt", ngayKt).setParameter("txt", txt);
         List<Object[]> listQuery = q.getResultList();
         List<TpThongKeSpCustom> listSP = new ArrayList<>();

@@ -602,6 +602,11 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
                 txtSearchMouseClicked(evt);
             }
         });
+        txtSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSearchActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelRound8Layout = new javax.swing.GroupLayout(panelRound8);
         panelRound8.setLayout(panelRound8Layout);
@@ -922,7 +927,7 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
 
     public List<Tai_SanPhamCustom> getListByTT(int rdo) {
         String timKiem = this.txtSearch.getText();
-        ListSP = luongService.getListSPByMa(timKiem, rdo);
+        ListSP = luongService.phanTrangSP(luongService.getListSPByMa(timKiem, rdo), offset, limit);
         return ListSP;
     }
 
@@ -935,7 +940,6 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
         }
     }
     private void txtSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSearchMouseClicked
-
         searchhRadio();
     }//GEN-LAST:event_txtSearchMouseClicked
 
@@ -957,6 +961,10 @@ public class Tai_LuongPhieuXuat_CTSanPhamView extends javax.swing.JFrame {
         loadIndexCTSP();
         showDataCtsp(luongService.phanTrang(listChiTietSP, offsetCTSP, limitCTSP));
     }//GEN-LAST:event_btnNext1ActionPerformed
+
+    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSearchActionPerformed
 
     /**
      * @param args the command line arguments

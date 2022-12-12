@@ -874,6 +874,7 @@
                 <Component class="utilities.palette.SearchCustom.TextFieldAnimation" name="txtSearch">
                   <Events>
                     <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtSearchMouseClicked"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtSearchActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>

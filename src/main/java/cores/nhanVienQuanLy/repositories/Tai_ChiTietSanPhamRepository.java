@@ -42,53 +42,7 @@ public class Tai_ChiTietSanPhamRepository {
         List<TpQuanLyChiTietSanPhamCustom> listCTSP = query.getResultList();
         return listCTSP;
     }
-    
-    public List<TpQuanLyChiTietSanPhamCustom> getListCTSP() {
-        Session s = HibernateUtil.getSessionFactory().openSession();
-        Query query = s.createQuery("""
-                SELECT 
-                ctsp.Id,
-                ctsp.SoLuongTon,
-                ctsp.HinhAnh,
-                ctsp.GiaNhap,
-                ctsp.GiaBan,
-                ctsp.Mau,
-                dv.DonViQuyDoi,
-                ctsp.namBaoHanh,
-                ctsp.TrangThai,
-                ctsp.Size,
-                ncc.Ten,
-                ctpn.MaSanPhamNhaCungCap,
-                ctsp.createDate
-                FROM ChiTietSanPham ctsp
-                join DonVi dv on ctsp.IdDonVi = dv.Id
-                join ChiTietPhieuNhap ctpn on ctpn.IdChiTietSP = ctsp.Id
-                join PhieuNhap pn on ctpn.IdPhieuNhap = pn.Id
-                join NhaCungCap ncc on ncc.Id = pn.IdNhaCungCap
-            """);
-        List<Object[]> listQuery = query.getResultList();
-        List<TpQuanLyChiTietSanPhamCustom> list = new ArrayList<>();
-        listQuery.parallelStream().forEach(el -> {
-            list.add(new TpQuanLyChiTietSanPhamCustom(
-                    UUID.fromString((String) el[0]),
-                    (int) el[1],
-                    (String) el[2],
-                    (BigDecimal) el[3],
-                    (BigDecimal) el[4],
-                    (int) el[5],
-                    (String) el[6],
-                    (int) el[7],
-                    (int) el[8],
-                    (int) el[9],
-                    (String) el[10],
-                    (String) el[11],
-                    Long.valueOf(String.valueOf((BigDecimal) el[12]))
-            ));
-        });
-        s.close();
-        return list;
-    }
-    
+
     public ChiTietSanPham addCTSanPham(ChiTietSanPham sp) {
         Session s = HibernateUtil.getSessionFactory().openSession();
         try {
