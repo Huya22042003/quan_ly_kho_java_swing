@@ -52,6 +52,7 @@ public class NVQLQuanLyPhieuXuatServiceImpl implements NVQLQuanLyPhieuXuatServic
     @Override
     public boolean updatePhieuXuat(PhieuXuatCustom pxcs) {
         PhieuXuat px = new PhieuXuat();
+        px.setMaPhieu(pxcs.getMaPhieu());
         px.setNgayTao(pxcs.getNgayTao());
         px.setGhiChu(pxcs.getGhiChu());
         px.setNgayThanhToan(pxcs.getNgayThanhToan());

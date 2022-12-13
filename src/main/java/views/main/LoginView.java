@@ -45,6 +45,7 @@ public class LoginView extends javax.swing.JFrame {
     private NvqlXemThongTinCaNhanService khXemThongTinCaNhanService = new NvqlXemThongTinCaNhanServiceImpl();
     private List<NvqlXemThongTinCaNhanCustom> listNvql = new ArrayList<>();
     private String filename = "rememberMe.txt";
+    Bot bot;
 
     public LoginView() {
         service = new UserServiceImpl();
@@ -204,14 +205,13 @@ public class LoginView extends javax.swing.JFrame {
         if (map.containsKey(email)) {
             if (map.get(email).getMatKhau().equals(txtPassWord.getText())) {
                 Auth.nhanVien = map.get(email);
-                Bot bot = new Bot();
-                bot.setVisible(true);
+
                 // check hoat dong
-                if(Auth.nhanVien.getTrangThai() == TrangThaiNhanVienConstant.CHUA_HOAT_DONG || Auth.nhanVien.getTrangThai() == TrangThaiNhanVienConstant.DA_NGHI_VIEC) {
+                if (Auth.nhanVien.getTrangThai() == TrangThaiNhanVienConstant.CHUA_HOAT_DONG || Auth.nhanVien.getTrangThai() == TrangThaiNhanVienConstant.DA_NGHI_VIEC) {
                     JOptionPane.showMessageDialog(this, "Tài khoản không có hiệu lực", "Welcome", JOptionPane.PLAIN_MESSAGE);
                     return;
                 }
-                
+
                 // check chức vụ
                 if (Auth.nhanVien.getChucVu().getMa().equalsIgnoreCase("CV0001")) {
                     JOptionPane.showMessageDialog(this, "Thành công", "Welcome", JOptionPane.PLAIN_MESSAGE);
@@ -244,6 +244,7 @@ public class LoginView extends javax.swing.JFrame {
 
                 } else if (Auth.nhanVien.getChucVu().getMa().equalsIgnoreCase("CV0002")) {
                     this.setVisible(false);
+                    bot = new Bot();
                     JOptionPane.showMessageDialog(this, "Thành công", "Welcome", JOptionPane.PLAIN_MESSAGE);
                     try {
                         for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

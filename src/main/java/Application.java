@@ -32,11 +32,10 @@ public class Application extends JFrame {
             java.util.logging.Logger.getLogger(Application.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         Load load = new Load();
-
         load.show();
         LoginView lg = new LoginView();
         HibernateUtil.getSessionFactory();
-        Thread.sleep(6000);
+        Thread.sleep(1000);
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 /* Create and display the form */

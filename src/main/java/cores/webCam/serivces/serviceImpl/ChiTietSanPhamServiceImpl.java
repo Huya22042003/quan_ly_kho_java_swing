@@ -27,7 +27,6 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService{
     public ConcurrentHashMap<UUID, ChiTietSanPham> getMapChiTietSanPham() {
         ConcurrentHashMap<UUID, ChiTietSanPham> ctsp = new ConcurrentHashMap<>();
         rp.getListChiTietSanPham().parallelStream().forEach(el -> {
-            System.out.println(el.getId());
             ctsp.put(el.getId(), el);
         });
         return ctsp;

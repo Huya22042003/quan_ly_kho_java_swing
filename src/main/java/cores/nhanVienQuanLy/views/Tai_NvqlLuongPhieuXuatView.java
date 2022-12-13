@@ -1156,6 +1156,9 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
                             if (sanPhamQuet.getTrangThai() == TrangThaiSanPhamConstanst.DA_MO_BAN) {
                                 btnThemVaoCTPX.setEnabled(true);
                                 txtSoLuongMuaQuet.setEditable(true);
+                            } else {
+                                btnThemVaoCTPX.setEnabled(false);
+                                txtSoLuongMuaQuet.setEditable(false);
                             }
                         }
                         fileImg.delete();
@@ -1432,6 +1435,12 @@ public class Tai_NvqlLuongPhieuXuatView extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Bạn phải nhập kiểu số");
             return;
         }
+        
+        if(sanPhamQuet.getTrangThai() != TrangThaiSanPhamConstanst.DA_MO_BAN) {
+            JOptionPane.showMessageDialog(this, "Sản phẩm không thể bán");
+            return;
+        }
+        
         if (serviceCam.addChiTietPhieuXuat(this.listPhieuXuat.get(this.tblPhieuXuat.getSelectedRow()).getId(), sanPhamQuet.getId(), soLuongMua)) {
             JOptionPane.showMessageDialog(this, "Thêm thành công");
             diaLogCam.setVisible(false);
